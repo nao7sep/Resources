@@ -1,0 +1,11 @@
+﻿Compiled/flayground.deps.json
+Compiled/flayground.dll
+Compiled/flayground.exe
+Compiled/flayground.pdb
+Compiled/flayground.runtimeconfig.json
+flayground/flayground.csproj
+flayground/Program.cs
+.gitignore
+flayground.sln
+LICENSE
+srcZip.txt
