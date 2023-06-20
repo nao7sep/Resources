@@ -1,0 +1,19 @@
+﻿Compiled/ExcludedPathPatterns.txt
+Compiled/Nekote2018.dll
+Compiled/Nekote2018.dll.config
+Compiled/runAll.exe
+Compiled/runAll.exe.config
+Compiled/TargetPaths.txt
+Properties/AssemblyInfo.cs
+Resources/Ampeross-Qetto-2-Move/Move Icon - Qetto 2 Iconpack - Ampeross.url
+.gitignore
+Ampeross-Qetto-2-Move.ico
+App.config
+ExcludedPathPatterns.txt
+iUtility.cs
+LICENSE
+Program.cs
+runAll.csproj
+runAll.sln
+srcZip.txt
+TargetPaths.txt
