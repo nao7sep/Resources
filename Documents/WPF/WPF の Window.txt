@@ -10,8 +10,7 @@ Width を設定
 Height を設定
 必要に応じてコードで WindowState = WindowState.Maximized
 // 大きさを決めてから状態を
-Title を消す
-コードで Title = nApp.FriendlyTitle
+Title を設定
 // 大きさや状態のあとに内容を
 Background="#F0F0F0"
 // 「WPF の Background.txt」を参照

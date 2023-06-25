@@ -11,7 +11,7 @@ Content を設定
 二つ目以降に左5ピクセルのマージン
 Height="24"
 // 「WPF の Height.txt」を参照
-// Background はそのままで
+// Background はそのまま
 // 「WPF の Background.txt」を参照
 Padding="5,0"
 // 「WPF の Padding.txt」を参照

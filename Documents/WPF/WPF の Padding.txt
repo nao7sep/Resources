@@ -14,7 +14,7 @@ Button, TextBlock, TextBox を左端で揃えて縦に並べ、左3ピクセル�
     TextBox の文字列の開始位置が他二つより2ピクセルほど右になる
 Button と TextBlock の左パディングを5ピクセルにすると、だいたい揃う
 TextBox の2ピクセルほどの左右パディングは、ちょっと試した限りでは消せなかった
-TextBoxBase の Border の Padding なので、根本的に作り直すことになる
+TextBoxBase の Border の Padding なので、なくしたければ根本的に作り直すことになる
 https://docs.microsoft.com/en-us/dotnet/desktop/wpf/controls/textbox-styles-and-templates
 そのことを勘案し、Button と TextBlock には 5,0 を、TextBox には 3,0 を指定する
 

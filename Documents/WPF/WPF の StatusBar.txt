@@ -7,7 +7,7 @@ WPF の StatusBar
 VerticalAlignment="Bottom"
 Height="24"
 Background="#007ACC"
-// Visual Studio Code + Light+ テーマのステータスバーの背景色
+// Visual Studio Code の Light+ テーマのステータスバーの背景色
 // VerticalContentAlignment="Center" は不要
 // Visual Studio ではデフォルト値の Top が表示されるが、
 //     中身の0マージンで割り付け表示になるのか、上下方向に中央寄せになる
