@@ -1,0 +1,42 @@
+﻿2022年3月14日
+井ノ口慶尚
+
+WPF の Label
+
+// 基本
+何かと関連付けるのでないなら TextBlock の使用を検討
+他と揃えないなら、StackPanel または DockPanel に入れて可変幅に
+// 隣接するコントロールを横に広げるなら後者が適する
+揃えるなら、Label の隣に *Panel を置く
+必要に応じて x:Name を設定
+Content を設定
+// : を入れる
+// Visual Studio の「オプション」でも入っている
+必要に応じて _ によりショートカットキーを指定
+揃えるなら、余裕のある Width を設定
+Height="24"
+// 「WPF の Height.txt」を参照
+Padding="5,0"
+// TextBlock と同じに
+// 「WPF の Padding.txt」を参照
+揃えない場合、HorizontalContentAlignment があれば消す
+揃えるなら、HorizontalContentAlignment="Right"
+VerticalContentAlignment="Center"
+Target="{Binding ElementName=*}"
+// 他のコントロールと関連付け
+
+// 揃えない場合
+たとえば「件名:」に TextBox が続き、次の行に本文用として幅いっぱいの TextBox がある場合、
+    Label も DockPanel に入れるなら、「件名」が長い言語へのローカライズも問題ない
+*Panel 内で後続のものに左マージンを与えなければ、Label の右5ピクセルのパディングで適度に離れる
+
+// 揃える場合
+各行に「ラベル＋一つ以上のコントロール」があるにおいてラベルの内容の長さが異なるなら、
+    コントロールが始まるところを縦に揃えるため、ラベルに余裕のある固定幅を与える
+隣に置くにおいては、Visual Studio が入れようとする余白を省く
+Label に右5ピクセルのパディングがあるので不要
+
+// Label のみの行
+Visual Studio の「オプション」では、Label の次の行で ComboBox や TextBox が幅いっぱいのところがある
+「小さな Label＋小さな Button 二つ」のようなところには向かないが、Label が単語でなく文章ならほぼ唯一の選択肢
+Label に Height を設定するので、次の行のコントロールを余白なしで引っ付けるのが良さそう

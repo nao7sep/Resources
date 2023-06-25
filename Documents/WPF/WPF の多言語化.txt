@@ -1,0 +1,128 @@
+﻿2022年3月16日
+井ノ口慶尚
+
+WPF の多言語化
+
+// メモの分割
+WPF アプリの多言語化により得た知識が多いのでこちらのメモに全て書く考えがあったが、
+    メモ作成時の都合で情報の所属を不正確にしてはあとで探すことになるので「メモ/_NET の多言語化.txt」も作成
+
+// x:Static による方法（ボツ）
+問題があり、採用しないと決めたので、以下の一部は記憶からの未確認情報
+Resources.resx と Resources.ja-JP.resx を作れば、Resources.Designer.cs が作られる
+.resx を Visual Studio の GUI で編集すれば、三つとも全体的に再生成される
+GUI での編集なのでコメントを書けないし、開いて閉じるとキーで並び替えられるので管理性が極めて低い
+ResXManager により編集が少し楽になるが、バグの目立つツールで余計に不便
+これを使わない場合も、.resx に不要なコメントが大量に入ることや、
+    Resources.Designer.cs が決め打ちの仕様を押し付けてくることに時代遅れ感がある
+とにかく編集・管理しにくい .resx をどうにかし、xmlns などを指定すれば、
+    XAML では {x:Static lang:Resources.Hoge} のように、コードでは Resources.Hoge のように参照できる
+https://stackoverflow.com/questions/373388/best-way-to-implement-multi-language-globalization-in-large-net-project
+https://marketplace.visualstudio.com/items?itemName=TomEnglert.ResXManager
+同じプログラム内でのことなので不思議だが、
+    .resx の Access Modifier を Public にしないと XAML からの参照ができない
+また、.resx をサブディレクトリーに入れると、生成されるコードの名前空間にサブディレクトリー名が入る
+これは Custom Tool Namespace の指定により回避できる
+Visual Studio 2019 + .NET 5 で Nekote の試作を始めたときには不便・不安定ながらもギリギリ動いたが、
+    Visual Studio 2022 + .NET 6 では、
+    {x:Static lang:Resources.Hoge} において Resources まで書けば IntelliSense で Hoge が出るのに、
+    コンパイルしようとすれば Resources が見付からないとされて失敗することがあった
+XAML のデザイナーを閉じたり開いたり、Visual Studio を再起動したりすれば直ることもあったが、
+    何をやってもダメなときもあり、その場合はコンパイルができず先へ進めなかった
+また、他に原因があった可能性もあるが、
+    何とかコンパイルできたバイナリーを他のパソコンにコピーしても、
+    起動できなかったり、できても画面が真っ白だったり
+そのうちコンパイルエラーは IncludePackageReferencesDuringMarkupCompilation を false にすることでなぜか直った
+少し試した限りでは100％大丈夫だったが、何が問題だったのかや、それだけが問題だったのかは分からないまま
+いずれにせよ、Visual Studio 2019 + .NET 5 で動いていたものがそのままでは動かないというのは、
+    そういった技術やツールをこれから本格的に利用するべきではないということ
+https://badecho.com/index.php/2021/12/17/net-6-xaml-mayhem/
+XAML エディターの不安定さについては次のページにも
+https://qiita.com/tera1707/items/fb6570f3894a607f9dce
+
+// System.Windows.Markup.Localizer による方法（ボツ）
+msbuild -t:updateuid や -t:checkuid といったコマンドにより、
+    x:Uid="TextBlock_1" のような属性をおそらく全要素に入れる
+可読性もへったくれもないし、特殊なツールへの依存が前提の開発への違和感も
+https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/wpf-globalization-and-localization-overview
+https://docs.microsoft.com/en-us/dotnet/api/system.windows.markup.localizer
+LocBaml.exe /generate HelloApp.resources.dll /trans:Hellofr-CA.csv /out:c:\ /cul:fr-CA などにより CSV ファイルも扱うようだ
+https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/how-to-localize-an-application
+LocBaml で検索して出てくる質問は10年前のもの
+https://stackoverflow.com/questions/4933726/how-does-locbaml-work
+一応、次のページと近辺のページ全てに目を通したが、もう死んでいるか
+https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/globalization-and-localization
+
+// ResourceDictionary による方法（採用）
+StringResources.xaml と StringResources.ja-JP.xaml を作り、App.xaml でマージし、
+    ウィンドウの .xaml で xmlns を指定し、{DynamicResource Hoge} のように参照
+nWpf と NekoteWpf に実装した
+XAML デザイナーとの親和性が高く、まともに作業をさせてもらえることや、
+    StaticResource でなく DynamicResource にすればプログラム起動後の言語の切り替えも可能なことが強み
+.xaml が手書きなので、段落分けしたり、コメントを添えたりも可能
+.resx による方法のような古くさいコードや不要なコメントが一切生じないのも好感
+https://stackoverflow.com/questions/814600/multilanguage-in-wpf
+https://docs.microsoft.com/en-us/windows/apps/design/style/xaml-resource-dictionary
+
+// ResourceDictionary による方法に関する Nekote の仕様
+フォールバック先を Resources/StringResources.xaml に、
+    カルチャー指定ありのものを Resources/StringResources.ja-JP.xaml のように配置
+パスの区切り文字は、どちらでもよいようなので「Personal/メモ/その他/「Personal_メモ」ディレクトリーについて.txt」に倣い / に統一
+https://stackoverflow.com/questions/12066125/how-to-set-a-relative-path-uri-in-resourcedictionarys-source
+WPF では文字列以外のリソースも扱えるので、文字列のみのものをファイル名で区別
+カルチャー指定は、ISO 639 の言語コードと ISO 3166 の地域コードを - でつないだもので
+Windows でサポートされるもののうち、言語パックが提供されるものは限られるようだ
+https://docs.microsoft.com/en-us/windows/uwp/publish/supported-languages
+https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/available-language-packs-for-windows
+Nekote では、CultureInfo.GetCultureInfo を predefinedOnly == true で呼んで得られるものだけに対応
+地域コードを大文字にするのは、CultureInfo.GetCultures により得られるデータに倣ってのこと
+Nekote では、ja-JP → ja のように地域コードを外しての検索が行われない
+理由は長くなるので別セクションに
+.xaml 側では system という xmlns を定義
+他に倣い小文字
+「メモ/短縮化する単語.txt」の条件に該当しないので sys などと短縮化しない
+x:Key と x:Name では前者を使うべきのようだ
+https://docs.microsoft.com/en-us/dotnet/desktop/xaml-services/xkey-directive
+https://docs.microsoft.com/en-us/dotnet/desktop/xaml-services/xname-directive
+ResourceDictionary がマージされる前提で他種リソースとの衝突回避のためキーにも接頭辞を入れる考えがあったが、
+    今後も文字列リソースが大半だろうから、文字列以外のみに接頭辞を入れるのが低コスト
+
+// 地域コードを外しての検索を行わない理由
+en-US と en-GB を考えるにおいて、
+    まず、Nekote で作る程度の規模のプログラムにアメリカ英語とイギリス英語の区別が必要になるとは考えにくい
+では en や jp のみでよいかというと、そう決めては、区別したくてもできないのが制限になる
+それなら、en-US を en とし、そちらへのフォールバックの前提で必要に応じて en-GB を作るのも選択肢
+しかし、そうすると、たとえばイギリス人がまずは en-GB のみ用意したいとき、
+    そしてそれを CultureInfo.InvariantCulture 相当のフォールバック先とはしたくないときに、
+    en-US のパソコンで開いても en-GB のリソースにはフォールバックしないアプリになる
+これは、Parent が同じものを探す検索により解決できる
+しかし、今度は、en-US がないときに en-GB なのか en-CA なのかといったことが曖昧になる
+その優先順位が App.xaml の書き方により決め打ちになるのも気になる
+また、安易なフォールバックには、
+    それが慣例となってしまったときに日付の書式など他の部分への影響も懸念される
+同じ en でも、アメリカ、イギリス、カナダは、日付の書式が一致しない
+https://en.wikipedia.org/wiki/Date_format_by_country
+なので、CultureInfo.CurrentUICulture と CultureInfo.CurrentCulture に機械的に同じ値を設定することはできない
+ネットでは「これら二つはセットだ」的にそうするコードをよく目にするが、
+    別々の値にした方がユーザーの利便性が高い場合もある
+といったことを勘案すると、地域コードを外しての検索や、Parent が同じものを探す検索を中途半端に実装するより、
+    ユーザーが利用可能なカルチャーのうち一つをメニューから選んだり、
+    CSS のフォント指定のように複数を優先順位に基づいて指定したりできるのが現実的
+初回起動時にドンピシャのカルチャーがなければリストから選んでもらうのが最善
+その後、ドンピシャのカルチャーが追加されれば、そちらに切り替えるか聞くこともできる
+
+// 自分は今のところ手を抜く
+CultureInfo.InvariantCulture は、associated with the English language but not with any country/region とのこと
+とは言っても、スペルも書式も各部で一つを選ばないといけないため、
+    「invariant な culture が個別にあり、たまたまアメリカのスペルや書式がそれと一致する」という扱いになっている
+自分としても、小規模アプリの開発においては、決して "en-US" ではない invariant な culture をまず用意し、
+    それを日本語話者のためにローカライズした "ja-JP" も用意するという簡単な構成により手を抜く
+https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.invariantculture
+
+// CultureInfo.GetCultures により得られるデータ
+2022年3月17日に日本語の Windows 11 Pro | 21H2 | 22000.556 で出力したものを
+    「メモ/GetCultures によるデータ.htm」として保存
+出力には「メモ/GetCultures.cs」を使用
+Windows 10 でも出力してみて比較したところ、
+    ごくマイナーな言語のみ追加または修正されていた
+違いが何かに影響すると考えにくいので Windows 11 によるものだけ残す

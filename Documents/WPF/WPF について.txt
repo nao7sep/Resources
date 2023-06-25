@@ -1,0 +1,32 @@
+﻿2022年3月14日
+井ノ口慶尚
+
+WPF について
+
+// XAML のフォーマット
+横に長くなり、画面右端で折り返されてグチャグチャになることがあるためか、属性ごとに折り返す人がいる
+そういうツールもあり、高く評価されているようだ
+https://marketplace.visualstudio.com/items?itemName=TeamXavalon.XAMLStyler
+しかし、折り返しての各行がたとえば C# のコードのようにさらに引数などを受けて複雑な処理を行うわけでない
+A が B だという属性それぞれに行を与えるのは、メソッド呼び出しにおいて全ての引数を新しい行に置くのと本質的に異ならない
+XAML の場合、Visual Studio でプレビューしながらのデザインにおいてコードの表示領域が横長という問題もある
+そこにたとえば5も10も属性を持つ Label 一つしか表示できず、他と属性を見比べられず、
+    せっかくの大画面モニターなのに Label の右側の広い範囲に何も表示されないのはデメリットしかない
+
+// コントロールのスタイル
+Height や Padding などをスタイル化すれば各コントロールの記述が短くなる
+https://docs.microsoft.com/en-us/dotnet/desktop/wpf/controls/how-to-create-apply-style
+複雑な UI なら保守コストが下がるが、パッとコピペし、見比べ、コミットできる程度なら利益が手間に見合わない
+「デフォルト値が A の属性がスタイルで B になったが、ここでは A の方が」のようなグダグダもある
+CSS には転送量を大きく減らせるメリットがあるが、XAML のスタイルについては開発コストと保守コストを考えるべき
+
+// .NET MAUI
+そのうち WPF を淘汰するのだろう
+2～3年後、機能性と安定性が高まった頃に Nekote でも WPF の使用をやめる可能性が高い
+https://docs.microsoft.com/en-us/dotnet/maui/what-is-maui
+https://github.com/dotnet/maui
+
+// Avalonia UI
+.NET MAUI が使い物になるまでのつなぎとして考えたが、.NET MAUI が出たら淘汰されるはず
+それまでは WPF や Blazor でしのぐ
+https://avaloniaui.net/
