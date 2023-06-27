@@ -1,0 +1,16 @@
+﻿Compiled/fileDel.deps.json
+Compiled/fileDel.dll
+Compiled/fileDel.exe
+Compiled/fileDel.pdb
+Compiled/fileDel.runtimeconfig.json
+fileDel/Shared/ListFileInfo.cs
+fileDel/Shared/Shared.cs
+fileDel/App.manifest
+fileDel/fileDel.csproj
+fileDel/GlobalSuppressions.cs
+fileDel/iShared.cs
+fileDel/Program.cs
+.gitignore
+fileDel.sln
+LICENSE
+srcZip.txt
