@@ -1,0 +1,163 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans+JP&display=swap');
+
+body
+{
+    margin: 0;
+    font-family: 'IBM Plex Mono', 'IBM Plex Sans JP', sans-serif;
+    font-size: 1em;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+a
+{
+    color: blue;
+    text-decoration: underline;
+}
+
+a:hover, a:active, a:focus
+{
+    font-weight: bold;
+}
+
+div.task, div.note, div.file, div.image
+{
+    margin: 10px;
+    border: 1px solid #CCC;
+    border-radius: 10px;
+}
+
+div.title
+{
+    background-color: blueviolet;
+    padding: 20px 30px;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+@media (width < 576px)
+{
+    div.title
+    {
+        padding: 15px 22.5px;
+        font-size: 1.5em;
+    }
+}
+
+a.title
+{
+    color: white;
+    text-decoration: none;
+}
+
+a.title:hover, a.title:active, a.title:focus
+{
+    text-decoration: underline;
+}
+
+div.entries
+{
+}
+
+div.task
+{
+}
+
+div.done
+{
+    background-color: #EEF;
+}
+
+div.done:hover
+{
+    background-color: deepskyblue;
+    color: white;
+}
+
+div.canceled
+{
+    background-color: #FEE;
+}
+
+div.canceled:hover
+{
+    background-color: deeppink;
+    color: white;
+}
+
+div.task_contents
+{
+    margin: 10px 15px;
+}
+
+span.task_contents
+{
+    font-weight: bold;
+}
+
+a.permalink
+{
+    visibility: hidden;
+}
+
+div.task:hover a.permalink
+{
+    visibility: visible;
+}
+
+div.notes
+{
+}
+
+div.note
+{
+    background-color: white;
+    color: black;
+}
+
+div.note_contents
+{
+}
+
+p.note_contents
+{
+    margin: 15px 20px;
+}
+
+a.url
+{
+}
+
+div.files
+{
+}
+
+div.file
+{
+    background-color: white;
+    padding: 15px 20px;
+    color: black;
+}
+
+a.file
+{
+}
+
+div.image
+{
+    background-color: white;
+    padding: 10px;
+    color: black;
+}
+
+a.image
+{
+}
+
+img.image
+{
+    box-sizing: border-box;
+    vertical-align: top;
+    max-width: 100%;
+}
