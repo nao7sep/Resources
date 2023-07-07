@@ -621,6 +621,62 @@
                     <a href="#97551581-b1ef-4197-aada-bff6c4313ad7" class="permalink">&infin;</a>
                 </div>
             </div>
+            <div id="9779f484-4324-4314-a880-115d78870392" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">src や href のエンコードについて再考</span>
+                    <a href="#9779f484-4324-4314-a880-115d78870392" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">tk2Text では HTML エンコードだけで十分との結論に至った。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">改めて試したところ、「ブラウザーはこう処理するだろう」という想定と異なり、%20.jpg がリンク切れになった。これを HTML エンコードに通しても変化なく、そのまま src や href に入っては URL が一致せず Not Found になる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">現在の実装のままが良く、tk2Text の方を改めなければならないということ。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="1b4dfb2c-803d-4570-8d68-60f1a6102dd0" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">img に display: block を指定しないようにする</span>
+                    <a href="#1b4dfb2c-803d-4570-8d68-60f1a6102dd0" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">tk2Text のタスクリストのログに書いた理由により、display: block をやめておき、vertical-align を指定し、なくてよさそうだが、一応、box-sizing: border-box を指定した。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="1c022e8b-b06c-44c9-9e08-74b41ede0198" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">CSS について再考</span>
+                    <a href="#1c022e8b-b06c-44c9-9e08-74b41ede0198" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">画面が狭めだと画像の両端がウィンドウの端に接する。今になっては気になるデザインだが、時期によって揺れる主観による判断に過ぎないことで、そういうデザインであってはいけない具体的な理由はない。</p>
+                            <p class="note_contents">それは div.title などの余白についても同じで、もう少し広くてよいと感じたが、直すほどのことでない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="1958410d-3b1a-4538-8d00-8653406d7c69" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">v0.3 としてアーカイブ</span>
+                    <a href="#1958410d-3b1a-4538-8d00-8653406d7c69" class="permalink">&infin;</a>
+                </div>
+            </div>
         </div>
     </body>
 </html>
