@@ -368,6 +368,70 @@
                     <a href="#1a9b957d-b2f6-4425-9224-584934bf7eb2" class="permalink">&infin;</a>
                 </div>
             </div>
+            <div id="12b3ba3a-a6ff-42bc-975a-25bf57505974" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="http://var.blog.jp/archives/67902617.html" target="_blank" class="url">http://var.blog.jp/archives/67902617.html</a> をチェック</span>
+                    <a href="#12b3ba3a-a6ff-42bc-975a-25bf57505974" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">「WPF のフォントは汚い？」</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">TextFormattingMode, TextHintingMode, TextRenderingMode のデフォルト値は、Ideal, Auto, Auto。</p>
+                            <p class="note_contents">一つ目は Display がより新しいそうだが、そうすると文字が痩せ細ってガタガタになる。</p>
+                            <p class="note_contents">三つ目は ClearType になる Auto で固定。</p>
+                            <p class="note_contents">二つ目のみ、The rendering engine renders text with the highest animated quality とのことである Animated が、より Mac っぽくて自分は好き。For animated text, use Animated to allow for smoother animations at the cost of text quality とのことで、本来の使い方でないのかもしれない。</p>
+                            <p class="note_contents">TextHintingMode Enum (System.Windows.Media) | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.media.texthintingmode" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/system.windows.media.texthintingmode</a></p>
+                            <p class="note_contents">複数のスクショを撮って見比べたところ、Animated と Fixed とでは、デフォルトの後者では文字の各部がぼやけたりキレが良かったりと一貫性がなく、前者では全体的に Mac っぽくボケていた。</p>
+                            <p class="note_contents">後者は鉛筆とボールペンをそれぞれの文字のなかでも使い分けるかのようで、結果的に、細く濃いところがトゲトゲしい。全体的に適度にボケている前者の方が自分は読みやすい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="2a9802ba-7db8-499c-ae26-0540ee00d8e8" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">配色を改善</span>
+                    <a href="#2a9802ba-7db8-499c-ae26-0540ee00d8e8" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">背景色が真っ黒というのは、最近あまりない。グレーにして少しコントラストを落とす。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">GitHub の配色などを少し試したが、生産性が高まるわけでなさそうなのでやめておく。</p>
+                            <p class="note_contents">github-vscode-theme/src/classic/colors.json at main &#183; primer/github-vscode-theme<br />
+                                <a href="https://github.com/primer/github-vscode-theme/blob/main/src/classic/colors.json" target="_blank" class="url">https://github.com/primer/github-vscode-theme/blob/main/src/classic/colors.json</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="e7c2bd77-9363-4266-ba7d-088c2e40a54a" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">タスクリスト間のタスクの移動時に状態が変わらないようにする</span>
+                    <a href="#e7c2bd77-9363-4266-ba7d-088c2e40a54a" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">一度は見送った更新だが、やはり現行の挙動は不便。taskKiller の使用を億劫と感じる理由になっているのでサクッと直す。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="e325878b-a0d4-4aa2-b3cd-cab3e7796d14" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">v0.57 としてアーカイブ</span>
+                    <a href="#e325878b-a0d4-4aa2-b3cd-cab3e7796d14" class="permalink">&infin;</a>
+                </div>
+            </div>
         </div>
     </body>
 </html>
