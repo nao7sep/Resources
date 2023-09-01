@@ -1,0 +1,2020 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>timeLog を開発</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="tk2Text.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="title">
+            <a href="timeLog.htm" class="title">timeLog を開発</a>
+        </div>
+        <div class="entries">
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">何をするか書き、開始ボタンを押す。それだけやって終わったなら終了ボタンまたは次のタスクを書いて開始ボタンを押し、グダグダになったならその旨を記録するボタンを押す。どのくらい集中できているかが分かる。また、タスクのカテゴリーを設定できれば、どういうことにトータル何分かけたかも分かる。</p>
+                    <!-- Task: 25a6a23d-659c-42f9-8363-d11f4c6c9710 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">タスク管理はそれなりにできている。自分の問題は、職場で働いているとか、上司への報告があるとかではないことにより、ちょっと何か他のことに興味を持ったり、ちょっとメールを書こうと思ったりにより、そのことに没頭し、一気に何時間もかけてしまうこと。脱線が激しく、すぐに復旧しない。そのため、自分の時間の使い方を見える化してみるのは効果的かもしれない。レコーディングダイエットのようなこと。</p>
+                    <!-- Task: 25a6a23d-659c-42f9-8363-d11f4c6c9710 -->
+                </div>
+            </div>
+            <div id="e750bad3-a17c-4d96-8bbb-8c4708f29378" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">.git ディレクトリーなどを非表示にする</span>
+                    <a href="#e750bad3-a17c-4d96-8bbb-8c4708f29378" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="26433be5-a80b-46f4-a793-05658ae947ae" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ソリューションを作成</span>
+                    <a href="#26433be5-a80b-46f4-a793-05658ae947ae" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="938e9e13-5ce1-4b36-bed5-48e7c68b589d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">レポジトリーを作成</span>
+                    <a href="#938e9e13-5ce1-4b36-bed5-48e7c68b589d" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="f64dd608-ac1a-4428-b9cd-071d2b1186a9" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">プロパティーをチェック</span>
+                    <a href="#f64dd608-ac1a-4428-b9cd-071d2b1186a9" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="2a20a12f-b95c-4e94-b3f7-6c1c39afa9b7" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">名前を決める</span>
+                    <a href="#2a20a12f-b95c-4e94-b3f7-6c1c39afa9b7" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="544c1080-d39a-4b3a-9f25-dce84023fec8" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">.gitignore を作る</span>
+                    <a href="#544c1080-d39a-4b3a-9f25-dce84023fec8" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="9e84964b-277c-4965-b156-cbade835dcdf" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">レポジトリーをクローン</span>
+                    <a href="#9e84964b-277c-4965-b156-cbade835dcdf" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="8677e952-37e1-476b-90c6-07911e50f49f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">全てのファイルをチェック</span>
+                    <a href="#8677e952-37e1-476b-90c6-07911e50f49f" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">ログの例:</p>
+                    <p class="note_contents">○年○月○日</p>
+                    <p class="note_contents">○時○分<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;タスク1</p>
+                    <p class="note_contents">○時○分<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;タスク2<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;タスク3</p>
+                    <p class="note_contents">○時○分<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;タスク4<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;グダグダ</p>
+                    <p class="note_contents">○時○分<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;不詳</p>
+                    <p class="note_contents">何かを始め、それだけやり、次のタスクに移行したなら、タスク1のようになる。</p>
+                    <p class="note_contents">何かを始め、ついでに他のこともやったなら、「今やっていること」のところにそのことを書き足して確定したい。</p>
+                    <p class="note_contents">何かを始め、途中で子供と遊ぶことになったなどでグダグダになれば、また仕事に戻れてそれが終わったときに「終わったが、それだけに集中できたわけでない」を入れたい。そうでないと、その作業への所要時間がおかしくなる。</p>
+                    <p class="note_contents">タスク4が終わり、いったん飯だとかで机を離れるときには、次のタスクを指定せず「終了」ボタンを押す。その場合、それからの時間は不詳扱いになる。</p>
+                    <!-- Task: 25a6a23d-659c-42f9-8363-d11f4c6c9710 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">土日連続で子供とプールに行き、昨日（日曜）の晩は、運動でアドレナリンが出たのか、頭は覚醒しているのに回転が悪く、興奮状態にあるのに思考力がないという変な状態だった。その状態で友達にメールを書き始めては、全く聞かれていないことまで、ただ自分がそういう話を久々に書いてみると楽しいということだけで書き、気付けば2時間くらい経っていた。12時くらいになって「ん？ 何を書いているのか」と思って読み返しては、送る必要の全くない独り言だったので消した。</p>
+                    <p class="note_contents">自分は没頭しやすい。それはそれで強みだが、「2時間もメールを書いて結局送らない」というのは生産性がゼロである。とにかくそういう無駄を省いていきたい。</p>
+                    <!-- Task: 25a6a23d-659c-42f9-8363-d11f4c6c9710 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">そういう無駄を省くことが主目的なので、たとえばメールの送り先を事前登録しておいて誰に今週は何分かけたかを分析するなどは考えない。そこまですると管理コストが高まるし、グダグダが入るとデータとしての有用性が著しく低くなるため。「ちょっとメールを書いたついでに、途中で思い出したので必要なものをアマゾンで探し、他にも必要なものを思い出して買おうとしたが、情報が足りなかったのでググり、そのついでに他のことも調べた」などの全てがそのメールの所要時間となることに寛容なソフト。</p>
+                    <!-- Task: 25a6a23d-659c-42f9-8363-d11f4c6c9710 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">あとで「○○さんにメールを書いたときに△△もやった」と思い出すことがあるだろう。しかし、それをあとから追記できるようにすることが、今、目の前の時間の使い方の見直しに大きく貢献するとは思えない。日報を作って提出したいわけでないし、それで報酬の額が決まるわけでもない。「だいたい何にどのくらいの時間を」というのをゆるくチェックし、グダグダを減らしたいだけ。</p>
+                    <!-- Task: 25a6a23d-659c-42f9-8363-d11f4c6c9710 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">今のタスクに既にどのくらいの時間がかかっているかの表示をいったん見送る。必要ならすぐに追加できる。所要時間が見えた方が「時間をかけすぎている」と焦り、早く切り上げられる可能性があるが、逆に「まだこの程度か」と思う可能性もある。</p>
+                    <!-- Task: 25a6a23d-659c-42f9-8363-d11f4c6c9710 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">所要時間の表示を見送ると書いたが、サクッと実装した。「今のタスク」のところにタスクが表示されるだけでは実行中の印象が弱かったため。</p>
+                    <!-- Task: 25a6a23d-659c-42f9-8363-d11f4c6c9710 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">基本的な機能が一通り揃い、使えるようになったので、ここからはタスクリストで完成度を高めていく。</p>
+                    <!-- Task: 25a6a23d-659c-42f9-8363-d11f4c6c9710 -->
+                </div>
+            </div>
+            <div id="f507b278-4494-4da5-8551-4782c2d2fe13" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Logs.txt のロード時に問題があった場合にメッセージを表示</span>
+                    <a href="#f507b278-4494-4da5-8551-4782c2d2fe13" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="cc469778-5a9f-4d63-8ce7-d7ec576c053b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">経過時間をタイトルバーに表示</span>
+                    <a href="#cc469778-5a9f-4d63-8ce7-d7ec576c053b" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="42980b6a-e969-4ee6-b35d-7f98c2fbdbb3" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">全ての必要なメソッドで iUpdateControls が呼ばれているようにする</span>
+                    <a href="#42980b6a-e969-4ee6-b35d-7f98c2fbdbb3" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="f271ddc1-b4a0-415c-bf2f-0ff2597fa74c" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">落ちるところがないようにする</span>
+                    <a href="#f271ddc1-b4a0-415c-bf2f-0ff2597fa74c" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="599abb54-c062-4b55-9d42-309f019ffcf6" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Closed でコントロールの内容を取得するのが安全か調べる</span>
+                    <a href="#599abb54-c062-4b55-9d42-309f019ffcf6" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="c394339c-568a-4a25-83f4-ae8c4642a323" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ログの追加時にリストの先頭にスクロールする</span>
+                    <a href="#c394339c-568a-4a25-83f4-ae8c4642a323" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="dfed9dbd-bb82-44e9-88fd-f03ee6b85d15" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Logs.txt を timeLogs.txt に変更</span>
+                    <a href="#dfed9dbd-bb82-44e9-88fd-f03ee6b85d15" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">一意性があった方が他ディレクトリーに移動しやすい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="e0cf66b1-d2b7-46b3-abd7-d582fec9f3cc" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">コントロールの状態の変化をテスト</span>
+                    <a href="#e0cf66b1-d2b7-46b3-abd7-d582fec9f3cc" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="33b892cb-64ac-4b8f-891b-f86d193c6356" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ログの削除をボタンおよびキーで可能にする</span>
+                    <a href="#33b892cb-64ac-4b8f-891b-f86d193c6356" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="98fc74be-5697-412a-94ba-5cd0527d4d2b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">マルチスレッドでコリジョンが発生しないのを確認</span>
+                    <a href="#98fc74be-5697-412a-94ba-5cd0527d4d2b" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="c8112392-4834-45be-8fe3-7828a4d8f39c" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">時差やロケールが影響しないのを確認</span>
+                    <a href="#c8112392-4834-45be-8fe3-7828a4d8f39c" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="ee738afa-3f79-468f-8932-616eeac3fd60" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Closing イベントを消す</span>
+                    <a href="#ee738afa-3f79-468f-8932-616eeac3fd60" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">いつでも閉じることができてよい。開けば全て戻るように。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="9a26e183-2f8e-482d-b8ff-862689e691a3" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">リストアされた情報に基づいて Loaded でフォーカスを設定</span>
+                    <a href="#9a26e183-2f8e-482d-b8ff-862689e691a3" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">常に mNextTasks でよさそう。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="782e02af-9435-4b31-b234-29e9e3f4001c" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">シンプルな KVS 的なものを作る</span>
+                    <a href="#782e02af-9435-4b31-b234-29e9e3f4001c" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="7ed7433c-64c1-4969-8c49-4cfa70c56330" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">プログラムの異常終了時にも状態が戻るようにする</span>
+                    <a href="#7ed7433c-64c1-4969-8c49-4cfa70c56330" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">コントロールが操作された瞬間にセッション情報が保存されるようにした。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="668eedf8-2b9a-4887-8532-473c36e74c88" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ソフトや Windows の再起動をしても現行のタスクなどが戻るようにする</span>
+                    <a href="#668eedf8-2b9a-4887-8532-473c36e74c88" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="494ef19f-de79-4ed4-a881-64559d9588e3" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">KVS の文字のエスケープなどをテスト</span>
+                    <a href="#494ef19f-de79-4ed4-a881-64559d9588e3" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="9ac17141-5f4f-4315-abec-1e159599f5e4" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">起動時に IME をオンにする</span>
+                    <a href="#9ac17141-5f4f-4315-abec-1e159599f5e4" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="b3333a2c-415f-4835-a952-41126416d0d3" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">アセンブリー情報を設定</span>
+                    <a href="#b3333a2c-415f-4835-a952-41126416d0d3" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="2a650bb6-88e0-4583-85b4-1780fd0451d2" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">投げる例外クラスを見直す</span>
+                    <a href="#2a650bb6-88e0-4583-85b4-1780fd0451d2" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Nekote の開発を少し進めたので、一応、整合させておく。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d9eb96ba-f3ed-4106-930c-4a0115638aee" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">作業の中断に対応できるようにする</span>
+                    <a href="#d9eb96ba-f3ed-4106-930c-4a0115638aee" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">やめておく。</p>
+                            <p class="note_contents">「ちょっとトイレ」くらいならすぐだし、プログラムの操作を忘れて行くことも多い。「子どもが急に泣きだした」なら、プログラムの操作について考えることすらなく駆けつける。急な来客だったり、奥さんが声を掛けてきたりでも、「中断」ボタンを押すことはまず思いつかない。</p>
+                            <p class="note_contents">職場で集中していても日常的に発生する程度の頻度や長さの割り込みは「グダグダ」とみなすほどのことでないと考えるのが現実的。</p>
+                            <p class="note_contents">「グダグダ」をつけるのは、メールを書くだけのつもりだったのにアマゾンを開き、既に持っているものをチェックするために物置を見に行き、他のものを見つけ、そのメンテナンスのためにサビ取りを探し……などの、もっとガッツリと脱線した場合を想定。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="f7cf1f60-1e38-44b1-8485-48dbb9301243" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">iPreviousLogs を internal static にする</span>
+                    <a href="#f7cf1f60-1e38-44b1-8485-48dbb9301243" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">internal だと XAML での WPF のコントロールとのバインディング時にコンパイラーがエラーを吐くことがあるとの記憶があって public にしたが、今のところ再現していない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="c2cf5c5d-3156-4d1c-bceb-e1a650e8cf6e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">MainWindow から静的プロパティーにアクセスする仕様について再考</span>
+                    <a href="#c2cf5c5d-3156-4d1c-bceb-e1a650e8cf6e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">単一ウィンドウ・単一機能のプログラムなので、iPreviousLogs を作り、静的プロパティーなどを入れた。App.xaml.cs でデータのロードや保存の処理が必要になると思い、MainWindow 内の static でないプロパティーなどにデータを入れるのでは App.xaml.cs との受け渡しが面倒になりそうと思ったため。</p>
+                            <p class="note_contents">しかし、その後、</p>
+                            <p class="note_contents">ItemsSource=&quot;{Binding Source={x:Static local:iPreviousLogs.Logs}}&quot;</p>
+                            <p class="note_contents">が突然コンパイル不可になった。</p>
+                            <p class="note_contents">MainWindow に static でないプロパティーを用意し、ElementName と Path でバインディングしたところコンパイルできた。</p>
+                            <p class="note_contents">MainWindow は、名前からも、基本的には一つだけ開かれるものだが、そうであっても単一プロセスで複数が同時に開かれても問題ないような設計を心掛けるべきなのだろう。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="b124215a-e530-4065-84d2-452ea2b5c416" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">DataContext について調べる</span>
+                    <a href="#b124215a-e530-4065-84d2-452ea2b5c416" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Using the DataContext - The complete WPF tutorial<br />
+                                <a href="https://www.wpf-tutorial.com/data-binding/using-the-datacontext/" target="_blank" class="url">https://www.wpf-tutorial.com/data-binding/using-the-datacontext/</a></p>
+                            <p class="note_contents">次のページによると、The purpose of other binding sources (RelativeSource, ElementName, etc) is to point to another property that doesn&#39;t exist in the current control&#39;s DataContext とのこと。</p>
+                            <p class="note_contents">wpf - What is DataContext for? - Stack Overflow<br />
+                                <a href="https://stackoverflow.com/questions/7262137/what-is-datacontext-for" target="_blank" class="url">https://stackoverflow.com/questions/7262137/what-is-datacontext-for</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="5763c51e-23cf-4820-9e7a-99b574df94c1" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Binding における Source/RelativeSource と ElementName の違いを調べる</span>
+                    <a href="#5763c51e-23cf-4820-9e7a-99b574df94c1" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">RelativeSource は、親など、自分から見て相対的な関係にあるものとのバインディングに使われる。背景色を親と同じにするなど。</p>
+                            <p class="note_contents">RelativeSources in WPF<br />
+                                <a href="https://www.c-sharpcorner.com/UploadFile/yougerthen/relativesources-in-wpf/" target="_blank" class="url">https://www.c-sharpcorner.com/UploadFile/yougerthen/relativesources-in-wpf/</a></p>
+                            <p class="note_contents">RelativeSource MarkupExtension - WPF .NET Framework | Microsoft Docs<br />
+                                <a href="https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/relativesource-markupextension" target="_blank" class="url">https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/relativesource-markupextension</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">DynamicResource と StaticResource についても読んだ。リソースデータの取得を実行時に試みるか、コンパイル時にそれが可能なことを確認するかの違い。</p>
+                            <p class="note_contents">DynamicResource Markup Extension - WPF .NET Framework | Microsoft Docs<br />
+                                <a href="https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/dynamicresource-markup-extension" target="_blank" class="url">https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/dynamicresource-markup-extension</a></p>
+                            <p class="note_contents">StaticResource Markup Extension - WPF .NET Framework | Microsoft Docs<br />
+                                <a href="https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/staticresource-markup-extension" target="_blank" class="url">https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/staticresource-markup-extension</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ElementName での検索は、VisualTree を必要とし、VisualTree における上下移動による要素の検索として行われる。</p>
+                            <p class="note_contents">wpf - What is the difference between x:Reference and ElementName? - Stack Overflow<br />
+                                <a href="https://stackoverflow.com/questions/19244111/what-is-the-difference-between-xreference-and-elementname" target="_blank" class="url">https://stackoverflow.com/questions/19244111/what-is-the-difference-between-xreference-and-elementname</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ContentElement を継承するものは VisualTree に含まれないとのこと。</p>
+                            <p class="note_contents">Understanding the Visual Tree and Logical Tree in WPF - CodeProject<br />
+                                <a href="https://www.codeproject.com/Articles/21495/Understanding-the-Visual-Tree-and-Logical-Tree-in" target="_blank" class="url">https://www.codeproject.com/Articles/21495/Understanding-the-Visual-Tree-and-Logical-Tree-in</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Source, RelativeSource, ElementName の違いについては、次のページがドンピシャ。</p>
+                            <p class="note_contents">How to: Specify the Binding Source - WPF .NET Framework | Microsoft Docs<br />
+                                <a href="https://docs.microsoft.com/en-us/dotnet/desktop/wpf/data/how-to-specify-the-binding-source" target="_blank" class="url">https://docs.microsoft.com/en-us/dotnet/desktop/wpf/data/how-to-specify-the-binding-source</a></p>
+                            <p class="note_contents">Source は、DataContext の設定によりスコープを設定することなく、特定のインスタンス化されたものにバインディングするためのもの。</p>
+                            <p class="note_contents">RelativeSource は、先ほど書いたメモの内容でいい。</p>
+                            <p class="note_contents">ElementName は、VisualTree における上下の移動で見つかる他の要素のプロパティーにバインディングするためのもの。</p>
+                            <p class="note_contents">RelativeSource では、</p>
+                            <p class="note_contents">Value=&quot;{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)/ErrorContent}&quot; とか、</p>
+                            <p class="note_contents">Text=&quot;{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Value}&quot; とかの書き方がある。</p>
+                            <p class="note_contents">RelativeSource Class (System.Windows.Data) | Microsoft Docs<br />
+                                <a href="https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.relativesource" target="_blank" class="url">https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.relativesource</a></p>
+                            <p class="note_contents">Binding RelativeSource= ... の部分を Binding Source= ... に変更するといかなる書き方でも動かないのかと考えると、今の自分には分からない。</p>
+                            <p class="note_contents">とりあえず、RelativeSource は、Binding RelativeSource= ... のあとにも RelativeSource を書くような状況で使うものと考えておく。Binding 直後の RelativeSource により「上へ下へ検索するモードでお願いしまっせ」を言い、実際どう検索するかを = 以降に書くものと。</p>
+                            <p class="note_contents">Source と ElementName の使い分けや可換性についてはまだ弱いので、もう少し調べる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">MainWindow に</p>
+                            <p class="note_contents">private ObservableCollection &lt;LogInfo&gt; Hoge =&gt; iPreviousLogs.Logs;</p>
+                            <p class="note_contents">と書いたところ、</p>
+                            <p class="note_contents">ItemsSource=&quot;{Binding Source={x:Reference Name=mWindow}, Path=Hoge}&quot;</p>
+                            <p class="note_contents">は起動すらせず、</p>
+                            <p class="note_contents">ItemsSource=&quot;{Binding ElementName=mWindow, Path=Hoge}&quot;</p>
+                            <p class="note_contents">は起動には成功したものの、その後の処理でエラーが発生した。</p>
+                            <p class="note_contents">追記: 古いセッション情報が残っていてのエラーのようで、それを消してからの起動なら、後者の書き方はうまく動く。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">いろいろ調べたが、Source, RelativeSource, ElementName それぞれに「この状況だと、これしか使えない」というのがあるわけではなさそう。速度の比較も見られる。暫定的に、「したいことができれば、どれを使ってもよい」と考えることにする。</p>
+                            <p class="note_contents">第5回 WPFの「データ・バインディング」を理解する：連載：WPF入門（2/3 ページ） - ＠IT<br />
+                                <a href="https://atmarkit.itmedia.co.jp/ait/articles/1010/08/news123_2.html" target="_blank" class="url">https://atmarkit.itmedia.co.jp/ait/articles/1010/08/news123_2.html</a></p>
+                            <p class="note_contents">wpf - ElementName vs. RelativeResource? - Stack Overflow<br />
+                                <a href="https://stackoverflow.com/questions/4317097/elementname-vs-relativeresource" target="_blank" class="url">https://stackoverflow.com/questions/4317097/elementname-vs-relativeresource</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ef4c26d9-bb66-4cc9-8ca8-f59763939993" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ListBox の ItemsSource がエラーを吐くようになったのを修正</span>
+                    <a href="#ef4c26d9-bb66-4cc9-8ca8-f59763939993" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">以前は次のコードでコンパイルできていた。それが急にできなくなった。</p>
+                            <p class="note_contents">ItemsSource=&quot;{Binding Source={x:Static local:iPreviousLogs.Logs}}&quot;</p>
+                            <p class="note_contents">エラーメッセージ:</p>
+                            <p class="note_contents">型 &#39;iPreviousLogs&#39; が見つかりません。型名では大文字と小文字が区別されることに注意してください。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">DataContext について多少は理解した上、Logs 内の何かとバインディングするわけでないため意味がないと知りつつも</p>
+                            <p class="note_contents">DataContext=&quot;{x:Static local:iPreviousLogs.Logs}&quot;</p>
+                            <p class="note_contents">と書いてみたところ、こちらでも型が見つからないというエラーが出た。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">MainWindow に</p>
+                            <p class="note_contents">private ObservableCollection &lt;LogInfo&gt; Hoge =&gt; iPreviousLogs.Logs;</p>
+                            <p class="note_contents">を追記し、いくつか試した。</p>
+                            <p class="note_contents">* ItemsSource=&quot;{Binding Source={x:Reference Name=mWindow}, Path=Hoge}&quot; → 起動に失敗<br />
+                                * ItemsSource=&quot;{Binding ElementName=mWindow, Path=Hoge}&quot; → 起動に成功し、データが表示され、ログの追加に成功<br />
+                                * ItemsSource=&quot;{Binding Path=Hoge}&quot; → 起動に成功するが、データが表示されず、同じキーが2回追加されるエラー</p>
+                            <p class="note_contents">三つ目に</p>
+                            <p class="note_contents">&lt;ListBox.DataContext&gt;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&lt;Binding ElementName=&quot;mWindow&quot; /&gt;<br />
+                                &lt;/ListBox.DataContext&gt;</p>
+                            <p class="note_contents">を追記すると、二つ目と同様に成功。</p>
+                            <p class="note_contents">それは、</p>
+                            <p class="note_contents">DataContext=&quot;{Binding ElementName=mWindow}&quot; ItemsSource=&quot;{Binding Path=Hoge}&quot;</p>
+                            <p class="note_contents">でも同じ。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">XAML でのバインディングをやめ、mWindow_Loaded に</p>
+                            <p class="note_contents">mPreviousTasks.ItemsSource = iPreviousLogs.Logs;</p>
+                            <p class="note_contents">を書くと、Hoge なしでも動く。</p>
+                            <p class="note_contents">となると、</p>
+                            <p class="note_contents">* Visual Studio では、静的プロパティーは、XAML のプレビュー時にはインスタンス化されて中身まで詰められるが、コンパイル時にはそこまでされない<br />
+                                * そのため、ItemsSource にバインディングできるものとコンパイラーが正しく判断できず、（おそらくバグにより）型が見つからないというエラーになる<br />
+                                * mWindow_Loaded での設定は、XAML の関与しない、型の一致のみ調べられることなのでコンパイルが通り、実行時には静的プロパティーに中身が詰まっているため動く</p>
+                            <p class="note_contents">という仮説が立つ。</p>
+                            <p class="note_contents">1週間ほど前にはコンパイルできていたコードが、ただ Visual Studio を閉じて、しばらくしてまた開いただけでコンパイル不可になったので、x:Static によるコードは、（インスタンス化される MainWindow から静的プロパティーにアクセスする点において仕様がダメという点はあっても）文法的には正しく書けていて、ただ Visual Studio がバグっているだけと考えてよさそう。</p>
+                            <p class="note_contents">実際、調べると、全く同じ状況で、全く同じコードで静的プロパティーとバインディングさせる例を多数見る。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">最終的にどうするか。</p>
+                            <p class="note_contents">iPreviousLogs.Logs というのは、単一ウィンドウ・単一機能のプログラムにおいて最初は App.xaml.cs でデータのロードや保存を行おうと思っていたからこそデータの受け渡しの簡略化のために用意したもの。</p>
+                            <p class="note_contents">やはり設計としてベストでないと思うので今後は気をつけるが、実装としての問題はないため、今回はそのまま使う。</p>
+                            <p class="note_contents">そのため、さらに ObservableCollection を用意することのない、mWindow_Loaded での ItemsSource の設定を結論とする。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="37375ff8-c45d-472b-8e13-92fffc176995" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">フォントを変更できるようにする</span>
+                    <a href="#37375ff8-c45d-472b-8e13-92fffc176995" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">.NET Core の、JSON による機能を使うか、簡単な KVS を用意するか、オワコンの ConfigurationManager をあえて使ってみるかのうち、あえてオワコンでいく。</p>
+                            <p class="note_contents">他は、今は準備不足だったり実装がめんどくさかったりだし、今後は ConfigurationManager を使わないため、現行のプロジェクトにも一つくらいそれを使うものがあってほしい。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">mWindow_Loaded での大きさの設定では、既にウィンドウの表示位置が決まっていて、モニターからはみ出す可能性がある。</p>
+                            <p class="note_contents">コンストラクターだと、InitializeComponent のあとなら大丈夫そうだが、それでも、まだコントロールの大きさやフォントをさわるのは早い気もする。</p>
+                            <p class="note_contents">そのため、mWindow_Initialized で処理を行った。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="a17ad85c-4adf-478a-a491-ddb1aedabaa8" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">それぞれの入力欄が縦に自動的に伸びるようにする</span>
+                    <a href="#a17ad85c-4adf-478a-a491-ddb1aedabaa8" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="5d093632-182c-41ed-b77e-781a2d133141" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">経過時間のフォントサイズが自動的に調整されるようにする</span>
+                    <a href="#5d093632-182c-41ed-b77e-781a2d133141" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">FormattedText のコンストラクターの一部が古くなっている。</p>
+                            <p class="note_contents">c# - FormattedText.FormttedText is obsolete. Use the PixelsPerDip override - Stack Overflow<br />
+                                <a href="https://stackoverflow.com/questions/45765980/formattedtext-formttedtext-is-obsolete-use-the-pixelsperdip-override" target="_blank" class="url">https://stackoverflow.com/questions/45765980/formattedtext-formttedtext-is-obsolete-use-the-pixelsperdip-override</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">FormattedText で得られる「高さ」には複数ある。</p>
+                            <p class="note_contents">Extent は、見える一番上のドットから一番下のドットまで。Padding が明確な枠内で上下にセンタリングしての表示ならフォントによりアセンダーなどが異なることは問題にならないはずなので Extent を使う。</p>
+                            <p class="note_contents">FormattedText Class (System.Windows.Media) | Microsoft Docs<br />
+                                <a href="https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.formattedtext" target="_blank" class="url">https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.formattedtext</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">コントロールのコンテンツ部分の大きさの取得においては妥協する。</p>
+                            <p class="note_contents">TextBox は、内部に 2px の Padding を持つ。これを除去し、Text の左端を Border につけるには、Template を大きく変更することになる。</p>
+                            <p class="note_contents">TextBox Styles and Templates - WPF .NET Framework | Microsoft Docs<br />
+                                <a href="https://docs.microsoft.com/en-us/dotnet/desktop/wpf/controls/textbox-styles-and-templates" target="_blank" class="url">https://docs.microsoft.com/en-us/dotnet/desktop/wpf/controls/textbox-styles-and-templates</a></p>
+                            <p class="note_contents">FrameworkElement.ActualWidth により実際の幅を得られるが、その全てが描画可能なエリアではない。</p>
+                            <p class="note_contents">FrameworkElement.ActualWidth Property (System.Windows) | Microsoft Docs<br />
+                                <a href="https://docs.microsoft.com/en-us/dotnet/api/system.windows.frameworkelement.actualwidth" target="_blank" class="url">https://docs.microsoft.com/en-us/dotnet/api/system.windows.frameworkelement.actualwidth</a></p>
+                            <p class="note_contents">おそらく、VisualTreeHelper を使って UI 要素をたどり、それぞれの Margin、Border の太さ、Padding などを合計すれば、描画可能でないエリアが得られる。そこから、描画可能なエリアの大きさも分かるだろう。</p>
+                            <p class="note_contents">しかし、経過時間の表示文字列を TextBox の枠線にぴったり内接させたいなどでないため、そこまでの作り込みは不要。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">フォントサイズを決めるにおいては「999時間59分」の大きさを調べる。</p>
+                            <p class="note_contents">タスクに100時間以上かかることはない。寝ている間も計測を続けるようなタスクは考えにくい。</p>
+                            <p class="note_contents">となると、あり得るのは、タスクを開始し、そのまま忘れてしまい、パソコンがスリープし、久々に開いたときに4日とちょっと以上が経過していた場合。この場合、「時間」が3桁になる。</p>
+                            <p class="note_contents">しかし、40日以上もスリープが続いて999時間を超えることはまずない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">「高さ」に Extent を使うのをやめて、Height を使うようにした。</p>
+                            <p class="note_contents">VerticalContentAlignment が Center でも、フォントのアセンダーなどの部分の余白が上下に均等にはみ出てくれるわけでないようだから。</p>
+                            <p class="note_contents">つまり、「アセンダー + Extent + ディセンダー」が ActualHeight より大きくなると、下にだけはみ出て、Extent 部分が、上下方向にセンタリングされた位置より下にズレる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Height を使う場合、それが ActualHeight と近似する値であるにおいて、実際には枠線の太さだったり内部的な（見えない）Padding があればそれに影響されたりも考えないといけないわけで、フォントがギリギリまで大きくなったときに上下方向のセンタリングがわずかにズレる可能性を考える必要がある。</p>
+                            <p class="note_contents">しかし、目視でテストした限りは大丈夫のようなので、しばらく様子見。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="fdfb2f4a-16d3-4747-8429-e4fc7cf162da" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">価値の有無を区別できるようにする</span>
+                    <a href="#fdfb2f4a-16d3-4747-8429-e4fc7cf162da" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">統計処理のため、価値のあることとあまりそうでないことを区別する。</p>
+                            <p class="note_contents">たとえば子ども同士が仲いいから親ともやり取りしてのママ友へのメール返信は、それがなくてもアポだけ取り急ぎ取れば子ども同士は遊べる点において不可欠でない。普段あまりにもコミュニケーションが少ないと子ども同士の遊びにも影響が生じうるが、関係がそれなりに良好なら、なくてよいメールはたくさんある。</p>
+                            <p class="note_contents">逆に、ちょっと筋トレするようなことは、たった5分でも毎日やれば効果がありそうで、それで筋肉が増えて代謝が上がって脂肪が減れば動脈硬化を遅らせることにもなるはずで、おそらく有意に余命が伸びる。</p>
+                            <p class="note_contents">最初は仕事かどうかという区別を考えたが、それだと筋トレは仕事でないから timeLog では重要でないとされる。</p>
+                            <p class="note_contents">また、仕事にもいろいろあって、どうでもよいことも多い。そういうのは、仕事であっても「有効活用されなかった時間」として集計されるべき。</p>
+                            <p class="note_contents">一応の配慮として、「価値なし」という表現はプログラムに含めない。</p>
+                            <p class="note_contents">たとえば自分を友達と思ってくれている人へのメール返信は、それが社会的な付加価値を創出することはないかもしれなくとも、全く無意味なことではない。</p>
+                            <p class="note_contents">という考え方により、「価値あり」のみ表示するように UI などを工夫する。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="c0ddf80b-4aea-4014-a203-e1c97ca737cc" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">統計処理を実装</span>
+                    <a href="#c0ddf80b-4aea-4014-a203-e1c97ca737cc" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">「価値なし」を UI などに入れたくなかったが、入れた方が分かりやすくなりそうなので入れる。</p>
+                            <p class="note_contents">また、「グダグダ」の反対として「集中」を入れる。</p>
+                            <p class="note_contents">ListBox に「集中」が表示されないよう、Visibility が変更されるようにする。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">時間の使い方を階層的に表示し、それぞれに「％」による割合もつけた。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">昔は完徹もちょくちょくあったが、今は翌日に響くので遅くても3時過ぎには寝る。早起きは、早くても5時くらいで、4時以前に起きることはまずない。</p>
+                            <p class="note_contents">そのため、12時でなく4時に「日」が変わるとみなす実装にした。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d01c57f8-9b38-493b-be44-561fb864f727" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">起動時に最大化できるようにする</span>
+                    <a href="#d01c57f8-9b38-493b-be44-561fb864f727" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="72fc9bc2-9345-4f43-830f-bfc5f7cdd2c3" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">README.md を書く</span>
+                    <a href="#72fc9bc2-9345-4f43-830f-bfc5f7cdd2c3" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="d732c1ed-35b0-4d0f-8937-5d859ff63581" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">アーカイブ</span>
+                    <a href="#d732c1ed-35b0-4d0f-8937-5d859ff63581" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="b9fb9a42-62c8-49e4-a2c7-5f3a7d78ebe5" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">0.1 のアーカイブを作り直す</span>
+                    <a href="#b9fb9a42-62c8-49e4-a2c7-5f3a7d78ebe5" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Nekote の開発の本格化の前に、全てのプロジェクトにおけるメモの書き方や含めるメアドなどを見直した。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="3eeb23c2-486e-44af-a802-14c23896fd52" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">キーボードやマウスの操作を検出できるようにする</span>
+                    <a href="#3eeb23c2-486e-44af-a802-14c23896fd52" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">mtime には NuGet のパッケージを使っているが、バグがあるとどこかで見た記憶がある。簡単な処理なら自分で実装する。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">だいぶ前に MouseKeyHook を使った。そのプログラムは今でも動いている。2000年からのプロジェクトとのことで、それなりに信頼性もあるだろう。</p>
+                            <p class="note_contents">ただ、4年以上、NuGet のパッケージが更新されていない。GitHub の Issues は76個ある。事実上、放棄されたプロジェクトと考えるべき。</p>
+                            <p class="note_contents">NuGet Gallery | MouseKeyHook 5.6.0<br />
+                                <a href="https://www.nuget.org/packages/MouseKeyHook" target="_blank" class="url">https://www.nuget.org/packages/MouseKeyHook</a></p>
+                            <p class="note_contents">gmamaladze/globalmousekeyhook: This library allows you to tap keyboard and mouse, detect and record their activity even when an application is inactive and runs in background.<br />
+                                <a href="https://github.com/gmamaladze/globalmousekeyhook" target="_blank" class="url">https://github.com/gmamaladze/globalmousekeyhook</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">自分での実装を考えたが、きちんと作り込むと沼にハマりそう。他のアプリとの競合などが問題になるため。</p>
+                            <p class="note_contents">やれば数日で可能なことだからこそ、ライブラリーや「このソースコードをそのまま貼り付けてくれ」のようなものが乱立しているのだろう。だからといって、そこに自分がもう一つ加えるほどの必要性は今のところない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">SharpHook を試す。クロスプラットフォームとのこと。libUIOHook という C 言語のライブラリーのラッパー。73 stars を獲得していて、更新がマメのようで、ドキュメントも用意されている。</p>
+                            <p class="note_contents">NuGet Gallery | SharpHook 2.0.0<br />
+                                <a href="https://www.nuget.org/packages/SharpHook/2.0.0" target="_blank" class="url">https://www.nuget.org/packages/SharpHook/2.0.0</a></p>
+                            <p class="note_contents">TolikPylypchuk/SharpHook: SharpHook provides a cross-platform global keyboard and mouse hook for .NET, and the ability to simulate input events<br />
+                                <a href="https://github.com/TolikPylypchuk/SharpHook" target="_blank" class="url">https://github.com/TolikPylypchuk/SharpHook</a></p>
+                            <p class="note_contents">SharpHook<br />
+                                <a href="https://sharphook.tolik.io/v3.1.1/" target="_blank" class="url">https://sharphook.tolik.io/v3.1.1/</a></p>
+                            <p class="note_contents">kwhat/libuiohook: A multi-platform C library to provide global keyboard and mouse hooks from userland.<br />
+                                <a href="https://github.com/kwhat/libuiohook" target="_blank" class="url">https://github.com/kwhat/libuiohook</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">他には H.Hooks というものもある。こちらもマメに更新されているようだが、ドキュメントはまだのようだ。</p>
+                            <p class="note_contents">NuGet Gallery | H.Hooks 1.6.0<br />
+                                <a href="https://www.nuget.org/packages/H.Hooks" target="_blank" class="url">https://www.nuget.org/packages/H.Hooks</a></p>
+                            <p class="note_contents">HavenDV/H.Hooks: Contains LowLevelKeyboardHook and LowLevelMouseHook.<br />
+                                <a href="https://github.com/HavenDV/H.Hooks" target="_blank" class="url">https://github.com/HavenDV/H.Hooks</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">SharpHook が良くできているようで、すぐに動き、今のところ問題も認められない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="2438c95c-9a8e-4a52-ba9b-6745b3f30be0" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">一時停止してパソコンを離れて戻ったときに計測を再開するか聞く</span>
+                    <a href="#2438c95c-9a8e-4a52-ba9b-6745b3f30be0" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">最初にやっていたこととは別の用事でパソコンに戻ることがある。それがすぐ終わることなら計測を再開せずパッとやってしまい、またパソコンを離れるのもアリ。しばらくして、最初にやっていたことのために戻ったときに計測を再開したい。</p>
+                            <p class="note_contents">ただ、そういうのが過度な時間管理になる懸念もある。多少は他の用事の所要時間も混ざってよいか。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">複数インスタンスで単一のデータファイルを更新しても安全な仕様にするのも選択肢。その場合、A をやっている途中に B の方が大事になり、これらを単一のエントリーにまとめたくないとき、A を一時停止し、別のインスタンスで B をやり、B を終了し、A を再開することで正確なデータが残る。</p>
+                            <p class="note_contents">timeLog で時間給を請求するなら便利な機能かもしれないので、一応、想定はしてみる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ややこしくなるのでやめておく。</p>
+                            <p class="note_contents">一時停止中にそのまま寝てしまう問題については、翌朝、「あっ、これは timeLog 上で実行中のままになっていたな」と気づいてタスクの内容を整えていったん終了にしても、そのまま寝てしまったことがログに残らないようにするのがシンプル。</p>
+                            <p class="note_contents">「何時何分から何時何分まで」のリストを全て保存する考えがあったが、やめておく。開始日時と所要時間だけで十分。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="798de91c-9f47-4c8e-be5b-0da66dcf95dc" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">日をまたいだなど明らかに操作ミスのときに計測を再開するか聞く</span>
+                    <a href="#798de91c-9f47-4c8e-be5b-0da66dcf95dc" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">たとえば夜にあまり大事でもないメールを書き始め、何となくパソコンを離れ、そのまま寝たとする。</p>
+                            <p class="note_contents">起きて子どもを園に送ったあとパソコンをさわったときにすぐ計測が再開されるのはおかしい。</p>
+                            <p class="note_contents">そういうときには、「流れたみたいですが、なかったことにしますか？」を旨とするダイアログが出てほしい。</p>
+                            <p class="note_contents">あるいは「失敗」「打ち切り」のフラグを立てて終了も選択肢。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">なかったことにするのが良い。パソコンに向かわない時間も多い。お迎えの帰りに買い出しに寄るとか、子どもと遊ぶとかの、timeLog では管理されない膨大な時間の一部であったかのように情報として消えてしまう方が、使っていて気楽。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="66d4fed2-836c-4f21-af42-d4e3aa109b15" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">複数インスタンスで単一のデータファイルにアクセスできるか調べる</span>
+                    <a href="#66d4fed2-836c-4f21-af42-d4e3aa109b15" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">読み書きに問題はないが、そのプロセスでの統計情報が不正確になる。その点を気にしないなら、長いプログラミングの途中で短いメールを書くようなことは可能。ただ、そもそもそういうのを減らしていくのが時間管理。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="45ab9c2c-7490-4418-af10-a2b42df34de8" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">TimeSpan と文字列のラウンドトリップについて調べる</span>
+                    <a href="#45ab9c2c-7490-4418-af10-a2b42df34de8" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">小文字の &quot;c&quot; のみカルチャーに依存しない。</p>
+                            <p class="note_contents">Standard TimeSpan format strings | Microsoft Docs<br />
+                                <a href="https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-timespan-format-strings" target="_blank" class="url">https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-timespan-format-strings</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="4c12127f-e081-40c5-9e13-eec0dd44a739" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">LogInfo クラスを更新</span>
+                    <a href="#4c12127f-e081-40c5-9e13-eec0dd44a739" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">終了日時をなくし、ElapsedTime をコンストラクターで設定できるように。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="c472bd6c-5ff2-4de5-b161-01d1a84761d6" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">CurrentTasksStartUtc と mCounter の状態を同期させる</span>
+                    <a href="#c472bd6c-5ff2-4de5-b161-01d1a84761d6" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">派生開発ということもあってグダグダ。通常、こういうものは二つまとめて一つのクラスにする。</p>
+                            <p class="note_contents">二つに分かれたまま 0.2 をまとめるので、前者が変更されるときに必ず後者も変更。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="11c2fb3a-17ca-4306-a65f-dddfd0ddcbe3" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Nekote.dll を参照</span>
+                    <a href="#11c2fb3a-17ca-4306-a65f-dddfd0ddcbe3" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ベタ書きで始めたプロジェクトだが、nStopwatch を Nekote 側に実装した。共通化によりデバッグ効率を高める。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="2f6e2470-9d4d-46a0-8f29-b62d64fc4306" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">左上とその真下のグリッドの高さの比を 2:3 にする</span>
+                    <a href="#2f6e2470-9d4d-46a0-8f29-b62d64fc4306" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">「自動中断」などでコントロールの行を一つ増やした。作業中に他のことも必要になって追記すると「今のタスク」の方が文字列が縦長になることも考えるなら、2:3 くらいがちょうど良い。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="f701f90f-788b-4b79-ab41-c2e9d4e8a534" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">数分間パソコンの操作がなければ計測を一時停止させる</span>
+                    <a href="#f701f90f-788b-4b79-ab41-c2e9d4e8a534" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="357991b3-c9b4-404b-b07b-760ac7530799" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">Counter クラスを追加</span>
+                    <a href="#357991b3-c9b4-404b-b07b-760ac7530799" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Stopwatch と似ているが、Stopwatch では Elapsed を復元できない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Nekote に nStopwatch を追加し、そのインスタンスを含む、時間関連のものを集めた iCounter も追加した。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="a14851b9-c2e2-460f-97fb-9298cc7110d7" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">一時停止中かどうかがプログラム再起動時に復元されるようにする</span>
+                    <a href="#a14851b9-c2e2-460f-97fb-9298cc7110d7" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">不要。カウント中にプログラムを閉じても、自動中断またはマニュアル中断による中断中にそうしても、前回の経過時間を引き継ぎ、「再開」ボタンで再開できるように。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="26699e53-1451-4f14-9bf9-9a420396da36" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">mtime の実装をチェック</span>
+                    <a href="#26699e53-1451-4f14-9bf9-9a420396da36" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">タイマーとストップウォッチを組み合わせた古いプログラム。キーボードやマウスの操作を検出する。使っていて一度も不満がないので、仕様がうまくまとまっていることになる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="4340fdfd-01a4-4bc8-84fa-bfd1553bbb0a" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">設計を全体的に見直す</span>
+                    <a href="#4340fdfd-01a4-4bc8-84fa-bfd1553bbb0a" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">中断・再開、3分くらいでの自動停止、自動停止のオン・オフの切り換えなどを実装するには、既存の設計はアカンすぎる。</p>
+                            <p class="note_contents">自動停止しない場合、プログラムを閉じてしばらく経って開いたときに、その間の時間も計測されるべき。その間にパソコンの自動スリープ、Windows Update による再起動、電源オフなどがあっても同様。掃除をイメージ。パソコンを離れるが、戻るまで計測は続くべき。掃除が終わってからも timeLog 上で走りっぱなしにしてしまうミスは、プログラムで回避できることでない。</p>
+                            <p class="note_contents">自動停止する場合、つまり、パソコンでの作業の時間のみ計測する場合、プログラムがオフのときは「不明」なので計測されるべきでないし、自動スリープや再起動・電源オフの間も同様。</p>
+                            <p class="note_contents">デバッグモードならカウントの中断・再開などがログファイルに出力されるようにする。VSC で開いておけば、ほぼリアルタイムでリロードされる。</p>
+                            <p class="note_contents">iPreviousLogs なども正しい設計に。</p>
+                            <p class="note_contents">時間に関するところは全面的に書き直すのが良さそう。UI から完全に分離させる。</p>
+                            <p class="note_contents">タスクのリストのところも、1行1タスクで入力する必要性を UI で示す。コメントについては、括弧で添えるなどを推奨。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ザッと更新した。</p>
+                            <p class="note_contents">プログラムが閉じられている間の計測を完全にやめた。「掃除している間に Windows Update で勝手に」のような状況は、あり得ないことでないが、極めて稀。</p>
+                            <p class="note_contents">自動中断を CheckBox でオフにできるように実装したが、たぶんやらない。そもそも自動中断機能を実装したのは、パソコンに戻るのを忘れての操作ミスが続いたため。「たぶん忘れるだろうなぁ」と思いながらパソコン外のタスクの所要時間をこのプログラムで計測することはほとんどない。</p>
+                            <p class="note_contents">デバッグモードのログ出力も不要。想定するべきパターンは限られているので、バグを落としきれる。</p>
+                            <p class="note_contents">iPreviousLogs なども古い設計のままでよい。ごくシンプルなプログラムを軽いノリで書いただけ。自動中断機能の実装などによりそれなりに複雑になってきているが、ゴールの見えている開発。</p>
+                            <p class="note_contents">タスクリストが1行1タスクだという UI の表示もなくてよい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="6b37dd7d-feb7-4691-9d23-81822b1c216f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">休憩時などに一時停止できるようにする</span>
+                    <a href="#6b37dd7d-feb7-4691-9d23-81822b1c216f" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">左上の領域とその真下のものの高さの比を見直した。2:3 では下が広すぎたので、現時点におけるウィンドウの最初の高さである 600px において TextBox の高さが目視でだいたい同じになる 6:7 に変更。ウィンドウを最大化しても違和感がない。</p>
+                    <!-- Task: 2ee588a9-4d60-4ba6-8884-fc2ce938128c -->
+                </div>
+            </div>
+            <div id="2c2ec309-dcbc-41f6-8bf4-eea9948cef64" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">CurrentTasksStartUtc の値が復元される仕組みを調べる</span>
+                    <a href="#2c2ec309-dcbc-41f6-8bf4-eea9948cef64" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">mWindow_Closed で iShared.CurrentTasksStartUtc = null なのに問題がない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">設計を大きく変更するので不要。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="86707a05-770f-41f7-a299-f8568fb7f163" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">iCounter.AutoPauses の必要性について再考</span>
+                    <a href="#86707a05-770f-41f7-a299-f8568fb7f163" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">nStopwatch のものをそのまま使うので不要。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="3fa0d244-c911-43c4-a689-ac844c04d6c1" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">Counter のインスタンスの復元時のデフォルト値による挙動をテスト</span>
+                    <a href="#3fa0d244-c911-43c4-a689-ac844c04d6c1" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">通常は必要にならない処理だが、人為的ミスなどによりデータが飛んでいてもゼロからのカウントとして続行されるように。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">設計を大幅に見直す。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="7e063431-28c3-4d2a-85fb-a62c385b9b12" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">カウント中に閉じようとすると確認されるようにする</span>
+                    <a href="#7e063431-28c3-4d2a-85fb-a62c385b9b12" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">閉じるとカウントが止まるソフトになる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="dc7e56fd-0dc7-4265-ada8-42170c96e994" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">lock の必要なところを探す</span>
+                    <a href="#dc7e56fd-0dc7-4265-ada8-42170c96e994" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">軽い気持ちで lock したところデッドロックでプロセスが終わらなくなったので、むしろ timeLog 側では lock なしで問題なく動作させる方針に。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="939ea142-54ba-4bef-9f35-2483bbcb8b69" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">カウント中に Windows からログアウトできるようにする</span>
+                    <a href="#939ea142-54ba-4bef-9f35-2483bbcb8b69" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">timeLog が原因ですぐにログアウトできなかったり、（プロセスごと止められる形で）アプリが強制終了されたりを回避。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Closing は Windows 終了時には実行されなかった記憶がある。ドキュメントで確認する。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">If a session ends because a user logs off or shuts down, Closing is not raised とのこと。</p>
+                            <p class="note_contents">Window.Closing Event (System.Windows) | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.window.closing" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/system.windows.window.closing</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="cdfd2f95-4da8-49a8-b0ae-1415fcd50bd6" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">前回のセッションの開始日時と経過時間のラウンドトリップをテスト</span>
+                    <a href="#cdfd2f95-4da8-49a8-b0ae-1415fcd50bd6" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">値がない場合も。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="b7bb942a-fea3-42af-bf4c-216352857f13" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">カウントの状態が3色で区別されるようにする</span>
+                    <a href="#b7bb942a-fea3-42af-bf4c-216352857f13" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">カウント前はデフォルトの UI のまま。</p>
+                            <p class="note_contents">カウント中は、進んでいるのだから青。</p>
+                            <p class="note_contents">自動中断されたら、すぐ戻れる状態なので黄色。</p>
+                            <p class="note_contents">ボタンで中断されたら、ガッツリ止められているので赤。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">アホっぽくなりそうなので、まだやめておく。状態の誤認によるミスが続けば実装を考える。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="98f5300b-f374-4075-a3fc-85c9c8e63bd3" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">mGlobalHook_KeyTyped などで例外を発生させてみるテストを行う</span>
+                    <a href="#98f5300b-f374-4075-a3fc-85c9c8e63bd3" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="2b9b4836-f454-4048-9faa-f010bfc23e18" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">セッション情報の保存に Closed を使わないようにする</span>
+                    <a href="#2b9b4836-f454-4048-9faa-f010bfc23e18" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">アプリの終了と関連のあるイベントは以下の四つ。</p>
+                            <p class="note_contents">Window.Closing Event (System.Windows) | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.window.closing" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/system.windows.window.closing</a></p>
+                            <p class="note_contents">Window.Closed Event (System.Windows) | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.window.closed" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/system.windows.window.closed</a></p>
+                            <p class="note_contents">Application.SessionEnding Event (System.Windows) | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.application.sessionending" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/system.windows.application.sessionending</a></p>
+                            <p class="note_contents">Application.Exit Event (System.Windows) | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.application.exit" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/system.windows.application.exit</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Lifetime events of a WPF application - CodeProject<br />
+                                <a href="https://www.codeproject.com/Articles/403418/Lifetime-events-of-a-WPF-application" target="_blank" class="url">https://www.codeproject.com/Articles/403418/Lifetime-events-of-a-WPF-application</a></p>
+                            <p class="note_contents">docs-desktop/application-management-overview.md at main &#183; dotnet/docs-desktop<br />
+                                <a href="https://github.com/dotnet/docs-desktop/blob/main/dotnet-desktop-guide/framework/wpf/app-development/application-management-overview.md" target="_blank" class="url">https://github.com/dotnet/docs-desktop/blob/main/dotnet-desktop-guide/framework/wpf/app-development/application-management-overview.md</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">MS のページによると、SessionEnding 時、つまり、Windows からのログオフやシャットダウンでは Closing が起こらないとのこと。</p>
+                            <p class="note_contents">MS のページにおける、何が起こって何が起こらないかに関する情報はそのくらい。</p>
+                            <p class="note_contents">試したところ、次のようになった。</p>
+                            <p class="note_contents">* アプリを終了すれば、Closing → Closed → Exit<br />
+                                * 計測中でないときにセッションを終了すれば、SessionEnding → Closing → Closed<br />
+                                * 計測中にセッションを終了すれば、Closing → SessionEnding</p>
+                            <p class="note_contents">計測中のセッション終了における Closing では、ユーザーが MessageBox に対処できない。Closing → Closed というのは一つの流れで、Closing で止まるから Closed に到達しないか。SessionEnding が Closing より遅れるのも、基準が分からない。いくつかのページでは SessionEnding 時も起こるかのように書かれている Exit が、SessionEnding が空でも起こらないのも、基準が分からない。MS のドキュメントでは SessionEnding 時には無視されるとのことである Closing が起こるのも謎。</p>
+                            <p class="note_contents">ちょっとググったくらいでは、はっきりとした情報は見つからなかった。</p>
+                            <p class="note_contents">抜けられない Closing の場合にそれが SessionEnding より先行するのは、はっきりとタイムスタンプまで出ているので間違いないとみなす。</p>
+                            <p class="note_contents">実装としては、次のような考え方が現実的。</p>
+                            <p class="note_contents">* Closing は必要に応じて途中で打ち切られるため、閉じる前の確認など、最小限の対話のみとする<br />
+                                * Closed は、Closing 次第で呼ばれたり呼ばれなかったりなので、ウィンドウ関連の、なくても困らない後片付け程度にしておく<br />
+                                * SessionEnding は、本来、シャットダウンを止めるためのイベントとのことだが、Exit の代わりになっている部分もある<br />
+                                * データの保存などは、SessionEnding と Exit のいずれかにおいて一度だけ行われるようにする</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="841274aa-51ab-47e3-a91e-affdab9af7f1" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">各メソッドでの iUpdateControls の必要性を考える</span>
+                    <a href="#841274aa-51ab-47e3-a91e-affdab9af7f1" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="fa5d0ed0-a66d-41cf-b36b-0a43f9fd89e4" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">SharpHook のドキュメントに全体的に目を通す</span>
+                    <a href="#fa5d0ed0-a66d-41cf-b36b-0a43f9fd89e4" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">実装が終わってから。作法の忘れを探す。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">最初、KeyTyped で実装したが、それではカーソルキーが検出されなかった。文字が入力されないと KeyTyped は起こらない。KeyPressed への変更により解決した。</p>
+                            <p class="note_contents">マウスも、MouseClicked ではウィンドウのドラッグなどが検出されなかった。ドラッグ開始時にクリックが行われることも確かだが、ここでの MouseClicked は、その場でクリックされた場合のみのようだ。MousePressed への変更により解決。</p>
+                            <p class="note_contents">Native Functions<br />
+                                <a href="https://sharphook.tolik.io/v3.1.1/articles/native.html" target="_blank" class="url">https://sharphook.tolik.io/v3.1.1/articles/native.html</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="7293df72-4d6c-4f55-bd91-4a0b43b432ce" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">srcZip.txt の更新が必要か調べる</span>
+                    <a href="#7293df72-4d6c-4f55-bd91-4a0b43b432ce" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">以下の、テスト時のファイルの混入を回避。</p>
+                            <p class="note_contents">Compiled/timeLog.Errors.txt<br />
+                                Compiled/timeLog.Session.txt<br />
+                                Compiled/timeLog.Statistics.txt<br />
+                                Compiled/timeLogs.txt</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">SharpHook 関連の DLL としては、以下のものが入る。</p>
+                            <p class="note_contents">Compiled/runtimes/linux-arm/native/libuiohook.so<br />
+                                Compiled/runtimes/linux-arm/native/libuiohook.so.1<br />
+                                Compiled/runtimes/linux-arm/native/libuiohook.so.1.2.0<br />
+                                Compiled/runtimes/linux-arm64/native/libuiohook.so<br />
+                                Compiled/runtimes/linux-arm64/native/libuiohook.so.1<br />
+                                Compiled/runtimes/linux-arm64/native/libuiohook.so.1.2.0<br />
+                                Compiled/runtimes/linux-x64/native/libuiohook.so<br />
+                                Compiled/runtimes/linux-x64/native/libuiohook.so.1<br />
+                                Compiled/runtimes/linux-x64/native/libuiohook.so.1.2.0<br />
+                                Compiled/runtimes/osx-arm64/native/libuiohook.1.2.0.dylib<br />
+                                Compiled/runtimes/osx-arm64/native/libuiohook.1.dylib<br />
+                                Compiled/runtimes/osx-arm64/native/libuiohook.dylib<br />
+                                Compiled/runtimes/osx-x64/native/libuiohook.1.2.0.dylib<br />
+                                Compiled/runtimes/osx-x64/native/libuiohook.1.dylib<br />
+                                Compiled/runtimes/osx-x64/native/libuiohook.dylib<br />
+                                Compiled/runtimes/win-arm/native/uiohook.dll<br />
+                                Compiled/runtimes/win-arm64/native/uiohook.dll<br />
+                                Compiled/runtimes/win-x64/native/uiohook.dll<br />
+                                Compiled/runtimes/win-x86/native/uiohook.dll</p>
+                            <p class="note_contents">timeLog が四つの win* のうち x64 以外のどれで動くか分からないが、IDE では Any CPU でのコンパイルであり、.NET のバイナリーは現時点においては仮想マシンを必要とする中間言語的なものの認識なので、win* を四つとも残す。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Compiled/runtimes/linux-arm<br />
+                                Compiled/runtimes/linux-arm64<br />
+                                Compiled/runtimes/linux-x64<br />
+                                Compiled/runtimes/osx-arm64<br />
+                                Compiled/runtimes/osx-x64</p>
+                            <p class="note_contents">の五つのサブディレクトリーを中身ごと消しても、timeLog.deps.json にはアセンブリーの情報が残る。</p>
+                            <p class="note_contents">不整合になるが、そもそも timeLog.deps.json がなくてもプログラムは起動するようなので、何もせずに様子見。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">MyApp.deps.json is a list of dependencies, as well as compilation context data and compilation dependencies. Not technically required, but required to use the servicing or package cache/shared package install features とのこと。</p>
+                            <p class="note_contents">c# - What is deps.json, and how do I make it use relative paths? - Stack Overflow<br />
+                                <a href="https://stackoverflow.com/questions/40849745/what-is-deps-json-and-how-do-i-make-it-use-relative-paths" target="_blank" class="url">https://stackoverflow.com/questions/40849745/what-is-deps-json-and-how-do-i-make-it-use-relative-paths</a></p>
+                            <p class="note_contents">timeLog.dll あるいは timeLog.exe にさらに別のアプリからリンクする場合に何が必要かをアプリ側が把握するためのファイルの可能性が高い。そういうリンクは今のところ想定されないため、timeLog.deps.json の内容はどうでもいい。</p>
+                            <p class="note_contents">消すことも考えたが、Nekote に関する情報も以下のように入っている。</p>
+                            <p class="note_contents">&quot;Nekote/0.0.2.0&quot;: {<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&quot;runtime&quot;: {<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;Nekote.dll&quot;: {<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;assemblyVersion&quot;: &quot;0.0.2.0&quot;,<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;fileVersion&quot;: &quot;0.0.2.0&quot;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                }</p>
+                            <p class="note_contents">まだ黎明期の Nekote に今後、後方互換性のない更新が施されることは何度もあるだろうから、どのバージョンの Nekote を必要とするのかすぐ分かる利点に着目して一応残す。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="f5fc57d3-9024-4e6d-884b-55cad0c4e139" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">パソコンの再起動でもセッション情報が保存されるのを確認</span>
+                    <a href="#f5fc57d3-9024-4e6d-884b-55cad0c4e139" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="d2448ac5-fd5d-44e1-9f8c-3c1831dd0033" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">表示の更新の頻度を高めてみるテストを行う</span>
+                    <a href="#d2448ac5-fd5d-44e1-9f8c-3c1831dd0033" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Thread.Sleep の引数を0にすると、CPU のうちシングルスレッド分が使い切られる。</p>
+                            <p class="note_contents">1だと、リソースモニターにおいて「平均 CPU: プロセスによる % 単位での CPU の消費率の平均値（60秒あたり）」というのが0.02％で安定する。その状態で他のアプリを使っても、体感的な違いは全くない。</p>
+                            <p class="note_contents">100なら CPU の消費率は単純計算で0.0002％になる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="cd6efe52-64b2-42f1-973c-a06f1de78076" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">0.2 としてアーカイブ</span>
+                    <a href="#cd6efe52-64b2-42f1-973c-a06f1de78076" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="fb57b356-5a4b-4611-adab-13a6d64bb070" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">$&quot;{...}&quot; 内でのフォーマット指定の方法を調べる</span>
+                    <a href="#fb57b356-5a4b-4611-adab-13a6d64bb070" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Composite formatting のところに &quot;On {0:d}, the inventory of {1} was worth {2:C2}.&quot; という例がある。</p>
+                            <p class="note_contents">Overview: How to format numbers, dates, enums, and other types in .NET | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/formatting-types" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/standard/base-types/formatting-types</a></p>
+                            <p class="note_contents">{xSeconds % 60} に D2 を指定する場合、{xSeconds % 60 :D2} のように書くことにする。60:D2 のように引っ付けると % より優先度が高いように見える。60 : D2 のように離すと正しく構文解析されず、&quot;D2&quot; がそのまま表示される。</p>
+                            <p class="note_contents">次のページにも目を通した。</p>
+                            <p class="note_contents">Composite formatting | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/composite-formatting" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/standard/base-types/composite-formatting</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="55176d5b-2ae2-4b4e-ad8a-3048526a4902" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">「秒」の表示がなくならないようにする</span>
+                    <a href="#55176d5b-2ae2-4b4e-ad8a-3048526a4902" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">なくすと「10分」とかのときに計測中なのかどうかが分からない。テスト時にはそこまで使わなくて気付かず。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="0532875f-39d0-4dcc-be38-e5b15c122667" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">状態を視覚的に分かりやすくする</span>
+                    <a href="#0532875f-39d0-4dcc-be38-e5b15c122667" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">以前、アホっぽくなりそうと思ってやめた色分けを再考。一番分かりやすい。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">試したが、やはりアホっぽい。「秒」を常に表示するので一応は分かる。それで様子見。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="1d98137a-e7fd-43c0-88f0-9272fd527726" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">タスクの内容が行単位で最適化される仕様を見直す</span>
+                    <a href="#1d98137a-e7fd-43c0-88f0-9272fd527726" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">空行やインデントを可能にすると、「1行1タスク」の前提が崩れて出力時に困る？</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">そのままでよい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="7592e226-aa37-44e1-a19e-c52611603c8b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ウィンドウ左側の XAML を全体的にチェック</span>
+                    <a href="#7592e226-aa37-44e1-a19e-c52611603c8b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">「結果」を追加した。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">グリッドの高さの比は適当。ウィンドウの初期状態の高さ 600px でだいたい同じくらいに見える値を選んだ。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">マージンも大丈夫そう。テストも完了。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="e68814b4-5bf9-47cd-b827-a989f9aa9a57" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">タスクの結果を書けるようにする</span>
+                    <a href="#e68814b4-5bf9-47cd-b827-a989f9aa9a57" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="d0db0b12-2994-4e79-ace0-4fb93a6339ad" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">「過去ログ」のところの XAML をチェック</span>
+                    <a href="#d0db0b12-2994-4e79-ace0-4fb93a6339ad" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">「価値あり」と「グダグダ」の間の隙間を 10px に変更した。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="38cfd57a-1158-4dda-b8be-0d1b2bbdae7a" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">0.3 としてアーカイブ</span>
+                    <a href="#38cfd57a-1158-4dda-b8be-0d1b2bbdae7a" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">グダグダになった作業のログをそのまま消すことがある。「今のタスクを終了」を押し、「過去ログ」のところで選択し、Delete キーでの削除になる。</p>
+                    <p class="note_contents">ボタン一つで可能にしたいが、似たようなボタンになるので誤操作のリスクがある。</p>
+                    <p class="note_contents">また、グダグダになったならそのこともまた記録されるべきと思う。グダグダでなく、漠然と「これはうまくいった」と思う作業のみデータを残すのでは、残すものとそうでないものの境界に迷いが生じる。</p>
+                    <p class="note_contents">グダグダも含めて全て残すのが基本と念頭に置くため、「やっていることをなかったことにする」のボタンは実装しない。</p>
+                    <!-- Task: 10c41ea2-00a5-4e4b-a7a0-c30d78240237 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">タスクのカテゴリーをリストから選択できるようにする考えが生じたが、これは過度な管理になる。</p>
+                    <p class="note_contents">たとえば A 社に関する仕事の時間だから「A 社」を選んでいて、途中で急ぎのメールが入ったから返信したとか、何かの拍子に思い付いたチェックをしたところ Nekote に問題が見付かってすぐに直したとかがあれば、これらはいずれも「A 社」として登録されるべき作業時間でない。</p>
+                    <p class="note_contents">もちろん時間管理は重要だが、特定のプロジェクトに割り当てている時間においてそれとは関係のない急ぎのタスクに取り組むことを積極的に想定しないアプリは、ただただ使いにくくなる。</p>
+                    <!-- Task: 10c41ea2-00a5-4e4b-a7a0-c30d78240237 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">カテゴリーについて考えた理由は、週ごとにそれぞれのプロジェクトにどのくらいの時間を掛けたかを数値化し、偏りなく同時進行させたかったから。</p>
+                    <p class="note_contents">しかし、プロジェクトの進捗は時間のみでは管理できない。A のためにまず B を進めなければならないなどの依存関係もある。</p>
+                    <p class="note_contents">時間を見れば、全く止まってしまっているプロジェクトが見える。しかし、それは受動的な時間配分である。</p>
+                    <p class="note_contents">週の初めに「どれをどこまで進めるか」「何に実際どのくらいの時間が必要か」を俯瞰的に考え、「A をここまでやっては、B があまり進まない」のようなのを整理してバランスを取り、その週の時間割を作り、できるだけそれに従うのが能動的。</p>
+                    <!-- Task: 10c41ea2-00a5-4e4b-a7a0-c30d78240237 -->
+                </div>
+            </div>
+            <div id="b07e94be-24e7-4be4-896a-75a8c28fd498" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">トータルの作業時間を表示</span>
+                    <a href="#b07e94be-24e7-4be4-896a-75a8c28fd498" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">やってみたが、表示が縦に伸びることに見合うメリットを感じなかった。</p>
+                            <p class="note_contents">二つの数字の合計は、だいたいなら暗算ですぐに出る。「集中がどのくらいで～、グダグダがどのくらいで～」と二つの時間を認識した時点で既に大まかな計と比率を頭が把握している。</p>
+                            <p class="note_contents">そのあと「計」が表示されても、頭の中ではやや重複するその情報を改めて得て、そこから上に戻って「集中」と「グダグダ」が「計」のうちどのくらいかと認識するプロセスは起こらない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="69470973-4bbc-4dfb-ad4c-1043cbd4dc59" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">過去ログのうち「結果」部分の色を変更</span>
+                    <a href="#69470973-4bbc-4dfb-ad4c-1043cbd4dc59" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">色覚異常の人もいるため、枠線と同じ色・太さのボーダーを挟み、文字色を Green にした。Teal も考えたが、他で Blue と Red を使っているため、数値的に揃えた。また、Teal だとコントラストが下がり、少し見えにくい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="8d1ae5b5-ff38-4ebf-b29c-8ed22ae199af" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">起動時に日本語入力をオンにできるようにする</span>
+                    <a href="#8d1ae5b5-ff38-4ebf-b29c-8ed22ae199af" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="de28cb14-14c8-4c78-b4a0-31d931f94210" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">タスクを入力せずにカウントを開始できるようにする</span>
+                    <a href="#de28cb14-14c8-4c78-b4a0-31d931f94210" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">グダグダになったタスクをなかったことにするボタンは設計思想に反するので実装しないが、「次のタスク」のところにいろいろと溜まっている状況で、それら以外に着手することは正常な利用。そちらには個別のボタンがあるべき。「次のタスクを開始」で開始し、「今のタスク」の内容を「次のタスク」にドラッグ＆ドロップで戻すことがよくある。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">「空のタスクを開始」では「次のタスクを開始」と見間違いそうなので、「タスクなしで開始」と大きく異ならせる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="c7a34a7d-9631-4832-95d1-33789054d5f5" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">0.4 としてアーカイブ</span>
+                    <a href="#c7a34a7d-9631-4832-95d1-33789054d5f5" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">自分で10日ほどちゃんと使ってみて、かなり使えるプログラムになっていると感じる。細かいところを作り込み、英語への切り換えも可能にすれば、Twitter でアピールするのが恥ずかしくないレベルに達するかもしれない。</p>
+                    <!-- Task: 10c41ea2-00a5-4e4b-a7a0-c30d78240237 -->
+                </div>
+            </div>
+            <div id="99ead863-8f42-4d61-a184-86de134968e1" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">ダークモードを実装</span>
+                    <a href="#99ead863-8f42-4d61-a184-86de134968e1" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">めんどくさい。長時間、いろいろと入力するソフトでない。現状で使い込めていて非常に便利。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="572f2e65-9fb8-48d5-8c93-bf4e6c62b406" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">週の始まりの指定により週間レポートを出力できるようにする</span>
+                    <a href="#572f2e65-9fb8-48d5-8c93-bf4e6c62b406" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">カテゴリー単位の分析は行わないが、最近あまりにも家族サービスなどに時間を取られているので、実際どのくらいの時間、机に向かえているかだけでも週ごとに調べたい。もしかすると週30時間くらいの週もあるかもしれない。最低40時間、できれば50時間を確保したい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="75bea3d0-6a02-41ba-bd90-d48c90c600b5" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">「次のタスク」と「今のタスク」を拡大表示できるようにする</span>
+                    <a href="#75bea3d0-6a02-41ba-bd90-d48c90c600b5" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">なんだかんだ言って B5 ノートの代わりになる。しっかり使うと入力欄の高さの不足が気になるので、ダイアログでこれら二つだけを大きく表示したい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="67cbea64-0ced-4797-8a2b-eb31c8f889aa" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">KVS の機能などを Nekote のものと置き換える</span>
+                    <a href="#67cbea64-0ced-4797-8a2b-eb31c8f889aa" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Nekote のテストも兼ねて。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="b8994d73-82b4-4624-9ac6-031e4d701629" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">「今のタスク」のうち確定した行を他へ移動できるようにする</span>
+                    <a href="#b8994d73-82b4-4624-9ac6-031e4d701629" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="64136709-d84f-45fa-b7fe-3b8b766a22fc" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">英語モードを実装</span>
+                    <a href="#64136709-d84f-45fa-b7fe-3b8b766a22fc" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="e68f8427-22be-4206-a468-d5d368e9fd52" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">複数のパソコンで同時に使えるようにする</span>
+                    <a href="#e68f8427-22be-4206-a468-d5d368e9fd52" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">過去ログのファイルなどの名前にハイフンとパソコン名を入れるオプション？ 複数ファイルのロードは容易。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Windows に設定されているパソコン名とは別の「通称」を設定ファイルで指定できると便利か。ユーザーディレクトリーのトップに .timeLog というファイルを置き、その中に INI 的なフォーマットで。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="9d8530bd-a475-4962-b065-5ca3530e5908" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">HTML ページとしてのレポートの出力を検討</span>
+                    <a href="#9d8530bd-a475-4962-b065-5ca3530e5908" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">月ごとにする？ 保存先ディレクトリーやファイル名のフォーマットを指定できるようにする？</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">HTML にするからには、他者にそのまま渡せるくらいのものを。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">数ヶ月分のデータがあるときに古い HTML ページの更新が必要かを毎回調べる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d7fd122f-5353-4cce-9ee2-40ed13ff88e2" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">特定の期間のログをメールで送れるようにする</span>
+                    <a href="#d7fd122f-5353-4cce-9ee2-40ed13ff88e2" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="77f22e18-c5b9-4286-a7ea-6ad7178b6ce1" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">「次のタスク」のうち選択されている部分だけが「今のタスク」に移るようにする</span>
+                    <a href="#77f22e18-c5b9-4286-a7ea-6ad7178b6ce1" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">改行コードの違いもあるため、Nekote の方に実装。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="a5b24261-44d0-4a53-bfc8-6735d3ecc437" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">過去ログが膨大になるとどのくらい速度が低下するのか調べる</span>
+                    <a href="#a5b24261-44d0-4a53-bfc8-6735d3ecc437" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">#100DaysOfCode に毎日必ず取り組んでいた頃には Nekote の開発に費やした時間の記録に便利なソフトとして常用したが、最近は全く使っていない。</p>
+                    <p class="note_contents">そうなったきっかけは、flayground の開発中に、インストールされているフォントを（開発版との置き換えのために）いったん消したことで timeLog が巻き込まれて落ち、それまでの計測データが吹っ飛んだこと。以前にも Windows が久々にクラッシュしたときにデータが吹っ飛び、再発防止のためのタスクを入れた。二度目の吹っ飛びにより、そのタスクが終わるまで timeLog は信頼性に不足があるとの認識が生じた。</p>
+                    <p class="note_contents">ただ、それだけではない。以前から「自分は何を計測しているのか」と自問することが多かった。</p>
+                    <p class="note_contents">たとえば「Nekote を開発」のみをタスクとする計測データは、「今日は何時間何分やった」のツイートに便利だ。ほぼそれ一つで timeLog を使っていたし、キーボードやマウスの動きを検出しながらの計測なので、それ一つは良好に行えていた。</p>
+                    <p class="note_contents">しかし、「A さんに返信」のついでに「○○に申し込む」をやり、そのことを「B さんに返信」として、もらっているメールへの返信を兼ねて B さんに言い、その間に C さんからメールが届き、そちらは困っているようなのですぐに「C さんに返信」を入れて着手し、奥さんから言われて「△△をスキャン」をやり……といったことを timeLog に書いていくのは、時間管理というより、今やっていることを途中で忘れてグダグダにならないための作業メモだ。</p>
+                    <p class="note_contents">作業メモなら紙の方が自分には向く。タスクリストをまたがって「今日すること」を把握するのが基本なので、どうせ紙のタスクリストはたいてい目の前にある。timeLog で同じことをするのは、重複であり、なおかつ自分にとっては利便性が下がる。</p>
+                    <p class="note_contents">それなら、開発などの所要時間のみを計測するソフトとして局所的に使えばいい。</p>
+                    <p class="note_contents">ただ、それでは開発以外のことが途方もなく遅れる。自分はそういう性格なのだと、timeLog を使っていて改めて分かった。つまり、複数のツールをバランス良く使えない。めんどくさがりなので、あれもこれも同時に把握し、行ったり来たりするのが好きでない。そのため、そのときに使っているツールがどういうタスクに向くかにより、何が進むかが決まる。向かないことは、いくらでも遅れる。</p>
+                    <p class="note_contents">現行の timeLog は、「A さんに返信」からの一連のタスクのようなものをリストに書き込んで記録したところで、それぞれの内容を timeLog が把握できるわけでないため、集中できたのかどうかしか統計データには入らない。そのため、「だいたいこういう種類のタスク」というのが脳内にあっても、雑多なタスクには向かない。「作業メモをこんなところに書いて何になる？」「価値のあるコーディングなどの作業の統計データの閲覧性が下がるだけだ」と感じる。</p>
+                    <p class="note_contents">向かないことで雑多なタスクを timeLog では扱わなくなる。しかし、その時期においてはコーディング熱が高くて timeLog をさわっている時間が長ければ、「雑多で『ない』タスクばかりを、timeLog でばかり処理する」というところに自分は自然と落ち着く。それは、価値のある作業を進めるにおいては素晴らしいことだが、雑多なタスクが止まって社会性などを損なうことにもつながる。</p>
+                    <p class="note_contents">実際、コーディングのスイッチが入ると、たとえば娘の遊び相手になってくれそうな子どもの母親と知り合うなどがあって今まさに LINE でやり取りが始まっているのをいきなりこちらから1週間ほど放置するようなことが日常茶飯事だ。今も、娘とよく遊んでくれている子が先週6歳になったのにお祝い会を打診できていない。その人からの LINE も、既に5日ほど放置してしまっている。昼飯に誘ってくれている会社経営者からのメッセージなんて、4月29日からなので2週間も放置している。</p>
+                    <p class="note_contents">そういったことが起こるのは、紙では、急がないし、タイムアタック的な面白さがないし、全員の名前を手書きで書いての返信がめんどくさいからだろう。timeLog だと、「時間を計測しているのだから」というのが少しの緊張感になって時間を無駄にしないし、「これだけ多くの人に、この程度の時間で返信できた」というのが少しの自己満足にもなる。</p>
+                    <p class="note_contents">それでログに雑多なタスクが入って統計データとしての有用性が落ちるのは、カテゴリーの設定ができない設計上の問題だ。できないから、今は暗黙的に「開発」が唯一のカテゴリーとなり、それに属する作業ばかり入れたくなる。できるなら、開発は何時間、コミュニケーションは何時間といった分析も可能で、時間配分の見直しにもつながる。</p>
+                    <!-- Task: 6a941d60-afcf-4edf-b334-85903c7c9dfe -->
+                </div>
+            </div>
+            <div id="43a47874-7203-4617-a1bd-06e77f9a6a72" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">nStopwatch クラスの設計を改める利益があるか考える</span>
+                    <a href="#43a47874-7203-4617-a1bd-06e77f9a6a72" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">若干、ベタ書きになっている。教科書的に満点の設計でない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">何度かそういうことを考えているようだが、改めてもイマイチすっきりしなさそう。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">やはりカテゴリーの実装をやめておく。頭の中でシミュレーションするたびに、ない方が便利と感じられる機能だからだ。</p>
+                    <p class="note_contents">「今のタスク」にタスクを書いていくにおいて、最初の2～3個ならドンピシャなカテゴリーが決まることが多いが、そのうち難しくなってくる。カテゴリーにタスクの方を合わせていくと作業性が落ちる。かといって、そのときの流れや頭の中のコンテキストに従って何でもやるとカテゴリーを選べなくなる。そこに迷ってああだこうだ考えるのは仕事そのものと全く関係がない。</p>
+                    <!-- Task: 6a941d60-afcf-4edf-b334-85903c7c9dfe -->
+                </div>
+            </div>
+            <div id="b75d33c7-e8bf-4be9-bffa-6cc6622bd4f4" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">タスクのカテゴリーを登録・選択できるようにする</span>
+                    <a href="#b75d33c7-e8bf-4be9-bffa-6cc6622bd4f4" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">めんどくさいが、簡単な CRUD のダイアログを作る。少しの作り込みで、人によっては便利なツールになる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="70846d09-f4c1-4638-940e-d57faca2d16b" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">カテゴリーを入れられるようにファイルフォーマットを見直す</span>
+                    <a href="#70846d09-f4c1-4638-940e-d57faca2d16b" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="ac349244-ae5a-4762-9464-cb6413e76201" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">カテゴリーごとの統計も可能にする</span>
+                    <a href="#ac349244-ae5a-4762-9464-cb6413e76201" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="0f62d8ee-c371-4d91-8457-7b6eb51e104c" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">カテゴリーなしの「終了」時に警告が表示されるようにする</span>
+                    <a href="#0f62d8ee-c371-4d91-8457-7b6eb51e104c" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="465af694-e38b-4c43-bb6a-f829d79acae0" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">それぞれのボタンを押したときのフォーカスの移動を見直す</span>
+                    <a href="#465af694-e38b-4c43-bb6a-f829d79acae0" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="71fcf349-aa2c-4305-81fe-dc0e1669d3a1" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">人に使ってもらうために必要な機能を考える</span>
+                    <a href="#71fcf349-aa2c-4305-81fe-dc0e1669d3a1" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">在宅ワーカーが何にどのくらいの時間を費やしたのかを記録するにおいては、それなりに便利か。</p>
+                            <p class="note_contents">立派なタスク管理ソフトがいくつもあるし、携帯ベースのものが今は主流だろうが、ほぼパソコンで働く人にとっては、キーボードやマウスの動きを検出できる、シンプル極まりない、パソコン専用のソフトも悪くないかもしれない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ほかにするべきことが多すぎる。「使いたければご自由に」のスタンスを崩すべきでない。現行の仕様でも自分には便利。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ffbff0fe-bbd8-417e-bd19-e5751487e1f8" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">やっていることを定期的に確認してくるモードを実装</span>
+                    <a href="#ffbff0fe-bbd8-417e-bd19-e5751487e1f8" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">計測の再開を忘れることが多いとほかのタスクのメモに書いた。</p>
+                            <p class="note_contents">しかし、改めて使ってみると、雑多なタスクをこなしているときには、timeLog に入れ忘れての着手も多いと気づいた。</p>
+                            <p class="note_contents">それはそれでテンションが下がる。</p>
+                            <p class="note_contents">また、自分もアラフォーなので頭の回転が落ちてきていて、昔ほど多くのことを頭だけで把握できない。今、何をやっていて、次に何をやるかといったことを timeLog に書いていき、やったことならやったと書き、一種の「ココハドコ」状態を避けたい。</p>
+                            <p class="note_contents">そのため、やっている間も「今、あなたはこれをやっていますね」の通知を半透明で画面右下に表示できると便利か。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="54e79a24-7389-4752-957a-50a69bc82210" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">「タスクなしで開始」時に入力欄にフォーカスが移動するようにする</span>
+                    <a href="#54e79a24-7389-4752-957a-50a69bc82210" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="f5a90895-dcb9-4a58-9062-a423695c8ddf" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">通知画面の色分けを検討</span>
+                    <a href="#f5a90895-dcb9-4a58-9062-a423695c8ddf" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">計測していなければ赤、中断していれば黄色？ 基本ずっと走らせておくプログラムになるので、そうでないなら目立つべき。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">設定ファイルで指定できるようにする考えだったが、ほかの部分の配色をいじれないアプリなので通知画面だけいじれても仕方ない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="8b6d6592-7816-42a6-8cf0-a44efaebb740" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">計測の再開を忘れにくくする方法を考える</span>
+                    <a href="#8b6d6592-7816-42a6-8cf0-a44efaebb740" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">たとえばプログラムの開発中に、すぐに返信しなければならないメールが届けば、</p>
+                            <p class="note_contents">○○を開発<br />
+                                △△さんに返信 → □□分</p>
+                            <p class="note_contents">のように書くのが最善だろうか。</p>
+                            <p class="note_contents">メールの返信を始めるときにストップウォッチで計測を始め、書き終えたのに計測を止めるのを忘れ、□□分のところが分からなくなることがある（笑）。すると、関係のない二つの作業にトータルでどれだけの時間がかかったかの記録になる。</p>
+                            <p class="note_contents">それを避けるためメールの返信を始めるときに timeLog の方を一時停止すると、そちらの再開を忘れた場合の方が計測データへのダメージが大きい。トータルが分かっていてメールにかかった時間が不明なのは、メールの長さなどから推測できるが、トータルの方が分からなければ、開発にかけた時間は、より不正確になる。</p>
+                            <p class="note_contents">しかし、データとしてきれいなのは後者。自分は、timeLog を、日々、朝から晩までの時間を何に使ったのか細かく把握するためでなく、生産的な作業に費やせた時間を把握し、それをもっと長くするために使いたい。生産的なことが十分にできていれば、ほかのことはどうでもいい。なので、「timeLog で再開を忘れるよりマシだから」だけの理由で「開発」と「返信」をセットにするようなのは避けたい。</p>
+                            <p class="note_contents">となると、再開を忘れにくくすればいい。再開中には数分ごとに通知を出す選択肢から検討する。</p>
+                            <p class="note_contents">Windows の機能による通知は勝手に消えなくてめんどくさいので、Thunderbird 的なことをする方法を調べる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="c1d2dc1b-be07-4d3d-a06f-b79f89cca957" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">初期状態のサイズを少し大きくする</span>
+                    <a href="#c1d2dc1b-be07-4d3d-a06f-b79f89cca957" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">確かに少し狭いが、UI の崩れは発生していない。ノートだと倍率によっては低解像度での表示になる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="c49c8bd4-c167-4a7e-9374-b439fabf57f7" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">識別子から _lock をなくしたことの影響を調べる</span>
+                    <a href="#c49c8bd4-c167-4a7e-9374-b439fabf57f7" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Nekote の側をさわったようだ。おそらくコードを変更せず識別子のうるささを解消しただけだが、念のため双方の差分を見る。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="1aee4b83-afc4-4bda-8c14-d815718dab15" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">「価値あり」を「価値をつくる」に変更することを検討</span>
+                    <a href="#1aee4b83-afc4-4bda-8c14-d815718dab15" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">そのタスクそのものが価値をつくるのかどうかを意識する方が良さそう。</p>
+                            <p class="note_contents">というのも、「価値あり」では、価値をつくるためのタスクに必要な調整などのタスクも該当してしまうため。</p>
+                            <p class="note_contents">そういうタスクは、「やってるつもり」を楽しめるだけで、それ自体が価値をつくるわけでない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">コンテキストにより表現が微妙に違っても問題でないので、「価値をつくる」と「価値をつくった」の区別を行った。</p>
+                            <p class="note_contents">また、「グダグダ」では自己卑下であり、テンションが下がるので、「集中できなかった」という、「やろうとした」および「何らかの外的な割り込みがあった」のニュアンスが優しい表現に改めた。意味するものは同じだが、この方が「次は！」と思う。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="799880c1-bc0e-4605-a964-61ad56c0347e" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">通知画面のフォントファミリーを設定するか検討</span>
+                    <a href="#799880c1-bc0e-4605-a964-61ad56c0347e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">コントロールを並べて全体を自分で作ることになるか。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">めんどくさい。困っていない。慣れてしまった。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="fe5c8398-2aa7-493d-a849-02f03536c953" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://github.com/Platonenkov/Notification.Wpf" target="_blank" class="url">https://github.com/Platonenkov/Notification.Wpf</a> をチェック</span>
+                    <a href="#fe5c8398-2aa7-493d-a849-02f03536c953" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">実装は済んだ。あとはマニュアルを見る。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="739ca74f-5fb3-4c3a-9d14-eac84a6b81c1" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">キーが衝突したなら過去ログを書き込まない実装に変更 → 過去ログの方を消すように</span>
+                    <a href="#739ca74f-5fb3-4c3a-9d14-eac84a6b81c1" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">当初の考えと異なる実装にした。理由をコメントに書いた。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ce985330-baea-44a6-bc42-ee29b02155d6" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">エラー発生時にユーザーが自力で復旧する流れを確認</span>
+                    <a href="#ce985330-baea-44a6-bc42-ee29b02155d6" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">それぞれの状況・状態について、コードを見ながら考える。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">復旧できないのは、過去ログに入れようとしたデータの StartUtc が衝突するケースのみ。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="5cb0b923-ae67-4f76-ab42-c828097250eb" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">早すぎるフックに対処</span>
+                    <a href="#5cb0b923-ae67-4f76-ab42-c828097250eb" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Nekote.nOperationException: Exception of type &#39;Nekote.nOperationException&#39; was thrown.<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;at Nekote.nStopwatch`1.iStartOrResume(Boolean isStarting, String entryName, TagType entryTag) in C:\Repositories\Nekote\Nekote\Shared\nStopwatch.cs:line 262<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;at Nekote.nStopwatch`1.Knock(Boolean resumes, String entryName, TagType entryTag) in C:\Repositories\Nekote\Nekote\Shared\nStopwatch.cs:line 316<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;at timeLog.MainWindow.mGlobalHook_MousePressed(Object sender, MouseHookEventArgs e) in C:\Repositories\timeLog\timeLog\MainWindow.xaml.cs:line 683</p>
+                            <p class="note_contents">というのが発生した。</p>
+                            <p class="note_contents">原因は、まだ mWindow_Loaded の途中であり、IsPausedManually などが設定されていない段階でフックが行われたこと。</p>
+                            <p class="note_contents">mWindow_Loaded の最後に iStartUpdatingElapsedTime が呼ばれるので、タスクのインスタンスが存在するかどうかにより、初期化の処理が終わったかどうかを見る。</p>
+                            <p class="note_contents">ハック的な実装だが、派生開発において動かなくなる可能性は低いので、コメントを書いておけば大丈夫。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="6f2eb780-5d72-4271-8175-8cafaf32c658" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">プログラムが落ちてもセッション情報が残るようにする</span>
+                    <a href="#6f2eb780-5d72-4271-8175-8cafaf32c658" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ATOK のキー設定が元に戻ったので再設定しようと設定画面を開いたところ、落ちるところがないはずの timeLog が、より深いところで落とされた。Windows がカクついていて、timeLog を終了するボタンに到達するのが困難だった。そういうレベルで落ちることへの対策には限界がある。</p>
+                            <p class="note_contents">プログラムを再起動したところ、各部の文字列は戻った。しかし、最後に開始したセッションの開始日時が記録されておらず、セッションの終了時にキーの重複が起こってエラーになった。セッションの開始、中断、再開のタイミングでそのときの最新の情報を書いておくことを検討する。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="0a3dcd8a-ddad-4ba2-b80e-62e8e994bcf9" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">過去ログを編集できるようにする</span>
+                    <a href="#0a3dcd8a-ddad-4ba2-b80e-62e8e994bcf9" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">めんどくさかったことに加えて、過去ログの見直しは生産活動でないため、そもそもできなくした。</p>
+                            <p class="note_contents">しかし、誤字・脱字に気付いても直せないのは、直す数秒のコストより、しばらく気になるコストの方が大きい。</p>
+                            <p class="note_contents">また、情報の欠落に気付いても追加できないのは、ログの正確性・情報量に影響する。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">途中まで実装したが、やはり timeLogs.txt の更新が無理やりな実装になりそうで見送った。</p>
+                            <p class="note_contents">一人で使うツールをすぐに作りたくて手を抜いたが、結局、あとで余計にしんどい（笑）。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="005c3b31-8c19-4fb1-8c73-aa106dfbcfa2" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">過去ログの項目のデザインを見直す</span>
+                    <a href="#005c3b31-8c19-4fb1-8c73-aa106dfbcfa2" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">結果直前の境界線に理由がない。やったこととその結果のいずれにも空行が入らず、どちらも単一段落。空行で区切ればいい。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">境界線が嫌なのは、パッと見たときに境界線が項目の区切りのように見えて、「結果」部分を「タスク」部分と勘違いするから。</p>
+                            <p class="note_contents">試しに境界線を取り除いたところ、色分けなどをしても「結果」と「タスク」が視覚的に近すぎて、これはこれで微妙だった。</p>
+                            <p class="note_contents">そこで、境界線を残したまま、さらに「結果」部分に薄い背景色をつけた。</p>
+                            <p class="note_contents">考え方としては、タスクの実行時には「タスク」が重要だが、済んでから目に入るべきは「結果」の方。反省点などがそちらに書かれていることが多いため。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="f276f15f-9198-450e-9010-3bad201cacc9" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">コード分析による不要な警告を非表示にする</span>
+                    <a href="#f276f15f-9198-450e-9010-3bad201cacc9" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="5b64c261-0dd1-46f1-9d96-6b7b8d77fca0" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">srcZip.txt を更新</span>
+                    <a href="#5b64c261-0dd1-46f1-9d96-6b7b8d77fca0" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">なくてもいいファイルが残る。ターゲットを絞り込む。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="2691c714-e18d-460b-8123-edb37cf00dec" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">0.5 としてアーカイブ</span>
+                    <a href="#2691c714-e18d-460b-8123-edb37cf00dec" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">差分をザッとチェックし、OK コミットにする。それなりに動いていたプログラムをそれなりに更新した。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="9b08ec34-7613-4edb-aa12-634f0d11920f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">1日の終わりが午前4時になっているかチェック</span>
+                    <a href="#9b08ec34-7613-4edb-aa12-634f0d11920f" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">大丈夫。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="2d8b5e63-6398-4fed-a413-0158e85e268c" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">「集中できなかった」を「集中した」に変更</span>
+                    <a href="#2d8b5e63-6398-4fed-a413-0158e85e268c" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">タスクの終了時に毎回なんとなく使いにくい理由がやっと分かった。一つ目は true かどうかを聞き、二つ目は false でないかを聞くので、余計に頭を使うようになっている。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="76b4aeb2-3744-4628-af73-e433218d0534" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">v0.6 としてアーカイブ</span>
+                    <a href="#76b4aeb2-3744-4628-af73-e433218d0534" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="a2c429b7-c5a9-48d3-a3ab-f6a0be330a15" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">1文字ごとにセッション情報を保存しないようにする</span>
+                    <a href="#a2c429b7-c5a9-48d3-a3ab-f6a0be330a15" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">OneDrive が嫌がるようで、最新版のアップロードが止められた。それでパソコンを再起動したところ、古いものに上書きされて「今のタスク」が元に戻った。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ffeed8bf-e5fe-4fd1-91a3-d37997acd808" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">v0.7 としてアーカイブ</span>
+                    <a href="#ffeed8bf-e5fe-4fd1-91a3-d37997acd808" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="1e692f06-56aa-4b08-a1c5-e351e20e56f4" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">WPF のフォントレンダリングのパラメーターを指定できるようにする</span>
+                    <a href="#1e692f06-56aa-4b08-a1c5-e351e20e56f4" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="7fe776a3-ce05-47ab-bdb0-a7999ea44b49" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">v0.8 としてアーカイブ</span>
+                    <a href="#7fe776a3-ce05-47ab-bdb0-a7999ea44b49" class="permalink">&infin;</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
