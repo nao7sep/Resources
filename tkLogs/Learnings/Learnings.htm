@@ -2651,6 +2651,869 @@
                     </div>
                 </div>
             </div>
+            <div id="fce9f10e-8536-4082-89ba-a3d874983925" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Azure Cognitive Search について調べる</span>
+                    <a href="#fce9f10e-8536-4082-89ba-a3d874983925" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">@ Azure Cognitive Search is a cloud-based search service from Microsoft&#39;s Azure platform that provides developers with the tools to build robust search functionality into their applications, websites, and services. It provides capabilities such as text-based search, filtering, and complex types, allowing developers to build search experiences similar to those offered by large commercial websites. The service is designed to be highly customizable and to scale easily with your needs.</p>
+                            <p class="note_contents">### Key Features:</p>
+                            <p class="note_contents">1. **Text Search**: Full-text search capabilities, offering features like fuzzy search, wildcards, and Boolean operators.</p>
+                            <p class="note_contents">2. **Faceted Navigation**: Allows users to filter and refine search results based on various attributes or facets.</p>
+                            <p class="note_contents">3. **Ranking and Scoring**: Supports customized ranking of search results to promote the most relevant items.</p>
+                            <p class="note_contents">4. **Multi-language Support**: Comes with built-in language analyzers for text from multiple languages.</p>
+                            <p class="note_contents">5. **Typeahead and Autocomplete**: Features for suggesting queries as the user types.</p>
+                            <p class="note_contents">6. **Synonyms**: Supports synonym mapping to ensure that search results capture different phrasings or terminology.</p>
+                            <p class="note_contents">7. **Cognitive Services Integration**: Ability to integrate with other Azure Cognitive Services like Computer Vision and Text Analytics to extract insights from images and text.</p>
+                            <p class="note_contents">8. **Security**: Offers built-in security measures, including encryption at rest and in transit, as well as integration with Azure Active Directory for identity and access management.</p>
+                            <p class="note_contents">9. **Indexers**: Can automatically populate search indexes from a variety of data sources like Azure SQL Database, Azure Cosmos DB, and more.</p>
+                            <p class="note_contents">10. **Scalability**: Designed to scale easily to accommodate growing data volumes and query loads.</p>
+                            <p class="note_contents">### Typical Use Cases:</p>
+                            <p class="note_contents">1. **E-commerce Websites**: Enhance product search and improve customer experience.</p>
+                            <p class="note_contents">2. **Content Discovery**: Make articles, blogs, and other content easily discoverable on content-heavy websites.</p>
+                            <p class="note_contents">3. **Enterprise Search**: Allow employees to search through internal documents, databases, and other resources.</p>
+                            <p class="note_contents">4. **Media Libraries**: Facilitate the search of large volumes of images, videos, and other media types.</p>
+                            <p class="note_contents">5. **Real Estate Platforms**: Enable users to search for properties based on multiple attributes such as location, price, and features.</p>
+                            <p class="note_contents">6. **Customer Service**: Help users quickly find answers to their questions by searching through FAQs, support documents, and more.</p>
+                            <p class="note_contents">### Development Languages and SDKs</p>
+                            <p class="note_contents">Azure Cognitive Search supports a range of programming languages through SDKs and APIs, including .NET, Python, Java, and JavaScript. You can also make direct REST API calls to interact with the service.</p>
+                            <p class="note_contents">Overall, Azure Cognitive Search offers a powerful and scalable solution for adding sophisticated search capabilities to various types of applications and services.</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">@ In a real-world application, you might want to integrate natural language processing (NLP) capabilities or machine learning algorithms to find an answer to a natural language question in a large set of text data. However, a simplified example using Azure Cognitive Search and C# could look something like the following:</p>
+                            <p class="note_contents">Firstly, you&#39;ll need to install the Azure.Search.Documents NuGet package. You can install it via Package Manager Console with this command:</p>
+                            <p class="note_contents">```bash<br />
+                                Install-Package Azure.Search.Documents -Version 11.4.1<br />
+                                ```</p>
+                            <p class="note_contents">Here&#39;s some sample code for performing a search query:</p>
+                            <p class="note_contents">```csharp<br />
+                                using Azure;<br />
+                                using Azure.Search.Documents;<br />
+                                using Azure.Search.Documents.Models;<br />
+                                using System;<br />
+                                using System.Threading.Tasks;</p>
+                            <p class="note_contents">class Program<br />
+                                {<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;private static readonly Uri serviceEndpoint = new Uri(&quot;<a href="https://&lt;Your-Service-Name&gt;.search.windows.net/&quot;);" target="_blank" class="url">https://&lt;Your-Service-Name&gt;.search.windows.net/&quot;);</a><br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;private static readonly AzureKeyCredential credential = new AzureKeyCredential(&quot;&lt;Your-Search-Service-API-Key&gt;&quot;);</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;static async Task Main(string[] args)<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SearchClient client = new SearchClient(serviceEndpoint, &quot;your-index-name&quot;, credential);</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Assume the question is &quot;What is the capital of France?&quot;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string userQuestion = &quot;What is the capital of France?&quot;;</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Perform a search query<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SearchResults&lt;SearchDocument&gt; response = await client.SearchAsync&lt;SearchDocument&gt;(userQuestion);</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Process the search result<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach (SearchResult&lt;SearchDocument&gt; result in response.GetResults())<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Here you might have more complex logic to determine the best answer<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// For the sake of this example, just print the result<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine($&quot;Document Key: {result.Document[&quot;id&quot;]}, Score: {result.Score}&quot;);<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine($&quot;Answer: {result.Document[&quot;answerField&quot;]}&quot;);<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                }<br />
+                                ```</p>
+                            <p class="note_contents">In this example, replace `&lt;Your-Service-Name&gt;` and `&lt;Your-Search-Service-API-Key&gt;` with your Azure Cognitive Search service name and API key, respectively. Also, replace `&quot;your-index-name&quot;` and `&quot;answerField&quot;` with the actual names you have used in your Azure Cognitive Search service.</p>
+                            <p class="note_contents">This is a highly simplified example. Real-world applications often require more advanced features like scoring profiles, filtering, facets, and integration with NLP services to interpret and find answers to natural language questions effectively.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="cff6b0d1-c0e3-453a-9244-6c249b8dc77d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Azure OpenAI Service On Your Data について調べる</span>
+                    <a href="#cff6b0d1-c0e3-453a-9244-6c249b8dc77d" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">@ As of my last update in January 2022, Azure OpenAI Service on Your Data is a service that allows businesses and developers to run OpenAI&#39;s models, such as GPT-3, on their own premises or within their own Azure environment. This enables organizations to maintain data privacy and compliance while still taking advantage of OpenAI&#39;s state-of-the-art models.</p>
+                            <p class="note_contents">### Key Features:</p>
+                            <p class="note_contents">1. **Data Privacy**: By running the OpenAI model on your data in your own environment, you can meet strict data privacy and sovereignty requirements.</p>
+                            <p class="note_contents">2. **Low Latency**: Running the model locally can also offer performance benefits, including reduced latency.</p>
+                            <p class="note_contents">3. **Flexibility and Customization**: You can tailor the model to suit your specific requirements, such as integrating it into your existing workflows or pairing it with other Azure services for more advanced use-cases.</p>
+                            <p class="note_contents">4. **Scalability**: The service is designed to scale with your needs, allowing you to handle large volumes of data as necessary.</p>
+                            <p class="note_contents">5. **Azure Integration**: Given that it&#39;s an Azure service, it naturally integrates well with other Azure offerings like Azure Cognitive Services, Azure Machine Learning, Azure Databases, etc.</p>
+                            <p class="note_contents">### Typical Use Cases:</p>
+                            <p class="note_contents">1. **Natural Language Understanding**: Process and analyze large sets of textual data for applications such as sentiment analysis, summarization, and more.</p>
+                            <p class="note_contents">2. **Automated Customer Service**: Implement conversational agents that can handle customer inquiries without storing sensitive data outside your controlled environment.</p>
+                            <p class="note_contents">3. **Data Extraction**: Automatically pull relevant information or perform transformations on structured and unstructured data.</p>
+                            <p class="note_contents">4. **Content Creation and Enhancement**: Generate textual content or enhance existing content in a more controlled environment.</p>
+                            <p class="note_contents">5. **Custom Solutions**: Develop specialized solutions that require deep understanding or manipulation of natural language, all while keeping the data on your premises or within your Azure environment.</p>
+                            <p class="note_contents">### Development and Deployment:</p>
+                            <p class="note_contents">Just like with other Azure services, you would generally use SDKs or APIs to integrate OpenAI models into your application. You&#39;ll need to configure the Azure environment to meet the resource requirements of the OpenAI model, which can be resource-intensive.</p>
+                            <p class="note_contents">Remember that specific details, such as pricing and availability, would depend on your agreement with Azure and OpenAI. Always refer to the most current documentation for the most up-to-date information.</p>
+                            <p class="note_contents">Please note that the landscape of cloud services and machine learning is continually evolving, and new features or changes could have been introduced after my training data was last updated in January 2022.</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">@ Azure OpenAI Service on Your Data and Azure Cognitive Search serve different purposes and are used for different types of tasks, even though both can deal with large volumes of data and have applications in text-based operations.</p>
+                            <p class="note_contents">### Azure Cognitive Search:</p>
+                            <p class="note_contents">1. **Purpose**: Specifically designed to add sophisticated search capabilities to applications and services, including full-text search, faceted navigation, and filtering.</p>
+                            <p class="note_contents">2. **Data Types**: Primarily aimed at structured or semi-structured data like databases, JSON files, etc.</p>
+                            <p class="note_contents">3. **Scalability**: Indexing and searching are highly scalable, optimized for fast retrieval of relevant information.</p>
+                            <p class="note_contents">4. **Customization**: Allows for some customization in scoring profiles, ranking, etc., but generally does not interpret or understand the text.</p>
+                            <p class="note_contents">5. **Text Analysis**: Can perform simple text-based operations like tokenization, stemming, and linguistic analysis, but does not have capabilities like natural language understanding or generation.</p>
+                            <p class="note_contents">6. **Where It Runs**: A fully managed cloud service, but as of my last update, it doesn&#39;t offer an on-premises solution.</p>
+                            <p class="note_contents">7. **Security**: Provides features for data encryption and integrates with Azure Active Directory for identity and access management.</p>
+                            <p class="note_contents">8. **Use Cases**: Ideal for creating search experiences in e-commerce websites, content discovery platforms, enterprise search, etc.</p>
+                            <p class="note_contents">### Azure OpenAI Service on Your Data:</p>
+                            <p class="note_contents">1. **Purpose**: Designed to run OpenAI models like GPT-3 in your own Azure environment for tasks that require natural language understanding or text generation.</p>
+                            <p class="note_contents">2. **Data Types**: Generally aimed at any form of text data, be it structured or unstructured.</p>
+                            <p class="note_contents">3. **Scalability**: Designed to scale, but depending on the model, might require considerable computational resources.</p>
+                            <p class="note_contents">4. **Customization**: Highly customizable because you are leveraging machine learning models that can be fine-tuned (if permitted by OpenAI) or adapted to specific tasks.</p>
+                            <p class="note_contents">5. **Text Analysis**: Capable of complex operations like natural language understanding, question answering, summarization, translation, and text generation.</p>
+                            <p class="note_contents">6. **Where It Runs**: In your own Azure environment, enabling you to meet strict data privacy and sovereignty requirements.</p>
+                            <p class="note_contents">7. **Security**: Since it runs in your own Azure environment, you have complete control over data security and compliance.</p>
+                            <p class="note_contents">8. **Use Cases**: Ideal for tasks requiring a deep understanding of natural language, like automated customer service, content generation, data extraction, etc.</p>
+                            <p class="note_contents">### Summary:</p>
+                            <p class="note_contents">- **Azure Cognitive Search** is specialized for building search experiences and works well for retrieving and ranking information based on queries.<br />
+                                - **Azure OpenAI Service on Your Data** is more generalized and versatile for tasks requiring an understanding or generation of natural language text and allows for on-premises or in-Azure-environment deployments for better data control.</p>
+                            <p class="note_contents">Both services can be used complementarily. For example, you could use Azure OpenAI Service on Your Data to interpret a natural language query and then pass a transformed query to Azure Cognitive Search for retrieving the most relevant documents.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d15f5ef4-6df2-43ba-ad3a-1e845710c027" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Docker について調べる</span>
+                    <a href="#d15f5ef4-6df2-43ba-ad3a-1e845710c027" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">@ Docker is a platform that enables developers to build, package, and distribute applications as lightweight, portable containers. A container is a standalone executable package that includes everything needed to run a piece of software, including the code, runtime, libraries, and system tools. Docker containers are built from images that can be pulled from Docker Hub or other container registries.</p>
+                            <p class="note_contents">### Key Concepts:</p>
+                            <p class="note_contents">1. **Container**: An isolated environment in which an application and its dependencies run. Containers are created from images.</p>
+                            <p class="note_contents">2. **Image**: A snapshot of a container, containing the application and all its dependencies. You can pull images from a registry or create your own.</p>
+                            <p class="note_contents">3. **Dockerfile**: A text document that contains the instructions for building a Docker image.</p>
+                            <p class="note_contents">4. **Docker Hub**: A cloud-based registry where Docker users and partners publish and share containers.</p>
+                            <p class="note_contents">5. **Docker Engine**: The core component that runs containers. It can run on your local machine, or it can be a cloud-based service.</p>
+                            <p class="note_contents">6. **Docker Compose**: A tool for defining and running multi-container applications.</p>
+                            <p class="note_contents">### Basic Commands:</p>
+                            <p class="note_contents">- `docker pull &lt;image&gt;`: Pull an image from a registry.<br />
+                                - `docker build -t &lt;image-name&gt; .`: Build an image from a Dockerfile in the current directory.<br />
+                                - `docker run &lt;image&gt;`: Run a container from an image.<br />
+                                - `docker ps`: List running containers.<br />
+                                - `docker stop &lt;container-id&gt;`: Stop a running container.<br />
+                                - `docker rm &lt;container-id&gt;`: Remove a stopped container.<br />
+                                - `docker rmi &lt;image-id&gt;`: Remove an image.</p>
+                            <p class="note_contents">### Advantages:</p>
+                            <p class="note_contents">1. **Portability**: Applications in Docker containers can run anywhere that Docker is installed, regardless of the underlying infrastructure.</p>
+                            <p class="note_contents">2. **Consistency**: Docker containers ensure that applications run the same way everywhere, which simplifies development, testing, and deployment.</p>
+                            <p class="note_contents">3. **Isolation**: Containers isolate applications from each other and from the host system, improving security.</p>
+                            <p class="note_contents">4. **Scalability**: Docker containers can be easily scaled up or down, making it easier to build distributed, microservices-based applications.</p>
+                            <p class="note_contents">5. **Speed**: Containers are lightweight and start quickly, making it easier to build and deploy applications rapidly.</p>
+                            <p class="note_contents">### Use Cases:</p>
+                            <p class="note_contents">- **Development and Testing**: Create a consistent environment for building and testing applications.<br />
+                                - **Microservices Architecture**: Deploy each microservice in its own container for better scalability and maintainability.<br />
+                                - **Continuous Integration/Continuous Deployment (CI/CD)**: Automate the building, testing, and deployment of applications in containers.<br />
+                                - **Application Isolation**: Run different versions or instances of an application in isolation from each other.</p>
+                            <p class="note_contents">### Integration with Azure:</p>
+                            <p class="note_contents">Docker can be integrated with Azure services like Azure Container Instances (ACI), Azure Kubernetes Service (AKS), and Azure App Service to manage and deploy containers at scale in the cloud.</p>
+                            <p class="note_contents">Whether you&#39;re a developer looking to streamline your workflow or an organization seeking to scale applications with cloud services, Docker offers a range of solutions to make managing containers easier, more efficient, and more secure.</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">@ Yes, you can use Docker to manage versions of your ASP.NET Core application and ensure that the running copy is the latest version. There are several ways to achieve this, depending on your deployment environment and strategy. Below are some methods to consider:</p>
+                            <p class="note_contents">### Docker Compose</p>
+                            <p class="note_contents">You can use Docker Compose to manage your application and its services. With Docker Compose, you can define your ASP.NET Core service along with any dependencies in a `docker-compose.yml` file. To ensure you&#39;re running the latest version, you can pull the latest image and restart the service:</p>
+                            <p class="note_contents">1. Pull the latest image: `docker-compose pull myservice`<br />
+                                2. Restart the service: `docker-compose up -d myservice`</p>
+                            <p class="note_contents">### Watchtower</p>
+                            <p class="note_contents">[Watchtower](<a href="https://github.com/containrrr/watchtower)" target="_blank" class="url">https://github.com/containrrr/watchtower)</a> is a third-party tool that automatically updates running Docker containers to the latest image. You can run Watchtower as a separate container, and it will monitor your running containers and their images. If it finds an outdated image, it will update the container with the latest version.</p>
+                            <p class="note_contents">To run Watchtower:</p>
+                            <p class="note_contents">```bash<br />
+                                docker run -d --name watchtower -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower<br />
+                                ```</p>
+                            <p class="note_contents">Note that Watchtower will automatically update all running containers by default. You can limit this behavior to specific containers with additional flags.</p>
+                            <p class="note_contents">### Shell Script</p>
+                            <p class="note_contents">You can create a shell script that performs the following steps:</p>
+                            <p class="note_contents">1. Pulls the latest image for your ASP.NET Core application.<br />
+                                2. Compares the image ID of the running container to the latest image.<br />
+                                3. If the IDs are different, it stops the current container, removes it, and starts a new container using the latest image.</p>
+                            <p class="note_contents">Here&#39;s a simplified example:</p>
+                            <p class="note_contents">```bash<br />
+                                # Pull the latest image<br />
+                                docker pull my-aspnetcore-app:latest</p>
+                            <p class="note_contents"># Get the image ID of the running container<br />
+                                CURRENT_IMAGE_ID=$(docker inspect my-aspnetcore-container --format &#39;{{.Image}}&#39;)</p>
+                            <p class="note_contents"># Get the image ID of the latest pulled image<br />
+                                LATEST_IMAGE_ID=$(docker images --filter=reference=&#39;my-aspnetcore-app:latest&#39; --format &#39;{{.ID}}&#39;)</p>
+                            <p class="note_contents"># Compare IDs and update if needed<br />
+                                if [ &quot;$CURRENT_IMAGE_ID&quot; != &quot;$LATEST_IMAGE_ID&quot; ]; then<br />
+                                &nbsp;&nbsp;docker stop my-aspnetcore-container<br />
+                                &nbsp;&nbsp;docker rm my-aspnetcore-container<br />
+                                &nbsp;&nbsp;docker run --name my-aspnetcore-container -d my-aspnetcore-app:latest<br />
+                                fi<br />
+                                ```</p>
+                            <p class="note_contents">This script can be scheduled to run at intervals using cron jobs (Linux) or Task Scheduler (Windows).</p>
+                            <p class="note_contents">### Azure DevOps or GitHub Actions (CI/CD)</p>
+                            <p class="note_contents">If your application is hosted in a cloud environment like Azure, you can also set up a CI/CD pipeline to build, test, and deploy the latest version of your ASP.NET Core app automatically. Azure DevOps or GitHub Actions can be configured to update the Docker container whenever changes are pushed to your repository.</p>
+                            <p class="note_contents">These are just some of the ways to ensure you&#39;re running the latest version of your ASP.NET Core application in a Docker container. Your choice may vary based on your specific requirements and deployment environment.</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">@ Yes, Docker does support Blazor applications. You can containerize both Blazor Server and Blazor WebAssembly applications using Docker. Below are some general steps on how to do so for each type.</p>
+                            <p class="note_contents">### For Blazor Server Applications</p>
+                            <p class="note_contents">1. **Create a Dockerfile**: In the root directory of your Blazor Server application, create a file named `Dockerfile` with the following content:</p>
+                            <p class="note_contents">```Dockerfile<br />
+                                # Use the SDK image to build the app<br />
+                                FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base<br />
+                                WORKDIR /app<br />
+                                EXPOSE 80</p>
+                            <p class="note_contents">FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build<br />
+                                WORKDIR /src<br />
+                                COPY [&quot;MyBlazorApp/MyBlazorApp.csproj&quot;, &quot;MyBlazorApp/&quot;]<br />
+                                RUN dotnet restore &quot;MyBlazorApp/MyBlazorApp.csproj&quot;<br />
+                                COPY . .<br />
+                                WORKDIR &quot;/src/MyBlazorApp&quot;<br />
+                                RUN dotnet build &quot;MyBlazorApp.csproj&quot; -c Release -o /app/build</p>
+                            <p class="note_contents">FROM build AS publish<br />
+                                RUN dotnet publish &quot;MyBlazorApp.csproj&quot; -c Release -o /app/publish</p>
+                            <p class="note_contents"># Copy the build app to the base image and define entrypoint<br />
+                                FROM base AS final<br />
+                                WORKDIR /app<br />
+                                COPY --from=publish /app/publish .<br />
+                                ENTRYPOINT [&quot;dotnet&quot;, &quot;MyBlazorApp.dll&quot;]<br />
+                                ```</p>
+                            <p class="note_contents">Replace `MyBlazorApp` with the name of your Blazor Server application project.</p>
+                            <p class="note_contents">2. **Build the Docker Image**: In your terminal, navigate to the root directory where your `Dockerfile` is located and run:</p>
+                            <p class="note_contents">```bash<br />
+                                docker build -t my-blazor-server-app .<br />
+                                ```</p>
+                            <p class="note_contents">3. **Run the Docker Container**: Once the image is built, you can run it:</p>
+                            <p class="note_contents">```bash<br />
+                                docker run -p 8080:80 my-blazor-server-app<br />
+                                ```</p>
+                            <p class="note_contents">Open your web browser and navigate to `<a href="http://localhost:8080`" target="_blank" class="url">http://localhost:8080`</a> to access your Blazor Server app running in a Docker container.</p>
+                            <p class="note_contents">### For Blazor WebAssembly Applications</p>
+                            <p class="note_contents">For Blazor WebAssembly, the hosting model is different, as the application runs directly in the browser. Still, you can use Docker to serve the application files using a web server.</p>
+                            <p class="note_contents">Here&#39;s an example using an Nginx image to serve a Blazor WebAssembly app:</p>
+                            <p class="note_contents">1. **Create a Dockerfile**: In the root directory of your Blazor WebAssembly application, create a `Dockerfile` with the following content:</p>
+                            <p class="note_contents">```Dockerfile<br />
+                                # Build the app<br />
+                                FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build<br />
+                                WORKDIR /src<br />
+                                COPY [&quot;MyBlazorWasmApp/MyBlazorWasmApp.csproj&quot;, &quot;MyBlazorWasmApp/&quot;]<br />
+                                RUN dotnet restore &quot;MyBlazorWasmApp/MyBlazorWasmApp.csproj&quot;<br />
+                                COPY . .<br />
+                                WORKDIR &quot;/src/MyBlazorWasmApp&quot;<br />
+                                RUN dotnet publish &quot;MyBlazorWasmApp.csproj&quot; -c Release -o /app/publish</p>
+                            <p class="note_contents"># Use Nginx to serve the app<br />
+                                FROM nginx:alpine AS final<br />
+                                WORKDIR /var/www/web<br />
+                                COPY --from=build /app/publish/wwwroot .<br />
+                                COPY nginx.conf /etc/nginx/nginx.conf<br />
+                                ```</p>
+                            <p class="note_contents">Replace `MyBlazorWasmApp` with the name of your Blazor WebAssembly application project. Create an `nginx.conf` file with suitable settings for serving a Blazor WebAssembly application.</p>
+                            <p class="note_contents">2. **Build the Docker Image**: Build your Docker image as you would for the Blazor Server.</p>
+                            <p class="note_contents">3. **Run the Docker Container**: Run your Docker container as you would for the Blazor Server.</p>
+                            <p class="note_contents">Both Blazor Server and Blazor WebAssembly applications can be effectively containerized using Docker, making it easier to deploy, scale, and manage them.</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">やってみないと分からないが、概要は理解したと思う。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="0b3dd2c5-8a02-4bd3-b1de-320a1d14eb15" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Watchtower について調べる</span>
+                    <a href="#0b3dd2c5-8a02-4bd3-b1de-320a1d14eb15" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">@ Watchtower is an open-source tool that automatically updates running Docker containers with any new images that are available. It periodically checks a registry for updated images and replaces the running container with the new one, preserving the options that were used when initially running the container.</p>
+                            <p class="note_contents">### Key Features:</p>
+                            <p class="note_contents">1. **Automatic Updates**: Watchtower periodically checks for updates to Docker images and replaces running containers with the updated version if available.</p>
+                            <p class="note_contents">2. **Notifications**: You can configure Watchtower to send notifications via email, Slack, and other platforms when it updates a container.</p>
+                            <p class="note_contents">3. **Scheduling**: Watchtower supports cron-like scheduling for updates so that you can specify when you&#39;d like your containers to be updated.</p>
+                            <p class="note_contents">4. **Selective Monitoring**: By default, Watchtower will update all running containers. However, you can specify which containers should be updated automatically.</p>
+                            <p class="note_contents">5. **Rolling Updates**: Watchtower can be configured to perform rolling updates to minimize downtime during an upgrade.</p>
+                            <p class="note_contents">### Basic Usage:</p>
+                            <p class="note_contents">To run Watchtower, you can execute the following Docker command:</p>
+                            <p class="note_contents">```bash<br />
+                                docker run -d --name watchtower -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower<br />
+                                ```</p>
+                            <p class="note_contents">This command will start a new container named &quot;watchtower&quot; that has access to the Docker socket, enabling it to interact with Docker on your host.</p>
+                            <p class="note_contents">### More Advanced Options:</p>
+                            <p class="note_contents">- **Check Interval**: You can specify an interval (in seconds) for Watchtower to check for updates. For example, for a 1-hour interval:</p>
+                            <p class="note_contents">&nbsp;&nbsp;```bash<br />
+                                &nbsp;&nbsp;docker run -d --name watchtower -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --interval 3600<br />
+                                &nbsp;&nbsp;```</p>
+                            <p class="note_contents">- **Specifying Containers**: To monitor specific containers, you can list their names at the end of the Watchtower command:</p>
+                            <p class="note_contents">&nbsp;&nbsp;```bash<br />
+                                &nbsp;&nbsp;docker run -d --name watchtower -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower container1 container2<br />
+                                &nbsp;&nbsp;```</p>
+                            <p class="note_contents">- **Notifications**: You can set up notifications to, for example, a Slack channel by setting environment variables when running the Watchtower container:</p>
+                            <p class="note_contents">&nbsp;&nbsp;```bash<br />
+                                &nbsp;&nbsp;docker run -d --name watchtower -v /var/run/docker.sock:/var/run/docker.sock -e WATCHTOWER_NOTIFICATIONS=slack -e WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL=<a href="https://hooks.slack.com/your-webhook-url" target="_blank" class="url">https://hooks.slack.com/your-webhook-url</a> containrrr/watchtower<br />
+                                &nbsp;&nbsp;```</p>
+                            <p class="note_contents">### Considerations:</p>
+                            <p class="note_contents">1. **Downtime**: Depending on how you configure Watchtower, there might be a brief period of downtime for your application when Watchtower pulls the new image and restarts the container.</p>
+                            <p class="note_contents">2. **Breaking Changes**: Automatic updates might introduce breaking changes if the updated image is not fully compatible with the previous version.</p>
+                            <p class="note_contents">3. **Custom Configuration**: Ensure that any custom configurations or data are persisted outside the container, as Watchtower replaces containers.</p>
+                            <p class="note_contents">4. **Security**: Granting a container access to the Docker daemon (as shown in the basic usage example) can be a security risk if misconfigured. Make sure you understand the implications of doing this in your environment.</p>
+                            <p class="note_contents">5. **Database Migrations**: Watchtower is not designed to handle complex workflows like database migrations. For such cases, manual intervention or a more advanced deployment strategy is recommended.</p>
+                            <p class="note_contents">Watchtower can be a handy tool for small to medium-sized deployments where the benefits of automatic updates outweigh the risks and challenges mentioned above. For larger or more complex systems, a more sophisticated update mechanism might be appropriate.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="a1183d61-1f79-41e8-837b-92be78926d17" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Azure DevOps について調べる</span>
+                    <a href="#a1183d61-1f79-41e8-837b-92be78926d17" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">便利そう。ハンズオンのときに復習する。</p>
+                            <p class="note_contents">@ Azure DevOps is a set of cloud-based collaboration tools provided by Microsoft that facilitate software development and delivery. It offers various features to support DevOps practices, such as planning, tracking, code version control, automated builds, testing, and releases.</p>
+                            <p class="note_contents">### Core Features:</p>
+                            <p class="note_contents">1. **Azure Boards**: A work tracking system that uses Kanban boards, backlogs, custom reporting, and dashboards to visualize work and promote collaboration among team members.</p>
+                            <p class="note_contents">2. **Azure Repos**: Provides Git-based source code repositories, pull requests, and code reviews to facilitate version control and code sharing.</p>
+                            <p class="note_contents">3. **Azure Pipelines**: A CI/CD (Continuous Integration/Continuous Deployment) tool that automates the building, testing, and deployment of applications to different platforms like Windows, Linux, macOS, and containers like Docker.</p>
+                            <p class="note_contents">4. **Azure Test Plans**: Allows you to create, manage, and run tests in order to ensure the quality of your application.</p>
+                            <p class="note_contents">5. **Azure Artifacts**: Provides package management for Maven, npm, NuGet, and Python packages. You can share code across your organization.</p>
+                            <p class="note_contents">### How to Use Azure DevOps with Docker</p>
+                            <p class="note_contents">Azure DevOps can be integrated with Docker to automate building, testing, and deploying containerized applications.</p>
+                            <p class="note_contents">1. **Build Docker Images**: Azure Pipelines can be configured to automatically build Docker images whenever there is a code change.</p>
+                            <p class="note_contents">2. **Push to Registry**: After building the Docker image, you can push it to a Docker registry like Docker Hub, Azure Container Registry, or any other registry of your choice.</p>
+                            <p class="note_contents">3. **Run Tests**: Use Azure Test Plans to run automated tests against your Docker containers to ensure they meet your quality criteria.</p>
+                            <p class="note_contents">4. **Deploy Containers**: Once the image is built and tests pass, Azure Pipelines can deploy the Docker container to various platforms including Azure Kubernetes Service (AKS), Azure Container Instances (ACI), or any other container orchestration service.</p>
+                            <p class="note_contents">### Advantages:</p>
+                            <p class="note_contents">1. **Integrated Environment**: Azure DevOps provides a one-stop-shop for planning, coding, testing, and deploying applications, reducing the need for disparate, standalone tools.</p>
+                            <p class="note_contents">2. **Extensibility**: Azure DevOps can be extended with a wide range of plugins and extensions from the Azure DevOps Marketplace to customize your workflow.</p>
+                            <p class="note_contents">3. **Scalability**: Easily scalable to accommodate both small and large projects.</p>
+                            <p class="note_contents">4. **Security**: Azure DevOps offers features like access control, audit trails, and secure connections to ensure your code and data are secure.</p>
+                            <p class="note_contents">5. **Cross-Platform and Language Agnostic**: Azure DevOps can be used for projects written in any language and deployed to any platform.</p>
+                            <p class="note_contents">Whether you are a developer working on a small project or an organization with complex delivery pipelines, Azure DevOps offers a comprehensive suite of tools that can cater to your needs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="f9a7dcfb-5e80-466d-b241-50b3633f982f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">GitHub Actions について調べる</span>
+                    <a href="#f9a7dcfb-5e80-466d-b241-50b3633f982f" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">@ GitHub Actions is a CI/CD (Continuous Integration/Continuous Deployment) and automation service provided by GitHub. It allows you to define workflows that can build, test, package, release, and deploy your code directly from your GitHub repository. GitHub Actions can be used with any programming language and integrate with any platform, including Windows, macOS, and Linux.</p>
+                            <p class="note_contents">### Core Features:</p>
+                            <p class="note_contents">1. **Event-Driven**: GitHub Actions can be triggered by a wide range of events on the GitHub platform, such as pushing code to a repository, creating pull requests, releasing new versions, and more.</p>
+                            <p class="note_contents">2. **Workflow Configuration**: Workflows are defined using YAML files that live within your repository. This makes it easy to version-control and collaborate on your CI/CD pipelines.</p>
+                            <p class="note_contents">3. **Matrix Builds**: You can run your build and test jobs on multiple versions of a language or various OS types simultaneously.</p>
+                            <p class="note_contents">4. **Hosted Runners**: GitHub provides hosted runners for multiple operating systems, including Ubuntu, Windows, and macOS. You can also host your own runners if you need specialized hardware or software.</p>
+                            <p class="note_contents">5. **Extensible**: GitHub Actions can be easily extended with actions from the GitHub Marketplace, where you can find a wide variety of pre-built actions created by the community and vendors.</p>
+                            <p class="note_contents">6. **Environment Variables and Secrets**: You can define environment variables and secrets that are available to your workflow, making it easy to manage configuration and sensitive information.</p>
+                            <p class="note_contents">### How to Use GitHub Actions with Docker</p>
+                            <p class="note_contents">GitHub Actions can be used to build, test, and deploy Docker containers as part of your CI/CD workflow. Here&#39;s a simple example of a workflow YAML file that builds and pushes a Docker image:</p>
+                            <p class="note_contents">```yaml<br />
+                                name: Build and Push Docker Image</p>
+                            <p class="note_contents">on:<br />
+                                &nbsp;&nbsp;push:<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;branches: [ main ]</p>
+                            <p class="note_contents">jobs:<br />
+                                &nbsp;&nbsp;build:<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;runs-on: ubuntu-latest</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;steps:<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;- name: Checkout code<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uses: actions/checkout@v2</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- name: Login to Docker Hub<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uses: docker/login-action@v1<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with:<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;username: ${{ secrets.DOCKER_HUB_USERNAME }}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- name: Build and push Docker image<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uses: docker/build-push-action@v2<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with:<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context: .<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;push: true<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tags: username/repository:tag<br />
+                                ```</p>
+                            <p class="note_contents">In this example:</p>
+                            <p class="note_contents">- The workflow runs whenever code is pushed to the `main` branch.<br />
+                                - It checks out the code from the repository.<br />
+                                - It logs in to Docker Hub using credentials stored as GitHub secrets.<br />
+                                - It builds the Docker image and pushes it to a Docker Hub repository.</p>
+                            <p class="note_contents">### Advantages:</p>
+                            <p class="note_contents">1. **Integrated with GitHub**: Being built into GitHub means you can set up CI/CD without leaving the platform, making it convenient to manage everything related to your code.</p>
+                            <p class="note_contents">2. **Flexible and Customizable**: You can define complex workflows using YAML, and you can run virtually any script or command as part of your workflow.</p>
+                            <p class="note_contents">3. **Rich Ecosystem**: The GitHub Marketplace offers a large selection of pre-built actions that can do everything from deploying code to AWS, Azure, or other cloud providers, to sending SMS notifications.</p>
+                            <p class="note_contents">4. **Free Tier Available**: For public repositories, GitHub Actions is free. For private repositories, a number of free minutes are available, and additional minutes are affordably priced.</p>
+                            <p class="note_contents">GitHub Actions provides a powerful, flexible way to automate all your software workflows, from CI/CD to issue triaging and beyond, directly within the GitHub platform.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="55e84fc0-5f83-4e46-9bc2-0e538827f2ba" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">一つのアカウントで複数のサービスにアクセスできる仕組みについて調べる</span>
+                    <a href="#55e84fc0-5f83-4e46-9bc2-0e538827f2ba" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Google や Microsoft のアカウントでそういうことができる。いずれも OAuth なのか、実装上の違いはないのか、どのくらいのことができるのかといったことを調べる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">たとえば、アクセス権を階層的に定義する場合の実装はどうなるか。</p>
+                            <p class="note_contents">Google アカウントなどでログインしてもらい、最初は一番下のアクセス権を与え、システム管理者が気づき次第、手作業でアクセス権を高める？ それだとユーザーが多いときの管理コストが大きい。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">@ Implementing a single authentication mechanism that works across multiple web systems is often achieved through a single sign-on (SSO) system. SSO allows a user to log in once and gain access to multiple services without being required to log in again for each one. Here are some strategies and steps to implement such a mechanism:</p>
+                            <p class="note_contents">### Strategies for SSO</p>
+                            <p class="note_contents">1. **OAuth 2.0/OpenID Connect**: A well-known standard for authorization that allows you to use a single identity provider (like Google, Facebook, or a custom identity provider) to handle authentication for multiple services.</p>
+                            <p class="note_contents">2. **SAML**: Security Assertion Markup Language is an XML-based standard for exchanging authentication and authorization data between parties, particularly between an identity provider and a service provider.</p>
+                            <p class="note_contents">3. **JWT (JSON Web Tokens)**: A compact, URL-safe means of representing claims between two parties. JWTs can be used in SSO implementations.</p>
+                            <p class="note_contents">4. **LDAP**: Lightweight Directory Access Protocol can be used in enterprise settings for centralized authentication.</p>
+                            <p class="note_contents">5. **Kerberos**: A network authentication protocol designed to provide strong authentication for users and services.</p>
+                            <p class="note_contents">6. **Custom SSO**: You can also build a custom SSO system that fits the specific needs of your applications. However, adhering to a standard is often safer and more scalable.</p>
+                            <p class="note_contents">### General Steps to Implement SSO</p>
+                            <p class="note_contents">1. **Choose an Identity Provider (IdP)**: This is the service that will authenticate user credentials and send the information to the service providers (the individual web systems).</p>
+                            <p class="note_contents">2. **Configure Service Providers (SPs)**: Each web system must be configured to accept the SSO tokens generated by the identity provider.</p>
+                            <p class="note_contents">3. **User Authentication**: The IdP needs to verify the user&#39;s identity, typically through a username and password, although multi-factor authentication can also be used.</p>
+                            <p class="note_contents">4. **Token Generation**: After successful authentication, the IdP generates a secure token that can be understood and validated by the service providers.</p>
+                            <p class="note_contents">5. **Token Validation**: When a user tries to access a service, the service provider requests a token from the identity provider. The service provider validates this token and, if valid, grants access to the user.</p>
+                            <p class="note_contents">6. **User Session**: The user’s session can be managed either centrally by the IdP or locally by each service provider, with the latter periodically checking the validity of the SSO token.</p>
+                            <p class="note_contents">7. **Security Measures**: Always use HTTPS and consider other security measures like token encryption, periodic key rotation, and logout mechanisms.</p>
+                            <p class="note_contents">### Coding Aspects</p>
+                            <p class="note_contents">- Each web system (service provider) needs to include a library or SDK that can communicate with the chosen identity provider. Many SSO systems offer SDKs for popular languages and frameworks.</p>
+                            <p class="note_contents">- The identity provider often has its own setup code, whether it&#39;s a dedicated server or a cloud service.</p>
+                            <p class="note_contents">### Example Libraries and Services</p>
+                            <p class="note_contents">- Microsoft&#39;s Azure Active Directory<br />
+                                - Google Identity Platform<br />
+                                - Auth0<br />
+                                - Okta<br />
+                                - Open-source libraries like Spring Security for Java</p>
+                            <p class="note_contents">Implementing SSO is non-trivial but offers a much better user experience and typically provides better security than managing multiple separate login systems. The choice of technology and approach will depend on your specific requirements, including the programming languages you are using, the level of security you need, and whether you are building for an enterprise or consumer audience.</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">@ Services that implement OAuth specifications are generally categorized into two roles:</p>
+                            <p class="note_contents">1. **OAuth Providers (Identity Providers)**: These are services that authenticate users and issue OAuth tokens. Users have accounts with these services, and they authenticate against them during the OAuth flow. Examples include:</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- **Google Sign-In**: Google&#39;s identity platform that uses OAuth 2.0 and OpenID Connect.</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- **Facebook Login**: Facebook&#39;s authentication system also utilizes OAuth 2.0.</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- **GitHub**: Primarily for developer-focused services, GitHub offers OAuth 2.0 based authentication.</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- **Twitter**: Offers OAuth 1.0a and OAuth 2.0 for different types of applications.</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- **Microsoft Identity Platform**: Provides OAuth 2.0 authentication, previously known as Azure Active Directory (Azure AD) v2.0.</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- **Apple Sign In**: Apple&#39;s own OAuth 2.0 based single sign-on service.</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- **LinkedIn**: Provides OAuth 2.0 based authentication for LinkedIn profiles.</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- **Spotify**: Uses OAuth 2.0 for authorizing third-party applications.</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- **Dropbox**: Uses OAuth 2.0 for their API.</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- **Reddit**: Offers OAuth 2.0 based authentication for its API.</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- **Salesforce**: Utilizes OAuth 2.0 for their various cloud services.</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- **PayPal**: For API permissions and authentication, PayPal also uses OAuth 2.0.</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- **Okta**: An identity management service that also provides OAuth 2.0 and OpenID Connect services.</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- **Auth0**: Offers both OAuth 2.0 and OpenID Connect services.</p>
+                            <p class="note_contents">2. **OAuth Consumers (Service Providers)**: These are services that allow users to authenticate via an OAuth provider, generally to gain some access to data or services without needing a separate username and password for each site. Examples include:</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- **Third-party Mail Clients**: Like Thunderbird or Microsoft Outlook may use OAuth for Gmail access.</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- **Social Media Management Tools**: Like Buffer or Hootsuite that require access to social media accounts.</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- **Collaboration Tools**: Such as Slack, which can integrate with Google Drive or GitHub via OAuth.</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- **Online Stores**: That allow you to create an account and log in using credentials from Google, Facebook, etc.</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- **Cloud-based Software Solutions**: Such as CRM or ERP systems that integrate with other platforms via OAuth.</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;- **Developer Tools**: Like IDEs or CI/CD platforms that integrate with GitHub or GitLab using OAuth.</p>
+                            <p class="note_contents">Both of these categories have become integral to modern web architecture, and OAuth is widely adopted as the standard for secure delegated access.</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">@ Hierarchical authentication using OAuth refers to the implementation of an OAuth-based authentication system where access control is structured in a hierarchical manner. This concept isn&#39;t native to OAuth itself, but OAuth can be combined with other authorization mechanisms to achieve a hierarchical structure.</p>
+                            <p class="note_contents">In the context of OAuth, &quot;hierarchical&quot; typically pertains to the scope or granularity of access rights. Instead of just &quot;read&quot; or &quot;write&quot; permissions, you might have several nested levels of permissions.</p>
+                            <p class="note_contents">### How Hierarchical Authentication Using OAuth Might Look:</p>
+                            <p class="note_contents">1. **Top-Level (Admin Rights)**:<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;- Full control over an application, its data, and its settings.<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;- Can add or remove other administrators or manage lower-level users.</p>
+                            <p class="note_contents">2. **Mid-Level (Managerial Rights)**:<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;- Can perform most actions but might not be allowed to alter fundamental settings.<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;- Can manage users within their purview, but not other managers or admins.</p>
+                            <p class="note_contents">3. **Entry-Level (User Rights)**:<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;- Access to use the application and its features.<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;- No control over settings or other users.</p>
+                            <p class="note_contents">4. **Guest-Level**:<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;- Very limited, read-only access.</p>
+                            <p class="note_contents">### Implementation Steps:</p>
+                            <p class="note_contents">1. **Define Scopes**: In OAuth, the permissions granted to a token are defined by its &quot;scopes&quot;. Scopes can be used to represent hierarchical levels of access. For instance, scopes can be defined as `admin`, `manager`, `user`, and `guest`.</p>
+                            <p class="note_contents">2. **Token Request**: When an application requests an OAuth token, it specifies the required scopes. The OAuth provider then checks whether the user has the necessary permissions to grant those scopes.</p>
+                            <p class="note_contents">3. **Token Inspection**: When an OAuth token is presented to a service, the service can inspect the token&#39;s scopes to determine the user&#39;s level of access.</p>
+                            <p class="note_contents">4. **Fine-Grained Authorization**: Beyond just inspecting the token&#39;s scopes, the service might combine the OAuth token with its own authorization logic. For instance, a user might have a `manager` scope in their token, but an internal database dictates which specific users or departments they can manage.</p>
+                            <p class="note_contents">5. **Revocation**: Hierarchical structures often come with the need to revoke or downgrade permissions. Ensure you have mechanisms in place for this. If an admin removes managerial rights from a user, you&#39;ll need to invalidate any tokens that were issued with the `manager` scope for that user.</p>
+                            <p class="note_contents">6. **Refresh Tokens**: Utilize refresh tokens to allow the client to fetch a new access token when the previous one expires. This way, even if a token&#39;s permissions are long-lived, you can re-check and re-assert the user&#39;s permissions at regular intervals.</p>
+                            <p class="note_contents">### Challenges:</p>
+                            <p class="note_contents">- **Complexity**: Hierarchical authentication structures can be complex to design, implement, and maintain. Ensuring that permissions are always correctly assigned and enforced can be challenging.</p>
+                            <p class="note_contents">- **User Experience**: From a user&#39;s perspective, it might be confusing if they are suddenly denied access to a resource without understanding the hierarchical structure or any changes made to their level in the hierarchy.</p>
+                            <p class="note_contents">- **Scalability**: As more hierarchical levels and nuances are introduced, managing and validating these permissions at scale can become a concern.</p>
+                            <p class="note_contents">### Conclusion:<br />
+                                OAuth itself doesn&#39;t inherently support or reject hierarchical authentication. Instead, OAuth provides mechanisms (like scopes) that can be utilized to build hierarchical (or any other structured) authentication and authorization systems. When designing such a system, be clear about the requirements, maintain a robust mechanism for token validation and revocation, and ensure that the user experience remains intuitive.</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">@ OAuth scopes are a mechanism in OAuth 2.0 and OpenID Connect that allows you to specify the access level that you are requesting from the user. In essence, they define the permissions that are granted to the OAuth access token. By using scopes, the application can request only the permissions it needs to accomplish the task at hand, which is good for both security and user experience.</p>
+                            <p class="note_contents">### Common Scopes in OAuth 2.0</p>
+                            <p class="note_contents">1. **Read/Write Access**: For example, an application that interacts with a user&#39;s Google Drive may request read-only (`<a href="https://www.googleapis.com/auth/drive.readonly`)" target="_blank" class="url">https://www.googleapis.com/auth/drive.readonly`)</a> or read/write (`<a href="https://www.googleapis.com/auth/drive`)" target="_blank" class="url">https://www.googleapis.com/auth/drive`)</a> access.</p>
+                            <p class="note_contents">2. **Profile Information**: Some OAuth providers offer a `profile` scope to access the basic profile information of a user.</p>
+                            <p class="note_contents">3. **Email**: An `email` scope could grant access to the user&#39;s email address.</p>
+                            <p class="note_contents">4. **OpenID**: In OpenID Connect, the `openid` scope is used to request an ID token.</p>
+                            <p class="note_contents">5. **Offline Access**: The `offline_access` scope can be used to request a refresh token that allows the application to maintain access when the user is not present.</p>
+                            <p class="note_contents">6. **Custom Scopes**: You&#39;re not limited to predefined scopes; many services allow you to define your own custom scopes.</p>
+                            <p class="note_contents">### Using Scopes in OAuth 2.0 Flow</p>
+                            <p class="note_contents">1. **Requesting Scopes**: When directing the user to the authorization endpoint, the application includes the scopes it needs in the `scope` query parameter, often space-delimited.<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;- Example: `<a href="https://auth.example.com/authorize?response_type=code&amp;client_id=CLIENT_ID&amp;redirect_uri=REDIRECT_URI&amp;scope=read" target="_blank" class="url">https://auth.example.com/authorize?response_type=code&amp;client_id=CLIENT_ID&amp;redirect_uri=REDIRECT_URI&amp;scope=read</a> write`</p>
+                            <p class="note_contents">2. **User Consent**: The OAuth service will typically show the user a consent screen that lists the scopes the application is requesting. The user can then allow or deny the request.</p>
+                            <p class="note_contents">3. **Access Token**: If the user consents, the access token that is issued will be associated with the scopes that were approved.</p>
+                            <p class="note_contents">4. **Token Inspection**: The service that receives the access token can check its associated scopes to see what access should be granted.</p>
+                            <p class="note_contents">### Security Implications</p>
+                            <p class="note_contents">1. **Least Privilege**: By requesting only the scopes your application needs, you adhere to the principle of least privilege, reducing the potential damage from a compromised access token.</p>
+                            <p class="note_contents">2. **User Trust**: Being transparent about the permissions you&#39;re requesting can help gain user trust.</p>
+                            <p class="note_contents">3. **Revocable**: Users can generally revoke access tokens, either by revoking individual scopes or by revoking access to the entire application.</p>
+                            <p class="note_contents">### Scope Validation</p>
+                            <p class="note_contents">When an access token is presented to a service, it&#39;s crucial to validate that the token has the required scopes for the requested operation. This is generally done on the server that receives the token, either by introspecting the token or by examining self-contained claims in a JWT (JSON Web Token).</p>
+                            <p class="note_contents">### Examples:</p>
+                            <p class="note_contents">- GitHub OAuth Scopes: GitHub allows granular scopes like `read:user`, `user:email`, `repo`, etc.</p>
+                            <p class="note_contents">- Google OAuth Scopes: Google&#39;s API offers various scopes for accessing different services like Google Drive, Google Calendar, Google Photos, etc.</p>
+                            <p class="note_contents">### Summary</p>
+                            <p class="note_contents">OAuth scopes offer a flexible way to request and grant varying levels of access. This provides a good balance between functionality and security, allowing users to maintain control over their data while enabling powerful integrations by third-party applications.</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">@ Here&#39;s a simple example to demonstrate OAuth 2.0 authentication using Razor Pages in an ASP.NET Core application. In this sample, I&#39;ll use Google as the OAuth provider. This is just for demonstration and educational purposes; you should always consult official documentation and tailor the example to your needs.</p>
+                            <p class="note_contents">### Prerequisites</p>
+                            <p class="note_contents">- Install the ASP.NET Core SDK from [here](<a href="https://dotnet.microsoft.com/download)." target="_blank" class="url">https://dotnet.microsoft.com/download).</a><br />
+                                - Create an OAuth 2.0 client ID from Google Cloud Console.</p>
+                            <p class="note_contents">### Steps</p>
+                            <p class="note_contents">1. **Create a new Razor Pages project**</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;```bash<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;dotnet new webapp -o RazorPagesOAuthExample<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;```</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;Navigate to the newly created folder:</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;```bash<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;cd RazorPagesOAuthExample<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;```</p>
+                            <p class="note_contents">2. **Edit `Startup.cs`**</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;Open the `Startup.cs` file and add the following in the `ConfigureServices` method to configure the OAuth 2.0 authentication:</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;```csharp<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;public void ConfigureServices(IServiceCollection services)<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;services.AddAuthentication(options =&gt;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.AddCookie(options =&gt; { options.LoginPath = &quot;/Login&quot;; })<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.AddGoogle(options =&gt;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;options.ClientId = &quot;YOUR_GOOGLE_CLIENT_ID&quot;;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;options.ClientSecret = &quot;YOUR_GOOGLE_CLIENT_SECRET&quot;;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;services.AddRazorPages();<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;```</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;And also, add these lines in the `Configure` method:</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;```csharp<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;public void Configure(IApplicationBuilder app, IWebHostEnvironment env)<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// ... existing code ...</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;app.UseAuthentication();<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;app.UseAuthorization();</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// ... existing code ...<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;```</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;Don&#39;t forget to add necessary `using` directives:</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;```csharp<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;using Microsoft.AspNetCore.Authentication.Cookies;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;using Microsoft.AspNetCore.Authentication.Google;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;```</p>
+                            <p class="note_contents">3. **Add Login and Logout functionality**</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;Create a new Razor Page named &quot;Login&quot; using the following command:</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;```bash<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;dotnet new page --name Login --namespace RazorPagesOAuthExample.Pages<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;```</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;Replace `Login.cshtml.cs` content with:</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;```csharp<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;using System.Threading.Tasks;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;using Microsoft.AspNetCore.Authentication;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;using Microsoft.AspNetCore.Mvc;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;using Microsoft.AspNetCore.Mvc.RazorPages;</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;namespace RazorPagesOAuthExample.Pages<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public class LoginModel : PageModel<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public IActionResult OnGet()<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Challenge(new AuthenticationProperties { RedirectUri = &quot;/&quot; }, &quot;Google&quot;);<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;```</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;Create a `Logout.cshtml` file with a code-behind `Logout.cshtml.cs`:</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;```csharp<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;using Microsoft.AspNetCore.Authentication;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;using Microsoft.AspNetCore.Authentication.Cookies;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;using Microsoft.AspNetCore.Mvc;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;using Microsoft.AspNetCore.Mvc.RazorPages;</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;namespace RazorPagesOAuthExample.Pages<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public class LogoutModel : PageModel<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public async Task&lt;IActionResult&gt; OnGetAsync()<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return RedirectToPage(&quot;/Index&quot;);<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;```</p>
+                            <p class="note_contents">4. **Run Your App**</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;Finally, run your app:</p>
+                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;```bash<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;dotnet run<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;```</p>
+                            <p class="note_contents">Now, when you navigate to `/Login`, you should be redirected to Google&#39;s OAuth 2.0 login page. After successful authentication, you should be redirected back to the home page. To log out, you can navigate to `/Logout`.</p>
+                            <p class="note_contents">Note: Replace `YOUR_GOOGLE_CLIENT_ID` and `YOUR_GOOGLE_CLIENT_SECRET` with the credentials you got from the Google Cloud Console.</p>
+                            <p class="note_contents">This is a simplified example to get you started. There&#39;s much more you can do, including handling user information, dealing with tokens for API calls, integrating with other OAuth providers, and so on.</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">@ Yes, you can attach additional information to the authentication data for sharing across multiple systems. However, there are different approaches to achieving this depending on your specific use case and architectural considerations.</p>
+                            <p class="note_contents">### JWT Claims (Token-based approach)</p>
+                            <p class="note_contents">If you are using a JWT (JSON Web Token) as your authentication mechanism, you can include additional custom claims in the payload section of the token. Custom claims can hold arbitrary information like user settings or display language. All systems that validate the JWT will then have access to this additional information.</p>
+                            <p class="note_contents">For example:</p>
+                            <p class="note_contents">```json<br />
+                                {<br />
+                                &nbsp;&nbsp;&quot;sub&quot;: &quot;123&quot;,<br />
+                                &nbsp;&nbsp;&quot;name&quot;: &quot;John Doe&quot;,<br />
+                                &nbsp;&nbsp;&quot;displayLanguage&quot;: &quot;en-US&quot;,<br />
+                                &nbsp;&nbsp;&quot;userSettings&quot;: {<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&quot;theme&quot;: &quot;dark&quot;<br />
+                                &nbsp;&nbsp;}<br />
+                                }<br />
+                                ```</p>
+                            <p class="note_contents">### Shared Database or Cache</p>
+                            <p class="note_contents">Another approach is to use a shared database or caching layer that can be accessed by all the systems that need the additional information. In this case, the authentication token could include a unique identifier for the user. This identifier can be used to look up additional information stored in the shared database.</p>
+                            <p class="note_contents">### Identity Provider (OAuth, OpenID Connect)</p>
+                            <p class="note_contents">If you are using an Identity Provider that supports OAuth 2.0 or OpenID Connect, you can usually include additional claims when requesting tokens. The provider can then include this additional information either in the token itself or in the accompanying user information payload.</p>
+                            <p class="note_contents">### .NET Core Identity Claims</p>
+                            <p class="note_contents">In ASP.NET Core Identity, you can use claims to add additional user information. Once a user is authenticated, you can add extra claims to the `ClaimsIdentity` object.</p>
+                            <p class="note_contents">Example:</p>
+                            <p class="note_contents">```csharp<br />
+                                var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);<br />
+                                identity.AddClaim(new Claim(ClaimTypes.Name, username));<br />
+                                identity.AddClaim(new Claim(&quot;DisplayLanguage&quot;, &quot;en-US&quot;));<br />
+                                identity.AddClaim(new Claim(&quot;UserSetting:Theme&quot;, &quot;dark&quot;));</p>
+                            <p class="note_contents">var principal = new ClaimsPrincipal(identity);<br />
+                                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);<br />
+                                ```</p>
+                            <p class="note_contents">### Sharing Data Between Systems</p>
+                            <p class="note_contents">If multiple systems need to share this information, the choice of mechanism would depend on the architecture:</p>
+                            <p class="note_contents">1. **APIs**: Systems could call an API to fetch this additional data.<br />
+                                2. **Shared Database**: Systems could look up a shared database to fetch the additional user information.<br />
+                                3. **Token Claims**: If using a standard like OAuth, all the needed information could be packaged into the token itself as claims.</p>
+                            <p class="note_contents">### Considerations</p>
+                            <p class="note_contents">1. **Security**: Make sure that the additional information is secured both in transit and at rest.<br />
+                                2. **Consistency**: Ensure that the data is kept consistent across all systems.<br />
+                                3. **Data Size**: Be mindful of the size of the additional data, especially if you are using it in tokens or cookies, as there are size limits to consider.</p>
+                            <p class="note_contents">To sum it up, there are various ways to attach and share additional information for authentication across multiple systems. The approach you choose would depend on your specific needs and architecture.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="fa6b4f56-fb53-451d-b117-1f28c5b1627d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">JSON の読み書きのライブラリーを探す</span>
+                    <a href="#fa6b4f56-fb53-451d-b117-1f28c5b1627d" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">@ JSON (JavaScript Object Notation) manipulation and parsing is a common task in modern programming. C# provides several libraries for handling JSON data. Here are some popular ones:</p>
+                            <p class="note_contents">### System.Text.Json (Built-in)</p>
+                            <p class="note_contents">Starting from .NET Core 3.0, Microsoft introduced `System.Text.Json` as a high-performance JSON framework. It&#39;s integrated into the .NET Core runtime and doesn&#39;t require any additional packages.</p>
+                            <p class="note_contents">```csharp<br />
+                                using System.Text.Json;</p>
+                            <p class="note_contents">var jsonString = &quot;{ \&quot;name\&quot;: \&quot;John\&quot;, \&quot;age\&quot;: 30 }&quot;;<br />
+                                var obj = JsonSerializer.Deserialize&lt;Dictionary&lt;string, object&gt;&gt;(jsonString);<br />
+                                var newJsonString = JsonSerializer.Serialize(obj);<br />
+                                ```</p>
+                            <p class="note_contents">### Newtonsoft.Json (Json.NET)</p>
+                            <p class="note_contents">Json.NET, created by James Newton-King, is one of the most popular and versatile JSON libraries for .NET. While it&#39;s not built into the runtime like `System.Text.Json`, its rich feature set and flexibility have made it a de facto standard for many years.</p>
+                            <p class="note_contents">To install:<br />
+                                ```bash<br />
+                                Install-Package Newtonsoft.Json<br />
+                                ```</p>
+                            <p class="note_contents">Usage example:</p>
+                            <p class="note_contents">```csharp<br />
+                                using Newtonsoft.Json;</p>
+                            <p class="note_contents">var jsonString = &quot;{ \&quot;name\&quot;: \&quot;John\&quot;, \&quot;age\&quot;: 30 }&quot;;<br />
+                                var obj = JsonConvert.DeserializeObject&lt;Dictionary&lt;string, object&gt;&gt;(jsonString);<br />
+                                var newJsonString = JsonConvert.SerializeObject(obj);<br />
+                                ```</p>
+                            <p class="note_contents">### Jil</p>
+                            <p class="note_contents">Jil is a fast JSON (de)serializer, built on top of `Sigil` with a number of somewhat crazy optimization tricks.</p>
+                            <p class="note_contents">To install:<br />
+                                ```bash<br />
+                                Install-Package Jil<br />
+                                ```</p>
+                            <p class="note_contents">Usage example:</p>
+                            <p class="note_contents">```csharp<br />
+                                using Jil;</p>
+                            <p class="note_contents">var jsonString = &quot;{ \&quot;name\&quot;: \&quot;John\&quot;, \&quot;age\&quot;: 30 }&quot;;<br />
+                                var obj = JSON.Deserialize&lt;Dictionary&lt;string, object&gt;&gt;(jsonString);<br />
+                                var newJsonString = JSON.Serialize(obj);<br />
+                                ```</p>
+                            <p class="note_contents">### Utf8Json</p>
+                            <p class="note_contents">Utf8Json claims to be a fast JSON serializer for C#. It focuses on performance by directly encoding to UTF-8.</p>
+                            <p class="note_contents">To install:<br />
+                                ```bash<br />
+                                Install-Package Utf8Json<br />
+                                ```</p>
+                            <p class="note_contents">Usage example:</p>
+                            <p class="note_contents">```csharp<br />
+                                using Utf8Json;</p>
+                            <p class="note_contents">var jsonString = &quot;{ \&quot;name\&quot;: \&quot;John\&quot;, \&quot;age\&quot;: 30 }&quot;;<br />
+                                var obj = JsonSerializer.Deserialize&lt;Dictionary&lt;string, object&gt;&gt;(Encoding.UTF8.GetBytes(jsonString));<br />
+                                var newJsonString = Encoding.UTF8.GetString(JsonSerializer.Serialize(obj));<br />
+                                ```</p>
+                            <p class="note_contents">### SimpleJson</p>
+                            <p class="note_contents">SimpleJson is a simple and easy-to-use JSON library that can be incorporated as a single file.</p>
+                            <p class="note_contents">Usage example:</p>
+                            <p class="note_contents">```csharp<br />
+                                var jsonString = &quot;{ \&quot;name\&quot;: \&quot;John\&quot;, \&quot;age\&quot;: 30 }&quot;;<br />
+                                var obj = SimpleJson.DeserializeObject&lt;Dictionary&lt;string, object&gt;&gt;(jsonString);<br />
+                                var newJsonString = SimpleJson.SerializeObject(obj);<br />
+                                ```</p>
+                            <p class="note_contents">### ServiceStack.Text</p>
+                            <p class="note_contents">ServiceStack&#39;s libraries include a JSON serializer among other text-based formats. It is known for its speed and clean API.</p>
+                            <p class="note_contents">To install:<br />
+                                ```bash<br />
+                                Install-Package ServiceStack.Text<br />
+                                ```</p>
+                            <p class="note_contents">Usage example:</p>
+                            <p class="note_contents">```csharp<br />
+                                using ServiceStack.Text;</p>
+                            <p class="note_contents">var jsonString = &quot;{ \&quot;name\&quot;: \&quot;John\&quot;, \&quot;age\&quot;: 30 }&quot;;<br />
+                                var obj = JsonSerializer.DeserializeFromString&lt;Dictionary&lt;string, object&gt;&gt;(jsonString);<br />
+                                var newJsonString = JsonSerializer.SerializeToString(obj);<br />
+                                ```</p>
+                            <p class="note_contents">Each of these libraries has its own set of features, optimizations, and use-cases where they excel. You can choose the one that fits your requirements the best.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="056bdbcf-6cf7-477b-94fc-3396cc672d67" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">翻訳 API を探す</span>
+                    <a href="#056bdbcf-6cf7-477b-94fc-3396cc672d67" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">@ Translation APIs allow developers to integrate machine translation into their applications, services, or websites. These APIs support multiple languages and are generally easy to use. Here are some popular translation APIs:</p>
+                            <p class="note_contents">### Google Cloud Translation API</p>
+                            <p class="note_contents">Google offers a robust and feature-rich translation API that supports a wide variety of languages. The API provides simple text translation as well as language detection.</p>
+                            <p class="note_contents">- **Documentation**: [Google Cloud Translation API Docs](<a href="https://cloud.google.com/translate/docs)" target="_blank" class="url">https://cloud.google.com/translate/docs)</a><br />
+                                - **Features**: Text translation, language detection, glossary, and more.</p>
+                            <p class="note_contents">### Microsoft Translator Text API</p>
+                            <p class="note_contents">Part of Azure Cognitive Services, Microsoft&#39;s Translator Text API is another feature-rich offering that supports text translation, transliteration, and language detection.</p>
+                            <p class="note_contents">- **Documentation**: [Microsoft Translator Text API Docs](<a href="https://docs.microsoft.com/en-us/azure/cognitive-services/translator/)" target="_blank" class="url">https://docs.microsoft.com/en-us/azure/cognitive-services/translator/)</a><br />
+                                - **Features**: Text translation, transliteration, dictionary lookup, language detection, and more.</p>
+                            <p class="note_contents">### IBM Language Translator</p>
+                            <p class="note_contents">IBM also offers a Language Translator service that supports translation and language identification.</p>
+                            <p class="note_contents">- **Documentation**: [IBM Language Translator Docs](<a href="https://cloud.ibm.com/docs/language-translator?topic=language-translator-about)" target="_blank" class="url">https://cloud.ibm.com/docs/language-translator?topic=language-translator-about)</a><br />
+                                - **Features**: Text translation, identification, and more.</p>
+                            <p class="note_contents">### DeepL API</p>
+                            <p class="note_contents">DeepL offers high-quality translations and claims to outperform other services in terms of translation quality.</p>
+                            <p class="note_contents">- **Documentation**: [DeepL API Docs](<a href="https://www.deepl.com/docs-api/)" target="_blank" class="url">https://www.deepl.com/docs-api/)</a><br />
+                                - **Features**: Text translation.</p>
+                            <p class="note_contents">### Amazon Translate</p>
+                            <p class="note_contents">Amazon Translate is a neural machine translation service that is part of AWS. It aims for high-quality, affordable translations.</p>
+                            <p class="note_contents">- **Documentation**: [Amazon Translate Docs](<a href="https://docs.aws.amazon.com/translate/index.html)" target="_blank" class="url">https://docs.aws.amazon.com/translate/index.html)</a><br />
+                                - **Features**: Text translation, batch translation, custom terminology, and more.</p>
+                            <p class="note_contents">### Yandex.Translate</p>
+                            <p class="note_contents">Yandex also offers a translation API, although it&#39;s not as feature-rich as some of the other major offerings.</p>
+                            <p class="note_contents">- **Documentation**: [Yandex.Translate API Docs](<a href="https://tech.yandex.com/translate/)" target="_blank" class="url">https://tech.yandex.com/translate/)</a><br />
+                                - **Features**: Text translation, language detection.</p>
+                            <p class="note_contents">### MyMemory</p>
+                            <p class="note_contents">MyMemory is an interesting option as it combines machine translation with a database of human translations, aiming to provide more contextually accurate translations.</p>
+                            <p class="note_contents">- **Documentation**: [MyMemory API Docs](<a href="https://mymemory.translated.net/doc/spec.php)" target="_blank" class="url">https://mymemory.translated.net/doc/spec.php)</a><br />
+                                - **Features**: Text translation, language detection.</p>
+                            <p class="note_contents">These services usually provide SDKs and client libraries in various programming languages, including C#, Python, Java, and more, to facilitate easy integration into your projects.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="728909c4-09ab-4960-83dd-bcb03b2980d7" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ORM ライブラリーを探す</span>
+                    <a href="#728909c4-09ab-4960-83dd-bcb03b2980d7" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">@ Object-Relational Mapping (ORM) libraries in C# are used to map between object-oriented code and a relational database, effectively simplifying database operations. Here are some commonly used ORM libraries for C#:</p>
+                            <p class="note_contents">### Entity Framework Core</p>
+                            <p class="note_contents">Entity Framework Core (EF Core) is a lightweight, extensible, open-source, and cross-platform version of Entity Framework data access technology. It&#39;s maintained by Microsoft and has extensive documentation and community support.</p>
+                            <p class="note_contents">- **Features**: Code-First, Database-First, and Model-First approaches; LINQ support, change tracking, migrations, etc.<br />
+                                - **Official Website**: [Entity Framework Core](<a href="https://docs.microsoft.com/en-us/ef/core/)" target="_blank" class="url">https://docs.microsoft.com/en-us/ef/core/)</a></p>
+                            <p class="note_contents">### Entity Framework 6</p>
+                            <p class="note_contents">This is the older, full .NET Framework-only version of Entity Framework. It is feature-rich but not as lightweight as EF Core.</p>
+                            <p class="note_contents">- **Features**: Code-First, Database-First, and Model-First approaches; LINQ support, change tracking, migrations, etc.<br />
+                                - **Official Website**: [Entity Framework 6](<a href="https://docs.microsoft.com/en-us/ef/ef6/)" target="_blank" class="url">https://docs.microsoft.com/en-us/ef/ef6/)</a></p>
+                            <p class="note_contents">### Dapper</p>
+                            <p class="note_contents">Dapper is a micro-ORM that provides a set of helper functions for executing queries and mapping results. It&#39;s known for high performance and is maintained by Stack Overflow.</p>
+                            <p class="note_contents">- **Features**: Lightweight, high-performance, direct SQL execution.<br />
+                                - **Official Website**: [Dapper](<a href="https://dapperlib.github.io/Dapper/)" target="_blank" class="url">https://dapperlib.github.io/Dapper/)</a></p>
+                            <p class="note_contents">### NHibernate</p>
+                            <p class="note_contents">NHibernate is a mature ORM for .NET that is a port of Java&#39;s Hibernate. It&#39;s extremely flexible and configurable.</p>
+                            <p class="note_contents">- **Features**: Code-First and Database-First, LINQ support, caching, lazy loading, etc.<br />
+                                - **Official Website**: [NHibernate](<a href="https://nhibernate.info/)" target="_blank" class="url">https://nhibernate.info/)</a></p>
+                            <p class="note_contents">### LLBLGen Pro</p>
+                            <p class="note_contents">LLBLGen Pro is a commercial ORM for .NET that also supports code generation. It is known for its rich feature set and performance.</p>
+                            <p class="note_contents">- **Features**: Code-First and Database-First, LINQ support, caching, etc.<br />
+                                - **Official Website**: [LLBLGen Pro](<a href="https://www.llblgen.com/)" target="_blank" class="url">https://www.llblgen.com/)</a></p>
+                            <p class="note_contents">### PetaPoco</p>
+                            <p class="note_contents">PetaPoco is another micro-ORM that was inspired by Rob Conery&#39;s Massive project but for a different database.</p>
+                            <p class="note_contents">- **Features**: Lightweight, T4-based code generation, and supports multiple databases.<br />
+                                - **Official Website**: [PetaPoco](<a href="https://github.com/CollaboratingPlatypus/PetaPoco)" target="_blank" class="url">https://github.com/CollaboratingPlatypus/PetaPoco)</a></p>
+                            <p class="note_contents">### Insight.Database</p>
+                            <p class="note_contents">Insight.Database is a fast and lightweight micro-ORM for .NET. It aims to provide the ease-of-use of an ORM with almost native performance levels by compiling SQL queries and C# data-access code together.</p>
+                            <p class="note_contents">- **Features**: Auto-generation of code from SQL, stored procedure support, etc.<br />
+                                - **Official Website**: [Insight.Database](<a href="https://github.com/jonwagner/Insight.Database)" target="_blank" class="url">https://github.com/jonwagner/Insight.Database)</a></p>
+                            <p class="note_contents">### Simple.Data</p>
+                            <p class="note_contents">Simple.Data is a lightweight framework that uses the dynamic features of .NET 4 to provide an expressive, ORM-like API for data access.</p>
+                            <p class="note_contents">- **Features**: Dynamic type support, query syntax, extensible to different database types.<br />
+                                - **Official Website**: [Simple.Data](<a href="https://github.com/markrendle/Simple.Data)" target="_blank" class="url">https://github.com/markrendle/Simple.Data)</a></p>
+                            <p class="note_contents">### ServiceStack.OrmLite</p>
+                            <p class="note_contents">ServiceStack.OrmLite is a configuration-free, lightweight ORM for .NET. It&#39;s part of the ServiceStack ecosystem.</p>
+                            <p class="note_contents">- **Features**: POCO-driven, API similar to Dapper, supports complex types, etc.<br />
+                                - **Official Website**: [ServiceStack.OrmLite](<a href="https://github.com/ServiceStack/ServiceStack.OrmLite)" target="_blank" class="url">https://github.com/ServiceStack/ServiceStack.OrmLite)</a></p>
+                            <p class="note_contents">Each of these libraries has its own strengths, weaknesses, and best-use cases. Your choice will depend on your project needs, performance requirements, and the type of application you&#39;re building.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
