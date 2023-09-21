@@ -3,7 +3,7 @@
     <head>
         <title>tk2Text</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link href="tk2Text.css" rel="stylesheet" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans+JP&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'IBM Plex Sans JP',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.title{background-color:#333;padding:20px 30px;font-size:2rem;font-weight:bold}@media(width< 576px){div.title{padding:15px 22.5px;font-size:1.5rem;}}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{background-color:#111;padding:15px 20px}div.image{background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'IBM Plex Mono','IBM Plex Sans JP',monospace;font-size:1rem;line-height:1.5}</style>
     </head>
     <body>
         <div class="title">
@@ -1374,6 +1374,192 @@
                 <div class="task_contents">&check;
                     <span class="task_contents">v0.13 としてアーカイブ</span>
                     <a href="#ee510c87-e404-4037-97a3-71a1434df7be" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="9fe5b63e-e853-4abb-b79e-049475e6161c" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">Completed.txt ありのタスクリストをスキップするモードを追加</span>
+                    <a href="#9fe5b63e-e853-4abb-b79e-049475e6161c" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">学習系のタスクリストが増えると、tk2Text の実行コストが増す。</p>
+                            <p class="note_contents">SSD なので仮に1万の小さなファイルが読み込まれてもシークに明け暮れてダメージを受けるなどはないが、今まさに取り組んでいることのログファイルを更新するたびに大昔のタスクまで読み込ませるのは時間の無駄だ。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">プロジェクト管理システムの開発を決めたので、今後を見すえての処理コストの低減のためのタスクは不要。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="2d8f6ab1-0ee6-4e2d-8897-a563557c5465" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">ブログモードを実装</span>
+                    <a href="#2d8f6ab1-0ee6-4e2d-8897-a563557c5465" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ソートの順序が逆転し、添付画像が小さく表示されるモード。</p>
+                            <p class="note_contents">さらに、一定期間が経過した投稿においては添付画像がファイル名のみ表示されてもよい。件数の上限でもいい。</p>
+                            <p class="note_contents">とても古い投稿の添付画像を改めて Facebook 側と照合するなどは考えにくく、流れていってくれるのが管理において効率的。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">今、とても困っているわけでないし、ブログも、より合理的なワークフローにいずれ切り替える。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d8b6cd7a-8363-4cdd-ad6a-8f13cc7abe59" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">メモにおいて @ からの段落を検出できるようにする</span>
+                    <a href="#d8b6cd7a-8363-4cdd-ad6a-8f13cc7abe59" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">過剰な実装にしない。@ から始まる段落があれば、そこからは AI の回答の引用。@ で終わる段落あるいはメモの終わりに到達すれば、AI の回答の引用の終わり。いずれの @ も除去・トリミングされる。@ 直後にインデントがつくことは考えにくい。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">プロジェクト管理システムの開発を決めたが、開発や学習に関する既存のメモは引き継がれる。最近は AI への依存度が高まっているので、自分の書いた文章と AI による回答の明確な区別があった方が、既存のメモや今後のものをチェックしやすい。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Markdig を入れてみた。すぐに使えて、結果も良好。HTML をフォーマットする方法は、ザッと探した限りではなさそう。AI に聞いても「それは Markdig の目的とするところでない」のような回答。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="a214c4b1-4955-4564-983d-a85329e90f44" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">メモの表示位置によってインデントの深さが異なるところの実装をチェック</span>
+                    <a href="#a214c4b1-4955-4564-983d-a85329e90f44" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="ddc383a8-2a96-490e-a06c-fc422b117bee" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">@ で終わる段落で引用が止まるかテスト</span>
+                    <a href="#ddc383a8-2a96-490e-a06c-fc422b117bee" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">単一のメモに複数の引用部分を入れるテストも行う。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="6a146c0b-01e9-4555-82b7-f665d13db03d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">空行にインデントがつかないようにする → インデントそのものを諦める</span>
+                    <a href="#6a146c0b-01e9-4555-82b7-f665d13db03d" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">空行が入るのは &lt;pre&gt; 部分。インデントをつけるとレンダリング時にそれが入る。&lt;pre&gt;&lt;code ... というのが必ず現れるので &lt;pre&gt; をなくすことも考えたが、その場合、&lt;pre&gt; 内の各行に &lt;br /&gt; をつけることになる。</p>
+                            <p class="note_contents">Markdig は良くできている。ChatGPT の回答もそうなので、「そのまま突っ込んで、そのまま出力する」というシンプルな実装にすることで、これら二つの良好な処理に頼りたい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="e45f44ec-1b93-4a23-9af4-8b2bd6cfc3c1" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">CSS をコンパクト化できるようにする</span>
+                    <a href="#e45f44ec-1b93-4a23-9af4-8b2bd6cfc3c1" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">これを試す。</p>
+                            <p class="note_contents">trullock/NUglify: NUglify is a HTML, JavaScript and CSS minification Library for .NET (fork of AjaxMin + new features)<br />
+                                <a href="https://github.com/trullock/NUglify" target="_blank" class="url">https://github.com/trullock/NUglify</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="07bfcb1c-cd4e-43b4-8a73-c2953215fa66" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">配色を暗くする</span>
+                    <a href="#07bfcb1c-cd4e-43b4-8a73-c2953215fa66" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="77739fbf-0abc-4e97-8282-7e758cb9af10" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Markdig が生成するタグにスタイルをつける</span>
+                    <a href="#77739fbf-0abc-4e97-8282-7e758cb9af10" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="ccddb714-7ee1-4077-aa1e-7c3bc2e72b69" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">英文向きのフォントに変更</span>
+                    <a href="#ccddb714-7ee1-4077-aa1e-7c3bc2e72b69" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">AI に質問するときは、機械がつくった日本語が読みにくくて、英語で答えてもらうことが多い。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="bfd56cf0-db1e-4f0d-974c-638d4279a4e2" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">CSS を HTML ファイルに入れる</span>
+                    <a href="#bfd56cf0-db1e-4f0d-974c-638d4279a4e2" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="7b5ac304-6124-4436-8e1b-9f4232117a88" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://github.com/xoofx/markdig/blob/master/src/Markdig/MarkdownExtensions.cs" target="_blank" class="url">https://github.com/xoofx/markdig/blob/master/src/Markdig/MarkdownExtensions.cs</a> をチェック</span>
+                    <a href="#7b5ac304-6124-4436-8e1b-9f4232117a88" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="6f937746-d1b7-44cb-929a-6c3d89a1d534" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">生成された HTML を文法チェッカーに通す</span>
+                    <a href="#6f937746-d1b7-44cb-929a-6c3d89a1d534" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">CSS について書いておく。</p>
+                    <p class="note_contents">ブロック内の最初のブロックの上マージンが消えたので AI に聞けば、マージンの統合の可能性があり、transparent な border が解決策の一つだと。なので、div.note_ai_generated に設定し、ほかでも、うるさいから境界線を消すところで、マージンの統合を回避するため念のために設定した。</p>
+                    <!-- Task: 3e9447df-d8cf-4a58-a415-70920c76626b -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">配色について。</p>
+                    <p class="note_contents">真っ黒と真っ白を避けた。</p>
+                    <p class="note_contents">背景色は、#111, #333, #555<br />
+                        文字色は、#ddd<br />
+                        完了は、#115 → #337<br />
+                        却下は、#511 → #733<br />
+                        リンク色は、#69c</p>
+                    <p class="note_contents">奇数多めなので文字色も #eee にしたが、まだ少し明るかった。</p>
+                    <!-- Task: 3e9447df-d8cf-4a58-a415-70920c76626b -->
+                </div>
+            </div>
+            <div id="47ceb591-2b47-4605-8597-0cfde81273cf" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">AI の回答が複数回引用されるメモにおいて段落数の一致を確認</span>
+                    <a href="#47ceb591-2b47-4605-8597-0cfde81273cf" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">++ の直前に + 1 していての段落の欠落があったので、直せているか確認。</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

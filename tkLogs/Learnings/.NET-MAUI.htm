@@ -3,13 +3,207 @@
     <head>
         <title>.NET MAUI</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link href="tk2Text.css" rel="stylesheet" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans+JP&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'IBM Plex Sans JP',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.title{background-color:#333;padding:20px 30px;font-size:2rem;font-weight:bold}@media(width< 576px){div.title{padding:15px 22.5px;font-size:1.5rem;}}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{background-color:#111;padding:15px 20px}div.image{background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'IBM Plex Mono','IBM Plex Sans JP',monospace;font-size:1rem;line-height:1.5}</style>
     </head>
     <body>
         <div class="title">
             <a href=".NET-MAUI.htm" class="title">.NET MAUI</a>
         </div>
         <div class="entries">
+            <div class="note">
+                <div class="note_contents">
+                    <div class="note_ai_generated">
+<p>Deciding between WPF (Windows Presentation Foundation) and .NET MAUI (Multi-platform App UI) depends on various factors such as your target platforms, the features you need, your team's expertise, and so on. Below are some considerations that might help you decide:</p>
+<h3>WPF</h3>
+<h4>Advantages:</h4>
+<ul>
+<li><p><strong>Windows-Specific</strong>: If your target audience is solely Windows users, WPF offers deep integration with the Windows platform.</p>
+</li>
+<li><p><strong>Mature and Stable</strong>: WPF has been around since 2006 and has a large community, numerous third-party libraries, and extensive documentation.</p>
+</li>
+<li><p><strong>Rich UI Capabilities</strong>: Advanced UI customization and complex animations are achievable using WPF's powerful XAML-based UI framework.</p>
+</li>
+<li><p><strong>Backward Compatibility</strong>: WPF applications can run on older versions of Windows, depending on the version of .NET Framework or .NET Core you target.</p>
+</li>
+</ul>
+<h4>Disadvantages:</h4>
+<ul>
+<li><p><strong>Windows-Only</strong>: WPF applications are limited to Windows. Cross-platform deployment is not natively possible.</p>
+</li>
+<li><p><strong>Learning Curve</strong>: While WPF is robust and feature-rich, it can be complex and may require a steep learning curve for those unfamiliar with its architecture and XAML.</p>
+</li>
+</ul>
+<h3>.NET MAUI</h3>
+<h4>Advantages:</h4>
+<ul>
+<li><p><strong>Cross-Platform</strong>: .NET MAUI is designed to build cross-platform applications for Windows, macOS, Android, and iOS from a single code base.</p>
+</li>
+<li><p><strong>Modern Architecture</strong>: MAUI is part of the unified .NET 6 (and later) platform, benefiting from modern language features, performance improvements, and streamlined APIs.</p>
+</li>
+<li><p><strong>Blazor Integration</strong>: .NET MAUI allows you to use Blazor to build native mobile applications, enabling you to share code between web and native mobile UI.</p>
+</li>
+<li><p><strong>Evolving Ecosystem</strong>: Being a newer technology, MAUI is set to receive new features and improvements over time, backed by Microsoft.</p>
+</li>
+</ul>
+<h4>Disadvantages:</h4>
+<ul>
+<li><p><strong>Less Mature</strong>: As a newer technology, MAUI might not have as large a community or as many third-party libraries available as WPF.</p>
+</li>
+<li><p><strong>Limited to Newer Platforms</strong>: Depending on the platform, MAUI might require newer OS versions to run. For example, MAUI apps target WinUI 3 for Windows apps, which has its own set of system requirements.</p>
+</li>
+</ul>
+<h3>Summary</h3>
+<ul>
+<li><p>Choose <strong>WPF</strong> if you need to build a Windows-specific application with complex UI requirements and if you need to support older versions of Windows.</p>
+</li>
+<li><p>Choose <strong>.NET MAUI</strong> if you aim to build cross-platform applications (Windows, macOS, Android, iOS) and want to use a more modern framework that is integrated into the unified .NET platform.</p>
+</li>
+</ul>
+<p>Each framework has its own set of use-cases, and the right choice largely depends on your specific needs and constraints.</p>
+                    </div>
+                    <!-- Task: 081e8535-0bd9-4c65-acda-a8ce666c3076 -->
+                </div>
+            </div>
+            <div id="2eaa574a-aef1-4235-9a7b-a3583b57887f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Hello, world の方法を調べる</span>
+                    <a href="#2eaa574a-aef1-4235-9a7b-a3583b57887f" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The .NET MAUI (Multi-platform App UI) framework allows developers to build cross-platform apps that can run on Android, iOS, macOS, and Windows. With MAUI, you can use a single code base to design apps for multiple platforms.</p>
+<p>To create a &quot;Hello, World!&quot; application in .NET MAUI, you'll need to make sure you have the necessary tools installed. This includes .NET SDK and MAUI workload. You can download and install these tools from the official Microsoft website.</p>
+<p>Here is a simple example to write a &quot;Hello, World!&quot; application using .NET MAUI:</p>
+<ol>
+<li><p><strong>Create a new MAUI project:</strong></p>
+<pre><code class="language-bash">dotnet new maui -n HelloWorldMaui
+</code></pre>
+</li>
+<li><p><strong>Navigate to the project directory:</strong></p>
+<pre><code class="language-bash">cd HelloWorldMaui
+</code></pre>
+</li>
+<li><p><strong>Open the <code>MainPage.xaml</code> file and modify it:</strong>
+Replace its content with the following XAML code:</p>
+<pre><code class="language-xaml">&lt;ContentPage xmlns=&quot;http://schemas.microsoft.com/dotnet/2021/maui&quot;
+             xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+             x:Class=&quot;HelloWorldMaui.MainPage&quot;&gt;
+
+    &lt;StackLayout&gt;
+        &lt;!-- Place new controls here --&gt;
+        &lt;Label Text=&quot;Hello, World!&quot;
+               VerticalOptions=&quot;CenterAndExpand&quot;
+               HorizontalOptions=&quot;CenterAndExpand&quot; /&gt;
+    &lt;/StackLayout&gt;
+
+&lt;/ContentPage&gt;
+</code></pre>
+</li>
+<li><p><strong>Build and Run the Application:</strong></p>
+<pre><code class="language-bash">dotnet build
+dotnet run
+</code></pre>
+<p>This will launch the app in a default emulator or connected device based on the platform.</p>
+</li>
+</ol>
+<p>That's it! You should see a screen with the text &quot;Hello, World!&quot; displayed in the center.</p>
+<p>You can use this basic template to extend your MAUI application with more features and functionalities.</p>
+<p>Note: The steps and code might be different based on the version of the SDK and .NET MAUI you are using, as the technology is evolving.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>As of my last update in January 2022, .NET MAUI (Multi-platform App UI) is designed to be compatible with multiple IDEs (Integrated Development Environments) that are suitable for cross-platform development. Here are some IDEs you can use for developing .NET MAUI applications:</p>
+<h3>Visual Studio</h3>
+<ul>
+<li><p><strong>Visual Studio 2022 (Windows):</strong> Offers robust tooling and debugging features for .NET MAUI development. It provides an integrated emulator for testing and a variety of project templates to get started.</p>
+</li>
+<li><p><strong>Visual Studio 2022 for Mac:</strong> Though it has fewer features compared to its Windows counterpart, it still offers essential tools for .NET MAUI development on macOS.</p>
+</li>
+</ul>
+<h3>Visual Studio Code</h3>
+<ul>
+<li><strong>VS Code (Windows, macOS, Linux):</strong> A lighter option compared to Visual Studio, suitable for those who prefer a more minimal setup. You can install necessary extensions for C# and .NET development. However, some advanced features like the designer surface may not be available.</li>
+</ul>
+<h3>JetBrains Rider</h3>
+<ul>
+<li><strong>Rider (Windows, macOS, Linux):</strong> JetBrains Rider also supports .NET MAUI projects and provides a rich set of features, including a robust debugger, integrated terminal, and various other tools.</li>
+</ul>
+<h3>Command Line</h3>
+<ul>
+<li><strong>.NET CLI:</strong> While not an IDE, the .NET CLI provides a set of command-line tools for creating, building, running, and publishing .NET MAUI apps. This could be useful for those who prefer working in a terminal or want to automate tasks using scripts.</li>
+</ul>
+<p>Each IDE has its own set of features and advantages, so you can choose the one that best fits your needs.</p>
+<p>For the most feature-rich experience, especially if you're new to .NET MAUI, Visual Studio 2022 is generally recommended. It offers integrated tooling, debugging features, and emulators to streamline your development process.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="2649a758-7089-4919-ae5f-9d07e7b41312" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">.NET MAUI と Blazor の関係性について調べる</span>
+                    <a href="#2649a758-7089-4919-ae5f-9d07e7b41312" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>.NET MAUI (Multi-platform App UI) and Blazor are two technologies within the .NET ecosystem that are designed for creating user interfaces, but they target different scenarios and platforms. However, starting with .NET 6, Microsoft has made it possible to use them together, integrating Blazor WebAssembly within .NET MAUI apps. This enables developers to create hybrid apps using web technologies for native applications. Here's how they compare and can work together:</p>
+<h3>.NET MAUI</h3>
+<ul>
+<li><p><strong>Purpose</strong>: Designed to build native cross-platform mobile and desktop applications.</p>
+</li>
+<li><p><strong>Platforms</strong>: Targets Windows, macOS, Android, and iOS.</p>
+</li>
+<li><p><strong>Programming Model</strong>: Uses MVU (Model-View-Update) or MVVM (Model-View-ViewModel) for UI logic.</p>
+</li>
+<li><p><strong>UI Definition</strong>: User interfaces are generally created using XAML or C#.</p>
+</li>
+</ul>
+<h3>Blazor</h3>
+<ul>
+<li><p><strong>Purpose</strong>: Primarily intended for building web applications.</p>
+</li>
+<li><p><strong>Platforms</strong>: Runs in web browsers using WebAssembly or server-side on ASP.NET Core.</p>
+</li>
+<li><p><strong>Programming Model</strong>: Uses a component-based architecture.</p>
+</li>
+<li><p><strong>UI Definition</strong>: User interfaces are built using Razor syntax, a mix of HTML and C#.</p>
+</li>
+</ul>
+<h3>Integration of .NET MAUI and Blazor (Blazor Hybrid)</h3>
+<ul>
+<li><p><strong>Reuse Web UI</strong>: You can use Blazor components within a .NET MAUI application. This allows you to reuse your existing web components and logic in a native application.</p>
+</li>
+<li><p><strong>Blazor WebView</strong>: .NET MAUI provides a <code>BlazorWebView</code> control to host Blazor WebAssembly content. This allows you to write part or all of your application UI using web technologies (HTML, CSS, JavaScript), while still having access to native device features.</p>
+</li>
+<li><p><strong>Single Project Structure</strong>: You can structure your application so that the same project includes both .NET MAUI and Blazor code, facilitating code sharing and reuse.</p>
+</li>
+<li><p><strong>Access to Native APIs</strong>: While running in the context of a .NET MAUI app, the Blazor components have access to native device APIs, something not normally available to web apps.</p>
+</li>
+</ul>
+<h3>Use Cases for Integration</h3>
+<ul>
+<li><p><strong>Code Reuse</strong>: If you already have a Blazor web app and you want to bring it to mobile or desktop platforms without rewriting much of the UI or logic.</p>
+</li>
+<li><p><strong>Web and Native Synergy</strong>: If you want to build an application that combines web-based UI with native controls and device APIs.</p>
+</li>
+<li><p><strong>Rapid Prototyping</strong>: If you have web development expertise and want to quickly prototype a native application without learning a new UI framework.</p>
+</li>
+</ul>
+<h3>Example Scenario</h3>
+<p>You could have a .NET MAUI application that uses native controls for certain complex interactions, but employs Blazor components for forms, dashboards, or other UI components that are easier to implement with web technologies.</p>
+<p>By combining .NET MAUI with Blazor, you can capitalize on the strengths of both technologies to create versatile, cross-platform applications.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
