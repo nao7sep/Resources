@@ -1104,31 +1104,35 @@
                     <div class="note">
                         <div class="note_contents">
                             <p class="note_contents">Is it safe to assume URLs copied from common web browsers are properly URL-encoded and are safe?</p>
-                            <p class="note_contents">----</p>
-                            <p class="note_contents">While it&#39;s generally safe to assume that URLs copied from common web browsers are properly URL-encoded, it&#39;s still a good practice to perform proper HTML encoding before embedding them in HTML content. This practice helps ensure consistent rendering across different browsers and prevents potential security vulnerabilities.</p>
-                            <p class="note_contents">Web browsers often display URLs in their decoded form to improve readability for users. However, when embedding URLs in HTML attributes like `href`, you should still perform HTML encoding to handle characters that have special meanings in HTML (like `&lt;`, `&gt;`, `&quot;`, `&#39;`, and `&amp;`). These characters might be present in URLs, and proper encoding helps prevent cross-site scripting (XSS) attacks and other issues related to HTML injection.</p>
-                            <p class="note_contents">Here&#39;s an example demonstrating how you can handle URLs copied from web browsers and embed them in HTML using proper HTML encoding:</p>
-                            <p class="note_contents">```csharp<br />
-                                using System;<br />
-                                using System.Web;</p>
-                            <p class="note_contents">namespace URLHtmlEncodingExample<br />
-                                {<br />
-                                &nbsp;&nbsp;&nbsp;&nbsp;class Program<br />
-                                &nbsp;&nbsp;&nbsp;&nbsp;{<br />
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;static void Main(string[] args)<br />
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// URL copied from a browser (decoded form)<br />
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string decodedUrl = &quot;<a href="https://www.example.com/path/page.html?query=value&amp;param=123&quot;;" target="_blank" class="url">https://www.example.com/path/page.html?query=value&amp;param=123&quot;;</a></p>
-                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Encode the URL for safe embedding in HTML<br />
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string encodedUrl = HttpUtility.HtmlEncode(decodedUrl);</p>
-                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string html = $&quot;&lt;a href=\&quot;{encodedUrl}\&quot;&gt;Click here&lt;/a&gt;&quot;;</p>
-                            <p class="note_contents">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine(html);<br />
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
-                                &nbsp;&nbsp;&nbsp;&nbsp;}<br />
-                                }<br />
-                                ```</p>
-                            <p class="note_contents">In this example, even though the `decodedUrl` appears to be properly formatted, the `HttpUtility.HtmlEncode` method is used to encode it before embedding it in HTML. This practice ensures that any special characters in the URL are safely handled in the context of HTML content.</p>
-                            <p class="note_contents">By consistently using HTML encoding, you can help mitigate potential risks and maintain a strong security posture for your application.</p>
+                            <div class="note_ai_generated">
+<p>While it's generally safe to assume that URLs copied from common web browsers are properly URL-encoded, it's still a good practice to perform proper HTML encoding before embedding them in HTML content. This practice helps ensure consistent rendering across different browsers and prevents potential security vulnerabilities.</p>
+<p>Web browsers often display URLs in their decoded form to improve readability for users. However, when embedding URLs in HTML attributes like <code>href</code>, you should still perform HTML encoding to handle characters that have special meanings in HTML (like <code>&lt;</code>, <code>&gt;</code>, <code>&quot;</code>, <code>'</code>, and <code>&amp;</code>). These characters might be present in URLs, and proper encoding helps prevent cross-site scripting (XSS) attacks and other issues related to HTML injection.</p>
+<p>Here's an example demonstrating how you can handle URLs copied from web browsers and embed them in HTML using proper HTML encoding:</p>
+<pre><code class="language-csharp">using System;
+using System.Web;
+
+namespace URLHtmlEncodingExample
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // URL copied from a browser (decoded form)
+            string decodedUrl = &quot;https://www.example.com/path/page.html?query=value&amp;param=123&quot;;
+
+            // Encode the URL for safe embedding in HTML
+            string encodedUrl = HttpUtility.HtmlEncode(decodedUrl);
+
+            string html = $&quot;&lt;a href=\&quot;{encodedUrl}\&quot;&gt;Click here&lt;/a&gt;&quot;;
+
+            Console.WriteLine(html);
+        }
+    }
+}
+</code></pre>
+<p>In this example, even though the <code>decodedUrl</code> appears to be properly formatted, the <code>HttpUtility.HtmlEncode</code> method is used to encode it before embedding it in HTML. This practice ensures that any special characters in the URL are safely handled in the context of HTML content.</p>
+<p>By consistently using HTML encoding, you can help mitigate potential risks and maintain a strong security posture for your application.</p>
+                            </div>
                         </div>
                     </div>
                     <div class="note">
@@ -1232,24 +1236,38 @@
                 <div class="notes">
                     <div class="note">
                         <div class="note_contents">
-                            <p class="note_contents">Both `rem` and `em` are units of measurement in CSS that are used to define sizes. However, they have different behavior in terms of how they inherit and cascade through the document&#39;s structure.</p>
-                            <p class="note_contents">**`rem` (Root EM)**:<br />
-                                - `rem` stands for &quot;root em.&quot; It is relative to the font size of the root element (`&lt;html&gt;`), not the immediate parent element.<br />
-                                - This means that if you set a font size on the root element, it will affect the sizes of all elements using `rem` units throughout the page.<br />
-                                - `rem` is often preferred for setting sizes that need to be consistent across the entire document, such as layout components or global typography.</p>
-                            <p class="note_contents">**`em` (Ems)**:<br />
-                                - `em` units are relative to the font size of their direct or nearest parent.<br />
-                                - If you set a font size of `1.5em` on an element, it will be 1.5 times the font size of its parent element.<br />
-                                - `em` units are useful when you want a size to be proportionate to the font size of a specific element. However, this can lead to cascading effects as the sizes depend on the font size of each parent element.</p>
-                            <p class="note_contents">Which one to use depends on your specific use case:</p>
-                            <p class="note_contents">1. **Use `rem`**:<br />
-                                &nbsp;&nbsp;&nbsp;- When you want consistent sizing across the entire document, as it is based on the root element&#39;s font size.<br />
-                                &nbsp;&nbsp;&nbsp;- For setting global typography styles, layout components, and other elements that need a predictable and consistent size.</p>
-                            <p class="note_contents">2. **Use `em`**:<br />
-                                &nbsp;&nbsp;&nbsp;- When you want sizes to be relative to the font size of a specific parent element.<br />
-                                &nbsp;&nbsp;&nbsp;- For creating responsive designs where elements adjust their size according to their immediate parent&#39;s font size.</p>
-                            <p class="note_contents">In many cases, a combination of both units can be effective. For example, you might use `rem` for major layout components and `em` for fine-tuning sizes within those components.</p>
-                            <p class="note_contents">Remember that the choice of unit depends on the design goals, the structure of your HTML, and the desired behavior for text and element sizing.</p>
+                            <div class="note_ai_generated">
+<p>Both <code>rem</code> and <code>em</code> are units of measurement in CSS that are used to define sizes. However, they have different behavior in terms of how they inherit and cascade through the document's structure.</p>
+<p><strong><code>rem</code> (Root EM)</strong>:</p>
+<ul>
+<li><code>rem</code> stands for &quot;root em.&quot; It is relative to the font size of the root element (<code>&lt;html&gt;</code>), not the immediate parent element.</li>
+<li>This means that if you set a font size on the root element, it will affect the sizes of all elements using <code>rem</code> units throughout the page.</li>
+<li><code>rem</code> is often preferred for setting sizes that need to be consistent across the entire document, such as layout components or global typography.</li>
+</ul>
+<p><strong><code>em</code> (Ems)</strong>:</p>
+<ul>
+<li><code>em</code> units are relative to the font size of their direct or nearest parent.</li>
+<li>If you set a font size of <code>1.5em</code> on an element, it will be 1.5 times the font size of its parent element.</li>
+<li><code>em</code> units are useful when you want a size to be proportionate to the font size of a specific element. However, this can lead to cascading effects as the sizes depend on the font size of each parent element.</li>
+</ul>
+<p>Which one to use depends on your specific use case:</p>
+<ol>
+<li><p><strong>Use <code>rem</code></strong>:</p>
+<ul>
+<li>When you want consistent sizing across the entire document, as it is based on the root element's font size.</li>
+<li>For setting global typography styles, layout components, and other elements that need a predictable and consistent size.</li>
+</ul>
+</li>
+<li><p><strong>Use <code>em</code></strong>:</p>
+<ul>
+<li>When you want sizes to be relative to the font size of a specific parent element.</li>
+<li>For creating responsive designs where elements adjust their size according to their immediate parent's font size.</li>
+</ul>
+</li>
+</ol>
+<p>In many cases, a combination of both units can be effective. For example, you might use <code>rem</code> for major layout components and <code>em</code> for fine-tuning sizes within those components.</p>
+<p>Remember that the choice of unit depends on the design goals, the structure of your HTML, and the desired behavior for text and element sizing.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
