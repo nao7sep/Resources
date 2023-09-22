@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>photoMan</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans+JP&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'IBM Plex Sans JP',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#333;padding:20px 30px;font-size:2rem;font-weight:bold}@media(width< 576px){div.title{padding:15px 22.5px;font-size:1.5rem;}}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{background-color:#111;padding:15px 20px}div.image{background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'IBM Plex Mono','IBM Plex Sans JP',monospace;font-size:1rem;line-height:1.5}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="photoMan.htm" class="title">photoMan</a>
+        </div>
+        <div class="entries">
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">撮りっぱなしの写真が何年分も溜まっている。コロナ前のものもたくさんあって、たぶん10万枚とかだ。仕事で撮るなら予備もたくさん撮るし、整理すると1万枚を下回るだろうが、それでも膨大な量だ。6～7年分あるので仕方ない。</p>
+                    <p class="note_contents">だいたい千枚の整理に1時間くらいかかるので、10万枚だと100時間かかる。すごい時間だが、死にものぐるいでやれば7営業日くらいなわけで、6～7年撮ってその程度かという考えもある。しかし、今も撮っているし、どこから手をつけていいか分からず放置しているので、このままでは溜まる一方だ。やれば終わる大きな作業の第一歩を踏み出せず、永遠に先送りしている。</p>
+                    <p class="note_contents">そこで、溜まっている写真の Exif やビデオのメタデータを読み、HTML ページとしてレポートを表示し、「一番古い日から○日分」だとか、特定の日だとかの写真だけを作業用のディレクトリーに移動できるツールを書く。</p>
+                    <p class="note_contents">これがあれば、どこから着手するかに迷わないし、さらに写真が増えていくにおいて、日々、あと何時間くらいで終わるかを計算できる。</p>
+                    <p class="note_contents">どこから着手してもよいのでないかとも思ったが、長い時間のなかでカメラや携帯が変わっていて、「そのときの写真をほかの機材でも撮ったかもしれない」というのが自分としては引っかかる。</p>
+                    <p class="note_contents">ディレクトリーも何十とあって、分散している。「この写真を見れば、なぜそこでこういうのを撮ったか思い出せる」というのもよくあることで、A を見ていてこそ残す B を、A を見ずに消し、その後、A が出てきたときに B を消したことを後悔したくない。</p>
+                    <p class="note_contents">旅行写真なら別に困らないが、多くは娘の成長の記録であり、「あぁ、初めて立った日だからか」みたいなのを避けたい親心だ。</p>
+                    <!-- Task: 9e1a648d-92ba-4e2c-8cfd-be56ba0de21c -->
+                </div>
+            </div>
+            <div id="22288b84-81bf-4956-a521-f17d00bcbef1" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">名前を決める</span>
+                    <a href="#22288b84-81bf-4956-a521-f17d00bcbef1" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">photoMan にする。manage のためのソフトだし、家族のカメラマンだからだ。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="196fa2a0-d273-4a3d-a554-b26d89b85b9f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">レポジトリーを作成</span>
+                    <a href="#196fa2a0-d273-4a3d-a554-b26d89b85b9f" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="54b724aa-8d9f-41ad-8577-5e2db47b88ab" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">レポジトリーをクローン</span>
+                    <a href="#54b724aa-8d9f-41ad-8577-5e2db47b88ab" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="cd1ea6f0-1b46-4bd7-8159-237ad076fd26" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">taskKiller のログが出力されるように設定</span>
+                    <a href="#cd1ea6f0-1b46-4bd7-8159-237ad076fd26" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="44dc5534-0381-4206-9289-bb3be7f05591" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">.gitignore を作る</span>
+                    <a href="#44dc5534-0381-4206-9289-bb3be7f05591" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="86aff91c-3c3c-4dd6-a97e-5475d8b0a5d4" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ソリューションを作成</span>
+                    <a href="#86aff91c-3c3c-4dd6-a97e-5475d8b0a5d4" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="a51ab71c-320a-457d-8dee-c6dc4c818fda" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">アセンブリー情報を設定</span>
+                    <a href="#a51ab71c-320a-457d-8dee-c6dc4c818fda" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="6046cce1-9f4a-4e89-9aef-2ea9abaaa5ad" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">全てのファイルをチェック</span>
+                    <a href="#6046cce1-9f4a-4e89-9aef-2ea9abaaa5ad" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="a125868f-fc8e-4c36-9f27-0bf185447fd5" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">.git ディレクトリーなどを非表示にする</span>
+                    <a href="#a125868f-fc8e-4c36-9f27-0bf185447fd5" class="permalink">&infin;</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

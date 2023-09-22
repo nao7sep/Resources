@@ -1,0 +1,469 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>autoPub</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans+JP&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'IBM Plex Sans JP',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#333;padding:20px 30px;font-size:2rem;font-weight:bold}@media(width< 576px){div.title{padding:15px 22.5px;font-size:1.5rem;}}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{background-color:#111;padding:15px 20px}div.image{background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'IBM Plex Mono','IBM Plex Sans JP',monospace;font-size:1rem;line-height:1.5}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="autoPub.htm" class="title">autoPub</a>
+        </div>
+        <div class="entries">
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">Windows で「ターミナル」を開いて ftp と入力すると、そういうモードになる。コマンドラインでも頑張れそう。</p>
+                    <p class="note_contents">How to Use FTP from a Command Line<br />
+                        <a href="https://www.computerhope.com/issues/ch001246.htm" target="_blank" class="url">https://www.computerhope.com/issues/ch001246.htm</a></p>
+                    <p class="note_contents">ただ、FFFTP など、同期のできるものを使ってきて思うこととしては、FTP は元々同期に向かない可能性がある。</p>
+                    <!-- Task: e0a6d7f8-38bf-4565-99dd-d4b66b0493d2 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <div class="note_ai_generated">
+<p>The time taken to synchronize a folder between a server and a local computer using File Transfer Protocol (FTP) can depend on several factors, and it could be prolonged due to any one of them or a combination thereof. Here are a few considerations:</p>
+<h3>1. <strong>Network Latency:</strong></h3>
+<ul>
+<li>The round-trip time between the server and the local computer can impact the synchronization speed, especially when many small files are being transferred.</li>
+</ul>
+<h3>2. <strong>Bandwidth:</strong></h3>
+<ul>
+<li>The available network bandwidth will influence the speed at which data can be transferred between the server and the local computer. If the bandwidth is low, the synchronization process will take longer.</li>
+</ul>
+<h3>3. <strong>File Sizes:</strong></h3>
+<ul>
+<li>Larger files will take longer to transfer. If the folder contains a large number of big files, the synchronization process will be slow.</li>
+</ul>
+<h3>4. <strong>Server Load:</strong></h3>
+<ul>
+<li>If the server is under heavy load, it might respond more slowly, leading to longer synchronization times.</li>
+</ul>
+<h3>5. <strong>FTP Protocol Overheads:</strong></h3>
+<ul>
+<li>FTP is not the most efficient protocol for transferring a large number of small files because it establishes a new connection for each file transferred, leading to significant overhead.</li>
+</ul>
+<h3>6. <strong>Disk I/O Speeds:</strong></h3>
+<ul>
+<li>The read/write speed of the disks involved (both on the server and the local computer) can also influence the synchronization speed.</li>
+</ul>
+<h3>7. <strong>File Processing:</strong></h3>
+<ul>
+<li>If there are processes or applications that are reading/writing to the files while they are being synchronized, it can also delay the synchronization process.</li>
+</ul>
+<h3>8. <strong>Firewall/Security Software:</strong></h3>
+<ul>
+<li>Sometimes, firewall or security software may inspect or scan files during transfer, causing additional delays.</li>
+</ul>
+<h3>Solutions:</h3>
+<ul>
+<li><strong>Use Efficient Protocols:</strong>
+<ul>
+<li>Consider using more efficient synchronization protocols or methods like Rsync or SCP, which are generally faster and more reliable than FTP, especially for synchronizing large numbers of files.</li>
+</ul>
+</li>
+<li><strong>Compress Files:</strong>
+<ul>
+<li>Compressing files before transfer can significantly reduce the amount of data that needs to be transferred, thus speeding up the synchronization process.</li>
+</ul>
+</li>
+<li><strong>Optimize Network:</strong>
+<ul>
+<li>Improving network conditions by optimizing bandwidth and reducing latency can help in faster synchronization.</li>
+</ul>
+</li>
+<li><strong>Optimize Server Load:</strong>
+<ul>
+<li>Reducing server load or optimizing server resources can also aid in improving synchronization speeds.</li>
+</ul>
+</li>
+</ul>
+<p>Remember, the actual cause can be multifaceted, and addressing each of these areas, where applicable, can lead to improvements in synchronization times.</p>
+                    </div>
+                    <!-- Task: e0a6d7f8-38bf-4565-99dd-d4b66b0493d2 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <div class="note_ai_generated">
+<p>Yes, the FTP command to receive a detailed list of all the files in a folder on a server is <code>LIST</code>. When you issue the <code>LIST</code> command in the FTP client, it provides detailed information about each file in the current directory on the server, including file permissions, owner, group, size, and time of last modification.</p>
+<h3>Usage:</h3>
+<pre><code class="language-sh">LIST [remote-directory] [local-file]
+</code></pre>
+<ul>
+<li><code>remote-directory</code> specifies the directory for which you want to see the listing.</li>
+<li><code>local-file</code> specifies a local file where the listing should be stored.</li>
+</ul>
+<h3>Example:</h3>
+<p>If you want to see the detailed list of all files in a folder named <code>example</code>, you would use:</p>
+<pre><code class="language-sh">LIST example
+</code></pre>
+<h3>Note:</h3>
+<ul>
+<li>The <code>LIST</code> command’s output can vary depending on the FTP server’s operating system, and it usually provides more detailed information than the <code>NLST</code> command, which shows only the names of the files.</li>
+<li>Some FTP servers also support the <code>MLSD</code> command for machine-readable directory listing, which provides detailed information about files in a standardized format.</li>
+</ul>
+<h3>Alternative with <code>ls</code> Command:</h3>
+<p>The <code>ls</code> command can also be used to list files in a directory, but it might not provide as much detailed information as the <code>LIST</code> command, depending on the FTP server’s implementation.</p>
+<pre><code class="language-sh">ls [remote-directory] [local-file]
+</code></pre>
+<h3>Example:</h3>
+<pre><code class="language-sh">ls example
+</code></pre>
+<p>To get a detailed list, consider using a suitable FTP client software that allows viewing detailed file listings, or use the <code>LIST</code> command and parse the output as needed.</p>
+                    </div>
+                    <!-- Task: e0a6d7f8-38bf-4565-99dd-d4b66b0493d2 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <div class="note_ai_generated">
+<p>When dealing with FTP, obtaining information on a large number of files located in different subfolders can indeed be challenging and inefficient due to the limitations and the structure of the FTP protocol. However, there are some strategies you can employ:</p>
+<h3>1. <strong>Recursive LIST Command:</strong></h3>
+<ul>
+<li>Some FTP servers support the recursive listing of directories, which can be attempted with a command like <code>LIST -R</code> or <code>ls -R</code>, but not all servers support this feature.</li>
+</ul>
+<pre><code class="language-sh">LIST -R [path-to-directory]
+</code></pre>
+<h3>2. <strong>Scripting:</strong></h3>
+<ul>
+<li>You can use scripting to automate the process. For example, you can write a script that logs in to the FTP server, navigates into each subfolder, and executes the <code>LIST</code> command. This can be done using a shell script, a Python script utilizing the <code>ftplib</code> library, or other scripting/programming languages.</li>
+</ul>
+<h3>3. <strong>Use of FTP Clients:</strong></h3>
+<ul>
+<li>Several FTP client applications allow for the recursive listing and even downloading of directories and their subdirectories. Examples include FileZilla and WinSCP. These clients often provide a user-friendly interface to navigate, view, and manage files and directories.</li>
+</ul>
+<h3>4. <strong>Change to a More Efficient Protocol:</strong></h3>
+<ul>
+<li>If possible, switch to a more advanced and efficient protocol like SFTP or SCP. These protocols often support more advanced features, like recursive copying and more efficient file transfers, and are more secure than FTP.</li>
+</ul>
+<h3>Example Python Script using <code>ftplib</code>:</h3>
+<p>Here’s a very basic example of how you might start with a Python script to list all files in all subdirectories:</p>
+<pre><code class="language-python">from ftplib import FTP
+
+# Connect to the FTP Server
+ftp = FTP('ftp.example.com')
+ftp.login('username', 'password')
+
+def list_files_recursively(path):
+    items = ftp.nlst(path)
+
+    for item in items:
+        full_item = f&quot;{path}/{item}&quot;
+        if is_directory(full_item):
+            list_files_recursively(full_item)
+        else:
+            print(full_item)
+
+def is_directory(path):
+    try:
+        return bool(ftp.sendcmd('CWD ' + path))
+    except Exception as e:
+        return False
+
+# List all files in all subdirectories of the directory 'example_directory'
+list_files_recursively('example_directory')
+
+# Logout and close the connection
+ftp.quit()
+</code></pre>
+<p>This is just a basic example and may not work in all scenarios, so you may need to modify the code based on your actual needs, FTP server’s features, and handle exceptions properly.</p>
+<h3>Note:</h3>
+<p>Always ensure that your approach abides by the policies of the server you are interacting with and avoid actions that could be disruptive to the server's operations. Also, consider the impact on network and server load when retrieving extensive information from the server.</p>
+                    </div>
+                    <!-- Task: e0a6d7f8-38bf-4565-99dd-d4b66b0493d2 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <div class="note_ai_generated">
+<p>SFTP (SSH File Transfer Protocol) and FTP (File Transfer Protocol) are both protocols used for transferring files over a network, but they differ significantly in their design, operation, and security features. Here are several factors that generally make SFTP more advantageous compared to FTP:</p>
+<h3>1. <strong>Security and Encryption:</strong></h3>
+<ul>
+<li><strong>SFTP</strong> is inherently more secure as it operates over SSH (Secure Shell) and encrypts both authentication information and data in transit, protecting them from eavesdropping, man-in-the-middle attacks, and other vulnerabilities.</li>
+<li><strong>FTP</strong>, in contrast, transmits data, including login credentials, in plain text, making it susceptible to a variety of security threats.</li>
+</ul>
+<h3>2. <strong>Connection:</strong></h3>
+<ul>
+<li><strong>SFTP</strong> utilizes a single connection (usually over port 22) for both command/control and data transfer, which simplifies firewall and network configurations and reduces potential points of failure.</li>
+<li><strong>FTP</strong> uses two separate channels (ports 20 and 21) for command/control and data transfer, which can lead to complexities in firewall and network configurations.</li>
+</ul>
+<h3>3. <strong>Authentication Mechanisms:</strong></h3>
+<ul>
+<li><strong>SFTP</strong> supports multiple types of authentication including password, public key, and host-based authentication.</li>
+<li><strong>FTP</strong> primarily relies on basic username/password authentication, which is less secure.</li>
+</ul>
+<h3>4. <strong>Performance:</strong></h3>
+<ul>
+<li><strong>SFTP</strong> may have better performance due to the capabilities of using compression to reduce the amount of data being transmitted over the network.</li>
+<li><strong>FTP</strong> does not inherently support compression which may lead to longer transfer times for compressible data.</li>
+</ul>
+<h3>5. <strong>Functionality:</strong></h3>
+<ul>
+<li><strong>SFTP</strong> provides additional functionality, including the ability to resume interrupted transfers, change file permissions, and perform directory operations, making it more versatile.</li>
+<li><strong>FTP</strong> has limited functionalities, primarily focused on basic file transfer operations.</li>
+</ul>
+<h3>6. <strong>File Integrity and Reliability:</strong></h3>
+<ul>
+<li><strong>SFTP</strong> has built-in mechanisms for ensuring the integrity and reliability of files, typically using checksums or hashes.</li>
+<li><strong>FTP</strong> lacks inherent file integrity verification mechanisms.</li>
+</ul>
+<h3>7. <strong>Ease of Use and Setup:</strong></h3>
+<ul>
+<li><strong>SFTP</strong> can be easier to set up and use in modern network environments due to its single port usage and improved security.</li>
+<li><strong>FTP</strong> may pose challenges in setup due to the need to configure multiple ports and its lack of security.</li>
+</ul>
+<h3>8. <strong>Compatibility:</strong></h3>
+<ul>
+<li><strong>SFTP</strong> is a part of the SSH protocol suite, and it is widely used and supported on most modern systems.</li>
+<li><strong>FTP</strong>, while being older and widely supported, is being deprecated in favor of more secure alternatives, and support for it may be limited on newer systems.</li>
+</ul>
+<h3>Conclusion:</h3>
+<p>Given the numerous advantages in security, functionality, and ease of use, SFTP is generally considered a better option than FTP, especially in environments where security and data integrity are paramount. However, there could be specific cases or legacy environments where FTP might still be in use due to system limitations or compatibility reasons. In such cases, it’s crucial to mitigate the inherent security risks associated with FTP, possibly by using FTPS (FTP Secure), which adds SSL/TLS encryption to FTP.</p>
+                    </div>
+                    <!-- Task: e0a6d7f8-38bf-4565-99dd-d4b66b0493d2 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <div class="note_ai_generated">
+<p>FTPS (FTP Secure) is an extension to the original FTP protocol that adds support for the Transport Layer Security (TLS) and, formerly, the Secure Sockets Layer (SSL) cryptographic protocols. It’s an upgrade to FTP that addresses several security issues inherent in FTP.</p>
+<h3>How FTPS Compares to FTP and SFTP:</h3>
+<h4><strong>1. Security:</strong></h4>
+<ul>
+<li><strong>FTPS:</strong> Uses SSL/TLS to encrypt the control and/or data channels. This makes it more secure than plain FTP.</li>
+<li><strong>FTP:</strong> Transmits data, including login credentials, in plain text.</li>
+<li><strong>SFTP:</strong> Encrypts both command and data channels using SSH.</li>
+</ul>
+<h4><strong>2. Ports:</strong></h4>
+<ul>
+<li><strong>FTPS:</strong> Like FTP, it uses two channels for communication, but it can be configured to secure either or both channels. Typically, it uses port 990 for implicit FTPS and port 21 for explicit FTPS.</li>
+<li><strong>FTP:</strong> Uses port 21 for control and port 20 for data.</li>
+<li><strong>SFTP:</strong> Uses a single port (22) for both command/control and data transfer.</li>
+</ul>
+<h4><strong>3. Firewall Configuration:</strong></h4>
+<ul>
+<li><strong>FTPS:</strong> Similar to FTP, it can be challenging to configure with firewalls and NAT due to the use of separate control and data channels.</li>
+<li><strong>FTP:</strong> Has complexities in firewall and NAT configurations due to its architecture.</li>
+<li><strong>SFTP:</strong> Easier to configure with firewalls and NAT due to single connection/channel.</li>
+</ul>
+<h4><strong>4. Ease of Use and Setup:</strong></h4>
+<ul>
+<li><strong>FTPS:</strong> Can be more complex to set up than SFTP due to the need to manage certificates.</li>
+<li><strong>FTP:</strong> Easiest to set up but lacks security features.</li>
+<li><strong>SFTP:</strong> Easier to set up with improved security, typically using existing SSH keys.</li>
+</ul>
+<h4><strong>5. Compatibility:</strong></h4>
+<ul>
+<li><strong>FTPS:</strong> Supported by many FTP server and client applications, but not as universally supported as FTP.</li>
+<li><strong>FTP:</strong> Widely supported, often used in legacy systems.</li>
+<li><strong>SFTP:</strong> Widely supported on most modern systems and preferred due to security features.</li>
+</ul>
+<h4><strong>6. Integrity and Reliability:</strong></h4>
+<ul>
+<li><strong>FTPS:</strong> Offers security through SSL/TLS but lacks inherent file integrity verification mechanisms.</li>
+<li><strong>FTP:</strong> Lacks both security and inherent file integrity verification mechanisms.</li>
+<li><strong>SFTP:</strong> Offers security through SSH and has built-in mechanisms for ensuring file integrity.</li>
+</ul>
+<h3>Conclusion:</h3>
+<p>FTPS provides a significant security improvement over plain FTP by encrypting the data being transmitted, but it can be more complex to set up and may have compatibility and configuration challenges similar to those of FTP. SFTP generally offers a good balance of security, ease of use, and functionality, making it a preferred choice for secure file transfers in many situations. The choice between FTPS and SFTP would depend on specific organizational needs, existing infrastructure, and security requirements.</p>
+                    </div>
+                    <!-- Task: e0a6d7f8-38bf-4565-99dd-d4b66b0493d2 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <div class="note_ai_generated">
+<p>In C#, you can develop server-side APIs using ASP.NET Core, which is a robust, high-performance, open-source framework for building modern, cloud-based, Internet-connected applications. Below is a general guide to developing a simple API for sending/receiving files using ASP.NET Core.</p>
+<h3>1. <strong>Create a New Project</strong></h3>
+<ul>
+<li>Create a new ASP.NET Core Web API project using Visual Studio or the .NET CLI.</li>
+</ul>
+<h3>2. <strong>Develop the API</strong></h3>
+<ul>
+<li>You can create an API Controller that will handle file uploads and downloads.</li>
+</ul>
+<h3>3. <strong>Example Controller for File Upload/Download</strong></h3>
+<ul>
+<li>Below is a very basic example of a controller that can handle file uploads and downloads.</li>
+</ul>
+<pre><code class="language-csharp">[ApiController]
+[Route(&quot;[controller]&quot;)]
+public class FileController : ControllerBase
+{
+    private readonly IWebHostEnvironment _hostingEnvironment;
+
+    public FileController(IWebHostEnvironment hostingEnvironment)
+    {
+        _hostingEnvironment = hostingEnvironment;
+    }
+
+    [HttpPost(&quot;upload&quot;)]
+    public IActionResult Upload(IFormFile file)
+    {
+        var uploads = Path.Combine(_hostingEnvironment.WebRootPath, &quot;uploads&quot;);
+        if (file.Length &gt; 0)
+        {
+            var filePath = Path.Combine(uploads, file.FileName);
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                file.CopyTo(fileStream);
+            }
+        }
+
+        return Ok(new { file.FileName });
+    }
+
+    [HttpGet(&quot;download/{filename}&quot;)]
+    public IActionResult Download(string filename)
+    {
+        var uploads = Path.Combine(_hostingEnvironment.WebRootPath, &quot;uploads&quot;);
+        var filePath = Path.Combine(uploads, filename);
+        if (!System.IO.File.Exists(filePath))
+            return NotFound();
+
+        var memory = new MemoryStream();
+        using (var stream = new FileStream(filePath, FileMode.Open))
+        {
+            stream.CopyTo(memory);
+        }
+        memory.Position = 0;
+        return File(memory, &quot;application/octet-stream&quot;, filename);
+    }
+}
+</code></pre>
+<h3>4. <strong>Security Considerations:</strong></h3>
+<ul>
+<li><strong>Authentication &amp; Authorization:</strong> Ensure that only authorized users can access the API. You can use token-based authentication like JWT for securing your API.</li>
+<li><strong>Validation:</strong> Validate file type, size, and content to avoid security vulnerabilities like uploading malicious files.</li>
+<li><strong>HTTPS:</strong> Use HTTPS to encrypt data in transit and prevent man-in-the-middle attacks.</li>
+<li><strong>Data Sanitization:</strong> Sanitize the filenames and any other input data to prevent Injection attacks.</li>
+<li><strong>Access Controls:</strong> Implement proper access controls to ensure that users can only access the resources they are allowed to.</li>
+<li><strong>Logging and Monitoring:</strong> Log security-relevant events and monitor the logs for any suspicious activity.</li>
+</ul>
+<h3>5. <strong>Testing API:</strong></h3>
+<ul>
+<li>You can use tools like Postman to test the file upload/download functionality of your API.</li>
+</ul>
+<h3>6. <strong>Deploying:</strong></h3>
+<ul>
+<li>Deploy your API to a secure and properly configured server or a cloud-based environment.</li>
+</ul>
+<h3>Note:</h3>
+<ul>
+<li>This example is quite basic and for educational purposes. Depending on your specific requirements, you might need to modify and add various configurations, error handling, and security measures.</li>
+<li>Keep your software, dependencies, and libraries up-to-date to patch any known vulnerabilities.</li>
+</ul>
+<h3>Final Thought:</h3>
+<p>Building a secure and scalable file transfer API requires careful consideration of various security principles, proper architecture, and adherence to best practices in secure coding, and the example provided should be significantly expanded and refined for production use.</p>
+                    </div>
+                    <!-- Task: e0a6d7f8-38bf-4565-99dd-d4b66b0493d2 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">FTP でつくる考えだったが、使っているサーバーが FTPS や SFTP をサポートしているのか、どこにも情報がなく、管理画面を開いても、そういう設定がなく、平文でアクセスする FTP アカウントしか作れなさそう。もし FTP だけなら、長期的には危ない。</p>
+                    <p class="note_contents">そのため、単一のプログラムでなく「ソリューション」と位置づけ、FTPS や SFTP をやってみたり、ダメなら API をつくったり、いろいろやってみる。どれもカスタマイズ可能にしておき、今後もサーバーが変わるたびに、そのときに最善のファイル転送ができるようにする。</p>
+                    <p class="note_contents">既存のクライアントでもよいが、ライブラリーを使うなら簡単な処理なので、分かりにくい設定画面であたふたしたり、完全には自動化できなかったりより、送るファイルの内容の一部を置換した場合のハッシュをサーバー側と比較し……のようなことまで最初からできるツールを書いた方が、結果的には時間の節約になり、なおかつ、できることが大幅に増える。</p>
+                    <!-- Task: e0a6d7f8-38bf-4565-99dd-d4b66b0493d2 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">このソリューションが完成し、すでに tk2Text により出力・GitHub にアップロードできている HTML 形式のログファイルにたとえば共通メニューなどを埋め込んで自分のドメインのサイトにもアップロードして簡易的なサイトにできれば、GitHub から HTML ファイルをダウンロードせずに進捗状況を確認するということを、パソコンに詳しくない人でもできるようになる。</p>
+                    <p class="note_contents">いろいろな人と一緒にいろいろなことをやるにおける環境づくりの最後の一歩。</p>
+                    <!-- Task: e0a6d7f8-38bf-4565-99dd-d4b66b0493d2 -->
+                </div>
+            </div>
+            <div id="11cd70f1-e1c5-4c47-99c6-80c274f1babe" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">名前を決める</span>
+                    <a href="#11cd70f1-e1c5-4c47-99c6-80c274f1babe" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">autoPub にする。</p>
+                            <p class="note_contents">車で乗り入れてお酒を飲むかのようで少し面白いと思ったが、土地の広い国だと、車で乗り入れてタイヤをロックされてからお酒が提供されて、車内でダラダラ飲めて、そのまま朝まで寝て、アルコールが検出されなければロックを外してもらえるサービスも可能かとも思った。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="04498553-9e97-4cc3-acbd-4ebe7b86a9f8" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">レポジトリーを作成</span>
+                    <a href="#04498553-9e97-4cc3-acbd-4ebe7b86a9f8" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="7ac483e8-3d00-4323-a88e-617f7e125dfa" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">レポジトリーをクローン</span>
+                    <a href="#7ac483e8-3d00-4323-a88e-617f7e125dfa" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="e0057a12-8df1-4283-a892-79edabe792f5" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">taskKiller のログが出力されるように設定</span>
+                    <a href="#e0057a12-8df1-4283-a892-79edabe792f5" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="0e7ab48d-7b91-4a5b-a49e-99290693cebd" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">.gitignore を作る</span>
+                    <a href="#0e7ab48d-7b91-4a5b-a49e-99290693cebd" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="80318300-6d21-4f16-af64-470cbb9b5a94" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ソリューションを作成</span>
+                    <a href="#80318300-6d21-4f16-af64-470cbb9b5a94" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">まずは autoFtp を入れた。ftp だけでもいけるが、接頭辞を入れることでシリーズものに。</p>
+                            <p class="note_contents">また、ファイルの一部を置換するなどの処理は共通化されるべきなので、autoPub というクラスライブラリーも。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="319672a6-8bfa-4fce-9dbe-416953f48a8f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">プロジェクトの依存関係を設定</span>
+                    <a href="#319672a6-8bfa-4fce-9dbe-416953f48a8f" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="7834dfdd-2607-4b95-9701-1b6af5ed36b5" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">アセンブリー情報を設定</span>
+                    <a href="#7834dfdd-2607-4b95-9701-1b6af5ed36b5" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="20a8c268-c67f-45e7-990e-18af3f3ea9a9" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">全てのファイルをチェック</span>
+                    <a href="#20a8c268-c67f-45e7-990e-18af3f3ea9a9" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="db51fbc4-8dd5-4da4-884b-258fc859034e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">.git ディレクトリーなどを非表示にする</span>
+                    <a href="#db51fbc4-8dd5-4da4-884b-258fc859034e" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="f9c3906e-4963-49bf-9c8e-2e9303f78d0e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">autoPub というクラスライブラリーを autoPubShared に改名</span>
+                    <a href="#f9c3906e-4963-49bf-9c8e-2e9303f78d0e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Nekote と異なり、autoPub はライブラリーの名前でない。「いろいろと入っているソリューション」であり、そのうち共有される機能については、autoShared または autoPubShared が選択肢。auto は、単独でそこまで固有の意味合いを持たないので、後者のほうが良い。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

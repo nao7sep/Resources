@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>Friends</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans+JP&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'IBM Plex Sans JP',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#333;padding:20px 30px;font-size:2rem;font-weight:bold}@media(width< 576px){div.title{padding:15px 22.5px;font-size:1.5rem;}}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{background-color:#111;padding:15px 20px}div.image{background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'IBM Plex Mono','IBM Plex Sans JP',monospace;font-size:1rem;line-height:1.5}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="Friends.htm" class="title">Friends</a>
+        </div>
+        <div class="entries">
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">業務に不可欠なものだが、少し着手が遅れている。</p>
+                    <p class="note_contents">おそらくだが、その最大の理由は、ほかにも必要なシステムとの分割・統合に迷いがあること。</p>
+                    <p class="note_contents">たとえば、商品データベースを含む弊社サイトを作るなら、そこに CMS 的な機能もあってほしい。静的ページを作ったり、静的ファイルを載せたりだ。</p>
+                    <p class="note_contents">しかし、そういった機能は、社内グループウェアでも役立つので、二つのシステムにバラバラに実装したくない。かといって、同じコードをコピペするのもめんどくさい。コピペそのものより、コピペ忘れを常時確認する作業こそがめんどくさい。</p>
+                    <p class="note_contents">顧客管理をやるなら、そこにログイン情報を関連づけられるようにして、同意を取ったうえで取引先にそのログイン情報で商品データベースにログインしてほしい。すると、誰がどういう商品に関心を示しているのか、顧客管理のところで見えて便利だ。</p>
+                    <p class="note_contents">それぞれの顧客については、RDBMS 的に処理できるヘッダーと、ウィキ的に更新できるメモと、そこにぶら下がるタスクやファイルを管理したいが、そのうちメモの部分を翻訳するのは難しい。書き手の母語が異なるからだ。となると、メモを諦めて、タスクやファイルのみ追加していくカード型になる。古いカードは上書きで更新し、旧版があるならタブを表示するなどか。</p>
+                    <p class="note_contents">もう社内グループウェアでいいのでないかとも思った。カテゴリーを細かく分離してチケットを切れるようにすれば、それなりの人数をさばける。</p>
+                    <p class="note_contents">しかし、ヨーロッパ、西アジア、インド、ASEAN といったところを対象に、人も入れてスピード感のある営業をやっていくには、やはりそれでは絶対にうまくいかない。「その人がすでに登録されていないか」の検索の精度が下がるため。</p>
+                    <p class="note_contents">そこからあえて「1万人」という数字を入れてプロジェクトを始める。そのくらいの人数を容易にさばけることを最優先事項とする。</p>
+                    <!-- Task: e061b9f0-ee26-4a02-b90d-14b787a3d0ba -->
+                </div>
+            </div>
+            <div id="88e60897-9e4d-4b18-8bc3-552c0b4b3e5a" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">名前を決める</span>
+                    <a href="#88e60897-9e4d-4b18-8bc3-552c0b4b3e5a" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Friends にする。英語ネイティブでなくても絶対に分かる名前。お互いが儲かってこその良好な関係を目指すもの。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">システムを分けるかどうかについては、分けた場合にそれらをつなぐ方法について AI にいろいろ教えてもらったので、やはり当たり前の構成として分ける。一つにまとめると、Word と Excel が一つのソフトになっているようなことになる。</p>
+                    <!-- Task: e061b9f0-ee26-4a02-b90d-14b787a3d0ba -->
+                </div>
+            </div>
+            <div id="0b5ccbd7-fd18-4737-8613-c103de5cad04" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">レポジトリーを作成</span>
+                    <a href="#0b5ccbd7-fd18-4737-8613-c103de5cad04" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="d4fe3bf3-c1b0-4f56-adc7-3b1584fc83f7" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">レポジトリーをクローン</span>
+                    <a href="#d4fe3bf3-c1b0-4f56-adc7-3b1584fc83f7" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="109116d6-a8d2-49a1-8842-eaa0fa132090" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">taskKiller のログが出力されるように設定</span>
+                    <a href="#109116d6-a8d2-49a1-8842-eaa0fa132090" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="2c7c472f-dd07-4153-929b-da013598215a" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">.gitignore を作る</span>
+                    <a href="#2c7c472f-dd07-4153-929b-da013598215a" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="0d764668-672e-438d-897d-ed7f4aac2583" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">.git ディレクトリーなどを非表示にする</span>
+                    <a href="#0d764668-672e-438d-897d-ed7f4aac2583" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="06ebaf76-8f00-44bf-b2e2-90c8949605ae" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">レポジトリーの作成時に誤って入れた README.md を消す</span>
+                    <a href="#06ebaf76-8f00-44bf-b2e2-90c8949605ae" class="permalink">&infin;</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

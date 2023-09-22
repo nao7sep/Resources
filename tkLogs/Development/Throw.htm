@@ -1,0 +1,366 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>Throw</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans+JP&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'IBM Plex Sans JP',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#333;padding:20px 30px;font-size:2rem;font-weight:bold}@media(width< 576px){div.title{padding:15px 22.5px;font-size:1.5rem;}}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{background-color:#111;padding:15px 20px}div.image{background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'IBM Plex Mono','IBM Plex Sans JP',monospace;font-size:1rem;line-height:1.5}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="Throw.htm" class="title">Throw</a>
+        </div>
+        <div class="entries">
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">写真でのタスク登録は便利。</p>
+                    <!-- Task: 7142516f-1fbd-42b7-a43e-9edfce21bf48 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">別スレッドを低コストでまわせるなら、定期的にするべきことが自動的に入り、同時にメールも届いてほしい。</p>
+                    <!-- Task: 7142516f-1fbd-42b7-a43e-9edfce21bf48 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">たぶん2年くらい前から欲しいソフトだが、こんなに着手が遅れた。</p>
+                    <p class="note_contents">携帯が二つあって、メインの LINE からサブの LINE にメッセージを送れば足りるというのが理由の一つ。</p>
+                    <p class="note_contents">もう一つは、どこまでやるか迷うのが楽しいためだと思う。楽しいので、答えを出したくなかった。もっとも、「足りていた」が理由としては7割くらいだが。</p>
+                    <!-- Task: 7142516f-1fbd-42b7-a43e-9edfce21bf48 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">どこまでやるかだが、メールを送るなら SMS も送りたい。</p>
+                    <p class="note_contents">迷惑メールの判別をいろいろなところでやると学習効率が低いため、自分は、特定のパソコンの Thunderbird でしかメールを開かないようにしている。ほかのパソコンで開くなら、バッチファイルで OneDrive に training.dat をコピーし、別のパソコンでバッチファイルによりそれを適用してからだ。</p>
+                    <p class="note_contents">という運用なので携帯での判別をしないし、携帯にメールが届いても通知が鳴らないようにしている。携帯で判別しないのに通知を鳴らせると、毎日何十回と鳴るからだ。</p>
+                    <p class="note_contents">メールの通知を受けていないので、「TODO メール」のシステムだが、急ぐことなら SMS でも届いてほしい。</p>
+                    <p class="note_contents">メールだけを送るシステムなら大昔に書いた。サーバーの移転まではそれを使っていた。今のサーバーは localhost へのセキュリティーなしの接続でメールを送れず、SMTP 認証が必要なので、2秒で書いたショボいツールを更新してまで……というのも思い、使えないままだ。</p>
+                    <p class="note_contents">古いものを更新して使わない理由は、第一にはめんどくさいからだが、第二に「即時性がないと二度手間」というのもある。</p>
+                    <p class="note_contents">特に夫婦間がそうだ。自分はアホなので LINE で買い物を頼まれても忘れる。しかし、TODO メールをもらうだけでは、それに気づくことなくスーパーやホームセンターを通り過ぎる。だから以前は、TODO メールをもらい、同時に LINE や WhatsApp でも「送っといた」と連絡をもらっていた。そういうのをシンプルにしたい。</p>
+                    <!-- Task: 7142516f-1fbd-42b7-a43e-9edfce21bf48 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">迷って楽しいのは、次のようなこと。</p>
+                    <p class="note_contents">* 使いたい人が自分でアカウントを作れるようにするか<br />
+                        * それを紹介制にするのか、誰でも作れるようにして、数の上限を決めて、それを超えるなら有料にするのか<br />
+                        * SQL Server を使うのか、SQLite なのか、あるいは KVS 的なもので遊んでみるのか<br />
+                        * 送信前の入力チェックをどうするのか<br />
+                        * 翻訳 API を入れて、循環翻訳テストをしてから送れるようにするのか<br />
+                        * 送信されたタスクを、本人のみ、ログインすればダッシュボードで見られるようにするのか<br />
+                        * IMAP と連携させて、メールが消えていたらダッシュボードからも消えるようにするか<br />
+                        * タスクの CRUD やメール・SMS の送信にも API を用意し、ローカルアプリなどからも使えるようにするのか<br />
+                        * アカウントごとに複数のユーザーを設定できるようにして、グループによるタスク管理も可能にするのか</p>
+                    <p class="note_contents">やればやるほど便利になるが、その分、開発コストもかさむ。</p>
+                    <!-- Task: 7142516f-1fbd-42b7-a43e-9edfce21bf48 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">アカウントを作れるようにするのは確定している。少なくとも奥さんと自分が使う。サーバーに配置するバイナリーは1セットがよい。</p>
+                    <p class="note_contents">それぞれのアカウントのダッシュボードも、ぜひともあってほしい。奥さんに TODO メールだけを送っていたときには、その後どうなったか分からなくて、「○○についてどうなったか聞く」的なタスクをこちらで別に管理していた。</p>
+                    <p class="note_contents">メールを奥さんの Thunderbird から消されて、そのことがこちらに通知されないのでは同じことになるので、「ダッシュボード＋SMS」の方が適するという考えもある。毎朝、「システムに○個のタスクがありまっせ」を SMS で送るのも悪くない。</p>
+                    <p class="note_contents">奥さんもバタバタしていて、しなければならないことの多さに埋もれつつあるので、自分ほど細かくタスク管理をしない奥さんにとって、このダッシュボードが「朝からずっと開いておくもの」になってほしいとの考えもある。</p>
+                    <p class="note_contents">となると、やったかどうか、やった場合はその結果もチョロッと書けてほしい。その点において、Thunderbird が主たる作業場になる設計は、やはり問題がある。</p>
+                    <p class="note_contents">データベースについては、SQL Server を使う規模のシステムでない。</p>
+                    <p class="note_contents">SQLite のデータベースが日ごとにスナップショットとして ZIP 圧縮され、それを API でダウンロードできる仕組みを作れば、いろいろなシステムのデータをローカルに定期的に落とすツールの開発により、低コストでサーバーのバックアップを行える。添付ファイルも落とせるわけで、これは悪くない。</p>
+                    <p class="note_contents">ということから考えると、まずは UI と完全に切り離された API を全て揃えるところからだ。</p>
+                    <!-- Task: 7142516f-1fbd-42b7-a43e-9edfce21bf48 -->
+                </div>
+            </div>
+            <div id="c655527b-548c-41d2-ac68-eafffd7a4992" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">名前を決める</span>
+                    <a href="#c655527b-548c-41d2-ac68-eafffd7a4992" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">throw にする。タスクを投げ合う。会話では Can you throw it to me? のように。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="38ecfe5b-d7e7-4512-b428-90bfedbf8dcd" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">レポジトリーを作成</span>
+                    <a href="#38ecfe5b-d7e7-4512-b428-90bfedbf8dcd" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="afc5de1a-bb0e-49a5-8e0d-ea98e3f10bb5" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">レポジトリーをクローン</span>
+                    <a href="#afc5de1a-bb0e-49a5-8e0d-ea98e3f10bb5" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="710b97b0-29ad-4c6e-ac10-4462082d3693" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">名前を Throw に変更</span>
+                    <a href="#710b97b0-29ad-4c6e-ac10-4462082d3693" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">人に使ってもらうことを想定しない簡単なツールの名前を小文字から始めている。このシステムは、それには該当しない。</p>
+                            <p class="note_contents">仕事と育児の両立が大変でいつもバタバタしている人などにも役立ちうるものなので、ちゃんと作る。似たようなアプリが山ほどあるので見ず知らずの他者に選んでもらうほどのものにはならないが、「困っているなら一度使ってくれていいですよ」くらいはサイトに書きたい。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">と書いて思ったが、年額1万円前後でドメインとサーバーを用意できるホスティング会社が多数あるので、そこへの導入支援も行うことで、このシステムには自分の手を離れてほしい。とにかくシンプルに作るので、それでいい人、それがいい人には、もしかすると便利かもしれない。</p>
+                            <p class="note_contents">自分とつながりのある人やその友だちが困っているなら無料で貸しても（大勢にはならないだろうから）大きなコストにならないだろうから、そういう枠も考えるつもりだが、際限なくユーザーを増やして無料で貸すとサーバーが重たくなる。ほかにもボランティアでこのシステムを友だちに貸したい人が万が一にもいるなら、その人が立ち上げに困らないように。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="44462d4e-5247-4f38-b56e-0a3a9b7ca83b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">taskKiller のログが出力されるように設定</span>
+                    <a href="#44462d4e-5247-4f38-b56e-0a3a9b7ca83b" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="f1ccf0f2-d939-4275-88fd-1f9a9e0e7e3b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">.gitignore を作る</span>
+                    <a href="#f1ccf0f2-d939-4275-88fd-1f9a9e0e7e3b" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="e8589006-d0e4-4952-895f-e94d198a424d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ソリューションを作成</span>
+                    <a href="#e8589006-d0e4-4952-895f-e94d198a424d" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Blazor Server アプリ<br />
+                                フレームワーク: .NET 6.0<br />
+                                認証の種類: 個別のアカウント<br />
+                                「HTTPS 用の構成」オン<br />
+                                「Docker を有効にする」オン<br />
+                                Docker OS: Windows<br />
+                                「最上位レベルのステートメントを使用しない」オン</p>
+                            <p class="note_contents">として作ってみた。</p>
+                            <p class="note_contents">「認証の種類」などについては、Blazor について学ぶタスクリストのほうで。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="2a0cc58e-d9c6-4ffe-be75-5f6e85d4683f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">API のプロジェクトを追加</span>
+                    <a href="#2a0cc58e-d9c6-4ffe-be75-5f6e85d4683f" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When naming a project that contains a set of APIs, either &quot;API&quot; or &quot;APIs&quot; can be appropriate, but the singular &quot;API&quot; is more commonly used in project names to represent that the project is an Application Programming Interface. The singular form is usually understood to encompass the concept of having multiple endpoints or serving multiple functionalities.</p>
+<p>For example, if your project is related to managing products, a suitable name could be <code>ProductManagementAPI</code>.</p>
+<p>Using the singular form &quot;API&quot; can make the name sound more concise and professional. However, the naming convention can also depend on the organization's preferences, existing naming conventions, and the specific use case.</p>
+<p>In the end, the most important thing is to choose a name that accurately reflects the project’s purpose and is consistent with your or your organization's naming conventions.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When creating a new ASP.NET Core Web API project, Visual Studio presents an option to create the project with or without controllers. This choice influences whether Visual Studio will generate some initial example (template) controllers in your project.</p>
+<h3><strong>With Controllers:</strong></h3>
+<p>If you choose to create the project with controllers, Visual Studio will scaffold one or more example controllers in your project. These are typically <code>WeatherForecastController</code> or similar, and they are intended to serve as examples and to help you get started with developing your controllers. They usually come with example actions and routes, showcasing the basic CRUD operations you can perform via HTTP requests.</p>
+<h3><strong>Without Controllers:</strong></h3>
+<p>If you opt to create the project without controllers, your project won’t have any predefined controllers, and you will need to add your controllers manually. This is a cleaner option if you prefer to structure your project your way without having to delete or modify the scaffolded example controllers.</p>
+<h3><strong>Creating Controllers Manually:</strong></h3>
+<p>Even if you choose not to create controllers initially, you can always add them manually later by right-clicking on the <code>Controllers</code> folder in your project, selecting <code>Add</code> -&gt; <code>Controller</code>, and following the wizard to add a new controller.</p>
+<h3><strong>Example of a Controller:</strong></h3>
+<p>A typical controller in an ASP.NET Core Web API project looks something like this:</p>
+<pre><code class="language-csharp">[ApiController]
+[Route(&quot;[controller]&quot;)]
+public class WeatherForecastController : ControllerBase
+{
+    [HttpGet]
+    public IEnumerable&lt;WeatherForecast&gt; Get()
+    {
+        // Return some data here
+    }
+
+    // You can add more actions to handle other HTTP methods like POST, PUT, DELETE, etc.
+}
+</code></pre>
+<h3><strong>Conclusion:</strong></h3>
+<p>The option to create controllers or not when creating a new ASP.NET Core Web API project is primarily about whether you want some example controllers to be scaffolded by Visual Studio or prefer to start with a clean slate and add your controllers manually.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The &quot;OpenAPI Support&quot; option in Visual Studio, when creating an ASP.NET Core Web API project, refers to the inclusion of tooling and libraries for working with OpenAPI (also known as Swagger), a specification used to document and describe RESTful APIs.</p>
+<h3><strong>If You Enable OpenAPI Support:</strong></h3>
+<p>When you enable OpenAPI support, the project will be configured to use the Swashbuckle library (or a similar one), which generates OpenAPI documentation for your API and provides a user interface to interact with the API, usually available at the <code>/swagger</code> endpoint of your API.</p>
+<p>This is highly beneficial during development and testing phases as it provides:</p>
+<ul>
+<li>An interactive UI for exploring your API.</li>
+<li>A self-updating documentation system that reflects the current state of your API.</li>
+<li>The ability to test API endpoints directly from the browser.</li>
+</ul>
+<h3><strong>Example Configuration:</strong></h3>
+<p>If you choose to enable OpenAPI support, you will see something like this in the <code>Startup.cs</code> file:</p>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    services.AddSwaggerGen(c =&gt;
+    {
+        c.SwaggerDoc(&quot;v1&quot;, new OpenApiInfo { Title = &quot;My API&quot;, Version = &quot;v1&quot; });
+    });
+}
+
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c =&gt;
+    {
+        c.SwaggerEndpoint(&quot;/swagger/v1/swagger.json&quot;, &quot;My API V1&quot;);
+    });
+}
+</code></pre>
+<h3><strong>If You Do Not Enable OpenAPI Support:</strong></h3>
+<p>If you decide not to enable OpenAPI support while creating the project, you can still add it manually later by installing the necessary NuGet package and adding the appropriate configuration in the <code>Startup.cs</code> file.</p>
+<h3><strong>Adding Manually:</strong></h3>
+<p>To add OpenAPI support manually, you will need to:</p>
+<ol>
+<li>Install the Swashbuckle.AspNetCore NuGet package.</li>
+<li>Configure Swagger in the <code>Startup.cs</code>.</li>
+</ol>
+<h3><strong>Recommendation:</strong></h3>
+<p>It is generally recommended to enable OpenAPI support, especially during development, as it provides valuable tools for testing and documenting your API. It can be disabled in production environments if needed.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ASP.NET Core Web API<br />
+                                フレームワーク: .NET 6.0<br />
+                                認証の種類: なし<br />
+                                「HTTPS 用の構成」オン<br />
+                                「Docker を有効にする」オン<br />
+                                Docker OS: Windows<br />
+                                「コントローラーを使用する」オン<br />
+                                「Open API サポートを有効にする」オン<br />
+                                「最上位レベルのステートメントを使用しない」オン</p>
+                            <p class="note_contents">として作る。</p>
+                            <p class="note_contents">そのうち認証については Blazor についてのタスクリストのログに。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="b85648c4-6c29-4908-8dac-423b42187d82" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">.gitignore をなくした場合の差分のうち、コミットするべきものがないか調べる</span>
+                    <a href="#b85648c4-6c29-4908-8dac-423b42187d82" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">なさそう。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="0debfd5a-7139-42e6-991b-064ccb62a65f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">クラスライブラリーを追加</span>
+                    <a href="#0debfd5a-7139-42e6-991b-064ccb62a65f" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="e54f5403-8ca0-4b3b-b067-0e9328de341a" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">プロジェクトの依存関係を設定</span>
+                    <a href="#e54f5403-8ca0-4b3b-b067-0e9328de341a" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Blazor から API への依存は不要。これらからクラスライブラリーに依存。Blazor と API は、別々のサーバーに置けるくらい独立的に作ってみたい。クラスライブラリーは、あくまでコードの冗長性を除くためだけのもの。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="6079ae68-fa2c-4bae-85ad-76fe5c6d9013" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">アセンブリー情報を設定</span>
+                    <a href="#6079ae68-fa2c-4bae-85ad-76fe5c6d9013" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="e0a45fc5-b426-4030-8e0a-a75af77f259a" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">.git ディレクトリーなどを非表示にする</span>
+                    <a href="#e0a45fc5-b426-4030-8e0a-a75af77f259a" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="b6b9ab2d-70ec-4dd4-a789-ecd2156a7147" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">.github\workflows ディレクトリーにダミーのファイルを入れる</span>
+                    <a href="#b6b9ab2d-70ec-4dd4-a789-ecd2156a7147" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">空なので repoCheck が警告を出す。設定で無視できるが、何か入れるほうが作法か。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Typically, version control systems like Git do not track empty directories. Git, in particular, tracks content, which means it keeps track of files rather than directories. If a directory does not contain any file, Git will not include it in the repository.</p>
+<h3>Workaround:</h3>
+<p>However, if you do want to commit an empty folder, a common practice is to place a <code>.gitkeep</code> file inside the empty directory. The <code>.gitkeep</code> file itself doesn't have any special meaning to Git—it is just a placeholder to ensure that the directory gets included in the repository. The file can be empty and doesn’t need to contain any data.</p>
+<p>Here’s how you can do it:</p>
+<pre><code class="language-sh">mkdir empty_folder # create the empty folder
+touch empty_folder/.gitkeep # add a .gitkeep file inside the empty folder
+</code></pre>
+<p>After running the above commands, you can then add, commit, and push this folder to the Git repository as usual:</p>
+<pre><code class="language-sh">git add empty_folder/.gitkeep
+git commit -m &quot;Add empty_folder&quot;
+git push origin main # Replace main with the appropriate branch name, if different
+</code></pre>
+<h3>Alternative Filename:</h3>
+<p>While <code>.gitkeep</code> is a widely recognized convention, it’s not a standard or special filename in Git. Some people might use a different filename like <code>.placeholder</code> or even a <code>README.md</code> explaining why the folder is there and is empty, depending on the project's conventions or personal/team preference.</p>
+<h3>Removing Placeholder File:</h3>
+<p>If, in the future, you add content to the directory, you can optionally remove the <code>.gitkeep</code> or placeholder file, or you may choose to leave it there; it’s up to your project’s conventions or your personal preference.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The <code>.github</code> folder is often used to store GitHub-specific configuration files and workflow files (for GitHub Actions). Examples include the <code>workflow</code> directory for GitHub Actions configuration, <code>FUNDING.yml</code> for sponsorship settings, <code>CODEOWNERS</code> to define individuals or teams that are responsible for code in a repository, and <code>ISSUE_TEMPLATE</code> and <code>PULL_REQUEST_TEMPLATE</code> for templates.</p>
+<h3>Committing <code>.github</code> Folder</h3>
+<p><strong>Yes, it is standard practice to commit the <code>.github</code> folder.</strong> This folder typically contains important configuration and metadata that help in managing the project on GitHub, and thus, it should be version controlled to ensure that these configurations are consistent across all clones of the repository.</p>
+<h3>Considerations</h3>
+<ul>
+<li><p><strong>Collaboration:</strong> When working in a collaborative environment, having GitHub configurations version controlled ensures that workflow and settings are consistent for all contributors.</p>
+</li>
+<li><p><strong>Workflow Versioning:</strong> For workflows defined using GitHub Actions in the <code>.github/workflows</code> directory, it is crucial to have them under version control to keep track of changes and modifications to the workflows.</p>
+</li>
+<li><p><strong>Documentation:</strong> Files like <code>CONTRIBUTING.md</code> can also be placed in the <code>.github</code> folder, providing guidelines for contributing to the project.</p>
+</li>
+</ul>
+<h3>Example</h3>
+<p>If you have workflow files or other GitHub-specific configurations in the <code>.github</code> folder, you would generally add and commit them to the repository like so:</p>
+<pre><code class="language-sh">git add .github
+git commit -m &quot;Add GitHub configurations&quot;
+git push origin main # Replace main with the appropriate branch name, if different
+</code></pre>
+<h3>Exclusions</h3>
+<p>While it is standard to include the <code>.github</code> folder, be mindful not to commit sensitive information. Review the contents of the folder and use <code>.gitignore</code> to exclude any sensitive or unnecessary files or data before committing.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

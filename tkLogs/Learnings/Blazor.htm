@@ -10,6 +10,1266 @@
             <a href="Blazor.htm" class="title">Blazor</a>
         </div>
         <div class="entries">
+            <div id="071621bb-2c73-4026-8da9-69396a5a2db1" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">サーバー版とアプリ版の違いについて調べる</span>
+                    <a href="#071621bb-2c73-4026-8da9-69396a5a2db1" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Blazor is a framework from Microsoft that allows developers to build interactive web UIs using C# instead of JavaScript. Blazor can run on the client-side (WebAssembly) or server-side. Below are the key differences between Server-side Blazor (Blazor Server) and Client-side Blazor (Blazor WebAssembly).</p>
+<h3>1. <strong>Hosting Model</strong>:</h3>
+<ul>
+<li><strong>Server-side Blazor</strong>:
+<ul>
+<li>Runs on the server.</li>
+<li>Uses SignalR to communicate between the client and the server.</li>
+</ul>
+</li>
+<li><strong>Client-side Blazor</strong>:
+<ul>
+<li>Runs directly in the browser using WebAssembly.</li>
+<li>Doesn't need an active connection to the server for executing the code logic.</li>
+</ul>
+</li>
+</ul>
+<h3>2. <strong>Execution Model</strong>:</h3>
+<ul>
+<li><strong>Server-side Blazor</strong>:
+<ul>
+<li>The application runs on the server and utilizes server resources.</li>
+<li>Interactivity is achieved by updating the DOM in the browser over a real-time SignalR connection.</li>
+</ul>
+</li>
+<li><strong>Client-side Blazor</strong>:
+<ul>
+<li>Runs directly in the browser on a WebAssembly-based .NET runtime.</li>
+<li>All resources, components, and the runtime are downloaded to the client.</li>
+</ul>
+</li>
+</ul>
+<h3>3. <strong>Latency and Network Traffic</strong>:</h3>
+<ul>
+<li><strong>Server-side Blazor</strong>:
+<ul>
+<li>Generally has higher latency due to continuous communication with the server for UI updates.</li>
+<li>Network traffic is usually higher due to frequent data exchanges between client and server.</li>
+</ul>
+</li>
+<li><strong>Client-side Blazor</strong>:
+<ul>
+<li>Lower latency as the application runs directly in the browser.</li>
+<li>Network traffic is minimal after the initial load since the app doesn't need to talk to the server for every user interaction.</li>
+</ul>
+</li>
+</ul>
+<h3>4. <strong>Offline Support</strong>:</h3>
+<ul>
+<li><strong>Server-side Blazor</strong>:
+<ul>
+<li>Does not support offline mode since it needs a constant connection to the server.</li>
+</ul>
+</li>
+<li><strong>Client-side Blazor</strong>:
+<ul>
+<li>Supports offline mode as it can run entirely on the client-side without needing constant communication with the server.</li>
+</ul>
+</li>
+</ul>
+<h3>5. <strong>Load Time</strong>:</h3>
+<ul>
+<li><strong>Server-side Blazor</strong>:
+<ul>
+<li>Usually has faster initial load times as less content needs to be loaded on the client-side.</li>
+</ul>
+</li>
+<li><strong>Client-side Blazor</strong>:
+<ul>
+<li>May have slower initial load times due to downloading the runtime and application files, but subsequent loads can be faster, especially with proper caching.</li>
+</ul>
+</li>
+</ul>
+<h3>6. <strong>Scaling</strong>:</h3>
+<ul>
+<li><strong>Server-side Blazor</strong>:
+<ul>
+<li>Can be more challenging to scale as it maintains a constant connection for each user, consuming more server resources.</li>
+</ul>
+</li>
+<li><strong>Client-side Blazor</strong>:
+<ul>
+<li>Easier to scale as the majority of the processing load is on the client-side, freeing up server resources.</li>
+</ul>
+</li>
+</ul>
+<h3>7. <strong>Access to Browser APIs</strong>:</h3>
+<ul>
+<li><strong>Server-side Blazor</strong>:
+<ul>
+<li>Limited and indirect access to browser APIs and JavaScript interop due to the server-side execution model.</li>
+</ul>
+</li>
+<li><strong>Client-side Blazor</strong>:
+<ul>
+<li>Has more direct and broader access to browser APIs and JavaScript interop since it runs in the browser.</li>
+</ul>
+</li>
+</ul>
+<h3>8. <strong>Security</strong>:</h3>
+<ul>
+<li><strong>Server-side Blazor</strong>:
+<ul>
+<li>More secure as the application logic is executed on the server, preventing the exposure of sensitive code or data to the client.</li>
+</ul>
+</li>
+<li><strong>Client-side Blazor</strong>:
+<ul>
+<li>Application logic is executed on the client-side, which can expose the application's code. Developers need to be cautious about securing sensitive data and logic.</li>
+</ul>
+</li>
+</ul>
+<h3>9. <strong>Prerendering</strong>:</h3>
+<ul>
+<li><strong>Server-side Blazor</strong>:
+<ul>
+<li>Supports prerendering out of the box, which can improve the perceived load time by rendering the page on the server before it is sent to the client.</li>
+</ul>
+</li>
+<li><strong>Client-side Blazor</strong>:
+<ul>
+<li>Prerendering can be configured, but it is not as straightforward as in server-side Blazor.</li>
+</ul>
+</li>
+</ul>
+<h3>10. <strong>Development Environment</strong>:</h3>
+<ul>
+<li><strong>Both</strong>:
+<ul>
+<li>Both Blazor Server and Blazor WebAssembly can be developed using Visual Studio, Visual Studio Code, or any preferred code editor with the .NET SDK installed.</li>
+<li>Developers can debug both Blazor Server and Blazor WebAssembly apps, but the debugging experience may vary, with Blazor Server generally offering a more familiar and polished debugging experience.</li>
+</ul>
+</li>
+</ul>
+<h3>11. <strong>Runtime</strong>:</h3>
+<ul>
+<li><strong>Server-side Blazor</strong>:
+<ul>
+<li>Requires a .NET Core runtime on the server.</li>
+</ul>
+</li>
+<li><strong>Client-side Blazor</strong>:
+<ul>
+<li>Requires WebAssembly-compatible browsers, which are widely available in modern browsers.</li>
+</ul>
+</li>
+</ul>
+<h3>12. <strong>Dependencies</strong>:</h3>
+<ul>
+<li><strong>Server-side Blazor</strong>:
+<ul>
+<li>Has fewer client-side dependencies, mainly relies on SignalR.</li>
+</ul>
+</li>
+<li><strong>Client-side Blazor</strong>:
+<ul>
+<li>Requires more dependencies to be loaded on the client, including the Mono runtime and the application’s assemblies.</li>
+</ul>
+</li>
+</ul>
+<h3>13. <strong>Data Access</strong>:</h3>
+<ul>
+<li><strong>Server-side Blazor</strong>:
+<ul>
+<li>Has direct access to the server’s resources and data, which can simplify data access patterns.</li>
+</ul>
+</li>
+<li><strong>Client-side Blazor</strong>:
+<ul>
+<li>Relies on APIs or other server-side mechanisms to access server resources and data.</li>
+</ul>
+</li>
+</ul>
+<h3>Conclusion:</h3>
+<p>The choice between Blazor Server and Blazor WebAssembly depends on the specific needs and constraints of your project, such as latency, offline support, load time, and scalability. Understanding these differences can help in making an informed decision.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">「いちいち POST しなくていいツール」くらいでよいなら、サーバー版のほうがデータベースアクセスに向きそう。</p>
+                            <p class="note_contents">アプリ版は、起動までのクライアント側でのダウンロードが長く、パッケージの互換性も気になるので、「そこまでしてでも最速で動かしたい、あるいはオフラインモードを実装したいものに」といったん考える。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">アプリ版のほうがリリースが遅く、そちらがより新しいなら勉強のためにもそちらを、と最初は考えたが、それぞれに長短があり、明確な使い分けが成立するようにつくられている。</p>
+                            <p class="note_contents">そのため、どういうシステムを作りたいか、どういう動かし方をしたいかといった当たり前の基準で判断する。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="549f67e5-6f18-4f8d-803a-eb5d90bf99e7" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">プロジェクトの作成時の「認証の種類」について調べる</span>
+                    <a href="#549f67e5-6f18-4f8d-803a-eb5d90bf99e7" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When you are creating a Server-side Blazor app using Visual Studio, you have several options for authentication. Authentication is the process of identifying users, and it is crucial for securing your application. Here are the common authentication types you may encounter and their differences:</p>
+<h3>1. <strong>No Authentication</strong></h3>
+<ul>
+<li>This option means that your application will not have any authentication out of the box. Everyone can access it without needing to log in.</li>
+</ul>
+<h3>2. <strong>Individual User Accounts</strong></h3>
+<ul>
+<li>This option allows users to create accounts and log in to your application. You will typically have the choice between storing user accounts:
+<ul>
+<li><strong>In-app</strong>:
+<ul>
+<li>User accounts are stored in your application’s data store, typically a database that you manage.</li>
+<li>It is often used with Entity Framework Core and a SQL Server database.</li>
+</ul>
+</li>
+<li><strong>Azure AD B2C (Azure Active Directory B2C)</strong>:
+<ul>
+<li>This is a customer identity access management (CIAM) solution by Microsoft Azure.</li>
+<li>User accounts are stored in Azure AD B2C, a scalable and secure platform.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>3. <strong>Work or School Accounts</strong></h3>
+<ul>
+<li>This option is typically used for integrating with Azure Active Directory (Azure AD).</li>
+<li>It is used when you want to allow users from specific organizations (that use Azure AD) to access the application.</li>
+<li>It is suitable for business-to-business (B2B) and Software as a Service (SaaS) apps where users belong to other organizations that use Azure AD.</li>
+</ul>
+<h3>4. <strong>Windows Authentication</strong></h3>
+<ul>
+<li>This type is often used for intranet applications within an organization.</li>
+<li>It uses the Windows credentials of the current user, so users are not prompted to enter their credentials.</li>
+<li>It is suitable when the application is used within an organization that uses a Windows Server Active Directory domain.</li>
+</ul>
+<h3>5. <strong>Multi-org Authentication</strong></h3>
+<ul>
+<li>Similar to “Work or School Accounts”, but it is configured to allow users from multiple Azure AD organizations.</li>
+<li>Suitable for multi-tenant applications, where multiple organizations need access to the same application.</li>
+</ul>
+<h3>6. <strong>Single-org Authentication</strong></h3>
+<ul>
+<li>Similar to “Work or School Accounts”, but it is configured to allow users from a single Azure AD organization.</li>
+<li>Suitable for single-tenant applications, where only users from a specific organization need access.</li>
+</ul>
+<h3>Notes on Choosing Authentication Type:</h3>
+<ul>
+<li><strong>Individual User Accounts</strong> with In-app storage is a good choice if you want to allow any user to sign up and access your app, and if you want to manage user accounts yourself.</li>
+<li><strong>Azure AD B2C</strong> is suitable if you are developing a consumer-facing application and want to leverage Azure's scalable and secure identity services.</li>
+<li><strong>Work or School Accounts</strong> are suitable if you are developing apps for businesses or educational institutions that use Azure AD.</li>
+<li><strong>Windows Authentication</strong> is a suitable choice for internal applications within organizations using Windows Server Active Directory.</li>
+<li><strong>Multi-org and Single-org Authentications</strong> are suitable for developing applications meant for usage in business collaborations involving multiple or single organizations respectively.</li>
+</ul>
+<h3>Final Thought:</h3>
+<p>Choosing the right authentication type is crucial for the security and functionality of your app. Your choice will depend on the nature of your app, your security requirements, the type of users you want to support, and whether or not you want to manage user accounts and credentials yourself.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="1f00e907-8f9e-4f82-975c-c8427cec174e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">データベースのデータの変更をリアルタイムに UI に反映できるか調べる</span>
+                    <a href="#1f00e907-8f9e-4f82-975c-c8427cec174e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, a Server-side Blazor application can certainly coexist with a set of ASP.NET Core Web APIs, and it’s a common architecture to use Blazor for the frontend and Web APIs for the backend, facilitating the separation of concerns. You can host them together in the same project or in separate projects, depending on your architectural preferences and deployment strategies.</p>
+<h3>Real-Time Updates:</h3>
+<p>When it comes to reflecting changes immediately in the Blazor pages, it’s important to understand that by default, changes made to the shared data by external clients through the API won’t automatically update the data being displayed in currently open Blazor pages. This is because HTTP, by nature, is stateless, and Blazor Server applications don’t automatically know when the underlying data has changed.</p>
+<h3>Strategies for Real-Time Updates:</h3>
+<ol>
+<li><p><strong>SignalR:</strong></p>
+<ul>
+<li>Since Blazor Server already uses SignalR for the client-server communication, you can leverage SignalR to push updates to the Blazor clients when a change occurs via the API. You can create a SignalR hub that the Blazor pages and API controllers both interact with to facilitate real-time updates.</li>
+</ul>
+</li>
+<li><p><strong>Refresh Mechanism:</strong></p>
+<ul>
+<li>Implement a refresh mechanism in the Blazor components to periodically check for changes in the data and update the UI accordingly.</li>
+</ul>
+</li>
+<li><p><strong>Blazor JavaScript Interop:</strong></p>
+<ul>
+<li>Use JavaScript Interop in Blazor to call JavaScript functions from C# code, allowing you to integrate with any JavaScript library that provides real-time capabilities, such as socket.io.</li>
+</ul>
+</li>
+</ol>
+<h3>Example using SignalR:</h3>
+<p>Here’s a simplified example using SignalR. Assume you have a SignalR hub that both the Blazor components and API controllers are connected to.</p>
+<ol>
+<li><p><strong>SignalR Hub:</strong></p>
+<pre><code class="language-csharp">public class UpdateHub : Hub
+{
+    public async Task SendUpdate(string message)
+    {
+        await Clients.All.SendAsync(&quot;ReceiveUpdate&quot;, message);
+    }
+}
+</code></pre>
+</li>
+<li><p><strong>API Controller:</strong></p>
+<ul>
+<li>After performing an update, the API controller can send a message via the SignalR hub to inform connected clients about the update.</li>
+</ul>
+<pre><code class="language-csharp">[ApiController]
+[Route(&quot;[controller]&quot;)]
+public class UpdateController : ControllerBase
+{
+    private readonly IHubContext&lt;UpdateHub&gt; _hubContext;
+
+    public UpdateController(IHubContext&lt;UpdateHub&gt; hubContext)
+    {
+        _hubContext = hubContext;
+    }
+
+    [HttpPost]
+    public async Task&lt;IActionResult&gt; Post(UpdateModel update)
+    {
+        // Perform the update...
+
+        // Notify connected clients about the update.
+        await _hubContext.Clients.All.SendAsync(&quot;ReceiveUpdate&quot;, &quot;Data has been updated&quot;);
+
+        return Ok();
+    }
+}
+</code></pre>
+</li>
+<li><p><strong>Blazor Component:</strong></p>
+<ul>
+<li>The Blazor component can listen for messages from the SignalR hub and refresh the data when an update message is received.</li>
+</ul>
+<pre><code class="language-csharp">@inject IHubContext&lt;UpdateHub&gt; UpdateHubContext
+@code {
+    private string message;
+
+    protected override void OnInitialized()
+    {
+        UpdateHubContext.On&lt;string&gt;(&quot;ReceiveUpdate&quot;, (updateMessage) =&gt;
+        {
+            message = updateMessage;
+            // Refresh the component or reload the data.
+            StateHasChanged();
+        });
+    }
+}
+</code></pre>
+</li>
+</ol>
+<h3>Summary:</h3>
+<p>In a scenario where a Server-side Blazor system and a set of ASP.NET Core Web APIs coexist, incorporating real-time communication mechanisms like SignalR is a strategic approach to keep the UI synchronized with the underlying data, ensuring changes made via the APIs are immediately reflected on the Blazor pages.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">should i add a class library containing methods that would access the database directly and add reference to it from both the server-side blazor page and the set of apis to share the functionality, or let the apis do all the backend work and add a reference from the blazor page to the apis, completely omitting the class library?</p>
+                            <p class="note_contents">と聞いてみて、以下の完璧な答えが返ってきて、いよいよプログラミングでは食えない時代になると感じた。</p>
+                            <div class="note_ai_generated">
+<p>Both strategies you mentioned can work, but they address different concerns and have different implications. Here are the considerations for both approaches:</p>
+<h3>1. <strong>Shared Class Library (Direct Database Access)</strong>:</h3>
+<h4>Pros:</h4>
+<ul>
+<li><strong>Performance:</strong> Generally, direct database access can be faster since it doesn’t have the overhead of HTTP requests.</li>
+<li><strong>Simplicity:</strong> You can reuse the same logic/methods without having to create API endpoints.</li>
+</ul>
+<h4>Cons:</h4>
+<ul>
+<li><strong>Coupling:</strong> Tight coupling between your Blazor application and the database, which can make changes more challenging.</li>
+<li><strong>Scalability:</strong> If your Blazor application and APIs grow, maintaining a direct database connection can become complex.</li>
+<li><strong>Security:</strong> Exposing direct database access methods to the Blazor app can expose sensitive data and operations.</li>
+</ul>
+<h3>2. <strong>API Access (Indirect Database Access)</strong>:</h3>
+<h4>Pros:</h4>
+<ul>
+<li><strong>Decoupling:</strong> Provides a clear separation of concerns between your frontend and backend, making the system more maintainable.</li>
+<li><strong>Security:</strong> More secure as you expose only what is needed and can implement proper authentication and authorization on the API.</li>
+<li><strong>Flexibility:</strong> Allows easier changes to the database layer without affecting the frontend, and vice versa.</li>
+<li><strong>Reusability:</strong> The API can be consumed by other clients (e.g., mobile apps) if needed.</li>
+<li><strong>Consistency:</strong> Ensures that all consumers of the data have a consistent view and are subject to the same business rules and logic.</li>
+</ul>
+<h4>Cons:</h4>
+<ul>
+<li><strong>Overhead:</strong> Additional overhead due to HTTP requests, which can impact performance.</li>
+<li><strong>Complexity:</strong> Requires designing and maintaining API endpoints.</li>
+</ul>
+<h3>Recommendation:</h3>
+<p>In most modern application architectures, especially when dealing with potentially sensitive operations such as database access, the <strong>API Access</strong> approach is often recommended. It provides a more secure, scalable, and maintainable architecture, allowing you to manage and control access to your data more effectively.</p>
+<p>You would typically have your Blazor app communicate with a backend API, and the API would interact with the database. This approach also aligns well with microservices architecture, which can offer additional benefits like independent deployment and scaling of different parts of your system.</p>
+<h3>Best Practice:</h3>
+<p>Even when opting for the API approach, creating a Class Library to hold shared logic, models, or utility functions is a good practice, ensuring that both the API and the Blazor app can share common elements, reducing redundancy and potential inconsistencies.</p>
+<h3>Final Thoughts:</h3>
+<p>Ultimately, your choice might depend on the specific requirements, constraints, and future plans for your project. If you prioritize security, maintainability, and future scalability, the API approach is the way to go. If the project is small, with no plans for future expansion, and simplicity and speed are paramount, direct database access might be justifiable.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="0e67eec6-96b5-4605-b12e-8640939594f4" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">サーバー側のものと API を連動させる場合の認証の実装について調べる</span>
+                    <a href="#0e67eec6-96b5-4605-b12e-8640939594f4" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When using the API access approach, where the Blazor app interacts with the backend through APIs, it's typically good practice to secure both your Blazor application and your API, unless your project requirements specifically don’t require any form of authentication or authorization.</p>
+<h3>Authentication &amp; Authorization Strategies:</h3>
+<ol>
+<li><p><strong>Blazor App (Server-side) Authentication:</strong></p>
+<ul>
+<li><strong>Purpose:</strong> To authenticate and authorize users accessing your Blazor app.</li>
+<li><strong>Strategy:</strong> You should typically add the appropriate authentication based on your user store, whether it’s individual user accounts, Azure AD, or another provider.</li>
+</ul>
+</li>
+<li><p><strong>API Authentication &amp; Authorization:</strong></p>
+<ul>
+<li><strong>Purpose:</strong> To secure your API endpoints and ensure that only authenticated and authorized clients (including your Blazor app) can access them.</li>
+<li><strong>Strategy:</strong> You typically use token-based authentication like JWT (JSON Web Tokens) to secure your APIs.</li>
+</ul>
+</li>
+</ol>
+<h3>Workflow Example:</h3>
+<ol>
+<li><p><strong>User logs into the Blazor app:</strong></p>
+<ul>
+<li>The user is authenticated in the Blazor app, and upon successful authentication, the app obtains an access token.</li>
+</ul>
+</li>
+<li><p><strong>Blazor app calls the API:</strong></p>
+<ul>
+<li>The Blazor app includes the access token in the Authorization header when making requests to the API.</li>
+<li>The API validates the token and processes the request if the token is valid and the user has the necessary permissions.</li>
+</ul>
+</li>
+</ol>
+<h3>Setting Up Authentication:</h3>
+<ol>
+<li><p><strong>Blazor App:</strong></p>
+<ul>
+<li>Set up the authentication type that suits your needs (Individual User Accounts, Work or School Accounts, etc.)</li>
+<li>Configure the app to acquire and handle tokens for accessing the API.</li>
+</ul>
+</li>
+<li><p><strong>API:</strong></p>
+<ul>
+<li>Set up token-based authentication.</li>
+<li>Configure it to validate incoming tokens and handle unauthorized requests.</li>
+</ul>
+</li>
+</ol>
+<h3>Summary:</h3>
+<ul>
+<li><strong>Blazor App:</strong> Should have an authentication type that suits your project needs, not &quot;None&quot;, unless no authentication is required.</li>
+<li><strong>API:</strong> Should have token-based authentication and should not be set to &quot;None&quot; unless it is intended to be a public API with no restrictions.</li>
+<li><strong>Development Ease:</strong> During initial development, you might find it easier to set up with no authentication to avoid dealing with the setup complexities until you are ready to secure your app and API.</li>
+</ul>
+<p>Remember, properly securing both your Blazor app and your API is crucial in protecting sensitive user data and ensuring that your services are not misused or compromised.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When adding an API project to work with your Server-side Blazor app, the authentication type you choose for the API depends on your architecture and how you intend to secure communication between the Blazor app and the API. Since you have chosen &quot;Individual Authentication&quot; for the Blazor app, you probably have a user store and are issuing tokens for authenticated users.</p>
+<h3>Here are steps and considerations for securing your API:</h3>
+<h4>1. <strong>API Authentication Type:</strong></h4>
+<ul>
+<li>Choose “None” if you intend to implement a custom token-based authentication mechanism like JWT.</li>
+<li>Implement JWT Bearer Token authentication in your API to validate the tokens issued during the login in your Blazor app.</li>
+</ul>
+<h4>2. <strong>Implementing JWT Bearer Token Authentication:</strong></h4>
+<ul>
+<li>Implement token creation and validation in your API.</li>
+<li>When a user logs in through your Blazor app, issue a JWT that can be used to authenticate against your API.</li>
+<li>Secure your API endpoints by validating incoming JWTs.</li>
+</ul>
+<h4>3. <strong>Authentication Provider Consistency:</strong></h4>
+<ul>
+<li>Use the same authentication provider (e.g., IdentityServer, Azure AD) for both the Blazor app and the API to ensure consistency and seamless integration.</li>
+</ul>
+<h4>4. <strong>Authorizing API Endpoints:</strong></h4>
+<ul>
+<li>Use <code>[Authorize]</code> attribute to protect your API endpoints, allowing access only to authenticated users with valid tokens.</li>
+</ul>
+<h4>5. <strong>Cross-Origin Resource Sharing (CORS):</strong></h4>
+<ul>
+<li>If your API is hosted on a different domain or port than your Blazor app, ensure that you configure CORS properly in your API to accept requests from your Blazor app’s domain.</li>
+</ul>
+<h3>Example Implementation Steps:</h3>
+<ol>
+<li><p><strong>API Project Setup:</strong></p>
+<ul>
+<li>Create the API project with “None” as the authentication type.</li>
+<li>Implement JWT Bearer Token authentication and configure it properly.</li>
+</ul>
+</li>
+<li><p><strong>Token Issuance:</strong></p>
+<ul>
+<li>When a user logs in through your Blazor app, issue a JWT.</li>
+<li>Store this token securely on the client side.</li>
+</ul>
+</li>
+<li><p><strong>API Calls:</strong></p>
+<ul>
+<li>Include the token in the Authorization header when making calls from your Blazor app to your API.</li>
+<li>Validate the token in the API for each request and process it accordingly.</li>
+</ul>
+</li>
+<li><p><strong>Testing:</strong></p>
+<ul>
+<li>Test your setup thoroughly to ensure that only authenticated users with valid tokens can access the secured endpoints of your API.</li>
+</ul>
+</li>
+</ol>
+<h3>Summary:</h3>
+<p>For a cohesive and secure interaction between your Blazor app with &quot;Individual Authentication&quot; and your API, it’s usually recommended to set up your API with “None” and manually implement a consistent token-based authentication mechanism like JWT Bearer Token authentication, aligned with the authentication strategy of your Blazor app. This provides a streamlined and secure user experience while maintaining a clear separation of concerns between your frontend and backend components.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When you create a new API project in Visual Studio, the available authentication options may vary depending on your Visual Studio version, but generally, you might see the following options:</p>
+<ol>
+<li><p><strong>No Authentication:</strong></p>
+<ul>
+<li>No authentication mechanism is added to your project.</li>
+</ul>
+</li>
+<li><p><strong>Individual User Accounts:</strong></p>
+<ul>
+<li>This option is suitable if you want to use ASP.NET Core Identity for handling user registration, login, and storing user information.</li>
+<li>You can choose to store user data in-app or in the cloud.</li>
+</ul>
+</li>
+<li><p><strong>Work or School Accounts:</strong></p>
+<ul>
+<li>Suitable if you are developing an enterprise application and want to use Azure AD (Active Directory) to authenticate users.</li>
+</ul>
+</li>
+<li><p><strong>Windows Authentication:</strong></p>
+<ul>
+<li>This option is for intranet scenarios where you want to authenticate users based on their Windows accounts.</li>
+<li>Not suitable for internet-facing applications.</li>
+</ul>
+</li>
+<li><p><strong>Multi-org Authentication:</strong></p>
+<ul>
+<li>This option allows you to use Azure AD to authenticate users from multiple organizations.</li>
+</ul>
+</li>
+<li><p><strong>Windows Domain Authentication:</strong></p>
+<ul>
+<li>This is for scenarios where you want to use Windows domains for authentication.</li>
+</ul>
+</li>
+</ol>
+<h3>Considerations:</h3>
+<ul>
+<li>If you choose <strong>Individual User Accounts</strong>, and your Blazor app also uses Individual User Accounts, you need to ensure that they share the same user store, or you have a mechanism to correlate users between the two stores.</li>
+<li>If you choose options related to <strong>Azure AD</strong>, you would generally use token-based authentication (such as OAuth 2.0 or OpenID Connect) to secure communication between your Blazor app and your API.</li>
+</ul>
+<h3>Custom Authentication:</h3>
+<p>Regardless of the option you choose, you can still implement custom authentication mechanisms, like JWT Bearer Token Authentication, to suit your project needs and ensure secure and consistent communication between your Blazor app and API.</p>
+<h3>Recommendation:</h3>
+<p>If you want a fully cohesive and integrated authentication flow between your API and your Blazor app, consider using a consistent authentication mechanism, like JWT, with the same user store. If your Blazor app is using Individual User Accounts, you might want to consider using the same for your API, or using “No Authentication” and implementing a shared JWT Bearer Token Authentication manually to ensure seamless integration and user experience.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To implement a JWT-based mechanism in an API and have a server-side Blazor app access it, you can follow the steps below. These steps assume that you are using ASP.NET Core for your API and Blazor Server app.</p>
+<h3>API Side</h3>
+<h4>1. <strong>Install NuGet Packages</strong></h4>
+<pre><code class="language-shell">dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+dotnet add package Microsoft.IdentityModel.Tokens
+</code></pre>
+<h4>2. <strong>Configure JWT Authentication</strong></h4>
+<p>In <code>Startup.cs</code>, register the JWT authentication services.</p>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    services.AddAuthentication(options =&gt;
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    }).AddJwtBearer(options =&gt;
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = Configuration[&quot;Jwt:Issuer&quot;],
+            ValidAudience = Configuration[&quot;Jwt:Audience&quot;],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration[&quot;Jwt:Key&quot;]))
+        };
+    });
+
+    // ... Other service configurations
+}
+</code></pre>
+<h4>3. <strong>Configure Authentication Middleware</strong></h4>
+<p>In <code>Startup.cs</code>, add the authentication middleware.</p>
+<pre><code class="language-csharp">public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    // ... Other middleware configurations
+
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    // ... Other middleware configurations
+}
+</code></pre>
+<h4>4. <strong>Create Token</strong></h4>
+<p>Create an API endpoint to issue a token upon user login or as needed.</p>
+<pre><code class="language-csharp">[ApiController]
+[Route(&quot;api/auth&quot;)]
+public class AuthController : ControllerBase
+{
+    private readonly IConfiguration _configuration;
+
+    public AuthController(IConfiguration configuration)
+    {
+        _configuration = configuration;
+    }
+
+    [HttpPost(&quot;token&quot;)]
+    public IActionResult CreateToken([FromBody] LoginModel login)
+    {
+        // Authenticate the user, e.g., verify username and password.
+        // ...
+
+        var claims = new[]
+        {
+            new Claim(JwtRegisteredClaimNames.Sub, login.Username),
+            // ... Other claims
+        };
+
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration[&quot;Jwt:Key&quot;]));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        var token = new JwtSecurityToken(
+            issuer: _configuration[&quot;Jwt:Issuer&quot;],
+            audience: _configuration[&quot;Jwt:Audience&quot;],
+            claims: claims,
+            expires: DateTime.Now.AddMinutes(30),
+            signingCredentials: creds);
+
+        return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
+    }
+}
+</code></pre>
+<h3>Server-side Blazor App</h3>
+<h4>1. <strong>Install NuGet Package</strong></h4>
+<pre><code class="language-shell">dotnet add package Microsoft.AspNetCore.Components.Web.Extensions
+</code></pre>
+<h4>2. <strong>Configure HTTP Client with Authorization</strong></h4>
+<p>In <code>Startup.cs</code>, configure the HTTP Client to include the token in the Authorization header.</p>
+<pre><code class="language-csharp">services.AddScoped(sp =&gt;
+{
+    var navigationManager = sp.GetRequiredService&lt;NavigationManager&gt;();
+    var accessToken = &quot;YOUR_ACCESS_TOKEN&quot;; // Retrieve the access token securely.
+    var httpClient = new HttpClient
+    {
+        BaseAddress = new Uri(navigationManager.BaseUri)
+    };
+    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(&quot;Bearer&quot;, accessToken);
+    return httpClient;
+});
+</code></pre>
+<h4>3. <strong>Make API Requests</strong></h4>
+<p>Now, you can inject the HTTP Client into your Blazor components and make API requests.</p>
+<pre><code class="language-csharp">@inject HttpClient Http
+
+@code {
+    private async Task MakeApiRequest()
+    {
+        var response = await Http.GetAsync(&quot;api/someendpoint&quot;);
+        // Process the response
+    }
+}
+</code></pre>
+<h3>Important Notes:</h3>
+<ul>
+<li><strong>Secure Token Handling:</strong> Store the JWT token securely, preferably in HttpOnly cookies or server-side storage in the case of Blazor Server, to avoid exposure to XSS attacks.</li>
+<li><strong>Validate User Credentials:</strong> During token creation, properly validate the user credentials against your user store and handle failed login attempts appropriately.</li>
+<li><strong>Token Expiry and Renewal:</strong> Handle token expiry and renewal gracefully in your Blazor app to maintain a smooth user experience.</li>
+<li><strong>CORS:</strong> If your Blazor app and API are on different domains, configure CORS in your API project to allow requests from your Blazor app’s domain.</li>
+<li><strong>Https:</strong> Use HTTPS to ensure the security of data in transit between the Blazor app and the API.</li>
+</ul>
+<p>Remember, this is just a high-level overview, and you should adapt it based on your application’s specific requirements, user store, and security considerations.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>I understand the confusion, and I’ll attempt to clarify the steps and the overall flow. The process involves user authentication, token generation, token usage, and token validation between the Blazor Server App and the API.</p>
+<h3>Overview:</h3>
+<ol>
+<li><p><strong>User Authentication:</strong> Users register/log in through the Blazor app or any other client. The credentials are verified against stored user data, often on the API side.</p>
+</li>
+<li><p><strong>Token Generation:</strong> Once the user is authenticated, a JWT token is generated, usually by the API. The token includes claims about the user and is signed with a secret key.</p>
+</li>
+<li><p><strong>Token Usage:</strong> The token is sent to the client (Blazor app) and included in subsequent API requests for authentication.</p>
+</li>
+<li><p><strong>Token Validation:</strong> The API validates the token using the secret key and processes the request if the token is valid.</p>
+</li>
+</ol>
+<h3>Detailed Steps:</h3>
+<h4>1. <strong>User Registration and Login:</strong></h4>
+<ul>
+<li>Users register and log in through your Blazor App, where user credentials are verified, typically by communicating with the API.</li>
+</ul>
+<h4>2. <strong>Configure Secret Key in API:</strong></h4>
+<ul>
+<li>The API has a secret key configured (in appsettings.json or securely through environment variables or a secure key vault).</li>
+</ul>
+<pre><code class="language-json">&quot;Jwt&quot;: {
+   &quot;Key&quot;: &quot;YOUR_SECRET_KEY&quot;,
+   &quot;Issuer&quot;: &quot;YOUR_ISSUER&quot;,
+   &quot;Audience&quot;: &quot;YOUR_AUDIENCE&quot;
+}
+</code></pre>
+<h4>3. <strong>Token Generation in API:</strong></h4>
+<ul>
+<li>Once the user is authenticated, the API generates a JWT token signed with the secret key and sends it to the Blazor app.</li>
+<li>The secret key should never be exposed to the client.</li>
+</ul>
+<h4>4. <strong>Store Token in Blazor App:</strong></h4>
+<ul>
+<li>The Blazor app securely stores the received token, ideally in a HttpOnly cookie or in-memory, and not in local storage to avoid XSS attacks.</li>
+</ul>
+<h4>5. <strong>Attach Token to Requests:</strong></h4>
+<ul>
+<li>For subsequent requests to the API, the Blazor app attaches the token in the Authorization header.</li>
+</ul>
+<h4>6. <strong>Validate Token in API:</strong></h4>
+<ul>
+<li>The API validates the token using the secret key for each incoming request with the Authorization header and processes it if the token is valid.</li>
+</ul>
+<h3>Example:</h3>
+<h4>API Side:</h4>
+<ul>
+<li><strong>Configure Secret Key:</strong> In <code>appsettings.json</code> or securely elsewhere.</li>
+<li><strong>Generate Token Endpoint:</strong> A controller action that authenticates the user and, if successful, generates and returns a JWT token.</li>
+</ul>
+<h4>Blazor App Side:</h4>
+<ul>
+<li><strong>Login Functionality:</strong> User logs in through a page/component in your Blazor app.</li>
+<li><strong>Receive and Store Token:</strong> Once the user is authenticated, receive and store the token securely.</li>
+<li><strong>Attach Token to Requests:</strong> Use the stored token in subsequent requests to the API.</li>
+</ul>
+<h3>Recap:</h3>
+<p>You don’t need to create accounts on the API side beforehand manually. The registration and login functionalities in your app will handle user account creation and login. The secret key is part of the API configuration and is used to sign and validate tokens; it is not user-specific and should be kept secure.</p>
+<p>I hope this provides a clearer picture of the flow. Would you like any specific part of this process to be explained in more detail or a specific code example for any step?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>You're absolutely correct, and it seems like there might have been a bit of misunderstanding. The process of authenticating a user and granting access to the API involves several steps, and I’ll clarify them below.</p>
+<h3>1. <strong>Unified User Store:</strong></h3>
+<p>Both the API and the Blazor app should share a common user store, often managed by the API, so that when a user is authenticated on the Blazor side, the API recognizes and trusts this user.</p>
+<h3>2. <strong>API Protection:</strong></h3>
+<p>The API should be protected by requiring a valid JWT token for accessing secure endpoints. The token should contain claims about the user, such as roles or permissions, that the API uses to authorize access to its endpoints.</p>
+<h3>3. <strong>Token Generation:</strong></h3>
+<p>When a user logs in on the Blazor app, the app communicates with the API to authenticate the user. If the authentication is successful, the API generates a JWT token with the necessary claims and sends it back to the Blazor app.</p>
+<h3>4. <strong>Token Storage and Usage:</strong></h3>
+<p>The Blazor app stores this token securely and includes it in the Authorization header in subsequent requests to the API.</p>
+<h3>5. <strong>Token Verification:</strong></h3>
+<p>The API verifies the token for each request, checking its signature and claims to authenticate and authorize the user.</p>
+<h3>6. <strong>Authorization:</strong></h3>
+<p>The API, based on the user’s claims in the token, decides whether the user has the right to access the requested resources or perform the desired actions.</p>
+<h3>Example Flow:</h3>
+<ol>
+<li><p><strong>User Logs In:</strong></p>
+<ul>
+<li>The user logs in via the Blazor app.</li>
+<li>The Blazor app sends the user credentials to a login endpoint on the API.</li>
+</ul>
+</li>
+<li><p><strong>Authentication and Token Generation:</strong></p>
+<ul>
+<li>The API authenticates the user against the user store.</li>
+<li>Upon successful authentication, the API generates a JWT token with the appropriate claims and returns it to the Blazor app.</li>
+</ul>
+</li>
+<li><p><strong>Token Storage:</strong></p>
+<ul>
+<li>The Blazor app stores the received token securely (e.g., in-memory storage).</li>
+</ul>
+</li>
+<li><p><strong>API Requests:</strong></p>
+<ul>
+<li>For any subsequent requests to secure API endpoints, the Blazor app attaches the stored token in the Authorization header of the request.</li>
+</ul>
+</li>
+<li><p><strong>Token Verification and Authorization:</strong></p>
+<ul>
+<li>The API verifies the token’s signature and claims.</li>
+<li>If the token is valid, the API checks the user’s claims (roles/permissions) to determine whether the user is authorized to access the requested resources.</li>
+</ul>
+</li>
+</ol>
+<h3>No Additional Pre-Configuration:</h3>
+<p>Typically, there is no need for additional pre-configuration or pre-generated keys to be shared between the Blazor app and the API, as the JWT mechanism provides the necessary protection. The secret used to sign the JWT token is known only to the API and is used to verify whether the token is legitimate.</p>
+<h3>Important Consideration:</h3>
+<ul>
+<li><strong>Role-Based Authorization:</strong> Implement role-based or claim-based authorization in your API to ensure that users can only access resources and perform actions they are allowed to.</li>
+<li><strong>Secure Token Handling:</strong> Ensure secure handling and transmission of tokens to protect user data and credentials.</li>
+<li><strong>CORS and HTTPS:</strong> If the Blazor app and the API are on different domains, configure CORS securely, and always use HTTPS to prevent man-in-the-middle attacks.</li>
+</ul>
+<p>This way, the “wall” you mentioned is effectively the combination of JWT token verification and authorization mechanisms in place on the API side, ensuring that only authenticated and authorized users have access.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Creating a local app (a desktop app, for instance) to access the API involves a similar authentication and authorization flow as the Blazor app. Here’s a high-level approach:</p>
+<h3>1. <strong>User Authentication</strong></h3>
+<p>The local app must have a way for users to log in, and it communicates with the API to authenticate users and receive a JWT token.</p>
+<h3>2. <strong>Token Storage</strong></h3>
+<p>The app securely stores the token for use in subsequent API requests.</p>
+<h3>3. <strong>API Requests</strong></h3>
+<p>The app includes the token in the Authorization header for API requests, and the API validates the token as usual.</p>
+<h3>Example Flow in a Console App:</h3>
+<p>Here’s a simplified C# Console app example to demonstrate the concept:</p>
+<pre><code class="language-csharp">class Program
+{
+    static async Task Main(string[] args)
+    {
+        Console.WriteLine(&quot;Enter Username:&quot;);
+        var username = Console.ReadLine();
+
+        Console.WriteLine(&quot;Enter Password:&quot;);
+        var password = Console.ReadLine();
+
+        var token = await Authenticate(username, password);
+
+        if(token != null)
+        {
+            // Use token for subsequent API requests
+        }
+    }
+
+    static async Task&lt;string&gt; Authenticate(string username, string password)
+    {
+        using var client = new HttpClient { BaseAddress = new Uri(&quot;http://your-api-base-address&quot;) };
+
+        var content = new StringContent(JsonConvert.SerializeObject(new { Username = username, Password = password }), Encoding.UTF8, &quot;application/json&quot;);
+
+        var response = await client.PostAsync(&quot;api/auth/token&quot;, content);
+
+        if(response.IsSuccessStatusCode)
+        {
+            var result = JsonConvert.DeserializeObject&lt;dynamic&gt;(await response.Content.ReadAsStringAsync());
+            return result.token;
+        }
+
+        Console.WriteLine(&quot;Authentication Failed&quot;);
+        return null;
+    }
+}
+</code></pre>
+<p>This example assumes you have an API endpoint at <code>api/auth/token</code> that authenticates users and returns a JWT token.</p>
+<h3>Securing the Token:</h3>
+<p>For a desktop app, storing the token securely is crucial. Avoid keeping it in plain text or insecure storage. For instance, you can use the <a href="https://docs.microsoft.com/en-us/dotnet/standard/security/how-to-use-data-protection">Data Protection API (DPAPI)</a> on Windows to protect sensitive data.</p>
+<h3>Authorization:</h3>
+<p>The token will contain claims/roles, and the API will perform authorization based on those, so even if someone has the token, they can only access the API resources allowed by their roles/claims.</p>
+<h3>Local App UI:</h3>
+<p>In real-world applications, especially those with a graphical user interface (GUI), you will have proper user interface elements for user input, feedback, error messages, and displaying data retrieved from the API, depending on the technology/framework you are using for the local app. The example above is oversimplified and primarily for conceptual demonstration.</p>
+<h3>Adjusting CORS in API:</h3>
+<p>If your API and local app run on different domains or ports, make sure to properly configure CORS in your API to allow requests from your local app’s domain/port, if applicable.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>You are quite correct in your understanding of the flow. Here’s a concise recap and a few clarifications and suggestions:</p>
+<h3>Recap and Clarifications:</h3>
+<ol>
+<li><p><strong>User Management:</strong></p>
+<ul>
+<li>The Admin user logs in via the Blazor app and can manage (add/remove) users through a UI in the Blazor app, which communicates with the API to perform user management tasks.</li>
+<li>The user data is stored in a shared user store, which the API can access to authenticate and authorize users.</li>
+</ul>
+</li>
+<li><p><strong>Admin Identification:</strong></p>
+<ul>
+<li>The admin user could indeed be predefined, or you could have a role-based mechanism where certain users have admin roles and others have regular user roles.</li>
+<li>The roles should ideally be assigned through the system, and the users with admin roles should have the rights to perform admin-related tasks like managing users.</li>
+</ul>
+</li>
+<li><p><strong>User Login:</strong></p>
+<ul>
+<li>Regular users log in via the Blazor app. The app communicates with the API, which authenticates the users against the shared user store and returns a token upon successful authentication.</li>
+</ul>
+</li>
+<li><p><strong>Token Handling:</strong></p>
+<ul>
+<li>The token is stored securely in the server memory of the Blazor app and is used to make authenticated requests to the API.</li>
+<li>The token is never exposed to the client-side.</li>
+</ul>
+</li>
+<li><p><strong>User Interface Access:</strong></p>
+<ul>
+<li>Depending on the user role, different UI elements or pages could be accessible to the user.</li>
+<li>The UI interacts with the API, using the stored token for making requests and receiving responses, and updates the UI accordingly.</li>
+</ul>
+</li>
+</ol>
+<h3>Suggestions:</h3>
+<ol>
+<li><p><strong>Role-Based Authorization:</strong></p>
+<ul>
+<li>Use role-based authorization for defining access levels, where certain roles have permissions to perform specific tasks or access specific resources.</li>
+</ul>
+</li>
+<li><p><strong>Secure User Management:</strong></p>
+<ul>
+<li>Ensure that user management functionalities, like adding or removing users, are secure, and only authorized (admin) users can access them.</li>
+</ul>
+</li>
+<li><p><strong>Token Security:</strong></p>
+<ul>
+<li>Continue ensuring that the token is secured in memory and not exposed to the client-side, reducing the risk of token theft.</li>
+</ul>
+</li>
+<li><p><strong>Use HTTPS:</strong></p>
+<ul>
+<li>Ensure all communications, especially logins, and user management tasks, are done over HTTPS to prevent man-in-the-middle attacks.</li>
+</ul>
+</li>
+<li><p><strong>Monitoring and Logging:</strong></p>
+<ul>
+<li>Keep logs of sensitive operations like user additions/removals, and monitor for any unauthorized or suspicious access.</li>
+</ul>
+</li>
+<li><p><strong>User Authentication and Authorization in API:</strong></p>
+<ul>
+<li>The API should handle authentication and authorization checks for each request, ensuring that only authenticated and authorized users can access the resources.</li>
+</ul>
+</li>
+<li><p><strong>Data Validation:</strong></p>
+<ul>
+<li>Validate all incoming data, especially in user management functionalities, to prevent security vulnerabilities like SQL Injection.</li>
+</ul>
+</li>
+</ol>
+<h3>Conclusion:</h3>
+<p>Your understanding is quite solid, and implementing the above strategies and practices will help in creating a secure and efficient system. The suggestions are aimed to reinforce security and operational best practices.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To implement a strategy where you are securing both your Blazor app and API using JWT tokens, you would indeed often start with &quot;Individual User Accounts&quot; (Individual Authentication) for the Blazor app, as it sets up an authentication system with a user store for you.</p>
+<p>However, for the API, the selection depends on your exact needs, but choosing &quot;None&quot; would usually give you a clean slate to implement JWT-based authentication and protection, allowing you more control over your authentication and authorization mechanisms.</p>
+<h3>Here’s a step-by-step approach:</h3>
+<h4><strong>1. Blazor App:</strong></h4>
+<ul>
+<li>Select “Individual User Accounts”.</li>
+<li>Set up roles for users (e.g., Admin, User) in your user store (could be ASP.NET Core Identity).</li>
+<li>Implement login and user management pages/functionality in your Blazor app.</li>
+</ul>
+<h4><strong>2. API:</strong></h4>
+<ul>
+<li>Start with &quot;None&quot;.</li>
+<li>Implement JWT-based authentication, where you issue tokens to authenticated users.</li>
+<li>Protect your API endpoints using the issued JWT tokens.</li>
+<li>Set up your API to validate the tokens and authorize users based on the roles/claims in the tokens.</li>
+</ul>
+<h4><strong>3. Integration:</strong></h4>
+<ul>
+<li>Integrate your Blazor app with the API to handle login and receive JWT tokens.</li>
+<li>Store tokens securely in the server-side memory in the Blazor app and use them for subsequent API requests.</li>
+</ul>
+<h3><strong>Note:</strong></h3>
+<ul>
+<li>You can use ASP.NET Core Identity for managing users and roles in both the Blazor app and the API.</li>
+<li>The API should be set up to authenticate users against the shared user store and issue, validate, and authorize based on JWT tokens.</li>
+</ul>
+<h3><strong>Secure Communication:</strong></h3>
+<ul>
+<li>Ensure that the Blazor app and the API communicate over HTTPS to keep user credentials and tokens secure.</li>
+</ul>
+<p>By taking this approach, you leverage the built-in facilities of “Individual User Accounts” for user management in the Blazor app, while custom-implementing a secure and streamlined JWT-based authentication and authorization mechanism in your API.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When leveraging ASP.NET Core Identity across both your Server-Side Blazor app and API, it’s crucial to have both configured correctly to interact with the Identity system and the user store.</p>
+<h3>1. <strong>Blazor App:</strong></h3>
+<ul>
+<li>For the Server-Side Blazor app, choosing “Individual User Accounts” is appropriate, as it will scaffold the required setup for integrating with ASP.NET Core Identity.</li>
+<li>This will set up the necessary Identity services, database context, and default UI for user management, registration, and login.</li>
+</ul>
+<h3>2. <strong>API Project:</strong></h3>
+<ul>
+<li>For the API, the setup is more manual, but starting with “No Authentication” allows for more control and customization.</li>
+<li>You’ll need to configure ASP.NET Core Identity manually, setting up the Identity services, and pointing it to the correct user store (the same one that the Blazor app is using).</li>
+<li>Implement JWT Bearer authentication for issuing and validating tokens.</li>
+</ul>
+<h3>Shared User Store:</h3>
+<p>Ensure that both the Blazor app and the API are configured to use the same user store (database). This can be achieved by pointing both projects to the same connection string.</p>
+<h3>Implementation Steps for API:</h3>
+<ol>
+<li><p><strong>Configure Identity Services:</strong></p>
+<ul>
+<li>Manually add and configure ASP.NET Core Identity services in the Startup class.</li>
+</ul>
+</li>
+<li><p><strong>Configure JWT Bearer Authentication:</strong></p>
+<ul>
+<li>Set up JWT Bearer authentication to issue and validate tokens.</li>
+</ul>
+</li>
+<li><p><strong>Secure Endpoints:</strong></p>
+<ul>
+<li>Secure your API endpoints using <code>[Authorize]</code> attribute, and possibly specify roles if needed.</li>
+</ul>
+</li>
+<li><p><strong>User Authentication:</strong></p>
+<ul>
+<li>Implement user authentication against ASP.NET Core Identity to issue JWT tokens upon successful authentication.</li>
+</ul>
+</li>
+</ol>
+<h3>Additional Note:</h3>
+<p>When setting up the API to use ASP.NET Core Identity, you might want to create a separate project (a class library) that contains the Identity models, DbContext, and possibly some shared logic, and then reference this project from both the Blazor app and the API. This way, you can ensure that both projects are using the same Identity setup and user store.</p>
+<h3>Example of Startup Configuration in API:</h3>
+<p>Here is a very simplified example of how you might configure Identity and JWT Bearer authentication in your API’s <code>Startup.cs</code>:</p>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    // ... Other services
+
+    services.AddDbContext&lt;ApplicationDbContext&gt;(options =&gt;
+        options.UseSqlServer(Configuration.GetConnectionString(&quot;DefaultConnection&quot;)));
+
+    services.AddIdentity&lt;ApplicationUser, IdentityRole&gt;()
+        .AddEntityFrameworkStores&lt;ApplicationDbContext&gt;()
+        .AddDefaultTokenProviders();
+
+    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options =&gt;
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = Configuration[&quot;Jwt:Issuer&quot;],
+                ValidAudience = Configuration[&quot;Jwt:Audience&quot;],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration[&quot;Jwt:Key&quot;]))
+            };
+        });
+
+    // ... MVC, CORS, etc.
+}
+</code></pre>
+<p>Remember to secure your configuration settings, especially sensitive ones like the JWT key, and never hard-code them directly in your code. Use the configuration system in ASP.NET Core and consider using user secrets, environment variables, or Azure Key Vault for storing sensitive configuration settings.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, it is indeed possible to generate the outlined solution using ASP.NET Core technologies, including Blazor for the web app, and ASP.NET Core Web API for the API, integrated with ASP.NET Core Identity for user management and authentication. Below is a high-level overview of the steps to achieve this.</p>
+<h3>Step 1: Setup Solution and Projects</h3>
+<ol>
+<li><p><strong>Create a Solution:</strong></p>
+<ul>
+<li>Create a new solution using Visual Studio or the .NET CLI.</li>
+</ul>
+</li>
+<li><p><strong>Add Blazor Project:</strong></p>
+<ul>
+<li>Add a new Server-Side Blazor project to the solution.</li>
+<li>Choose “Individual User Accounts” for authentication.</li>
+</ul>
+</li>
+<li><p><strong>Add API Project:</strong></p>
+<ul>
+<li>Add a new ASP.NET Core Web API project to the solution.</li>
+<li>Choose “No Authentication” for the API project.</li>
+</ul>
+</li>
+<li><p><strong>Add Shared Library (Optional):</strong></p>
+<ul>
+<li>Optionally, add a class library project to keep shared models, interfaces, or logic.</li>
+</ul>
+</li>
+</ol>
+<h3>Step 2: Configure Projects</h3>
+<ol>
+<li><p><strong>Configure Blazor Project:</strong></p>
+<ul>
+<li>Use the scaffolded Identity pages or modify them as per your needs.</li>
+<li>Add CRUD pages for user management.</li>
+</ul>
+</li>
+<li><p><strong>Configure API Project:</strong></p>
+<ul>
+<li>Manually set up ASP.NET Core Identity and point it to the same user store as the Blazor project.</li>
+<li>Implement JWT Bearer authentication.</li>
+<li>Add controllers and actions to handle token requests and other functionalities.</li>
+</ul>
+</li>
+<li><p><strong>Setup Shared User Store:</strong></p>
+<ul>
+<li>Ensure both the Blazor app and API are configured to use the same user store.</li>
+</ul>
+</li>
+</ol>
+<h3>Step 3: Implement Functionalities</h3>
+<ol>
+<li><p><strong>Implement Login in Blazor App:</strong></p>
+<ul>
+<li>Implement a login page that communicates with your API to get a JWT token.</li>
+<li>Store the token securely in the server-side memory.</li>
+</ul>
+</li>
+<li><p><strong>Implement User CRUD in Blazor App:</strong></p>
+<ul>
+<li>Create pages to add, remove, update, and list users utilizing the API.</li>
+</ul>
+</li>
+<li><p><strong>Implement Token Issuance in API:</strong></p>
+<ul>
+<li>Authenticate users against ASP.NET Core Identity and issue JWT tokens on successful authentication.</li>
+</ul>
+</li>
+<li><p><strong>Secure API Endpoints:</strong></p>
+<ul>
+<li>Apply the <code>[Authorize]</code> attribute to secure your API endpoints.</li>
+</ul>
+</li>
+</ol>
+<h3>Step 4: Testing and Debugging</h3>
+<ul>
+<li>Test your solution thoroughly, ensuring that user management from the Blazor app and token issuance from the API work seamlessly.</li>
+<li>Debug any issues that arise during the testing phase, looking specifically at authentication, authorization, and data integrity between the Blazor app and API.</li>
+</ul>
+<h3>Tools:</h3>
+<ul>
+<li>Use Entity Framework Core for data access and migrations.</li>
+<li>Use Postman or a similar tool for testing your API endpoints.</li>
+</ul>
+<h3>Security Considerations:</h3>
+<ul>
+<li>Store sensitive data securely using user secrets, environment variables, or a secure configuration provider.</li>
+<li>Ensure secure communication using HTTPS.</li>
+<li>Validate and sanitize all inputs, especially in user management functionalities.</li>
+</ul>
+<h3>Conclusion:</h3>
+<p>This high-level guide provides a structured approach to creating a solution with a Blazor app and an API, both utilizing ASP.NET Core Identity. It involves configuring projects, implementing required functionalities, ensuring secure communication, and thorough testing. Keep refining each step based on your specific requirements and project needs, ensuring to follow best practices for security and development.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Creating the entire code for such a project involves multiple components, extensive configuration, and would exceed the capacity of a single response. However, I can provide a simplified guideline with some code snippets to help you get started on building the project.</p>
+<h3>1. Blazor App Configuration:</h3>
+<ul>
+<li>Setup Blazor with Individual User Account</li>
+</ul>
+<pre><code class="language-shell">dotnet new blazorserver -n YourBlazorApp -au Individual
+</code></pre>
+<ul>
+<li>Create a Login page and CRUD pages for user management as per your requirements.</li>
+</ul>
+<h3>2. API Configuration:</h3>
+<ul>
+<li>Create an API Project with No Authentication.</li>
+</ul>
+<pre><code class="language-shell">dotnet new webapi -n YourApiProject
+</code></pre>
+<ul>
+<li>In <code>Startup.cs</code> of the API project, configure Identity and JWT Bearer.</li>
+</ul>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    services.AddDbContext&lt;ApplicationDbContext&gt;(options =&gt;
+        options.UseSqlServer(Configuration.GetConnectionString(&quot;DefaultConnection&quot;)));
+
+    services.AddIdentity&lt;ApplicationUser, IdentityRole&gt;()
+        .AddEntityFrameworkStores&lt;ApplicationDbContext&gt;()
+        .AddDefaultTokenProviders();
+
+    services.AddAuthentication(x =&gt;
+    {
+        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(x =&gt;
+    {
+        x.RequireHttpsMetadata = false;
+        x.SaveToken = true;
+        x.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration[&quot;Jwt:Key&quot;])),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
+}
+</code></pre>
+<ul>
+<li>Add a controller to your API to handle user authentication and token issuance.</li>
+</ul>
+<h3>3. Shared User Store:</h3>
+<ul>
+<li>Ensure that both the API and the Blazor app use the same <code>ApplicationDbContext</code> and the same connection string to point to the same user store.</li>
+</ul>
+<h3>4. Testing:</h3>
+<ul>
+<li>You can use Postman to test your API endpoints to make sure they are issuing tokens correctly.</li>
+<li>You can then use these tokens to access secured endpoints from your Blazor app.</li>
+</ul>
+<p>Remember to never hardcode sensitive information like your secret keys directly in your code. Store them securely using environment variables, user secrets, or a secure configuration provider.</p>
+<p>This example is greatly simplified and is only a starting point. You will need to build upon it, considering error handling, user experience, security enhancements, and other business-specific requirements. Also, remember to secure your applications properly, use HTTPS, and follow the best practices for secure coding.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">空気を読んでこちらの考えに合わせてきている感があった。心地よく使えるというのは、AI のクオリティーにつながる。</p>
+                            <p class="note_contents">コードを生成できるなら、そのままビルドできるものを出してほしかったが、そこまではしないようだ。やってみると細かいところが動かないからか。</p>
+                            <p class="note_contents">TODO メールのシステムの開発において三つのプロジェクトをソリューションに追加するに十分な情報は得られた。やってみないことには分からないが、AI がそれでいいと言いきっているので、まずはこの構成から着手してみる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
