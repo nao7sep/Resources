@@ -10,6 +10,952 @@
             <a href="SQLite.htm" class="title">SQLite</a>
         </div>
         <div class="entries">
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">今まで使ったことがない。使おうとしたことはあるが、業務システムには SQL Server のほうが適すると判断した。</p>
+                    <p class="note_contents">しかし、コリジョンを心配しなくてよい、データ件数も数万くらいの小さなアプリなら、SQLite をもっと使ってよさそうだ。</p>
+                    <!-- Task: f29d565d-248f-4ab3-984d-11af6a50d81d -->
+                </div>
+            </div>
+            <div id="dab5bd46-e8c9-47b8-8f43-22d13bd97470" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">コリジョンの回避の方法を調べる</span>
+                    <a href="#dab5bd46-e8c9-47b8-8f43-22d13bd97470" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Collision in SQLite typically refers to situations where multiple operations, such as reads, writes, or updates, attempt to access the database concurrently, causing data inconsistency or corruption. To avoid collisions, you can employ several strategies:</p>
+<h3>1. <strong>Use Transactions:</strong></h3>
+<p>SQLite supports transactional operations. When you execute a group of SQL commands within a transaction, SQLite ensures that either all the commands succeed, or none of them does.</p>
+<pre><code class="language-sql">BEGIN TRANSACTION;
+
+-- SQL Operations
+
+COMMIT;
+</code></pre>
+<h3>2. <strong>Optimize Write Operations:</strong></h3>
+<p>Since write operations lock the database, try to minimize the time the database is locked by optimizing your write operations. This is often done by batching inserts/updates/deletes and minimizing the amount of work done inside a transaction.</p>
+<h3>3. <strong>Use Write-Ahead Logging (WAL) Mode:</strong></h3>
+<p>By default, SQLite operates in rollback journal mode, where write transactions lock the whole database. Switching to Write-Ahead Logging (WAL) mode allows multiple reads and one write to occur concurrently.</p>
+<pre><code class="language-sql">PRAGMA journal_mode=WAL;
+</code></pre>
+<h3>4. <strong>Locking and Busy Timeout:</strong></h3>
+<p>SQLite provides mechanisms to handle cases when the database is locked due to ongoing write operations. One approach is to set a busy timeout, where SQLite will wait for the specified amount of time for the lock to be released before returning an error.</p>
+<pre><code class="language-sql">PRAGMA busy_timeout=3000; -- Set to 3000 milliseconds, adjust as needed
+</code></pre>
+<h3>5. <strong>Connection Pooling:</strong></h3>
+<p>If your application has multiple threads or processes accessing the database, use a connection pool to manage and reuse database connections efficiently, reducing the overhead of opening and closing connections frequently.</p>
+<h3>6. <strong>Use Read Uncommitted Isolation Level:</strong></h3>
+<p>In scenarios where reading uncommitted data is acceptable, you can use the read uncommitted isolation level to read data without acquiring any locks, avoiding collisions with write operations.</p>
+<pre><code class="language-sql">PRAGMA read_uncommitted=1;
+</code></pre>
+<h3>7. <strong>Normalize Database:</strong></h3>
+<p>A normalized database design can reduce the likelihood of collisions by reducing redundancy and ensuring that changes to data are localized.</p>
+<h3>8. <strong>Optimize Queries:</strong></h3>
+<p>Optimize your SQL queries to reduce execution time, thus reducing the time the database is locked. Make use of indexes, and analyze your queries to ensure they are as efficient as possible.</p>
+<h3>9. <strong>Use Application-Level Locking:</strong></h3>
+<p>If the aforementioned mechanisms are not sufficient, consider implementing application-level locking strategies to synchronize access to the database.</p>
+<h3>10. <strong>Check for Database Corruption:</strong></h3>
+<p>Regularly check your SQLite database for corruption and have backup and recovery mechanisms in place.</p>
+<h3>11. <strong>Avoid Long-Running Transactions:</strong></h3>
+<p>Keep your transactions as short as possible to avoid locking the database for extended periods, which can lead to collisions.</p>
+<h3>12. <strong>Concurrency Control Mechanisms:</strong></h3>
+<p>Use optimistic or pessimistic concurrency control mechanisms to manage concurrent access to the database.</p>
+<h3>13. <strong>Upgrade to a Full-Featured DBMS:</strong></h3>
+<p>If the application's complexity and the volume of concurrent accesses become too high, consider migrating to a more robust, full-featured database management system like PostgreSQL or MySQL.</p>
+<h3>14. <strong>Use a Cached Read-Only Replica:</strong></h3>
+<p>For read-heavy workloads, consider maintaining a cached read-only replica of your SQLite database to offload read operations and avoid collisions with write operations.</p>
+<p>By considering and implementing a combination of these strategies, you can avoid or mitigate collisions and ensure the integrity and consistency of your SQLite database.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Managing concurrent access in SQLite while using C# involves using transactions, connection pooling, and handling exceptions for retrying the operations. Below are the mechanisms with actual C# code to illustrate the usage with SQLite.</p>
+<h3>1. <strong>Using Transactions</strong></h3>
+<pre><code class="language-csharp">using System;
+using System.Data;
+using Microsoft.Data.Sqlite;
+
+class Program
+{
+    static void Main()
+    {
+        var connectionString = &quot;Data Source=sample.db&quot;;
+        using var connection = new SqliteConnection(connectionString);
+        connection.Open();
+
+        using var transaction = connection.BeginTransaction();
+
+        try
+        {
+            using var command = connection.CreateCommand();
+            command.Transaction = transaction;
+            command.CommandText = &quot;INSERT INTO Table1 (Name) VALUES ('John Doe')&quot;;
+            command.ExecuteNonQuery();
+
+            // Any additional SQL operations
+
+            transaction.Commit();
+        }
+        catch (SqliteException ex)
+        {
+            Console.WriteLine(&quot;Error occurred: &quot; + ex.Message);
+            transaction.Rollback();
+        }
+    }
+}
+</code></pre>
+<h3>2. <strong>Handling SQLITE_BUSY by Setting a Busy Timeout</strong></h3>
+<pre><code class="language-csharp">using System;
+using Microsoft.Data.Sqlite;
+
+class Program
+{
+    static void Main()
+    {
+        var connectionString = &quot;Data Source=sample.db&quot;;
+        using var connection = new SqliteConnection(connectionString);
+        connection.Open();
+
+        using var pragmaCommand = connection.CreateCommand();
+        pragmaCommand.CommandText = &quot;PRAGMA busy_timeout=3000&quot;; // Set busy timeout to 3000 milliseconds
+        pragmaCommand.ExecuteNonQuery();
+
+        try
+        {
+            using var command = connection.CreateCommand();
+            command.CommandText = &quot;INSERT INTO Table1 (Name) VALUES ('John Doe')&quot;;
+            command.ExecuteNonQuery();
+        }
+        catch (SqliteException ex)
+        {
+            Console.WriteLine(&quot;Error occurred: &quot; + ex.Message);
+        }
+    }
+}
+</code></pre>
+<h3>3. <strong>Using Write-Ahead Logging (WAL) Mode</strong></h3>
+<pre><code class="language-csharp">using System;
+using Microsoft.Data.Sqlite;
+
+class Program
+{
+    static void Main()
+    {
+        var connectionString = &quot;Data Source=sample.db&quot;;
+        using var connection = new SqliteConnection(connectionString);
+        connection.Open();
+
+        using var pragmaCommand = connection.CreateCommand();
+        pragmaCommand.CommandText = &quot;PRAGMA journal_mode=WAL&quot;;
+        pragmaCommand.ExecuteNonQuery();
+
+        // Continue with database operations
+    }
+}
+</code></pre>
+<h3>4. <strong>Connection Pooling</strong></h3>
+<p>SQLite and the SQLite .NET provider automatically handle connection pooling, so you don’t typically have to manage it explicitly. However, you can control it through the connection string:</p>
+<pre><code class="language-csharp">var connectionString = &quot;Data Source=sample.db;Pooling=True;Max Pool Size=100;&quot;;
+using var connection = new SqliteConnection(connectionString);
+</code></pre>
+<h3>5. <strong>Handling Concurrency Conflicts</strong></h3>
+<p>For handling concurrency conflicts, you can combine transactions, exception handling, and retry logic to repeat the operation when conflicts occur.</p>
+<pre><code class="language-csharp">using System;
+using System.Threading;
+using Microsoft.Data.Sqlite;
+
+class Program
+{
+    static void Main()
+    {
+        var connectionString = &quot;Data Source=sample.db&quot;;
+        using var connection = new SqliteConnection(connectionString);
+        connection.Open();
+
+        var retryCount = 3;
+        while (retryCount &gt; 0)
+        {
+            try
+            {
+                using var transaction = connection.BeginTransaction();
+                using var command = connection.CreateCommand();
+                command.Transaction = transaction;
+                command.CommandText = &quot;UPDATE Table1 SET Name = 'Jane Doe' WHERE Id = 1&quot;;
+                var affectedRows = command.ExecuteNonQuery();
+
+                if (affectedRows == 0)
+                {
+                    throw new Exception(&quot;No rows affected, possible concurrency conflict&quot;);
+                }
+
+                transaction.Commit();
+                break;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(&quot;Error occurred: &quot; + ex.Message);
+                retryCount--;
+
+                if (retryCount &gt; 0)
+                {
+                    Thread.Sleep(1000); // Wait for a while before retrying
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<p>In the examples above, replace the table name <code>Table1</code> and column names <code>Name</code> and <code>Id</code> with the actual table and column names in your database. Also, modify SQL commands according to your actual use case.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Optimistic and pessimistic concurrency control are two approaches to managing concurrent access to a database, ensuring that transactions are executed in a controlled manner to avoid conflicts and maintain data integrity.</p>
+<h3>Optimistic Concurrency Control in SQLite using C#</h3>
+<p>In optimistic concurrency control, a record is read under the assumption that it won’t be modified by another transaction before the current transaction is committed. Typically, a version number, timestamp, or checksum is used to detect conflicts.</p>
+<p>Here’s a simplified example in C# using SQLite:</p>
+<pre><code class="language-csharp">using Microsoft.Data.Sqlite;
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        var connectionString = &quot;Data Source=sample.db&quot;;
+        using var connection = new SqliteConnection(connectionString);
+        connection.Open();
+
+        int idToUpdate = 1;
+
+        using var command = new SqliteCommand(&quot;SELECT Name, Version FROM Table1 WHERE Id = @Id&quot;, connection);
+        command.Parameters.AddWithValue(&quot;@Id&quot;, idToUpdate);
+
+        var reader = command.ExecuteReader();
+        if (reader.Read())
+        {
+            string name = reader.GetString(0);
+            int version = reader.GetInt32(1);
+
+            // Perform operations on the record and decide to update it.
+            using var updateCommand = new SqliteCommand(&quot;UPDATE Table1 SET Name = @Name, Version = Version + 1 WHERE Id = @Id AND Version = @Version&quot;, connection);
+            updateCommand.Parameters.AddWithValue(&quot;@Name&quot;, name + &quot; - Updated&quot;);
+            updateCommand.Parameters.AddWithValue(&quot;@Id&quot;, idToUpdate);
+            updateCommand.Parameters.AddWithValue(&quot;@Version&quot;, version);
+
+            int rowsAffected = updateCommand.ExecuteNonQuery();
+
+            if (rowsAffected == 0)
+            {
+                Console.WriteLine(&quot;Concurrent modification detected. Operation aborted.&quot;);
+            }
+        }
+    }
+}
+</code></pre>
+<h3>Pessimistic Concurrency Control in SQLite using C#</h3>
+<p>In pessimistic concurrency control, locks are used to prevent other transactions from modifying the record until the current transaction is either committed or rolled back.</p>
+<p>SQLite uses locks at the database level. When using transactions in SQLite, a lock is acquired to prevent other write transactions from proceeding until the current one is complete, which can be considered as a form of pessimistic concurrency control.</p>
+<p>Here’s an example:</p>
+<pre><code class="language-csharp">using Microsoft.Data.Sqlite;
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        var connectionString = &quot;Data Source=sample.db&quot;;
+        using var connection = new SqliteConnection(connectionString);
+        connection.Open();
+
+        int idToUpdate = 1;
+
+        using var transaction = connection.BeginTransaction();
+
+        try
+        {
+            // Other transactions trying to write will be blocked until this transaction is committed or rolled back.
+            using var command = new SqliteCommand(&quot;UPDATE Table1 SET Name = 'New Name' WHERE Id = @Id&quot;, connection);
+            command.Parameters.AddWithValue(&quot;@Id&quot;, idToUpdate);
+            command.Transaction = transaction;
+
+            int rowsAffected = command.ExecuteNonQuery();
+
+            if (rowsAffected == 0)
+            {
+                Console.WriteLine(&quot;No rows were updated.&quot;);
+            }
+
+            // Perform other operations...
+
+            transaction.Commit();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(&quot;Error: &quot; + ex.Message);
+            transaction.Rollback();
+        }
+    }
+}
+</code></pre>
+<h3>Consideration:</h3>
+<p>While SQLite does offer some level of concurrency control, if your application requires high concurrency with complex transaction isolation and conflict detection, a more fully-featured DBMS like PostgreSQL or MySQL may be more suitable.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="23fc72d7-cf1f-4f4d-bffe-a93b639212a2" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Connection Pooling について調べる</span>
+                    <a href="#23fc72d7-cf1f-4f4d-bffe-a93b639212a2" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Connection pooling is a method that allows multiple physical connections to be used as if they are a single connection. In SQLite, connection pooling can be particularly useful in multi-threaded and high-concurrency scenarios, where creating a new connection for every operation can be very costly.</p>
+<p>For a C# application, you might typically use the <code>System.Data.SQLite</code> library to interact with SQLite databases. This library, like many database access libraries, already has built-in support for connection pooling.</p>
+<h3>Using Connection Pooling with <code>System.Data.SQLite</code></h3>
+<p>When using the <code>SQLiteConnection</code> object from <code>System.Data.SQLite</code>, connection pooling is enabled by default. The <code>Pooling</code> connection string property controls whether or not connection pooling is enabled. You can set it like this:</p>
+<pre><code class="language-csharp">string connectionString = &quot;Data Source=mydb.db;Version=3;Pooling=True;Max Pool Size=100;&quot;;
+using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+{
+    connection.Open();
+    // Perform database operations
+}
+</code></pre>
+<p>In this example, the <code>Pooling=True</code> part of the connection string enables connection pooling, and <code>Max Pool Size=100;</code> sets the maximum number of connections allowed in the pool.</p>
+<h3>Implementing Custom Connection Pooling</h3>
+<p>If, for some reason, you decide to implement your own connection pooling mechanism, you would essentially maintain a list or collection of open connections, and manage the allocation and deallocation of these connections as needed. Here’s a very simple example to give you an idea:</p>
+<pre><code class="language-csharp">class SQLiteConnectionPool
+{
+    private readonly ConcurrentBag&lt;SQLiteConnection&gt; _connectionPool = new ConcurrentBag&lt;SQLiteConnection&gt;();
+    private readonly string _connectionString;
+    private readonly int _maxPoolSize;
+    private int _currentPoolSize = 0;
+
+    public SQLiteConnectionPool(string connectionString, int maxPoolSize)
+    {
+        _connectionString = connectionString;
+        _maxPoolSize = maxPoolSize;
+    }
+
+    public SQLiteConnection GetConnection()
+    {
+        if (_connectionPool.TryTake(out var connection))
+        {
+            return connection;
+        }
+
+        if (Interlocked.Increment(ref _currentPoolSize) &lt;= _maxPoolSize)
+        {
+            connection = new SQLiteConnection(_connectionString);
+            connection.Open();
+            return connection;
+        }
+
+        throw new InvalidOperationException(&quot;Maximum pool size reached.&quot;);
+    }
+
+    public void ReturnConnection(SQLiteConnection connection)
+    {
+        if (connection != null)
+        {
+            _connectionPool.Add(connection);
+        }
+    }
+}
+</code></pre>
+<p>In this code:</p>
+<ul>
+<li><code>_connectionPool</code> holds the pooled connections.</li>
+<li><code>GetConnection()</code> retrieves a connection from the pool or creates a new one if the pool is not full.</li>
+<li><code>ReturnConnection()</code> returns a connection to the pool.</li>
+</ul>
+<p>Remember, this is just a simple example, and there are many considerations and improvements that can be made, such as handling disposed connections and managing connection lifetimes more effectively.</p>
+<h3>Example of Using Custom Connection Pool</h3>
+<p>Here's how you might use the custom connection pool:</p>
+<pre><code class="language-csharp">var pool = new SQLiteConnectionPool(&quot;Data Source=mydb.db;Version=3;&quot;, 5);
+
+var connection = pool.GetConnection();
+// Perform operations
+pool.ReturnConnection(connection);
+</code></pre>
+<p>Remember to always return connections back to the pool after using them, preferably in a <code>finally</code> block or a <code>using</code> statement to ensure that connections are returned even if an exception occurs. This will prevent leaking connections and exhausting the connection pool.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>SQLite is not a client-server database engine and typically runs in the same address space as the application. Therefore, it doesn't have a concept of &quot;connections&quot; in the same way that client-server databases do. However, concurrent access is mostly about how many threads or processes are accessing the database at the same time.</p>
+<h3>Concurrent Access and Write Transactions</h3>
+<p>SQLite supports concurrent read access by multiple threads or processes, but write transactions are exclusive; when a write transaction is occurring, no other writes or reads can occur.</p>
+<p>However, the write transactions in SQLite are typically very fast, so the lock is held for a very short time, allowing for a high level of concurrency in practice, especially if write transactions are kept short.</p>
+<h3>Connection Pooling Impact</h3>
+<p>Connection pooling, in the context of SQLite, mainly affects how many SQLite handles your application is holding and managing concurrently, and it could impact the performance of the application. However, the number of connections in the connection pool does not affect the fundamental limitation of SQLite that only one write transaction can occur at a time.</p>
+<h3>Practical Limitations</h3>
+<p>While SQLite handles concurrent reads very well, if your application has high concurrency requirements, especially with many write transactions, then SQLite may become a bottleneck, and a client-server database management system may be more appropriate.</p>
+<p>The number of concurrent reads or connections that SQLite can handle depends on various factors, including the hardware it’s running on, the complexity of the queries, the size of the database, and the duration of the write transactions. Therefore, it's hard to state a specific limit on the number of concurrent connections.</p>
+<h3>Optimization</h3>
+<p>To optimize concurrency in SQLite:</p>
+<ul>
+<li>Keep write transactions as short as possible.</li>
+<li>Use Write-Ahead Logging (WAL) mode, which can allow concurrent reads and writes.</li>
+</ul>
+<p>To enable WAL mode, you can execute the following SQL command after connecting to the database:</p>
+<pre><code class="language-sql">PRAGMA journal_mode=WAL;
+</code></pre>
+<h3>Conclusion</h3>
+<p>While you can have many open connections, and thus a large connection pool, to an SQLite database, the actual limiting factor is often the number of concurrent write transactions due to SQLite's write serialization. If your application has extensive concurrent write needs, you might want to consider a more fully-featured DBMS like PostgreSQL, MySQL, or SQL Server.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="288cbc94-9006-49d0-8293-63a9667cfa9d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">キャッシュについて調べる</span>
+                    <a href="#288cbc94-9006-49d0-8293-63a9667cfa9d" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">どのくらいのメモリーが使われるか、どういったタイミングで破棄されるか。</p>
+                            <p class="note_contents">回線を切るとキャッシュが破棄されると最近知った。自分は、プロセスに関連づけられて、そのプロセスがなくなるまではキャッシュが残るのだと思っていた。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>SQLite provides an in-memory database which is transient and will disappear once the connection to it is closed. However, when you are working with a regular file-based SQLite database, the data persists after the connection is closed, but certain cached information or transactional states may not be retained.</p>
+<p>SQLite uses different kinds of caching, like the page cache to hold the content of the database, and prepared statement cache to avoid re-parsing the SQL queries. These are typically discarded when you close the connection, but the actual data that has been committed to the database will persist.</p>
+<p>Here is a more detailed breakdown:</p>
+<ol>
+<li><strong>Data Persistence</strong>: The actual data stored in the database file will persist between connections.</li>
+<li><strong>Page Cache</strong>: This is used to store copies of database disk pages to avoid frequent disk reads. This is usually cleared when the connection is closed.</li>
+<li><strong>Prepared Statement Cache</strong>: If you prepare an SQL statement, SQLite might cache this preparation to avoid re-parsing of the SQL. This also is usually cleared when the connection is closed.</li>
+<li><strong>Transaction State</strong>: Any uncommitted transactions will be rolled back when the connection is closed, and those changes will not be saved to the database file.</li>
+</ol>
+<h3>In-Memory Databases</h3>
+<p>If you are using an in-memory SQLite database (by specifying <code>:memory:</code> as the database filename), then the entire database, including its data and cache, will be lost when the connection is closed.</p>
+<h3>Persistent Connections</h3>
+<p>If you are using a persistent connection or connection pooling, the cache may not be cleared when you release a connection back to the pool, and it could be reused by subsequent connections.</p>
+<h3>Manually Clearing Cache</h3>
+<p>If needed, you can also manually clear certain caches using SQLite's PRAGMA cache_size command to adjust the page cache size, but doing so usually isn’t necessary unless you have specific memory usage requirements or are dealing with very large databases.</p>
+<h3>Checkpoints</h3>
+<p>SQLite utilizes Write-Ahead Logging (WAL) mode by default. When transactions are made, changes are not directly written to the main database file but are instead logged to a WAL file. It is essential to perform checkpoints to transfer the logged transactions in the WAL file back to the main database file to ensure data persistence.</p>
+<h3>Connection Closing and Committing</h3>
+<p>To ensure that all your changes are saved to a persistent SQLite database, it’s crucial to commit transactions before closing connections. Any uncommitted transaction will be lost when the connection is closed.</p>
+<pre><code class="language-python">import sqlite3
+
+conn = sqlite3.connect('example.db')
+
+# ... perform some operations ...
+
+# Commit the transaction
+conn.commit()
+
+# Close the connection
+conn.close()
+</code></pre>
+<p>Remember to handle exceptions properly to avoid data loss due to errors during transactions.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>You're partially correct, but let's clarify a few things.</p>
+<h3>Inter-Process Cache Sharing</h3>
+<p>You're absolutely right that if two different processes are accessing the same SQLite file, there isn’t shared cache between these two processes as each process has its own memory space.</p>
+<h3>Intra-Process (Thread-Level) Cache Sharing</h3>
+<p>Within a single process, if two threads are accessing the same SQLite file, they could potentially share some level of cache, particularly if they are using the same connection or if connection pooling is being used. However, SQLite connections are not thread-safe by default, so special care and configuration are needed if you want to share connections between threads.</p>
+<h3>Closing Connections</h3>
+<p>The decision to close a connection after each access does not primarily revolve around cache management but around resource management and ensuring data integrity. Keeping connections open can be resource-intensive, and in multithreaded environments, managing open connections can be complex. Closing the connection when it’s no longer needed is a good practice to release resources.</p>
+<p>However, repeatedly opening and closing connections has its own overhead, so if a thread is performing a series of database operations in quick succession, it might be more efficient to keep the connection open for the duration of those operations and then close it.</p>
+<h3>Connection Pooling</h3>
+<p>Connection pooling can be a middle-ground solution, allowing for the reuse of connections, reducing the overhead of opening and closing connections repeatedly, and managing resources more efficiently.</p>
+<h3>Thread Safety and Connection Sharing</h3>
+<p>If you're dealing with multithreading and SQLite, you'll usually want to have each thread use its own connection to the database to avoid issues related to concurrent access. SQLite has some support for concurrent access at the transaction level, but special care and attention to transaction management and locking are needed to avoid data corruption or access conflicts.</p>
+<p>SQLite offers different threading modes that control its behavior in multi-threaded environments:</p>
+<ol>
+<li><strong>Single-thread</strong>: In this mode, SQLite can only be accessed by a single thread.</li>
+<li><strong>Multi-thread</strong>: In this mode, SQLite can be accessed by multiple threads, but a single connection should only be used by one thread at a time.</li>
+<li><strong>Serialized</strong>: In this mode, SQLite can be accessed by multiple threads and a single connection can be shared among multiple threads, with SQLite handling the necessary locking.</li>
+</ol>
+<p>The default mode is serialized, but depending on the compile-time and run-time configurations, this might be different, so it is always good to verify and configure it according to your needs.</p>
+<h3>Conclusion</h3>
+<p>In summary, while there is a layer of cache management involved, when dealing with multiple processes or threads accessing SQLite, the primary concerns are usually related to connection and resource management, data integrity, and concurrency control, and appropriate strategies should be employed to handle these aspects according to the specific requirements of your application.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>For a typical todo app, especially in a client environment where the SQLite database is being accessed locally and not being shared between multiple processes or users, maintaining a single connection for the duration of the app's runtime is generally a sensible approach.</p>
+<h3>Advantages</h3>
+<ol>
+<li><strong>Reduced Overhead</strong>: You avoid the overhead of repeatedly opening and closing connections.</li>
+<li><strong>Simplicity</strong>: It simplifies the code by avoiding the need to manage multiple connections or implement connection pooling.</li>
+</ol>
+<h3>Considerations</h3>
+<ol>
+<li><strong>Error Handling</strong>: You need to ensure that any errors that occur during database interactions are properly handled so that the connection remains in a consistent and usable state.</li>
+<li><strong>Concurrent Access</strong>: If your app uses multiple threads to interact with the database, you need to manage access to the connection carefully to avoid conflicts, or you may consider using separate connections for each thread, depending on the complexity and requirements of your app.</li>
+<li><strong>Data Commit</strong>: Regularly commit transactions to ensure that changes are saved to the database file.</li>
+</ol>
+<h3>Example</h3>
+<p>Here's a simplistic example in Python, assuming you are using a single-threaded approach:</p>
+<pre><code class="language-python">import sqlite3
+
+# Open the connection when the app starts
+conn = sqlite3.connect('todo_app.db')
+
+def add_task(task):
+    cursor = conn.cursor()
+    cursor.execute(&quot;INSERT INTO tasks (name) VALUES (?)&quot;, (task,))
+    conn.commit()
+    cursor.close()
+
+def remove_task(task_id):
+    cursor = conn.cursor()
+    cursor.execute(&quot;DELETE FROM tasks WHERE id = ?&quot;, (task_id,))
+    conn.commit()
+    cursor.close()
+
+# ... Other database interaction functions ...
+
+# Remember to close the connection when the app closes
+def close_app():
+    conn.close()
+</code></pre>
+<p>In this example, the connection <code>conn</code> is opened when the app starts and is used for the duration of the app's runtime, and it’s only closed when the app is terminated.</p>
+<h3>Additional Tips</h3>
+<ul>
+<li>If the todo app evolves to have more complex workflows or multiple threads or processes accessing the database, you might need more sophisticated connection and concurrency management strategies like connection pooling or employing an ORM (Object-Relational Mapper) that abstracts and manages database connections.</li>
+<li>Regularly test your app with different scenarios to ensure data integrity and stability, especially after modifying the database interaction logic.</li>
+<li>Regular backups of the database can also be a good practice to prevent data loss.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="62dd2b89-de1f-48c9-848f-adf5a3fda715" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">SQLite にない機能を調べる</span>
+                    <a href="#62dd2b89-de1f-48c9-848f-adf5a3fda715" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>SQLite is a software library that provides a relational database management system. It's a lightweight, file-based database and is suitable for applications such as mobile apps, small to medium-sized applications, desktop applications, etc. However, it does lack several features that server-based database systems like PostgreSQL, MySQL, and Microsoft SQL Server provide. Here are some features that SQLite lacks:</p>
+<h3>1. <strong>Concurrency &amp; Write-Ahead Logging:</strong></h3>
+<ul>
+<li>While SQLite has some support for concurrent reads, it has limited support for concurrent writes, making it less suitable for high-concurrency applications. Server-based databases offer more advanced concurrency and transaction controls.</li>
+</ul>
+<h3>2. <strong>User Management &amp; Security:</strong></h3>
+<ul>
+<li>SQLite does not offer robust user management and access controls as server-based solutions do. It lacks the ability to manage user roles and permissions at a granular level.</li>
+<li>Server-based databases provide advanced security mechanisms such as encryption, auditing, and more fine-grained access controls.</li>
+</ul>
+<h3>3. <strong>Advanced Indexing and Searching:</strong></h3>
+<ul>
+<li>Server-based databases support full-text search and indexing, spatial indexing, and other advanced indexing features, which SQLite does not natively support.</li>
+</ul>
+<h3>4. <strong>Scalability:</strong></h3>
+<ul>
+<li>Server-based databases are designed to handle larger volumes of data and can be distributed and replicated across multiple servers. SQLite is not suitable for very large databases or high transaction volumes.</li>
+</ul>
+<h3>5. <strong>Stored Procedures and Triggers:</strong></h3>
+<ul>
+<li>SQLite supports a limited set of triggers but does not support stored procedures, whereas server-based databases often support a variety of programmable logic like stored procedures, functions, and more extensive trigger capabilities.</li>
+</ul>
+<h3>6. <strong>Foreign Keys &amp; Referential Integrity:</strong></h3>
+<ul>
+<li>Although SQLite has added support for foreign keys, its implementation is not as comprehensive or enforcing as in other server-based databases.</li>
+</ul>
+<h3>7. <strong>Data Types:</strong></h3>
+<ul>
+<li>SQLite has a smaller set of data types compared to server-based databases. For example, SQLite does not support date and time as distinct data types.</li>
+</ul>
+<h3>8. <strong>Backup and Recovery:</strong></h3>
+<ul>
+<li>Server-based databases often have more advanced and automatic backup and recovery mechanisms compared to SQLite.</li>
+</ul>
+<h3>9. <strong>Clustering and High Availability:</strong></h3>
+<ul>
+<li>Features like automatic failover, clustering, and data replication are often built into server-based databases to provide high availability, which are not available in SQLite.</li>
+</ul>
+<h3>10. <strong>Database Management Tools:</strong></h3>
+<ul>
+<li>Server-based databases usually come with more sophisticated database management tools and utilities for tasks like monitoring, tuning, and optimizing performance.</li>
+</ul>
+<h3>11. <strong>Optimization and Performance Tuning:</strong></h3>
+<ul>
+<li>Server-based databases provide more options and configurations for optimization and performance tuning compared to SQLite.</li>
+</ul>
+<h3>12. <strong>ACID Compliancy:</strong></h3>
+<ul>
+<li>While SQLite is ACID compliant, the way it handles ACID compliancy, especially the Isolation, may differ and might not be as robust as in server-based databases.</li>
+</ul>
+<h3>13. <strong>Partitioning and Sharding:</strong></h3>
+<ul>
+<li>Server-based databases offer advanced partitioning and sharding options for handling very large datasets, which is not supported by SQLite.</li>
+</ul>
+<h3>14. <strong>Network Access:</strong></h3>
+<ul>
+<li>SQLite is embedded and does not support network access to the database, which server-based databases inherently do.</li>
+</ul>
+<h3>Conclusion:</h3>
+<p>While SQLite is an excellent choice for smaller scale applications due to its simplicity and minimal setup, it is not suitable for applications that require high concurrency, have large datasets, or need advanced features and optimizations that are offered by server-based databases. The selection between SQLite and a server-based database depends on the specific needs and constraints of the project.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Stored procedures are a feature provided by many server-based database systems, and they represent precompiled collections of one or more SQL statements that are stored under a name and processed as a unit. They are used to encapsulate logic for data transformation, data validation, and encapsulate complex SQL logic, among other things. They can also improve performance as they are precompiled and offer a level of security as they can parameterize inputs, preventing SQL injection attacks.</p>
+<h3>SQLite and Stored Procedures</h3>
+<p>SQLite does not support stored procedures in the way that other server-based databases like Microsoft SQL Server, Oracle, or PostgreSQL do. If your application relies on stored procedures, you may need to move some of the logic into the application layer or use another database system that supports stored procedures.</p>
+<h3>Server-Based Databases and Stored Procedures</h3>
+<p>In contrast, server-based databases typically support stored procedures. For instance:</p>
+<ul>
+<li><strong>Microsoft SQL Server</strong> uses Transact-SQL (T-SQL) to write stored procedures.</li>
+<li><strong>Oracle</strong> uses PL/SQL for writing stored procedures.</li>
+<li><strong>PostgreSQL</strong> supports stored procedures written in PL/pgSQL and other procedural languages.</li>
+<li><strong>MySQL</strong> supports stored procedures typically written in SQL/PSM.</li>
+</ul>
+<h3>Workarounds for SQLite</h3>
+<p>While SQLite does not support stored procedures, developers can implement business logic in the application layer using the programming language the application is written in. Additionally, some developers use triggers and views in SQLite to emulate some aspects of stored procedures, though with limitations.</p>
+<h3>Example Usage in Other Databases</h3>
+<p>Here is a very simple example of a stored procedure in SQL Server:</p>
+<pre><code class="language-sql">CREATE PROCEDURE GetEmployeeById
+    @EmployeeId INT
+AS
+BEGIN
+    SELECT * FROM Employees WHERE Id = @EmployeeId;
+END
+</code></pre>
+<p>In this example, the stored procedure <code>GetEmployeeById</code> will return all columns for an employee with a specified <code>EmployeeId</code> from the <code>Employees</code> table when it is called/executed. The syntax will vary between different database systems, but this example illustrates the basic concept.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Foreign keys are a fundamental aspect of relational database systems and are used to establish a link between two tables. They enforce referential integrity by ensuring that the relationship between the two tables remains synchronized during inserts, updates, and deletes.</p>
+<h3>SQLite and Foreign Keys</h3>
+<p>SQLite does support foreign keys, but they are not enabled by default. You have to explicitly enable foreign key support using the following SQL command:</p>
+<pre><code class="language-sql">PRAGMA foreign_keys = ON;
+</code></pre>
+<p>Once foreign keys are enabled, SQLite will enforce referential integrity, preventing any actions that would violate it.</p>
+<h3>Example in SQLite</h3>
+<p>Here’s a basic example in SQLite:</p>
+<pre><code class="language-sql">-- Create a parent table `artists`
+CREATE TABLE artists(
+    artistid INTEGER PRIMARY KEY,
+    artistname TEXT
+);
+
+-- Create a child table `albums` with a foreign key referencing `artists`
+CREATE TABLE albums(
+    albumid INTEGER PRIMARY KEY,
+    albumname TEXT,
+    artistid INTEGER,
+    FOREIGN KEY (artistid) REFERENCES artists (artistid)
+);
+
+-- Enable foreign key support
+PRAGMA foreign_keys = ON;
+</code></pre>
+<p>In this example, the <code>artistid</code> column in the <code>albums</code> table is a foreign key that references the <code>artistid</code> primary key in the <code>artists</code> table.</p>
+<h3>Server-Based Database Systems</h3>
+<p>In server-based database systems like PostgreSQL, MySQL, and SQL Server, foreign key support is typically enabled by default, and the implementation of foreign keys is more robust and comprehensive.</p>
+<h3>Example in SQL Server</h3>
+<p>Here’s a basic example in SQL Server:</p>
+<pre><code class="language-sql">-- Create a parent table `Artists`
+CREATE TABLE Artists(
+    ArtistId INT PRIMARY KEY,
+    ArtistName NVARCHAR(255)
+);
+
+-- Create a child table `Albums` with a foreign key referencing `Artists`
+CREATE TABLE Albums(
+    AlbumId INT PRIMARY KEY,
+    AlbumName NVARCHAR(255),
+    ArtistId INT FOREIGN KEY REFERENCES Artists(ArtistId)
+);
+</code></pre>
+<h3>Conclusion</h3>
+<p>Foreign keys are crucial for maintaining the referential integrity of your database by ensuring that the relationships between tables are kept consistent. While there are differences in implementation and management between SQLite and server-based databases, foreign keys play a pivotal role in both environments. The use of foreign keys is generally recommended to avoid data anomalies and ensure data consistency in relational database systems.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>SQLite has a dynamic typing system and supports a limited set of data types. However, the type of a value is associated with the value itself, not with its container. This characteristic is called &quot;manifest typing.&quot; Here are the storage classes (data types) supported by SQLite:</p>
+<h3>1. <strong>NULL:</strong></h3>
+<ul>
+<li>The value is a NULL value.</li>
+</ul>
+<h3>2. <strong>INTEGER:</strong></h3>
+<ul>
+<li>The value is a signed integer, stored in 1, 2, 3, 4, 6, or 8 bytes depending on the magnitude of the value.</li>
+</ul>
+<h3>3. <strong>REAL:</strong></h3>
+<ul>
+<li>The value is a floating-point value, stored as an 8-byte IEEE floating-point number.</li>
+</ul>
+<h3>4. <strong>TEXT:</strong></h3>
+<ul>
+<li>The value is a text string, stored using the database encoding (UTF-8, UTF-16BE, or UTF-16LE).</li>
+</ul>
+<h3>5. <strong>BLOB:</strong></h3>
+<ul>
+<li>The value is a blob of data, stored exactly as it was input. It is used to store binary data, such as images or files.</li>
+</ul>
+<h3>6. <strong>NUMERIC:</strong></h3>
+<ul>
+<li>This is not a separate data type but rather a classification indicating that the value can be interpreted as an integer or a real number depending on its format. For example, if a numeric value has a decimal point, SQLite interprets it as REAL, else it is interpreted as INTEGER.</li>
+</ul>
+<p>SQLite does not have a distinct Boolean data type. It uses integers 0 and 1 to represent false and true, respectively. Similarly, there are no distinct date and time data types in SQLite; instead, dates and times can be represented as TEXT, REAL, or INTEGER, following one of the predefined string formats or numeric formats.</p>
+<h3>Example</h3>
+<p>Here’s a simple example of how different data types can be used in SQLite:</p>
+<pre><code class="language-sql">CREATE TABLE example(
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    age INTEGER,
+    height REAL,
+    photo BLOB,
+    date_of_birth TEXT
+);
+</code></pre>
+<p>In this example:</p>
+<ul>
+<li><code>id</code> is an INTEGER.</li>
+<li><code>name</code> is TEXT.</li>
+<li><code>age</code> is an INTEGER.</li>
+<li><code>height</code> is REAL.</li>
+<li><code>photo</code> is a BLOB.</li>
+<li><code>date_of_birth</code> is TEXT, and you can store date string in any supported format like 'YYYY-MM-DD'.</li>
+</ul>
+<p>It’s important to note that while defining the table schema, you can technically assign any type name to the columns due to SQLite's flexibility, but the value stored in that column will be of one of the above-mentioned storage classes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="1bd2e65d-dc36-4a0d-a46f-0eb0e2a0cff4" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">SQLite の利用例を調べる</span>
+                    <a href="#1bd2e65d-dc36-4a0d-a46f-0eb0e2a0cff4" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>SQLite is widely used as an internal storage mechanism due to its lightweight nature, ease of use, and reliability. Here are several notable applications and platforms that use SQLite internally:</p>
+<h3>1. <strong>Web Browsers:</strong></h3>
+<ul>
+<li><strong>Google Chrome:</strong> Uses SQLite for storing various pieces of data, such as cookies, bookmarks, and web history.</li>
+<li><strong>Mozilla Firefox:</strong> Utilizes SQLite to store bookmarks, web history, and other user data.</li>
+<li><strong>Apple Safari:</strong> Employs SQLite for storing user data like web history, cookies, and other information.</li>
+</ul>
+<h3>2. <strong>Operating Systems:</strong></h3>
+<ul>
+<li><strong>macOS:</strong> Uses SQLite for a variety of functions, including storing data related to system services and applications.</li>
+<li><strong>Windows 10:</strong> Employs SQLite for certain functionalities and as a component in various system applications.</li>
+<li><strong>iOS and Android:</strong> Both mobile operating systems utilize SQLite for storage solutions in many built-in apps and system functions.</li>
+</ul>
+<h3>3. <strong>Software Applications:</strong></h3>
+<ul>
+<li><strong>Adobe Products:</strong> Several Adobe applications, like Adobe Lightroom, use SQLite for storing configuration and user data.</li>
+<li><strong>Dropbox:</strong> Utilizes SQLite to keep track of files and metadata on the client side.</li>
+<li><strong>Skype:</strong> Uses SQLite to store messages, contacts, and other user data locally.</li>
+</ul>
+<h3>4. <strong>Development Frameworks:</strong></h3>
+<ul>
+<li><strong>Django:</strong> The web framework for Python uses SQLite as its default database.</li>
+<li><strong>Flask:</strong> Often used with SQLite for smaller projects due to its lightweight nature.</li>
+</ul>
+<h3>5. <strong>Embedded Systems:</strong></h3>
+<ul>
+<li>SQLite is also commonly used in various embedded systems like IoT devices, where a lightweight database solution is ideal.</li>
+</ul>
+<h3>6. <strong>Mobile Applications:</strong></h3>
+<ul>
+<li>Numerous mobile apps on iOS and Android platforms, particularly those that require local storage of data, utilize SQLite, given its lightweight nature and ease of implementation.</li>
+</ul>
+<h3>7. <strong>Media Players:</strong></h3>
+<ul>
+<li><strong>Kodi:</strong> The media player and entertainment hub use SQLite to manage its media library.</li>
+</ul>
+<h3>8. <strong>Aircrafts:</strong></h3>
+<ul>
+<li><strong>Airbus A350 and A380:</strong> These aircraft use SQLite for storing some pieces of data related to flight software.</li>
+</ul>
+<h3>9. <strong>Automotive Software:</strong></h3>
+<ul>
+<li>Many automotive software systems leverage SQLite for storing data due to its reliability and lightweight nature.</li>
+</ul>
+<h3>10. <strong>Health Applications:</strong></h3>
+<ul>
+<li>Various health applications, especially those involving patient data collection and monitoring, use SQLite for secure and efficient data storage.</li>
+</ul>
+<p>These are just a few examples, and there are many other applications, both small and large scale, across various domains that leverage SQLite for internal data management. Its ubiquity is attributed to its simplicity, reliability, and the fact that it’s self-contained with minimal setup or administration required.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="32a2a2f1-a917-4d85-a9d8-c833f2eef5c5" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">データの破損について調べる</span>
+                    <a href="#32a2a2f1-a917-4d85-a9d8-c833f2eef5c5" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>SQLite databases can indeed become corrupt due to various reasons like application crashes, bugs in the SQLite library, file system corruption, or disk I/O errors. When corruption occurs, the impact can range from minor issues, where most of the data remains accessible, to severe cases, where the entire database becomes unusable.</p>
+<h3><strong>Partial Accessibility:</strong></h3>
+<ul>
+<li>In many cases, corruption might affect only a specific part of the database file, allowing applications to read from and write to other unaffected parts of the database. For example, a single corrupt table or record might not prevent access to other tables or records within the same database.</li>
+</ul>
+<h3><strong>Complete Unusability:</strong></h3>
+<ul>
+<li>However, if the database's internal structure, such as the SQLite master table or crucial metadata, is corrupted, it can render the whole database file unusable.</li>
+</ul>
+<h3><strong>Recovery:</strong></h3>
+<ul>
+<li>SQLite provides some tools and mechanisms to deal with corruption. The <code>sqlite3</code> command-line tool has a <code>.recover</code> command that can be used to try and recover as much data as possible from a corrupt database file.</li>
+<li>Moreover, regular backups are strongly recommended as a preventive measure against data loss due to corruption. By maintaining backups, you can restore the database to its last good state in case of corruption.</li>
+</ul>
+<h3><strong>Example:</strong></h3>
+<p>If you have a corrupt SQLite database file named <code>corrupt.db</code>, you can attempt to recover the data using the following command:</p>
+<pre><code class="language-sh">sqlite3 corrupt.db &quot;.recover&quot; | sqlite3 new.db
+</code></pre>
+<p>This command will attempt to recover as much data as possible from <code>corrupt.db</code> and save it to a new database file named <code>new.db</code>.</p>
+<h3><strong>Preventive Measures:</strong></h3>
+<ul>
+<li>Regularly backup your SQLite database.</li>
+<li>Use transactions to ensure that your database operations are atomic, consistent, isolated, and durable (ACID).</li>
+<li>Regularly test your backups to ensure that they can be restored successfully.</li>
+</ul>
+<h3><strong>Conclusion:</strong></h3>
+<p>While a corrupt SQLite database might still allow partial data accessibility, depending on the level and location of the corruption within the file, the best practice is to regularly backup the database and be prepared for recovery actions. Regular maintenance and monitoring can also help in early detection of corruption, minimizing the risk of data loss.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="f150d90f-37c7-4080-951c-c2adb15601ef" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">書き込み中にファイルをバックアップした場合の影響を調べる</span>
+                    <a href="#f150d90f-37c7-4080-951c-c2adb15601ef" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Copying a SQLite database file while it is being written to can indeed result in a corrupted or inconsistent copy. If a write operation is occurring while the file is being copied, the copy may not contain all the changes made by the write operation or might capture the database file in an intermediate state, leading to inconsistencies and potential corruption in the copied file.</p>
+<h3><strong>Atomic Commit and Rollback:</strong></h3>
+<p>SQLite uses atomic commit and rollback to ensure that the database file is always in a consistent state, even after a crash or power failure. When a transaction is committed, SQLite ensures that either all the changes are written to the disk, or none of them are, avoiding partial writes.</p>
+<h3><strong>Write-Ahead Logging (WAL):</strong></h3>
+<p>When Write-Ahead Logging (WAL) mode is used, changes are first written to a separate log file and later transferred to the main database file. Copying the database file without the corresponding WAL file can result in an inconsistent or corrupt copy.</p>
+<h3><strong>Solutions and Workarounds:</strong></h3>
+<ol>
+<li><p><strong>Use Backup API:</strong>
+SQLite provides a <a href="https://www.sqlite.org/backup.html">Backup API</a> that allows for making consistent backups of a database file, even while it is being written to. The Backup API can be used to copy a database file safely, without risking corruption or inconsistency.</p>
+</li>
+<li><p><strong>Locking Mechanism:</strong>
+Implementing a locking mechanism, where the database file is locked during write operations and copied only when no write operation is ongoing, can also prevent corruption. However, this may not be feasible in all scenarios, especially if the database is being written to frequently.</p>
+</li>
+<li><p><strong>Snapshots:</strong>
+Depending on the host operating system and file system, you might also consider using file system snapshots or other similar mechanisms to create consistent backups of the database file.</p>
+</li>
+<li><p><strong>Regular Backups:</strong>
+Regularly backing up the database using appropriate methods can prevent data loss and ensure that you have a consistent copy of the database available in case of failure.</p>
+</li>
+</ol>
+<h3><strong>Example:</strong></h3>
+<p>To create a backup of a SQLite database using the SQLite Backup API, you can use the <code>sqlite3</code> command-line utility as follows:</p>
+<pre><code class="language-sh">sqlite3 original.db &quot;.backup backup.db&quot;
+</code></pre>
+<p>In this example, <code>original.db</code> is the name of the original database file, and <code>backup.db</code> is the name of the backup file that will be created. This command creates a consistent backup of the database, even if write operations are ongoing.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In C#, you can use the SQLite Backup API by leveraging the <code>SQLiteConnection.BackupDatabase</code> method provided by the <code>System.Data.SQLite</code> library, which is a .NET wrapper around the SQLite library.</p>
+<p>Below is a simplified example that demonstrates how you might use this method to create a backup of an SQLite database in C#.</p>
+<h3><strong>1. Install System.Data.SQLite Package</strong></h3>
+<p>Firstly, ensure that you have the <code>System.Data.SQLite</code> NuGet package installed in your project. You can install it via NuGet Package Manager Console:</p>
+<pre><code class="language-sh">Install-Package System.Data.SQLite
+</code></pre>
+<h3><strong>2. Implement Backup Logic</strong></h3>
+<p>Here’s a simple example of backing up an SQLite database using C#:</p>
+<pre><code class="language-csharp">using System;
+using System.Data.SQLite;
+
+class Program
+{
+    static void Main()
+    {
+        string sourceConnectionString = &quot;Data Source=original.db;Version=3;&quot;;
+        string destinationDatabasePath = &quot;backup.db&quot;;
+
+        // Open the source database connection
+        using (var sourceConnection = new SQLiteConnection(sourceConnectionString))
+        {
+            sourceConnection.Open();
+
+            // Open or create the destination database file
+            using (var destinationConnection = new SQLiteConnection($&quot;Data Source={destinationDatabasePath};Version=3;&quot;))
+            {
+                destinationConnection.Open();
+
+                // Perform the backup from source to destination
+                sourceConnection.BackupDatabase(destinationConnection, &quot;main&quot;, &quot;main&quot;, -1, null, 0);
+
+                Console.WriteLine(&quot;Backup completed successfully.&quot;);
+            }
+        }
+    }
+}
+</code></pre>
+<p>In this example:</p>
+<ul>
+<li><code>sourceConnectionString</code>: Connection string for the source database (the one you want to back up).</li>
+<li><code>destinationDatabasePath</code>: File path for the destination database (the backup).</li>
+</ul>
+<h3><strong>3. Execute the Program</strong></h3>
+<p>Once you've added this code to your project and set up the correct connection strings and paths, executing the program should create a backup of the source SQLite database.</p>
+<p>This approach ensures that a consistent and non-corrupt copy of the database is made, even if the source database is being written to during the backup process. The <code>BackupDatabase</code> method takes care of all the intricacies related to locking and transaction consistency, giving you a straightforward way to perform backups.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="60b0f47e-b969-43a7-8d25-8c75f3ed19d0" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://www.sqlite.org/backup.html" target="_blank" class="url">https://www.sqlite.org/backup.html</a> をチェック</span>
+                    <a href="#60b0f47e-b969-43a7-8d25-8c75f3ed19d0" class="permalink">&infin;</a>
+                </div>
+            </div>
         </div>
     </body>
 </html>

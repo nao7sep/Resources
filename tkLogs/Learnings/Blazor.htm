@@ -1270,6 +1270,1893 @@ public class AuthController : ControllerBase
                     </div>
                 </div>
             </div>
+            <div id="90cd69c2-7b72-4932-88f0-038bde18c8a6" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Blazor でなくてもよい可能性について調べる</span>
+                    <a href="#90cd69c2-7b72-4932-88f0-038bde18c8a6" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Blazor is a web framework from Microsoft that allows developers to build interactive web applications using C# instead of JavaScript. It offers a variety of benefits but also comes with its set of disadvantages.</p>
+<h3>Advantages:</h3>
+<ol>
+<li><p><strong>Familiarity and Consistency:</strong></p>
+<ul>
+<li>For .NET developers, Blazor provides a consistent and familiar environment, utilizing C#, Razor, and .NET libraries, reducing the learning curve compared to learning a new JavaScript framework.</li>
+</ul>
+</li>
+<li><p><strong>Code Sharing:</strong></p>
+<ul>
+<li>Blazor allows for code sharing between client and server, which is particularly helpful for validating models.</li>
+</ul>
+</li>
+<li><p><strong>Performance:</strong></p>
+<ul>
+<li>Blazor WebAssembly can offer near-native performance for client-side web applications, as WebAssembly is faster than JavaScript in specific scenarios.</li>
+</ul>
+</li>
+<li><p><strong>Integration:</strong></p>
+<ul>
+<li>It easily integrates with existing .NET libraries and APIs, making it easier for developers to leverage existing code and services.</li>
+</ul>
+</li>
+<li><p><strong>Tooling:</strong></p>
+<ul>
+<li>Blazor benefits from the excellent tooling support provided by Visual Studio, including debugging, IntelliSense, and various productivity features.</li>
+</ul>
+</li>
+<li><p><strong>Components:</strong></p>
+<ul>
+<li>Blazor’s component-based architecture promotes code reusability and maintainability.</li>
+</ul>
+</li>
+<li><p><strong>Rich Ecosystem:</strong></p>
+<ul>
+<li>Blazor can leverage the extensive .NET ecosystem, including NuGet packages, libraries, and frameworks.</li>
+</ul>
+</li>
+<li><p><strong>Type Safety:</strong></p>
+<ul>
+<li>Being a statically typed language, C# helps catch errors at compile-time, improving code reliability.</li>
+</ul>
+</li>
+</ol>
+<h3>Disadvantages:</h3>
+<ol>
+<li><p><strong>Browser Compatibility:</strong></p>
+<ul>
+<li>Blazor WebAssembly requires WebAssembly support, which is not available in older browsers.</li>
+</ul>
+</li>
+<li><p><strong>Maturity:</strong></p>
+<ul>
+<li>As a relatively new framework (compared to Angular, React, or Vue), Blazor might not be as mature, and finding solutions to specific problems may be challenging.</li>
+</ul>
+</li>
+<li><p><strong>Limited Community and Resources:</strong></p>
+<ul>
+<li>The community around Blazor is growing but is not as extensive as the communities around more established JavaScript frameworks, which can limit the availability of tutorials, documentation, and third-party libraries.</li>
+</ul>
+</li>
+<li><p><strong>SEO Challenges:</strong></p>
+<ul>
+<li>Client-side Blazor (WebAssembly) can present SEO challenges, as search engines may struggle to index client-rendered content. This can be mitigated using server-side rendering or prerendering.</li>
+</ul>
+</li>
+<li><p><strong>Load Time:</strong></p>
+<ul>
+<li>Blazor WebAssembly apps can have a longer initial load time compared to JavaScript SPAs, as they need to download the .NET runtime along with the app.</li>
+</ul>
+</li>
+<li><p><strong>Memory Usage:</strong></p>
+<ul>
+<li>Blazor WebAssembly apps tend to use more memory compared to JavaScript SPAs, which might be an issue for low-powered devices.</li>
+</ul>
+</li>
+<li><p><strong>Interoperability:</strong></p>
+<ul>
+<li>While Blazor offers JavaScript interop, it may not be as smooth or straightforward as working solely within a JavaScript environment, especially for complex interactions.</li>
+</ul>
+</li>
+<li><p><strong>Learning Curve:</strong></p>
+<ul>
+<li>For developers who are new to the .NET ecosystem, there may be a steep learning curve to understand C#, Razor syntax, and other .NET technologies.</li>
+</ul>
+</li>
+</ol>
+<h3>Conclusion:</h3>
+<p>While Blazor offers a unique set of advantages, especially for .NET developers, it is crucial to consider its disadvantages and evaluate whether it aligns with the project’s goals, the team's expertise, and the project's requirements before opting for it as the development framework.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>No, you do not necessarily need to use Blazor to create a reactive Todo-management web system. Many JavaScript frameworks and libraries can handle reactive UI updates very well, such as React, Vue.js, Angular, or even vanilla JavaScript with the Fetch API or XMLHttpRequest for AJAX.</p>
+<h3>Alternative Approach:</h3>
+<h4>1. <strong>React, Vue, or Angular:</strong></h4>
+<ul>
+<li>You can use these libraries/frameworks to create reactive UI components that can perform CRUD operations without needing a page reload. They all have rich ecosystems, ample learning resources, and are known for their efficient handling of UI state and updates.</li>
+</ul>
+<h4>2. <strong>JavaScript (or jQuery) with AJAX:</strong></h4>
+<ul>
+<li>Even without a modern front-end framework, you can make asynchronous HTTP requests (AJAX) to perform CRUD operations and update the DOM accordingly, making the page reactive to user inputs.</li>
+</ul>
+<h4>3. <strong>Web Sockets or Server-Sent Events:</strong></h4>
+<ul>
+<li>If you want to reflect changes in real-time across multiple users, you can use Web Sockets or Server-Sent Events to push updates from the server to the clients.</li>
+</ul>
+<h4>Example with React:</h4>
+<p>Here is a simple example using React:</p>
+<pre><code class="language-javascript">function TodoList() {
+  const [tasks, setTasks] = React.useState([]);
+  const [newTask, setNewTask] = React.useState(&quot;&quot;);
+
+  React.useEffect(() =&gt; {
+    // Fetch the initial task list
+    fetch('/api/tasks')
+      .then(response =&gt; response.json())
+      .then(setTasks);
+  }, []);
+
+  const addTask = () =&gt; {
+    fetch('/api/tasks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ task: newTask })
+    })
+    .then(response =&gt; response.json())
+    .then(newTask =&gt; setTasks([...tasks, newTask]));
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;input value={newTask} onChange={e =&gt; setNewTask(e.target.value)} /&gt;
+      &lt;button onClick={addTask}&gt;Add Task&lt;/button&gt;
+      &lt;ul&gt;
+        {tasks.map(task =&gt; (
+          &lt;li key={task.id}&gt;{task.name}&lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<h3>Conclusion:</h3>
+<p>While Blazor could certainly be used for creating a reactive Todo management application, especially if you prefer using C# and .NET, it is not the only option, and alternative technologies like React, Vue, Angular, or even plain JavaScript can be more suitable depending on your context, team’s familiarity, and project requirements.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Sure, below is a simple example using Vue.js to create a reactive Todo-management system. This example assumes that you have an API ready to handle the CRUD operations for the tasks.</p>
+<h3>1. <strong>HTML:</strong></h3>
+<pre><code class="language-html">&lt;div id=&quot;app&quot;&gt;
+  &lt;input v-model=&quot;newTask&quot; @keyup.enter=&quot;addTask&quot; placeholder=&quot;Add a new task&quot; /&gt;
+  &lt;ul&gt;
+    &lt;li v-for=&quot;task in tasks&quot; :key=&quot;task.id&quot;&gt;
+      {{ task.name }}
+      &lt;button @click=&quot;deleteTask(task.id)&quot;&gt;Delete&lt;/button&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+<h3>2. <strong>Vue JS:</strong></h3>
+<pre><code class="language-javascript">new Vue({
+  el: '#app',
+  data: {
+    newTask: '',
+    tasks: []
+  },
+  mounted() {
+    // Fetch the initial task list
+    fetch('/api/tasks')
+      .then(response =&gt; response.json())
+      .then(data =&gt; this.tasks = data);
+  },
+  methods: {
+    addTask() {
+      if(!this.newTask) return;
+
+      fetch('/api/tasks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: this.newTask })
+      })
+      .then(response =&gt; response.json())
+      .then(newTask =&gt; {
+        this.tasks.push(newTask);
+        this.newTask = ''; // Clear the input box
+      });
+    },
+    deleteTask(id) {
+      fetch(`/api/tasks/${id}`, {
+        method: 'DELETE'
+      })
+      .then(() =&gt; {
+        this.tasks = this.tasks.filter(task =&gt; task.id !== id);
+      });
+    }
+  }
+});
+</code></pre>
+<h3>How to Run:</h3>
+<ol>
+<li><p>Include Vue in your project. You can include it from a CDN in your HTML:</p>
+<pre><code class="language-html">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>Or, if you are using Vue 3:</p>
+<pre><code class="language-html">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@next&quot;&gt;&lt;/script&gt;
+</code></pre>
+</li>
+<li><p>Create an HTML file and include the HTML and Vue JS code inside it.</p>
+</li>
+<li><p>Run it on a web server, or use something like Live Server in Visual Studio Code to view your page.</p>
+</li>
+<li><p>Adjust the API endpoints (<code>'/api/tasks'</code>) according to your actual API.</p>
+</li>
+</ol>
+<p>This Vue.js example illustrates a straightforward way to manage a task list in a reactive manner, with methods to add and delete tasks, reflecting the changes without having to reload the page. The initial task list is loaded when the component is mounted.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Sure, let's consider a simple example where you can create a Todo-management system with Angular. This example assumes that you have Angular CLI installed and an Angular project set up.</p>
+<h3>1. <strong>Create a Task Service</strong></h3>
+<p>Firstly, create a service that will handle the communication with your API.</p>
+<pre><code class="language-shell">ng generate service task
+</code></pre>
+<p>In your <code>task.service.ts</code>:</p>
+<pre><code class="language-typescript">import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Task } from './task';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class TaskService {
+  private apiUrl = '/api/tasks'; // replace with your API endpoint
+
+  constructor(private http: HttpClient) {}
+
+  getTasks(): Observable&lt;Task[]&gt; {
+    return this.http.get&lt;Task[]&gt;(this.apiUrl);
+  }
+
+  addTask(task: Task): Observable&lt;Task&gt; {
+    return this.http.post&lt;Task&gt;(this.apiUrl, task);
+  }
+
+  deleteTask(id: number): Observable&lt;void&gt; {
+    return this.http.delete&lt;void&gt;(`${this.apiUrl}/${id}`);
+  }
+}
+</code></pre>
+<p>Define a <code>Task</code> model in <code>task.ts</code>:</p>
+<pre><code class="language-typescript">export interface Task {
+  id: number;
+  name: string;
+}
+</code></pre>
+<h3>2. <strong>Create a Task Component</strong></h3>
+<p>Create a new component to handle the task list.</p>
+<pre><code class="language-shell">ng generate component task-list
+</code></pre>
+<p>In your <code>task-list.component.ts</code>:</p>
+<pre><code class="language-typescript">import { Component, OnInit } from '@angular/core';
+import { TaskService } from '../task.service';
+import { Task } from '../task';
+
+@Component({
+  selector: 'app-task-list',
+  templateUrl: './task-list.component.html',
+  styleUrls: ['./task-list.component.css'],
+})
+export class TaskListComponent implements OnInit {
+  tasks: Task[] = [];
+  newTask: string = '';
+
+  constructor(private taskService: TaskService) {}
+
+  ngOnInit(): void {
+    this.getTasks();
+  }
+
+  getTasks(): void {
+    this.taskService.getTasks().subscribe((tasks) =&gt; (this.tasks = tasks));
+  }
+
+  addTask(): void {
+    if (!this.newTask) return;
+
+    const task: Task = { name: this.newTask } as Task;
+    this.taskService.addTask(task).subscribe((task) =&gt; this.tasks.push(task));
+    this.newTask = '';
+  }
+
+  deleteTask(task: Task): void {
+    this.taskService
+      .deleteTask(task.id)
+      .subscribe(() =&gt; (this.tasks = this.tasks.filter((t) =&gt; t !== task)));
+  }
+}
+</code></pre>
+<p>In your <code>task-list.component.html</code>:</p>
+<pre><code class="language-html">&lt;input [(ngModel)]=&quot;newTask&quot; (keyup.enter)=&quot;addTask()&quot; placeholder=&quot;Add a new task&quot; /&gt;
+&lt;ul&gt;
+  &lt;li *ngFor=&quot;let task of tasks&quot;&gt;
+    {{ task.name }}
+    &lt;button (click)=&quot;deleteTask(task)&quot;&gt;Delete&lt;/button&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+<h3>3. <strong>Update AppModule</strong></h3>
+<p>Update your <code>app.module.ts</code> to import necessary modules:</p>
+<pre><code class="language-typescript">import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { TaskListComponent } from './task-list/task-list.component';
+
+@NgModule({
+  declarations: [
+    // ... other components
+    TaskListComponent
+  ],
+  imports: [
+    // ... other modules
+    HttpClientModule,
+    FormsModule
+  ],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+</code></pre>
+<h3>4. <strong>Run the Application</strong></h3>
+<p>After setting up the service, component, and updating the app module, you can run your application using the Angular CLI:</p>
+<pre><code class="language-shell">ng serve
+</code></pre>
+<p>Navigate to <code>http://localhost:4200/</code> to view your application.</p>
+<h3>Conclusion:</h3>
+<p>This Angular example creates a reactive task list allowing users to perform CRUD operations without needing a page reload. Adjust the API endpoint according to your actual API, and you can extend the functionality according to your needs.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>You can create a simple reactive Todo List with plain HTML, CSS, and JavaScript without relying on any frameworks or libraries. Below is a simple example that does not communicate with any back-end service, but you can modify it to make HTTP requests for CRUD operations using <code>XMLHttpRequest</code> or the <code>fetch</code> API.</p>
+<h3>1. <strong>HTML:</strong></h3>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Todo List&lt;/title&gt;
+&lt;style&gt;
+    /* Add your styles here */
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;app&quot;&gt;
+    &lt;input type=&quot;text&quot; id=&quot;taskInput&quot; placeholder=&quot;New Task&quot;/&gt;
+    &lt;button onclick=&quot;addTask()&quot;&gt;Add Task&lt;/button&gt;
+    &lt;ul id=&quot;taskList&quot;&gt;&lt;/ul&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    // JavaScript will go here
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3>2. <strong>JavaScript:</strong></h3>
+<pre><code class="language-javascript">// Get the elements
+const taskInput = document.getElementById('taskInput');
+const taskList = document.getElementById('taskList');
+
+function addTask() {
+    const taskName = taskInput.value;
+    if(!taskName) return;
+
+    const listItem = document.createElement('li');
+    listItem.textContent = taskName;
+
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.onclick = function() {
+        taskList.removeChild(listItem);
+    };
+
+    listItem.appendChild(deleteButton);
+    taskList.appendChild(listItem);
+
+    // Clear the input
+    taskInput.value = '';
+}
+
+// Example to perform HTTP GET using the fetch API
+// fetch('/api/tasks')
+// .then(response =&gt; response.json())
+// .then(tasks =&gt; {
+// tasks.forEach(task =&gt; {
+// // Process each task
+// });
+// });
+
+// Example to perform HTTP POST using the fetch API
+// fetch('/api/tasks', {
+// method: 'POST',
+// headers: {
+// 'Content-Type': 'application/json'
+// },
+// body: JSON.stringify({
+// name: 'New Task'
+// })
+// })
+// .then(response =&gt; response.json())
+// .then(task =&gt; {
+// // Process the created task
+// });
+</code></pre>
+<h3>3. <strong>CSS (Optional):</strong></h3>
+<pre><code class="language-css">/* Simple styling, you can modify as per your needs */
+#app {
+    max-width: 300px;
+    margin: auto;
+    padding: 20px;
+}
+
+button {
+    margin-top: 10px;
+    cursor: pointer;
+}
+</code></pre>
+<h3>Explanation:</h3>
+<ul>
+<li>When the &quot;Add Task&quot; button is clicked, a new list item (<code>li</code>) is created and appended to the <code>ul</code>.</li>
+<li>Each task item has a &quot;Delete&quot; button to remove the task from the list.</li>
+<li>Optionally, you can replace the commented-out fetch code with actual API calls to interact with a server.</li>
+</ul>
+<h3>Enhancements:</h3>
+<ul>
+<li>To make this a fully-featured Todo-management system, you can add the ability to edit tasks and mark them as complete.</li>
+<li>You can also connect the app to a server or a database to persist the tasks and reflect changes in real-time to multiple users using AJAX, Fetch API, or WebSockets.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Blazor and Razor Pages serve different purposes and one may be preferred over the other based on the project requirements. Below are some reasons to choose Blazor over Razor Pages:</p>
+<h3>1. <strong>Single Page Application (SPA) Framework:</strong></h3>
+<ul>
+<li>If you need a SPA framework for interactive and dynamic content without full page reloads, Blazor is more suitable than Razor Pages which are typically used for server-rendered web applications.</li>
+</ul>
+<h3>2. <strong>Rich Interactivity:</strong></h3>
+<ul>
+<li>For apps requiring rich interactivity and complex user interfaces, Blazor’s component-based architecture is beneficial. Components can be more easily developed, tested, and maintained independently compared to Razor Pages.</li>
+</ul>
+<h3>3. <strong>Client-Side Logic:</strong></h3>
+<ul>
+<li>If you need to run code on the client-side to reduce server load, optimize performance, or enable offline scenarios, Blazor WebAssembly is the right choice. Razor Pages, being server-side, require constant communication with the server.</li>
+</ul>
+<h3>4. <strong>.NET Code Sharing:</strong></h3>
+<ul>
+<li>Blazor allows sharing of models, configurations, validations, and other C# code between client and server, which is more challenging with a Razor Pages (server) and JavaScript (client) combination.</li>
+</ul>
+<h3>5. <strong>Real-time Web Applications:</strong></h3>
+<ul>
+<li>If you are developing real-time web applications with live data updates, Blazor, with its component-based real-time UI updates, can be more advantageous compared to Razor Pages.</li>
+</ul>
+<h3>6. <strong>Advanced State Management:</strong></h3>
+<ul>
+<li>Blazor facilitates advanced client-side state management scenarios which can be more cumbersome to implement with Razor Pages and JavaScript.</li>
+</ul>
+<h3>7. <strong>Learning Curve:</strong></h3>
+<ul>
+<li>For developers proficient in C#, choosing Blazor could reduce the learning curve compared to learning JavaScript or a JavaScript framework for client-side interactions in Razor Pages.</li>
+</ul>
+<h3>8. <strong>Tooling:</strong></h3>
+<ul>
+<li>The tooling support for Blazor in Visual Studio is robust and continuously improving, offering a productive development experience.</li>
+</ul>
+<h3>Summary:</h3>
+<p>While Razor Pages are excellent for many server-rendered application scenarios, Blazor offers advantages for more interactive, complex, and real-time applications, especially when leveraging existing .NET and C# skills and codebases.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, Blazor provides a robust and flexible routing system that works exceptionally well with structured URLs. Blazor's routing system is component-based, similar to routing in modern SPA frameworks like React or Angular.</p>
+<h3><strong>Blazor Routing Features:</strong></h3>
+<ol>
+<li><p><strong>Parameterized Routes:</strong></p>
+<ul>
+<li>You can define parameterized routes to pass parameters via the URL to components.</li>
+</ul>
+<pre><code class="language-csharp">@page &quot;/item/{id}&quot;
+</code></pre>
+<p>In this case, <code>id</code> is a parameter that can be accessed within the component.</p>
+</li>
+<li><p><strong>Optional and Catch-all Parameters:</strong></p>
+<ul>
+<li>Blazor supports optional parameters and catch-all parameters for creating flexible route templates.</li>
+</ul>
+<pre><code class="language-csharp">@page &quot;/archive/{year}/{month?}/{day?}&quot;
+</code></pre>
+</li>
+<li><p><strong>Constraints:</strong></p>
+<ul>
+<li>You can apply constraints to the route parameters to match against specific conditions.</li>
+</ul>
+<pre><code class="language-csharp">@page &quot;/item/{id:int}&quot;
+</code></pre>
+<p>Here, <code>id</code> must be an integer.</p>
+</li>
+<li><p><strong>Layouts and Nested Routes:</strong></p>
+<ul>
+<li>Blazor allows defining layouts (similar to master pages) and supports nested routing, enabling structured and organized UI compositions.</li>
+</ul>
+</li>
+<li><p><strong>Navigation Manager:</strong></p>
+<ul>
+<li>The <code>NavigationManager</code> service in Blazor provides functionalities to interact with the URI, navigate to different routes programmatically, and work with URL and navigation events.</li>
+</ul>
+</li>
+<li><p><strong>Fallback Routes:</strong></p>
+<ul>
+<li>You can define fallback routes to handle undefined routes, enabling the creation of custom 404 pages.</li>
+</ul>
+</li>
+<li><p><strong>Route Templates:</strong></p>
+<ul>
+<li>You can define multiple route templates for a single component, making the component reachable by different URIs.</li>
+</ul>
+</li>
+</ol>
+<h3><strong>Example:</strong></h3>
+<p>Here is a simple example of a Blazor component with routing:</p>
+<pre><code class="language-csharp">@page &quot;/product/{Id}&quot;
+
+&lt;h3&gt;Product Details&lt;/h3&gt;
+&lt;p&gt;Product Id: @Id&lt;/p&gt;
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+}
+</code></pre>
+<p>In this example, the component will display the product details for the product with the ID specified in the URL.</p>
+<h3><strong>Structured URLs:</strong></h3>
+<p>If by structured URLs, you mean URLs with a hierarchical structure or specific patterns, Blazor’s flexible routing system can certainly handle structured URLs efficiently, allowing the development of applications with organized and readable URLs.</p>
+<h3><strong>SEO Consideration:</strong></h3>
+<p>While Blazor can handle structured URLs well, if SEO is a crucial consideration, developers might need to put in additional effort, especially with Blazor WebAssembly apps, to ensure that the content is crawlable by search engine bots, which might have limitations in crawling and rendering single-page applications. Techniques such as prerendering can be helpful in such cases.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, it is possible to make an interactive Razor Page that changes the current URL displayed on the browser upon the execution of each CRUD operation. However, the mechanisms for doing so might not be as seamless as in a SPA (Single Page Application) framework like Blazor or React. Here’s how you could approach it:</p>
+<h3>1. <strong>JavaScript:</strong></h3>
+<ul>
+<li>You can use JavaScript’s <code>window.history.pushState</code> or <code>window.history.replaceState</code> to manipulate the browser’s history and change the URL displayed in the address bar without causing a page reload.</li>
+</ul>
+<pre><code class="language-javascript">window.history.pushState(null, null, 'new-url');
+</code></pre>
+<p>Where <code>'new-url'</code> is the new URL you want to display in the browser.</p>
+<h3>2. <strong>Anchor Tags and Redirects:</strong></h3>
+<ul>
+<li>Using traditional anchor (<code>&lt;a&gt;</code>) tags or performing full page redirects after CRUD operations will also change the URL, but this approach may not maintain the page’s interactive state, leading to a full page reload.</li>
+</ul>
+<h3>3. <strong>AJAX:</strong></h3>
+<ul>
+<li>You can use AJAX for performing CRUD operations without reloading the page, maintaining the interactivity of the Razor Page. After the AJAX operation, you can use JavaScript to change the URL as described above.</li>
+</ul>
+<h3>Example:</h3>
+<p>Here is a simple example with AJAX and JavaScript to change the URL after a CRUD operation:</p>
+<pre><code class="language-html">&lt;button onclick=&quot;performCrudOperation()&quot;&gt;Perform CRUD Operation&lt;/button&gt;
+
+&lt;script&gt;
+    function performCrudOperation() {
+        // Perform AJAX call for CRUD operation
+        fetch('/api/some-endpoint', {
+            method: 'POST', // or 'PUT'/'DELETE'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ /* Your payload here */ }),
+        })
+        .then(response =&gt; response.json())
+        .then(data =&gt; {
+            // Change the URL after successful CRUD operation
+            window.history.pushState(null, null, '/new-url');
+        })
+        .catch((error) =&gt; {
+            console.error('Error during the CRUD operation:', error);
+        });
+    }
+&lt;/script&gt;
+</code></pre>
+<p>This example shows a button that, when clicked, will perform a CRUD operation using the Fetch API (AJAX) and change the URL in the address bar upon successful completion without causing a full page reload.</p>
+<h3>Considerations:</h3>
+<ul>
+<li>This approach only changes the URL on the client side, and care must be taken to ensure that the server can properly handle requests to the newly pushed URLs.</li>
+<li>Ensure that the changes in URL align with the actual resources and states represented by your application.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The <code>Fetch API</code> provides a JavaScript interface for accessing and manipulating parts of the HTTP pipeline, such as requests and responses. It is a modern alternative to the older <code>XMLHttpRequest</code> object and allows you to make network requests similar to HTTP GET, POST, DELETE, PUT, etc., and return promises.</p>
+<h3>Basic Usage:</h3>
+<p>Here’s a simple example of using the Fetch API to make a GET request:</p>
+<pre><code class="language-javascript">fetch('https://jsonplaceholder.typicode.com/posts/1')
+  .then(response =&gt; response.json())
+  .then(data =&gt; console.log(data))
+  .catch(error =&gt; console.error('There has been a problem with your fetch operation:', error));
+</code></pre>
+<h3>Making a POST Request:</h3>
+<p>For making a POST request or other requests that need a request body, you can do something like this:</p>
+<pre><code class="language-javascript">fetch('https://jsonplaceholder.typicode.com/posts', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    title: 'foo',
+    body: 'bar',
+    userId: 1
+  })
+})
+  .then(response =&gt; response.json())
+  .then(data =&gt; console.log(data))
+  .catch(error =&gt; console.error('There has been a problem with your fetch operation:', error));
+</code></pre>
+<h3>Advantages of Fetch API:</h3>
+<ol>
+<li><p><strong>Returns Promises:</strong></p>
+<ul>
+<li>It returns promises and is very convenient to use with <code>async/await</code> syntax.</li>
+</ul>
+</li>
+<li><p><strong>Request and Response Objects:</strong></p>
+<ul>
+<li>It uses <code>Request</code> and <code>Response</code> objects that provide a more powerful and flexible API compared to <code>XMLHttpRequest</code>.</li>
+</ul>
+</li>
+<li><p><strong>Stream Handling:</strong></p>
+<ul>
+<li>It can handle streams, which is particularly useful for progressively loading large amounts of data.</li>
+</ul>
+</li>
+<li><p><strong>Cleaner, More Powerful API:</strong></p>
+<ul>
+<li>Its API is cleaner and more powerful than the older <code>XMLHttpRequest</code>.</li>
+</ul>
+</li>
+<li><p><strong>Service Worker Integration:</strong></p>
+<ul>
+<li>It is integrated with service workers and therefore is essential for developing Progressive Web Apps (PWAs).</li>
+</ul>
+</li>
+</ol>
+<h3>Consideration:</h3>
+<ul>
+<li>One thing to note is that <code>fetch()</code> only rejects a promise when there is a network error or another issue; it does not reject HTTP error statuses (e.g., 404 or 500). Developers should handle HTTP error statuses by checking the <code>ok</code> property of the Response object.</li>
+</ul>
+<p>Here is how you might handle HTTP error statuses:</p>
+<pre><code class="language-javascript">fetch('https://jsonplaceholder.typicode.com/posts/1')
+  .then(response =&gt; {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(data =&gt; console.log(data))
+  .catch(error =&gt; console.error('There has been a problem with your fetch operation:', error));
+</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>While it is theoretically possible to use React, Vue, and Angular simultaneously on one Razor page, doing so is highly unconventional and would likely lead to significant complexities and performance issues. Each of these frameworks/libraries has its own way of managing state, handling DOM updates, and responding to user interactions, which could conflict with each other when used on the same page.</p>
+<h3>Potential Issues:</h3>
+<ol>
+<li><p><strong>Performance Overhead:</strong>
+Loading and initializing multiple frameworks will have a significant impact on performance and load times.</p>
+</li>
+<li><p><strong>Conflict:</strong>
+They might try to modify or control the same DOM elements or handle the same events, leading to unpredictable behavior.</p>
+</li>
+<li><p><strong>Complexity:</strong>
+The complexity of managing and debugging code with three different frameworks on a single page is significantly high.</p>
+</li>
+<li><p><strong>Size:</strong>
+Each of these libraries/frameworks comes with its own size, and using all three will result in a larger bundle size, impacting the load time and performance, especially for users with slower internet connections.</p>
+</li>
+</ol>
+<h3>Alternatives:</h3>
+<ol>
+<li><p><strong>Micro Frontends:</strong>
+If you have separate teams working with different frameworks and want to integrate their work, consider a micro frontends approach where different parts of an application are developed and deployed independently and then integrated, usually at the level of routing. This way, each part of the application uses one framework, avoiding conflicts and reducing complexity.</p>
+</li>
+<li><p><strong>Web Components:</strong>
+You can create reusable, encapsulated components using Web Components, which can be used in any JavaScript framework or library. This way, you can create interoperable components without loading multiple frameworks on the same page.</p>
+</li>
+<li><p><strong>Choose One Framework:</strong>
+Evaluate the needs of your project and choose the one framework or library that best meets those needs. Mixing multiple frameworks usually adds more problems than it solves.</p>
+</li>
+</ol>
+<h3>Example:</h3>
+<p>If you still want to try mixing them for experimental or learning purposes, here’s a simplified conceptual example of how it might look in a Razor page:</p>
+<pre><code class="language-html">@page &quot;/mixedframeworks&quot;
+
+@section Scripts {
+    &lt;script src=&quot;path-to-react.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;path-to-react-dom.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;path-to-vue.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;path-to-angular.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        // Initialize React component
+        ReactDOM.render( /*...*/, document.getElementById('react-root'));
+
+        // Initialize Vue component
+        new Vue({ /*...*/ }).$mount('#vue-root');
+
+        // Initialize Angular application
+        angular.bootstrap(document.getElementById('angular-root'), ['myApp']);
+    &lt;/script&gt;
+}
+
+&lt;div id=&quot;react-root&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;vue-root&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;angular-root&quot; ng-app=&quot;myApp&quot;&gt;&lt;/div&gt;
+</code></pre>
+<p>This example is highly simplified and not recommended for production use. It is just to illustrate that you can have placeholders for each framework’s components in a single Razor page. The actual implementation would be more complex, and managing state and interactions between them would be challenging.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Facebook では、画像や投稿の絶対 URL を取得できつつ、タイムラインは、</p>
+                            <p class="note_contents"><a href="https://www.facebook.com/" target="_blank" class="url">https://www.facebook.com/</a></p>
+                            <p class="note_contents">のまま延々とスクロールできる。こういう設計のプログラムを書きたい。</p>
+                            <p class="note_contents">絶対 URL で開いた画像や投稿のほうでもページのリロードを行うことなくコメントの書き込みなどができるので、「サイトのトップページだろうと、そこに相対 URL のついたところだろうと、JavaScript ベースのライブラリーによりインタラクティブな処理が可能」という実装なのは間違いない。</p>
+                            <p class="note_contents">これができるなら、Blazor でないといけない理由が見えにくい。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">「できてるやん」と思った。</p>
+                            <div class="note_ai_generated">
+<p>As of my knowledge cut-off in January 2022, Blazor does not have a native method to show a yes/no dialog without writing any JavaScript or using additional libraries. Typically, you would need to implement a modal component yourself or use a library/component that provides such functionality.</p>
+<h3>Implementing a Simple Confirmation Dialog in Blazor:</h3>
+<p>You can create a simple confirmation dialog using Blazor components. Below is an example of how you could do it.</p>
+<h4>1. <strong>Create a ConfirmationDialog Component:</strong></h4>
+<p>Create a new Razor Component, <code>ConfirmationDialog.razor</code>:</p>
+<pre><code class="language-razor">@if (IsVisible)
+{
+    &lt;div class=&quot;modal-backdrop show&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;modal show&quot; tabindex=&quot;-1&quot; style=&quot;display: block;&quot;&gt;
+        &lt;div class=&quot;modal-dialog&quot;&gt;
+            &lt;div class=&quot;modal-content&quot;&gt;
+                &lt;div class=&quot;modal-header&quot;&gt;
+                    &lt;h5 class=&quot;modal-title&quot;&gt;Confirmation&lt;/h5&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;modal-body&quot;&gt;
+                    &lt;p&gt;@Message&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;modal-footer&quot;&gt;
+                    &lt;button class=&quot;btn btn-secondary&quot; @onclick=&quot;Cancel&quot;&gt;No&lt;/button&gt;
+                    &lt;button class=&quot;btn btn-primary&quot; @onclick=&quot;Confirm&quot;&gt;Yes&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+}
+
+@code {
+    private bool IsVisible { get; set; }
+    private string Message { get; set; }
+    private TaskCompletionSource&lt;bool&gt; tcs;
+
+    public Task&lt;bool&gt; Show(string message)
+    {
+        IsVisible = true;
+        Message = message;
+        tcs = new TaskCompletionSource&lt;bool&gt;();
+        StateHasChanged();
+        return tcs.Task;
+    }
+
+    private void Confirm()
+    {
+        IsVisible = false;
+        tcs.SetResult(true);
+    }
+
+    private void Cancel()
+    {
+        IsVisible = false;
+        tcs.SetResult(false);
+    }
+}
+</code></pre>
+<h4>2. <strong>Use the ConfirmationDialog Component:</strong></h4>
+<p>You can then use this <code>ConfirmationDialog</code> component in another component and call the <code>Show</code> method to display the dialog:</p>
+<pre><code class="language-razor">@page &quot;/example&quot;
+
+&lt;button @onclick=&quot;ShowDialog&quot;&gt;Show Confirmation&lt;/button&gt;
+
+&lt;ConfirmationDialog @ref=&quot;confirmationDialog&quot;&gt;&lt;/ConfirmationDialog&gt;
+
+@code {
+    private ConfirmationDialog confirmationDialog;
+
+    private async Task ShowDialog()
+    {
+        bool isConfirmed = await confirmationDialog.Show(&quot;Are you sure?&quot;);
+        Console.WriteLine($&quot;Confirmation Result: {isConfirmed}&quot;);
+    }
+}
+</code></pre>
+<p>In this example, clicking the &quot;Show Confirmation&quot; button will display the dialog, and the result of the confirmation will be written to the console. You can replace the <code>Console.WriteLine</code> with your desired logic to execute on confirmation/cancellation.</p>
+<h3>Using Libraries:</h3>
+<p>There are also several Blazor libraries/components available that provide dialog functionalities, such as Blazored.Modal, Radzen.Blazor, and MudBlazor, among others. These libraries often offer more features and customization options than a simple handmade dialog.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In a Blazor WebAssembly application, when you navigate between different pages (components) using anchor tags, the application does not reload the entire WebAssembly runtime or re-initialize the app from scratch. Blazor's router intercepts the navigation, and it loads the requested component dynamically, replacing the content of the <code>&lt;app&gt;</code> element defined in your <code>wwwroot/index.html</code>. This means the overhead is significantly less compared to reloading the entire page and re-initializing the WebAssembly runtime.</p>
+<h3>Example:</h3>
+<p>If you have a Blazor WebAssembly app with anchor tags like this:</p>
+<pre><code class="language-razor">&lt;nav&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&quot;/users&quot;&gt;User Management&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;/tasks&quot;&gt;Task Management&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+
+@body
+</code></pre>
+<p>When you click on either &quot;User Management&quot; or &quot;Task Management&quot;, Blazor will dynamically load the corresponding component without reloading the entire application or the WebAssembly runtime.</p>
+<h3>Considerations:</h3>
+<ul>
+<li>While the overhead of navigating between Blazor components is minimal, there might be some overhead depending on the logic inside the components being loaded/unloaded, such as making API requests or running complex computations.</li>
+<li>Also, the initialization state of the newly navigated component is independent unless there is some global state management in place, so any state within the component will be initialized anew when you navigate to it.</li>
+</ul>
+<h3>Caching and Pre-rendering:</h3>
+<p>To further optimize navigation and component loading:</p>
+<ul>
+<li>You can leverage caching strategies to cache the results of API requests, reducing the need to re-fetch data when navigating between pages.</li>
+<li>You can utilize Blazor’s pre-rendering feature to render components on the server before they are sent to the client, improving the perceived load time.</li>
+</ul>
+<p>In summary, using anchor tags for navigation in a Blazor WebAssembly app is a common approach, and it is designed to be efficient without the significant overheads associated with full page reloads.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Choosing between Blazor and Razor Pages depends on the specific requirements, constraints, and goals of your project. Here are some key considerations that might help you decide:</p>
+<h3>1. <strong>Interactivity and User Experience:</strong></h3>
+<ul>
+<li><strong>Blazor:</strong> Suitable for SPA (Single Page Application) where a rich, interactive, and dynamic user experience is required.</li>
+<li><strong>Razor Pages:</strong> Suitable for traditional multi-page applications where each page is rendered by the server, ideal for simpler, form-based sites with less interactivity.</li>
+</ul>
+<h3>2. <strong>Learning Curve:</strong></h3>
+<ul>
+<li><strong>Blazor:</strong> If your team is more familiar with C# and .NET, Blazor could offer a more straightforward learning curve, allowing you to write both client and server code in C#.</li>
+<li><strong>Razor Pages:</strong> More straightforward if the team is accustomed to the standard MVC pattern and comfortable with mixing HTML and server-side code.</li>
+</ul>
+<h3>3. <strong>Performance:</strong></h3>
+<ul>
+<li><strong>Blazor WebAssembly:</strong> Can be slower to load initially as it downloads the runtime and application to the browser, but once loaded, offers quick interactions and navigations.</li>
+<li><strong>Razor Pages:</strong> Each interaction that requires a server round trip could be slower than a client-side interaction, but the initial load is generally faster as it doesn’t have to download the runtime.</li>
+</ul>
+<h3>4. <strong>SEO and Crawling:</strong></h3>
+<ul>
+<li><strong>Blazor:</strong> Can have challenges with SEO and crawling due to client-side rendering, but these can be mitigated using server-side rendering or pre-rendering techniques.</li>
+<li><strong>Razor Pages:</strong> Generally better for SEO out-of-the-box as the content is rendered server-side, and thus easily crawlable by search engine bots.</li>
+</ul>
+<h3>5. <strong>Offline Support:</strong></h3>
+<ul>
+<li><strong>Blazor WebAssembly:</strong> Suitable if you need to support offline scenarios, as it can run entirely in the client and can work offline once loaded.</li>
+<li><strong>Razor Pages:</strong> Depend on the server for rendering and do not support offline scenarios.</li>
+</ul>
+<h3>6. <strong>Scalability:</strong></h3>
+<ul>
+<li><strong>Blazor WebAssembly:</strong> Can be more scalable as the server is used mostly for APIs and serving static files, reducing server load.</li>
+<li><strong>Razor Pages:</strong> Each interaction requires server resources, which could impact scalability, especially for read-heavy scenarios.</li>
+</ul>
+<h3>7. <strong>Development and Hosting:</strong></h3>
+<ul>
+<li><strong>Blazor:</strong> Requires a more modern development environment and hosting capabilities, especially for Blazor WebAssembly.</li>
+<li><strong>Razor Pages:</strong> Can be developed and hosted in more traditional and possibly constrained environments.</li>
+</ul>
+<h3>8. <strong>Compatibility:</strong></h3>
+<ul>
+<li><strong>Blazor WebAssembly:</strong> Requires browsers that support WebAssembly.</li>
+<li><strong>Razor Pages:</strong> More broadly compatible as it relies on traditional server-side rendering.</li>
+</ul>
+<h3>Summary:</h3>
+<ul>
+<li>Use <strong>Blazor</strong> when you need a rich, interactive web app with complex client-side logic, and possibly offline support, and your team is more comfortable with C#.</li>
+<li>Use <strong>Razor Pages</strong> for simpler, form-based websites, especially when SEO is a significant concern, or when the development/hosting environment is more constrained or traditional.</li>
+</ul>
+<p>When you evaluate these factors, consider the priorities of your project and weigh each aspect according to your specific needs and constraints.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="7d6d786d-85c1-43be-8be4-0e5d692ee28b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ページの内容の非同期的な翻訳について調べる</span>
+                    <a href="#7d6d786d-85c1-43be-8be4-0e5d692ee28b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In a Blazor application, you can perform the asynchronous translation more seamlessly without having to write JavaScript, by leveraging the built-in features of Blazor and C#.</p>
+<p>Below is an example of how you might achieve asynchronous translation in a Blazor page:</p>
+<h3>1. <strong>Create a Blazor Component</strong></h3>
+<p>Create a new Blazor component, for instance <code>Translate.razor</code>, where you will call the translation service or API method asynchronously and update the UI when the translation is received.</p>
+<h3>2. <strong>Implement the Component Logic</strong></h3>
+<p>In the component, you will inject the necessary services to interact with the API method and update the UI dynamically.</p>
+<h3>Translate.razor</h3>
+<pre><code class="language-razor">@page &quot;/translate&quot;
+@inject HttpClient Http
+@inject ITranslationRepository TranslationRepository
+
+&lt;h3&gt;Original Text&lt;/h3&gt;
+&lt;p&gt;@originalText&lt;/p&gt;
+
+&lt;h3&gt;Translated Text&lt;/h3&gt;
+&lt;p&gt;@translatedText&lt;/p&gt;
+
+@code {
+    private string originalText = &quot;Hello, How are you?&quot;;
+    private string translatedText = &quot;Translating...&quot;;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Check if the translation already exists in the local database
+        translatedText = await TranslationRepository.GetTranslatedTextAsync(originalText);
+
+        if (string.IsNullOrEmpty(translatedText))
+        {
+            // If not, make a call to the API method to get the translation
+            var response = await Http.PostAsJsonAsync(&quot;/api/translate&quot;, new { Text = originalText });
+            response.EnsureSuccessStatusCode();
+
+            var result = await response.Content.ReadFromJsonAsync&lt;TranslationResponse&gt;();
+            translatedText = result.TranslatedText;
+
+            // Save the translated text to the local database
+            await TranslationRepository.SaveTranslationAsync(originalText, translatedText);
+        }
+    }
+
+    private class TranslationResponse
+    {
+        public string TranslatedText { get; set; }
+    }
+}
+</code></pre>
+<p>In this example:</p>
+<ul>
+<li>We have a <code>Translate.razor</code> component which displays the original and translated text.</li>
+<li>When the component is initialized (<code>OnInitializedAsync</code>), it first checks the local database (via <code>TranslationRepository</code>) for an existing translation.</li>
+<li>If it doesn't find one, it makes an API call to get the translated text, updates the UI with the translated text, and saves the new translation to the local database for future use.</li>
+</ul>
+<p>This way, you can efficiently manage translations and display them in a Blazor component without writing any JavaScript, maintaining separation of concerns, and reusability.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To save and reuse the translated text in a Blazor page, follow these steps:</p>
+<h3>1. <strong>Create a Service</strong></h3>
+<p>Create a service that will handle interactions with the database, i.e., to save and retrieve translations. This service can be injected into your Blazor components.</p>
+<h3>2. <strong>Modify the Blazor Component</strong></h3>
+<p>In your Blazor component, inject the service created in step 1 and modify the component to use this service for getting and saving translations.</p>
+<h3>Example Implementation:</h3>
+<h4>1. <strong>Translation Service (ITranslationService.cs &amp; TranslationService.cs):</strong></h4>
+<pre><code class="language-csharp">// Interface Definition
+public interface ITranslationService
+{
+    Task&lt;string&gt; GetTranslatedTextAsync(string originalText);
+    Task SaveTranslatedTextAsync(string originalText, string translatedText);
+}
+
+// Service Implementation
+public class TranslationService : ITranslationService
+{
+    private readonly YourDbContext _context;
+    public TranslationService(YourDbContext context) =&gt; _context = context;
+
+    public async Task&lt;string&gt; GetTranslatedTextAsync(string originalText)
+    {
+        var translation = await _context.Translations
+            .FirstOrDefaultAsync(t =&gt; t.OriginalText == originalText);
+        return translation?.TranslatedText;
+    }
+
+    public async Task SaveTranslatedTextAsync(string originalText, string translatedText)
+    {
+        _context.Translations.Add(new Translation { OriginalText = originalText, TranslatedText = translatedText });
+        await _context.SaveChangesAsync();
+    }
+}
+</code></pre>
+<h4>2. <strong>Modify the Blazor Component (Translate.razor):</strong></h4>
+<pre><code class="language-razor">@page &quot;/translate&quot;
+@inject HttpClient Http
+@inject ITranslationService TranslationService
+
+&lt;h3&gt;Original Text&lt;/h3&gt;
+&lt;p&gt;@originalText&lt;/p&gt;
+
+&lt;h3&gt;Translated Text&lt;/h3&gt;
+&lt;p&gt;@translatedText&lt;/p&gt;
+
+@code {
+    private string originalText = &quot;Hello, How are you?&quot;;
+    private string translatedText;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Attempt to get the translation from the database
+        translatedText = await TranslationService.GetTranslatedTextAsync(originalText);
+
+        if (string.IsNullOrEmpty(translatedText))
+        {
+            // If not found in the database, get it from the translation API
+            var response = await Http.PostAsJsonAsync(&quot;/api/translate&quot;, new { Text = originalText });
+            response.EnsureSuccessStatusCode();
+            var result = await response.Content.ReadFromJsonAsync&lt;TranslationResponse&gt;();
+            translatedText = result.TranslatedText;
+
+            // Save the new translation to the database
+            await TranslationService.SaveTranslatedTextAsync(originalText, translatedText);
+        }
+    }
+
+    private class TranslationResponse
+    {
+        public string TranslatedText { get; set; }
+    }
+}
+</code></pre>
+<p>In this modified component:</p>
+<ul>
+<li>It first attempts to retrieve the translated text from the database using the <code>ITranslationService</code>.</li>
+<li>If the translation is not found in the database, it gets the translation from the API, displays it, and then saves this new translation to the database using the same service.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In the context of Blazor (and more broadly, in ASP.NET Core), services are classes that encapsulate the logic needed by the application for things like data access, computation, and the application's &quot;business logic&quot;. Services are created to adhere to the principle of separation of concerns and to make the application more modular and maintainable.</p>
+<h3>Types of Services in Blazor</h3>
+<h4>1. <strong>Http Services:</strong></h4>
+<p>These services interact with external APIs or services and are typically used to handle HTTP requests and responses. They often use the <code>HttpClient</code> class to make HTTP calls.</p>
+<h4>2. <strong>Data Services:</strong></h4>
+<p>These services interact with the database or other data stores. They typically include the logic to create, read, update, and delete (CRUD) data.</p>
+<h4>3. <strong>Business Logic Services:</strong></h4>
+<p>These services encapsulate the business rules and logic of the application, separate from the data access and presentation logic.</p>
+<h4>4. <strong>State Management Services:</strong></h4>
+<p>These services manage and store the state of the application, especially for Blazor Server applications where state management is crucial due to the stateless nature of HTTP.</p>
+<h3>Service Registration and Dependency Injection</h3>
+<p>Services in Blazor (and ASP.NET Core) are typically registered in the <code>Startup.cs</code> file (or <code>Program.cs</code> in .NET 6 and later) and are made available to components through dependency injection. Dependency injection is a technique whereby one object supplies the dependencies of another object, promoting the decoupling of classes and their dependencies.</p>
+<h4>Registering a Service:</h4>
+<pre><code class="language-csharp">// This is typically done in the Startup.cs or Program.cs file
+services.AddScoped&lt;IMyService, MyService&gt;();
+</code></pre>
+<h4>Injecting a Service:</h4>
+<pre><code class="language-razor">@inject IMyService MyService
+</code></pre>
+<h3>Example of a Service</h3>
+<p>Here is a simple example of a service in Blazor, a data service that interacts with a database:</p>
+<pre><code class="language-csharp">public interface ITranslationService
+{
+    Task&lt;string&gt; GetTranslatedTextAsync(string originalText);
+    Task SaveTranslatedTextAsync(string originalText, string translatedText);
+}
+
+public class TranslationService : ITranslationService
+{
+    private readonly YourDbContext _context;
+    public TranslationService(YourDbContext context) =&gt; _context = context;
+
+    public async Task&lt;string&gt; GetTranslatedTextAsync(string originalText)
+    {
+        var translation = await _context.Translations
+            .FirstOrDefaultAsync(t =&gt; t.OriginalText == originalText);
+        return translation?.TranslatedText;
+    }
+
+    public async Task SaveTranslatedTextAsync(string originalText, string translatedText)
+    {
+        _context.Translations.Add(new Translation { OriginalText = originalText, TranslatedText = translatedText });
+        await _context.SaveChangesAsync();
+    }
+}
+</code></pre>
+<p>In this example, <code>TranslationService</code> is a service that interacts with the database to retrieve and save translations. It's registered in the application's dependency injection container, and then it can be injected into any Blazor component or other services as needed.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="e19e3458-5d08-4060-9a53-ded24649e36c" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ページの URL や物理パスを取得する方法を調べる</span>
+                    <a href="#e19e3458-5d08-4060-9a53-ded24649e36c" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When running a Blazor application, the underlying system may vary, as Blazor can run on multiple hosting models such as Server, WebAssembly, and more. However, if you want to get the physical path of your application, you can use different approaches depending on the hosting model.</p>
+<h3>For Blazor Server:</h3>
+<p>In a Blazor Server application, you can inject the <code>IWebHostEnvironment</code> service to get the physical path of your application:</p>
+<pre><code class="language-csharp">@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment WebHostEnvironment
+
+...
+
+string contentRootPath = WebHostEnvironment.ContentRootPath;
+string webRootPath = WebHostEnvironment.WebRootPath;
+</code></pre>
+<p><code>ContentRootPath</code> gives the path of the application, and <code>WebRootPath</code> gives the path of the <code>wwwroot</code> folder.</p>
+<h3>For Blazor WebAssembly:</h3>
+<p>Blazor WebAssembly runs client-side in the browser and does not have access to the server file system, and therefore, it does not have a concept of a physical path in the way that server-side code does. However, if your Blazor WebAssembly app is hosted by an ASP.NET Core app, you can create an API endpoint to get the physical path from the server-side and call this endpoint from the client-side.</p>
+<p>For example, create a Controller with an action that returns the physical path:</p>
+<pre><code class="language-csharp">// In your ASP.NET Core app
+[ApiController]
+[Route(&quot;api/[controller]&quot;)]
+public class PathController : ControllerBase
+{
+    private readonly IWebHostEnvironment _environment;
+
+    public PathController(IWebHostEnvironment environment)
+    {
+        _environment = environment;
+    }
+
+    [HttpGet]
+    public ActionResult&lt;string&gt; GetPhysicalPath()
+    {
+        return _environment.ContentRootPath;
+    }
+}
+</code></pre>
+<p>And then, call this endpoint from your Blazor WebAssembly component:</p>
+<pre><code class="language-csharp">@inject HttpClient Http
+
+@code {
+    private string physicalPath;
+
+    protected override async Task OnInitializedAsync()
+    {
+        physicalPath = await Http.GetStringAsync(&quot;api/path&quot;);
+    }
+}
+</code></pre>
+<h3>Additional Consideration:</h3>
+<p>Exposing the physical path of the application could potentially lead to security vulnerabilities. It is crucial to secure such endpoints or reconsider whether exposing such information is necessary. If you only need this during development, consider using preprocessor directives to include this functionality only in debug builds:</p>
+<pre><code class="language-csharp">#if DEBUG
+    // Code to get and expose physical path
+#endif
+</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Certainly, there are other ways you might approach this based on your specific needs or constraints. Below are a few alternative methods:</p>
+<h3>1. <strong>AppSettings or Configuration Files:</strong></h3>
+<p>You can define the physical path directly in the <code>appsettings.json</code> or another configuration file and then read it when necessary.</p>
+<h3>2. <strong>Environment Variables:</strong></h3>
+<p>You can store the physical path as an environment variable on the server and read it in your application.</p>
+<h3>3. <strong>Custom Middleware:</strong></h3>
+<p>You can create custom middleware in ASP.NET Core which can be used to access the physical path in Blazor Server apps.</p>
+<p>Here’s a simple example of how to create middleware that writes the ContentRootPath to the Response (just as an example):</p>
+<pre><code class="language-csharp">public class PhysicalPathMiddleware
+{
+    private readonly RequestDelegate _next;
+    private readonly IWebHostEnvironment _env;
+
+    public PhysicalPathMiddleware(RequestDelegate next, IWebHostEnvironment env)
+    {
+        _next = next;
+        _env = env;
+    }
+
+    public async Task InvokeAsync(HttpContext context)
+    {
+        context.Response.Headers.Add(&quot;Physical-Path&quot;, _env.ContentRootPath);
+        await _next(context);
+    }
+}
+</code></pre>
+<p>Then, you register this middleware in the <code>Startup.cs</code> or <code>Program.cs</code> depending on your .NET version:</p>
+<pre><code class="language-csharp">app.UseMiddleware&lt;PhysicalPathMiddleware&gt;();
+</code></pre>
+<p>In this example, the physical path is added to the response header of every request, which could be read on the client side.</p>
+<h3>4. <strong>Using JavaScript Interop in Blazor WebAssembly:</strong></h3>
+<p>Blazor WebAssembly doesn't have direct access to server paths, but if you have a requirement to get a local path from the client machine, you might use JavaScript interop to interact with the client environment to some extent. However, due to browser security restrictions (sandboxing), you will have very limited access to client resources, and usually, you cannot access the file system.</p>
+<h3>5. <strong>ASP.NET Core Hosting Services:</strong></h3>
+<p>If you have some level of control over the hosting environment, you can create a service in ASP.NET Core that holds the physical path information and then inject this service wherever needed.</p>
+<h3>Security Consideration:</h3>
+<p>Regardless of the approach, exposing sensitive information such as physical paths can create security risks, so it’s important to carefully consider the implications and implement necessary security measures, such as restricting access to such information based on user roles, securing the communication channels, or encrypting the information.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To get the current URL in a Blazor application, you can use the <code>NavigationManager</code> service which provides information about the URL and allows you to navigate to new URLs.</p>
+<h3>In Blazor Server and Blazor WebAssembly</h3>
+<p>You can inject the <code>NavigationManager</code> service into your component to access the current URL:</p>
+<pre><code class="language-csharp">@inject NavigationManager NavManager
+
+&lt;h3&gt;Current URL&lt;/h3&gt;
+&lt;p&gt;@currentUrl&lt;/p&gt;
+
+@code {
+    private string currentUrl;
+
+    protected override void OnInitialized()
+    {
+        currentUrl = NavManager.Uri;
+    }
+}
+</code></pre>
+<p><code>NavManager.Uri</code> will give you the absolute URI of the current page.</p>
+<h3>Base URL</h3>
+<p>If you just need the base URL of your application, you can use:</p>
+<pre><code class="language-csharp">string baseUrl = NavManager.BaseUri;
+</code></pre>
+<h3>Navigating to a New URL</h3>
+<p><code>NavigationManager</code> also provides a method to navigate to a new URL:</p>
+<pre><code class="language-csharp">NavManager.NavigateTo(&quot;newpage&quot;);
+</code></pre>
+<h3>URL Change Event</h3>
+<p>You can also register a callback to be notified of URL changes if you want to react to changes in the URL:</p>
+<pre><code class="language-csharp">protected override void OnInitialized()
+{
+    NavManager.LocationChanged += HandleLocationChanged;
+}
+
+private void HandleLocationChanged(object sender, LocationChangedEventArgs e)
+{
+    // Handle URL change
+}
+
+// Don't forget to unregister the event when the component is disposed of
+void IDisposable.Dispose()
+{
+    NavManager.LocationChanged -= HandleLocationChanged;
+}
+</code></pre>
+<h3>Security Considerations</h3>
+<p>Remember that URLs can be manipulated by users, so never trust the URL to be safe and always validate and sanitize any information you extract from it, especially if you are using it to make decisions or load data in your application.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="6158b496-a8d7-4816-9644-4f7e1cd7dfa1" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ページのリテラルやメッセージのローカライズの方法を調べる</span>
+                    <a href="#6158b496-a8d7-4816-9644-4f7e1cd7dfa1" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Localizing a Blazor application involves several steps, including creating resource files, configuring the localization services, and using localized strings in your components.</p>
+<h3>1. <strong>Create Resource Files</strong></h3>
+<p>Create resource files for each locale you want to support. Resource files are <code>.resx</code> files, and you should create one for each language. For example:</p>
+<ul>
+<li><code>Resources.resx</code> (default language, e.g., English)</li>
+<li><code>Resources.fr.resx</code> (for French)</li>
+<li><code>Resources.es.resx</code> (for Spanish)</li>
+</ul>
+<h3>2. <strong>Configure Localization Services</strong></h3>
+<p>Configure the localization services in your <code>Startup.cs</code> (or <code>Program.cs</code> in .NET 6 and later).</p>
+<pre><code class="language-csharp">// Using Startup.cs
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddLocalization(options =&gt; options.ResourcesPath = &quot;Resources&quot;);
+    services.AddRazorPages().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
+}
+
+// Using Program.cs (.NET 6 and later)
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddLocalization(options =&gt; options.ResourcesPath = &quot;Resources&quot;);
+builder.Services.AddRazorPages().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
+</code></pre>
+<h3>3. <strong>Set Supported Cultures</strong></h3>
+<p>Also, specify the supported cultures and the default culture in the <code>Configure</code> method in <code>Startup.cs</code> or in <code>Program.cs</code>.</p>
+<pre><code class="language-csharp">// Using Startup.cs
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    var supportedCultures = new[]
+    {
+        new CultureInfo(&quot;en&quot;),
+        new CultureInfo(&quot;fr&quot;),
+        new CultureInfo(&quot;es&quot;)
+    };
+    app.UseRequestLocalization(new RequestLocalizationOptions
+    {
+        DefaultRequestCulture = new RequestCulture(&quot;en&quot;),
+        SupportedCultures = supportedCultures,
+        SupportedUICultures = supportedCultures
+    });
+
+    // ... other middlewares ...
+}
+
+// Using Program.cs (.NET 6 and later)
+var app = builder.Build();
+var supportedCultures = new[]
+{
+    new CultureInfo(&quot;en&quot;),
+    new CultureInfo(&quot;fr&quot;),
+    new CultureInfo(&quot;es&quot;)
+};
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture(&quot;en&quot;),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures
+});
+
+// ... other middlewares ...
+</code></pre>
+<h3>4. <strong>Inject String Localizer</strong></h3>
+<p>In your Razor components, inject the <code>IStringLocalizer&lt;T&gt;</code> service to localize strings.</p>
+<pre><code class="language-csharp">@inject IStringLocalizer&lt;Index&gt; Localizer
+
+&lt;h3&gt;@Localizer[&quot;Welcome&quot;]&lt;/h3&gt;
+</code></pre>
+<p>In this example, <code>&quot;Welcome&quot;</code> is the name of a string resource in your <code>.resx</code> files.</p>
+<h3>5. <strong>Culture Switching</strong></h3>
+<p>You might also want to implement culture switching, allowing the user to select their preferred language. For this, you may need to have some UI elements that allow the user to select a language, and then you can change the culture using the <code>NavigationManager</code> to append or modify the culture in the URL or use a cookie to store the user’s preferred culture.</p>
+<p>Here’s a simple example of how to switch cultures using a select element:</p>
+<pre><code class="language-csharp">@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+
+&lt;select @onchange=&quot;ChangeLanguage&quot;&gt;
+    &lt;option value=&quot;en&quot;&gt;English&lt;/option&gt;
+    &lt;option value=&quot;fr&quot;&gt;French&lt;/option&gt;
+    &lt;option value=&quot;es&quot;&gt;Spanish&lt;/option&gt;
+&lt;/select&gt;
+
+@code {
+    private async Task ChangeLanguage(ChangeEventArgs e)
+    {
+        var culture = (string)e.Value;
+        var uri = new Uri(NavigationManager.Uri)
+            .GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
+        var query = $&quot;?culture={culture}&amp;redirectUri={uri}&quot;;
+
+        NavigationManager.NavigateTo(&quot;/Culture/SetCulture&quot; + query, forceLoad: true);
+    }
+}
+</code></pre>
+<h3>6. <strong>Testing Locally</strong></h3>
+<p>Remember to test your localization implementation thoroughly, ensuring that strings are displayed correctly for each supported culture, especially when dealing with right-to-left languages or languages with different scripts.</p>
+<p>By following these steps, you should be able to successfully localize your Blazor application to support multiple languages and cultures.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, indeed. While <code>.resx</code> files are a common way of handling localization in .NET applications due to their integration with the framework, there are modern libraries and approaches that allow more flexible and extensive localization strategies.</p>
+<h3>1. <strong>Portable Object Localization (PO Files)</strong></h3>
+<p>PO files are a standard, widely used file format for localization in many software projects. There are .NET libraries available such as <a href="https://www.nuget.org/packages/OrchardCore.Localization.Abstractions/">OrchardCore.Localization.Abstractions</a> that provide support for using PO files for localization.</p>
+<h3>2. <strong>JSON-based Resources</strong></h3>
+<p>JSON is a more modern and widely-used format, and you can store your localized strings in JSON files and then read them as required. This approach would need custom implementation for reading and applying localized strings from JSON.</p>
+<h3>3. <strong>Database-driven Localization</strong></h3>
+<p>Storing localized resources in a database can be an effective way to manage translations, especially if you have a significant amount of text and many translations. It allows for easier updates and management of translations. However, this approach would also require a custom implementation to retrieve and apply translations.</p>
+<h3>4. <strong>Content Management Systems (CMS)</strong></h3>
+<p>Using a CMS can be beneficial for managing localization, especially for large applications. Many content management systems support multi-language content and can serve localized content via API endpoints, which can be consumed by Blazor applications.</p>
+<h3>5. <strong>Third-Party Localization Services</strong></h3>
+<p>There are also several third-party services like <a href="https://phrase.com/">Phrase</a> or <a href="https://crowdin.com/">Crowdin</a> that offer extensive localization management features. They usually provide integrations, APIs, and SDKs that can be used to retrieve localized resources dynamically.</p>
+<h3>Implementation Example: JSON-based Resources</h3>
+<p>Here’s a simple example of how you might approach using JSON files for localization:</p>
+<ol>
+<li><strong>Create JSON Files:</strong>
+<ul>
+<li><code>Resources.en.json</code></li>
+<li><code>Resources.fr.json</code></li>
+</ul>
+</li>
+</ol>
+<pre><code class="language-json">// Example content of Resources.en.json
+{
+    &quot;Welcome&quot;: &quot;Welcome&quot;,
+    &quot;Greeting&quot;: &quot;Hello, {0}!&quot;
+}
+</code></pre>
+<ol start="2">
+<li><strong>Load JSON Files:</strong>
+Load the JSON files in your app, parse them, and create a service or some utility to get localized strings by keys.</li>
+</ol>
+<pre><code class="language-csharp">public class JsonLocalizationService
+{
+    private readonly IJSRuntime _jsRuntime;
+    private Dictionary&lt;string, string&gt; _localizations;
+
+    public JsonLocalizationService(IJSRuntime jsRuntime)
+    {
+        _jsRuntime = jsRuntime;
+    }
+
+    public async Task LoadLocalization(string culture)
+    {
+        var path = $&quot;Resources.{culture}.json&quot;;
+        _localizations = await _jsRuntime.InvokeAsync&lt;Dictionary&lt;string, string&gt;&gt;(&quot;import&quot;, path);
+    }
+
+    public string this[string key] =&gt; _localizations.TryGetValue(key, out var value) ? value : key;
+}
+</code></pre>
+<ol start="3">
+<li><strong>Use the Service:</strong>
+Use the created service/utility in your components to get localized strings.</li>
+</ol>
+<pre><code class="language-csharp">@inject JsonLocalizationService LocalizationService
+
+&lt;h3&gt;@LocalizationService[&quot;Welcome&quot;]&lt;/h3&gt;
+</code></pre>
+<h3>Conclusion</h3>
+<p>Each approach has its pros and cons, and the choice depends on the project’s specific requirements, like the number of languages, the amount of text, the update frequency of translations, etc. The built-in <code>.resx</code> approach is integrated and straightforward, but exploring other options like JSON-based, database-driven, or third-party services might be more suitable for certain scenarios.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Localizing validation messages in a Blazor application involves localizing data annotations and configuring the application to use localized resources for validation messages. Here are the steps you can follow to localize validation messages in a Blazor application:</p>
+<h3>1. <strong>Create Resource Files for Validation Messages</strong></h3>
+<p>Create resource files to store localized validation messages, similar to localizing other strings.</p>
+<pre><code class="language-plaintext">Resources/ValidationMessages.resx (default, e.g., English)
+Resources/ValidationMessages.fr.resx (French)
+Resources/ValidationMessages.es.resx (Spanish)
+</code></pre>
+<h3>2. <strong>Add Localized Validation Messages</strong></h3>
+<p>In your <code>.resx</code> files, you can add entries for the validation attribute error messages. For example:</p>
+<pre><code class="language-xml">&lt;!-- Resources/ValidationMessages.resx --&gt;
+&lt;data name=&quot;RequiredField&quot; xml:space=&quot;preserve&quot;&gt;
+    &lt;value&gt;{0} is required.&lt;/value&gt;
+&lt;/data&gt;
+</code></pre>
+<pre><code class="language-xml">&lt;!-- Resources/ValidationMessages.fr.resx --&gt;
+&lt;data name=&quot;RequiredField&quot; xml:space=&quot;preserve&quot;&gt;
+    &lt;value&gt;{0} est requis.&lt;/value&gt;
+&lt;/data&gt;
+</code></pre>
+<h3>3. <strong>Apply Data Annotations</strong></h3>
+<p>Decorate your model properties with validation attributes and refer to the resource keys you have defined:</p>
+<pre><code class="language-csharp">public class MyModel
+{
+    [Required(ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = &quot;RequiredField&quot;)]
+    public string Name { get; set; }
+}
+</code></pre>
+<h3>4. <strong>Configure Localization Services</strong></h3>
+<p>Make sure that you have configured localization services in the <code>Startup.cs</code> or <code>Program.cs</code> file.</p>
+<pre><code class="language-csharp">// Register localization services
+services.AddLocalization(options =&gt; options.ResourcesPath = &quot;Resources&quot;);
+
+// Configure supported cultures and localization options
+var supportedCultures = new[] { &quot;en&quot;, &quot;fr&quot;, &quot;es&quot; };
+var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures);
+
+app.UseRequestLocalization(localizationOptions);
+</code></pre>
+<h3>5. <strong>Use Localizer in Components</strong></h3>
+<p>Inject <code>IStringLocalizer&lt;T&gt;</code> in the components where you want to use localized validation messages.</p>
+<pre><code class="language-csharp">@inject IStringLocalizer&lt;ValidationMessages&gt; Localizer
+</code></pre>
+<h3>6. <strong>Test the Validation Messages</strong></h3>
+<p>After you've configured localization for your validation messages, ensure to test them thoroughly by switching the culture and checking if the correct localized validation messages are displayed based on the selected culture.</p>
+<h3>Notes:</h3>
+<ul>
+<li>The <code>ErrorMessageResourceType</code> should point to the class generated for the resource file, and <code>ErrorMessageResourceName</code> should be the name of the specific resource inside the resource file.</li>
+<li>The setup may vary slightly depending on whether you are using Blazor Server or Blazor WebAssembly, and depending on your project structure and .NET SDK version.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Indeed, the challenge you mentioned arises in many languages, including Russian, due to grammatical cases, gender, and other language-specific features. The simple parameter substitution, like <code>&quot;A is B&quot;</code>, may not work correctly in such languages.</p>
+<h3>Using Pluralization and Gender Rules</h3>
+<p>Some localization libraries and services offer more advanced substitution options, allowing you to define different forms of a message depending on grammatical number (singular/plural), gender, and sometimes even cases. You will define different variations of a message in your localization files, and the correct form will be chosen at runtime based on the parameters you pass.</p>
+<h3>Example with a Complex Language</h3>
+<p>Let’s take a hypothetical example with a complex language (like Russian), where you have different forms of a word and sentences depending on the context:</p>
+<pre><code class="language-plaintext">// In your .resx or other localization file, you might have:
+&quot;UserRegistered_Male&quot; = &quot;{0} зарегистрировался успешно.&quot;;
+&quot;UserRegistered_Female&quot; = &quot;{0} зарегистрировалась успешно.&quot;;
+</code></pre>
+<p>Here, <code>{0}</code> is a placeholder for the user's name, and the sentence changes based on the gender of the user. When using this localized string in your code, you would select the correct form based on the user's gender:</p>
+<pre><code class="language-csharp">var messageKey = user.Gender == Gender.Male ? &quot;UserRegistered_Male&quot; : &quot;UserRegistered_Female&quot;;
+var message = string.Format(Localizer[messageKey], user.Name);
+</code></pre>
+<h3>Pluralization</h3>
+<p>Similarly, for pluralization, you can have different strings for different plural forms, and select the correct form based on the quantity:</p>
+<pre><code class="language-plaintext">&quot;Items_Left_One&quot; = &quot;Остался {0} предмет.&quot;;
+&quot;Items_Left_Few&quot; = &quot;Осталось {0} предмета.&quot;;
+&quot;Items_Left_Many&quot; = &quot;Осталось {0} предметов.&quot;;
+</code></pre>
+<pre><code class="language-csharp">var messageKey = GetPluralizationKey(count); // a method that returns the correct key based on the count
+var message = string.Format(Localizer[messageKey], count);
+</code></pre>
+<h3>Contextual Localization</h3>
+<p>For cases where the form of the word depends on the context in which it is used, you might need to use contextual localization. You would have different translations for the same word used in different contexts. The context can be explicitly defined in your localization files.</p>
+<h3>External Libraries and Services</h3>
+<p>Some external localization libraries and services offer advanced features for handling complex localization scenarios, including gender, pluralization, and contextual localization, which can be helpful for languages with complex grammatical rules.</p>
+<h3>Remember</h3>
+<p>Localization can be challenging due to the differences in grammatical rules, syntax, and semantics across languages. It’s crucial to work closely with native speakers and linguists who understand the subtleties of the target language, and to test localized versions of the application thoroughly with the target audience to ensure that the localized strings are correct and make sense in context.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In .NET, the fallback process for localization resources is designed to use resource files of a neutral or default culture as a fallback when no match is found for the specific culture. The general flow is from <code>Specific Culture -&gt; Neutral Culture -&gt; Default Culture</code>.</p>
+<p>However, .NET Core does not natively support a mechanism to define custom fallback strategies, like falling back to Russian for Ukrainian. One way to handle this scenario is to implement custom logic to manually resolve the correct resource file based on the requested culture and your specific fallback rules.</p>
+<h3>Custom Fallback Logic</h3>
+<p>Here is a simplified way to achieve a specific fallback mechanism.</p>
+<h4>1. <strong>Define a Service or Middleware</strong></h4>
+<p>Define a service or middleware to resolve the culture and appropriate resource file.</p>
+<pre><code class="language-csharp">public class CustomLocalizationService
+{
+    private readonly IStringLocalizerFactory _localizerFactory;
+
+    public CustomLocalizationService(IStringLocalizerFactory localizerFactory)
+    {
+        _localizerFactory = localizerFactory;
+    }
+
+    public IStringLocalizer GetLocalizer(CultureInfo culture)
+    {
+        CultureInfo fallbackCulture;
+
+        switch (culture.TwoLetterISOLanguageName)
+        {
+            case &quot;uk&quot;:
+                fallbackCulture = new CultureInfo(&quot;ru&quot;);
+                break;
+            case &quot;ja&quot;:
+                fallbackCulture = new CultureInfo(&quot;en&quot;);
+                break;
+            default:
+                fallbackCulture = CultureInfo.InvariantCulture;
+                break;
+        }
+
+        var localizer = _localizerFactory.Create(&quot;Resources&quot;, Assembly.GetExecutingAssembly().FullName);
+
+        return new CustomStringLocalizer(localizer, culture, fallbackCulture);
+    }
+}
+</code></pre>
+<h4>2. <strong>Define a Custom StringLocalizer</strong></h4>
+<p>Define a custom <code>StringLocalizer</code> to utilize the fallback culture.</p>
+<pre><code class="language-csharp">public class CustomStringLocalizer : IStringLocalizer
+{
+    private readonly IStringLocalizer _baseLocalizer;
+    private readonly CultureInfo _requestedCulture;
+    private readonly CultureInfo _fallbackCulture;
+
+    public CustomStringLocalizer(IStringLocalizer baseLocalizer, CultureInfo requestedCulture, CultureInfo fallbackCulture)
+    {
+        _baseLocalizer = baseLocalizer;
+        _requestedCulture = requestedCulture;
+        _fallbackCulture = fallbackCulture;
+    }
+
+    public LocalizedString this[string name]
+    {
+        get
+        {
+            var result = _baseLocalizer.WithCulture(_requestedCulture)[name];
+            if (!result.ResourceNotFound)
+            {
+                return result;
+            }
+
+            result = _baseLocalizer.WithCulture(_fallbackCulture)[name];
+            return result.ResourceNotFound ? _baseLocalizer[name] : result;
+        }
+    }
+
+    // Implement other members of IStringLocalizer...
+}
+</code></pre>
+<h3>Register Service</h3>
+<p>Register the service and use it to retrieve localizers based on culture.</p>
+<pre><code class="language-csharp">services.AddSingleton&lt;CustomLocalizationService&gt;();
+</code></pre>
+<h3>Usage</h3>
+<pre><code class="language-csharp">@inject CustomLocalizationService LocalizationService
+
+@code {
+    private IStringLocalizer _localizer;
+
+    protected override void OnInitialized()
+    {
+        // Assume 'uk' is the culture you obtained from user preference or browser setting
+        _localizer = LocalizationService.GetLocalizer(new CultureInfo(&quot;uk&quot;));
+    }
+}
+</code></pre>
+<p>This way, you can inject <code>CustomLocalizationService</code> where needed and retrieve an <code>IStringLocalizer</code> that follows your custom fallback logic. This approach provides a high level of control over the fallback process and can be further extended or modified to fit specific requirements.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="6a5d3ad3-4278-4dc2-85c1-e90305e7297c" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">サーバーに配置されているバイナリーの自動更新の方法を調べる</span>
+                    <a href="#6a5d3ad3-4278-4dc2-85c1-e90305e7297c" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When you package a Blazor app (or any app) using Docker, you typically create an image that contains a specific version of your app. To update the app, you generally need to create a new image with the updated app and then redeploy it. For automating this process, you have various strategies, and here’s one of them using Kubernetes and some CI/CD pipeline.</p>
+<h3>1. Continuous Integration/Continuous Deployment (CI/CD)</h3>
+<p>You can set up a CI/CD pipeline to automatically build a new Docker image whenever you push changes to your application's source code. Many CI/CD tools and services are available like Jenkins, GitLab CI/CD, GitHub Actions, and more.</p>
+<h3>2. Kubernetes</h3>
+<p>If your app is deployed on a Kubernetes cluster, you can set up your deployment to automatically pull the latest image. However, pulling the latest image at a specific time, like 4 AM every day, is a bit trickier.</p>
+<h3>3. Scheduled Updates</h3>
+<p>To achieve the scheduling, you might use a combination of Kubernetes and some form of scheduled task.</p>
+<p>Here is a simplified overview of a possible solution:</p>
+<h4>a) Kubernetes Deployment</h4>
+<p>You can set up a Kubernetes Deployment with your Docker container. Normally, Kubernetes uses a <code>pullPolicy</code> of <code>IfNotPresent</code>, meaning it will only pull the image if it's not already present on the node. You can change this to <code>Always</code> to ensure it pulls the latest image every time the pod is started.</p>
+<p>Here's an example of a Deployment YAML:</p>
+<pre><code class="language-yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-blazor-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-blazor-app
+  template:
+    metadata:
+      labels:
+        app: my-blazor-app
+    spec:
+      containers:
+      - name: my-blazor-app
+        image: myregistry/my-blazor-app:latest
+        imagePullPolicy: Always
+</code></pre>
+<h4>b) Scheduled Task</h4>
+<p>You can then set up a scheduled task (CronJob) in Kubernetes to restart your deployment every day at 4 AM, causing it to pull the latest image.</p>
+<p>Here's an example of a CronJob YAML:</p>
+<pre><code class="language-yaml">apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: my-blazor-app-restart
+spec:
+  schedule: &quot;0 4 * * *&quot;
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: kubectl
+            image: bitnami/kubectl
+            command:
+            - kubectl
+            - rollout
+            - restart
+            - deployment/my-blazor-app
+          restartPolicy: OnFailure
+</code></pre>
+<h3>Automating Image Build and Push</h3>
+<p>Your CI/CD pipeline should automate the building of your Docker image and pushing it to your container registry whenever there is a new commit or a new release tag. For this, you can use services like Docker Hub, GitHub Container Registry, or any other container registry service.</p>
+<h3>Ensuring Zero Downtime</h3>
+<p>When working with automated deployments, ensure that your deployment strategy allows for zero downtime. Kubernetes provides different deployment strategies like Rolling updates to help you update without affecting the availability of your application.</p>
+<h3>Conclusion</h3>
+<p>This is just one example, and there might be other solutions based on different orchestrators or automation tools. Additionally, remember to manage your configurations, secrets, and other environmental concerns appropriately when automating deployments, and to consider rollback scenarios in case the new version has issues.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When dealing with deployments, especially with multiple instances across several servers, it’s generally better practice to have a centralized, controlled, and automated way to handle updates. Having each instance attempt to update itself can lead to several issues such as version inconsistency, potential downtimes, and additional complexities.</p>
+<h3>Centralized Approach</h3>
+<p>You should typically have an automated CI/CD pipeline to handle building, testing, and deploying your applications. This ensures that all instances across all servers are running the same version of your application and reduces the manual effort required to update each instance individually.</p>
+<p>When you have multiple instances running, container orchestration tools like Kubernetes become increasingly valuable. Kubernetes can manage the deployment of your application across multiple servers (nodes), ensuring consistency, scalability, and availability.</p>
+<h3>Multiple Instances</h3>
+<p>If you have like 10 running copies (replicas) of the same app across several servers (nodes), the container orchestrator (e.g., Kubernetes) ensures that the deployed replicas are running the updated version of your app after a deployment.</p>
+<h3>Steps to Achieve This</h3>
+<ol>
+<li><p><strong>Set up CI/CD Pipeline:</strong> Use a CI/CD tool to automate building, testing, and pushing the Docker images, and eventually deploying the app. Tools like Jenkins, GitLab CI/CD, or GitHub Actions can be used for this.</p>
+</li>
+<li><p><strong>Container Orchestration:</strong> Use a container orchestrator like Kubernetes to manage the deployment of your app across multiple servers and to handle scaling, self-healing, and updates.</p>
+</li>
+<li><p><strong>Automated Rollouts &amp; Rollbacks:</strong> Define Deployment strategies to ensure zero downtime during updates and rollbacks in case of failure.</p>
+</li>
+<li><p><strong>Testing:</strong> Before deploying a new version, thoroughly test it in an environment similar to the production environment to catch any potential issues before they affect the live application.</p>
+</li>
+</ol>
+<h3>Example Scenario with 10 Instances</h3>
+<p>Let’s say you have a Blazor app running in 10 replicas across several nodes in a Kubernetes Cluster. When a new version of the app is pushed:</p>
+<ol>
+<li><p><strong>Building and Pushing:</strong> Your CI/CD pipeline will build a new Docker image and push it to a container registry.</p>
+</li>
+<li><p><strong>Updating the Deployment:</strong> Your CI/CD pipeline will update the Kubernetes Deployment with the new image, or if you are using the <code>:latest</code> tag and <code>imagePullPolicy: Always</code>, a restart will pull the latest image.</p>
+</li>
+<li><p><strong>Rolling Update:</strong> Kubernetes will perform a rolling update, creating new pods with the new version while terminating the old ones, ensuring that there is no downtime.</p>
+</li>
+<li><p><strong>Consistency:</strong> All replicas will be running the same version of the app, maintaining consistency across all instances.</p>
+</li>
+</ol>
+<p>By following this approach, you centralize and automate the update process, reducing manual effort, minimizing errors, and ensuring consistency and availability across all instances of your application.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Kubernetes is a powerful open-source platform designed to automate deploying, scaling, and operating application containers. It groups containers that make up an application into logical units for easy management and discovery.</p>
+<h3>Core Components</h3>
+<h4>1. <strong>Master Node</strong></h4>
+<p>The master node(s) manage the Kubernetes cluster. It is responsible for maintaining the desired state, scheduling workloads to worker nodes, and interacting with the cluster via Kubernetes API.</p>
+<h4>2. <strong>Worker Node</strong></h4>
+<p>Worker nodes are the machines, VMs, or physical computers that run applications using Pods, which are the smallest deployable units in a Kubernetes cluster and can host multiple containers.</p>
+<h4>3. <strong>Pod</strong></h4>
+<p>A Pod is the smallest and simplest unit in the Kubernetes object model. It represents a single instance of a running process in a cluster and can contain one or more containers.</p>
+<h4>4. <strong>Service</strong></h4>
+<p>A Service is an abstraction that defines a logical set of Pods and a policy by which to access them. It enables external traffic exposure, load balancing, and service discovery.</p>
+<h4>5. <strong>Deployment</strong></h4>
+<p>A Deployment provides declarative updates for Pods and ReplicaSets. You describe a desired state in a Deployment, and the Deployment Controller changes the actual state to the desired state at a controlled rate.</p>
+<h3>Use Cases</h3>
+<p>Kubernetes is used in a variety of scenarios, including:</p>
+<ul>
+<li><strong>Microservices Architecture:</strong> Manage and orchestrate multiple microservices that make up an application.</li>
+<li><strong>Scaling &amp; High Availability:</strong> Automatically scale applications based on resource utilization or other select metrics.</li>
+<li><strong>Load Balancing &amp; Traffic Routing:</strong> Distribute network traffic to provide improved responsiveness and availability of applications.</li>
+<li><strong>Continuous Deployment &amp; Rollback:</strong> Perform rolling updates and rollbacks without downtime.</li>
+<li><strong>Self-Healing:</strong> Automatically replace and reschedule containers from failed nodes.</li>
+</ul>
+<h3>Workflow</h3>
+<p>Here is a simplified workflow when deploying applications using Kubernetes:</p>
+<ol>
+<li><strong>Define Application:</strong> You define your application and its components using manifest files (usually YAML) specifying the desired state of the application and its components.</li>
+<li><strong>Create Docker Images:</strong> Package your application in Docker containers which are stored in a container registry.</li>
+<li><strong>Deploy Application:</strong> Use <code>kubectl apply</code> to create the defined resources on your Kubernetes cluster.</li>
+<li><strong>Schedule &amp; Run:</strong> The master node schedules the application to run on the worker nodes and manages the desired state.</li>
+<li><strong>Access &amp; Expose:</strong> You can expose your application to the external world through services or ingress controllers.</li>
+<li><strong>Scale &amp; Manage:</strong> You can manage, scale, update, and monitor your applications using various Kubernetes objects and tools.</li>
+</ol>
+<h3>Kubernetes and Updating Applications</h3>
+<p>When it comes to updating applications, Kubernetes provides a robust and seamless way to roll out updates using rolling updates, ensuring that there is no downtime. You can use Deployments to declare the desired state of your application, and Kubernetes will ensure that the current state of your application matches the desired state.</p>
+<h3>Learning Resources</h3>
+<p>To get started with Kubernetes, you can explore the following resources:</p>
+<ul>
+<li><a href="https://kubernetes.io/docs/">Kubernetes Official Documentation</a></li>
+<li><a href="https://kubernetes.io/docs/tutorials/">Kubernetes Tutorials</a></li>
+<li><a href="https://www.katacoda.com/courses/kubernetes">Katacoda's Interactive Kubernetes Courses</a></li>
+</ul>
+<p>Kubernetes can be complex to learn initially due to its extensive feature set and concepts, but it’s a highly effective tool for deploying and managing containerized applications at scale.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="338bb9bd-e44a-457d-b482-0c504f485792" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">フォームの内容を自動的に保存する方法を調べる</span>
+                    <a href="#338bb9bd-e44a-457d-b482-0c504f485792" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In a Blazor app, auto-saving form information can be achieved using various approaches depending on your exact requirements and application architecture. Below are two general approaches:</p>
+<h3>1. <strong>JavaScript Interop</strong></h3>
+<p>You can use JavaScript interop to listen for changes on form elements and then save the data either locally (e.g., in <code>localStorage</code>) or send it to a server.</p>
+<p>Here is a simplified example of how you could use JavaScript interop in conjunction with <code>localStorage</code> to auto-save form data:</p>
+<h4>a) JavaScript</h4>
+<p>Create a JavaScript file, for example, <code>autosave.js</code>, and include it in your <code>index.html</code> or <code>_Host.cshtml</code>:</p>
+<pre><code class="language-javascript">// autosave.js
+window.autoSaveForm = {
+    save: function (key, value) {
+        localStorage.setItem(key, value);
+    },
+    load: function (key) {
+        return localStorage.getItem(key);
+    }
+};
+</code></pre>
+<p>Include it in your HTML file:</p>
+<pre><code class="language-html">&lt;!-- index.html or _Host.cshtml --&gt;
+&lt;script src=&quot;autosave.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h4>b) Blazor Component</h4>
+<p>In your Blazor component, you can use JavaScript interop to call the functions defined in your JavaScript file:</p>
+<pre><code class="language-csharp">@inject IJSRuntime JSRuntime
+@code {
+    private string formData;
+
+    private async Task HandleInput(ChangeEventArgs e)
+    {
+        formData = e.Value.ToString();
+        await JSRuntime.InvokeVoidAsync(&quot;autoSaveForm.save&quot;, &quot;formDataKey&quot;, formData);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        formData = await JSRuntime.InvokeAsync&lt;string&gt;(&quot;autoSaveForm.load&quot;, &quot;formDataKey&quot;) ?? &quot;&quot;;
+        return base.OnInitializedAsync();
+    }
+}
+</code></pre>
+<h3>2. <strong>Blazor Event Handling</strong></h3>
+<p>You can handle the <code>oninput</code> or <code>onchange</code> event of the form or input elements to trigger the auto-save functionality in Blazor directly without JavaScript interop. For example, you could save the form data to a server by calling an API endpoint whenever the user changes the input.</p>
+<p>Here’s a simplified example using Blazor event handling:</p>
+<pre><code class="language-csharp">@page &quot;/autosaveform&quot;
+
+&lt;input @bind=&quot;formData&quot; @bind:event=&quot;oninput&quot; /&gt;
+
+@code {
+    private string formData;
+
+    private async Task HandleInput(ChangeEventArgs e)
+    {
+        formData = e.Value.ToString();
+        // Call your API to save the formData, or save it locally, or use any other method to persist the data.
+    }
+}
+</code></pre>
+<p>In the example above, you can replace the comment inside the <code>HandleInput</code> method with the actual logic or method call to save the data, depending on your needs.</p>
+<h3>3. <strong>Debounce the Save Action</strong></h3>
+<p>Regardless of the approach you take, it’s a good practice to debounce the auto-save action to avoid excessive calls, especially if you are saving to a remote server. Debouncing will batch the rapid successive calls to the save function and execute it only once after a certain delay.</p>
+<h3>4. <strong>Persist Data in a Store or Database</strong></h3>
+<p>In a real-world application, you might want to consider persisting the auto-saved data in a more reliable store such as a database, either directly or through an API call, depending on your application architecture.</p>
+<p>Remember to handle security considerations appropriately, especially when dealing with user input and storing or transmitting sensitive information.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

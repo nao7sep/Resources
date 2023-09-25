@@ -191,6 +191,816 @@
                     <a href="#61bcc273-ddb3-424a-ac28-ec4123eb6e7d" class="permalink">&infin;</a>
                 </div>
             </div>
+            <div id="d8ffe2a3-1124-496f-b929-a0fb7fb35e57" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">dependency injection について調べる</span>
+                    <a href="#d8ffe2a3-1124-496f-b929-a0fb7fb35e57" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">なぜか苦手意識がある。コードを見れば、「へぇ、これをそう呼ぶだけか」と思う程度のこと。しかし、普段のコーディングにおいて、これは dependency injection であり、これはそうでない、といったことの意識がなく、しばらく離れてから、いきなりまた dependency injection と言われたら、想像すらできない抽象的な概念に遭遇したかのように感じる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Dependency injection - .NET | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection</a></p>
+                            <p class="note_contents">Microsoft.Extensions.DependencyInjection Namespace | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection</a></p>
+                            <p class="note_contents">ServiceProviderServiceExtensions.GetRequiredService Method (Microsoft.Extensions.DependencyInjection) | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.serviceproviderserviceextensions.getrequiredservice" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.serviceproviderserviceextensions.getrequiredservice</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Dependency Injection (DI) is a design pattern used to implement Inversion of Control (IoC) to manage dependencies between objects. It is a method to pass the dependent object (the dependency) to a client object. This pattern helps in achieving loose coupling between the objects, making the system more modular, easier to test and maintain.</p>
+<h3>Key Concepts:</h3>
+<ol>
+<li><strong>Service</strong>: Object to be used.</li>
+<li><strong>Client</strong>: Object that demands the service.</li>
+<li><strong>Injector</strong>: Object that injects the service into the client.</li>
+</ol>
+<h3>Dependency Injection in C#</h3>
+<p>In C#, Dependency Injection can be implemented through various techniques such as Constructor Injection, Property Injection, or Method Injection.</p>
+<h4>1. Constructor Injection</h4>
+<p>In Constructor Injection, dependencies are provided through a class constructor.</p>
+<pre><code class="language-csharp">public interface IService
+{
+    void Serve();
+}
+
+public class Service : IService
+{
+    public void Serve()
+    {
+        Console.WriteLine(&quot;Service Called&quot;);
+    }
+}
+
+public class Client
+{
+    private IService _service;
+
+    public Client(IService service) // Constructor Injection
+    {
+        this._service = service;
+    }
+
+    public void Start()
+    {
+        Console.WriteLine(&quot;Service Started&quot;);
+        this._service.Serve();
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        IService service = new Service();
+        Client client = new Client(service);
+        client.Start();
+    }
+}
+</code></pre>
+<h4>2. Property Injection</h4>
+<p>In Property Injection, dependencies are provided through properties.</p>
+<pre><code class="language-csharp">public class Client
+{
+    private IService _service;
+
+    public IService Service
+    {
+        set
+        {
+            this._service = value;
+        }
+    }
+
+    public void Start()
+    {
+        Console.WriteLine(&quot;Service Started&quot;);
+        this._service.Serve();
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Client client = new Client();
+        client.Service = new Service();
+        client.Start();
+    }
+}
+</code></pre>
+<h4>3. Method Injection</h4>
+<p>In Method Injection, dependencies are provided through methods.</p>
+<pre><code class="language-csharp">public class Client
+{
+    public void Start(IService service)
+    {
+        Console.WriteLine(&quot;Service Started&quot;);
+        service.Serve();
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Client client = new Client();
+        client.Start(new Service());
+    }
+}
+</code></pre>
+<h3>Using DI Containers</h3>
+<p>In large applications, managing dependencies manually can become cumbersome. Therefore, DI containers or IoC containers are often used. These containers manage the object life cycle and inject dependencies when required.</p>
+<h4>Example: Using Microsoft.Extensions.DependencyInjection</h4>
+<pre><code class="language-csharp">using Microsoft.Extensions.DependencyInjection;
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Setup DI
+        var serviceProvider = new ServiceCollection()
+            .AddTransient&lt;IService, Service&gt;() // Registering Service to IService
+            .AddTransient&lt;Client&gt;() // Registering Client
+            .BuildServiceProvider();
+
+        var client = serviceProvider.GetService&lt;Client&gt;();
+        client.Start();
+    }
+}
+
+public interface IService
+{
+    void Serve();
+}
+
+public class Service : IService
+{
+    public void Serve()
+    {
+        Console.WriteLine(&quot;Service Called&quot;);
+    }
+}
+
+public class Client
+{
+    private readonly IService _service;
+
+    public Client(IService service)
+    {
+        _service = service;
+    }
+
+    public void Start()
+    {
+        Console.WriteLine(&quot;Service Started&quot;);
+        _service.Serve();
+    }
+}
+</code></pre>
+<p>In this example, <code>Microsoft.Extensions.DependencyInjection</code> is used as the DI container to register and resolve dependencies. You can add this package to your project using NuGet Package Manager or the .NET CLI as follows:</p>
+<pre><code class="language-sh">dotnet add package Microsoft.Extensions.DependencyInjection
+</code></pre>
+<p>This approach is useful to manage and control the dependencies in a clean and efficient manner, making the codebase scalable, maintainable, and testable.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="2ffd37df-9a24-4f09-91d2-bbfda634f524" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">WebHostBuilderIISExtensions の UseIIS/UseIISIntegration について調べる</span>
+                    <a href="#2ffd37df-9a24-4f09-91d2-bbfda634f524" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">マルチプラットフォーム化と逆行。古いコード？</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The <code>UseIISIntegration</code> method is a part of the <code>WebHostBuilderIISExtensions</code> and is used in ASP.NET Core applications to configure the integration with IIS (Internet Information Services).</p>
+<h3>UseIISIntegration</h3>
+<p>When you host your ASP.NET Core application behind IIS, you typically use the <code>UseIISIntegration</code> extension method on <code>IWebHostBuilder</code> during the host configuration in the <code>Program.cs</code> file.</p>
+<p>Here’s how it looks in a typical <code>Program.cs</code> file:</p>
+<pre><code class="language-csharp">public class Program
+{
+    public static void Main(string[] args)
+    {
+        CreateHostBuilder(args).Build().Run();
+    }
+
+    public static IHostBuilder CreateHostBuilder(string[] args) =&gt;
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =&gt;
+            {
+                webBuilder.UseStartup&lt;Startup&gt;();
+                webBuilder.UseIISIntegration(); // Integration with IIS
+            });
+}
+</code></pre>
+<h3>What does UseIISIntegration do?</h3>
+<p>The <code>UseIISIntegration</code> method does not actually host the application inside IIS but configures the Web Host to work behind IIS as a reverse proxy. The application is still hosted in Kestrel, which is the lightweight, cross-platform web server built into ASP.NET Core.</p>
+<p>When the <code>UseIISIntegration</code> method is used, it configures the base path and port of the application, sets up websockets if needed, and handles process management between IIS and the ASP.NET Core application.</p>
+<h3>UseIIS</h3>
+<p>The <code>UseIIS</code> method is similar but is used for in-process hosting model, where the app runs in the same process as the IIS worker process.</p>
+<p>Here is a typical usage:</p>
+<pre><code class="language-csharp">public class Program
+{
+    public static void Main(string[] args)
+    {
+        CreateHostBuilder(args).Build().Run();
+    }
+
+    public static IHostBuilder CreateHostBuilder(string[] args) =&gt;
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =&gt;
+            {
+                webBuilder.UseStartup&lt;Startup&gt;();
+                webBuilder.UseIIS(); // In-process hosting model
+            });
+}
+</code></pre>
+<p>When using <code>UseIIS</code>, the application is hosted inside the IIS worker process (<code>w3wp.exe</code> or <code>iisexpress.exe</code>), and Kestrel is not used as a public-facing web server.</p>
+<h3>Note:</h3>
+<ul>
+<li>The <code>UseIISIntegration</code> is often used together with the <code>UseKestrel</code> in scenarios where IIS serves as a reverse proxy to Kestrel.</li>
+<li>The choice between <code>UseIIS</code> and <code>UseIISIntegration</code> mainly depends on whether you prefer in-process or out-of-process hosting with IIS, respectively.</li>
+</ul>
+<h3>Adding Required NuGet Package</h3>
+<p>Ensure that you have added the <code>Microsoft.AspNetCore.Server.IIS</code> NuGet package to your project, as this package is necessary for IIS integration.</p>
+<pre><code class="language-shell">dotnet add package Microsoft.AspNetCore.Server.IIS
+</code></pre>
+<h3>Configure IIS in the Project File (.csproj)</h3>
+<p>To use in-process hosting, you also need to set the <code>AspNetCoreHostingModel</code> property to <code>InProcess</code> in your <code>.csproj</code> file.</p>
+<pre><code class="language-xml">&lt;Project Sdk=&quot;Microsoft.NET.Sdk.Web&quot;&gt;
+  &lt;PropertyGroup&gt;
+    &lt;TargetFramework&gt;net5.0&lt;/TargetFramework&gt;
+    &lt;AspNetCoreHostingModel&gt;InProcess&lt;/AspNetCoreHostingModel&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;!-- Other configurations --&gt;
+&lt;/Project&gt;
+</code></pre>
+<h3>Conclusion</h3>
+<ul>
+<li><code>UseIISIntegration</code> is used for configuring the application to work behind IIS as a reverse proxy with out-of-process hosting.</li>
+<li><code>UseIIS</code> is used for in-process hosting where the app runs in the same process as that of IIS.</li>
+<li>Choosing between them depends on your specific hosting requirements and preferences.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d5871a10-9f3d-407c-8de9-a8427ba43046" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Kestrel について調べる</span>
+                    <a href="#d5871a10-9f3d-407c-8de9-a8427ba43046" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Kestrel web server in ASP.NET Core | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel" target="_blank" class="url">https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Kestrel is a cross-platform web server for ASP.NET Core. It is lightweight, open-source, and it’s the default web server configured for ASP.NET Core applications. It can be used as an edge server processing requests directly from the network, or it can be used behind a reverse proxy, like IIS, Nginx, or Apache.</p>
+<h3>Usage in ASP.NET Core Application</h3>
+<p>In an ASP.NET Core application, Kestrel is configured in the <code>Program.cs</code> file, as part of the host building process.</p>
+<p>Here’s an example of how Kestrel is configured in an ASP.NET Core application:</p>
+<pre><code class="language-csharp">using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        CreateHostBuilder(args).Build().Run();
+    }
+
+    static IHostBuilder CreateHostBuilder(string[] args) =&gt;
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =&gt;
+            {
+                webBuilder.UseKestrel() // Using Kestrel server
+                       .UseStartup&lt;Startup&gt;();
+            });
+}
+</code></pre>
+<h3>Using Kestrel with a Reverse Proxy</h3>
+<p>Even though Kestrel can be used as an edge server, it's common to use it behind a reverse proxy like IIS, Nginx, or Apache. This provides an additional layer of configuration and security. For example, when using IIS, you often use <code>UseIISIntegration()</code> along with <code>UseKestrel()</code>.</p>
+<pre><code class="language-csharp">.ConfigureWebHostDefaults(webBuilder =&gt;
+{
+    webBuilder.UseKestrel()
+               .UseIISIntegration() // When used behind IIS as a reverse proxy
+               .UseStartup&lt;Startup&gt;();
+});
+</code></pre>
+<h3>Configuring Kestrel</h3>
+<p>Kestrel can be configured to listen on specific URLs and ports, and it can be fine-tuned using various options. Here is a basic example of how to configure Kestrel to listen on a specific port:</p>
+<pre><code class="language-csharp">webBuilder.UseKestrel(options =&gt;
+{
+    options.ListenAnyIP(5000); // Listen on port 5000
+})
+.UseStartup&lt;Startup&gt;();
+</code></pre>
+<h3>Key Points about Kestrel</h3>
+<ol>
+<li><strong>Cross-Platform:</strong> Runs on Windows, Linux, and macOS.</li>
+<li><strong>Performance:</strong> It’s designed to be fast and efficient and is often used to improve the performance of ASP.NET Core applications.</li>
+<li><strong>Edge Server or Behind a Proxy:</strong> Can be used directly as an edge server or behind a reverse proxy for additional features and security.</li>
+<li><strong>Configurability:</strong> Offers various configuration options to tailor its behavior to your needs.</li>
+</ol>
+<h3>Security Considerations</h3>
+<p>While Kestrel is designed to be secure, when exposing it directly to the Internet, make sure to follow security best practices, like using firewalls and keeping the server updated. Often, using a well-configured reverse proxy is recommended for additional security and features, especially in production environments.</p>
+<h3>When to Use Kestrel?</h3>
+<p>Kestrel is a good choice for any ASP.NET Core application, due to its performance and cross-platform capabilities. It is particularly useful when high-performance is a critical requirement, or when deploying to Linux or macOS environments where IIS is not available. Regardless of the scenario, care should be taken to secure the deployment, often by employing a reverse proxy.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Using a web server behind a reverse proxy means that the reverse proxy receives client requests, forwards them to the web server, receives responses from the web server, and then sends these responses back to the clients. In this configuration, the reverse proxy sits between client devices and the web server, mediating the traffic between them.</p>
+<h3>Why Use a Reverse Proxy?</h3>
+<ol>
+<li><p><strong>Security:</strong></p>
+<ul>
+<li>It can help to hide the identity and internal structure of your back-end servers, providing an additional layer of security.</li>
+<li>It can enforce SSL/TLS, allowing you to secure the communication between clients and the server.</li>
+<li>Provides DDoS protection and can block malicious traffic before it reaches your server.</li>
+</ul>
+</li>
+<li><p><strong>Load Balancing:</strong></p>
+<ul>
+<li>It can distribute incoming requests to several servers, balancing the load and ensuring no single server is overwhelmed with too much traffic.</li>
+</ul>
+</li>
+<li><p><strong>Caching:</strong></p>
+<ul>
+<li>It can cache the responses from your server, reducing the load on your server and improving response times for your users.</li>
+</ul>
+</li>
+<li><p><strong>Compression:</strong></p>
+<ul>
+<li>It can compress outgoing responses, reducing the amount of data sent and improving performance, particularly for users with slower internet connections.</li>
+</ul>
+</li>
+<li><p><strong>Global Server Load Balancing:</strong></p>
+<ul>
+<li>Distribute client requests across servers in multiple geographic locations to optimize content delivery to users worldwide.</li>
+</ul>
+</li>
+</ol>
+<h3>Examples</h3>
+<ol>
+<li><p><strong>Kestrel with IIS:</strong></p>
+<ul>
+<li>In ASP.NET Core applications, Kestrel is often used behind IIS, where IIS acts as a reverse proxy.</li>
+<li>IIS handles incoming HTTP requests from the Internet and forwards them to Kestrel, and then returns the responses back to the clients.</li>
+</ul>
+</li>
+<li><p><strong>Kestrel with Nginx or Apache:</strong></p>
+<ul>
+<li>On Linux or macOS, Kestrel is often used behind Nginx or Apache.</li>
+<li>Nginx/Apache handles incoming requests and forwards them to Kestrel, similar to the IIS scenario.</li>
+</ul>
+</li>
+</ol>
+<h3>Configuration</h3>
+<ul>
+<li><p><strong>IIS Configuration:</strong></p>
+<ul>
+<li>When using IIS as a reverse proxy, you don’t have to do a manual configuration; <code>UseIISIntegration()</code> in your ASP.NET Core application typically handles it.</li>
+<li>Ensure the correct setup in the <code>web.config</code> file and application pool settings.</li>
+</ul>
+</li>
+<li><p><strong>Nginx Configuration:</strong></p>
+<ul>
+<li>For Nginx, you would typically have a configuration block in your Nginx configuration file (<code>nginx.conf</code>) to forward requests to Kestrel.</li>
+</ul>
+<pre><code class="language-nginx">location / {
+     proxy_pass http://localhost:5000; # Assumes Kestrel is running on port 5000
+     proxy_http_version 1.1;
+     proxy_set_header Upgrade $http_upgrade;
+     proxy_set_header Connection keep-alive;
+     proxy_set_header Host $host;
+     proxy_cache_bypass $http_upgrade;
+}
+</code></pre>
+</li>
+<li><p><strong>Apache Configuration:</strong></p>
+<ul>
+<li>Similarly, for Apache, you would use the <code>mod_proxy</code> module to forward requests to Kestrel.</li>
+</ul>
+<pre><code class="language-apache">&lt;VirtualHost *:*&gt;
+     RequestHeader set &quot;Host&quot; &quot;domain.com&quot;
+     ProxyPreserveHost On
+     ProxyPass / http://127.0.0.1:5000/
+     ProxyPassReverse / http://127.0.0.1:5000/
+&lt;/VirtualHost&gt;
+</code></pre>
+<p>This configuration assumes Kestrel is running on <code>127.0.0.1</code> on port <code>5000</code>.</p>
+</li>
+</ul>
+<h3>Considerations</h3>
+<p>When setting up a reverse proxy:</p>
+<ul>
+<li>Ensure proper firewall rules are in place to allow traffic only through the reverse proxy and block direct access to Kestrel.</li>
+<li>Regularly update both the reverse proxy software (IIS, Nginx, Apache, etc.) and the web server (Kestrel) to patch any security vulnerabilities.</li>
+<li>Monitor the logs of both the reverse proxy and the web server to detect any unusual or unauthorized activity.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Let's try to clarify this a bit more by comparing direct access to a server (like IIS) with access to a server behind a reverse proxy.</p>
+<h3>Direct Access to a Local Server (e.g., IIS)</h3>
+<p>When a client directly accesses a local server like IIS:</p>
+<ol>
+<li><p><strong>Direct Connection:</strong></p>
+<ul>
+<li>The client directly communicates with the web server (IIS, Apache, etc.). There’s no middle layer in between them.</li>
+<li>The client sends HTTP requests directly to the server's IP address and port, and the server sends back HTTP responses.</li>
+</ul>
+</li>
+<li><p><strong>Server Exposure:</strong></p>
+<ul>
+<li>The server is exposed to the public Internet (unless it’s behind a firewall) and handles all aspects of the request lifecycle, including SSL/TLS termination, request processing, and response generation.</li>
+</ul>
+</li>
+<li><p><strong>Server Responsibilities:</strong></p>
+<ul>
+<li>The server is responsible for handling all client connections, security configurations, SSL/TLS termination, and other tasks related to serving content and processing requests.</li>
+</ul>
+</li>
+</ol>
+<h3>Access via a Reverse Proxy</h3>
+<p>When a server is behind a reverse proxy:</p>
+<ol>
+<li><p><strong>Indirect Connection:</strong></p>
+<ul>
+<li>The client communicates with the reverse proxy server, not with the backend server (e.g., Kestrel, IIS) directly.</li>
+<li>The reverse proxy forwards the client's requests to the backend server and returns the server's responses to the client.</li>
+</ul>
+</li>
+<li><p><strong>Security Layer:</strong></p>
+<ul>
+<li>The backend server is not directly exposed to the public Internet, adding an extra layer of security. The reverse proxy can block malicious traffic and requests before they reach the backend server.</li>
+</ul>
+</li>
+<li><p><strong>Offloading Tasks:</strong></p>
+<ul>
+<li>The reverse proxy can offload tasks from the backend server, like SSL/TLS termination, caching, compression, and load balancing, allowing the backend server to focus on processing requests and serving content.</li>
+</ul>
+</li>
+</ol>
+<h3>Example: IIS and Kestrel</h3>
+<p>In the context of an ASP.NET Core application:</p>
+<ul>
+<li><p><strong>With Direct Access:</strong></p>
+<ul>
+<li>If IIS is used as the web server, clients interact directly with IIS, and IIS handles all aspects of serving content and processing requests.</li>
+</ul>
+</li>
+<li><p><strong>With a Reverse Proxy:</strong></p>
+<ul>
+<li>If IIS is used as a reverse proxy to Kestrel:
+<ul>
+<li>Clients interact with IIS.</li>
+<li>IIS forwards the requests to Kestrel.</li>
+<li>Kestrel processes the requests and sends the responses back to IIS.</li>
+<li>Finally, IIS sends the responses back to the clients.</li>
+</ul>
+</li>
+<li>In this scenario, Kestrel is not exposed directly to the Internet, and IIS provides an additional security layer and can handle SSL/TLS termination, among other tasks.</li>
+</ul>
+</li>
+</ul>
+<h3>In Summary</h3>
+<ul>
+<li><strong>Direct Access:</strong> Clients interact directly with the server, which handles all responsibilities related to serving content and processing requests.</li>
+<li><strong>Reverse Proxy Access:</strong> Clients interact with the reverse proxy, which forwards the requests to the backend server and handles many security and optimization tasks, adding an extra layer of security and offloading tasks from the backend server.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Correct! In an isolated environment where the application and the server are on a private network with no Internet access, and the app directly accesses a local server, the benefits provided by a reverse proxy related to security, load balancing, and internet traffic management would not be pertinent. In such scenarios, a reverse proxy might be unnecessary overhead. Instead, direct access to the server would typically be simpler and more efficient, as it involves fewer moving parts and less complexity.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="097c6abf-74e0-4cf7-a56c-96656e82647c" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">log scope について復習</span>
+                    <a href="#097c6abf-74e0-4cf7-a56c-96656e82647c" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ちゃんと読んだが、今、他者に全く説明できない。つまり、分かっていない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In ASP.NET Core, logging scopes can be used to attach additional metadata to the logs generated within a specific block of code. A scope is a disposable object that is created to add contextual information to logs generated within that object's existence. Scopes are useful for attaching contextual information, such as operation IDs, transaction IDs, or other identifiers that can help track the flow of a request through various components of an application.</p>
+<h3>How to Create a Logging Scope</h3>
+<p>You can create a scope using the <code>BeginScope</code> method of the <code>ILogger</code> interface, typically wrapping the scoped block of code inside a <code>using</code> statement.</p>
+<p>Here’s a simple example of creating a logging scope:</p>
+<pre><code class="language-csharp">public class MyService
+{
+    private readonly ILogger _logger;
+
+    public MyService(ILogger&lt;MyService&gt; logger)
+    {
+        _logger = logger;
+    }
+
+    public void MyMethod()
+    {
+        using (_logger.BeginScope(&quot;MyMethod Scope&quot;))
+        {
+            _logger.LogInformation(&quot;Executing MyMethod within a logging scope.&quot;);
+        }
+    }
+}
+</code></pre>
+<p>In this example, log entries created within the <code>using</code> block will have an associated scope, in this case, <code>&quot;MyMethod Scope&quot;</code>.</p>
+<h3>Attaching Additional Metadata</h3>
+<p>Often, scopes are used to attach additional metadata, like IDs or other contextual information, to the log entries. Here’s an example with additional metadata:</p>
+<pre><code class="language-csharp">using (_logger.BeginScope(new Dictionary&lt;string, object&gt; { { &quot;Method&quot;, &quot;MyMethod&quot; }, { &quot;UserId&quot;, 1234 } }))
+{
+    _logger.LogInformation(&quot;Executing MyMethod within a logging scope with additional metadata.&quot;);
+}
+</code></pre>
+<p>In this example, the log entries created within the scope will include the provided dictionary as metadata, which can be extremely useful for debugging and tracing.</p>
+<h3>Configuration</h3>
+<p>To make scope logging effective, ensure that your logging provider and logging configuration support logging scopes. Not all logging providers support them, and they might need to be enabled explicitly in the logging configuration.</p>
+<p>Here’s how you can enable scopes in your <code>Startup.cs</code> or <code>Program.cs</code> when configuring logging:</p>
+<pre><code class="language-csharp">using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        var host = Host.CreateDefaultBuilder(args)
+            .ConfigureLogging(logging =&gt;
+            {
+                logging.AddConsole(options =&gt; options.IncludeScopes = true); // Include Scopes in Console Logger
+            })
+            .ConfigureWebHostDefaults(webBuilder =&gt;
+            {
+                webBuilder.UseStartup&lt;Startup&gt;();
+            })
+            .Build();
+
+        host.Run();
+    }
+}
+</code></pre>
+<p>In this example, <code>IncludeScopes</code> is set to <code>true</code> for the console logger to ensure that the logging scopes are included in the log output. Different logging providers might have different ways of enabling and configuring scopes, so refer to the documentation for your specific provider for more details.</p>
+<h3>Using Scopes Effectively</h3>
+<ul>
+<li>Use scopes to group log entries and attach relevant metadata that can help in debugging and tracing requests and operations.</li>
+<li>Keep in mind that excessive use of scopes can clutter your logs with redundant information, so use them judiciously, and configure your logging providers appropriately to capture the scope information.</li>
+<li>Consider performance impacts, especially when logging in high-frequency code paths, and adjust logging levels and logging providers accordingly to capture the necessary information without unnecessary overhead.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="a05b8daf-a526-4560-ab18-fad3d858dc1d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">.NET のクラスによるウェブページへの POST について調べる</span>
+                    <a href="#a05b8daf-a526-4560-ab18-fad3d858dc1d" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">HTTPS での ASP.NET のフォーム認証くらいは可能にしたい。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Razor Pages にも、かつてのフォーム認証のようなものが用意されている。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In ASP.NET Core, data can be posted to a page (or more commonly, to a controller action) using HTML forms, AJAX requests, or other client-side technologies that can send HTTP POST requests. Below are the different ways to post data to an ASP.NET Core application, including using a Razor Page.</p>
+<h3>1. <strong>HTML Form</strong></h3>
+<p>You can use an HTML form to post data to a server. Here is a basic example using a Razor Page.</p>
+<h4>Razor Page Markup:</h4>
+<pre><code class="language-html">&lt;!-- Index.cshtml --&gt;
+&lt;form method=&quot;post&quot;&gt;
+    &lt;label for=&quot;name&quot;&gt;Name:&lt;/label&gt;
+    &lt;input type=&quot;text&quot; id=&quot;name&quot; name=&quot;name&quot; /&gt;
+    &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+<h4>Razor Page Model:</h4>
+<pre><code class="language-csharp">// Index.cshtml.cs
+public class IndexModel : PageModel
+{
+    public void OnPost()
+    {
+        var name = Request.Form[&quot;name&quot;];
+        // Handle the posted name value
+    }
+}
+</code></pre>
+<h3>2. <strong>AJAX Request</strong></h3>
+<p>You can use JavaScript to make an AJAX POST request to the server.</p>
+<h4>JavaScript:</h4>
+<pre><code class="language-javascript">fetch('/YourPage', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name: 'John Doe' })
+});
+</code></pre>
+<h4>Razor Page Model:</h4>
+<pre><code class="language-csharp">// YourPage.cshtml.cs
+public class YourPageModel : PageModel
+{
+    public void OnPost([FromBody] dynamic data)
+    {
+        var name = data.name;
+        // Handle the posted name value
+    }
+}
+</code></pre>
+<h3>3. <strong>Using Model Binding in MVC Controller</strong></h3>
+<p>If you are using MVC Controllers instead of Razor Pages, you can take advantage of model binding to receive posted data.</p>
+<h4>HTML:</h4>
+<pre><code class="language-html">&lt;!-- SomeView.cshtml --&gt;
+&lt;form asp-controller=&quot;Home&quot; asp-action=&quot;PostData&quot; method=&quot;post&quot;&gt;
+    &lt;label for=&quot;name&quot;&gt;Name:&lt;/label&gt;
+    &lt;input type=&quot;text&quot; id=&quot;name&quot; name=&quot;name&quot; /&gt;
+    &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+<h4>Controller:</h4>
+<pre><code class="language-csharp">public class HomeController : Controller
+{
+    [HttpPost]
+    public IActionResult PostData(string name)
+    {
+        // Handle the posted name value
+        return View();
+    }
+}
+</code></pre>
+<h3>4. <strong>Using API Controller</strong></h3>
+<p>If you have an API Controller, you can post data using any HTTP client that can send HTTP POST requests.</p>
+<h4>API Controller:</h4>
+<pre><code class="language-csharp">[ApiController]
+[Route(&quot;[controller]&quot;)]
+public class MyApiController : ControllerBase
+{
+    [HttpPost]
+    public IActionResult PostData([FromBody] MyModel model)
+    {
+        // Handle the posted data
+        return Ok();
+    }
+}
+
+public class MyModel
+{
+    public string Name { get; set; }
+}
+</code></pre>
+<h4>cURL Command:</h4>
+<pre><code class="language-sh">curl -X POST &quot;https://yourdomain.com/myapi&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;Name&quot;: &quot;John Doe&quot;}'
+</code></pre>
+<h3>Security Considerations</h3>
+<p>When designing your pages or APIs to accept POST data, always consider security aspects such as:</p>
+<ul>
+<li><strong>Validation:</strong> Always validate the posted data on the server side before processing it.</li>
+<li><strong>Authentication and Authorization:</strong> Secure your endpoints by allowing access only to authenticated and authorized users, as necessary.</li>
+<li><strong>Cross-Site Request Forgery (CSRF) Protection:</strong> Use anti-forgery tokens in forms to prevent CSRF attacks. In ASP.NET Core, anti-forgery protection is enabled by default for Razor Pages.</li>
+</ul>
+<h3>Content-Type</h3>
+<ul>
+<li>The <code>Content-Type</code> of the request needs to be specified correctly, e.g., <code>application/json</code> for JSON data, <code>application/x-www-form-urlencoded</code> for form data.</li>
+<li>The server-side method needs to be designed to read the data correctly based on the <code>Content-Type</code>. For instance, <code>[FromBody]</code> attribute can be used to read JSON data, while model binding can be used to read form data.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>You can use <code>HttpClient</code> to programmatically send data using the HTTP POST method in C#. Here’s how you can do it, considering you want to send JSON data to a page or a controller.</p>
+<h3>Sending JSON Data</h3>
+<p>Assume you have an API endpoint, or an ASP.NET Core page or controller that accepts POST requests at the URL &quot;https://yourdomain.com/yourpage&quot;.</p>
+<h4>Model</h4>
+<pre><code class="language-csharp">public class MyModel
+{
+    public string Name { get; set; }
+}
+</code></pre>
+<h4>HTTP Client</h4>
+<pre><code class="language-csharp">using System;
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main()
+    {
+        var url = &quot;https://yourdomain.com/yourpage&quot;;
+
+        using var httpClient = new HttpClient();
+
+        var model = new MyModel
+        {
+            Name = &quot;John Doe&quot;
+        };
+
+        var json = JsonSerializer.Serialize(model);
+        var data = new StringContent(json, Encoding.UTF8, &quot;application/json&quot;);
+
+        var response = await httpClient.PostAsync(url, data);
+
+        if (response.IsSuccessStatusCode)
+        {
+            Console.WriteLine(&quot;Data sent successfully!&quot;);
+        }
+        else
+        {
+            Console.WriteLine($&quot;Failed to send data. Status Code: {response.StatusCode}&quot;);
+        }
+    }
+}
+</code></pre>
+<p>In this example, we are using <code>HttpClient.PostAsync</code> method to send a POST request. We are serializing our model to a JSON string and sending it in the HTTP Content with the &quot;application/json&quot; content type. After sending the data, we are checking if the response status is successful.</p>
+<h3>Sending Form Data</h3>
+<p>If you want to send data as <code>application/x-www-form-urlencoded</code> (like a form post), you can use <code>FormUrlEncodedContent</code>.</p>
+<pre><code class="language-csharp">using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main()
+    {
+        var url = &quot;https://yourdomain.com/yourpage&quot;;
+
+        using var httpClient = new HttpClient();
+
+        var formContent = new FormUrlEncodedContent(new[]
+        {
+            new KeyValuePair&lt;string, string&gt;(&quot;Name&quot;, &quot;John Doe&quot;)
+        });
+
+        var response = await httpClient.PostAsync(url, formContent);
+
+        if (response.IsSuccessStatusCode)
+        {
+            Console.WriteLine(&quot;Data sent successfully!&quot;);
+        }
+        else
+        {
+            Console.WriteLine($&quot;Failed to send data. Status Code: {response.StatusCode}&quot;);
+        }
+    }
+}
+</code></pre>
+<p>Here, we are using <code>FormUrlEncodedContent</code> to send the data as key-value pairs, mimicking a form post. After that, we are sending this form content using <code>HttpClient.PostAsync</code> method to the specified URL.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

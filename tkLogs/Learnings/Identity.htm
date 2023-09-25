@@ -10,6 +10,827 @@
             <a href="Identity.htm" class="title">Identity</a>
         </div>
         <div class="entries">
+            <div id="f9f3f29a-810f-4f6e-863b-5b1511b49aff" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">どのようなことができるか調べる</span>
+                    <a href="#f9f3f29a-810f-4f6e-863b-5b1511b49aff" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>ASP.NET Core Identity is a membership system that adds login functionality to your application. It provides functionality such as user registration, password recovery, and role management, allowing you to secure your application. Here are some of the key features and capabilities of ASP.NET Core Identity:</p>
+<h3>1. <strong>User Management:</strong></h3>
+<ul>
+<li><strong>User Registration:</strong> Allows new users to register an account.</li>
+<li><strong>User Login &amp; Logout:</strong> Enables users to log in and out of the application.</li>
+<li><strong>Profile Management:</strong> Allows users to manage their profiles, updating information like email and password.</li>
+</ul>
+<h3>2. <strong>Role Management:</strong></h3>
+<ul>
+<li><strong>Role Creation:</strong> Allows administrators to create different roles.</li>
+<li><strong>Role Assignment:</strong> Allows assigning roles to different users.</li>
+<li><strong>Role-Based Authorization:</strong> Enables restricting access to specific parts of the application based on user roles.</li>
+</ul>
+<h3>3. <strong>Claim Management:</strong></h3>
+<ul>
+<li><strong>Claim Assignment:</strong> Lets you assign claims to users.</li>
+<li><strong>Claim-Based Authorization:</strong> Allows you to restrict access to application resources based on user claims.</li>
+</ul>
+<h3>4. <strong>Authentication:</strong></h3>
+<ul>
+<li><strong>External Login Providers:</strong> Supports login via external providers such as Facebook, Google, Twitter, etc.</li>
+<li><strong>Two-Factor Authentication:</strong> Offers an additional layer of security by requiring two forms of identification from the user.</li>
+<li><strong>Account Confirmation:</strong> Provides support for confirming user accounts through email confirmation.</li>
+<li><strong>Password Recovery:</strong> Enables users to recover their passwords via email.</li>
+</ul>
+<h3>5. <strong>Authorization:</strong></h3>
+<ul>
+<li><strong>Policy-Based Authorization:</strong> Provides the ability to implement policies to control access based on custom requirements.</li>
+<li><strong>Resource-Based Authorization:</strong> Allows the implementation of access control logic on a per-resource basis.</li>
+</ul>
+<h3>6. <strong>Security:</strong></h3>
+<ul>
+<li><strong>Password Hashing:</strong> Securely stores passwords using hashing.</li>
+<li><strong>Security Stamp:</strong> Can invalidate a user’s session if the user’s credentials are altered.</li>
+<li><strong>Lockout Policy:</strong> Allows configuring user lockout settings to protect against brute-force attacks.</li>
+</ul>
+<h3>7. <strong>Data Validation and Protection:</strong></h3>
+<ul>
+<li><strong>Input Validation:</strong> Offers built-in validation features for user input.</li>
+<li><strong>Data Protection APIs:</strong> Provide cryptographic services, including the secure storage of data.</li>
+</ul>
+<h3>8. <strong>Token Management:</strong></h3>
+<ul>
+<li><strong>Token Generation:</strong> Generates tokens for various purposes like email confirmation, password reset, etc.</li>
+<li><strong>Token Validation:</strong> Validates tokens to ensure they are correct and have not expired.</li>
+</ul>
+<h3>9. <strong>Extensibility:</strong></h3>
+<ul>
+<li><strong>Custom User Stores:</strong> Allows you to use custom storage providers, such as NoSQL databases.</li>
+<li><strong>Custom Tokens and Validators:</strong> Supports the creation of custom tokens and validators.</li>
+<li><strong>Custom User Properties:</strong> Enables the addition of custom properties to the user model.</li>
+</ul>
+<h3>10. <strong>Integration:</strong></h3>
+<ul>
+<li><strong>Middleware Integration:</strong> Integrates seamlessly with ASP.NET Core Middleware.</li>
+<li><strong>Entity Framework Core Integration:</strong> Typically used with Entity Framework Core for storing user information in a database.</li>
+</ul>
+<h3>11. <strong>User Interface:</strong></h3>
+<ul>
+<li><strong>Scaffolded Views:</strong> Provides scaffolded Razor views for common identity-related tasks.</li>
+<li><strong>Customizable UI:</strong> Allows customization of the UI to suit the needs of the application.</li>
+</ul>
+<h3>12. <strong>Email and SMS Services:</strong></h3>
+<ul>
+<li><strong>Email Services:</strong> Allows sending emails for account confirmation, password reset, etc.</li>
+<li><strong>SMS Services:</strong> Supports sending SMS messages for two-factor authentication.</li>
+</ul>
+<h3>How to Use ASP.NET Core Identity?</h3>
+<p>To use ASP.NET Core Identity in a project, you usually start by adding the necessary NuGet package and then configuring it in the <code>Startup.cs</code> file. After that, you can scaffold identity-related views and customize them according to your needs. Additionally, you integrate it with Entity Framework Core or another data access mechanism to store user and role data.</p>
+<p>Here is a high-level overview of steps to configure ASP.NET Core Identity:</p>
+<ol>
+<li><p><strong>Install NuGet Package:</strong></p>
+<pre><code class="language-shell">dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore
+</code></pre>
+</li>
+<li><p><strong>Configure Services in Startup.cs:</strong></p>
+<pre><code class="language-csharp">services.AddDbContext&lt;ApplicationDbContext&gt;(options =&gt;
+    options.UseSqlServer(Configuration.GetConnectionString(&quot;DefaultConnection&quot;)));
+
+services.AddDefaultIdentity&lt;IdentityUser&gt;(options =&gt; options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores&lt;ApplicationDbContext&gt;();
+</code></pre>
+</li>
+<li><p><strong>Configure Middleware in Startup.cs:</strong></p>
+<pre><code class="language-csharp">app.UseAuthentication();
+app.UseAuthorization();
+</code></pre>
+</li>
+<li><p><strong>Migrate Database:</strong></p>
+<pre><code class="language-shell">dotnet ef migrations add InitialCreate
+dotnet ef database update
+</code></pre>
+</li>
+<li><p><strong>Scaffold and Customize Views:</strong>
+You can scaffold and then modify the generated Razor views for registration, login, etc., according to your application's needs.</p>
+</li>
+</ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In ASP.NET Core Identity, to register users, you often expose a registration form where users can enter their details, such as email, password, etc. When the form is submitted, the information is processed by a controller action, which calls the appropriate methods to create a new user. Below is a simplified illustration of how the registration of users might be achieved in a Controller.</p>
+<h3>Controller Action Example for User Registration</h3>
+<p>Here is a simplified example that uses the <code>UserManager</code> service provided by ASP.NET Core Identity to create a new user. The <code>UserManager</code> service has a <code>CreateAsync</code> method that is used to create a new user in the system.</p>
+<pre><code class="language-csharp">public class AccountController : Controller
+{
+    private readonly UserManager&lt;IdentityUser&gt; _userManager;
+    private readonly SignInManager&lt;IdentityUser&gt; _signInManager;
+
+    public AccountController(UserManager&lt;IdentityUser&gt; userManager, SignInManager&lt;IdentityUser&gt; signInManager)
+    {
+        _userManager = userManager;
+        _signInManager = signInManager;
+    }
+
+    [HttpPost]
+    public async Task&lt;IActionResult&gt; Register(RegisterViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
+            {
+                await _signInManager.SignInAsync(user, isPersistent: false);
+                return RedirectToAction(&quot;index&quot;, &quot;home&quot;);
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+        }
+        return View(model);
+    }
+}
+</code></pre>
+<p>In this example:</p>
+<ul>
+<li><code>RegisterViewModel</code> is a model class representing the data collected from the user in the registration form.</li>
+<li><code>_userManager.CreateAsync</code> method is used to create a new user.</li>
+<li>If the user is successfully created, <code>_signInManager.SignInAsync</code> method is used to sign in the user, and the user is redirected to the home page.</li>
+<li>If there are errors during the user creation (for example, if the password does not meet the specified criteria), these errors are added to the <code>ModelState</code>, and the registration form is displayed again with the error messages.</li>
+</ul>
+<h3>RegisterViewModel Example</h3>
+<p>Here’s a very basic example of what a <code>RegisterViewModel</code> might look like:</p>
+<pre><code class="language-csharp">public class RegisterViewModel
+{
+    [Required]
+    [EmailAddress]
+    public string Email { get; set; }
+
+    [Required]
+    [DataType(DataType.Password)]
+    public string Password { get; set; }
+
+    [DataType(DataType.Password)]
+    [Compare(&quot;Password&quot;, ErrorMessage = &quot;Passwords do not match.&quot;)]
+    public string ConfirmPassword { get; set; }
+}
+</code></pre>
+<h3>Razor View Example for Registration Form</h3>
+<p>Here's a simplified Razor View example representing a registration form:</p>
+<pre><code class="language-html">@model RegisterViewModel
+&lt;form asp-action=&quot;Register&quot; method=&quot;post&quot;&gt;
+    &lt;div&gt;
+        &lt;label asp-for=&quot;Email&quot;&gt;&lt;/label&gt;
+        &lt;input asp-for=&quot;Email&quot; /&gt;
+        &lt;span asp-validation-for=&quot;Email&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;label asp-for=&quot;Password&quot;&gt;&lt;/label&gt;
+        &lt;input asp-for=&quot;Password&quot; /&gt;
+        &lt;span asp-validation-for=&quot;Password&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;label asp-for=&quot;ConfirmPassword&quot;&gt;&lt;/label&gt;
+        &lt;input asp-for=&quot;ConfirmPassword&quot; /&gt;
+        &lt;span asp-validation-for=&quot;ConfirmPassword&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;button type=&quot;submit&quot;&gt;Register&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+<p>Remember, this is just a simplified example to illustrate the process. In a real-world application, you would likely need to handle additional concerns such as email confirmation, error handling, and user feedback. Also, you would likely want to style your form and possibly include additional fields depending on your application’s requirements.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In ASP.NET Core, <code>UserManager</code> and <code>SignInManager</code> are services that are registered in the dependency injection (DI) container during the application startup, typically in the <code>ConfigureServices</code> method in the <code>Startup.cs</code> file.</p>
+<h3>Dependency Injection in ASP.NET Core</h3>
+<p>Dependency Injection is a design pattern where the objects that a class needs to perform its actions (i.e., dependencies) are supplied to the class by an external entity (e.g., the DI container) rather than the class creating them itself. In ASP.NET Core, the framework automatically resolves the dependencies of a class when it creates an instance of the class.</p>
+<h3>Example</h3>
+<p>When you create a controller like the following:</p>
+<pre><code class="language-csharp">public class AccountController : Controller
+{
+    private readonly UserManager&lt;IdentityUser&gt; _userManager;
+    private readonly SignInManager&lt;IdentityUser&gt; _signInManager;
+
+    public AccountController(UserManager&lt;IdentityUser&gt; userManager, SignInManager&lt;IdentityUser&gt; signInManager)
+    {
+        _userManager = userManager;
+        _signInManager = signInManager;
+    }
+}
+</code></pre>
+<p>The ASP.NET Core framework automatically provides the required <code>UserManager&lt;IdentityUser&gt;</code> and <code>SignInManager&lt;IdentityUser&gt;</code> instances when it instantiates the <code>AccountController</code>. This is possible because, by default, these services are registered in the DI container when you set up ASP.NET Core Identity in the <code>Startup.cs</code> file.</p>
+<h3>Configuring Services in Startup.cs</h3>
+<p>Here’s how services like <code>UserManager</code> and <code>SignInManager</code> are typically registered in the <code>Startup.cs</code> file:</p>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    services.AddDbContext&lt;ApplicationDbContext&gt;(options =&gt;
+        options.UseSqlServer(Configuration.GetConnectionString(&quot;DefaultConnection&quot;)));
+
+    services.AddDefaultIdentity&lt;IdentityUser&gt;()
+        .AddEntityFrameworkStores&lt;ApplicationDbContext&gt;();
+
+    // Other services configurations...
+}
+</code></pre>
+<p>The <code>AddDefaultIdentity</code> extension method sets up the default identity system, registering services including <code>UserManager</code> and <code>SignInManager</code>, and associates them with a specified user class, typically <code>IdentityUser</code>.</p>
+<h3>Can We Freely Define the Parameters?</h3>
+<p>When defining the parameters of a constructor in ASP.NET Core, you are relying on the DI system to provide the instances of these parameters. So, you can define parameters in the constructor of a Controller or any other service, but the types you specify must be registered in the DI container, either explicitly in your <code>Startup.cs</code> file or implicitly by the ASP.NET Core framework.</p>
+<p>If a dependency or a service is not registered in the DI container, and you try to inject it, the framework will throw an exception at runtime indicating that it cannot resolve a dependency.</p>
+<p>Additionally, if you need to inject more services, you can freely add them as parameters to the constructor as long as those services are registered in the DI container. Here is an extended example:</p>
+<pre><code class="language-csharp">public class AccountController : Controller
+{
+    private readonly UserManager&lt;IdentityUser&gt; _userManager;
+    private readonly SignInManager&lt;IdentityUser&gt; _signInManager;
+    private readonly ILogger&lt;AccountController&gt; _logger;
+
+    public AccountController(UserManager&lt;IdentityUser&gt; userManager, SignInManager&lt;IdentityUser&gt; signInManager, ILogger&lt;AccountController&gt; logger)
+    {
+        _userManager = userManager;
+        _signInManager = signInManager;
+        _logger = logger; // Injected Logger service
+    }
+}
+</code></pre>
+<p>In this example, an <code>ILogger&lt;AccountController&gt;</code> is also injected into the <code>AccountController</code>, which is a service that the ASP.NET Core framework automatically registers in the DI container.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In ASP.NET Core, <code>ModelState.IsValid</code> is a property that gets a value that indicates whether the current model, typically received as a parameter in a controller action, is in a valid state. A model becomes invalid when the data annotated in the model does not meet the specified data validation rules.</p>
+<h3>How Can a Model be Invalid?</h3>
+<p>A model can be marked as invalid when any of the validation attributes applied to its properties are violated. Here’s a simple example of a model with validation attributes:</p>
+<pre><code class="language-csharp">public class RegisterViewModel
+{
+    [Required(ErrorMessage = &quot;Email is required.&quot;)]
+    [EmailAddress(ErrorMessage = &quot;Invalid Email Address.&quot;)]
+    public string Email { get; set; }
+
+    [Required(ErrorMessage = &quot;Password is required.&quot;)]
+    [StringLength(100, ErrorMessage = &quot;The {0} must be at least {2} characters long.&quot;, MinimumLength = 6)]
+    public string Password { get; set; }
+
+    [Compare(&quot;Password&quot;, ErrorMessage = &quot;The password and confirmation password do not match.&quot;)]
+    public string ConfirmPassword { get; set; }
+}
+</code></pre>
+<p>In this example:</p>
+<ul>
+<li>The <code>Email</code> property must have a value (i.e., it is required), and it must be a valid email address.</li>
+<li>The <code>Password</code> property is required and must be at least 6 characters long.</li>
+<li>The <code>ConfirmPassword</code> must match the <code>Password</code> property.</li>
+</ul>
+<p>If a user submits a form that maps to this model and any of these rules are violated, <code>ModelState.IsValid</code> will be <code>false</code>, indicating that the model is in an invalid state.</p>
+<h3>Processing in a Controller Action</h3>
+<p>When you check <code>ModelState.IsValid</code> in a controller action, you are typically deciding whether to proceed with processing the model or to return an error response. Here’s a simplified example:</p>
+<pre><code class="language-csharp">[HttpPost]
+public IActionResult Register(RegisterViewModel model)
+{
+    if (ModelState.IsValid)
+    {
+        // Proceed with processing (e.g., register the user)
+        return RedirectToAction(&quot;Index&quot;, &quot;Home&quot;);
+    }
+
+    // If we got this far, something failed; redisplay form with error messages
+    return View(model);
+}
+</code></pre>
+<p>In this example, if <code>ModelState.IsValid</code> is <code>true</code>, the application proceeds with the user registration. If it's <code>false</code>, the application returns the user back to the registration form, and the form will display the error messages for the violated validation rules, giving the user a chance to correct their input.</p>
+<h3>Model Binding and Validation Errors</h3>
+<p><code>ModelState</code> also holds the errors that occur during model binding. Model binding is the process of creating .NET objects using the data from HTTP requests. If there is a type mismatch or if a required property is not provided in the request, model binding will fail, and the errors will be added to the <code>ModelState</code>. For example, if a property is of type <code>int</code> and a non-numeric string is provided, a model binding error will be added to <code>ModelState</code>, making <code>ModelState.IsValid</code> <code>false</code>.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>ASP.NET Core Identity, by default, supports a flat role structure, meaning you can assign roles to a user, but there is no hierarchy or inheritance between the roles.</p>
+<h3>Implementing Hierarchical Roles</h3>
+<p>If you need hierarchical roles or role inheritance, you would typically have to extend or modify the role management system to fit your needs.</p>
+<ol>
+<li><p><strong>Custom Role Implementation:</strong>
+You could implement a custom hierarchical role system by creating a new entity, say <code>HierarchicalRole</code>, which might have a reference to a parent role. This way, you could construct a tree-like structure to represent the hierarchy of roles.</p>
+<pre><code class="language-csharp">public class HierarchicalRole : IdentityRole
+{
+    public string ParentRoleId { get; set; }
+    public HierarchicalRole ParentRole { get; set; }
+    public ICollection&lt;HierarchicalRole&gt; ChildRoles { get; set; }
+}
+</code></pre>
+</li>
+<li><p><strong>Custom Authorization Policies:</strong>
+You can define custom Authorization Policies using the built-in policy-based authorization system, where you can have policies that represent hierarchical roles and handle the hierarchical role checks within the requirement handlers.</p>
+</li>
+<li><p><strong>Claim-Based Approach:</strong>
+A more flexible alternative is to use claims, where each user has claims representing their permissions. This way, higher roles in the hierarchy can be given all the claims of the lower roles, effectively creating a hierarchy of permissions.</p>
+</li>
+</ol>
+<h3>Example Using Policy-Based Authorization</h3>
+<p>Here’s a very basic example of using policy-based authorization to simulate hierarchical roles:</p>
+<pre><code class="language-csharp">services.AddAuthorization(options =&gt;
+{
+    options.AddPolicy(&quot;BasePolicy&quot;, policy =&gt; policy.RequireRole(&quot;BaseRole&quot;));
+
+    options.AddPolicy(&quot;IntermediatePolicy&quot;, policy =&gt;
+    {
+        policy.RequireRole(&quot;IntermediateRole&quot;);
+        policy.AddRequirements(new BaseRoleRequirement());
+    });
+
+    options.AddPolicy(&quot;AdminPolicy&quot;, policy =&gt;
+    {
+        policy.RequireRole(&quot;AdminRole&quot;);
+        policy.AddRequirements(new IntermediateRoleRequirement());
+    });
+});
+</code></pre>
+<p>In this hypothetical example, the <code>AdminPolicy</code> requires the user to have an <code>AdminRole</code> and also meet the requirements of the <code>IntermediateRoleRequirement</code> and, indirectly, the <code>BaseRoleRequirement</code>. This way, you could say that the <code>AdminRole</code> is hierarchically above the <code>IntermediateRole</code> and the <code>BaseRole</code>.</p>
+<p>Remember, the actual implementation might be more complex depending on the specifics of your use case and your application’s requirements.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Claims in ASP.NET Core Identity represent attributes or properties of a user that are packed into the security token, such as JWT (JSON Web Token), and they provide additional information about the user’s identity, roles, rights, or other characteristics.</p>
+<h3>Characteristics of Claims:</h3>
+<ul>
+<li><strong>Type:</strong> The claim type is essentially the name of the claim and typically is a URI.</li>
+<li><strong>Value:</strong> The claim value is the actual content or information that the claim is describing.</li>
+<li><strong>Issuer:</strong> The entity that issued the claim.</li>
+</ul>
+<h3>Examples of Claims:</h3>
+<ul>
+<li><strong>Name Claim:</strong> Could contain the user’s username or full name.</li>
+<li><strong>Role Claim:</strong> Could specify the role of the user within the application.</li>
+<li><strong>Email Claim:</strong> Could contain the user's email address.</li>
+</ul>
+<h3>Claims-Based Authentication:</h3>
+<p>In a claims-based authentication and authorization process:</p>
+<ol>
+<li>When a user logs in, the application authenticates the user and then builds a claims identity for the user.</li>
+<li>The claims identity is then packed into a security token that the application issues to the user.</li>
+<li>When the user accesses secured resources, the application can extract the claims from the token to make authorization decisions based on the claims present in the token.</li>
+</ol>
+<h3>Using Claims in ASP.NET Core</h3>
+<p>In ASP.NET Core Identity, once a user is authenticated, you can access the user’s claims through the <code>HttpContext.User</code> property.</p>
+<p>Here's an example of how you might use claims to perform authorization checks in a controller action:</p>
+<pre><code class="language-csharp">[Authorize]
+public IActionResult SomeProtectedAction()
+{
+    var userClaims = User.Claims;
+    var userIdClaim = userClaims.FirstOrDefault(c =&gt; c.Type == ClaimTypes.NameIdentifier);
+    if (userIdClaim != null)
+    {
+        var userId = userIdClaim.Value;
+        // Perform some action with the user's ID.
+    }
+
+    // Check if the user has a specific claim.
+    if (User.HasClaim(c =&gt; c.Type == &quot;SomeClaimType&quot; &amp;&amp; c.Value == &quot;SomeClaimValue&quot;))
+    {
+        // The user has the specific claim, perform the corresponding action.
+    }
+
+    return View();
+}
+</code></pre>
+<h3>Adding Claims</h3>
+<p>You can add claims to a user using the <code>UserManager</code> class in ASP.NET Core Identity:</p>
+<pre><code class="language-csharp">var claim = new Claim(&quot;SomeClaimType&quot;, &quot;SomeClaimValue&quot;);
+await _userManager.AddClaimAsync(user, claim);
+</code></pre>
+<h3>Claims vs Roles</h3>
+<p>While roles are a way to group users based on their access levels or responsibilities, claims offer a more granular and flexible approach to represent a user’s identity and their permissions within an application. With claims, you can specify detailed rights or characteristics of a user, enabling you to perform more precise authorization checks.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, ASP.NET Core Identity can work with SQLite as its datastore. SQLite is a lightweight, file-based database, and ASP.NET Core Identity uses Entity Framework Core to interact with the underlying database, which supports SQLite among other databases.</p>
+<h3>Configuring SQLite with ASP.NET Core Identity</h3>
+<p>Below are the basic steps and a simple example of configuring ASP.NET Core Identity to use SQLite.</p>
+<h4>1. Create a New ASP.NET Core Project</h4>
+<p>If you haven’t already, create a new ASP.NET Core project. You can do this using the .NET CLI or through Visual Studio.</p>
+<h4>2. Install SQLite Package</h4>
+<p>You need to add the SQLite Entity Framework Core package to your project. You can do this by adding a package reference in your project file or by using the .NET CLI or NuGet Package Manager.</p>
+<pre><code class="language-sh">dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+</code></pre>
+<h4>3. Configure SQLite in Startup.cs</h4>
+<p>In the <code>Startup.cs</code> file, configure the services to use SQLite as the database for your <code>DbContext</code>. Here’s an example where <code>ApplicationDbContext</code> is the <code>DbContext</code> for the Identity:</p>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    services.AddDbContext&lt;ApplicationDbContext&gt;(options =&gt;
+        options.UseSqlite(
+            Configuration.GetConnectionString(&quot;DefaultConnection&quot;)));
+
+    services.AddDefaultIdentity&lt;IdentityUser&gt;(options =&gt; options.SignIn.RequireConfirmedAccount = true)
+        .AddEntityFrameworkStores&lt;ApplicationDbContext&gt;();
+
+    // Other services...
+}
+</code></pre>
+<h4>4. Connection String</h4>
+<p>Ensure that your <code>appsettings.json</code> file has the correct connection string for SQLite:</p>
+<pre><code class="language-json">{
+  &quot;ConnectionStrings&quot;: {
+    &quot;DefaultConnection&quot;: &quot;Data Source=myapp.db&quot;
+  },
+  // Other settings...
+}
+</code></pre>
+<p>This connection string specifies the filename of the SQLite database as <code>myapp.db</code>.</p>
+<h4>5. Run Migrations</h4>
+<p>Finally, you need to create the database and apply the migrations. Run the following commands in the terminal:</p>
+<pre><code class="language-sh">dotnet ef migrations add InitialCreate
+dotnet ef database update
+</code></pre>
+<p>These commands will create the SQLite database file with the necessary tables for ASP.NET Core Identity.</p>
+<h3>Considerations</h3>
+<ul>
+<li>SQLite is an excellent choice for development, testing, and small to medium-sized applications.</li>
+<li>For production environments with high load, high concurrency, or write-intensive operations, consider using a more robust database system like PostgreSQL or SQL Server.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>ASP.NET Core Identity itself does not directly send SMS messages. However, it includes interfaces and services that you can implement to integrate with external services to send SMS messages for purposes like two-factor authentication.</p>
+<h3>Two-Factor Authentication and SMS</h3>
+<p>In the context of two-factor authentication (2FA) in ASP.NET Core Identity, you usually deal with an interface named <code>ISmsSender</code>. This interface typically has a method like <code>SendSmsAsync</code> that you need to implement.</p>
+<p>Here is a simple example of what the <code>ISmsSender</code> interface might look like:</p>
+<pre><code class="language-csharp">public interface ISmsSender
+{
+    Task SendSmsAsync(string number, string message);
+}
+</code></pre>
+<h3>Implementing ISmsSender</h3>
+<p>You need to create a class that implements this interface and uses an SMS gateway API to actually send the SMS. There are many SMS gateway providers available, like Twilio, Nexmo, Plivo, etc., and most of them provide RESTful APIs to send SMS messages.</p>
+<p>Here is a very basic example of how you might implement <code>ISmsSender</code> using an hypothetical SMS gateway:</p>
+<pre><code class="language-csharp">public class SmsSender : ISmsSender
+{
+    // Constructor and any needed fields go here, possibly API keys and URLs
+
+    public async Task SendSmsAsync(string number, string message)
+    {
+        // Here, use the API of your SMS gateway to send the message.
+        // This typically involves sending an HTTP request to the SMS gateway's API endpoint.
+    }
+}
+</code></pre>
+<h3>Registering the Service</h3>
+<p>Once you have implemented the <code>ISmsSender</code>, you need to register it in the <code>Startup.cs</code> file so that ASP.NET Core Identity can use your implementation:</p>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    services.AddTransient&lt;ISmsSender, SmsSender&gt;();
+
+    // Other services...
+}
+</code></pre>
+<h3>Choosing an SMS Gateway</h3>
+<p>When choosing an SMS gateway, you need to consider the following:</p>
+<ul>
+<li><strong>Coverage:</strong> Does it support the countries and carriers you need to reach?</li>
+<li><strong>Pricing:</strong> What is the cost per message?</li>
+<li><strong>API:</strong> Does it have a well-documented and reliable API that suits your technical needs?</li>
+<li><strong>Reliability and Support:</strong> Does it offer reliable delivery and good customer support?</li>
+</ul>
+<p>Once you decide on an SMS gateway provider, you will usually need to sign up for an account, obtain API keys, and then use the provider’s SDK or API documentation to implement the actual SMS sending logic in your <code>ISmsSender</code> implementation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="f2c85c87-a282-4834-b3bd-67ad077a4ef4" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ほかに留意するべきことを調べる</span>
+                    <a href="#f2c85c87-a282-4834-b3bd-67ad077a4ef4" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>ASP.NET Core Identity is a powerful and flexible system, but it comes with its complexity. Here are some additional considerations and best practices you might want to be aware of before using it:</p>
+<h3>1. <strong>Understand the Basics:</strong></h3>
+<ul>
+<li>Make sure to understand the fundamental concepts like Users, Roles, Claims, Tokens, and how they interrelate.</li>
+</ul>
+<h3>2. <strong>Security Concerns:</strong></h3>
+<ul>
+<li><strong>Use HTTPS:</strong> Always serve your site over HTTPS to protect user information and authentication cookies.</li>
+<li><strong>Strong Passwords:</strong> Configure Identity to enforce strong passwords.</li>
+<li><strong>Account Lockout:</strong> Use account lockout settings to protect against brute-force attacks.</li>
+</ul>
+<h3>3. <strong>Customization:</strong></h3>
+<ul>
+<li>ASP.NET Core Identity is highly customizable. You can extend the default User and Role classes, and you can also replace many parts of the system if you have specific needs, for example, a custom password hasher or a custom user validator.</li>
+</ul>
+<h3>4. <strong>External Authentication:</strong></h3>
+<ul>
+<li>ASP.NET Core Identity supports external login providers like Google, Facebook, Twitter, etc. So, consider whether you will allow users to log in using external providers and plan the integration accordingly.</li>
+</ul>
+<h3>5. <strong>Database Schema:</strong></h3>
+<ul>
+<li>Familiarize yourself with the database schema created by Identity, especially if you are planning to extend the User and Role classes or if you need to interact with the Identity data from other parts of your application.</li>
+</ul>
+<h3>6. <strong>Email Confirmation and Password Recovery:</strong></h3>
+<ul>
+<li>Consider implementing email confirmation for new accounts and providing password recovery functionality. This generally involves sending emails, so you’ll need to integrate with an email sending service.</li>
+</ul>
+<h3>7. <strong>Testing:</strong></h3>
+<ul>
+<li>Remember to thoroughly test all parts of your authentication and authorization system, including less frequently used paths like password recovery.</li>
+</ul>
+<h3>8. <strong>Data Protection:</strong></h3>
+<ul>
+<li>ASP.NET Core Identity uses the Data Protection API for encrypting data. Make sure to configure data protection appropriately, especially in production environments and when hosting in a cloud environment.</li>
+</ul>
+<h3>9. <strong>Deployment Considerations:</strong></h3>
+<ul>
+<li>When deploying your application, be mindful of the security of your deployment environment, including securing the database and using secure connections.</li>
+</ul>
+<h3>10. <strong>GDPR and Legal Considerations:</strong></h3>
+<ul>
+<li>If you are storing user data, be aware of legal requirements related to data protection, such as the General Data Protection Regulation (GDPR) in Europe.</li>
+</ul>
+<h3>11. <strong>Scaling and Performance:</strong></h3>
+<ul>
+<li>Consider how Identity will scale as your application grows. This might involve optimizing database access, using caching, and possibly distributing the load over multiple servers.</li>
+</ul>
+<h3>12. <strong>Documentation and Learning:</strong></h3>
+<ul>
+<li>The <a href="https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity">official documentation</a> for ASP.NET Core Identity is a valuable resource. Take time to go through it and understand the features and capabilities of Identity before integrating it into your project.</li>
+</ul>
+<h3>13. <strong>Keep Software Updated:</strong></h3>
+<ul>
+<li>Regularly update the ASP.NET Core Identity package and related packages to the latest versions to benefit from security updates, bug fixes, and new features.</li>
+</ul>
+<p>Taking the time to properly understand and configure ASP.NET Core Identity from the start can save a lot of headaches and security issues later on.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The account lockout feature in ASP.NET Core Identity is used to protect user accounts from brute-force attack attempts. If a user enters incorrect login credentials too many times within a specified time period, the account is locked out for a defined duration.</p>
+<h3>Configuring Account Lockout</h3>
+<p>You can configure account lockout settings in the <code>Startup.cs</code> file of your project within the <code>ConfigureServices</code> method. Here’s an example where account lockout is configured:</p>
+<pre><code class="language-csharp">services.AddDefaultIdentity&lt;IdentityUser&gt;(options =&gt;
+{
+    // Other configuration...
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5); // Lockout time
+    options.Lockout.MaxFailedAccessAttempts = 5; // Maximum failed login attempts
+    options.Lockout.AllowedForNewUsers = true; // Whether new users can be locked out
+})
+.AddEntityFrameworkStores&lt;ApplicationDbContext&gt;();
+</code></pre>
+<p>In this example:</p>
+<ul>
+<li><code>DefaultLockoutTimeSpan</code> sets how long the user will be locked out when a lockout occurs. After this period, the user can attempt to login again.</li>
+<li><code>MaxFailedAccessAttempts</code> sets the maximum number of failed access attempts allowed before locking out the user.</li>
+<li><code>AllowedForNewUsers</code> specifies whether a new user can be locked out.</li>
+</ul>
+<h3>Implementing Lockout in Login Logic</h3>
+<p>When implementing the login logic in your application, ASP.NET Core Identity automatically handles the account lockout, incrementing the failed access count and locking out the user when the maximum failed access attempts are reached.</p>
+<p>Here’s a simplified example of login logic with ASP.NET Core Identity:</p>
+<pre><code class="language-csharp">public async Task&lt;IActionResult&gt; Login(LoginViewModel model)
+{
+    var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
+    if (result.Succeeded)
+    {
+        return RedirectToAction(&quot;Index&quot;, &quot;Home&quot;);
+    }
+    if (result.IsLockedOut)
+    {
+        return View(&quot;Lockout&quot;);
+    }
+
+    // Other logic...
+    return View(model);
+}
+</code></pre>
+<p>In this example, if the user is locked out, they are redirected to a &quot;Lockout&quot; view, which you should create to inform the user that their account has been locked.</p>
+<h3>Resetting Lockout</h3>
+<p>Administrators can also manually reset the lockout for a user using the <code>UserManager</code> service. For example:</p>
+<pre><code class="language-csharp">await _userManager.ResetAccessFailedCountAsync(user);
+</code></pre>
+<h3>Email Notification</h3>
+<p>Additionally, you might want to notify users by email when their account is locked out, especially if it's due to multiple failed login attempts, as this could be an indication of an attack on the user's account. The notification could prompt them to reset their password or contact support if they did not initiate the login attempts.</p>
+<h3>Monitoring</h3>
+<p>Continuously monitor failed login attempts and lockouts as they can be indicators of security incidents, and having proper monitoring and alerting in place can help in quickly identifying and responding to such incidents.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>ASP.NET Core Identity supports external authentication providers, allowing users to log in with their credentials from external services like Google, Facebook, Twitter, or Microsoft.</p>
+<h3>Overview of Flow with External Providers</h3>
+<ol>
+<li><p><strong>Redirect to External Provider:</strong></p>
+<ul>
+<li>The user clicks a button to log in with an external provider.</li>
+<li>The application redirects the user to the external provider's sign-in page.</li>
+</ul>
+</li>
+<li><p><strong>Authentication by External Provider:</strong></p>
+<ul>
+<li>The user authenticates with the external provider by entering their credentials.</li>
+<li>The external provider authenticates the user and sends an OAuth token to the application.</li>
+</ul>
+</li>
+<li><p><strong>Creating/Associating Local User:</strong></p>
+<ul>
+<li>The application receives the token and retrieves the user's information from the external provider.</li>
+<li>If the user is logging in for the first time, the application creates a new local user and associates it with the external login. If the user has logged in before, the application signs in the existing user.</li>
+</ul>
+</li>
+<li><p><strong>Sign-in or Registration:</strong></p>
+<ul>
+<li>If the user has registered before, they are signed in.</li>
+<li>If it’s a new user, the application may ask the user to complete the registration by providing additional information like email and username, which might not be received from the external provider.</li>
+</ul>
+</li>
+</ol>
+<h3>Implementation Steps</h3>
+<p>Here is a general process to set up external authentication with ASP.NET Core Identity:</p>
+<h4>1. <strong>Install NuGet Packages:</strong></h4>
+<p>You need to install the appropriate NuGet package for the external provider, for example, <code>Microsoft.AspNetCore.Authentication.Google</code> for Google authentication.</p>
+<h4>2. <strong>Register Application with Provider:</strong></h4>
+<ul>
+<li>For the external provider you are using, register your application to get the API keys (Client ID and Client Secret).</li>
+<li>For example, for Google authentication, you will use the <a href="https://console.developers.google.com/">Google API Console</a> to create a project and generate credentials.</li>
+</ul>
+<h4>3. <strong>Configure Authentication in Startup:</strong></h4>
+<ul>
+<li>In the <code>Startup.cs</code> file, configure the authentication services to use the external provider, and provide the API keys.</li>
+<li>Below is an example of configuring Google authentication:</li>
+</ul>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    services.AddAuthentication()
+        .AddGoogle(options =&gt;
+        {
+            options.ClientId = &quot;YourClientId&quot;;
+            options.ClientSecret = &quot;YourClientSecret&quot;;
+        });
+    // Other services...
+}
+</code></pre>
+<h4>4. <strong>Adjust Login View:</strong></h4>
+<ul>
+<li>In the Login view, add buttons or links allowing users to initiate login with the external providers.</li>
+<li>You can use Tag Helpers to generate the correct URLs, like this:</li>
+</ul>
+<pre><code class="language-html">&lt;a asp-area=&quot;Identity&quot; asp-page=&quot;./ExternalLogin&quot; asp-provider=&quot;Google&quot; class=&quot;btn btn-primary&quot;&gt;Log in with Google&lt;/a&gt;
+</code></pre>
+<h4>5. <strong>Handle Callbacks and User Association:</strong></h4>
+<ul>
+<li>After successful authentication by the external provider, handle the callback to associate the external login with a local user account, creating a new user if necessary.</li>
+</ul>
+<h3>Associating Multiple Logins</h3>
+<p>ASP.NET Core Identity allows users to associate multiple external logins with a single local account. For instance, a user could associate both Google and Facebook accounts with a single local user account in your application.</p>
+<h3>Remember Privacy and Terms of Service</h3>
+<p>When integrating with external providers, be aware of user privacy considerations, and make sure to clearly communicate to users how their data will be used and stored. Additionally, review the terms of service of the external providers to ensure compliance with their policies.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>ASP.NET Core Identity uses Entity Framework Core to define and interact with the database, and it creates several tables to manage users, roles, claims, and other related data. Below are the main tables created by ASP.NET Core Identity with a brief description of each:</p>
+<h3>1. <strong>AspNetUsers</strong></h3>
+<ul>
+<li>Stores information about the registered users.</li>
+<li>Columns include UserId, Username, NormalizedUsername, Email, NormalizedEmail, PasswordHash, SecurityStamp, etc.</li>
+</ul>
+<h3>2. <strong>AspNetRoles</strong></h3>
+<ul>
+<li>Stores information about the roles defined in the system.</li>
+<li>Columns include RoleId, Name, NormalizedName, etc.</li>
+</ul>
+<h3>3. <strong>AspNetUserRoles</strong></h3>
+<ul>
+<li>Represents a many-to-many join table between AspNetUsers and AspNetRoles.</li>
+<li>Stores the association between user IDs and role IDs.</li>
+</ul>
+<h3>4. <strong>AspNetUserClaims</strong></h3>
+<ul>
+<li>Stores claims for users.</li>
+<li>Claims are key-value pairs associated with a user that can be used for expressing permissions, roles, or other security-related information.</li>
+</ul>
+<h3>5. <strong>AspNetRoleClaims</strong></h3>
+<ul>
+<li>Stores claims for roles.</li>
+<li>Similar to user claims but associated with a role.</li>
+</ul>
+<h3>6. <strong>AspNetUserLogins</strong></h3>
+<ul>
+<li>Stores information for users who have registered via external login providers.</li>
+<li>Columns include LoginProvider, ProviderKey (unique identifier from the provider), ProviderDisplayName, and UserId (associated local user).</li>
+</ul>
+<h3>7. <strong>AspNetUserTokens</strong></h3>
+<ul>
+<li>Stores tokens for users, used for things like two-factor authentication and account verification.</li>
+<li>Columns include UserId, LoginProvider, Name (purpose of the token), and Value (token value).</li>
+</ul>
+<h3>8. <strong>AspNetUserPasswords</strong></h3>
+<ul>
+<li>This is not a default table, but it’s mentioned here as PasswordHash is stored in the AspNetUsers table.</li>
+</ul>
+<h3>Customization and Extension:</h3>
+<p>The default schema can be extended or customized according to the application's requirements. For example, you can add new columns to the <code>AspNetUsers</code> table to store additional information about users, or create new tables related to the existing Identity tables.</p>
+<h3>Viewing the Schema:</h3>
+<p>You can view the exact schema generated by Identity by examining the migrations in your project (usually in the &quot;Migrations&quot; folder) or by inspecting the database schema directly using a database tool or SQL queries depending on the database system you are using.</p>
+<h3>Using Different Databases:</h3>
+<p>By default, Identity uses Entity Framework Core, which supports a variety of databases including SQL Server, SQLite, PostgreSQL, MySQL, etc. The database provider can be selected and configured when setting up Entity Framework Core in the <code>Startup.cs</code> file of the project. The actual schema and SQL data types might vary depending on the database system used.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The General Data Protection Regulation (GDPR) significantly affects user authentication by imposing stringent requirements on how personal data is collected, stored, processed, and shared. Here are several considerations and impacts of GDPR on user authentication:</p>
+<h3>1. <strong>Informed Consent:</strong></h3>
+<ul>
+<li>Before collecting any personal data, including data collected during registration and login, users must be informed about what data is being collected, for what purpose, and how long it will be retained. They must explicitly consent to this data collection.</li>
+</ul>
+<h3>2. <strong>Data Minimization:</strong></h3>
+<ul>
+<li>Only collect the minimum amount of personal data necessary for authentication and the provision of services.</li>
+<li>Avoid collecting unnecessary information during user registration and authentication.</li>
+</ul>
+<h3>3. <strong>Right to Access and Data Portability:</strong></h3>
+<ul>
+<li>Users have the right to access their personal data and to receive it in a structured, commonly used, and machine-readable format, impacting how data is stored and retrieved.</li>
+</ul>
+<h3>4. <strong>Right to Erasure (Right to be Forgotten):</strong></h3>
+<ul>
+<li>Users have the right to request the deletion of their personal data.</li>
+<li>The authentication system must be able to completely remove a user’s personal data, including related records, such as logs, if there are no legitimate grounds for retaining it.</li>
+</ul>
+<h3>5. <strong>Data Protection:</strong></h3>
+<ul>
+<li>Personal data must be stored securely.</li>
+<li>Passwords should be hashed using strong cryptographic algorithms.</li>
+<li>Sensitive data must be encrypted during transmission (use HTTPS) and at rest.</li>
+<li>Multi-factor authentication and other security measures should be implemented to protect user accounts.</li>
+</ul>
+<h3>6. <strong>Data Breach Notification:</strong></h3>
+<ul>
+<li>In the event of a data breach involving personal data, organizations are required to notify affected individuals and the relevant supervisory authority within 72 hours.</li>
+<li>The authentication system must have mechanisms in place to detect, log, and alert administrators of security incidents.</li>
+</ul>
+<h3>7. <strong>Use of Third-party Services and External Authentication Providers:</strong></h3>
+<ul>
+<li>If using external authentication providers (e.g., Google, Facebook), it must be clear to users that they are sharing their data with both the external provider and your service.</li>
+<li>Third-party services involved in the authentication process must also be GDPR compliant, and their use should be covered in the privacy policy.</li>
+</ul>
+<h3>8. <strong>Cookies and Tracking:</strong></h3>
+<ul>
+<li>The use of cookies and other tracking technologies for authentication (e.g., session cookies) must comply with GDPR requirements regarding informed consent and the right to opt-out.</li>
+</ul>
+<h3>9. <strong>Privacy by Design and by Default:</strong></h3>
+<ul>
+<li>The principles of privacy by design and by default require integrating data protection into the development process of the authentication system.</li>
+<li>Only personal data necessary for each specific purpose should be processed, and access to personal data should be limited to those needing the data for processing.</li>
+</ul>
+<h3>10. <strong>Privacy Policies and Terms of Service:</strong></h3>
+<ul>
+<li>Clear, concise, and accessible privacy policies and terms of service are required to inform users about their rights and how their data will be used, stored, and protected.</li>
+</ul>
+<h3>11. <strong>Children’s Data:</strong></h3>
+<ul>
+<li>Special considerations are required for services aimed at children, including obtaining consent from a person holding parental responsibility.</li>
+</ul>
+<h3>12. <strong>Impact Assessment and Documentation:</strong></h3>
+<ul>
+<li>Organizations may need to conduct data protection impact assessments for processing activities that pose a high risk to data subject rights.</li>
+<li>Organizations need to maintain detailed documentation on data processing activities, including those related to authentication.</li>
+</ul>
+<h3>Implementation</h3>
+<p>Ensuring GDPR compliance in user authentication involves both technical and organizational measures. Organizations need to assess their authentication processes, implement necessary controls, and regularly review their compliance status, especially when introducing new technologies or processing activities. Non-compliance with GDPR can result in substantial fines and damage to reputation, making it crucial for organizations to address GDPR requirements proactively.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

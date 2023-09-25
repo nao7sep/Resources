@@ -2742,6 +2742,45 @@
                     </div>
                 </div>
             </div>
+            <div id="22684bf1-9a67-479a-9721-bbd77f66c1dd" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">スレッド数の更新がうまくいかなかったことについて AI に聞く</span>
+                    <a href="#22684bf1-9a67-479a-9721-bbd77f66c1dd" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">一瞬で解決してしまった……。</p>
+                            <div class="note_ai_generated">
+<p>When dealing with generic classes and static variables in C#, the static variable is not shared between instances of different type parameters. Each closed constructed type will have its own version of the static variable.</p>
+<p>Now, coming to your question, if you are using <code>Interlocked.Increment</code> in a generic class and it works only when you prefix it with the class name, it likely means that you are referencing the correct, specific version of the static variable associated with that constructed type.</p>
+<p>Here’s a small example to demonstrate:</p>
+<pre><code class="language-csharp">public class MyClass&lt;T&gt;
+{
+    private static int _counter;
+
+    public void CreateThread()
+    {
+        // If Interlocked.Increment(ref _counter); does not work
+        // then, fully qualifying the variable with class name might work
+        Interlocked.Increment(ref MyClass&lt;T&gt;._counter);
+    }
+}
+</code></pre>
+<p>In this case, if you have <code>MyClass&lt;int&gt;</code> and <code>MyClass&lt;string&gt;</code>, they will have separate <code>_counter</code> variables, each associated with the respective closed constructed type.</p>
+<p>Using the class name, especially with the generic parameter, ensures that you are accessing the correct <code>_counter</code> variable associated with that specific type parameter. If there is some form of shadowing or if the context within which you are accessing the variable makes it ambiguous or unclear which <code>_counter</code> you are referring to, fully qualifying it with the class name resolves that ambiguity.</p>
+<p>This concept is especially important when dealing with thread safety and concurrent operations, as <code>Interlocked.Increment</code> is designed to modify the variable in a thread-safe way, and referencing the correct variable is crucial.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="349b9cb1-e2be-4dba-b52c-348b557c017f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ほかにジェネリッククラスに静的変数を入れているところを探す</span>
+                    <a href="#349b9cb1-e2be-4dba-b52c-348b557c017f" class="permalink">&infin;</a>
+                </div>
+            </div>
         </div>
     </body>
 </html>

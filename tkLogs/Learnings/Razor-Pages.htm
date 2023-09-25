@@ -10,6 +10,344 @@
             <a href="Razor-Pages.htm" class="title">Razor Pages</a>
         </div>
         <div class="entries">
+            <div id="395180ec-ca0f-4ca2-9324-87f9fc7a3fa3" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">昔のフォーム認証の代わりがあるか調べる</span>
+                    <a href="#395180ec-ca0f-4ca2-9324-87f9fc7a3fa3" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, ASP.NET Core, including Razor Pages, offers multiple ways to implement authentication and authorization, and it provides a much more modular and customizable system compared to the older Forms Authentication in Web Forms. You can still achieve something similar and simple with Cookie Authentication or by using Identity.</p>
+<h3>Using ASP.NET Core Identity</h3>
+<p>ASP.NET Core Identity is a membership system that adds login functionality to your application. It uses cookie authentication under the hood but wraps it up with a nice set of utilities for handling user registration, login, password reset, etc.</p>
+<h4>Setup</h4>
+<ol>
+<li><strong>Create a New Project:</strong> When creating a new Razor Pages project, select &quot;Individual User Accounts&quot; for authentication to set up a project with Identity.</li>
+<li><strong>Add Scaffolded Items:</strong> If you have an existing project, you can scaffold Identity into your project by right-clicking on the project -&gt; Add -&gt; New Scaffolded Item -&gt; Identity.</li>
+</ol>
+<h4>Usage</h4>
+<p>Once Identity is set up, you can easily restrict access to your Razor Pages using the <code>[Authorize]</code> attribute. You can put this attribute on individual Razor Pages or in the <code>Startup.cs</code> file to secure the entire application.</p>
+<pre><code class="language-csharp">[Authorize]
+public class IndexModel : PageModel
+{
+    public void OnGet()
+    {
+    }
+}
+</code></pre>
+<h3>Using Cookie Authentication without Identity</h3>
+<p>If you want something simpler and don’t need the full Identity system, you can use Cookie Authentication directly.</p>
+<h4>Setup</h4>
+<ol>
+<li><p><strong>Add Authentication Services:</strong></p>
+<pre><code class="language-csharp">// Startup.cs
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddAuthentication(&quot;MyCookieAuthenticationScheme&quot;)
+            .AddCookie(&quot;MyCookieAuthenticationScheme&quot;, options =&gt;
+            {
+                options.LoginPath = new PathString(&quot;/Login&quot;);
+                options.AccessDeniedPath = new PathString(&quot;/AccessDenied&quot;);
+            });
+    services.AddRazorPages();
+}
+</code></pre>
+</li>
+<li><p><strong>Use Authentication Middleware:</strong></p>
+<pre><code class="language-csharp">// Startup.cs
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    // Other middleware...
+    app.UseAuthentication();
+    app.UseAuthorization();
+    // Other middleware...
+}
+</code></pre>
+</li>
+</ol>
+<h4>Usage</h4>
+<ol>
+<li><p><strong>Create a Login Page:</strong></p>
+<pre><code class="language-csharp">// Login.cshtml.cs
+public class LoginModel : PageModel
+{
+    public async Task&lt;IActionResult&gt; OnPostAsync(string username, string password)
+    {
+        var claims = new List&lt;Claim&gt;
+        {
+            new Claim(ClaimTypes.Name, username)
+        };
+
+        var claimsIdentity = new ClaimsIdentity(claims, &quot;MyCookieAuthenticationScheme&quot;);
+        var authProperties = new AuthenticationProperties();
+
+        await HttpContext.SignInAsync(&quot;MyCookieAuthenticationScheme&quot;, new ClaimsPrincipal(claimsIdentity), authProperties);
+
+        return RedirectToPage(&quot;/Index&quot;);
+    }
+}
+</code></pre>
+</li>
+<li><p><strong>Secure Your Pages:</strong></p>
+<pre><code class="language-csharp">[Authorize(AuthenticationSchemes = &quot;MyCookieAuthenticationScheme&quot;)]
+public class SecurePageModel : PageModel
+{
+    public void OnGet()
+    {
+    }
+}
+</code></pre>
+</li>
+</ol>
+<p>This example is extremely simplified and does not include any form of password validation or user management, but it demonstrates how to set up cookie-based authentication in a Razor Pages application.</p>
+<h3>Additional Considerations</h3>
+<ul>
+<li>Ensure you have proper validation, error handling, and security measures in place, such as encrypting passwords and using HTTPS.</li>
+<li>Consider using Two-Factor Authentication for enhanced security.</li>
+<li>ASP.NET Core’s documentation has extensive resources and tutorials on setting up and customizing authentication in your applications.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="1678c298-3aca-427b-ab58-8bfcb2e4fd72" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ページのコンテンツを非同期的に翻訳する方法を調べる</span>
+                    <a href="#1678c298-3aca-427b-ab58-8bfcb2e4fd72" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To display a Razor Page and then asynchronously insert translated text into the page as it’s acquired from a translation API, you can follow these steps:</p>
+<h3>1. <strong>Create a Razor Page</strong></h3>
+<p>You start by creating a standard Razor Page, where you will place placeholders for the translated text.</p>
+<h3>2. <strong>Call Translation API Asynchronously</strong></h3>
+<p>After the page is loaded, you can call the translation API asynchronously using JavaScript or by invoking an endpoint on the server side which, in turn, calls the translation API.</p>
+<h3>3. <strong>Update the Page Dynamically</strong></h3>
+<p>Once the translated text is received, you can dynamically update the page using JavaScript or Blazor components (if you decide to use Blazor components within your Razor Page).</p>
+<h3>Example Using JavaScript Fetch API</h3>
+<h4>Razor Page (Index.cshtml):</h4>
+<pre><code class="language-html">@page
+@model IndexModel
+
+&lt;h2&gt;Text to Translate&lt;/h2&gt;
+&lt;div id=&quot;textToTranslate&quot;&gt;Hello, How are you?&lt;/div&gt;
+
+&lt;h2&gt;Translated Text&lt;/h2&gt;
+&lt;div id=&quot;translatedText&quot;&gt;Translating...&lt;/div&gt;
+
+@section Scripts{
+    &lt;script&gt;
+        async function translateText() {
+            try {
+                const textToTranslate = document.getElementById('textToTranslate').innerText;
+
+                // Call to your server endpoint that interacts with Translation API
+                const response = await fetch('/api/translate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: textToTranslate })
+                });
+
+                if (!response.ok) throw new Error('Translation failed');
+
+                const result = await response.json();
+                document.getElementById('translatedText').innerText = result.translatedText;
+            } catch (error) {
+                console.error('Error translating text:', error);
+                document.getElementById('translatedText').innerText = 'Translation failed';
+            }
+        }
+
+        // Call the translate function when the page loads
+        translateText();
+    &lt;/script&gt;
+}
+</code></pre>
+<h4>API Endpoint (TranslateController.cs):</h4>
+<pre><code class="language-csharp">[ApiController]
+[Route(&quot;api/[controller]&quot;)]
+public class TranslateController : ControllerBase
+{
+    [HttpPost]
+    public async Task&lt;IActionResult&gt; Translate([FromBody] TranslateRequest request)
+    {
+        // Logic to call the Translation API and get the translated text
+        string translatedText = await TranslationService.TranslateAsync(request.Text);
+
+        if (string.IsNullOrEmpty(translatedText))
+            return BadRequest(new { error = &quot;Translation failed&quot; });
+
+        return Ok(new { translatedText });
+    }
+}
+
+public class TranslateRequest
+{
+    public string Text { get; set; }
+}
+</code></pre>
+<p>In this example:</p>
+<ul>
+<li>The translation function is triggered when the page is loaded.</li>
+<li>It sends an asynchronous request to a server-side endpoint (<code>/api/translate</code>), which interacts with the Translation API.</li>
+<li>Once the translated text is received, it dynamically updates the page with the translated text.</li>
+</ul>
+<p>You would need to replace the placeholder for the translation service with the actual logic or service call to get the translated text from the Translation API you are using. The translation service could be an injected service in your controller that interacts with the translation API.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To save the translated text in the database and omit accessing the translation API for the same original text, you can follow the below steps:</p>
+<h3>1. <strong>Check Database for Existing Translation</strong></h3>
+<p>Before calling the translation API, check if the translation for the given text already exists in the database.</p>
+<h3>2. <strong>Call Translation API if Necessary</strong></h3>
+<p>If the translation does not exist in the database, call the translation API to get the translated text.</p>
+<h3>3. <strong>Save the New Translation to the Database</strong></h3>
+<p>After receiving the translated text from the API, save it to the database for future use.</p>
+<h3>4. <strong>Return the Translated Text</strong></h3>
+<p>Finally, return the translated text (whether from the database or the API) to the client for display.</p>
+<h3>Example:</h3>
+<h4>API Endpoint (TranslateController.cs):</h4>
+<pre><code class="language-csharp">[ApiController]
+[Route(&quot;api/[controller]&quot;)]
+public class TranslateController : ControllerBase
+{
+    private readonly ITranslationRepository _translationRepository;
+    private readonly ITranslationService _translationService;
+
+    public TranslateController(
+        ITranslationRepository translationRepository,
+        ITranslationService translationService)
+    {
+        _translationRepository = translationRepository;
+        _translationService = translationService;
+    }
+
+    [HttpPost]
+    public async Task&lt;IActionResult&gt; Translate([FromBody] TranslateRequest request)
+    {
+        // Check if the translation already exists in the database
+        string translatedText = await _translationRepository.GetTranslatedTextAsync(request.Text);
+
+        if (string.IsNullOrEmpty(translatedText))
+        {
+            // If not, call the Translation API to get the translated text
+            translatedText = await _translationService.TranslateAsync(request.Text);
+
+            if (string.IsNullOrEmpty(translatedText))
+                return BadRequest(new { error = &quot;Translation failed&quot; });
+
+            // Save the new translation to the database
+            await _translationRepository.SaveTranslationAsync(request.Text, translatedText);
+        }
+
+        return Ok(new { translatedText });
+    }
+}
+</code></pre>
+<h4>Translation Repository (ITranslationRepository.cs):</h4>
+<pre><code class="language-csharp">public interface ITranslationRepository
+{
+    Task&lt;string&gt; GetTranslatedTextAsync(string originalText);
+    Task SaveTranslationAsync(string originalText, string translatedText);
+}
+</code></pre>
+<p>In this example:</p>
+<ul>
+<li>The <code>TranslateController</code> has dependencies on <code>ITranslationRepository</code> and <code>ITranslationService</code>.</li>
+<li>When a translation request is received, it first checks the repository (database) to see if the translation already exists.</li>
+<li>If the translation does not exist in the repository, it calls the translation service to get the translated text from the API, then saves this new translation back to the repository before returning the translated text.</li>
+</ul>
+<p>This approach ensures that each unique piece of text is translated only once, reducing the number of calls to the translation API and thereby possibly reducing costs and improving performance.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, that’s correct! Implementing an API method that does the translation, saves it to the database, and returns the translated text is a recommended approach, and calling this API method from JavaScript embedded in the Razor Page is a good way to achieve the desired functionality.</p>
+<h3>Why This Approach:</h3>
+<ol>
+<li><strong>Separation of Concerns:</strong> Keeps the business logic, like interacting with the translation API and database, separate from the UI logic.</li>
+<li><strong>Security:</strong> Prevents exposing sensitive information like API keys that might be needed to interact with the translation API.</li>
+<li><strong>Reusability:</strong> Allows reuse of the translation functionality across different parts of your application or even different applications.</li>
+<li><strong>Efficiency and Cost:</strong> Reduces the number of calls to the external translation API by caching the results in your database, which can be more efficient and cost-effective.</li>
+</ol>
+<h3>Implementation Steps:</h3>
+<ol>
+<li><p><strong>Create an API Method:</strong></p>
+<ul>
+<li>Create a method in your API Controller that takes the text to be translated as input.</li>
+<li>Check the database to see if the translation already exists.</li>
+<li>If not, call the translation API to get the translation, save it to the database, and then return the translated text.</li>
+</ul>
+</li>
+<li><p><strong>Call the API Method from JavaScript:</strong></p>
+<ul>
+<li>From your Razor Page, use JavaScript (or TypeScript) to call this API method asynchronously.</li>
+<li>Update the DOM with the received translated text once the API call is completed.</li>
+</ul>
+</li>
+</ol>
+<h3>Example:</h3>
+<h4>1. API Method:</h4>
+<pre><code class="language-csharp">[HttpPost(&quot;translate&quot;)]
+public async Task&lt;IActionResult&gt; TranslateText([FromBody] TranslateRequest request)
+{
+    // Check Database for existing translation
+    var translation = await _translationRepository.GetTranslationAsync(request.Text);
+    if (translation != null)
+        return Ok(new { TranslatedText = translation.TranslatedText });
+
+    // Call Translation API and save to the database if not exist
+    var translatedText = await _translationService.TranslateAsync(request.Text);
+    if (string.IsNullOrEmpty(translatedText))
+        return BadRequest(&quot;Translation failed.&quot;);
+
+    await _translationRepository.AddTranslationAsync(new Translation { OriginalText = request.Text, TranslatedText = translatedText });
+    return Ok(new { TranslatedText = translatedText });
+}
+</code></pre>
+<h4>2. JavaScript in Razor Page:</h4>
+<pre><code class="language-html">@section Scripts{
+    &lt;script&gt;
+        async function translateText() {
+            const textToTranslate = document.getElementById('textToTranslate').innerText;
+            try {
+                const response = await fetch('/api/translate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: textToTranslate })
+                });
+
+                if (!response.ok) throw new Error('Translation failed');
+
+                const result = await response.json();
+                document.getElementById('translatedText').innerText = result.TranslatedText;
+            } catch (error) {
+                console.error('Error translating text:', error);
+                document.getElementById('translatedText').innerText = 'Translation failed';
+            }
+        }
+
+        // Call the translate function when the page loads
+        translateText();
+    &lt;/script&gt;
+}
+</code></pre>
+<p>This way, the interaction with the Translation API and the database is encapsulated in the server-side code, and the client-side code in the Razor Page is only responsible for displaying the result to the user.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
