@@ -8246,6 +8246,897 @@ public IConfiguration Configuration { get; }
                     </div>
                 </div>
             </div>
+            <div id="fdf3bd67-0753-4832-a7d0-2267616724a6" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Identity のテーブルに列を増やす方法を調べる</span>
+                    <a href="#fdf3bd67-0753-4832-a7d0-2267616724a6" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>ASP.NET Identity uses Entity Framework Code First approach, which means you can modify the structure of your database by modifying your model classes and applying migrations.</p>
+<h3>Step-by-step guide to add a column:</h3>
+<ol>
+<li><p><strong>Modify the Identity Model</strong></p>
+<ul>
+<li>Open the IdentityModel.cs file or wherever your Identity models are located.</li>
+<li>Locate the class representing the table to which you want to add a column (for example, <code>ApplicationUser</code> for the Users table).</li>
+<li>Add a new property to this class. This property represents the new column you want to add.</li>
+</ul>
+<pre><code class="language-csharp">public class ApplicationUser : IdentityUser
+{
+    public string NewColumnName { get; set; } // Add this line
+}
+</code></pre>
+</li>
+<li><p><strong>Add a Migration</strong></p>
+<ul>
+<li>Open the Package Manager Console (View &gt; Other Windows &gt; Package Manager Console).</li>
+<li>Run the command <code>Add-Migration NameOfYourMigration</code>, where <code>NameOfYourMigration</code> is a name you choose to describe the changes you've made.</li>
+</ul>
+<pre><code class="language-sh">Add-Migration AddedNewColumnToApplicationUser
+</code></pre>
+</li>
+<li><p><strong>Update the Database</strong></p>
+<ul>
+<li>After creating the migration, apply it to the database by running the <code>Update-Database</code> command in the Package Manager Console.</li>
+</ul>
+<pre><code class="language-sh">Update-Database
+</code></pre>
+</li>
+</ol>
+<h3>Additional Consideration: Update Views and Controllers</h3>
+<ul>
+<li>Once you have added a new column, you may also need to update the related views, controllers, and possibly ViewModels to accommodate, display, or modify the new column data.</li>
+</ul>
+<h3>Extra: Using Fluent API</h3>
+<ul>
+<li><p>If you need to configure the new column with more settings or constraints, you can use Fluent API within <code>OnModelCreating</code> method in your DbContext class.</p>
+<pre><code class="language-csharp">protected override void OnModelCreating(ModelBuilder builder)
+{
+    base.OnModelCreating(builder);
+
+    builder.Entity&lt;ApplicationUser&gt;()
+        .Property(u =&gt; u.NewColumnName)
+        .IsRequired(); // For making it a required field, for instance.
+}
+</code></pre>
+</li>
+</ul>
+<h3>Example: Add a <code>DateOfBirth</code> Column to ApplicationUser</h3>
+<p>Here’s a brief example, assuming you want to add a <code>DateOfBirth</code> column to the <code>ApplicationUser</code> class.</p>
+<ol>
+<li><p><strong>Modify ApplicationUser Class</strong></p>
+<pre><code class="language-csharp">public class ApplicationUser : IdentityUser
+{
+    public DateTime DateOfBirth { get; set; }
+}
+</code></pre>
+</li>
+<li><p><strong>Create Migration</strong></p>
+<p>In Package Manager Console:</p>
+<pre><code class="language-sh">Add-Migration AddedDateOfBirthToApplicationUser
+</code></pre>
+</li>
+<li><p><strong>Update Database</strong></p>
+<p>In Package Manager Console:</p>
+<pre><code class="language-sh">Update-Database
+</code></pre>
+</li>
+</ol>
+<p>This way, a <code>DateOfBirth</code> column will be added to the Users table represented by the <code>ApplicationUser</code> class.</p>
+<p>Always ensure to test these changes thoroughly to avoid issues, especially when modifying existing tables. Also, remember to backup your database before performing migrations on production environments.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To set a default value for a column in Entity Framework, you can use the Fluent API in your <code>DbContext</code> class to configure the default value for a property.</p>
+<h3>Here is a step-by-step guide:</h3>
+<h4>1. <strong>Update the Model</strong></h4>
+<p>Start by adding the new column to your model, just as you did before. For example:</p>
+<pre><code class="language-csharp">public class ApplicationUser : IdentityUser
+{
+    public string NewColumnName { get; set; }
+}
+</code></pre>
+<h4>2. <strong>Configure Default Value with Fluent API</strong></h4>
+<p>In your DbContext, override the <code>OnModelCreating</code> method (or update it if it already exists) and use the Fluent API to set the default value.</p>
+<pre><code class="language-csharp">protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    base.OnModelCreating(modelBuilder);
+
+    modelBuilder.Entity&lt;ApplicationUser&gt;()
+        .Property(b =&gt; b.NewColumnName)
+        .HasDefaultValue(&quot;DefaultValue&quot;); // Replace DefaultValue with the actual default value you want to set.
+}
+</code></pre>
+<p>For a <code>DateTime</code>, you might do something like:</p>
+<pre><code class="language-csharp">.HasDefaultValueSql(&quot;getdate()&quot;); // Use SQL function to get the current date.
+</code></pre>
+<h4>3. <strong>Create a New Migration</strong></h4>
+<p>After updating your model and configuring the default value, create a new migration.</p>
+<pre><code class="language-sh">Add-Migration AddedNewColumnWithDefaultValue
+</code></pre>
+<h4>4. <strong>Update the Database</strong></h4>
+<p>Finally, apply the migration to update the database.</p>
+<pre><code class="language-sh">Update-Database
+</code></pre>
+<h4>Example: Set Default Value for DateOfBirth Column</h4>
+<p>Here is a more concrete example, adding a <code>DateOfBirth</code> column with a default value.</p>
+<ol>
+<li><p><strong>Update ApplicationUser Class</strong></p>
+<pre><code class="language-csharp">public class ApplicationUser : IdentityUser
+{
+    public DateTime DateOfBirth { get; set; }
+}
+</code></pre>
+</li>
+<li><p><strong>Configure Default Value in DbContext</strong></p>
+<pre><code class="language-csharp">protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    base.OnModelCreating(modelBuilder);
+
+    modelBuilder.Entity&lt;ApplicationUser&gt;()
+        .Property(b =&gt; b.DateOfBirth)
+        .HasDefaultValueSql(&quot;CONVERT(datetime, '2000-01-01 00:00:00.000', 121)&quot;); // Sets default value to January 1, 2000.
+}
+</code></pre>
+</li>
+<li><p><strong>Create Migration and Update Database</strong></p>
+<pre><code class="language-sh">Add-Migration AddedDateOfBirthWithDefaultValue
+Update-Database
+</code></pre>
+</li>
+</ol>
+<h3>Note:</h3>
+<ul>
+<li>After setting the default value using Fluent API, any new rows added will have the specified default value for the new column if no value is provided.</li>
+<li>The default value set using Fluent API does not affect existing rows in the table; it will only apply to new rows that are added after the migration.</li>
+<li>If you want to update the existing rows with the default value, you may need to do this manually with a SQL update statement or by updating the entities in your application.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="f69b3dec-60a4-4433-8cc1-f9b8d27f479f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">fanApiJwt でのアカウントのロックアウトをテスト</span>
+                    <a href="#f69b3dec-60a4-4433-8cc1-f9b8d27f479f" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>HTTP response status codes indicate whether a specific HTTP request has been successfully completed or not. They are grouped into five classes or categories:</p>
+<h3>1. <strong>1xx (Informational):</strong></h3>
+<ul>
+<li><strong>100 Continue</strong>: The server has received the request headers, and the client should proceed to send the request body.</li>
+</ul>
+<h3>2. <strong>2xx (Successful):</strong></h3>
+<ul>
+<li><strong>200 OK</strong>: The standard response for successful HTTP requests.</li>
+<li><strong>201 Created</strong>: The request has been fulfilled, and a new resource has been created.</li>
+<li><strong>204 No Content</strong>: The server has successfully processed the request, but there is no content to send in the response.</li>
+</ul>
+<h3>3. <strong>3xx (Redirection):</strong></h3>
+<ul>
+<li><strong>301 Moved Permanently</strong>: The URL of the requested resource has been changed permanently. The new URL is given in the response.</li>
+<li><strong>302 Found (Previously &quot;Moved Temporarily&quot;)</strong>: The URL of the requested resource has been changed temporarily. New changes in the URL might be made in the future.</li>
+<li><strong>304 Not Modified</strong>: The resource has not been modified since the last request.</li>
+</ul>
+<h3>4. <strong>4xx (Client Error):</strong></h3>
+<ul>
+<li><strong>400 Bad Request</strong>: The server could not understand the request due to invalid syntax.</li>
+<li><strong>401 Unauthorized</strong>: The request lacks valid authentication credentials for the target resource.</li>
+<li><strong>403 Forbidden</strong>: The client does not have access rights to the content.</li>
+<li><strong>404 Not Found</strong>: The server cannot find the requested resource.</li>
+<li><strong>429 Too Many Requests</strong>: The user has sent too many requests in a given amount of time (&quot;rate limiting&quot;).</li>
+</ul>
+<h3>5. <strong>5xx (Server Error):</strong></h3>
+<ul>
+<li><strong>500 Internal Server Error</strong>: A generic error message, given when an unexpected condition was encountered.</li>
+<li><strong>502 Bad Gateway</strong>: The server, while acting as a gateway or proxy, received an invalid response from the upstream server.</li>
+<li><strong>503 Service Unavailable</strong>: The server cannot handle the request (because it is overloaded or down for maintenance).</li>
+</ul>
+<p>These are some of the common HTTP status codes, but there are many others in each category, serving various purposes.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">else if (xResult.IsLockedOut)<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;return BadRequest (&quot;User account locked out.&quot;);</p>
+                            <p class="note_contents">を追加。</p>
+                            <p class="note_contents">401 Unauthorized でもよさそうだが、パスワードなどが誤っている場合と区別がついたほうが良い。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="e083f3d5-a3fd-4b19-8959-f28cb72808f8" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">API のエンドポイントの URL は小文字であるべきか調べる</span>
+                    <a href="#e083f3d5-a3fd-4b19-8959-f28cb72808f8" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, URLs including API endpoint URLs are case-sensitive, according to the HTTP/1.1 specification (RFC 2616). This means that <code>example.com/resource</code> and <code>example.com/RESOURCE</code> would be considered different URLs. However, domain names are not case-sensitive due to the DNS specification. So <code>EXAMPLE.com/resource</code> and <code>example.com/resource</code> would be equivalent.</p>
+<p>That said, many web servers are configured to be case-insensitive by default, especially those serving on Windows platforms. This is also true for many web frameworks and applications. Therefore, you might often find that URLs appear not to be case-sensitive in practice, even though the specification declares them to be.</p>
+<p>To avoid confusion and potential issues, it is often best to adopt a consistent casing convention, such as lower camel case, for all your API endpoint paths and to document that convention clearly for API consumers. For example, using <code>example.com/api/resourceName</code> instead of mixing different cases like <code>example.com/API/ResourceName</code> or <code>example.com/api/resourceNAME</code>.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>It is generally a good practice to use lowercase letters in URLs, including API endpoint URLs, for several reasons:</p>
+<h3>1. <strong>Convention:</strong></h3>
+<p>Lowercase URLs are a widely adopted convention. Following this convention can make your API more intuitive for consumers.</p>
+<h3>2. <strong>Case-Sensitivity:</strong></h3>
+<p>As URLs are case-sensitive by standard, using lowercase letters avoids confusion and potential errors that can arise due to case differences, such as users not being able to access a resource because they are using the wrong case.</p>
+<h3>3. <strong>SEO Considerations:</strong></h3>
+<p>For publicly accessible web pages, search engines typically treat URLs as case-sensitive. This means that the same page at two different URL casings can be seen as two different pages, leading to SEO issues. While this may not be a primary concern for API endpoints, maintaining consistency across your application can be beneficial.</p>
+<h3>4. <strong>Consistency:</strong></h3>
+<p>Using lowercase letters contributes to a consistent, clean URL structure, which can be especially helpful in larger systems with many different endpoints.</p>
+<h3>5. <strong>Compatibility:</strong></h3>
+<p>Some systems and servers may not handle mixed-case URLs well, or they may be configured to treat URLs as case-insensitive, leading to unexpected behavior.</p>
+<h3>Recommendations</h3>
+<ul>
+<li>Stick to lowercase letters.</li>
+<li>Use hyphens (-) to separate words, e.g., <code>/api/resource-name</code>.</li>
+<li>Avoid using special characters that can cause issues or be misinterpreted in URLs.</li>
+<li>Clearly document your URL structures and conventions in your API documentation.</li>
+</ul>
+<p>In conclusion, while it’s not a strict requirement, using lowercase letters in your API endpoint URLs is a good practice and can help avoid unnecessary complications and confusions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="f9b11d34-16a6-4993-b978-eaebc3d1bca2" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">fanApiJwt のデータベースファイルを改名</span>
+                    <a href="#f9b11d34-16a6-4993-b978-eaebc3d1bca2" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">おそらくアプリ全体でこれを使うので、Users.db は不適。</p>
+                            <p class="note_contents">また、拡張子についても再考。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When naming your SQLite database file for a web API, consider the following principles:</p>
+<h3>1. <strong>Descriptive Name:</strong></h3>
+<p>Choose a name that describes the content or purpose of the database. It should be clear to someone else (or you in the future) what the database is used for just by looking at the name.</p>
+<h3>2. <strong>Adopt Conventions:</strong></h3>
+<p>Use a common convention like snake_case or camelCase for multi-word names.</p>
+<h3>3. <strong>Use the .db Extension:</strong></h3>
+<p>Although SQLite database files can have any extension, it’s common practice to use the <code>.db</code> extension.</p>
+<h3>4. <strong>Avoid Spaces:</strong></h3>
+<p>It's good practice to avoid spaces in file names; instead, use underscores or camelCase.</p>
+<h3>5. <strong>Include Version (Optional):</strong></h3>
+<p>If your database schema is likely to change, you might want to include a version number in the file name.</p>
+<h3>6. <strong>Keep it Private:</strong></h3>
+<p>It should not expose sensitive information, as it is a potential security risk. Also, don’t put the SQLite file in a public directory of your web server.</p>
+<h3>7. <strong>Keep it Short:</strong></h3>
+<p>It's helpful to keep the name reasonably short while still being descriptive.</p>
+<h3>Examples:</h3>
+<ul>
+<li><code>user_data.db</code></li>
+<li><code>inventory_v1.db</code></li>
+<li><code>api_cache.db</code></li>
+</ul>
+<h3>Example in Context:</h3>
+<p>If you are developing a web API for a blog, a good name might be <code>blog_posts.db</code>.</p>
+<h3>Remember:</h3>
+<ul>
+<li><strong>Location Matters:</strong> The database file should be located in a secure and appropriate directory, inaccessible from the web.</li>
+<li><strong>Configure Properly:</strong> Ensure that the web server is properly configured to never serve the database file.</li>
+<li><strong>Backup Strategy:</strong> Have a backup strategy in place for your database, especially if it contains critical data.</li>
+<li><strong>Use Environmental Variables:</strong> Consider using environmental variables or configuration files to store the database file name, making it easy to change without modifying code.</li>
+</ul>
+<h3>Final Note:</h3>
+<p>While SQLite is a great database for many purposes, especially for development, testing, and smaller production projects, for larger web APIs or those with high concurrency requirements, consider using a more robust database system like PostgreSQL or MySQL.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Certainly! Below are several more examples, illustrating a variety of potential use-cases:</p>
+<h3>General Examples</h3>
+<ol>
+<li><code>app_config.db</code></li>
+<li><code>employee_records.db</code></li>
+<li><code>order_history_v2.db</code></li>
+<li><code>customer_profiles.db</code></li>
+<li><code>session_storage.db</code></li>
+<li><code>product_catalog.db</code></li>
+<li><code>task_queue.db</code></li>
+</ol>
+<h3>Specific Context Examples</h3>
+<h4><strong>For a Music Streaming App API:</strong></h4>
+<ul>
+<li><code>song_metadata.db</code></li>
+<li><code>user_playlists.db</code></li>
+<li><code>artist_information.db</code></li>
+</ul>
+<h4><strong>For an E-commerce Platform API:</strong></h4>
+<ul>
+<li><code>product_inventory.db</code></li>
+<li><code>transaction_records.db</code></li>
+<li><code>customer_addresses.db</code></li>
+</ul>
+<h4><strong>For a Social Media Platform API:</strong></h4>
+<ul>
+<li><code>user_posts.db</code></li>
+<li><code>friend_connections.db</code></li>
+<li><code>message_threads.db</code></li>
+</ul>
+<h4><strong>For a Library Management System API:</strong></h4>
+<ul>
+<li><code>book_information.db</code></li>
+<li><code>borrower_records.db</code></li>
+<li><code>loan_history.db</code></li>
+</ul>
+<h3>Structured Versioning Examples:</h3>
+<p>If you want to include structured versioning in your database file names, you might consider a structure like:</p>
+<ul>
+<li><code>sales_data_v1_0_0.db</code></li>
+<li><code>user_profiles_v2_3_1.db</code></li>
+<li><code>comments_v3_0_2.db</code></li>
+</ul>
+<p>Remember, these are just examples, and you should choose a naming convention that is suitable and makes sense in the context of your specific project and its requirements. The filename should help anyone working on the project to easily understand the purpose of the database.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">どれもしっくりこなかったので、.NET でコードを生成した場合の app.db とする。</p>
+                            <p class="note_contents">周囲には、Program.cs のように大文字から始まるものも、appsettings.json のようにそうでないものもある。</p>
+                            <p class="note_contents">前者はクラス名の反映なので単語のつなぎ目が大文字になるのを避けがたく、それなら先頭も大文字でよい。</p>
+                            <p class="note_contents">一方、エンドポイントの URL は小文字が望ましいとのことなので、静的ファイルや、大文字の含まれる名前の反映を受けないものには、不都合のない範囲内で小文字を使う。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="e080d564-24d5-42d4-9398-65e8260dc88d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">メールや SMS を送れる外部サービスを探す＋fanApiJwt にメールの送信を実装</span>
+                    <a href="#e080d564-24d5-42d4-9398-65e8260dc88d" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Services that allow sending emails without being SMTP servers typically act as email API providers or are platforms that facilitate email sending programmatically. These services generally interact with SMTP servers behind the scenes but provide users with a higher-level, often more user-friendly, interface or API. Here are a few such services:</p>
+<h3>1. <strong>SendGrid</strong></h3>
+<p>SendGrid offers an Email API that enables developers to send emails without directly interacting with an SMTP server. It provides various features like analytics, email template management, and more.</p>
+<h3>2. <strong>Mailgun</strong></h3>
+<p>Mailgun is another popular email delivery service offering APIs to send, receive, and track emails seamlessly. It is particularly suitable for developers and businesses looking for an efficient email solution.</p>
+<h3>3. <strong>Mailjet</strong></h3>
+<p>Mailjet provides a set of APIs allowing developers to send emails and SMS. It also offers features like email tracking and templating.</p>
+<h3>4. <strong>Amazon SES (Simple Email Service)</strong></h3>
+<p>Amazon SES is Amazon Web Services' scalable and cost-effective email sending service that allows developers to send mail from within any application.</p>
+<h3>5. <strong>Twilio SendGrid Email API</strong></h3>
+<p>Twilio offers a cloud-based email platform (SendGrid) providing reliable transactional email delivery, scalability, and real-time analytics along with flexible APIs.</p>
+<h3>6. <strong>Postmark</strong></h3>
+<p>Postmark is an email service provider aimed at providing delivery for transactional emails. They offer an API for easy integration with applications.</p>
+<h3>7. <strong>Mandrill (by Mailchimp)</strong></h3>
+<p>Mandrill is a transactional email API for Mailchimp users. It’s reliable and powerful and designed to help application developers send transactional emails.</p>
+<h3>8. <strong>SparkPost</strong></h3>
+<p>SparkPost is another email API service focusing on delivering transactional emails and providing detailed email analytics.</p>
+<h3>9. <strong>Sendinblue</strong></h3>
+<p>Sendinblue offers a suite of email services, including an SMTP relay and a transactional email API, designed to send emails efficiently.</p>
+<h3>Online Form Services</h3>
+<p>Some online form building services like <strong>Google Forms</strong> or <strong>Typeform</strong> allow users to receive form responses via email without dealing with SMTP servers directly.</p>
+<h3>No-Code Automation Platforms</h3>
+<p>Platforms like <strong>Zapier</strong> or <strong>Integromat</strong> allow you to automate sending emails through various triggers and actions, without requiring direct interaction with SMTP servers.</p>
+<p>All these services provide a way for developers and users to send emails without directly setting up or interacting with SMTP servers, often adding additional features like tracking, scheduling, templating, and analytics.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To send SMS messages programmatically, a variety of SMS gateway services provide APIs allowing developers to integrate SMS sending capabilities into their applications. Below are several services that offer such capabilities:</p>
+<h3>1. <strong>Twilio</strong></h3>
+<p>Twilio offers a robust API for sending SMS messages globally. It allows sending text messages to over 200 countries and is widely used for transactional, promotional, and notification messages.</p>
+<h3>2. <strong>Nexmo (Vonage)</strong></h3>
+<p>Nexmo, now part of Vonage, provides APIs for SMS, voice, phone verifications, and other communication features. It's another widely used service for sending SMS messages programmatically.</p>
+<h3>3. <strong>Plivo</strong></h3>
+<p>Plivo is a cloud API platform and a global SMS and voice carrier. It allows developers to send SMS messages around the world.</p>
+<h3>4. <strong>Tropo (by Cisco)</strong></h3>
+<p>Tropo offers a cloud API platform that enables voice and messaging capabilities. It was acquired by Cisco and provides various communication APIs, including SMS.</p>
+<h3>5. <strong>Sinch</strong></h3>
+<p>Sinch provides a platform for messaging, voice, and video communication, allowing developers to integrate SMS messaging functionality into their applications.</p>
+<h3>6. <strong>Africastalking</strong></h3>
+<p>Africastalking is a platform offering a variety of communication APIs, including SMS, to the African market. It's widely used for sending SMS messages across several African countries.</p>
+<h3>7. <strong>Textlocal</strong></h3>
+<p>Textlocal is a service that offers an SMS API allowing businesses to send text messages, receive inbound SMS, and more.</p>
+<h3>8. <strong>Amazon SNS (Simple Notification Service)</strong></h3>
+<p>Amazon SNS is a fully managed notification service by AWS, providing support for sending SMS text messages, mobile push messages, and email-to-SMS capabilities.</p>
+<h3>9. <strong>ClickSend</strong></h3>
+<p>ClickSend provides a cloud-based service that lets you send and receive SMS, Email, Voice, Fax, and more. They have a robust SMS API allowing integration with software and applications.</p>
+<h3>10. <strong>MessageBird</strong></h3>
+<p>MessageBird provides various communication APIs, including SMS, Voice, and Chat. It allows developers to send SMS messages globally.</p>
+<p>These services typically charge per message or offer message packages, and prices can vary depending on the country to which the message is being sent. Integrating such services can help in reaching users through SMS for alerts, verifications, promotions, and other communications effectively.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">両方 AWS で済みそう。</p>
+                            <p class="note_contents">Amazon SES にて ID を作成した。送信者を登録。メアドの確認を受けた。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">aws-doc-sdk-examples/dotnetv3/SES at main &#183; awsdocs/aws-doc-sdk-examples<br />
+                                <a href="https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/dotnetv3/SES" target="_blank" class="url">https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/dotnetv3/SES</a></p>
+                            <p class="note_contents">aws-doc-sdk-examples/dotnetv3/SNS at main &#183; awsdocs/aws-doc-sdk-examples<br />
+                                <a href="https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/dotnetv3/SNS" target="_blank" class="url">https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/dotnetv3/SNS</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">NuGet でインストール。</p>
+                            <p class="note_contents">AWSSDK.SimpleEmailV2 と AWSSDK.SimpleEmail の二つがあった。後者もサポートが続くようだし、とてもシンプルなことをやりたいだけなので、既存のコードのコピペの容易さも考えて後者を。</p>
+                            <p class="note_contents">AWSSDK.SimpleNotificationService, AWSSDK.Extensions.NETCore.Setup も入れた。そのうち後者は AddAWSService などの拡張メソッドに必要。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p><code>AddTransient</code> is a method in ASP.NET Core that is used to register a service with the dependency injection (DI) container as Transient. Dependency injection is a technique where an object receives its dependencies from the outside. In ASP.NET Core, services (like logging, configuration, and Entity Framework Core) are registered with the DI container, and components that require these services (like controllers and Razor Pages) request them through their constructors.</p>
+<p>When a service is registered as Transient, it means a new instance of the service is created every time it is requested from the DI container. This is in contrast to Scoped services, which are created once per client request (connection), and Singleton services, which are created once and reused for every subsequent request.</p>
+<p>Here is a simplified example to show how <code>AddTransient</code> is used in an ASP.NET Core application:</p>
+<h3>Example:</h3>
+<pre><code class="language-csharp">public class Startup
+{
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddTransient&lt;IMyService, MyService&gt;();
+    }
+}
+
+public interface IMyService
+{
+    // Service Interface Methods
+}
+
+public class MyService : IMyService
+{
+    // Implementation of Service
+}
+</code></pre>
+<p>In this example:</p>
+<ul>
+<li><code>IMyService</code> is an interface that defines the contract for the service.</li>
+<li><code>MyService</code> is a class implementing <code>IMyService</code>.</li>
+<li><code>AddTransient&lt;IMyService, MyService&gt;()</code> registers <code>MyService</code> as a Transient service with the DI container.</li>
+</ul>
+<p>This means that every time <code>IMyService</code> is requested (for example, via a constructor of a Controller), a new instance of <code>MyService</code> will be created.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In ASP.NET Core, using <code>AddTransient</code> to register a service means that a new instance of the service is created each time it is requested, whether it's by a controller, a Razor page, another service, etc. This is in contrast to <code>AddScoped</code>, where one instance is used per client request, and <code>AddSingleton</code>, where one instance is used for all requests.</p>
+<h3>Reasons to use <code>AddTransient</code>:</h3>
+<ol>
+<li><strong>Statelessness:</strong> When a service doesn’t maintain state between requests, <code>AddTransient</code> is often appropriate.</li>
+<li><strong>Lightweight Services:</strong> If the service is lightweight and doesn’t hold any resources, it’s a good candidate for transient lifetime.</li>
+<li><strong>Different Implementation Per Request:</strong> If different implementations or configurations of the service are needed for different requests.</li>
+</ol>
+<h3>Example Usage in Controller:</h3>
+<p>When you register a service as transient and inject it into a controller, you don’t specifically “use the transient” in the controller, rather, you use the service instance provided by the dependency injection system. Here’s a brief example:</p>
+<pre><code class="language-csharp">public class MyService : IMyService
+{
+    // Implementation of the service
+}
+
+public class MyController : ControllerBase
+{
+    private readonly IMyService _myService;
+
+    public MyController(IMyService myService)
+    {
+        _myService = myService;
+    }
+
+    public IActionResult MyAction()
+    {
+        // Use _myService here
+    }
+}
+</code></pre>
+<p>In this example, <code>IMyService</code> is injected into <code>MyController</code>. Every time a new request is handled by <code>MyController</code>, a new instance of <code>MyService</code> is provided, assuming it’s registered as transient:</p>
+<pre><code class="language-csharp">services.AddTransient&lt;IMyService, MyService&gt;();
+</code></pre>
+<p>You just interact with <code>_myService</code> in your actions as needed; ASP.NET Core’s dependency injection system takes care of providing the correctly scoped instance based on how it’s registered.</p>
+<h3>Importance of Choosing the Correct Lifetime:</h3>
+<p>Choosing the correct service lifetime is crucial. If a service, for example, interacts with shared resources or maintains state, a transient lifetime may not be appropriate, and scoped or singleton might be more suitable. Additionally, transient services that are dependent on scoped services need special attention, as the dependent services will not align in terms of their lifetimes. Similarly, creating too many instances of a heavy transient service could lead to performance issues. It's always important to consider the implications and requirements of the service before deciding on its lifetime.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In the given code snippet:</p>
+<pre><code class="language-csharp">services.AddAWSService&lt;IAmazonSimpleEmailService&gt;()
+        .AddTransient&lt;SESWrapper&gt;();
+</code></pre>
+<p>Two services are being registered to the ASP.NET Core dependency injection container.</p>
+<ol>
+<li><p><strong>AWS Simple Email Service (SES):</strong>
+<code>AddAWSService&lt;IAmazonSimpleEmailService&gt;()</code> is used to add Amazon Simple Email Service to the services collection, allowing it to be injected into classes throughout the application. This is part of the AWS SDK for .NET, which provides idiomatic .NET interfaces to AWS services.</p>
+</li>
+<li><p><strong><code>SESWrapper</code> as a Transient Service:</strong>
+After adding the AWS SES service, <code>.AddTransient&lt;SESWrapper&gt;()</code> is then chaining to register a <code>SESWrapper</code> class as a transient service. This means a new instance of <code>SESWrapper</code> will be created each time it is requested.</p>
+</li>
+</ol>
+<h3>Possible Implementation and Usage:</h3>
+<p>Assuming <code>SESWrapper</code> is a class that wraps around <code>IAmazonSimpleEmailService</code> to provide additional functionality or to abstract away some of the AWS details, it might be defined something like this:</p>
+<pre><code class="language-csharp">public class SESWrapper
+{
+    private readonly IAmazonSimpleEmailService _ses;
+
+    public SESWrapper(IAmazonSimpleEmailService ses)
+    {
+        _ses = ses;
+    }
+
+    // Additional methods and functionality related to SES
+}
+</code></pre>
+<h3>Controller Injection:</h3>
+<p>In a controller or any other class, you would inject <code>SESWrapper</code> like any other service:</p>
+<pre><code class="language-csharp">public class MyController : ControllerBase
+{
+    private readonly SESWrapper _sesWrapper;
+
+    public MyController(SESWrapper sesWrapper)
+    {
+        _sesWrapper = sesWrapper;
+    }
+
+    // Use _sesWrapper in your actions.
+}
+</code></pre>
+<p>In this setup, every time <code>MyController</code> is instantiated to handle a request, a new instance of <code>SESWrapper</code> is created, along with a new instance of <code>IAmazonSimpleEmailService</code>. If <code>SESWrapper</code> is meant to be a lightweight and stateless service, this setup could be appropriate. If <code>SESWrapper</code> maintains state or manages resources, you may need to consider a different service lifetime, like Scoped or Singleton.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">service に transient を追加しているのだと思ったが、</p>
+                            <p class="note_contents">* AddAWSService という拡張メソッドが、サービスの設定をいろいろやる<br />
+                                * それで現在のコンテキストに情報が集まった状態で、GET/POST のたびに SESWrapper が用意される</p>
+                            <p class="note_contents">という想定で様子見。</p>
+                            <p class="note_contents">なぜ SESWrapper が必要なのかは、IAmazonSimpleEmailService.SendEmailAsync がうるさいからと考える。件名のエンコーディングなどを細かく指定する必要がある。</p>
+                            <p class="note_contents">上記の想定では、コントローラーにインジェクトされるべきは SESWrapper のほう。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The <code>aws_access_key_id</code> and <code>aws_secret_access_key</code> are part of the credentials used to authenticate and authorize API requests in AWS. Here are the steps to create and retrieve these keys:</p>
+<h3>Creating AWS Access Key ID and Secret Access Key</h3>
+<ol>
+<li><p><strong>Sign in to the AWS Management Console</strong></p>
+<ul>
+<li>Navigate to https://aws.amazon.com/ and sign in to your account.</li>
+</ul>
+</li>
+<li><p><strong>Access IAM (Identity and Access Management)</strong></p>
+<ul>
+<li>Once logged in, navigate to the IAM console by searching for &quot;IAM&quot; in the search bar.</li>
+</ul>
+</li>
+<li><p><strong>Navigate to Users</strong></p>
+<ul>
+<li>In the IAM dashboard, click on &quot;Users&quot; in the left navigation pane.</li>
+</ul>
+</li>
+<li><p><strong>Select the IAM User</strong></p>
+<ul>
+<li>Choose the user for which you want to create an access key.</li>
+</ul>
+</li>
+<li><p><strong>Create Access Key</strong></p>
+<ul>
+<li>In the user details page, click on the “Security credentials” tab.</li>
+<li>Here, you will see a section named “Access keys”. Click on “Create access key”.</li>
+</ul>
+</li>
+<li><p><strong>Download Credentials</strong></p>
+<ul>
+<li>Once the access key is created, you will see a popup showing the <code>Access key ID</code> and <code>Secret access key</code>.</li>
+<li>Make sure to download the .csv file or copy the credentials to a secure location immediately, as this is the only time AWS will show the <code>Secret access key</code>.</li>
+</ul>
+</li>
+</ol>
+<h3>Managing Credentials Safely</h3>
+<ul>
+<li><p><strong>Security</strong>: Be extremely careful with storing and using the <code>aws_secret_access_key</code>, as it can be used to access and modify resources in your AWS account. Never expose it in your code, repositories, or any publicly accessible space.</p>
+</li>
+<li><p><strong>Environment Variables</strong>: Typically, these keys are stored as environment variables on your local machine or your server to avoid hard-coding them in your application. The AWS SDKs and CLI will automatically look for credentials in the <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code> environment variables.</p>
+</li>
+<li><p><strong>AWS CLI Configuration</strong>: If you are using the AWS CLI, you can run <code>aws configure</code> to set up your credentials, which will be stored in a local file (by default, <code>~/.aws/credentials</code> on Linux and macOS, and <code>C:\Users\USERNAME\.aws\credentials</code> on Windows).</p>
+</li>
+<li><p><strong>IAM Roles</strong>: When running applications on AWS services like EC2, Lambda, or ECS, it is recommended to use IAM roles attached to the resource instead of using access keys, providing a more secure and manageable approach.</p>
+</li>
+<li><p><strong>Access Management</strong>: Regularly review and rotate access keys and use IAM policies to grant the least amount of privilege needed for tasks.</p>
+</li>
+</ul>
+<h3>Reminder:</h3>
+<p>Remember, AWS Secret Access Key will only be visible once when you create it, and it is essential to store it securely. If you lose it, you'll need to create a new access key.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The <code>aws_access_key_id</code> and <code>aws_secret_access_key</code> are usually stored in the AWS credentials file, typically located at <code>~/.aws/credentials</code> on Linux and macOS, and <code>C:\Users\USERNAME\.aws\credentials</code> on Windows.</p>
+<h3>Format of the Credentials File</h3>
+<p>The AWS credentials file should be formatted as follows:</p>
+<pre><code class="language-ini">[default]
+aws_access_key_id = YOUR_ACCESS_KEY_ID
+aws_secret_access_key = YOUR_SECRET_ACCESS_KEY
+
+[anotherProfile]
+aws_access_key_id = ANOTHER_ACCESS_KEY_ID
+aws_secret_access_key = ANOTHER_SECRET_ACCESS_KEY
+</code></pre>
+<ul>
+<li>Each section represents a different profile. The <code>[default]</code> profile is used when no profile is explicitly specified when using AWS CLI or SDKs.</li>
+<li>You can have multiple profiles, each with its own set of credentials, and specify which profile to use with a specific command or in your application.</li>
+</ul>
+<h3>Using Credentials in AWS CLI</h3>
+<p>When using the AWS CLI, the <code>default</code> profile is used unless another profile is specified with the <code>--profile</code> option.</p>
+<pre><code class="language-sh">aws s3 ls --profile anotherProfile
+</code></pre>
+<h3>Using Credentials in AWS SDKs</h3>
+<p>When using an AWS SDK, like Boto3 for Python, you can specify a profile to use, or it will use the <code>default</code> profile if none is specified.</p>
+<p>Here's an example in Python with Boto3:</p>
+<pre><code class="language-python">import boto3
+
+# Using the default profile
+session = boto3.Session()
+s3 = session.client('s3')
+
+# Using another profile
+another_session = boto3.Session(profile_name='anotherProfile')
+another_s3 = another_session.client('s3')
+</code></pre>
+<h3>Security Consideration</h3>
+<ul>
+<li>Avoid using hardcoded credentials in your code.</li>
+<li>Use IAM roles with the necessary permissions when running applications on AWS services like EC2, Lambda, or ECS.</li>
+<li>Enable multi-factor authentication (MFA) on your AWS account.</li>
+<li>Regularly rotate your access keys.</li>
+</ul>
+<h3>Using Environment Variables</h3>
+<p>You can also use environment variables to store your AWS credentials, especially if you are not comfortable having them in a file or if you are working in an environment where using a credentials file is not practical.</p>
+<pre><code class="language-sh">export AWS_ACCESS_KEY_ID=YOUR_ACCESS_KEY_ID
+export AWS_SECRET_ACCESS_KEY=YOUR_SECRET_ACCESS_KEY
+</code></pre>
+<p>When the above environment variables are set, AWS SDKs and the CLI will use them as the credentials when making requests.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The error <code>Amazon.Runtime.AmazonClientException: No RegionEndpoint or ServiceURL configured</code> implies that while creating a service client, no region or service URL was specified. AWS services are available in multiple regions, and when creating a service client (like <code>AmazonS3Client</code>, <code>AmazonDynamoDBClient</code>, etc.), you typically need to specify the region in which you are operating, unless you are using a service that has a global endpoint.</p>
+<h3>Specifying Region in Code</h3>
+<p>When you are creating a service client using AWS SDK for .NET, you need to specify the region. Here’s a quick example using Amazon S3 service:</p>
+<pre><code class="language-csharp">using Amazon;
+using Amazon.S3;
+using Amazon.Runtime;
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            var s3Client = new AmazonS3Client(&quot;YOUR_ACCESS_KEY_ID&quot;, &quot;YOUR_SECRET_ACCESS_KEY&quot;, RegionEndpoint.USEast1);
+            // Your code here
+        }
+        catch (AmazonClientException ace)
+        {
+            Console.WriteLine(&quot;Error occurred: &quot; + ace.Message);
+        }
+    }
+}
+</code></pre>
+<p>In this example, <code>RegionEndpoint.USEast1</code> specifies the AWS region to be used.</p>
+<h3>Specifying Region in AWS SDK Setup</h3>
+<p>You can also set up a default region for your AWS SDK by using the AWS configuration file, usually located at <code>~/.aws/config</code> on Linux and macOS, and <code>C:\Users\USERNAME\.aws\config</code> on Windows. Here’s how it should look:</p>
+<pre><code class="language-ini">[default]
+region = us-east-1
+</code></pre>
+<h3>Handling Regions in AWS SDKs</h3>
+<p>Most AWS SDKs provide a way to specify the region either via a configuration file, environment variable, or directly in the code when creating the client. Ensure that one of these mechanisms is used to specify the region.</p>
+<h3>Using a Specific Service URL</h3>
+<p>In some cases, you might want to use a specific service URL, especially if you are working with a service that is not region-based or if you are working with a custom endpoint. Typically, service clients have a constructor or a configuration option where you can specify the service URL.</p>
+<p>Here's a generalized example of how you might do it:</p>
+<pre><code class="language-csharp">var config = new AmazonS3Config
+{
+    ServiceURL = &quot;https://my-custom-s3-endpoint&quot;
+};
+
+var client = new AmazonS3Client(&quot;YOUR_ACCESS_KEY_ID&quot;, &quot;YOUR_SECRET_ACCESS_KEY&quot;, config);
+</code></pre>
+<h3>Conclusion</h3>
+<p>To resolve the <code>Amazon.Runtime.AmazonClientException: No RegionEndpoint or ServiceURL configured</code> error, make sure to specify the region endpoint or the service URL when creating AWS service clients using the AWS SDK, or ensure that a default region is configured in the AWS configuration file or environment variable.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Regions and Zones - Amazon Elastic Compute Cloud<br />
+                                <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html" target="_blank" class="url">https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>If the <code>SendEmailAsync</code> method from AWS SDK returns successfully but the message ID is empty and the email is not delivered, there could be several possible causes. Here are a few things to consider:</p>
+<h3>1. <strong>Check Email Address</strong>:</h3>
+<p>Ensure that the recipient email address is correct and able to receive emails. Invalid or incorrect email addresses can cause email delivery failures.</p>
+<h3>2. <strong>Verify Email Addresses</strong>:</h3>
+<p>In Amazon SES, both the sender and recipient email addresses need to be verified if your account is in the Amazon SES sandbox. If your account is still in the sandbox, you can only send emails to verified email addresses or domains.</p>
+<h3>3. <strong>Check AWS SES Region</strong>:</h3>
+<p>Ensure that you are interacting with the correct AWS region where your SES is set up.</p>
+<h3>4. <strong>Check Email Content</strong>:</h3>
+<p>The email content, including subject and body, needs to comply with the email sending policies and should not contain any spam-like content, which might be filtered out by email providers.</p>
+<h3>5. <strong>Review Sending Limits</strong>:</h3>
+<p>If you have reached your daily sending limit or your sending rate, additional email sending attempts will be throttled. Check the SES Console to review your sending statistics and limits.</p>
+<h3>6. <strong>Inspect Email Headers</strong>:</h3>
+<p>Some email providers might block emails due to missing or incorrect email headers, such as <code>From</code>, <code>To</code>, and <code>Return-Path</code>.</p>
+<h3>7. <strong>Email Filtering</strong>:</h3>
+<p>Check spam or junk folders on the recipient's side as the email might have been filtered out.</p>
+<h3>8. <strong>Review AWS SES Suppression List</strong>:</h3>
+<p>Amazon SES maintains a suppression list of email addresses to which it will not deliver emails. These are addresses that have recently caused a hard bounce.</p>
+<h3>9. <strong>Check AWS CloudWatch Logs</strong>:</h3>
+<p>Inspect AWS CloudWatch Logs for any logs related to email sending that might have more information on why the email was not delivered.</p>
+<h3>10. <strong>Examine AWS SES Reputation Dashboard</strong>:</h3>
+<p>Review the AWS SES Reputation Dashboard for any issues related to your account reputation, which might affect email deliverability.</p>
+<h3>11. <strong>Assess AWS SES Event Publishing</strong>:</h3>
+<p>Set up AWS SES Event Publishing to monitor your email sending activity closely. This will provide you with information on sends, deliveries, opens, clicks, bounces, complaints, and rejections, which can aid in diagnosing the issue.</p>
+<h3>12. <strong>Consider AWS Support Plan</strong>:</h3>
+<p>If you are unable to resolve the issue, consider reaching out to AWS Support, if available under your support plan, for further assistance.</p>
+<h3>13. <strong>Review AWS SES Quotas</strong>:</h3>
+<p>AWS SES has various quotas like sending quotas and receiving quotas, which could impact the email deliverability if they are exceeded. Make sure to review your quotas to ensure they are not the cause.</p>
+<h3>14. <strong>Investigate Network Issues</strong>:</h3>
+<p>Network issues or interruptions during the API call can potentially result in unexpected behaviors, including empty message IDs.</p>
+<h3>15. <strong>Consult the AWS Documentation</strong>:</h3>
+<p>Refer to the AWS documentation for any additional constraints or requirements related to using the <code>SendEmailAsync</code> method in Amazon SES.</p>
+<p>By systematically reviewing and addressing these considerations, you can identify and resolve the factors contributing to the successful API call but non-delivery and empty message ID issue.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In Amazon Simple Email Service (Amazon SES), verifying a recipient usually refers to verifying the recipient’s email address or domain, especially when the SES account is in sandbox mode.</p>
+<h3>If your SES account is in Sandbox Mode:</h3>
+<h4><strong>Verify Individual Email Addresses:</strong></h4>
+<ol>
+<li><p><strong>SES Console:</strong></p>
+<ul>
+<li>Open the Amazon SES console.</li>
+<li>In the navigation pane, choose “Email Addresses” under “Identity Management.”</li>
+<li>Choose “Verify a New Email Address.”</li>
+<li>Enter the email address you want to verify and choose “Verify This Email Address.”</li>
+</ul>
+</li>
+<li><p><strong>Email Confirmation:</strong></p>
+<ul>
+<li>Amazon SES will send a verification email to the address you provided.</li>
+<li>The recipient has to open this email and click on the link to complete the verification process.</li>
+</ul>
+</li>
+</ol>
+<h4><strong>Verify Domain:</strong></h4>
+<ol>
+<li><p><strong>SES Console:</strong></p>
+<ul>
+<li>Open the Amazon SES console.</li>
+<li>In the navigation pane, choose “Domains” under “Identity Management.”</li>
+<li>Choose “Verify a New Domain.”</li>
+<li>Enter the domain you want to verify and follow the domain verification process.</li>
+</ul>
+</li>
+<li><p><strong>DNS Configuration:</strong></p>
+<ul>
+<li>For domain verification, you’ll have to add some DNS records (like TXT record) to your domain’s DNS configuration.</li>
+<li>Once the DNS records are added, Amazon SES will automatically verify the domain.</li>
+</ul>
+</li>
+</ol>
+<h3>If your SES account is out of Sandbox Mode:</h3>
+<ul>
+<li>You don’t need to verify the recipient addresses or domains, but you will still need to verify the sender email addresses or domains.</li>
+<li>You can send emails to any recipient, but you have to adhere to Amazon SES's email sending policies and guidelines to avoid issues like bounces, complaints, or poor sender reputation.</li>
+</ul>
+<h3>Note:</h3>
+<ul>
+<li>Even if your SES account is out of sandbox mode, if you are using SES to receive emails, you need to verify the recipient domains by adding them to SES and configuring the necessary DNS records.</li>
+<li>Having verified sender identities (email addresses or domains) is always required irrespective of whether your SES account is in or out of sandbox mode.</li>
+</ul>
+<h3>SES API and AWS SDK:</h3>
+<ul>
+<li>You can also verify email addresses and domains programmatically by using the Amazon SES API or AWS SDKs. The <code>VerifyEmailIdentity</code> (for email addresses) and <code>VerifyDomainIdentity</code> (for domains) actions can be used to initiate the verification process programmatically.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">リージョンがなぜかシドニーになっていた。「検証済み ID」はリージョンに関連づけられるようで、大阪に切り替えると「なし」になる。シドニーからメアドを消し、大阪に切り替え、送信と受信の両方のメアドを追加し、メール検証を受けた。</p>
+                            <p class="note_contents">キーの生成のために IAM にて追加した「ユーザー」は、「グローバル」に関連づけられている。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ということをしても送信に失敗。</p>
+                            <p class="note_contents">アマゾン側では、「送信された E メール」が増えていた。</p>
+                            <p class="note_contents">SDK 側でレスポンスの内容を見たところ、</p>
+                            <p class="note_contents">Amazon.SimpleEmail.AmazonSimpleEmailServiceException: User `●&#39; is not authorized to perform `ses:SendEmail&#39; on resource `●&#39;</p>
+                            <p class="note_contents">というのが入っていた。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">AmazonSESFullAccess と AmazonSESReadOnlyAccess の二つがある。</p>
+                            <p class="note_contents">SendEmail というアクションは、そのうち前者でのみ可能な「書き込み」に相当する。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">動いたので、コードを洗った。</p>
+                            <p class="note_contents">バッチファイルに、</p>
+                            <p class="note_contents">cd /d &quot;C:\Repositories\fan\fanApiJwt&quot;<br />
+                                dotnet user-secrets set &quot;Aws:SenderAddress&quot; &quot;●&quot;<br />
+                                dotnet user-secrets set &quot;Aws:ToAddress&quot; &quot;●&quot;<br />
+                                pause</p>
+                            <p class="note_contents">と書き、fanApiJwt.csproj には、</p>
+                            <p class="note_contents">&lt;UserSecretsId&gt;fanApiJwt&lt;/UserSecretsId&gt;</p>
+                            <p class="note_contents">を入れて、バッチファイルを実行した。</p>
+                            <p class="note_contents">一応、このバッチファイルを dotnet_user_secrets_set.bat として保存。</p>
+                            <p class="note_contents">認証なしからのコーディングなので UserSecretsId が入っていなかった。ランダムな文字列を考えたが、</p>
+                            <p class="note_contents">%APPDATA%\Microsoft\UserSecrets\&lt;UserSecretsId&gt;\secrets.json</p>
+                            <p class="note_contents">に保存されるものなので、プロジェクト名そのままのほうが初期化しやすい。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">SendMail の先頭で throw new Exception () を行ったところ、</p>
+                            <p class="note_contents">Exception of type &#39;System.Exception&#39; was thrown.<br />
+                                &nbsp;&nbsp;&nbsp;at fanApiJwt.Controllers.UserController.SendEmail()</p>
+                            <p class="note_contents">から始まるメッセージが表示された。API だと落ちはしないか。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">外部サービスを探すだけのつもりが、メールの送信の実装が終わった。メモが多くなっているので、ここで完了とする。SMS の送信の実装を別のタスクとして行う。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
