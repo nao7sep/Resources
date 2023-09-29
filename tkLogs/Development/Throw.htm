@@ -9857,6 +9857,149 @@ public class NotifyController : ControllerBase
                     </div>
                 </div>
             </div>
+            <div id="486b6581-4864-4c3f-8d74-c2873d4eaef0" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">レスポンスを構造化</span>
+                    <a href="#486b6581-4864-4c3f-8d74-c2873d4eaef0" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Returning a message from an ASP.NET Core Web API is quite straightforward. The best practice is to utilize the <code>ActionResult</code> class, which allows you to return various HTTP status codes along with the message. The response can contain the message in a human-readable form or as a part of a more structured object.</p>
+<p>Here’s a simple example where an API returns a message as a part of a structured object:</p>
+<h3>Example API Controller Method</h3>
+<pre><code class="language-csharp">[ApiController]
+[Route(&quot;api/[controller]&quot;)]
+public class ExampleController : ControllerBase
+{
+    [HttpGet(&quot;{id}&quot;)]
+    public ActionResult Get(int id)
+    {
+        if (id &lt;= 0)
+        {
+            var errorResponse = new
+            {
+                Message = &quot;ID must be a positive integer.&quot;,
+                StatusCode = StatusCodes.Status400BadRequest
+            };
+            return BadRequest(errorResponse);
+        }
+
+        var data = GetDataById(id);
+        if (data == null)
+        {
+            var notFoundResponse = new
+            {
+                Message = $&quot;Data with ID {id} not found.&quot;,
+                StatusCode = StatusCodes.Status404NotFound
+            };
+            return NotFound(notFoundResponse);
+        }
+
+        return Ok(data);
+    }
+}
+</code></pre>
+<p>In this example, when the input <code>id</code> is invalid or the data is not found, the API returns a structured object containing a <code>Message</code> and <code>StatusCode</code>. And if the data is found, it returns the data with a 200 OK status.</p>
+<h3>Structuring Responses</h3>
+<p>You can create a more structured and standardized response by using a response wrapper. Here’s an example of a simple response wrapper:</p>
+<pre><code class="language-csharp">public class ApiResponse&lt;T&gt;
+{
+    public T Data { get; set; }
+    public string Message { get; set; }
+    public int StatusCode { get; set; }
+
+    public ApiResponse(T data, string message, int statusCode)
+    {
+        Data = data;
+        Message = message;
+        StatusCode = statusCode;
+    }
+}
+</code></pre>
+<p>Using this response wrapper, you can return responses in a more standardized way:</p>
+<pre><code class="language-csharp">[HttpGet(&quot;{id}&quot;)]
+public ActionResult Get(int id)
+{
+    if (id &lt;= 0)
+    {
+        return BadRequest(new ApiResponse&lt;object&gt;(null, &quot;ID must be a positive integer.&quot;, StatusCodes.Status400BadRequest));
+    }
+
+    var data = GetDataById(id);
+    if (data == null)
+    {
+        return NotFound(new ApiResponse&lt;object&gt;(null, $&quot;Data with ID {id} not found.&quot;, StatusCodes.Status404NotFound));
+    }
+
+    return Ok(new ApiResponse&lt;object&gt;(data, &quot;Data retrieved successfully.&quot;, StatusCodes.Status200OK));
+}
+</code></pre>
+<h3>Adding Problem Details</h3>
+<p>ASP.NET Core also provides a <code>ProblemDetails</code> class that you can use to standardize error responses as per the Problem Details for HTTP APIs specification.</p>
+<pre><code class="language-csharp">[HttpGet(&quot;{id}&quot;)]
+public ActionResult Get(int id)
+{
+    if (id &lt;= 0)
+    {
+        return BadRequest(new ProblemDetails
+        {
+            Title = &quot;Invalid ID&quot;,
+            Detail = &quot;ID must be a positive integer.&quot;,
+            Status = StatusCodes.Status400BadRequest
+        });
+    }
+
+    var data = GetDataById(id);
+    if (data == null)
+    {
+        return NotFound(new ProblemDetails
+        {
+            Title = &quot;Data Not Found&quot;,
+            Detail = $&quot;Data with ID {id} not found.&quot;,
+            Status = StatusCodes.Status404NotFound
+        });
+    }
+
+    return Ok(data);
+}
+</code></pre>
+<h3>Using Action Results</h3>
+<p>When constructing action results, you can use various helper methods provided by the <code>ControllerBase</code> class, such as <code>Ok()</code>, <code>NotFound()</code>, <code>BadRequest()</code>, etc. These methods create instances of <code>OkResult</code>, <code>NotFoundResult</code>, <code>BadRequestResult</code>, and so on, which are all derived from <code>ActionResult</code>.</p>
+<p>In conclusion, when designing your API responses, consider returning structured and meaningful messages with appropriate HTTP status codes, using standard classes like <code>ProblemDetails</code> when appropriate, and consider wrapping your responses for consistency.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Unauthorized のみ呼ぶところでは、</p>
+                            <p class="note_contents">{<br />
+                                &nbsp;&nbsp;&quot;type&quot;: &quot;<a href="https://tools.ietf.org/html/rfc7235#section-3.1&quot;," target="_blank" class="url">https://tools.ietf.org/html/rfc7235#section-3.1&quot;,</a><br />
+                                &nbsp;&nbsp;&quot;title&quot;: &quot;Unauthorized&quot;,<br />
+                                &nbsp;&nbsp;&quot;status&quot;: 401,<br />
+                                &nbsp;&nbsp;&quot;traceId&quot;: &quot;00-f1cf6ad70fe23cc6aebf7278bdfc6d22-fd270cbcdb32a492-00&quot;<br />
+                                }</p>
+                            <p class="note_contents">のようなものが返る。</p>
+                            <p class="note_contents">しかし、自分が Ok メソッドなどに文字列のみ与えたところでは、JSON でなく、単一行の文字列が返る。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ステータスコードはヘッダーに入るためボディーにも入れる必要はない。</p>
+                            <p class="note_contents">しかし、派生開発を考えると、キーと値のペアになっていないのは不都合がある。</p>
+                            <p class="note_contents">今後は、token, message といった一般的なキーを使い、単一行の文字列でもキーと値のペアにする。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">API の設計に関する数百ページの本が手元にある。まだ最初の10ページくらいしか読んでいないが、API の設計が奥深いものであることは伝わった。</p>
+                            <p class="note_contents">何が難しいかというと、結局、長く使っているうちに仕様がグチャグチャになるのだろう。そこそこの規模のシステムにエンドポイントが100あり、その多くにおいてキーの意味が揃っていなかったり、ステータスコードに一貫性がなかったり、欲しい情報が得られなかったりだと、API を再設計したい欲求と戦いながらクライアント側で無理をすることの繰り返しになる。</p>
+                            <p class="note_contents">とりあえず、JSON でないレスポンスという問題外のものからなくした。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
