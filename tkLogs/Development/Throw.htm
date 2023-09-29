@@ -9137,6 +9137,582 @@ var client = new AmazonS3Client(&quot;YOUR_ACCESS_KEY_ID&quot;, &quot;YOUR_SECRE
                     </div>
                 </div>
             </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">transient に関するところが気になったので聞いてみた。</p>
+                    <p class="note_contents">様子見でよさそう。</p>
+                    <div class="note_ai_generated">
+<p>Injecting <code>AmazonSimpleEmailServiceWrapper</code> into your <code>UserController</code> is an entirely valid approach if <code>UserController</code> needs to send emails. This allows you to use dependency injection to manage the life cycle of your service and easily swap it out with a different implementation if needed.</p>
+<p>Here’s a high-level outline of how you might go about this:</p>
+<pre><code class="language-csharp">// In your Startup.cs or Program.cs
+services.AddTransient&lt;AmazonSimpleEmailServiceWrapper&gt;();
+
+// In your UserController.cs
+private readonly AmazonSimpleEmailServiceWrapper _emailService;
+public UserController(AmazonSimpleEmailServiceWrapper emailService)
+{
+    _emailService = emailService;
+}
+</code></pre>
+<p>Regarding the <code>AddAWSService&lt;IAmazonSimpleEmailService&gt;()</code> line, it depends on the implementation details of your <code>AmazonSimpleEmailServiceWrapper</code>. If <code>AmazonSimpleEmailServiceWrapper</code> internally uses <code>IAmazonSimpleEmailService</code>, then you would need to register <code>IAmazonSimpleEmailService</code> in the service collection so that it can be injected into your wrapper class when it is created.</p>
+<p>Here's a simplified example that shows this scenario:</p>
+<pre><code class="language-csharp">// AmazonSimpleEmailServiceWrapper.cs
+public class AmazonSimpleEmailServiceWrapper : IAmazonSimpleEmailServiceWrapper
+{
+    private readonly IAmazonSimpleEmailService _amazonSimpleEmailService;
+
+    public AmazonSimpleEmailServiceWrapper(IAmazonSimpleEmailService amazonSimpleEmailService)
+    {
+        _amazonSimpleEmailService = amazonSimpleEmailService;
+    }
+
+    // Your simplified methods to send email go here.
+}
+
+// Startup.cs or Program.cs
+services.AddAWSService&lt;IAmazonSimpleEmailService&gt;();
+services.AddTransient&lt;AmazonSimpleEmailServiceWrapper&gt;();
+
+// UserController.cs
+public class UserController : ControllerBase
+{
+    private readonly AmazonSimpleEmailServiceWrapper _emailService;
+
+    public UserController(AmazonSimpleEmailServiceWrapper emailService)
+    {
+        _emailService = emailService;
+    }
+
+    // Your controller actions go here.
+}
+</code></pre>
+<p>In this example, <code>IAmazonSimpleEmailService</code> is a dependency of <code>AmazonSimpleEmailServiceWrapper</code>, and it needs to be registered in the service collection. If, however, your <code>AmazonSimpleEmailServiceWrapper</code> does not depend on <code>IAmazonSimpleEmailService</code> (i.e., it does not use it internally), then you would not need to register <code>IAmazonSimpleEmailService</code> with <code>AddAWSService&lt;IAmazonSimpleEmailService&gt;()</code>.</p>
+                    </div>
+                    <!-- Task: d4d1c292-c6df-4837-860e-b31d458f8dc4 -->
+                </div>
+            </div>
+            <div id="8290b481-3188-45d0-a396-3b1ad86cce3f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Identity が用意する全てのテーブルのスキームについて調べる</span>
+                    <a href="#8290b481-3188-45d0-a396-3b1ad86cce3f" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">自動生成されるコードで分かる。最小限の機能しかない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="f4ca81e7-bf8e-4fff-a4b3-4d3bfa5410be" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ASP.NET Core や Identity にアクセスログの機能がないか調べる＋Serilog でログを出力</span>
+                    <a href="#f4ca81e7-bf8e-4fff-a4b3-4d3bfa5410be" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">テーブルのスキームを見る限り、なさそう。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>ASP.NET Core and ASP.NET Core Identity do not inherently have default access logging functionalities specifically for logging access to different parts of an application. However, ASP.NET Core has built-in logging services that you can leverage to log access or any other information.</p>
+<h3>ASP.NET Core Logging</h3>
+<p>ASP.NET Core provides a built-in logging API that provides logging functionality that can be used to log information, warnings, errors, etc. By default, it logs information to the console about the incoming HTTP requests and their outcomes, but it does not log every access to every resource or identity-related events by default.</p>
+<p>You can customize and extend the logging functionality using different log providers or by implementing your own custom logging, and you can log access to specific resources or actions by adding logging statements to your controllers or middleware.</p>
+<p>Here’s a basic example of logging access to a resource:</p>
+<pre><code class="language-csharp">public class MyController : Controller
+{
+    private readonly ILogger&lt;MyController&gt; _logger;
+
+    public MyController(ILogger&lt;MyController&gt; logger)
+    {
+        _logger = logger;
+    }
+
+    public IActionResult MyAction()
+    {
+        _logger.LogInformation(&quot;Accessed MyAction&quot;);
+        return View();
+    }
+}
+</code></pre>
+<h3>ASP.NET Core Identity</h3>
+<p>ASP.NET Core Identity is more focused on user management, authentication, and authorization. By default, it does not provide specific access logging functionalities, but you can implement custom events and logging based on user activities, such as user login, logout, registration, etc.</p>
+<h3>Third-Party Solutions</h3>
+<p>If you are looking for more advanced access logging, you might consider third-party logging and analytics solutions like Serilog, ELK Stack (Elasticsearch, Logstash, Kibana), or Application Insights for more advanced, structured logging and monitoring.</p>
+<h3>Example: Using Serilog</h3>
+<p>Here’s a basic example of how you can use Serilog for logging:</p>
+<ol>
+<li>Install the Serilog.AspNetCore NuGet package.</li>
+</ol>
+<pre><code class="language-shell">dotnet add package Serilog.AspNetCore
+</code></pre>
+<ol start="2">
+<li>Configure Serilog in your <code>Program.cs</code> file.</li>
+</ol>
+<pre><code class="language-csharp">using Serilog;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        Log.Logger = new LoggerConfiguration()
+            .WriteTo.Console()
+            .CreateLogger();
+
+        try
+        {
+            Log.Information(&quot;Starting up&quot;);
+            CreateHostBuilder(args).Build().Run();
+        }
+        catch (Exception ex)
+        {
+            Log.Fatal(ex, &quot;Application start-up failed&quot;);
+        }
+        finally
+        {
+            Log.CloseAndFlush();
+        }
+    }
+
+    public static IHostBuilder CreateHostBuilder(string[] args) =&gt;
+        Host.CreateDefaultBuilder(args)
+            .UseSerilog() // Use Serilog as the logging framework.
+            .ConfigureWebHostDefaults(webBuilder =&gt;
+            {
+                webBuilder.UseStartup&lt;Startup&gt;();
+            });
+}
+</code></pre>
+<ol start="3">
+<li>Then, use the <code>ILogger</code> interface as usual in your controllers or services to log information, and it will be handled by Serilog.</li>
+</ol>
+<pre><code class="language-csharp">public class MyController : Controller
+{
+    private readonly ILogger&lt;MyController&gt; _logger;
+
+    public MyController(ILogger&lt;MyController&gt; logger)
+    {
+        _logger = logger;
+    }
+
+    public IActionResult MyAction()
+    {
+        _logger.LogInformation(&quot;Accessed MyAction&quot;);
+        return View();
+    }
+}
+</code></pre>
+<p>Remember, the examples provided are simplistic. Depending on your specific needs, you might want to log additional information, such as the user ID, timestamp, accessed resource, etc., and possibly send logs to external storage or analysis services.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When you inject an <code>ILogger</code> instance into a controller in an ASP.NET Core project and log messages using this instance, the destination of the log messages depends on the logging providers configured in your application.</p>
+<h3>Default Logging Configuration</h3>
+<p>By default, in an ASP.NET Core application created using the standard templates, log messages are written to the console, and they can also be viewed in the Debug window in Visual Studio during debugging. The default logging providers are configured in the <code>Program.cs</code> file in .NET 6 and later, or in the <code>Startup.cs</code> file in .NET Core 3.1 and earlier.</p>
+<h3>Example:</h3>
+<p>Here is an example of how logging is typically configured in a .NET 6 application, in the <code>Program.cs</code> file:</p>
+<pre><code class="language-csharp">var builder = WebApplication.CreateBuilder(args);
+
+// Other configurations...
+
+builder.Logging.AddConsole(); // This adds a console logging provider.
+</code></pre>
+<p>In this example, log messages are written to the console due to the <code>AddConsole()</code> method.</p>
+<h3>Custom Logging Providers</h3>
+<p>If you want your log messages to be written to a different destination, such as a file, a database, or a log aggregation service, you can configure additional logging providers. For example, you can use the Serilog library to write log messages to various outputs, including files, Elasticsearch, etc.</p>
+<p>Here’s a basic example using Serilog to write log messages to a file:</p>
+<ol>
+<li><strong>Install Serilog Packages</strong></li>
+</ol>
+<pre><code class="language-shell">dotnet add package Serilog
+dotnet add package Serilog.AspNetCore
+dotnet add package Serilog.Sinks.File
+</code></pre>
+<ol start="2">
+<li><strong>Configure Serilog in Program.cs</strong></li>
+</ol>
+<pre><code class="language-csharp">using Serilog;
+using Serilog.Events;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Configure Serilog
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Override(&quot;Microsoft&quot;, LogEventLevel.Information)
+    .Enrich.FromLogContext()
+    .WriteTo.Console() // Write log to console
+    .WriteTo.File(&quot;Logs/logs.txt&quot;, rollingInterval: RollingInterval.Day) // Write log to file
+    .CreateLogger();
+
+// Other configurations...
+
+builder.Host.UseSerilog(); // Use Serilog as the logging provider
+
+// ...
+
+var app = builder.Build();
+</code></pre>
+<p>In this example, log messages will be written to both the console and a file located in the “Logs” folder in the root directory of your project.</p>
+<h3>Summary</h3>
+<p>To summarize, where the logs go depends on the logging providers that you have configured in your application. By default, it’s the console, but it can be customized to be files, databases, external services, etc., based on your configuration and the logging providers you add to your project.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, it’s possible to have <code>ILogger</code> write logs to a file or a SQLite database without using Serilog, but you would need to create a custom logging provider or use an existing provider that supports file or SQLite logging.</p>
+<h3>1. <strong>File Logger:</strong></h3>
+<p>For writing logs to a file, you can use a NuGet package like <code>Microsoft.Extensions.Logging.File</code> that acts as a file logger provider for <code>ILogger</code>. Below is an example of how you can set it up:</p>
+<h4>Step 1: Install the Package</h4>
+<pre><code class="language-shell">dotnet add package Microsoft.Extensions.Logging.File
+</code></pre>
+<h4>Step 2: Configure the Provider</h4>
+<p>In your <code>Program.cs</code> (for .NET 6+) or <code>Startup.cs</code> (for .NET Core 3.1), configure the file logger provider.</p>
+<pre><code class="language-csharp">// In Program.cs (.NET 6+)
+builder.Logging.AddFile(&quot;AppLogs/myapplog.txt&quot;);
+</code></pre>
+<pre><code class="language-csharp">// In Startup.cs (.NET Core 3.1)
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddLogging(builder =&gt;
+    {
+        builder.AddFile(&quot;AppLogs/myapplog.txt&quot;);
+    });
+    // Other services...
+}
+</code></pre>
+<h3>2. <strong>SQLite Logger:</strong></h3>
+<p>For writing logs to a SQLite database, you would typically need to create a custom logging provider, as there is no built-in or standard provider available for SQLite logging.</p>
+<h4>Basic Steps to Create a Custom SQLite Logger:</h4>
+<ol>
+<li><strong>Create a Logger Provider:</strong> Implement <code>ILoggerProvider</code> to create a logger provider for SQLite.</li>
+<li><strong>Create a Logger:</strong> Implement <code>ILogger</code> to create a logger that writes logs to a SQLite database.</li>
+<li><strong>Register the Provider:</strong> Register the custom provider in your <code>Program.cs</code> or <code>Startup.cs</code>.</li>
+</ol>
+<p>Here’s a simplistic example to illustrate the idea. Note that this is not a complete or production-ready example and is provided just to give a conceptual overview.</p>
+<pre><code class="language-csharp">public class SQLiteLoggerProvider : ILoggerProvider
+{
+    public ILogger CreateLogger(string categoryName)
+    {
+        return new SQLiteLogger();
+    }
+
+    public void Dispose()
+    {
+        // Dispose of any resources if needed.
+    }
+}
+
+public class SQLiteLogger : ILogger
+{
+    public IDisposable BeginScope&lt;TState&gt;(TState state)
+    {
+        return null;
+    }
+
+    public bool IsEnabled(LogLevel logLevel)
+    {
+        return true;
+    }
+
+    public void Log&lt;TState&gt;(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func&lt;TState, Exception, string&gt; formatter)
+    {
+        string message = formatter(state, exception);
+        // Write the message to the SQLite database.
+    }
+}
+</code></pre>
+<h4>Registering the Custom Provider:</h4>
+<pre><code class="language-csharp">// .NET 6+
+builder.Logging.AddProvider(new SQLiteLoggerProvider());
+
+// .NET Core 3.1
+services.AddLogging(builder =&gt; builder.AddProvider(new SQLiteLoggerProvider()));
+</code></pre>
+<p>This SQLite logging example is highly simplified and conceptual; you would need to handle the database connections, command executions, and error handlings correctly in a production scenario. You might also want to consider using an ORM like Entity Framework Core to interact with the SQLite database.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The <code>LogLevel</code> enumeration in ASP.NET Core represents the severity level of the log messages. The <code>LogLevel</code> enumeration has the following values:</p>
+<ul>
+<li><strong>Trace</strong>: Logs that contain the most detailed messages. These messages may contain sensitive application data and are disabled by default.</li>
+<li><strong>Debug</strong>: Logs that are used for interactive investigation during development. These logs should primarily contain information useful for debugging and have no long-term value.</li>
+<li><strong>Information</strong>: Logs that track the general flow of the application. These logs should have long-term value.</li>
+<li><strong>Warning</strong>: Logs that highlight an abnormal or unexpected event in the application flow but do not otherwise cause the application execution to stop.</li>
+<li><strong>Error</strong>: Logs that highlight when the current flow of execution is stopped due to a failure. These should indicate a failure in the current activity, not an application-wide failure.</li>
+<li><strong>Critical</strong>: Logs that describe an unrecoverable application or system crash or a catastrophic failure that requires immediate attention.</li>
+<li><strong>None</strong>: Specifies that a logging category should not write any messages.</li>
+</ul>
+<h3>Using <code>LogLevel</code> in ASP.NET Core</h3>
+<p>You can specify the log level in various parts of your application:</p>
+<h4>1. <strong>Configuring Log Level:</strong></h4>
+<p>When configuring logging in your application, you can set the minimum log level required to log messages. For example:</p>
+<pre><code class="language-csharp">// .NET 6+ in Program.cs
+builder.Logging.AddConsole()
+    .SetMinimumLevel(LogLevel.Information); // Set the minimum log level to Information
+</code></pre>
+<pre><code class="language-csharp">// .NET Core 3.1 in Startup.cs
+public void Configure(
+    IApplicationBuilder app,
+    IWebHostEnvironment env,
+    ILogger&lt;Startup&gt; logger)
+{
+    logger.LogInformation(&quot;This is an information log.&quot;);
+}
+</code></pre>
+<h4>2. <strong>Logging Messages:</strong></h4>
+<p>When logging messages using an <code>ILogger</code> instance, you can specify the log level for each message:</p>
+<pre><code class="language-csharp">public class MyController : Controller
+{
+    private readonly ILogger&lt;MyController&gt; _logger;
+
+    public MyController(ILogger&lt;MyController&gt; logger)
+    {
+        _logger = logger;
+    }
+
+    public IActionResult MyAction()
+    {
+        _logger.LogDebug(&quot;This is a debug log.&quot;);
+        _logger.LogInformation(&quot;This is an information log.&quot;);
+        _logger.LogWarning(&quot;This is a warning log.&quot;);
+        _logger.LogError(&quot;This is an error log.&quot;);
+        _logger.LogCritical(&quot;This is a critical log.&quot;);
+
+        return View();
+    }
+}
+</code></pre>
+<h4>3. <strong>Filtering Logs:</strong></h4>
+<p>You can also filter logs based on categories and log levels in your configuration. For example, in <code>appsettings.json</code>, you might have:</p>
+<pre><code class="language-json">&quot;Logging&quot;: {
+  &quot;LogLevel&quot;: {
+    &quot;Default&quot;: &quot;Information&quot;,
+    &quot;Microsoft&quot;: &quot;Warning&quot;,
+    &quot;Microsoft.Hosting.Lifetime&quot;: &quot;Information&quot;
+  }
+}
+</code></pre>
+<p>Here, the default log level for all categories is set to <code>Information</code>, but logs from categories that start with <code>Microsoft</code> are only logged if their level is <code>Warning</code> or higher.</p>
+<h3>Structured Logging:</h3>
+<p>Remember, when logging messages, prefer structured logging over formatted string messages, especially when logging information that is meant to be processed by machines. Structured logging maintains the format and details of the log message, allowing for more effective analysis of logs.</p>
+<p>Here’s a quick example of structured logging:</p>
+<pre><code class="language-csharp">_logger.LogInformation(&quot;User {UserId} logged in at {Time}&quot;, userId, DateTime.UtcNow);
+</code></pre>
+<p>This keeps <code>userId</code> and <code>DateTime.UtcNow</code> as distinct elements in the log entry rather than rendering them into a string, which can be beneficial for log analysis tools.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Using Serilog in controllers in an ASP.NET Core application is straightforward. Here is a step-by-step guide to using Serilog in controllers:</p>
+<h3>Step 1: Setup Serilog</h3>
+<p>Firstly, you need to set up Serilog in your project.</p>
+<h4>a. Install Serilog NuGet Packages:</h4>
+<pre><code class="language-shell">dotnet add package Serilog
+dotnet add package Serilog.AspNetCore
+dotnet add package Serilog.Sinks.Console // For console logging
+</code></pre>
+<h4>b. Configure Serilog in Program.cs:</h4>
+<p>Here’s how you can set up Serilog in the <code>Program.cs</code> file for a .NET 6+ application:</p>
+<pre><code class="language-csharp">using Serilog;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Configure Serilog
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console() // Setup sink, in this case, Console
+    .CreateLogger();
+
+builder.Host.UseSerilog(); // Use Serilog as the logging provider
+
+// Other configurations...
+
+var app = builder.Build();
+
+// Other app configurations...
+
+app.Run();
+</code></pre>
+<h3>Step 2: Inject ILogger in Controllers</h3>
+<p>Once Serilog is configured as the logging provider, you can inject <code>ILogger&lt;T&gt;</code> into your controllers (or other services), where <code>T</code> is the type of the class into which <code>ILogger&lt;T&gt;</code> is injected.</p>
+<p>Here’s an example of how you can use it in a controller:</p>
+<pre><code class="language-csharp">public class MyController : ControllerBase
+{
+    private readonly ILogger&lt;MyController&gt; _logger;
+
+    public MyController(ILogger&lt;MyController&gt; logger)
+    {
+        _logger = logger;
+    }
+
+    public IActionResult Get()
+    {
+        _logger.LogInformation(&quot;This is an Information log from Serilog!&quot;);
+        return Ok(&quot;Hello, World!&quot;);
+    }
+}
+</code></pre>
+<p>In this example, <code>ILogger&lt;MyController&gt;</code> is injected into <code>MyController</code>, and you can use <code>_logger</code> to log messages. Since Serilog is configured as the logging provider, the log messages will be handled by Serilog and will be output to the configured sinks, e.g., Console in this example.</p>
+<h3>Using Serilog’s Logger Directly:</h3>
+<p>If for some reason, you want to use Serilog’s static <code>Log</code> class directly in your controllers (though it is generally recommended to use <code>ILogger&lt;T&gt;</code> for better testing and decoupling), you can do so as follows:</p>
+<pre><code class="language-csharp">public class MyController : ControllerBase
+{
+    public IActionResult Get()
+    {
+        Log.Information(&quot;This is an Information log from Serilog using static Log class!&quot;);
+        return Ok(&quot;Hello, World!&quot;);
+    }
+}
+</code></pre>
+<p>Here, the static <code>Log</code> class from Serilog is used directly to log an information message.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When specifying the file path in Serilog, if you provide a relative path, it is typically relative to the working directory of the application when it starts, which may not necessarily be the application’s root directory. This can lead to issues, especially when deploying the application, as the working directory might be different from what you expect.</p>
+<p>To ensure that the logs are written to a specific directory relative to the application’s root directory, you can create an absolute path using the application's root path. In ASP.NET Core, the application’s root path can be obtained using the <code>IWebHostEnvironment</code> (for .NET Core 3.1) or <code>IHostEnvironment</code> (for .NET 5+).</p>
+<h3>Example:</h3>
+<p>Here’s an example where the <code>IHostEnvironment</code> is used to build an absolute path for the log file:</p>
+<h4>.NET 6+ (in Program.cs)</h4>
+<pre><code class="language-csharp">using Serilog;
+using Microsoft.Extensions.Hosting;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Obtain the environment
+var environment = builder.Services.BuildServiceProvider().GetRequiredService&lt;IHostEnvironment&gt;();
+
+// Configure Serilog with an absolute path
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.File(Path.Combine(environment.ContentRootPath, &quot;Logs&quot;, &quot;log.txt&quot;), rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
+builder.Host.UseSerilog();
+
+// Other configurations...
+
+var app = builder.Build();
+
+// Other app configurations...
+
+app.Run();
+</code></pre>
+<p>In this example, <code>environment.ContentRootPath</code> gives the root path of the application, and <code>Path.Combine</code> is used to construct the full path to the log file relative to the application’s root directory.</p>
+<h3>Consideration for File Permissions:</h3>
+<p>Also, be cautious about file permissions. The directory you are writing logs to needs to have write permissions for the user account running the application. Otherwise, logging to a file will fail. This is especially important when deploying the application to production environments or when running inside containers.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When specifying a SQLite connection string with a file name (or file path), the behavior is similar to specifying file paths in general. If you specify a relative path or just a filename, it will be relative to the application's current working directory at runtime. If you specify an absolute path, it will point exactly to the location denoted by the path.</p>
+<h3>Example Connection Strings:</h3>
+<ul>
+<li><p><strong>Relative Path:</strong></p>
+<pre><code class="language-csharp">&quot;Data Source=mydatabase.db;&quot;
+</code></pre>
+<p>Here, <code>mydatabase.db</code> will be located relative to the working directory of the application.</p>
+</li>
+<li><p><strong>Absolute Path:</strong></p>
+<pre><code class="language-csharp">&quot;Data Source=/path/to/your/directory/mydatabase.db;&quot;
+</code></pre>
+<p>Here, <code>mydatabase.db</code> will be located exactly at <code>/path/to/your/directory/</code>.</p>
+</li>
+</ul>
+<h3>Using Content Root Path:</h3>
+<p>To make sure that your SQLite database file is located relative to the application's root directory, you can build an absolute path using the application's content root path, similar to the approach for Serilog file paths:</p>
+<h4>Example in Startup or Program class:</h4>
+<pre><code class="language-csharp">public class Startup
+{
+    public Startup(IConfiguration configuration, IWebHostEnvironment env)
+    {
+        Configuration = configuration;
+        // Building an absolute path for the SQLite database file
+        var connectionString = $&quot;Data Source={Path.Combine(env.ContentRootPath, &quot;mydatabase.db&quot;)};&quot;;
+        // Now, you can use this connection string to configure your DbContext or any other services
+    }
+
+    public IConfiguration Configuration { get; }
+
+    // Other methods...
+}
+</code></pre>
+<p>Or, in <code>.NET 6</code> or later, within the <code>Program.cs</code>:</p>
+<pre><code class="language-csharp">var builder = WebApplication.CreateBuilder(args);
+
+var environment = builder.Environment;
+var connectionString = $&quot;Data Source={Path.Combine(environment.ContentRootPath, &quot;mydatabase.db&quot;)};&quot;;
+
+// Use the connectionString to configure services.
+</code></pre>
+<h3>Note on Permissions:</h3>
+<p>Just like with log files, ensure that the account running your application has the necessary read/write permissions to access the SQLite database file and the directory containing it. Also, make sure to handle cases where the database file cannot be accessed due to permission issues, and log such incidents appropriately.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">serilog/serilog-settings-configuration: A Serilog configuration provider that reads from Microsoft.Extensions.Configuration<br />
+                                <a href="https://github.com/serilog/serilog-settings-configuration" target="_blank" class="url">https://github.com/serilog/serilog-settings-configuration</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">パスのマッピングのために、</p>
+                            <p class="note_contents">xBuilder.Configuration.SetBasePath (xBuilder.Environment.ContentRootPath);</p>
+                            <p class="note_contents">というのを書いてみたが、なくても動くのでいったんコメントアウトした。</p>
+                            <p class="note_contents">Docker を含む、さまざまな環境で走らせてみて、動かなければ、それから対処すればよい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">logs.log への出力の一例。</p>
+                    <p class="note_contents">2023-09-29 23:29:15.374 +09:00 [INF] User profile is available. Using &#39;C:\Users\Hoge\AppData\Local\ASP.NET\DataProtection-Keys&#39; as key repository and Windows DPAPI to encrypt keys at rest.<br />
+                        2023-09-29 23:29:16.982 +09:00 [INF] Now listening on: <a href="http://localhost:5255" target="_blank" class="url">http://localhost:5255</a><br />
+                        2023-09-29 23:29:16.989 +09:00 [INF] Application started. Press Ctrl+C to shut down.<br />
+                        2023-09-29 23:29:16.991 +09:00 [INF] Hosting environment: Development<br />
+                        2023-09-29 23:29:16.994 +09:00 [INF] Content root path: C:\Repositories\fan\fanApiJwt<br />
+                        2023-09-29 23:29:19.847 +09:00 [INF] Request starting HTTP/1.1 GET <a href="http://localhost:5255/swagger/index.html" target="_blank" class="url">http://localhost:5255/swagger/index.html</a> - -<br />
+                        2023-09-29 23:29:21.298 +09:00 [INF] Request starting HTTP/1.1 GET <a href="http://localhost:5255/_framework/aspnetcore-browser-refresh.js" target="_blank" class="url">http://localhost:5255/_framework/aspnetcore-browser-refresh.js</a> - -<br />
+                        2023-09-29 23:29:21.311 +09:00 [INF] Request starting HTTP/1.1 GET <a href="http://localhost:5255/_vs/browserLink" target="_blank" class="url">http://localhost:5255/_vs/browserLink</a> - -<br />
+                        2023-09-29 23:29:21.328 +09:00 [INF] Request finished HTTP/1.1 GET <a href="http://localhost:5255/_framework/aspnetcore-browser-refresh.js" target="_blank" class="url">http://localhost:5255/_framework/aspnetcore-browser-refresh.js</a> - - - 200 12350 application/javascript;+charset=utf-8 24.2298ms<br />
+                        2023-09-29 23:29:21.362 +09:00 [INF] Request finished HTTP/1.1 GET <a href="http://localhost:5255/swagger/index.html" target="_blank" class="url">http://localhost:5255/swagger/index.html</a> - - - 200 - text/html;charset=utf-8 1527.1111ms<br />
+                        2023-09-29 23:29:21.434 +09:00 [INF] Request finished HTTP/1.1 GET <a href="http://localhost:5255/_vs/browserLink" target="_blank" class="url">http://localhost:5255/_vs/browserLink</a> - - - 200 - text/javascript;+charset=UTF-8 123.3599ms<br />
+                        2023-09-29 23:29:21.611 +09:00 [INF] Request starting HTTP/1.1 GET <a href="http://localhost:5255/swagger/v1/swagger.json" target="_blank" class="url">http://localhost:5255/swagger/v1/swagger.json</a> - -<br />
+                        2023-09-29 23:29:22.881 +09:00 [INF] Request finished HTTP/1.1 GET <a href="http://localhost:5255/swagger/v1/swagger.json" target="_blank" class="url">http://localhost:5255/swagger/v1/swagger.json</a> - - - 200 - application/json;charset=utf-8 1269.6262ms<br />
+                        2023-09-29 23:29:27.641 +09:00 [INF] Request starting HTTP/1.1 GET <a href="http://localhost:5255/user/send-email" target="_blank" class="url">http://localhost:5255/user/send-email</a> - -<br />
+                        2023-09-29 23:29:27.681 +09:00 [INF] Executing endpoint &#39;fanApiJwt.Controllers.UserController.SendEmail (fanApiJwt)&#39;<br />
+                        2023-09-29 23:29:27.735 +09:00 [INF] Route matched with {action = &quot;SendEmail&quot;, controller = &quot;User&quot;, page = &quot;&quot;, area = &quot;&quot;}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SendEmail() on controller fanApiJwt.Controllers.UserController (fanApiJwt).<br />
+                        2023-09-29 23:29:28.117 +09:00 [INF] Found AWS options in IConfiguration<br />
+                        2023-09-29 23:29:28.236 +09:00 [INF] Found credentials using the AWS SDK&#39;s default credential search<br />
+                        2023-09-29 23:29:29.270 +09:00 [INF] Message &#39;0119018ae15840af-ee5a32cb-570a-42fb-ba5d-885dca0035dc-000000&#39; sent.<br />
+                        2023-09-29 23:29:29.288 +09:00 [INF] Executing OkObjectResult, writing value of type &#39;System.String&#39;.<br />
+                        2023-09-29 23:29:29.302 +09:00 [INF] Executed action fanApiJwt.Controllers.UserController.SendEmail (fanApiJwt) in 1558.4553ms<br />
+                        2023-09-29 23:29:29.310 +09:00 [INF] Executed endpoint &#39;fanApiJwt.Controllers.UserController.SendEmail (fanApiJwt)&#39;<br />
+                        2023-09-29 23:29:29.319 +09:00 [INF] Request finished HTTP/1.1 GET <a href="http://localhost:5255/user/send-email" target="_blank" class="url">http://localhost:5255/user/send-email</a> - - - 200 - text/plain;+charset=utf-8 1677.8828ms<br />
+                        2023-09-29 23:29:32.538 +09:00 [INF] Application is shutting down...</p>
+                    <!-- Task: ba987945-9cf8-48b2-829c-3b1d83274a83 -->
+                </div>
+            </div>
         </div>
     </body>
 </html>
