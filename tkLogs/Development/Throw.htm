@@ -7299,6 +7299,953 @@ public class Course
                     </div>
                 </div>
             </div>
+            <div id="9c45ad61-0801-44d2-b7c0-bd37ff7b0844" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">fan レポジトリーをつくる</span>
+                    <a href="#9c45ad61-0801-44d2-b7c0-bd37ff7b0844" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">sh*t hits the fan の言い回しが面白い。試行錯誤が足りないので、いろいろなパターンのコードを入れていく場を。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="2f758cde-7880-48c1-bd29-fafd10dbc1fc" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">AllowedHosts について調べる</span>
+                    <a href="#2f758cde-7880-48c1-bd29-fafd10dbc1fc" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In a .NET Core application, the <code>AllowedHosts</code> setting in <code>appsettings.json</code> is used to define which hosts are allowed for incoming requests. This is a security feature that helps prevent DNS rebinding attacks.</p>
+<p>Here’s a basic example of how it can be set in the <code>appsettings.json</code> file:</p>
+<pre><code class="language-json">{
+  &quot;Kestrel&quot;: {
+    &quot;Endpoints&quot;: {
+      &quot;Http&quot;: {
+        &quot;Url&quot;: &quot;http://localhost:5000&quot;,
+        &quot;AllowedHosts&quot;: &quot;example.com, *.example.com&quot;
+      }
+    }
+  }
+}
+</code></pre>
+<p>In the example above, only requests from <code>example.com</code> and any subdomain of <code>example.com</code> would be allowed.</p>
+<p>Here’s another example using <code>AllowedHosts</code> at the root level in <code>appsettings.json</code>:</p>
+<pre><code class="language-json">{
+  &quot;AllowedHosts&quot;: &quot;*&quot;
+}
+</code></pre>
+<p>In this example, using <code>&quot;*&quot;</code> as the value for <code>AllowedHosts</code> means that any host is allowed, effectively disabling the feature.</p>
+<h3>Setting AllowedHosts</h3>
+<p>You can specify multiple hosts by separating them with a comma and you can use a wildcard (*) as a placeholder for any subdomain.</p>
+<ul>
+<li><p><code>&quot;AllowedHosts&quot;: &quot;localhost, 127.0.0.1, [::1], example.com, *.example.com&quot;</code></p>
+<p>This setting would allow requests from <code>localhost</code>, <code>127.0.0.1</code>, <code>[::1]</code> (IPv6 localhost), <code>example.com</code>, and any subdomain of <code>example.com</code>.</p>
+</li>
+<li><p><code>&quot;AllowedHosts&quot;: &quot;*&quot;</code></p>
+<p>This setting would allow requests from any host.</p>
+</li>
+</ul>
+<h3>Usage in Startup.cs</h3>
+<p>The <code>AllowedHosts</code> option is typically used in combination with the <code>UseCors</code> middleware in the <code>Startup.cs</code> file to configure Cross-Origin Resource Sharing (CORS) policies. However, it is not the same as CORS and serves a different purpose, which is to define which hosts are allowed to send requests to the application.</p>
+<h3>Note</h3>
+<p>Remember to be cautious and restrictive about the hosts you are allowing, especially when deploying your application to production, to avoid exposing your application to potential security vulnerabilities. If your application doesn’t require processing requests from different origins, it’s a good practice to not use a wildcard (<code>*</code>) and instead explicitly list the allowed hosts.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="b2089f5a-70ce-4ec6-9dc0-1517970f3e6d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">[FromBody] について調べる</span>
+                    <a href="#b2089f5a-70ce-4ec6-9dc0-1517970f3e6d" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The <code>[FromBody]</code> attribute in ASP.NET Core is used to specify that the value for a parameter of a controller action method should be bound from the request body. When you apply <code>[FromBody]</code> to a method parameter, it tells the ASP.NET Core framework to deserialize the request body and map it to the parameter's type. This is commonly used for receiving data sent as JSON or XML in the request body.</p>
+<p>Here's an example of how <code>[FromBody]</code> is used:</p>
+<pre><code class="language-csharp">[HttpPost(&quot;create&quot;)]
+public IActionResult Create([FromBody] CreateUserModel user)
+{
+    // Process the user data received in the request body
+    // The 'user' parameter will be automatically populated with data from the request body
+    // Perform validation, database operations, etc.
+    // Return an appropriate HTTP response
+}
+</code></pre>
+<p>In this example:</p>
+<ul>
+<li><code>[HttpPost(&quot;create&quot;)]</code> defines a POST endpoint with the route &quot;create&quot; under the controller's base route.</li>
+<li>The <code>Create</code> method has a parameter named <code>user</code> decorated with <code>[FromBody]</code>. This indicates that the <code>user</code> parameter should be populated with data from the request body.</li>
+</ul>
+<p>When a client sends a POST request to this endpoint with JSON data in the request body, the ASP.NET Core framework will automatically deserialize the JSON and map it to the <code>user</code> parameter's type (in this case, <code>CreateUserModel</code>). This allows you to work with the data in a strongly typed manner within your action method.</p>
+<p>Here's a typical sequence when using <code>[FromBody]</code>:</p>
+<ol>
+<li><p>The client sends a POST request with JSON data in the request body to the specified endpoint (e.g., <code>/api/user/create</code>).</p>
+</li>
+<li><p>The ASP.NET Core framework receives the request and identifies that the <code>Create</code> method should handle it based on the HTTP verb and route.</p>
+</li>
+<li><p>The framework automatically deserializes the JSON data in the request body into an instance of the <code>CreateUserModel</code> class.</p>
+</li>
+<li><p>The <code>Create</code> method can then use the <code>user</code> parameter to access and process the data, which might involve validation, saving the data to a database, and so on.</p>
+</li>
+<li><p>Finally, the <code>Create</code> method returns an appropriate HTTP response, such as <code>Ok(&quot;User created successfully&quot;)</code> or <code>BadRequest(&quot;Invalid input data&quot;)</code>, which is sent back to the client.</p>
+</li>
+</ol>
+<p>Using <code>[FromBody]</code> simplifies the process of handling data sent in the request body and helps you work with complex data structures in a more structured and type-safe way in your ASP.NET Core controller actions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="afef7695-0b4e-40de-9a58-de46149f79f6" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">fan/fanApiJwt を追加</span>
+                    <a href="#afef7695-0b4e-40de-9a58-de46149f79f6" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ASP.NET Core Web API<br />
+                                フレームワーク: .NET 7.0<br />
+                                認証の種類: なし<br />
+                                「HTTPS 用の構成」オフ<br />
+                                「Docker を有効にする」オフ<br />
+                                「コントローラーを使用する」オン<br />
+                                「OpenAPI サポートを有効にする」オン<br />
+                                「最上位レベルのステートメントを使用しない」オン</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To implement EF Core with Identity and SQLite and issue JWTs in an ASP.NET Core Web API, you can follow the steps below. Here is a step-by-step guide:</p>
+<h3>1. Create an ASP.NET Core Web API Project</h3>
+<p>Create a new Web API project. You can use Visual Studio, the .NET CLI, or any other preferred method.</p>
+<h3>2. Install Necessary Packages</h3>
+<p>Install the necessary packages via NuGet Package Manager Console or .NET CLI:</p>
+<pre><code class="language-sh">dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore
+dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+</code></pre>
+<h3>3. Configure DbContext</h3>
+<p>Create a <code>DbContext</code> and configure it to use SQLite and Identity:</p>
+<pre><code class="language-csharp">public class ApplicationDbContext : IdentityDbContext
+{
+    public ApplicationDbContext(DbContextOptions&lt;ApplicationDbContext&gt; options)
+        : base(options)
+    {
+    }
+}
+
+</code></pre>
+<p>In <code>Startup.cs</code>:</p>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    services.AddDbContext&lt;ApplicationDbContext&gt;(options =&gt;
+        options.UseSqlite(Configuration.GetConnectionString(&quot;DefaultConnection&quot;)));
+
+    services.AddDefaultIdentity&lt;IdentityUser&gt;()
+        .AddEntityFrameworkStores&lt;ApplicationDbContext&gt;();
+}
+</code></pre>
+<p>In <code>appsettings.json</code>:</p>
+<pre><code class="language-json">{
+  &quot;ConnectionStrings&quot;: {
+    &quot;DefaultConnection&quot;: &quot;Data Source=mydatabase.db&quot;
+  }
+}
+</code></pre>
+<h3>4. Configure JWT Authentication</h3>
+<p>In <code>Startup.cs</code>, you can configure the JWT Authentication as follows:</p>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    // ... other services
+
+    var key = Encoding.ASCII.GetBytes(Configuration[&quot;Jwt:Key&quot;]);
+    services.AddAuthentication(x =&gt;
+    {
+        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(x =&gt;
+    {
+        x.RequireHttpsMetadata = false;
+        x.SaveToken = true;
+        x.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
+}
+</code></pre>
+<p>In <code>appsettings.json</code>, add your secret key:</p>
+<pre><code class="language-json">{
+  &quot;Jwt&quot;: {
+    &quot;Key&quot;: &quot;YOUR_SECRET_KEY_HERE&quot;
+  }
+}
+</code></pre>
+<h3>5. Configure Controllers</h3>
+<p>Create Controllers and Actions to register, login, and issue JWTs. Here's an example of how you can create a token:</p>
+<pre><code class="language-csharp">private string GenerateJwtToken(IdentityUser user)
+{
+    var tokenHandler = new JwtSecurityTokenHandler();
+    var key = Encoding.ASCII.GetBytes(_configuration[&quot;Jwt:Key&quot;]);
+    var tokenDescriptor = new SecurityTokenDescriptor
+    {
+        Subject = new ClaimsIdentity(new[] { new Claim(&quot;id&quot;, user.Id) }),
+        Expires = DateTime.UtcNow.AddHours(1),
+        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+    };
+    var token = tokenHandler.CreateToken(tokenDescriptor);
+    return tokenHandler.WriteToken(token);
+}
+</code></pre>
+<h3>6. Run Migrations</h3>
+<p>Once everything is set up, create and apply migrations to generate the database schema:</p>
+<pre><code class="language-sh">dotnet ef migrations add InitialCreate
+dotnet ef database update
+</code></pre>
+<h3>7. Build and Run the Application</h3>
+<p>Finally, build and run the application. If configured correctly, your API should be able to register and authenticate users using Identity, store user data in SQLite, and issue JWTs for authenticated users.</p>
+<p>Please note that this is a high-level overview, and depending on your needs, you may need to modify or extend these steps, such as adding proper error handling, improving security, and customizing the user model.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>You can create a <code>SecurityController</code> to handle user registration, login, and JWT token generation. Here’s a simple example that includes actions for user registration and login.</p>
+<h3>1. Define SecurityController</h3>
+<p>Create a new controller named <code>SecurityController</code> and define actions for registration and login as follows:</p>
+<pre><code class="language-csharp">[ApiController]
+[Route(&quot;api/[controller]&quot;)]
+public class SecurityController : ControllerBase
+{
+    private readonly UserManager&lt;IdentityUser&gt; _userManager;
+    private readonly SignInManager&lt;IdentityUser&gt; _signInManager;
+    private readonly IConfiguration _configuration;
+
+    public SecurityController(
+        UserManager&lt;IdentityUser&gt; userManager,
+        SignInManager&lt;IdentityUser&gt; signInManager,
+        IConfiguration configuration)
+    {
+        _userManager = userManager;
+        _signInManager = signInManager;
+        _configuration = configuration;
+    }
+
+    [HttpPost(&quot;register&quot;)]
+    public async Task&lt;IActionResult&gt; Register([FromBody] RegisterModel model)
+    {
+        var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+        var result = await _userManager.CreateAsync(user, model.Password);
+
+        if (result.Succeeded)
+        {
+            return Ok(new { Token = GenerateJwtToken(user) });
+        }
+
+        return BadRequest(result.Errors);
+    }
+
+    [HttpPost(&quot;login&quot;)]
+    public async Task&lt;IActionResult&gt; Login([FromBody] LoginModel model)
+    {
+        var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+
+        if (result.Succeeded)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            return Ok(new { Token = GenerateJwtToken(user) });
+        }
+
+        return Unauthorized();
+    }
+
+    private string GenerateJwtToken(IdentityUser user)
+    {
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var key = Encoding.ASCII.GetBytes(_configuration[&quot;Jwt:Key&quot;]);
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(new[] { new Claim(&quot;id&quot;, user.Id) }),
+            Expires = DateTime.UtcNow.AddHours(1),
+            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+        };
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+        return tokenHandler.WriteToken(token);
+    }
+}
+
+public class RegisterModel
+{
+    public string Email { get; set; }
+    public string Password { get; set; }
+}
+
+public class LoginModel
+{
+    public string Email { get; set; }
+    public string Password { get; set; }
+}
+</code></pre>
+<h3>2. Adapt According to Your Needs</h3>
+<p>This controller provides a basic example of how to use the <code>GenerateJwtToken</code> method for user registration and login, adapting it according to your specific requirements is recommended, like improving the model validation, handling errors more gracefully, and ensuring the security of your application.</p>
+<h3>3. Ensure Services are Registered</h3>
+<p>Ensure that Identity, Authentication, and other related services are properly registered in the <code>Startup.cs</code> file.</p>
+<p>For example, in the <code>ConfigureServices</code> method of <code>Startup.cs</code>:</p>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    services.AddControllers();
+
+    // ... other services like DbContext, Identity etc.
+
+    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer( /*... configure JwtBearerOptions ... */);
+
+    services.AddScoped&lt;UserManager&lt;IdentityUser&gt;&gt;();
+    services.AddScoped&lt;SignInManager&lt;IdentityUser&gt;&gt;();
+}
+</code></pre>
+<p>Now, you should be able to run your application and use tools like Postman to test the registration and login endpoints in your <code>SecurityController</code>.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>While it is a common convention to place model classes in the &quot;Models&quot; folder in an ASP.NET Core Web API project, it is not a strict requirement. Organizing your project is largely subjective and should be suited to the needs and preferences of your team and the specific project.</p>
+<h3>Common Practices:</h3>
+<ol>
+<li><strong>Models Folder:</strong> Frequently used to store ViewModel, DTOs (Data Transfer Objects), and sometimes entities, particularly in smaller projects.</li>
+<li><strong>Entities or Domain Folder:</strong> Sometimes, entities or domain models are stored in a separate folder, especially in Domain-Driven Design.</li>
+<li><strong>Data Folder:</strong> Sometimes used to store entities and other data-related classes like repositories.</li>
+<li><strong>DTOs Folder:</strong> In case of larger projects, you may have a dedicated folder for DTOs.</li>
+</ol>
+<h3>Example Structure:</h3>
+<p>Here’s an example project structure that distinguishes between Models, Entities, and DTOs:</p>
+<pre><code>ProjectName
+│
+├── Controllers
+├── Data # For DataContext and Repositories
+│ └── Entities # For Entity classes if you want to separate them from Models
+├── Models # For ViewModels, BindingModels, etc.
+├── DTOs # For Data Transfer Objects
+├── Services # For service classes
+├── Utilities or Helpers # For utility or helper classes
+└── ... (other folders and files like wwwroot, Startup.cs, etc.)
+</code></pre>
+<h3>Important Consideration:</h3>
+<p>While structuring your project, the most important consideration is to maintain consistency across the project. Consistency in organization helps in maintaining and understanding the codebase, which is particularly important when working with a team.</p>
+<p>Ultimately, it's best to use a structure that aligns with the size and complexity of your project and that the team feels comfortable with. In general, separating concerns and keeping related files together are good practices to follow.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To run Entity Framework Core migrations, you'll need to use the .NET CLI (Command Line Interface). Before running migrations, ensure that you have the Entity Framework CLI installed. If not, you can install it using the following command:</p>
+<pre><code class="language-sh">dotnet tool install --global dotnet-ef
+</code></pre>
+<h3>Running Migrations</h3>
+<p>Once you have the Entity Framework CLI installed, navigate to the directory containing your project file (<code>.csproj</code>) in the terminal or command prompt. The project file directory is usually the root directory of your project, where the <code>.csproj</code> file is located.</p>
+<ol>
+<li><p><strong>Open Terminal or Command Prompt:</strong></p>
+<ul>
+<li>For Windows, you can use <code>cmd</code> or Powershell.</li>
+<li>For macOS or Linux, you can open a terminal.</li>
+</ul>
+</li>
+<li><p><strong>Navigate to the Project Directory:</strong>
+Replace <code>YourProjectDirectory</code> with the path to your project directory.</p>
+<pre><code class="language-sh">cd YourProjectDirectory
+</code></pre>
+</li>
+<li><p><strong>Run the Migrations Command:</strong>
+Once in the correct directory, run the following command to add a migration:</p>
+<pre><code class="language-sh">dotnet ef migrations add InitialCreate
+</code></pre>
+</li>
+</ol>
+<h3>Applying Migrations</h3>
+<p>After adding the migration, you need to apply it to update the database schema. Run the following command in the same directory:</p>
+<pre><code class="language-sh">dotnet ef database update
+</code></pre>
+<h3>Notes:</h3>
+<ul>
+<li>Ensure that your project compiles without error before running migrations, as the EF tools will build the project.</li>
+<li>Your <code>DbContext</code> should be properly configured in your project's <code>Startup.cs</code> and the connection string in <code>appsettings.json</code> should be correct.</li>
+<li>If you encounter any issues, double-check your Entity Framework configuration, connection strings, and ensure that all necessary packages are installed.</li>
+</ul>
+<p>This should allow you to run and apply migrations to your database using Entity Framework Core.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">とりあえず動かせることに成功したのでコミットした。</p>
+                            <p class="note_contents">これから、なぜ動いたか調べ、コードの過不足を調べ、全体的に整える。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">LoginModel クラスの Email などについて、Nullable 関連の警告が出ていた。</p>
+                            <p class="note_contents">required modifier - C# Reference - C# | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/required" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/required</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">&quot;Key&quot;: &quot;YOUR_SECRET_KEY_HERE&quot; の部分は、あえてそのまま。</p>
+                            <p class="note_contents">ちゃんとした開発では、以下を使う。</p>
+                            <p class="note_contents">Safe storage of app secrets in development in ASP.NET Core | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets" target="_blank" class="url">https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">書き忘れたが、ChatGPT によるコードをコピペし、今後のため自分の好みに合わせて接頭辞くらいを調整して EF Core の機能により migration をつくろうとしたときには、次の二つの作業が必要だった。</p>
+                            <p class="note_contents">1. dotnet tool install --global dotnet-ef の実行<br />
+                                2. Microsoft.EntityFrameworkCore.Design のインストール</p>
+                            <p class="note_contents">そのうち前者を含むスクリプトファイルを作っておく。新しいプロジェクトにコピペで使える。</p>
+                            <p class="note_contents">dotnet tool install command - .NET CLI | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-tool-install" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-tool-install</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">復習。</p>
+                            <div class="note_ai_generated">
+<p>The <code>[Route(&quot;[controller]&quot;)]</code> attribute in ASP.NET Core is used to define the route template for a controller. It's part of the attribute routing feature of ASP.NET Core MVC.</p>
+<h3>Explanation</h3>
+<p>When <code>[Route(&quot;[controller]&quot;)]</code> is applied to a controller, it means that the route to access the actions in the controller will be based on the controller's name.</p>
+<ul>
+<li><code>[controller]</code> is a token replacement for the controller’s name. So if you have a controller named <code>HomeController</code>, <code>[controller]</code> will be replaced with <code>home</code>.</li>
+<li><code>[action]</code> is a similar token that can be used for action methods.</li>
+</ul>
+<h3>Example</h3>
+<p>Here’s a simple example of how you might use the <code>[Route(&quot;[controller]&quot;)]</code> attribute in a controller:</p>
+<pre><code class="language-csharp">[ApiController]
+[Route(&quot;[controller]&quot;)]
+public class HomeController : ControllerBase
+{
+    [HttpGet]
+    public IActionResult Get()
+    {
+        return Ok(&quot;Hello from Home Controller!&quot;);
+    }
+}
+</code></pre>
+<p>In this example, the <code>Get</code> action in <code>HomeController</code> would be accessible by sending a GET request to <code>/home</code> because the <code>[controller]</code> in the <code>[Route(&quot;[controller]&quot;)]</code> attribute will be replaced by the name of the controller, which is <code>Home</code> in this case, with &quot;Controller&quot; suffix removed.</p>
+<h3>Using with Action Name</h3>
+<p>If you want to include the action name in the route, you could use the <code>[action]</code> token in combination with the <code>[controller]</code> token.</p>
+<pre><code class="language-csharp">[ApiController]
+[Route(&quot;[controller]/[action]&quot;)]
+public class HomeController : ControllerBase
+{
+    [HttpGet]
+    public IActionResult Get()
+    {
+        return Ok(&quot;Hello from Home Controller!&quot;);
+    }
+}
+</code></pre>
+<p>In this enhanced example, the <code>Get</code> action in <code>HomeController</code> would be accessible by sending a GET request to <code>/home/get</code>.</p>
+<h3>Important Note</h3>
+<p><code>[ApiController]</code> attribute is used to infer API-specific conventions, which is applicable to the controllers that serve API responses. If your controller is intended to serve views (MVC), you might derive from <code>Controller</code> instead of <code>ControllerBase</code> and might not need to use the <code>[ApiController]</code> attribute.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">これも復習。</p>
+                            <div class="note_ai_generated">
+<p>The <code>[HttpPost(&quot;register&quot;)]</code> attribute is used in ASP.NET Core (and similar frameworks) to define an HTTP POST endpoint in a controller. In ASP.NET Core, controllers are C# classes that handle incoming HTTP requests and return HTTP responses.</p>
+<p>Here's how <code>[HttpPost(&quot;register&quot;)]</code> is typically used:</p>
+<ol>
+<li><strong>Controller Class</strong>: This attribute is usually placed on a method within a controller class. The controller class itself should be marked with the <code>[Controller]</code> attribute.</li>
+</ol>
+<pre><code class="language-csharp">[Route(&quot;api/[controller]&quot;)]
+[ApiController]
+public class UserController : ControllerBase
+{
+    // Other action methods
+
+    [HttpPost(&quot;register&quot;)]
+    public IActionResult RegisterUser([FromBody] UserRegistrationModel user)
+    {
+        // Handle user registration logic here
+        // Typically, you would process the incoming data and return an appropriate response
+        return Ok(&quot;User registered successfully&quot;);
+    }
+}
+</code></pre>
+<p>In the example above, <code>[Route(&quot;api/[controller]&quot;)]</code> defines a base route for all actions within the controller. <code>[ApiController]</code> is an attribute that indicates the controller is for handling HTTP API requests.</p>
+<ol start="2">
+<li><p><strong>HTTP Method</strong>: <code>[HttpPost]</code> specifies that this action method should be invoked when an HTTP POST request is made to the <code>/register</code> endpoint under the controller's base route. In this case, it's a user registration endpoint, so you would expect to receive user registration data in the request body.</p>
+</li>
+<li><p><strong>Method Parameters</strong>: The method <code>RegisterUser</code> can have parameters to accept data from the request, such as a user registration model. In the example, <code>[FromBody]</code> indicates that the data should be extracted from the request body.</p>
+</li>
+</ol>
+<p>When a client sends an HTTP POST request to <code>/api/user/register</code>, the <code>RegisterUser</code> method will be invoked to handle the registration logic. The logic inside this method can process the incoming data, interact with a database, perform validation, and return an appropriate HTTP response.</p>
+<p>Here's a typical sequence:</p>
+<ul>
+<li>Client sends a POST request to <code>/api/user/register</code> with user registration data in the request body.</li>
+<li>The ASP.NET Core framework routes the request to the <code>RegisterUser</code> method based on the route attribute <code>[HttpPost(&quot;register&quot;)]</code>.</li>
+<li>The <code>RegisterUser</code> method processes the request, validates the data, and performs user registration logic.</li>
+<li>The method returns an HTTP response, such as <code>Ok(&quot;User registered successfully&quot;)</code> or <code>BadRequest(&quot;Registration failed&quot;)</code>, which is sent back to the client.</li>
+</ul>
+<p>This allows you to define a structured and organized way to handle specific HTTP requests in your application.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">/register や /login がつながって自然な表現として、/security を /user に変更。コントローラークラスを UserController に改名した。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">UserManager&lt;TUser&gt;.CreateAsync Method (Microsoft.AspNetCore.Identity) | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity.usermanager-1.createasync" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity.usermanager-1.createasync</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">OkObjectResult Class (Microsoft.AspNetCore.Mvc) | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.okobjectresult" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.okobjectresult</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">JWT token からの識別子がコードに含まれる。AI が生成したものだ。T が token なので馬から落馬しているが、前後に現れる、識別子としての token との親和性が高いため、そのまま残す。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">BadRequestObjectResult Class (Microsoft.AspNetCore.Mvc) | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.badrequestobjectresult" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.badrequestobjectresult</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">SignInManager&lt;TUser&gt;.PasswordSignInAsync Method (Microsoft.AspNetCore.Identity) | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.passwordsigninasync" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.passwordsigninasync</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">PasswordSignInAsync の lockoutOnFailure を false から true に変更。永遠に再試行できるのは良くない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">UserManager&lt;TUser&gt;.FindByEmailAsync(String) Method (Microsoft.AspNetCore.Identity) | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity.usermanager-1.findbyemailasync" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity.usermanager-1.findbyemailasync</a></p>
+                            <p class="note_contents">言われた通りに RequireUniqueEmail に true を設定した。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">UnauthorizedResult Class (Microsoft.AspNetCore.Mvc) | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.unauthorizedresult" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.unauthorizedresult</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The code snippet you provided appears to be related to working with claims in the context of authentication and authorization in an ASP.NET Core application. Specifically, it's creating a <code>ClaimsIdentity</code> object with a single claim named &quot;id&quot; and associating it with a user's ID.</p>
+<p>Here's a breakdown of the code:</p>
+<pre><code class="language-csharp">Subject = new ClaimsIdentity(new[] { new Claim(&quot;id&quot;, user.Id) })
+</code></pre>
+<ul>
+<li><p><code>Subject</code>: In the context of claims-based authentication, the <code>Subject</code> typically represents the identity of the user associated with the current request.</p>
+</li>
+<li><p><code>ClaimsIdentity</code>: This is a class in ASP.NET Core used to represent a set of claims associated with a user. Claims are pieces of information about the user, such as their name, role, or in this case, their ID.</p>
+</li>
+<li><p><code>new[] { new Claim(&quot;id&quot;, user.Id) }</code>: This part creates an array of claims, with a single claim in it. The claim is created using the <code>Claim</code> class and consists of two parts: a claim type (&quot;id&quot;) and a claim value (user.Id). In this case, &quot;id&quot; is used as the claim type to store the user's ID.</p>
+</li>
+</ul>
+<p>This code is often used when implementing authentication and authorization in an ASP.NET Core application. After creating the <code>ClaimsIdentity</code> with the desired claims, it can be associated with the user's authentication token, such as a JSON Web Token (JWT), and used for user authentication and authorization throughout the application. Claims are a way to carry user-related information and permissions, which can be checked to determine whether a user is allowed to perform certain actions or access specific resources within the application.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ClaimsIdentity Class (System.Security.Claims) | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/system.security.claims.claimsidentity" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/system.security.claims.claimsidentity</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">SymmetricSecurityKey Class (System.IdentityModel.Tokens) | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/system.identitymodel.tokens.symmetricsecuritykey" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/system.identitymodel.tokens.symmetricsecuritykey</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">c# - JWT web token encryption - SecurityAlgoritms.HmacSha256 vs SecurityAlgoritms.HmacSha256Signature - Stack Overflow<br />
+                                <a href="https://stackoverflow.com/questions/41869902/jwt-web-token-encryption-securityalgoritms-hmacsha256-vs-securityalgoritms-hma" target="_blank" class="url">https://stackoverflow.com/questions/41869902/jwt-web-token-encryption-securityalgoritms-hmacsha256-vs-securityalgoritms-hma</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">JwtSecurityTokenHandler.WriteToken Method (System.IdentityModel.Tokens.Jwt) - Microsoft Authentication Library for .NET | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/system.identitymodel.tokens.jwt.jwtsecuritytokenhandler.writetoken" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/system.identitymodel.tokens.jwt.jwtsecuritytokenhandler.writetoken</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When initializing an ASP.NET Core Web API application, you typically configure and add various services to the Dependency Injection (DI) container in the <code>Startup</code> class. The order in which you add services can be important, as some services may depend on others. Here's a general guideline for the proper order to add services in the <code>Startup</code> class:</p>
+<ol>
+<li><p><strong>Set Up Configuration</strong>:</p>
+<ul>
+<li>Load configuration settings from various sources, such as appsettings.json, environment variables, and user secrets.</li>
+<li>Configure your <code>appsettings.json</code> and <code>appsettings.{Environment}.json</code> files to store configuration settings.</li>
+</ul>
+<pre><code class="language-csharp">public Startup(IConfiguration configuration)
+{
+    Configuration = configuration;
+}
+
+public IConfiguration Configuration { get; }
+</code></pre>
+</li>
+<li><p><strong>Add Services to DI Container</strong>:</p>
+<ul>
+<li>Configure and add services to the DI container using the <code>ConfigureServices</code> method. This includes services like authentication, authorization, database context, and application-specific services.</li>
+<li>Ensure that your services are registered with the correct lifetime (e.g., Singleton, Scoped, Transient) based on their usage and requirements.</li>
+</ul>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    // Configure services here
+
+    services.AddDbContext&lt;ApplicationDbContext&gt;(options =&gt;
+    {
+        options.UseSqlServer(Configuration.GetConnectionString(&quot;DefaultConnection&quot;));
+    });
+
+    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options =&gt;
+        {
+            // JWT authentication configuration
+        });
+
+    services.AddAuthorization(options =&gt;
+    {
+        // Authorization policies and requirements
+    });
+
+    services.AddScoped&lt;IMyService, MyService&gt;();
+}
+</code></pre>
+</li>
+<li><p><strong>Configure Middleware</strong>:</p>
+<ul>
+<li>In the <code>Configure</code> method, configure middleware components in the order they should execute.</li>
+<li>For example, configure routing, authentication, authorization, exception handling, CORS, and any other middleware your application requires.</li>
+</ul>
+<pre><code class="language-csharp">public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    if (env.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+    }
+    else
+    {
+        // Production error handling
+        app.UseExceptionHandler(&quot;/Home/Error&quot;);
+        app.UseHsts();
+    }
+
+    app.UseHttpsRedirection();
+    app.UseRouting();
+    app.UseAuthentication();
+    app.UseAuthorization();
+    app.UseCors(&quot;AllowSpecificOrigins&quot;); // Configure CORS policy
+    app.UseEndpoints(endpoints =&gt;
+    {
+        endpoints.MapControllers();
+    });
+}
+</code></pre>
+</li>
+<li><p><strong>Configure Routes and Endpoints</strong>:</p>
+<ul>
+<li>Define and configure your API routes and endpoints. This includes mapping controllers and actions to specific routes.</li>
+</ul>
+<pre><code class="language-csharp">app.UseEndpoints(endpoints =&gt;
+{
+    endpoints.MapControllers();
+});
+</code></pre>
+</li>
+<li><p><strong>Configure Database Migrations</strong> (if using Entity Framework Core):</p>
+<ul>
+<li>If you're using Entity Framework Core for database operations, you may want to run database migrations at this point to ensure your database schema is up-to-date.</li>
+</ul>
+<pre><code class="language-csharp">public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext dbContext)
+{
+    // Other middleware configurations
+
+    // Apply database migrations
+    dbContext.Database.Migrate();
+}
+</code></pre>
+</li>
+</ol>
+<p>Remember that the order can vary depending on your application's specific requirements. Ensure that services and middleware are added and configured in the appropriate order based on your application's needs and dependencies.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">DbContextOptionsBuilder Class (Microsoft.EntityFrameworkCore) | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.dbcontextoptionsbuilder" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.dbcontextoptionsbuilder</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">AuthenticationOptions Class (Microsoft.AspNetCore.Authentication) | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.authentication.authenticationoptions" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.authentication.authenticationoptions</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p><code>DefaultAuthenticateScheme</code> and <code>DefaultChallengeScheme</code> are properties used in ASP.NET Core to configure authentication middleware. These properties are typically set in the <code>AddAuthentication</code> method when configuring authentication in your <code>Startup</code> class.</p>
+<p>Here's an explanation of these properties:</p>
+<ol>
+<li><p><strong>DefaultAuthenticateScheme</strong>:</p>
+<ul>
+<li><code>DefaultAuthenticateScheme</code> specifies the default authentication scheme that should be used to authenticate users by default when they access protected resources or endpoints.</li>
+<li>It is used when you don't explicitly specify an authentication scheme for a particular endpoint or when using the <code>[Authorize]</code> attribute without specifying a scheme.</li>
+<li>The value of this property should be the name of an authentication scheme registered with the <code>AddAuthentication</code> method.</li>
+</ul>
+<p>Example:</p>
+<pre><code class="language-csharp">services.AddAuthentication(options =&gt;
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =&gt;
+{
+    // JWT authentication configuration
+});
+</code></pre>
+</li>
+<li><p><strong>DefaultChallengeScheme</strong>:</p>
+<ul>
+<li><code>DefaultChallengeScheme</code> specifies the default authentication scheme that should be used when a user is challenged to log in or provide credentials after they fail an authentication check.</li>
+<li>It is used for challenges initiated by the <code>[Authorize]</code> attribute or when you manually challenge a user in your code.</li>
+<li>The value of this property should be the name of an authentication scheme registered with the <code>AddAuthentication</code> method.</li>
+</ul>
+<p>Example:</p>
+<pre><code class="language-csharp">services.AddAuthentication(options =&gt;
+{
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =&gt;
+{
+    // JWT authentication configuration
+});
+</code></pre>
+</li>
+</ol>
+<p>Setting these properties helps you define the default behavior for authentication and challenges in your application. However, whether or not you should set other properties in the same class (<code>AuthenticationOptions</code>) depends on your specific authentication requirements. Some of the commonly used properties in <code>AuthenticationOptions</code> include:</p>
+<ul>
+<li><code>AutomaticAuthenticate</code>: Indicates whether authentication middleware should automatically authenticate requests.</li>
+<li><code>AutomaticChallenge</code>: Indicates whether authentication middleware should automatically challenge unauthorized requests.</li>
+<li><code>DefaultForbidScheme</code>: Specifies the default scheme for the <code>[Authorize]</code> attribute when no scheme is explicitly specified.</li>
+<li><code>Events</code>: Allows you to attach event handlers to authentication events like <code>OnAuthenticationFailed</code>, <code>OnChallenge</code>, and <code>OnSignIn</code>.</li>
+</ul>
+<p>You should set these properties as needed based on your application's authentication workflow. For example, if you want to customize the behavior of authentication events, you can configure the <code>Events</code> property. If you have specific requirements for handling unauthorized requests, you may configure <code>AutomaticChallenge</code> and <code>DefaultForbidScheme</code>. The choice of whether to set these properties or not depends on the flexibility and customization your application requires.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">JwtBearerOptions.RequireHttpsMetadata Property (Microsoft.AspNetCore.Authentication.JwtBearer) | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.authentication.jwtbearer.jwtbeareroptions.requirehttpsmetadata" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.authentication.jwtbearer.jwtbeareroptions.requirehttpsmetadata</a></p>
+                            <p class="note_contents">JwtBearerOptions.SaveToken Property (Microsoft.AspNetCore.Authentication.JwtBearer) | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.authentication.jwtbearer.jwtbeareroptions.savetoken" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.authentication.jwtbearer.jwtbeareroptions.savetoken</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">TokenValidationParameters.ValidateIssuerSigningKey Property (Microsoft.IdentityModel.Tokens) - Microsoft Authentication Library for .NET | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.identitymodel.tokens.tokenvalidationparameters.validateissuersigningkey" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/microsoft.identitymodel.tokens.tokenvalidationparameters.validateissuersigningkey</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p><code>ValidateIssuerSigningKey</code> is a property that you can set when configuring JSON Web Token (JWT) authentication in ASP.NET Core. It's part of the configuration options for the JWT bearer authentication middleware. This property controls whether the middleware should validate the signing key of the JWT token.</p>
+<p>Here's what <code>ValidateIssuerSigningKey</code> does and how to use it:</p>
+<ol>
+<li><p><strong>Validate the Signing Key</strong>:</p>
+<ul>
+<li>When you receive a JWT, it is typically signed by the issuer (the entity that created the token) using a secret key or a public-private key pair.</li>
+<li>Validating the signing key ensures that the token has not been tampered with and was indeed issued by a trusted entity.</li>
+<li>If <code>ValidateIssuerSigningKey</code> is set to <code>true</code>, the JWT bearer authentication middleware will validate that the token's signature matches the expected signature based on the issuer's signing key.</li>
+</ul>
+</li>
+<li><p><strong>Example Configuration</strong>:</p>
+<ul>
+<li>You can set <code>ValidateIssuerSigningKey</code> when configuring JWT authentication. Here's an example:</li>
+</ul>
+<pre><code class="language-csharp">services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =&gt;
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true, // Set to true to validate the signing key
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(&quot;YourSecretKey&quot;)),
+            // Other token validation parameters...
+        };
+    });
+</code></pre>
+<p>In this example:</p>
+<ul>
+<li><code>ValidateIssuerSigningKey</code> is set to <code>true</code> to enable validation of the signing key.</li>
+<li><code>IssuerSigningKey</code> specifies the expected signing key. You should replace <code>&quot;YourSecretKey&quot;</code> with the actual key used by the issuer.</li>
+</ul>
+</li>
+<li><p><strong>Additional Considerations</strong>:</p>
+<ul>
+<li>When <code>ValidateIssuerSigningKey</code> is set to <code>true</code>, it's essential to ensure that the key provided in <code>IssuerSigningKey</code> matches the key used by the token issuer.</li>
+<li>You should keep your signing key secure and not hardcode it in your application as shown in the example. It's better to load it from a secure configuration source.</li>
+<li>Depending on your use case, you might also consider using a certificate for signing and verifying tokens, especially in production scenarios.</li>
+</ul>
+</li>
+</ol>
+<p>By enabling <code>ValidateIssuerSigningKey</code>, you enhance the security of your application by ensuring that JWT tokens are only accepted if they have a valid signature. This helps protect your application from accepting tampered or forged tokens.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">TokenValidationParameters.ValidateIssuer Property (Microsoft.IdentityModel.Tokens) - Microsoft Authentication Library for .NET | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.identitymodel.tokens.tokenvalidationparameters.validateissuer" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/microsoft.identitymodel.tokens.tokenvalidationparameters.validateissuer</a></p>
+                            <p class="note_contents">TokenValidationParameters.ValidateAudience Property (Microsoft.IdentityModel.Tokens) - Microsoft Authentication Library for .NET | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.identitymodel.tokens.tokenvalidationparameters.validateaudience" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/microsoft.identitymodel.tokens.tokenvalidationparameters.validateaudience</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">重複チェックをテストした。</p>
+                            <p class="note_contents">[<br />
+                                &nbsp;&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&quot;code&quot;: &quot;DuplicateUserName&quot;,<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&quot;description&quot;: &quot;Username &#39;<a href="mailto:hoge@hoge.com" class="url">hoge@hoge.com</a>&#39; is already taken.&quot;<br />
+                                &nbsp;&nbsp;},<br />
+                                &nbsp;&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&quot;code&quot;: &quot;DuplicateEmail&quot;,<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&quot;description&quot;: &quot;Email &#39;<a href="mailto:hoge@hoge.com" class="url">hoge@hoge.com</a>&#39; is already taken.&quot;<br />
+                                &nbsp;&nbsp;}<br />
+                                ]</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">new SecurityTokenDescriptor における、</p>
+                            <p class="note_contents">Subject = new ClaimsIdentity (new[] { new Claim (&quot;id&quot;, user.Id) })</p>
+                            <p class="note_contents">の内容が気になったので調べたところ、</p>
+                            <p class="note_contents">55b59fb8-144f-4690-baac-5748c5f1809c</p>
+                            <p class="note_contents">だった。</p>
+                            <p class="note_contents">連番でなく GUID になっている。そのほうが都合が良い。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">issuer と audience については、まだよさそう。リリースが近づけば、どこかで気づいて気になる。</p>
+                            <p class="note_contents">.net - Should I specify JWT audience and issuer if I have only one SPA client? - Information Security Stack Exchange<br />
+                                <a href="https://security.stackexchange.com/questions/256794/should-i-specify-jwt-audience-and-issuer-if-i-have-only-one-spa-client" target="_blank" class="url">https://security.stackexchange.com/questions/256794/should-i-specify-jwt-audience-and-issuer-if-i-have-only-one-spa-client</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">トークンの有効期限は自動的にスライドしない。GET や POST のたびにサーバー側で調べることで新しいものを発行できそうだが、クライアント側で期限切れを検出して再ログインするほうがトータルの処理量が少なそう。</p>
+                            <div class="note_ai_generated">
+<p>In ASP.NET Core or any other web application, the expiration date of a token depends on how the token is configured and generated. Tokens, such as JSON Web Tokens (JWTs), typically have an expiration claim (<code>exp</code>) that specifies when the token should expire. Whether or not a token automatically slides its expiration date depends on your specific configuration and implementation.</p>
+<p>Here are some key points to consider:</p>
+<ol>
+<li><p><strong>Static Expiration</strong>: By default, if you set an expiration date in the token, it remains static, and the token is considered invalid once it expires. In ASP.NET Core, when you generate a token, you can specify the expiration date using the <code>Expire</code> property of the <code>SecurityTokenDescriptor</code> when creating the token. Here's an example:</p>
+<pre><code class="language-csharp">var tokenDescriptor = new SecurityTokenDescriptor
+{
+    // Other token settings...
+    Expires = DateTime.UtcNow.AddMinutes(30) // Token expires in 30 minutes
+};
+</code></pre>
+<p>In this case, the token will expire 30 minutes after it's issued, and it won't automatically slide its expiration date.</p>
+</li>
+<li><p><strong>Sliding Expiration</strong>: To implement sliding expiration, you need to manually check the token's expiration in your application code and issue a new token with a refreshed expiration date if needed. Sliding expiration means that as long as the user keeps using the token, it will be automatically extended.</p>
+</li>
+<li><p><strong>Refresh Tokens</strong>: In some authentication scenarios, you might use refresh tokens. Refresh tokens are long-lived tokens that can be used to obtain a new access token when the access token expires. The idea is to use a short-lived access token with a sliding expiration and a long-lived refresh token. When the access token expires, the client can use the refresh token to obtain a new access token without the user needing to reauthenticate.</p>
+</li>
+<li><p><strong>Token Renewal</strong>: Another approach is to implement token renewal. With token renewal, the client can request a new token before the current one expires. This can be done using a dedicated endpoint in your API or application.</p>
+</li>
+</ol>
+<p>In summary, whether a token issued by an ASP.NET Core web app automatically slides its expiration date depends on your specific token configuration and how you handle token validation and renewal in your application. Tokens do not automatically slide their expiration dates; you need to implement the logic for sliding expiration or renewal if that's a requirement for your application.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">DB Browser for SQLite でデータベースを開いた状態で API をテストし、アカウントを追加したところ、すぐには差分が現れず、DB Browser for SQLite を閉じたときに以下の二つのファイルが消えると同時に差分が現れた。</p>
+                            <div class="note_ai_generated">
+<p>The <code>.db-shm</code> and <code>.db-wal</code> files are associated with databases that use Write-Ahead Logging (WAL) as their storage mechanism. These files are commonly found in databases that use SQLite, a lightweight and serverless database engine that is often used in desktop and mobile applications.</p>
+<p>Here's what these files represent:</p>
+<ol>
+<li><p><strong>.db-shm (Shared Memory)</strong>:</p>
+<ul>
+<li>The <code>.db-shm</code> file is a shared memory file used by SQLite databases.</li>
+<li>SQLite uses shared memory to manage concurrent read and write operations efficiently.</li>
+<li>This file contains shared memory mappings used to coordinate access to the database file.</li>
+<li>It is used to improve database performance in multi-threaded or multi-process environments.</li>
+</ul>
+</li>
+<li><p><strong>.db-wal (Write-Ahead Log)</strong>:</p>
+<ul>
+<li>The <code>.db-wal</code> file is the Write-Ahead Log used by SQLite.</li>
+<li>In SQLite's Write-Ahead Logging mode, changes to the database are first written to the WAL file before being applied to the main database file.</li>
+<li>This mechanism ensures that write operations are atomic and can be rolled back if needed, providing durability and reliability.</li>
+<li>The WAL file allows for faster writes and reduced contention during concurrent read and write operations.</li>
+</ul>
+</li>
+</ol>
+<p>Here's a brief overview of how these files work together:</p>
+<ul>
+<li><p>When changes are made to a SQLite database, the changes are initially written to the <code>.db-wal</code> file. This allows other processes to continue reading from the main database file without locking it.</p>
+</li>
+<li><p>Periodically, or when certain conditions are met, the changes in the WAL file are &quot;checkpointed&quot; into the main database file. The checkpointing process effectively merges the changes from the WAL file into the main database file.</p>
+</li>
+<li><p>The <code>.db-shm</code> file is used for shared memory access control and optimization during concurrent database access. It helps ensure that multiple processes or threads can access the database efficiently without corrupting it.</p>
+</li>
+</ul>
+<p>These files are typically managed automatically by the SQLite database engine. Users of SQLite databases don't typically need to interact directly with <code>.db-shm</code> and <code>.db-wal</code> files. However, it's essential to be aware of them when working with SQLite databases, especially when dealing with file system operations, backup strategies, or investigating database performance and integrity issues.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">fanApiJwt を動くようにし、テストし、いったんコミットし、コードを全体的にチェックし、説明できないところをなくし、ほかにも設定するべきプロパティーなどを探し、再度コミットした。まだまだ甘いコードだが、いったん「追加」は完了とする。コンソールアプリからアクセスするなどのテストや、他者のコードの学習により、そのうち fanApiJwt も洗練されてくる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
