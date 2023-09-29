@@ -9713,6 +9713,150 @@ var connectionString = $&quot;Data Source={Path.Combine(environment.ContentRootP
                     <!-- Task: ba987945-9cf8-48b2-829c-3b1d83274a83 -->
                 </div>
             </div>
+            <div id="3b127716-93e5-4917-b2e2-46fce7f6aa1a" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">fanApiJwt に SMS の送信を実装</span>
+                    <a href="#3b127716-93e5-4917-b2e2-46fce7f6aa1a" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Amazon Simple Notification Service (SNS) is a fully managed pub/sub messaging service, primarily used for sending high-throughput messages, but it can be used to send emails as well. Below is a step-by-step guide to sending an email using Amazon SNS in an ASP.NET Core Web API.</p>
+<h3>Step 1: Set up Amazon SNS</h3>
+<ol>
+<li><strong>Create a Topic:</strong> Go to the <a href="https://console.aws.amazon.com/sns/">Amazon SNS Console</a>, create a new topic.</li>
+<li><strong>Create a Subscription:</strong> After creating the topic, create a subscription with the Protocol set to <code>Email</code> and the Endpoint set to the email address you want to send emails to.</li>
+</ol>
+<h3>Step 2: Set up AWS SDK</h3>
+<p>Install the AWS SDK NuGet package in your ASP.NET Core project:</p>
+<pre><code class="language-sh">dotnet add package AWSSDK.SimpleNotificationService
+</code></pre>
+<h3>Step 3: Configure AWS Options in Startup.cs</h3>
+<p>In <code>Startup.cs</code>, add the AWS options with your AWS credentials and Region.</p>
+<pre><code class="language-csharp">services.AddAWSService&lt;Amazon.SimpleNotificationService.IAmazonSimpleNotificationService&gt;(new AWSOptions
+{
+    Credentials = new Amazon.Runtime.BasicAWSCredentials(&quot;YOUR_ACCESS_KEY&quot;, &quot;YOUR_SECRET_KEY&quot;),
+    Region = RegionEndpoint.USEast1 // Change to your preferred region
+});
+</code></pre>
+<h3>Step 4: Inject and Use SNS in Controller</h3>
+<p>Inject <code>IAmazonSimpleNotificationService</code> in your controller and use it to publish a message.</p>
+<pre><code class="language-csharp">[ApiController]
+[Route(&quot;api/[controller]&quot;)]
+public class NotifyController : ControllerBase
+{
+    private readonly IAmazonSimpleNotificationService _snsClient;
+
+    public NotifyController(IAmazonSimpleNotificationService snsClient)
+    {
+        _snsClient = snsClient;
+    }
+
+    [HttpPost]
+    public async Task&lt;IActionResult&gt; SendEmail()
+    {
+        var topicArn = &quot;YOUR_TOPIC_ARN&quot;; // Replace with your Topic ARN
+        var subject = &quot;Your Email Subject&quot;;
+        var message = &quot;Your Email Message&quot;;
+
+        try
+        {
+            var publishRequest = new PublishRequest
+            {
+                Subject = subject,
+                Message = message,
+                TopicArn = topicArn
+            };
+
+            var response = await _snsClient.PublishAsync(publishRequest);
+
+            if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
+            {
+                return Ok(&quot;Email sent successfully!&quot;);
+            }
+            else
+            {
+                return StatusCode((int)response.HttpStatusCode, &quot;Failed to send email&quot;);
+            }
+        }
+        catch (Exception ex)
+        {
+            return BadRequest($&quot;Error: {ex.Message}&quot;);
+        }
+    }
+}
+</code></pre>
+<h3>Note</h3>
+<ul>
+<li>This is a simple example, and you may want to enhance it according to your requirements, e.g., error handling, logging, and configuration management for sensitive data like AWS Access Key, Secret Key, and Topic ARN.</li>
+<li>AWS Credentials should not be hardcoded for security reasons. Use AWS IAM roles, environment variables, or AWS Secrets Manager to handle AWS credentials.</li>
+<li>After a subscription is created, the endpoint (email address) will receive a confirmation email. The subscription must be confirmed before the endpoint can receive notifications from the topic.</li>
+<li>Amazon SNS uses a “publish/subscribe” (pub/sub) model, you publish messages to topics, and your subscribers (in this case, an email address) receive notifications. The above approach will send an email to all subscribers of the topic. If you wish to send transactional emails to individual recipients, consider using Amazon Simple Email Service (SES).</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>If you want to allow an IAM user to send SMS messages via Amazon SNS, you need to attach a policy to the user that grants permissions for the <code>sns:Publish</code> action. Here’s how you can do it:</p>
+<h3>Step 1: Create a Custom Policy</h3>
+<p>Create a custom IAM policy that grants permission to publish SMS messages.</p>
+<p>Here is an example of such a policy in JSON format. This policy allows sending SMS to any phone number (<code>*</code>). If needed, you can restrict it further by specifying resource ARNs.</p>
+<pre><code class="language-json">{
+    &quot;Version&quot;: &quot;2012-10-17&quot;,
+    &quot;Statement&quot;: [
+        {
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Action&quot;: &quot;sns:Publish&quot;,
+            &quot;Resource&quot;: &quot;*&quot;
+        }
+    ]
+}
+</code></pre>
+<h3>Step 2: Attach Policy to User</h3>
+<ol>
+<li>Go to the <a href="https://console.aws.amazon.com/iam/">IAM Console</a>.</li>
+<li>In the navigation pane, choose <strong>Users</strong>.</li>
+<li>Choose the name of the user that needs the permissions.</li>
+<li>Choose the <strong>Permissions</strong> tab, and then choose <strong>Add Permissions</strong>.</li>
+<li>Choose <strong>Attach existing policies directly</strong>.</li>
+<li>Choose the custom policy you created in Step 1 and attach it to the user.</li>
+</ol>
+<h3>Step 3: Sending SMS</h3>
+<p>Now the user should be able to send SMS using Amazon SNS. Here’s a brief example in AWS CLI:</p>
+<pre><code class="language-sh">aws sns publish --phone-number &quot;+1234567890&quot; --message &quot;Your message here&quot;
+</code></pre>
+<p>Replace <code>+1234567890</code> with the actual phone number you want to send an SMS to, and replace <code>&quot;Your message here&quot;</code> with the actual message content.</p>
+<h3>Notes</h3>
+<ul>
+<li>Make sure to follow the principle of least privilege, meaning you should only grant the permissions necessary for users to complete their tasks.</li>
+<li>Amazon SNS allows sending SMS messages, but be aware of the costs associated with sending SMS via Amazon SNS. Also, note that SMS pricing varies depending on the destination country.</li>
+<li>Consider limiting the policy even further by adding conditions such as restricting it to specific IP ranges or VPCs.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">AmazonSNSFullAccess を追加した。最初、出てこなかった。ログインがタイムアウトしていたからか。</p>
+                            <p class="note_contents">ステータスコード200が返るようになったが、SMS は届いていない。メールのときと同じ状況。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">「サンドボックスの送信先電話番号」に番号を追加した。</p>
+                            <p class="note_contents">検証の SMS は、241019という番号から届いた。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">あっけなく届いたので、コードを洗い、コミットした。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
