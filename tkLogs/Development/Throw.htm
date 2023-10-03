@@ -10391,6 +10391,1257 @@ services.AddDefaultIdentity&lt;ApplicationUser&gt;(options =&gt; options.SignIn.
                     </div>
                 </div>
             </div>
+            <div id="a021019b-30d3-4e8c-9a97-bc20261f354f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">PasswordSignInAsync の isPersistent について調べる</span>
+                    <a href="#a021019b-30d3-4e8c-9a97-bc20261f354f" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In an ASP.NET Core Web API, when you are using the <code>PasswordSignInAsync</code> method (typically from <code>SignInManager</code>), the <code>isPersistent</code> parameter determines whether the authentication cookie should be persistent or session-based. However, the implications and relevance of this parameter depend largely on the client and the nature of the application.</p>
+<p>Let's break it down:</p>
+<ol>
+<li><p><strong>Browser Scenario</strong>: If you were building a traditional web application, <code>isPersistent</code> would dictate the behavior of the auth cookie. If set to <code>true</code>, the cookie would survive browser restarts. If <code>false</code>, the cookie would be discarded once the browser session ends.</p>
+</li>
+<li><p><strong>SPA or Mobile/Web Client Scenario</strong>: For a Single Page Application (SPA) or a mobile or desktop application that's connecting to the ASP.NET Core Web API, the concept of a persistent cookie doesn't carry much meaning. Such clients typically use token-based authentication, like JWT (JSON Web Tokens). In this case, the persistence of the token (how and where it's stored) is managed by the client application, and the server simply issues and validates tokens. The <code>PasswordSignInAsync</code> method and the associated cookie authentication middleware aren't usually used in such scenarios.</p>
+</li>
+<li><p><strong>API-to-API Scenario</strong>: If one API is communicating with another, you generally don't use cookie-based authentication. Instead, client credentials, JWTs, or some other mechanism might be used.</p>
+</li>
+</ol>
+<p>Given your description (&quot;the client will not be a browser&quot;), it seems you might be alluding to either the second or third scenario. If that's the case:</p>
+<ul>
+<li><p>If you're using JWT or another token mechanism for authentication in your Web API, the <code>isPersistent</code> flag in <code>PasswordSignInAsync</code> becomes largely irrelevant. Instead, you'd manage token expiration and refresh mechanisms.</p>
+</li>
+<li><p>If you're still using cookies for some reason (which is uncommon for pure APIs), then the persistence of the cookie would still be dictated by the <code>isPersistent</code> parameter. However, handling and storing cookies in non-browser clients can be tricky, so it's typically avoided in favor of token-based authentication.</p>
+</li>
+</ul>
+<p>In summary, in most modern Web API scenarios where the client isn't a traditional web browser, you'd use token-based authentication and the <code>isPersistent</code> flag would be irrelevant. If you're using cookies, consider the nature of the client and how it manages cookies before deciding on the value for <code>isPersistent</code>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="f1a558ed-bc51-4e52-b2be-a985731efe11" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">SaveToken について聞く</span>
+                    <a href="#f1a558ed-bc51-4e52-b2be-a985731efe11" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">聞きたかったことでないが、参考になる。</p>
+                            <div class="note_ai_generated">
+<p>In ASP.NET Core, the <code>SaveTokens</code> property is relevant when you're using external authentication providers, like Google, Facebook, Microsoft, or any OpenID Connect provider. When you set <code>SaveTokens</code> to <code>true</code>, the tokens provided by the external authentication service are saved after a successful authentication.</p>
+<p>Here's why and when you might want to enable <code>SaveTokens</code>:</p>
+<ol>
+<li><p><strong>Accessing User Information Later</strong>: Often, you might want to make API calls to the external provider on behalf of the user after they've authenticated. For instance, if a user logs in via Google, you might want to access their Google Calendar. To do that, you'll need their access token, which is given to you only once when they authenticate. By setting <code>SaveTokens</code> to <code>true</code>, these tokens are stored and can be retrieved later to make such API calls.</p>
+</li>
+<li><p><strong>Refreshing Expired Tokens</strong>: Access tokens usually have a short lifespan. However, alongside the access token, external providers often give a refresh token that can be used to get a new access token when the old one expires. By saving tokens, you'll have the necessary refresh token to obtain a new access token without asking the user to re-authenticate.</p>
+</li>
+<li><p><strong>Auditing or Logging</strong>: For auditing or logging purposes, you might want to keep a record of tokens (although be cautious about security implications).</p>
+</li>
+<li><p><strong>Custom Logic Based on Token</strong>: Sometimes, the application might have custom logic or routing based on the specific token or claims associated with a token. Saving tokens can facilitate such scenarios.</p>
+</li>
+</ol>
+<p>Here's a simple example of how you might enable <code>SaveTokens</code> in your startup configuration:</p>
+<pre><code class="language-csharp">services.AddAuthentication()
+    .AddGoogle(options =&gt;
+    {
+        options.ClientId = &quot;your-client-id&quot;;
+        options.ClientSecret = &quot;your-client-secret&quot;;
+        options.SaveTokens = true;
+    });
+</code></pre>
+<p>However, there are important security considerations:</p>
+<ul>
+<li><p><strong>Sensitive Data</strong>: Tokens are sensitive. If they're saved in an insecure manner or location, they could be accessed by malicious actors. Ensure that wherever you're saving them, they're protected.</p>
+</li>
+<li><p><strong>Storage Overhead</strong>: Storing tokens for a large number of users might introduce overhead. Plan accordingly.</p>
+</li>
+<li><p><strong>Token Rotation and Revocation</strong>: If a token is compromised, it's important to have mechanisms to revoke or rotate them. Consider token lifespans and your strategies for refresh tokens.</p>
+</li>
+</ul>
+<p>In summary, enable <code>SaveTokens</code> when you need access to the tokens post-authentication for tasks like API access, token refresh, or custom logic. Always ensure the secure handling and storage of tokens.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The <code>SaveToken</code> property on <code>JwtBearerOptions</code> in ASP.NET Core is a bit different from the <code>SaveTokens</code> property in external authentication providers' configuration. The <code>SaveToken</code> property in the JWT bearer configuration determines whether the bearer token (the JWT token) should be stored in the <code>AuthenticationProperties</code> after a successful validation.</p>
+<p>Here's what it does:</p>
+<p>When you set <code>SaveToken</code> to <code>true</code> in the <code>JwtBearerOptions</code>, after the middleware validates the incoming JWT token, it saves the token in the <code>AuthenticationProperties</code> of the <code>AuthenticationTicket</code>. This means that later in the request pipeline, you can retrieve and inspect the token if needed.</p>
+<p>For instance:</p>
+<pre><code class="language-csharp">services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =&gt;
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            // ... other parameters
+        };
+        options.SaveToken = true;
+    });
+</code></pre>
+<p>Later in your pipeline (e.g., inside a controller action), you could retrieve the token like this:</p>
+<pre><code class="language-csharp">var authenticateInfo = await HttpContext.AuthenticateAsync(JwtBearerDefaults.AuthenticationScheme);
+string token = authenticateInfo.Properties.GetTokenValue(&quot;access_token&quot;);
+</code></pre>
+<p>Why might you want to use <code>SaveToken</code>?</p>
+<ol>
+<li><p><strong>Inspecting the Token</strong>: Sometimes you might need to inspect the token for logging, auditing, or additional validation purposes within your application logic.</p>
+</li>
+<li><p><strong>Passing the Token</strong>: In some scenarios, especially in microservices architectures, one service might need to forward the token to another downstream service. Having the token easily accessible can be handy.</p>
+</li>
+</ol>
+<p>However, in many standard applications, there's no need to set <code>SaveToken</code> to <code>true</code>, because once the token is validated, you typically use the claims and identity established by the token rather than the token itself.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>For the <code>JwtBearerOptions</code> in ASP.NET Core, the default value of the <code>SaveToken</code> property is <code>false</code>.</p>
+<p>This means that, by default, the token isn't stored in the <code>AuthenticationProperties</code> after validation. If you want to access the token later in the request pipeline, you'll need to explicitly set <code>SaveToken</code> to <code>true</code>.</p>
+<p>However, for many applications, the default behavior is appropriate, as you usually work with the claims and identity once the token is validated rather than the token itself.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="eda6d1ea-567a-4ef5-a549-6cc25fdf97f9" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">fanApiJwt において、ちょっとした情報をデータベースに入れておく仕組みをつくる</span>
+                    <a href="#eda6d1ea-567a-4ef5-a549-6cc25fdf97f9" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Implementing a simple, database-based Key-Value Store (KVS) functionality in an ASP.NET Core Web API is quite straightforward. Here’s a simple step-by-step guide:</p>
+<h3>1. Create a New Project</h3>
+<p>Create a new ASP.NET Core Web API project using Visual Studio or the .NET CLI.</p>
+<pre><code class="language-shell">dotnet new webapi -n SimpleKVS
+</code></pre>
+<h3>2. Define a Model</h3>
+<p>Define a simple model class that represents the key-value pair in the database.</p>
+<pre><code class="language-csharp">public class KeyValuePair
+{
+    public string Key { get; set; }
+    public string Value { get; set; }
+}
+</code></pre>
+<h3>3. Setup Database Context</h3>
+<p>Set up the database context using Entity Framework Core. You can use any supported database provider.</p>
+<p>Here's an example with SQL Server:</p>
+<pre><code class="language-csharp">public class SimpleKVSContext : DbContext
+{
+    public SimpleKVSContext(DbContextOptions&lt;SimpleKVSContext&gt; options)
+        : base(options)
+    { }
+
+    public DbSet&lt;KeyValuePair&gt; KeyValuePairs { get; set; }
+}
+</code></pre>
+<h3>4. Configure Database in Startup</h3>
+<p>In your <code>Startup.cs</code>, register the database context with the desired database provider in the <code>ConfigureServices</code> method.</p>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    services.AddDbContext&lt;SimpleKVSContext&gt;(options =&gt;
+        options.UseSqlServer(Configuration.GetConnectionString(&quot;DefaultConnection&quot;)));
+    services.AddControllers();
+}
+</code></pre>
+<h3>5. Create a Controller</h3>
+<p>Create a new controller for handling the API requests.</p>
+<pre><code class="language-csharp">[Route(&quot;api/[controller]&quot;)]
+[ApiController]
+public class KVSController : ControllerBase
+{
+    private readonly SimpleKVSContext _context;
+
+    public KVSController(SimpleKVSContext context)
+    {
+        _context = context;
+    }
+
+    [HttpGet(&quot;{key}&quot;)]
+    public async Task&lt;IActionResult&gt; Get(string key)
+    {
+        var kvp = await _context.KeyValuePairs.FindAsync(key);
+        if (kvp == null) return NotFound();
+        return Ok(kvp.Value);
+    }
+
+    [HttpPost]
+    public async Task&lt;IActionResult&gt; Post([FromBody] KeyValuePair kvp)
+    {
+        _context.KeyValuePairs.Add(kvp);
+        await _context.SaveChangesAsync();
+        return CreatedAtAction(nameof(Get), new { key = kvp.Key }, kvp);
+    }
+}
+</code></pre>
+<h3>6. Configure Connection String</h3>
+<p>In <code>appsettings.json</code>, add the connection string for your database.</p>
+<pre><code class="language-json">{
+  &quot;ConnectionStrings&quot;: {
+    &quot;DefaultConnection&quot;: &quot;YourConnectionStringHere&quot;
+  },
+  &quot;Logging&quot;: {
+    &quot;LogLevel&quot;: {
+      &quot;Default&quot;: &quot;Information&quot;,
+      &quot;Microsoft&quot;: &quot;Warning&quot;,
+      &quot;Microsoft.Hosting.Lifetime&quot;: &quot;Information&quot;
+    }
+  },
+  &quot;AllowedHosts&quot;: &quot;*&quot;
+}
+</code></pre>
+<h3>7. Database Migration</h3>
+<p>Finally, apply the Entity Framework migration to create the database schema.</p>
+<pre><code class="language-shell">dotnet ef migrations add InitialCreate
+dotnet ef database update
+</code></pre>
+<h3>8. Run Your Project</h3>
+<p>Run your project and test your simple KVS API using a tool like Postman or Swagger.</p>
+<pre><code class="language-shell">dotnet run
+</code></pre>
+<h3>Note</h3>
+<ul>
+<li>This is a simple and unoptimized example for learning purposes. In a production scenario, consider optimizing the database schema, adding validation, error handling, and securing the API.</li>
+<li>You may also want to use a dedicated caching system like Redis when dealing with key-value pairs for more performance and scalability.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The <code>FindAsync</code> method in Entity Framework Core is optimized for finding entities by their primary keys, and it’s generally more efficient compared to other querying methods when used for this purpose.</p>
+<p>Here is what happens when you call <code>FindAsync</code>:</p>
+<ol>
+<li><p><strong>Entity Tracking</strong>: EF Core first checks the local cache (the <code>DbContext</code> instance) to see if the entity is being tracked. If it is found in the local cache, it is returned immediately, and no database query is executed.</p>
+</li>
+<li><p><strong>Database Query</strong>: If the entity is not found in the local cache, then EF Core issues a SQL query to the database to find the entity by its primary key. The SQL generated is optimized to search by the primary key and retrieves only the entity that matches the given key.</p>
+</li>
+<li><p><strong>Early Termination</strong>: Databases optimize primary key lookups, and they typically use index seeks to find the matching row as quickly as possible and terminate the search as soon as the matching row is found.</p>
+</li>
+<li><p><strong>Materialization</strong>: Once the entity is found, EF Core creates an instance of the entity (or materializes it) and starts tracking it in the local cache.</p>
+</li>
+</ol>
+<p>Here’s an example of how it’s used:</p>
+<pre><code class="language-csharp">var entity = await _context.Entities.FindAsync(id);
+</code></pre>
+<p>In this scenario, assuming <code>id</code> is the primary key, EF Core will either return the entity from the local cache or will issue a SQL query to the database to find the entity with the specified <code>id</code>.</p>
+<p>The <code>FindAsync</code> method does not load all entities into memory and then perform the search. It efficiently queries the database using the primary key value. If you have configured the key property properly in your model, then this operation is very efficient, and it is optimized at the database level as databases are generally optimized for primary key lookups.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Using Redis can significantly improve performance, especially in high-load scenarios, but the comparison with Entity Framework Core’s (EF Core) caching is not exactly apples-to-apples, as they serve different purposes and operate at different levels.</p>
+<h3>EF Core Caching</h3>
+<p>EF Core does some level of caching, primarily related to entity tracking within a specific <code>DbContext</code> instance. It helps in avoiding redundant database round trips during the lifetime of a single <code>DbContext</code> instance. However, this caching is transient and per-request in a typical web application since <code>DbContext</code> is usually registered with a scoped lifetime.</p>
+<h3>Redis Caching</h3>
+<p>Redis, on the other hand, is an in-memory data store that can serve as a distributed cache. It can significantly improve performance by reducing the load on the database and enabling fast, scalable read and write operations. Data stored in Redis is accessible across different instances, nodes, and requests, making it suitable for more global and persistent caching needs. Here are a few points regarding Redis usage:</p>
+<ul>
+<li><strong>Cross-Request Caching</strong>: Data cached in Redis is available across multiple requests and users.</li>
+<li><strong>Distributed Environment</strong>: Redis is particularly helpful in load-balanced, distributed environments where caching needs to be shared across multiple servers/nodes.</li>
+<li><strong>High Read/Write Throughput</strong>: Redis is optimized for high-throughput scenarios and can serve read/write operations much faster than a typical relational database.</li>
+</ul>
+<h3>When to Use Redis</h3>
+<p>Consider using Redis when:</p>
+<ol>
+<li><strong>Global Caching Needs</strong>: You need a cache shared across multiple instances or nodes.</li>
+<li><strong>High Throughput</strong>: Your application has high read/write throughput requirements.</li>
+<li><strong>Scale</strong>: You are working in a distributed, load-balanced environment.</li>
+<li><strong>Persistence</strong>: You need more persistent caching that survives across requests.</li>
+</ol>
+<h3>Summary</h3>
+<p>While EF Core’s internal caching mechanisms can help optimize performance for single-request lifecycles, Redis can substantially improve performance by acting as a fast, distributed, and scalable caching layer for read-heavy and high-throughput scenarios, reducing database load and improving overall response times.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In ASP.NET Core, a &quot;scope&quot; typically refers to the lifetime of an HTTP request, from receiving the request to sending the response. Dependency injection in ASP.NET Core utilizes this concept to manage the lifetimes of services and their dependencies.</p>
+<h3>Service Lifetimes:</h3>
+<ul>
+<li><strong>Transient</strong>: Created each time they're requested.</li>
+<li><strong>Scoped</strong>: Created once per client request (connection).</li>
+<li><strong>Singleton</strong>: Created the first time they're requested (or when <code>Startup.cs</code> configures the services, if done eagerly). Every subsequent request uses the same instance.</li>
+</ul>
+<h3>Scoped Lifetime:</h3>
+<p>When a service is registered as &quot;Scoped,&quot; it is created once per request. This means if you inject a Scoped service into a controller, you get a new instance of that service for each HTTP request that comes into that controller, regardless of whether the request is hitting the same or different endpoints within that controller.</p>
+<h3>Example:</h3>
+<p>Let's say a user hits three different endpoints in the same controller sequentially:</p>
+<ol>
+<li><code>GET /api/values/1</code></li>
+<li><code>POST /api/values</code></li>
+<li><code>PUT /api/values/1</code></li>
+</ol>
+<p>For each of these HTTP requests, a new scope is created, and therefore a new instance of any Scoped service is created. It doesn’t matter whether these requests are to the same controller or not. Each request is a separate scope.</p>
+<h3>Visual Representation:</h3>
+<pre><code>HTTP Request 1 (GET /api/values/1) --&gt; Scoped Lifetime 1 (Service Instance 1)
+HTTP Request 2 (POST /api/values) --&gt; Scoped Lifetime 2 (Service Instance 2)
+HTTP Request 3 (PUT /api/values/1) --&gt; Scoped Lifetime 3 (Service Instance 3)
+</code></pre>
+<h3>Conclusion:</h3>
+<p>So, to answer your question, each call to an endpoint represents a different scope, not multiple calls within the same scope, even if they are in the same controller and even if they are sequential from the same user.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Great question! Both <code>Scoped</code> and <code>Transient</code> service lifetimes in ASP.NET Core’s Dependency Injection container dictate how services are created, but they serve different purposes. Here’s how they differ:</p>
+<h3>1. <strong>Transient Services:</strong></h3>
+<ul>
+<li><strong>Creation:</strong> A new instance is created every time a transient service is requested.</li>
+<li><strong>Use Case:</strong> Ideal for lightweight, stateless services.</li>
+<li><strong>Example:</strong>
+<pre><code class="language-csharp">services.AddTransient&lt;IMyService, MyService&gt;();
+</code></pre>
+</li>
+<li><strong>Illustration:</strong> If a transient service is injected into multiple places within a single HTTP request (e.g., into a controller and a service class), a new instance is created for each injection point.</li>
+</ul>
+<h3>2. <strong>Scoped Services:</strong></h3>
+<ul>
+<li><strong>Creation:</strong> A new instance is created once per client request (HTTP Request).</li>
+<li><strong>Use Case:</strong> Ideal for services where you want to maintain state across the lifetime of a single HTTP request.</li>
+<li><strong>Example:</strong>
+<pre><code class="language-csharp">services.AddScoped&lt;IMyService, MyService&gt;();
+</code></pre>
+</li>
+<li><strong>Illustration:</strong> If a scoped service is injected into multiple places within a single HTTP request (e.g., into a controller and a service class), the same instance is reused at each injection point within that request.</li>
+</ul>
+<h3>Visual Comparison:</h3>
+<p>Let’s illustrate this with an HTTP request hitting an endpoint, with services being injected into a controller and a service class.</p>
+<ul>
+<li><p><strong>For Transient:</strong></p>
+<pre><code>HTTP Request --&gt; Controller (TransientService Instance 1)
+              --&gt; Service Class (TransientService Instance 2)
+</code></pre>
+</li>
+<li><p><strong>For Scoped:</strong></p>
+<pre><code>HTTP Request --&gt; Controller (ScopedService Instance 1)
+              --&gt; Service Class (ScopedService Instance 1)
+</code></pre>
+</li>
+</ul>
+<p>In summary, while transient services are created anew for every injection point, scoped services are created once per HTTP request and are shared across different injection points within the same HTTP request lifecycle.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Injecting dependencies through constructors is a common practice in object-oriented design and is generally recommended for several reasons such as promoting a cleaner and more testable codebase. However, if a class, like a controller, has too many dependencies (a code smell often referred to as “Constructor Over-injection” or &quot;Too Many Dependencies&quot;), it could be a sign that the class might be doing too much and may be violating the Single Responsibility Principle (SRP).</p>
+<h3>Refactoring Suggestions:</h3>
+<ol>
+<li><p><strong>Refactor to Multiple Controllers:</strong>
+If your controller is handling too many concerns, consider splitting it into multiple controllers, each aligning with a specific responsibility or domain.</p>
+</li>
+<li><p><strong>Use Facade Services:</strong>
+Bundle related dependencies into a single “Facade” service. The controller then depends on fewer, more coarse-grained services rather than a large number of fine-grained services.</p>
+</li>
+<li><p><strong>Service Locator Pattern:</strong>
+Although generally considered an anti-pattern due to the hidden dependencies and the difficulty in managing lifetimes, using a Service Locator or a Method Injection could sometimes be considered in such situations. However, this approach comes with trade-offs and is usually not recommended unless necessary.</p>
+</li>
+<li><p><strong>Endpoint Injection:</strong>
+Injecting services directly into action methods (endpoint-level injection) can be useful in some scenarios; however, it can make the action methods more cumbersome and less intuitive.</p>
+</li>
+</ol>
+<h3>General Recommendation:</h3>
+<p>While considering refactoring to reduce the number of dependencies, it’s usually preferable to continue with constructor injection for the benefits it brings in terms of cleaner and more manageable code.</p>
+<p>Here’s a simplified example to demonstrate using a Facade Service:</p>
+<pre><code class="language-csharp">// Group related services into a Facade Service
+public class FacadeService
+{
+    public IService1 Service1 { get; }
+    public IService2 Service2 { get; }
+    // ... Other related services
+
+    public FacadeService(IService1 service1, IService2 service2 /*, ... Other related services*/)
+    {
+        Service1 = service1;
+        Service2 = service2;
+        // ...
+    }
+}
+
+// Controller with reduced dependencies
+[ApiController]
+[Route(&quot;[controller]&quot;)]
+public class MyController : ControllerBase
+{
+    private readonly FacadeService _facadeService;
+
+    public MyController(FacadeService facadeService)
+    {
+        _facadeService = facadeService;
+    }
+
+    [HttpGet]
+    public IActionResult Get()
+    {
+        // Use _facadeService.Service1, _facadeService.Service2, ...
+        return Ok();
+    }
+}
+</code></pre>
+<p>This way, you maintain the clarity and testability benefits of constructor injection while managing a more reasonable number of dependencies.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Certainly! When a service is registered as <code>Transient</code>, a new instance of the service is created each time it's requested, either directly or as a dependency of another type. This can be illustrated within a single HTTP request by injecting the service into different parts of the application, such as into a controller and another service class.</p>
+<p>Here's a simple example. Let’s consider a hypothetical <code>ITransientService</code>, and we’ll inject it into a controller and another service class within the same HTTP request to show how different instances are created:</p>
+<h3>Define a Transient Service</h3>
+<pre><code class="language-csharp">public interface ITransientService
+{
+    Guid InstanceId { get; }
+}
+
+public class TransientService : ITransientService
+{
+    public Guid InstanceId { get; } = Guid.NewGuid();
+}
+</code></pre>
+<h3>Register Transient Service in Startup.cs</h3>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    services.AddTransient&lt;ITransientService, TransientService&gt;();
+    // ... Other services
+}
+</code></pre>
+<h3>Inject Transient Service into a Controller and Another Service</h3>
+<pre><code class="language-csharp">public class MyService
+{
+    public ITransientService TransientService { get; }
+    public MyService(ITransientService transientService)
+    {
+        TransientService = transientService;
+    }
+}
+
+[ApiController]
+[Route(&quot;[controller]&quot;)]
+public class MyController : ControllerBase
+{
+    private readonly ITransientService _transientService;
+    private readonly MyService _myService;
+
+    public MyController(ITransientService transientService, MyService myService)
+    {
+        _transientService = transientService;
+        _myService = myService;
+    }
+
+    [HttpGet]
+    public IActionResult Get()
+    {
+        var controllerInstanceId = _transientService.InstanceId;
+        var serviceInstanceId = _myService.TransientService.InstanceId;
+
+        return Ok(new
+        {
+            ControllerInstanceId = controllerInstanceId,
+            ServiceInstanceId = serviceInstanceId,
+            AreInstancesDifferent = controllerInstanceId != serviceInstanceId
+        });
+    }
+}
+</code></pre>
+<p>In this example, if you invoke the <code>GET</code> method on the <code>MyController</code> controller, you will receive different instance IDs for the <code>TransientService</code> injected into the <code>MyController</code> and the <code>MyService</code>. The <code>AreInstancesDifferent</code> property will be <code>true</code>, illustrating that different instances of <code>TransientService</code> are created for the controller and the service, even within the same HTTP request.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Your observations are indeed valid, and the decision to choose between Transient, Scoped, or Singleton service lifetimes depends on the specific requirements and the nature of the service being used. Here are some scenarios where different service lifetimes are appropriate:</p>
+<h3>1. <strong>Transient:</strong></h3>
+<ul>
+<li><strong>Use Case:</strong> Ideal for stateless services, where sharing state between consumers is undesirable.</li>
+<li><strong>Example:</strong> Lightweight helper or utility classes, services that hold a temporary state that should not be shared.</li>
+<li><strong>Pros:</strong> Avoids shared state and side effects between consumers.</li>
+<li><strong>Cons:</strong> Can lead to higher memory usage and GC pressure if instances are large or numerous.</li>
+</ul>
+<h3>2. <strong>Scoped:</strong></h3>
+<ul>
+<li><strong>Use Case:</strong> Useful for services that should share state within a single HTTP request but not between different HTTP requests.</li>
+<li><strong>Example:</strong> Database context in Entity Framework Core, User context holding information about the current user.</li>
+<li><strong>Pros:</strong> Shares state within a request, avoiding redundant instance creation.</li>
+<li><strong>Cons:</strong> Can introduce side effects if the state is mutated within the request.</li>
+</ul>
+<h3>3. <strong>Singleton:</strong></h3>
+<ul>
+<li><strong>Use Case:</strong> Suitable for stateful services shared across all HTTP requests, or expensive to create services.</li>
+<li><strong>Example:</strong> Configuration services, caching services, single-instance background services.</li>
+<li><strong>Pros:</strong> Reduces overhead of instance creation, shares state across requests.</li>
+<li><strong>Cons:</strong> Can introduce side effects and threading issues due to shared state.</li>
+</ul>
+<h3>Decision Factors:</h3>
+<ul>
+<li><strong>Statelessness:</strong> Use Transient for truly stateless services.</li>
+<li><strong>Per-Request State Sharing:</strong> Use Scoped when state needs to be shared within a single request.</li>
+<li><strong>Application-wide State Sharing:</strong> Use Singleton for application-wide state or expensive-to-create services.</li>
+</ul>
+<h3>Example:</h3>
+<p>In the case of an email sending service:</p>
+<ul>
+<li>If it’s lightweight and doesn’t hold any state, it can be Transient.</li>
+<li>If it holds configuration or state that is expensive to create but doesn’t change, it can be Singleton.</li>
+<li>If it needs to hold some state specific to each request, it can be Scoped.</li>
+</ul>
+<pre><code class="language-csharp">public interface IEmailSender
+{
+    Task SendEmailAsync(string recipient, string subject, string message);
+}
+
+public class EmailSender : IEmailSender
+{
+    // Possibly some configuration here, like SMTP settings
+    public Task SendEmailAsync(string recipient, string subject, string message)
+    {
+        // Implementation of email sending here
+    }
+}
+
+// Registering as Singleton, if it is stateless or holds immutable state
+services.AddSingleton&lt;IEmailSender, EmailSender&gt;();
+</code></pre>
+<p>In summary, it’s crucial to consider the nature and usage of the service, the desired level of state sharing, and the potential impact on memory and performance when deciding the lifetime of a service.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When a class <code>ServiceB</code> inherits from <code>ServiceA</code>, <code>ServiceB</code> does inherit the behavior (methods) and state (fields/properties) of <code>ServiceA</code>. However, if you register <code>ServiceA</code> and <code>ServiceB</code> separately in the DI container, they will be treated as separate services, even though there is an inheritance relationship between them.</p>
+<p>When you resolve <code>ServiceB</code> as a dependency, it won’t automatically receive the instance or configuration of <code>ServiceA</code> registered in the container. The configuration applied to <code>ServiceA</code> when it was registered will not automatically apply to instances of <code>ServiceB</code> unless <code>ServiceB</code> is explicitly configured with it.</p>
+<p>Here's a simple example to illustrate this:</p>
+<h3>Define Services</h3>
+<pre><code class="language-csharp">public class ServiceA
+{
+    public string Configuration { get; set; }
+}
+
+public class ServiceB : ServiceA { }
+</code></pre>
+<h3>Register Services in Startup.cs</h3>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    services.AddSingleton&lt;ServiceA&gt;(provider =&gt;
+    {
+        var serviceA = new ServiceA();
+        serviceA.Configuration = &quot;Config for ServiceA&quot;;
+        return serviceA;
+    });
+
+    services.AddTransient&lt;ServiceB&gt;();
+}
+</code></pre>
+<h3>Inject ServiceB into a Controller</h3>
+<pre><code class="language-csharp">[ApiController]
+[Route(&quot;[controller]&quot;)]
+public class MyController : ControllerBase
+{
+    private readonly ServiceB _serviceB;
+
+    public MyController(ServiceB serviceB)
+    {
+        _serviceB = serviceB;
+    }
+
+    [HttpGet]
+    public string Get()
+    {
+        return _serviceB.Configuration; // This will be null
+    }
+}
+</code></pre>
+<p>In this example, even though <code>ServiceB</code> inherits from <code>ServiceA</code>, the <code>Configuration</code> property of the resolved <code>ServiceB</code> instance will be <code>null</code>, as it doesn’t automatically receive the configuration applied to <code>ServiceA</code>.</p>
+<h3>Solution:</h3>
+<p>If you want <code>ServiceB</code> instances to have specific configurations or behavior from <code>ServiceA</code>, you could:</p>
+<ol>
+<li>Apply the same configuration to <code>ServiceB</code> when it is registered.</li>
+<li>Or, you could configure <code>ServiceB</code> instances within their constructor or by overriding methods from <code>ServiceA</code> if necessary.</li>
+</ol>
+<h3>Example:</h3>
+<pre><code class="language-csharp">public class ServiceB : ServiceA
+{
+    public ServiceB()
+    {
+        Configuration = &quot;Config for ServiceB&quot;;
+    }
+}
+</code></pre>
+<p>In this case, if you inject <code>ServiceB</code>, the <code>Configuration</code> property will hold the value &quot;Config for ServiceB&quot;.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">AWS によるメールや SMS の送信における transient のところが今も気になっていたが、やはり大丈夫。自分が scoped と transient の違いをはっきりと理解していなかった。</p>
+                            <div class="note_ai_generated">
+<p>Yes, you are correct! If <code>ServiceB</code> composes <code>ServiceA</code> by having a field for it, and <code>ServiceA</code> is injected into <code>ServiceB</code> via its constructor, then each instance of <code>ServiceB</code> will have access to the configured instance of <code>ServiceA</code>. In this composition scenario, if <code>ServiceA</code> is configured when it's registered in the DI container, any transient <code>ServiceB</code> instances that are created and injected into controllers or other services will indeed have access to the configured <code>ServiceA</code> instance.</p>
+<p>Here’s a small example to illustrate this:</p>
+<h3>Define Services</h3>
+<pre><code class="language-csharp">public class ServiceA
+{
+    public string Configuration { get; set; }
+}
+
+public class ServiceB
+{
+    private readonly ServiceA _serviceA;
+
+    public ServiceB(ServiceA serviceA)
+    {
+        _serviceA = serviceA;
+    }
+
+    public string GetConfiguration()
+    {
+        return _serviceA.Configuration;
+    }
+}
+</code></pre>
+<h3>Register Services in Startup.cs</h3>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    services.AddSingleton&lt;ServiceA&gt;(provider =&gt;
+    {
+        var serviceA = new ServiceA();
+        serviceA.Configuration = &quot;Configured Value&quot;;
+        return serviceA;
+    });
+
+    services.AddTransient&lt;ServiceB&gt;();
+}
+</code></pre>
+<h3>Inject ServiceB into a Controller</h3>
+<pre><code class="language-csharp">[ApiController]
+[Route(&quot;[controller]&quot;)]
+public class MyController : ControllerBase
+{
+    private readonly ServiceB _serviceB;
+
+    public MyController(ServiceB serviceB)
+    {
+        _serviceB = serviceB;
+    }
+
+    [HttpGet]
+    public string Get()
+    {
+        return _serviceB.GetConfiguration(); // This will return &quot;Configured Value&quot;
+    }
+}
+</code></pre>
+<p>In this scenario, when you inject <code>ServiceB</code> into your controller, it will have access to the configured <code>ServiceA</code> instance, and calling the <code>GetConfiguration</code> method on <code>ServiceB</code> will indeed return the configuration attached to <code>ServiceA</code>.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To use Redis as a cache in an ASP.NET Core Web API, you can leverage the <code>StackExchange.Redis</code> NuGet package, which is a popular Redis client library for .NET.</p>
+<p>Here are the steps to follow:</p>
+<h3>1. Install the NuGet Package</h3>
+<p>Run the following command in your package manager console or terminal within your project directory to install the <code>StackExchange.Redis</code> package:</p>
+<pre><code class="language-shell">dotnet add package StackExchange.Redis
+</code></pre>
+<h3>2. Configure Redis in <code>Startup.cs</code></h3>
+<p>You need to configure the Redis connection in the <code>Startup.cs</code> file, usually within the <code>ConfigureServices</code> method.</p>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    // Other service configurations
+
+    services.AddSingleton&lt;IConnectionMultiplexer&gt;(sp =&gt;
+    {
+        var configuration = ConfigurationOptions.Parse(&quot;YourRedisConnectionString&quot;, true);
+        return ConnectionMultiplexer.Connect(configuration);
+    });
+}
+</code></pre>
+<p>Replace <code>&quot;YourRedisConnectionString&quot;</code> with your actual Redis connection string.</p>
+<h3>3. Implement Caching Logic</h3>
+<p>Here’s an example of a service class that uses Redis for caching key-value pairs:</p>
+<pre><code class="language-csharp">public class RedisCacheService
+{
+    private readonly IDatabase _database;
+
+    public RedisCacheService(IConnectionMultiplexer connectionMultiplexer)
+    {
+        _database = connectionMultiplexer.GetDatabase();
+    }
+
+    public async Task&lt;string&gt; GetCachedValueAsync(string key)
+    {
+        return await _database.StringGetAsync(key);
+    }
+
+    public async Task SetCacheValueAsync(string key, string value, TimeSpan? expiry = null)
+    {
+        await _database.StringSetAsync(key, value, expiry);
+    }
+}
+</code></pre>
+<h3>4. Register Your Cache Service</h3>
+<p>In your <code>Startup.cs</code>, you can register your cache service like this:</p>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    // Other service configurations
+
+    services.AddScoped&lt;RedisCacheService&gt;();
+}
+</code></pre>
+<h3>5. Use the Cache Service in Your Controller</h3>
+<p>Finally, inject the <code>RedisCacheService</code> into your controller or any other service where you want to use caching and use its methods to get/set cache values:</p>
+<pre><code class="language-csharp">[ApiController]
+[Route(&quot;[controller]&quot;)]
+public class MyController : ControllerBase
+{
+    private readonly RedisCacheService _cacheService;
+
+    public MyController(RedisCacheService cacheService)
+    {
+        _cacheService = cacheService;
+    }
+
+    [HttpGet(&quot;{key}&quot;)]
+    public async Task&lt;IActionResult&gt; Get(string key)
+    {
+        var cachedValue = await _cacheService.GetCachedValueAsync(key);
+        if (cachedValue != null)
+            return Ok(cachedValue);
+
+        // If the value is not in the cache, you might want to get the real value,
+        // cache it, and then return it.
+        var realValue = &quot;Some Value&quot;; // Replace with your logic to get the real value.
+        await _cacheService.SetCacheValueAsync(key, realValue, TimeSpan.FromHours(1)); // 1 hour expiry
+
+        return Ok(realValue);
+    }
+}
+</code></pre>
+<p>This is a simplified example, and in a real-world scenario, you might want to create a more abstract caching interface to decouple your application from the caching implementation, allowing you to easily switch to a different caching strategy if needed in the future.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, Redis does provide persistence features allowing you to use it as a persistent key-value store. Redis supports two types of persistence methods: <strong>RDB (Redis Database Backup)</strong> and <strong>AOF (Append-Only File)</strong>.</p>
+<h3>RDB (Redis Database Backup)</h3>
+<ul>
+<li><strong>Snapshotting</strong>: It takes the snapshot of your dataset at specified intervals.</li>
+<li><strong>Configuration</strong>: You can configure the intervals in your <code>redis.conf</code> file or via <code>CONFIG SET</code> command.</li>
+</ul>
+<pre><code class="language-conf">save 900 1 # Save the dataset every 900 seconds if at least 1 key changed.
+save 300 10 # Save the dataset every 300 seconds if at least 10 keys changed.
+save 60 10000 # Save the dataset every 60 seconds if at least 10000 keys changed.
+</code></pre>
+<ul>
+<li><strong>Pros</strong>:
+<ul>
+<li>Faster to create backups.</li>
+<li>Uses less disk space compared to AOF.</li>
+</ul>
+</li>
+<li><strong>Cons</strong>:
+<ul>
+<li>Not suitable if you cannot afford to lose the most recent writes.</li>
+</ul>
+</li>
+</ul>
+<h3>AOF (Append-Only File)</h3>
+<ul>
+<li><strong>Log Every Write Operation</strong>: AOF logs every write operation received by the server, which makes it suitable if you need full durability.</li>
+<li><strong>Configuration</strong>: You can enable it in your <code>redis.conf</code> file or via <code>CONFIG SET</code> command.</li>
+</ul>
+<pre><code class="language-conf">appendonly yes
+</code></pre>
+<ul>
+<li><strong>Pros</strong>:
+<ul>
+<li>Very durable and can survive all kinds of crashes.</li>
+<li>You can tune its durability by configuring how often the log is fsynced to the disk.</li>
+</ul>
+</li>
+<li><strong>Cons</strong>:
+<ul>
+<li>Typically, uses more disk space compared to RDB.</li>
+<li>Can be slower than RDB depending on the configured fsync policy.</li>
+</ul>
+</li>
+</ul>
+<h3>Combining RDB and AOF</h3>
+<p>You can also configure Redis to use both persistence methods together if you want to leverage the advantages of both. For example, you might use AOF for durability and RDB for point-in-time backups.</p>
+<h3>Integrating with ASP.NET Core</h3>
+<p>Configuring persistence in Redis doesn’t change how you interact with Redis from ASP.NET Core; it only affects how Redis persists the data. Your interaction with the Redis server via the <code>StackExchange.Redis</code> client, or any other client remains the same, irrespective of how you have configured persistence in Redis.</p>
+<h3>Additional Note:</h3>
+<ul>
+<li><strong>Persistence Overhead</strong>: Keep in mind that enabling persistence has some overhead, and depending on the method and configuration chosen, it can affect the performance and resource utilization of your Redis server.</li>
+<li><strong>Storage Capacity</strong>: Additionally, make sure that your Redis server has enough storage capacity to handle the persisted data, especially if you are dealing with a large dataset.</li>
+<li><strong>Scaling and Topology Considerations</strong>: For highly available and scalable solutions, you might also need to consider Redis clustering, sharding, and replication, which can add complexity to your setup.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, the AOF (Append Only File) in Redis does grow over time as it logs every write operation, and it's crucial to manage its size. Redis provides a mechanism called <strong>Rewriting of AOF</strong>, which you can use to compact the AOF file.</p>
+<h3>AOF Rewriting</h3>
+<p>AOF rewriting creates a new AOF file that is equivalent to the original one but has a smaller size. It reads the existing AOF file and appends only the minimum set of commands needed to reconstruct the current dataset in memory. This process removes redundant commands, resulting in a compacted AOF file.</p>
+<h4>1. <strong>Manual Rewriting:</strong></h4>
+<p>You can manually trigger an AOF rewrite using the <code>BGREWRITEAOF</code> command.</p>
+<pre><code class="language-shell">redis-cli bgrewriteaof
+</code></pre>
+<h4>2. <strong>Automatic Rewriting:</strong></h4>
+<p>You can configure Redis to automatically trigger an AOF rewrite once the AOF file grows beyond a certain size. You can set this up in your <code>redis.conf</code> file:</p>
+<pre><code class="language-conf">auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+</code></pre>
+<ul>
+<li><p><code>auto-aof-rewrite-percentage</code>: Redis will check the AOF size after each write operation. If the AOF file size is greater than the <code>auto-aof-rewrite-min-size</code> and has grown by the specified percentage, a background AOF rewrite is triggered. In the example, it’s set to 100%, meaning the AOF file needs to be double the size of the last rewrite.</p>
+</li>
+<li><p><code>auto-aof-rewrite-min-size</code>: The minimum size that the AOF file must be for an automatic rewrite to be triggered.</p>
+</li>
+</ul>
+<h3>Considerations:</h3>
+<ul>
+<li><p><strong>Performance Impact</strong>: Although AOF rewriting is done in the background, it can have a substantial impact on the performance due to increased CPU and disk I/O usage. So, it’s essential to schedule the rewrites considering your workload and resource availability.</p>
+</li>
+<li><p><strong>Disk Space</strong>: During the rewriting process, both the old and the new AOF files exist simultaneously, so sufficient disk space should be available.</p>
+</li>
+<li><p><strong>Configuration Tuning</strong>: The auto-rewrite configuration should be tuned according to your specific use case to balance between the rewrite frequency and the AOF file size.</p>
+</li>
+</ul>
+<h3>Example Configuration for Automatic Rewriting:</h3>
+<p>If you have a requirement to keep the AOF file's size manageable, you can adjust the <code>auto-aof-rewrite-percentage</code> and <code>auto-aof-rewrite-min-size</code> values according to your needs. For instance, if you want to trigger a rewrite when the AOF file is 1.5 times the size it was at the time of the last rewrite and is at least 32mb, you would configure it as follows:</p>
+<pre><code class="language-conf">auto-aof-rewrite-percentage 50
+auto-aof-rewrite-min-size 32mb
+</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, Redis is generally considered thread-safe when interacting with it from multiple threads in a client, like an ASP.NET Core application, especially when using a client library like <code>StackExchange.Redis</code>.</p>
+<h3>1. <strong>Client Side (StackExchange.Redis)</strong>:</h3>
+<p><code>StackExchange.Redis</code> is designed to be thread-safe, so you can safely use a shared instance of <code>ConnectionMultiplexer</code> across multiple threads in your application, which is the recommended practice. The multiplexer manages connections to the Redis server and handles the multiplexing of commands from multiple threads.</p>
+<h3>Example:</h3>
+<pre><code class="language-csharp">// Safe to share and use across multiple threads.
+var multiplexer = ConnectionMultiplexer.Connect(&quot;localhost&quot;);
+
+// Get a database from the multiplexer.
+var db = multiplexer.GetDatabase();
+</code></pre>
+<h3>2. <strong>Server Side (Redis Server)</strong>:</h3>
+<p>On the server side, Redis uses a single-threaded event-loop to handle commands. It processes one command at a time, but it's extremely fast and can handle a high throughput of commands. This single-threaded nature doesn’t mean that it’s blocking or slow because Redis handles I/O operations, like reading from and writing to the network, in a non-blocking way.</p>
+<h3>3. <strong>Concurrency Considerations</strong>:</h3>
+<p>While interactions with Redis are thread-safe, certain operations may still require consideration for concurrency. For example, when multiple clients are updating the same key, race conditions can occur. Lua scripting, transactions, or optimistic concurrency checks can be used to handle such scenarios, ensuring atomicity and consistency according to the specific requirements of the use case.</p>
+<h3>Example using Transaction (StackExchange.Redis):</h3>
+<pre><code class="language-csharp">var db = multiplexer.GetDatabase();
+
+// Start a transaction
+var tran = db.CreateTransaction();
+
+// Perform operations in the transaction
+tran.StringSetAsync(&quot;myKey&quot;, &quot;newValue&quot;);
+
+// Execute the transaction
+var committed = await tran.ExecuteAsync();
+</code></pre>
+<h3>4. <strong>Redis 6 and io_uring</strong>:</h3>
+<p>With the advent of Redis 6 and the introduction of the io_uring interface, Redis has started to experiment with scalable I/O handling, potentially leveraging multiple threads for handling I/O operations, which can help in fully utilizing multi-core systems.</p>
+<p>In summary, while Redis is thread-safe to interact with, careful consideration of concurrency and the atomicity of operations is essential when designing applications that use Redis, especially when multiple clients or threads are involved.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, Redis can store structured data and supports a variety of data types and structures. Below are the major functionalities and data types supported by Redis:</p>
+<h3>1. <strong>Data Types:</strong></h3>
+<h4>a. <strong>Strings:</strong></h4>
+<ul>
+<li>Simple key-value pairs, where the value is a string.</li>
+<li>Example: <code>SET mykey &quot;Hello&quot;</code></li>
+</ul>
+<h4>b. <strong>Hashes:</strong></h4>
+<ul>
+<li>Maps between string field and string values.</li>
+<li>Suitable to represent objects.</li>
+<li>Example: <code>HSET myhash field1 &quot;Hello&quot; field2 &quot;World&quot;</code></li>
+</ul>
+<h4>c. <strong>Lists:</strong></h4>
+<ul>
+<li>Ordered collections of strings.</li>
+<li>Example: <code>LPUSH mylist &quot;World&quot;</code></li>
+<li>Example: <code>RPUSH mylist &quot;Hello&quot;</code></li>
+</ul>
+<h4>d. <strong>Sets:</strong></h4>
+<ul>
+<li>Unordered collections of unique strings.</li>
+<li>Example: <code>SADD myset &quot;Hello&quot;</code></li>
+</ul>
+<h4>e. <strong>Sorted Sets:</strong></h4>
+<ul>
+<li>Similar to Sets but every string element is associated with a floating number value, called a score.</li>
+<li>Example: <code>ZADD myzset 1 &quot;one&quot;</code></li>
+</ul>
+<h4>f. <strong>Bitmaps:</strong></h4>
+<ul>
+<li>Arrays of bits, used to handle different types of small integers in a compact way.</li>
+<li>Example: <code>SETBIT mybitmap 7 1</code></li>
+</ul>
+<h4>g. <strong>HyperLogLogs:</strong></h4>
+<ul>
+<li>A probabilistic data structure to estimate the cardinality of a set.</li>
+<li>Example: <code>PFADD myhyperloglog &quot;Hello&quot;</code></li>
+</ul>
+<h3>2. <strong>Data Expiry:</strong></h3>
+<ul>
+<li>Redis allows setting a Time-To-Live (TTL) on keys, after which the keys will automatically be deleted.</li>
+<li>Example: <code>EXPIRE mykey 10</code> (Sets a TTL of 10 seconds on <code>mykey</code>)</li>
+</ul>
+<h3>3. <strong>Transactions:</strong></h3>
+<ul>
+<li>Provides a way to execute a group of commands in a single step.</li>
+<li>Example: Using <code>MULTI</code> and <code>EXEC</code> commands.</li>
+</ul>
+<h3>4. <strong>Pub/Sub:</strong></h3>
+<ul>
+<li>Implements Publish/Subscribe messaging paradigms.</li>
+<li>Example: Using <code>PUBLISH</code> and <code>SUBSCRIBE</code> commands.</li>
+</ul>
+<h3>5. <strong>Lua Scripting:</strong></h3>
+<ul>
+<li>Supports Lua scripting, allowing the execution of complex logic on the server side.</li>
+<li>Example: Using <code>EVAL</code> command.</li>
+</ul>
+<h3>6. <strong>Persistence:</strong></h3>
+<ul>
+<li>Provides mechanisms to persist data on disk without compromising much on performance.</li>
+<li>Supports RDB snapshots and AOF log files.</li>
+</ul>
+<h3>7. <strong>Replication:</strong></h3>
+<ul>
+<li>Supports master-slave replication, allowing slave Redis servers to be exact copies of master servers.</li>
+</ul>
+<h3>8. <strong>Partitioning:</strong></h3>
+<ul>
+<li>Supports horizontal partitioning or sharding, which makes it possible to split your data across multiple Redis instances.</li>
+</ul>
+<h3>9. <strong>Clustering:</strong></h3>
+<ul>
+<li>Provides a way to run a Redis installation where data is automatically sharded across multiple nodes.</li>
+</ul>
+<h3>10. <strong>Security:</strong></h3>
+<pre><code>- Offers basic security through password-based authentication and supports more advanced security models such as SSL/TLS for encrypted connections.
+</code></pre>
+<h3>11. <strong>Backup and Restore:</strong></h3>
+<pre><code>- Offers various ways to backup Redis data and restore it.
+</code></pre>
+<h3>12. <strong>Memory Management:</strong></h3>
+<pre><code>- Provides different eviction policies to handle memory efficiently when the memory is full.
+</code></pre>
+<h3>13. <strong>High Availability:</strong></h3>
+<pre><code>- Can be configured for high availability and failover support, typically using Sentinel.
+</code></pre>
+<p>These functionalities make Redis versatile, and it can be used as a database, cache, and message broker. The structured data types provided by Redis allow you to use it for a wide range of applications, from simple key-value storage to more complex use cases like leaderboards, real-time analytics, and geospatial indexing.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Redis はサーバーを立ち上げるタイプのシステムのようで、レンタルサーバーでは使えない可能性がある。localhost につなぐのでも、サービスを走らせ、特定のポートを開く必要がある。</p>
+                            <p class="note_contents">KVS は今すぐに必要なわけでない。いったん却下。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="1ee0d017-e803-493e-a87b-edbef813070f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ユーザーの確認などに関する既存の実装について調べる</span>
+                    <a href="#1ee0d017-e803-493e-a87b-edbef813070f" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, ASP.NET Core Identity does include built-in functionality for recording the time a user registers by default. When a user is created using ASP.NET Core Identity, a number of default properties are created, including <code>CreationTime</code> which records the date and time at which the user was created, or in other words, the time of registration.</p>
+<p>Here is how you can create a user and set the <code>CreationTime</code>:</p>
+<pre><code class="language-csharp">var user = new ApplicationUser
+{
+    UserName = model.Email,
+    Email = model.Email,
+    CreationTime = DateTime.UtcNow // Set the creation time to the current time
+};
+
+var result = await _userManager.CreateAsync(user, model.Password);
+</code></pre>
+<p>In this case, <code>ApplicationUser</code> would be your user entity, typically inheriting from <code>IdentityUser</code>.</p>
+<p>However, the exact property may not be named <code>CreationTime</code>, and you may have to add a custom property to your user model if a creation timestamp isn't included by default in your setup. Here's a brief example of how you might modify your user entity to include such a property:</p>
+<pre><code class="language-csharp">public class ApplicationUser : IdentityUser
+{
+    public DateTime RegistrationDate { get; set; }
+}
+</code></pre>
+<p>Then, when you create a user, you would set this property:</p>
+<pre><code class="language-csharp">var user = new ApplicationUser
+{
+    UserName = model.Email,
+    Email = model.Email,
+    RegistrationDate = DateTime.UtcNow // Set the registration date to the current time
+};
+
+var result = await _userManager.CreateAsync(user, model.Password);
+</code></pre>
+<p>Finally, remember to update your database schema by adding a new migration and updating the database after adding the new property:</p>
+<pre><code class="language-sh">dotnet ef migrations add AddRegistrationDate
+dotnet ef database update
+</code></pre>
+<p>This is a simplistic example, and in a production scenario, you would typically have to also handle failures, validation, and other considerations. Also, remember to respect user privacy and adhere to all applicable laws and regulations when storing user data.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The <code>RequireConfirmedAccount</code> option in ASP.NET Core Identity indeed relies on the <code>EmailConfirmed</code> property of the user. This means that when <code>RequireConfirmedAccount</code> is set to <code>true</code>, users must confirm their email addresses before they are allowed to log in.</p>
+<p>Here's a quick rundown on how it works:</p>
+<ol>
+<li>When a new user registers, an email is sent to the provided email address, containing a confirmation link.</li>
+<li>The user clicks the confirmation link.</li>
+<li>The <code>EmailConfirmed</code> property of the user is then set to <code>true</code> in the Identity database.</li>
+</ol>
+<p>Here is an example of setting <code>RequireConfirmedAccount</code> to true in the <code>Startup.cs</code> file:</p>
+<pre><code class="language-csharp">services.AddDefaultIdentity&lt;ApplicationUser&gt;(options =&gt; options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores&lt;ApplicationDbContext&gt;();
+</code></pre>
+<p>It doesn’t inherently consider the <code>PhoneNumberConfirmed</code> property for account confirmation. If you require phone number confirmation, you might have to implement additional logic or custom checks to enforce that.</p>
+<p>Remember, your application's requirements and user experience will guide whether you need email confirmation, phone number confirmation, or both, and you might need to adjust the default behavior provided by ASP.NET Core Identity accordingly.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To modify the behavior of <code>RequireConfirmedAccount</code> to allow users to log in if either <code>EmailConfirmed</code> or <code>PhoneNumberConfirmed</code> is <code>true</code>, you need to override the default behavior of the <code>SignInManager</code>.</p>
+<p>You can achieve this by extending the <code>SignInManager</code> and overriding the <code>CanSignInAsync</code> method to incorporate the custom logic, and then registering the custom sign-in manager in the <code>Startup.cs</code>.</p>
+<h3>1. Extend SignInManager:</h3>
+<p>Create a custom <code>SignInManager</code> that overrides the <code>CanSignInAsync</code> method:</p>
+<pre><code class="language-csharp">using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using System.Threading.Tasks;
+
+public class CustomSignInManager&lt;TUser&gt; : SignInManager&lt;TUser&gt; where TUser : class
+{
+    public CustomSignInManager(UserManager&lt;TUser&gt; userManager,
+        IHttpContextAccessor contextAccessor,
+        IUserClaimsPrincipalFactory&lt;TUser&gt; claimsFactory,
+        IOptions&lt;IdentityOptions&gt; optionsAccessor,
+        ILogger&lt;SignInManager&lt;TUser&gt;&gt; logger,
+        IAuthenticationSchemeProvider schemes)
+        : base(userManager, contextAccessor, claimsFactory, optionsAccessor, logger, schemes)
+    {
+    }
+
+    public override async Task&lt;bool&gt; CanSignInAsync(TUser user)
+    {
+        var baseUser = user as IdentityUser;
+
+        if (baseUser == null) return await base.CanSignInAsync(user);
+
+        // Custom logic: allow sign-in if either EmailConfirmed or PhoneNumberConfirmed is true
+        if (baseUser.EmailConfirmed || baseUser.PhoneNumberConfirmed)
+        {
+            return true;
+        }
+
+        return await base.CanSignInAsync(user);
+    }
+}
+</code></pre>
+<h3>2. Register CustomSignInManager:</h3>
+<p>Replace the default <code>SignInManager</code> with your <code>CustomSignInManager</code> in your <code>Startup.cs</code>:</p>
+<pre><code class="language-csharp">services.AddIdentity&lt;ApplicationUser, IdentityRole&gt;()
+    .AddEntityFrameworkStores&lt;ApplicationDbContext&gt;()
+    .AddSignInManager&lt;CustomSignInManager&lt;ApplicationUser&gt;&gt;(); // Add CustomSignInManager
+</code></pre>
+<h3>3. Configure Options:</h3>
+<p>Continue to configure <code>RequireConfirmedAccount</code> as <code>true</code> in your <code>Startup.cs</code>:</p>
+<pre><code class="language-csharp">services.AddDefaultIdentity&lt;ApplicationUser&gt;(options =&gt; options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores&lt;ApplicationDbContext&gt;()
+    .AddSignInManager&lt;CustomSignInManager&lt;ApplicationUser&gt;&gt;(); // Add CustomSignInManager
+</code></pre>
+<p>Now, with this configuration, users should be able to sign in if either their email is confirmed or their phone number is confirmed, based on the logic you’ve added to the <code>CanSignInAsync</code> method.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The <code>UserManager&lt;TUser&gt;</code> class in ASP.NET Core Identity provides a plethora of functionalities related to user management, allowing developers to perform various tasks such as creating users, changing passwords, and assigning roles, among others. Here are several notable functionalities provided by <code>UserManager&lt;TUser&gt;</code>:</p>
+<h3>1. <strong>Creating a User</strong></h3>
+<pre><code class="language-csharp">var result = await _userManager.CreateAsync(user, password);
+</code></pre>
+<h3>2. <strong>Finding a User</strong></h3>
+<pre><code class="language-csharp">var userByEmail = await _userManager.FindByEmailAsync(email);
+var userByName = await _userManager.FindByNameAsync(username);
+var userById = await _userManager.FindByIdAsync(userId);
+</code></pre>
+<h3>3. <strong>Updating a User</strong></h3>
+<pre><code class="language-csharp">var result = await _userManager.UpdateAsync(user);
+</code></pre>
+<h3>4. <strong>Deleting a User</strong></h3>
+<pre><code class="language-csharp">var result = await _userManager.DeleteAsync(user);
+</code></pre>
+<h3>5. <strong>Confirming Email</strong></h3>
+<pre><code class="language-csharp">var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+var result = await _userManager.ConfirmEmailAsync(user, token);
+</code></pre>
+<h3>6. <strong>Resetting Password</strong></h3>
+<pre><code class="language-csharp">var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+var result = await _userManager.ResetPasswordAsync(user, token, newPassword);
+</code></pre>
+<h3>7. <strong>Adding to Role</strong></h3>
+<pre><code class="language-csharp">var result = await _userManager.AddToRoleAsync(user, roleName);
+</code></pre>
+<h3>8. <strong>Removing from Role</strong></h3>
+<pre><code class="language-csharp">var result = await _userManager.RemoveFromRoleAsync(user, roleName);
+</code></pre>
+<h3>9. <strong>Checking Password</strong></h3>
+<pre><code class="language-csharp">var isValid = await _userManager.CheckPasswordAsync(user, password);
+</code></pre>
+<h3>10. <strong>Generating Security Token</strong></h3>
+<pre><code class="language-csharp">var token = await _userManager.GenerateUserTokenAsync(user, tokenProvider, purpose);
+</code></pre>
+<h3>11. <strong>Locking and Unlocking Users</strong></h3>
+<pre><code class="language-csharp">await _userManager.SetLockoutEndDateAsync(user, lockoutEnd);
+</code></pre>
+<h3>12. <strong>User's Two-Factor Authentication</strong></h3>
+<pre><code class="language-csharp">var isTwoFactorEnabled = await _userManager.GetTwoFactorEnabledAsync(user);
+</code></pre>
+<h3>13. <strong>Managing User Claims</strong></h3>
+<pre><code class="language-csharp">var claims = await _userManager.GetClaimsAsync(user);
+var result = await _userManager.AddClaimAsync(user, claim);
+var result = await _userManager.RemoveClaimAsync(user, claim);
+</code></pre>
+<h3>14. <strong>Managing User Logins (External Providers)</strong></h3>
+<pre><code class="language-csharp">var result = await _userManager.AddLoginAsync(user, userLoginInfo);
+var info = await _userManager.GetLoginInfoAsync(user);
+</code></pre>
+<h3>15. <strong>Generating and Validating Tokens</strong></h3>
+<pre><code class="language-csharp">var token = await _userManager.GenerateTwoFactorTokenAsync(user, tokenProvider);
+var isValid = await _userManager.VerifyTwoFactorTokenAsync(user, tokenProvider, token);
+</code></pre>
+<p>These functionalities offered by <code>UserManager&lt;TUser&gt;</code> are a part of the high-level API that ASP.NET Core Identity provides for managing users in your applications, making it easier to handle various user management tasks without having to interact with the database directly.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The <code>SignInManager&lt;TUser&gt;</code> class in ASP.NET Core Identity provides a set of functionalities related to user sign-in operations. It’s another integral part of the ASP.NET Core Identity system, focusing on authentication processes. Below are some notable functionalities provided by <code>SignInManager&lt;TUser&gt;</code>:</p>
+<h3>1. <strong>Password Sign In</strong></h3>
+<pre><code class="language-csharp">var result = await _signInManager.PasswordSignInAsync(username, password, isPersistent, lockoutOnFailure);
+</code></pre>
+<h3>2. <strong>Sign Out</strong></h3>
+<pre><code class="language-csharp">await _signInManager.SignOutAsync();
+</code></pre>
+<h3>3. <strong>External Sign In</strong></h3>
+<pre><code class="language-csharp">var result = await _signInManager.ExternalLoginSignInAsync(loginProvider, providerKey, isPersistent);
+</code></pre>
+<h3>4. <strong>User Sign In</strong></h3>
+<pre><code class="language-csharp">await _signInManager.SignInAsync(user, isPersistent);
+</code></pre>
+<h3>5. <strong>Validate Sign In</strong></h3>
+<pre><code class="language-csharp">var result = await _signInManager.CheckPasswordSignInAsync(user, password, lockoutOnFailure);
+</code></pre>
+<h3>6. <strong>Two Factor Sign In</strong></h3>
+<pre><code class="language-csharp">var result = await _signInManager.TwoFactorSignInAsync(twoFactorProvider, token, isPersistent, rememberClient);
+</code></pre>
+<h3>7. <strong>Refresh Sign In</strong></h3>
+<pre><code class="language-csharp">await _signInManager.RefreshSignInAsync(user);
+</code></pre>
+<h3>8. <strong>Is Signed In</strong></h3>
+<pre><code class="language-csharp">var isSignedIn = _signInManager.IsSignedIn(User);
+</code></pre>
+<h3>9. <strong>Create User Principal</strong></h3>
+<pre><code class="language-csharp">var principal = await _signInManager.CreateUserPrincipalAsync(user);
+</code></pre>
+<h3>10. <strong>Generate Two Factor Token</strong></h3>
+<pre><code class="language-csharp">var token = await _signInManager.GetTwoFactorAuthenticationUserAsync();
+</code></pre>
+<h3>11. <strong>Can Sign In</strong></h3>
+<pre><code class="language-csharp">var canSignIn = await _signInManager.CanSignInAsync(user);
+</code></pre>
+<h3>12. <strong>Password Sign In with Lockout</strong></h3>
+<pre><code class="language-csharp">var result = await _signInManager.PasswordSignInAsync(username, password, isPersistent, lockoutOnFailure: true);
+</code></pre>
+<h3>13. <strong>Generate User Claims</strong></h3>
+<pre><code class="language-csharp">var claimsPrincipal = await _signInManager.CreateUserPrincipalAsync(user);
+</code></pre>
+<h3>14. <strong>Retrieve External Login Info</strong></h3>
+<pre><code class="language-csharp">var info = await _signInManager.GetExternalLoginInfoAsync();
+</code></pre>
+<h3>15. <strong>Confirmation of Account</strong></h3>
+<pre><code class="language-csharp">var isConfirmed = await _signInManager.IsTwoFactorClientRememberedAsync(user);
+</code></pre>
+<h3>16. <strong>Remember Two-Factor Client</strong></h3>
+<pre><code class="language-csharp">await _signInManager.RememberTwoFactorClientAsync(user);
+</code></pre>
+<h3>17. <strong>Forget Two-Factor Client</strong></h3>
+<pre><code class="language-csharp">await _signInManager.ForgetTwoFactorClientAsync();
+</code></pre>
+<p>These methods offered by <code>SignInManager&lt;TUser&gt;</code> cover various aspects of the sign-in process, including external login providers, two-factor authentication, sign-in validation, and user principal creation, making it a crucial component in managing authentication flows in ASP.NET Core Identity-based applications.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="37bcd4c6-8a63-433a-8092-0ecf92fab6d7" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">ユーザー名をメアドと決め打ちする仕様について考える</span>
+                    <a href="#37bcd4c6-8a63-433a-8092-0ecf92fab6d7" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">最近、アカウントの登録時には、メアドとパスワードの組み合わせが一般的と感じる。もちろん、ユーザー名、メアド、パスワードを聞いてくるものもあるが、過半数を下回る印象。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ユーザー名とパスワードでやったほうが、メアドを変更できて便利。もちろん、ユーザー名がメアドでも変更は可能だが、より慎重な実装が必要になる。</p>
+                            <p class="note_contents">会社によっては電話番号のほうが良かったり、各人に一つ以上のメアドの登録だったりの想定も必要。</p>
+                            <p class="note_contents">項目が複数になるところには、列を増やすというより、KVS 的なテーブルを適用するべきか。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">今すぐに考えることでない。コードの構造が良好なら、仕様の変更は容易。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
