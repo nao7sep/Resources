@@ -10000,6 +10000,397 @@ public ActionResult Get(int id)
                     </div>
                 </div>
             </div>
+            <div id="49b574e1-c583-4e53-a246-6ecdb762c9f5" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">app.db-shm と app.db-wal を .gitignore に入れる</span>
+                    <a href="#49b574e1-c583-4e53-a246-6ecdb762c9f5" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To ignore <code>*.db-shm</code> and <code>*.db-wal</code> files using a <code>.gitignore</code> file, you can simply add these lines to your <code>.gitignore</code> file:</p>
+<pre><code>*.db-shm
+*.db-wal
+</code></pre>
+<p>Each line in a <code>.gitignore</code> file specifies a pattern. When a file or directory matches one of the patterns, it's ignored by Git.</p>
+<p>Adding the above lines will make sure that Git ignores any files ending with <code>.db-shm</code> and <code>.db-wal</code> in your repository, and they will not be tracked by Git. If you already have such files tracked, you'll need to remove them from the repository to stop tracking them.</p>
+<p>For instance, you can do this with:</p>
+<pre><code class="language-sh">git rm --cached filename.db-shm filename.db-wal
+</code></pre>
+<p>Make sure to replace <code>filename</code> with the actual names of your files. After running these commands, commit the changes to your repository.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="c24b3c9f-2b13-4010-9d93-75d699e4164e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">async/await について復習</span>
+                    <a href="#c24b3c9f-2b13-4010-9d93-75d699e4164e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In C#, you can execute multiple asynchronous methods concurrently using <code>Task.WhenAll()</code>. Here is a basic example illustrating how you can achieve that:</p>
+<p>Let's say you have two asynchronous methods <code>SendEmailAsync</code> and <code>SendSmsAsync</code>:</p>
+<pre><code class="language-csharp">public async Task SendEmailAsync()
+{
+    // Your implementation to send an email
+    await Task.Delay(1000); // This is just for illustration
+    Console.WriteLine(&quot;Email Sent!&quot;);
+}
+
+public async Task SendSmsAsync()
+{
+    // Your implementation to send an SMS
+    await Task.Delay(1000); // This is just for illustration
+    Console.WriteLine(&quot;SMS Sent!&quot;);
+}
+</code></pre>
+<p>To execute these two methods concurrently and wait for both to complete before returning, you can do the following:</p>
+<pre><code class="language-csharp">public async Task SendNotificationsAsync()
+{
+    // Run both tasks concurrently
+    await Task.WhenAll(SendEmailAsync(), SendSmsAsync());
+    Console.WriteLine(&quot;Both notifications sent!&quot;);
+}
+</code></pre>
+<p>Here, <code>SendNotificationsAsync</code> will complete only after both <code>SendEmailAsync</code> and <code>SendSmsAsync</code> have completed. The <code>Task.WhenAll</code> method returns a single task that completes when all of the supplied tasks have completed.</p>
+<p>Here is an example of how you can call <code>SendNotificationsAsync</code>:</p>
+<pre><code class="language-csharp">public static async Task Main(string[] args)
+{
+    await SendNotificationsAsync();
+}
+</code></pre>
+<p>This way, you can keep your <code>SendEmail</code> and <code>SendSms</code> methods independent and reusable while managing their concurrent execution in the composite method <code>SendNotificationsAsync</code>.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>If you have two asynchronous methods that return two different types, you indeed cannot use <code>Task.WhenAll</code> directly to return a single Task object containing both results, since <code>Task.WhenAll</code> is typically used when the tasks are of the same type.</p>
+<p>However, you can still use <code>Task.WhenAll</code> to wait for both tasks to complete, and afterwards access the result of each task. You can create a custom class or a Tuple to hold the results of both tasks and return that.</p>
+<p>Here’s an example in C#:</p>
+<pre><code class="language-csharp">public class CombinedResult
+{
+    public ResultType1 Result1 { get; }
+    public ResultType2 Result2 { get; }
+
+    public CombinedResult(ResultType1 result1, ResultType2 result2)
+    {
+        Result1 = result1;
+        Result2 = result2;
+    }
+}
+
+public async Task&lt;CombinedResult&gt; RunAsync()
+{
+    Task&lt;ResultType1&gt; task1 = Method1Async();
+    Task&lt;ResultType2&gt; task2 = Method2Async();
+
+    await Task.WhenAll(task1, task2);
+
+    return new CombinedResult(task1.Result, task2.Result);
+}
+</code></pre>
+<p>In this example, <code>ResultType1</code> and <code>ResultType2</code> are the return types of your asynchronous methods. After both tasks complete, you can access the <code>Result</code> property of each task to get the result of the respective task and return it as an instance of <code>CombinedResult</code>.</p>
+<p>Alternatively, you can use a ValueTuple if you do not want to create a separate class:</p>
+<pre><code class="language-csharp">public async Task&lt;(ResultType1, ResultType2)&gt; RunAsync()
+{
+    Task&lt;ResultType1&gt; task1 = Method1Async();
+    Task&lt;ResultType2&gt; task2 = Method2Async();
+
+    await Task.WhenAll(task1, task2);
+
+    return (task1.Result, task2.Result);
+}
+</code></pre>
+<p>This example achieves the same result but returns a tuple <code>(ResultType1, ResultType2)</code> containing the results of both tasks.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When you call an async method, it returns a <code>Task</code> or <code>Task&lt;T&gt;</code> representing the ongoing work. The <code>await</code> keyword is used to await the completion of the Task, and if the Task has a result (i.e., it is a <code>Task&lt;T&gt;</code>), <code>await</code> also retrieves the result.</p>
+<h3>Line-by-line Explanation:</h3>
+<ol>
+<li><p><strong>First Line:</strong></p>
+<pre><code class="language-csharp">await Task.WhenAll(xEmailTask, xSmsTask);
+</code></pre>
+<p>This line is awaiting the completion of both <code>xEmailTask</code> and <code>xSmsTask</code>. <code>Task.WhenAll</code> returns a <code>Task</code> that completes when all of the provided tasks have completed. So, the first <code>await</code> is essentially waiting for both tasks to complete.</p>
+</li>
+<li><p><strong>Second Line:</strong></p>
+<pre><code class="language-csharp">return (await xEmailTask, await xSmsTask);
+</code></pre>
+<p>Here, even though you know that <code>xEmailTask</code> and <code>xSmsTask</code> have completed because of the first <code>await</code>, the compiler does not automatically infer this. The <code>await</code> keywords here are used to extract the results from the completed tasks. Each <code>await</code> in this line is retrieving the result of the respective Task, and these results are being returned as a tuple.</p>
+</li>
+</ol>
+<h3>A Potential Improvement:</h3>
+<p>It is indeed a bit redundant to await the tasks again after they have completed. A more efficient approach could be to use the <code>Result</code> property of the task after you know the tasks have completed. This avoids the overhead associated with awaiting the already completed tasks again.</p>
+<pre><code class="language-csharp">await Task.WhenAll(xEmailTask, xSmsTask);
+return (xEmailTask.Result, xSmsTask.Result);
+</code></pre>
+<p>This way, you are not awaiting the completed tasks again, but directly accessing their results, which is more efficient. However, do note that accessing the <code>Result</code> property of a Task that is not completed will block the executing thread until the task completes, so it's crucial to ensure the tasks have completed before accessing the <code>Result</code> property. In this case, you are sure they have completed because of the <code>await Task.WhenAll(...);</code> line.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<h3>Task Waiting:</h3>
+<p>Yes, if you use <code>await Task.WhenAll(xEmailTask, xSmsTask);</code>, the execution of the method will not proceed past this line until both <code>xEmailTask</code> and <code>xSmsTask</code> have completed. If one of them never completes (or &quot;locks&quot;), then the execution will be stuck at this line indefinitely, unless there's a cancellation or timeout mechanism in place.</p>
+<h3>Async Keyword:</h3>
+<p>The <code>async</code> keyword in the method signature is part of the mechanism that allows you to use the <code>await</code> keyword within the method. It signals to the compiler that this method contains asynchronous operations. It enables the compiler to generate the necessary code to allow the method to be paused and resumed, enabling asynchronous behavior.</p>
+<p>Here’s a bit more detail:</p>
+<ol>
+<li><p><strong>Asynchrony:</strong>
+When you <code>await</code> a task, the method's execution is paused, and control is returned to the caller of the method. This allows other work to be done while the awaited task is completing, which is particularly useful, for example, in UI applications to keep the UI responsive while performing a long-running operation.</p>
+</li>
+<li><p><strong>Async Method Transformation:</strong>
+When you mark a method with <code>async</code>, the C# compiler transforms the method in such a way that it can return immediately to its caller and then resume its execution when the awaited asynchronous operation completes. This transformation is necessary for the proper functioning of the <code>await</code> keyword.</p>
+</li>
+<li><p><strong>Signaling Asynchronous Operations:</strong>
+Adding <code>async</code> also helps in expressing the intention that the method is supposed to run asynchronous operations. It’s a way to signal to other developers and to the runtime that the method is intended to be asynchronous.</p>
+</li>
+</ol>
+<p>Remember that the method marked with <code>async</code> will return a <code>Task</code> or <code>Task&lt;T&gt;</code> immediately, representing the ongoing work, and the actual work inside the method will continue executing asynchronously, allowing the calling thread to proceed with other operations while waiting for the results.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="7c926e21-7c62-4419-800b-85df1e4f5d71" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">DefaultAuthenticateScheme などの設定が必要か調べる</span>
+                    <a href="#7c926e21-7c62-4419-800b-85df1e4f5d71" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In ASP.NET Core, when configuring authentication services, you can use <code>AuthenticationOptions</code> to set various properties related to authentication. Below are several properties of <code>AuthenticationOptions</code>:</p>
+<h3>1. <code>DefaultAuthenticateScheme</code></h3>
+<ul>
+<li><strong>Type</strong>: <code>string</code></li>
+<li><strong>Description</strong>: Gets or sets the default scheme that should be used by <code>AuthenticateAsync()</code>. It is used when no scheme is specified.</li>
+</ul>
+<h3>2. <code>DefaultChallengeScheme</code></h3>
+<ul>
+<li><strong>Type</strong>: <code>string</code></li>
+<li><strong>Description</strong>: Gets or sets the default scheme that should be used by <code>ChallengeAsync()</code>. It is used when no scheme is specified, to challenge unauthorized requests.</li>
+</ul>
+<h3>3. <code>DefaultForbidScheme</code></h3>
+<ul>
+<li><strong>Type</strong>: <code>string</code></li>
+<li><strong>Description</strong>: Gets or sets the default scheme that should be used by <code>ForbidAsync()</code>. It is used when no scheme is specified.</li>
+</ul>
+<h3>4. <code>DefaultScheme</code></h3>
+<ul>
+<li><strong>Type</strong>: <code>string</code></li>
+<li><strong>Description</strong>: Gets or sets the default scheme that is used for all the context operations like <code>AuthenticateAsync()</code>, <code>ChallengeAsync()</code>, etc., if no scheme is specified.</li>
+</ul>
+<h3>5. <code>DefaultSignInScheme</code></h3>
+<ul>
+<li><strong>Type</strong>: <code>string</code></li>
+<li><strong>Description</strong>: Gets or sets the default scheme that should be used by <code>SignInAsync()</code>. It is used when no scheme is specified.</li>
+</ul>
+<h3>6. <code>DefaultSignOutScheme</code></h3>
+<ul>
+<li><strong>Type</strong>: <code>string</code></li>
+<li><strong>Description</strong>: Gets or sets the default scheme that should be used by <code>SignOutAsync()</code>. It is used when no scheme is specified.</li>
+</ul>
+<h3>Example:</h3>
+<p>Here is a brief example to show how you might set these properties:</p>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    services.AddAuthentication(options =&gt;
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        // You can also set other properties as needed
+    })
+    .AddJwtBearer(jwtOptions =&gt;
+    {
+        jwtOptions.TokenValidationParameters = new TokenValidationParameters
+        {
+            // Token validation parameters go here
+        };
+    });
+
+    // Other service configurations
+}
+</code></pre>
+<p>In this example, the <code>DefaultAuthenticateScheme</code> and <code>DefaultChallengeScheme</code> are set to use JWT Bearer authentication by default. Similarly, other properties of <code>AuthenticationOptions</code> can be set as per your application's requirements.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">これらのメソッドを今のところ一つも使っていないので、なくしてみて様子見。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ddc67725-75c9-4521-b6ed-75257867471e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ApplicationUser クラスを追加</span>
+                    <a href="#ddc67725-75c9-4521-b6ed-75257867471e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The error message <code>Cannot create a DbSet for 'ApplicationUser' because this type is not included in the model for the context</code> typically occurs in Entity Framework when trying to access a <code>DbSet</code> of a type that hasn’t been added to your DbContext.</p>
+<p>Here are several steps to troubleshoot and fix this issue:</p>
+<h3>1. Include ApplicationUser in DbContext</h3>
+<p>Make sure that <code>ApplicationUser</code> is defined in your <code>DbContext</code> class as a <code>DbSet</code>. Here’s an example:</p>
+<pre><code class="language-csharp">public class ApplicationDbContext : IdentityDbContext&lt;ApplicationUser&gt;
+{
+    public DbSet&lt;ApplicationUser&gt; ApplicationUsers { get; set; }
+}
+</code></pre>
+<h3>2. Check your Connection String</h3>
+<p>Make sure that the connection string in your <code>appsettings.json</code> or wherever you have stored it is correct and pointing to the right database.</p>
+<h3>3. Ensure Migration and Database Update</h3>
+<p>If you have added <code>ApplicationUser</code> to your <code>DbContext</code> after the initial creation of the database, you will need to add a new migration and update the database with that migration:</p>
+<pre><code class="language-shell">dotnet ef migrations add AddApplicationUser
+dotnet ef database update
+</code></pre>
+<h3>4. Validate Model Creation</h3>
+<p>Check if <code>ApplicationUser</code> is correctly inherited or extended from a class that can be included in the <code>DbContext</code>, like <code>IdentityUser</code> if you’re using ASP.NET Core Identity.</p>
+<h3>5. Check Configuration in Startup.cs</h3>
+<p>Ensure that the correct <code>DbContext</code> is registered in the <code>Startup.cs</code>'s <code>ConfigureServices</code> method and that the <code>ApplicationUser</code> is being used correctly. For example:</p>
+<pre><code class="language-csharp">services.AddDbContext&lt;ApplicationDbContext&gt;(options =&gt;
+    options.UseSqlServer(
+        Configuration.GetConnectionString(&quot;DefaultConnection&quot;)));
+services.AddDefaultIdentity&lt;ApplicationUser&gt;(options =&gt; options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores&lt;ApplicationDbContext&gt;();
+</code></pre>
+<h3>6. Rebuild Solution</h3>
+<p>Sometimes issues might be caused by a faulty build. Try cleaning and rebuilding the solution.</p>
+<h3>7. Check Namespaces and References</h3>
+<p>Ensure that you are using the correct namespaces and references, and that there are no conflicts in class names or namespaces that might be causing the ApplicationUser to not be recognized.</p>
+<h3>8. Review Database Schema</h3>
+<p>Ensure that the <code>ApplicationUser</code> is correctly represented in your database schema and that there are no discrepancies between the database and your DbContext class.</p>
+<p>By addressing these points, you should be able to resolve the error message you are encountering.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">登録はできるようになったが、今度はロックアウトしなくなった。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When you experience an issue where <code>PasswordSignInAsync</code> no longer locks out a user after changing to <code>ApplicationUser</code> from <code>IdentityUser</code>, there are several things you could check to troubleshoot the problem.</p>
+<h3>1. Lockout Settings</h3>
+<p>Ensure that the lockout settings are properly configured. These settings are usually in the <code>Startup.cs</code> file within the <code>ConfigureServices</code> method when adding identity services.</p>
+<pre><code class="language-csharp">services.AddIdentity&lt;ApplicationUser, IdentityRole&gt;(options =&gt;
+{
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.AllowedForNewUsers = true;
+})
+.AddEntityFrameworkStores&lt;ApplicationDbContext&gt;()
+.AddDefaultTokenProviders();
+</code></pre>
+<p>Make sure that <code>AllowedForNewUsers</code> is set to <code>true</code> and that <code>MaxFailedAccessAttempts</code> is set to a value greater than 0.</p>
+<h3>2. LockoutOnFailure</h3>
+<p>Ensure that you are calling <code>PasswordSignInAsync</code> with <code>lockoutOnFailure: true</code>.</p>
+<pre><code class="language-csharp">var result = await _signInManager.PasswordSignInAsync(user, password, isPersistent, lockoutOnFailure: true);
+</code></pre>
+<h3>3. Custom Implementation</h3>
+<p>Check if there is any custom implementation or override in the <code>ApplicationUser</code> class that might be affecting the lockout functionality. If there are any overridden methods related to lockout, ensure they are implemented correctly.</p>
+<h3>4. Database Context</h3>
+<p>Make sure that your <code>ApplicationDbContext</code> or equivalent context is properly configured to use <code>ApplicationUser</code> and that there are no issues with the database schema that might be affecting lockout functionality. Update the database if needed.</p>
+<pre><code class="language-csharp">public class ApplicationDbContext : IdentityDbContext&lt;ApplicationUser&gt;
+{
+    //...
+}
+</code></pre>
+<h3>5. Debugging</h3>
+<p>If the above steps do not resolve the issue, use debugging or logging to gather more information about what is happening when <code>PasswordSignInAsync</code> is called. Inspect the result of <code>PasswordSignInAsync</code> to see if there are any clues in the returned <code>SignInResult</code>.</p>
+<h3>6. Documentation/Changes</h3>
+<p>Lastly, consult the ASP.NET Core documentation for any updates or changes related to Identity and lockout functionality. It’s possible that there might be new configurations or changes in newer versions that affect the lockout functionality.</p>
+<p>If you’ve checked all of the above and the issue still persists, you may want to create a minimal, reproducible example and seek help from the community, such as posting on Stack Overflow or the ASP.NET Core GitHub repository.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The <code>AddDefaultTokenProviders</code> method is used to add the default token providers used by ASP.NET Core Identity. Token providers are used for various features in Identity, such as email confirmation, password reset, and more. When you add default token providers, it ensures that the token providers needed for these features are registered and available for use.</p>
+<p>Here is an example of how it can be used when setting up Identity in the <code>Startup.cs</code>:</p>
+<pre><code class="language-csharp">services.AddIdentity&lt;ApplicationUser, IdentityRole&gt;()
+    .AddEntityFrameworkStores&lt;ApplicationDbContext&gt;()
+    .AddDefaultTokenProviders();
+</code></pre>
+<p>In this example, <code>ApplicationUser</code> is a custom user class inheriting from <code>IdentityUser</code>, and <code>ApplicationDbContext</code> is the Entity Framework database context used to access the user store.</p>
+<p>Including <code>AddDefaultTokenProviders</code> doesn’t directly impact the lockout functionality but is crucial for enabling other Identity features related to token generation and handling. If you are facing issues with lockout not working, it’s important to focus on configurations related to lockout settings and make sure that lockout is enabled and configured properly, as explained in the previous message.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When you create an <code>ApplicationDbContext</code> that inherits from <code>IdentityDbContext&lt;ApplicationUser&gt;</code>, it usually has a constructor that receives a <code>DbContextOptions&lt;ApplicationDbContext&gt;</code> to configure the context. The constructor then passes this parameter to the base class constructor. Here is an example:</p>
+<pre><code class="language-csharp">public class ApplicationDbContext : IdentityDbContext&lt;ApplicationUser&gt;
+{
+    public ApplicationDbContext(DbContextOptions&lt;ApplicationDbContext&gt; options)
+        : base(options)
+    {
+    }
+
+    // Optionally, override OnModelCreating, add DbSets for other entities, etc.
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+        // Your custom model creating statements, if any.
+    }
+}
+</code></pre>
+<p>In this example, <code>ApplicationDbContext</code> receives <code>DbContextOptions&lt;ApplicationDbContext&gt;</code> in its constructor, which is then passed to the base <code>IdentityDbContext&lt;ApplicationUser&gt;</code> constructor.</p>
+<p>This <code>DbContextOptions</code> instance is typically configured in the <code>Startup.cs</code> file in the <code>ConfigureServices</code> method like this:</p>
+<pre><code class="language-csharp">services.AddDbContext&lt;ApplicationDbContext&gt;(options =&gt;
+    options.UseSqlServer(
+        Configuration.GetConnectionString(&quot;DefaultConnection&quot;)));
+</code></pre>
+<p>In this case, the <code>UseSqlServer</code> extension method is used to configure the context to use SQL Server with a connection string named “DefaultConnection” from the configuration (usually located in <code>appsettings.json</code>). You should adjust the <code>UseSqlServer</code> and the connection string based on your actual database provider and configuration.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">options.SignIn.RequireConfirmedAccount = true のコメントアウトにより動いた。</p>
+                            <p class="note_contents">確認なしではアカウント情報の照合さえ行われていなかったのだろう。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="a01c6281-c9dc-4b40-96f4-de79c0cd53b8" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">PasswordSignInAsync の lockoutOnFailure について調べる</span>
+                    <a href="#a01c6281-c9dc-4b40-96f4-de79c0cd53b8" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">SQLite 側がちゃんと変更されているか。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">そうなっていた。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
