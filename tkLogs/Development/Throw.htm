@@ -12342,6 +12342,1094 @@ catch (Exception ex)
                     </div>
                 </div>
             </div>
+            <div id="1360aef0-3f05-4357-b79b-8d992645607c" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">AWS のドキュメントの一部に目を通す</span>
+                    <a href="#1360aef0-3f05-4357-b79b-8d992645607c" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Sending email through Amazon SES using an AWS SDK - Amazon Simple Email Service<br />
+                                <a href="https://docs.aws.amazon.com/ses/latest/dg/send-an-email-using-sdk-programmatically.html" target="_blank" class="url">https://docs.aws.amazon.com/ses/latest/dg/send-an-email-using-sdk-programmatically.html</a></p>
+                            <p class="note_contents">このページから始める。量が膨大なので、関連していることだけをザッと。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="c699549d-b086-4521-8869-3968cfcb201f" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">fanApiJwt でのユーザー登録時のメアド認証を実装</span>
+                    <a href="#c699549d-b086-4521-8869-3968cfcb201f" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="7712a8d7-f5ef-43e3-b117-43b01b533676" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">fanApiJwt でユーザーがパスワードを変更したりアカウントを消したりできるようにする</span>
+                    <a href="#7712a8d7-f5ef-43e3-b117-43b01b533676" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">メアドの変更も可能にする？ ユーザーの ID が変化しない。</p>
+                            <p class="note_contents">ほかにも一般的な処理を調べる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">アカウントを消す場合にデータを本当に消すのか、消されたというフラグを立てるのかも考える。Identity のデフォルトの挙動も調べる。自分は消してきたが、最近はフラグ派の意見をよく目にする。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="92cc08f5-3f49-49a8-be67-636afef841af" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">fanApiJwt で2段階認証をやってみる</span>
+                    <a href="#92cc08f5-3f49-49a8-be67-636afef841af" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ちゃんとしたシステムの開発において避けて通れない道。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">TwoFactorEnabled があるので、コードを生成・保持するなども機能が揃っている可能性。</p>
+                            <p class="note_contents">そもそも API で2段階認証というのも調べが必要。初回は成り立つが、クライアント側で毎回やらされるなら、そしてトークンが期限切れになるたびに再度やらされるなら、利便性がずいぶんと落ちる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, implementing Two-Factor Authentication (2FA) on a web API system is common and recommended for enhancing security. 2FA adds an extra layer of security to ensure that people trying to gain access to an account must verify their identity in two different ways, typically something they know (like a password) and something they have (like a mobile device).</p>
+<h3>How 2FA is Generally Implemented in APIs:</h3>
+<ol>
+<li><p><strong>Time-Based One-Time Password (TOTP):</strong> TOTP are algorithms that generate a one-time password from a shared secret key and the current time. It is commonly used in conjunction with mobile applications like Google Authenticator or Authy.</p>
+</li>
+<li><p><strong>SMS-Based Verification:</strong> This involves sending a one-time code via SMS to the user's registered mobile number, which the user then enters to complete the authentication process.</p>
+</li>
+<li><p><strong>Email-Based Verification:</strong> Similar to SMS, a one-time code or link is sent to the user's registered email address.</p>
+</li>
+<li><p><strong>Hardware Tokens:</strong> Physical devices that generate one-time passwords or that the user employs to authenticate in another manner.</p>
+</li>
+</ol>
+<h3>Implementation in Web APIs:</h3>
+<p>When implementing 2FA in web APIs, the flow usually involves:</p>
+<ol>
+<li><strong>Initial Authentication:</strong> The user first authenticates using a username and password.</li>
+<li><strong>Initiation of 2FA:</strong> Once the initial authentication is successful, the server initiates the 2FA process, typically by sending a one-time password (OTP) or a push notification to the user’s device.</li>
+<li><strong>Verification of 2FA:</strong> The user submits the OTP or approves the push notification, and the server verifies the second factor before granting access.</li>
+</ol>
+<p>In a Web API context, 2FA is often used to secure sensitive operations and endpoints, especially when they involve access to user data or control over system behavior. API developers may use standard protocols like OAuth 2.0 and OpenID Connect, and may leverage libraries and frameworks that support 2FA to integrate it into their API systems.</p>
+<p>In summary, implementing 2FA is a common and highly recommended practice to enhance the security of web API systems by protecting against unauthorized access and potential breaches.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Using Time-Based One-Time Passwords (TOTP) has several advantages over SMS or Email-based 2FA, especially considering security and reliability:</p>
+<h3>1. <strong>Security:</strong></h3>
+<ul>
+<li><strong>No Interception:</strong> Unlike SMS, TOTP does not rely on the telecommunication network, making it less susceptible to interception or SIM swapping attacks.</li>
+<li><strong>Offline Access:</strong> TOTP can be generated offline by apps like Google Authenticator or Authy, eliminating the risk associated with email-based phishing attacks.</li>
+<li><strong>No Phishing:</strong> It's harder for attackers to phish a TOTP compared to SMS or Email codes as it’s generated on the device and doesn’t travel over the network.</li>
+<li><strong>Independence from Third-Party Services:</strong> Relying on SMS or Email means relying on external services, which could be compromised, adding an additional vulnerability point.</li>
+</ul>
+<h3>2. <strong>Reliability:</strong></h3>
+<ul>
+<li><strong>Immediate Access:</strong> TOTP does not depend on network availability, so users can access their codes even in areas with poor or no mobile signal or internet connection, making it more reliable than SMS or Email.</li>
+<li><strong>Consistency:</strong> TOTPs are generated at regular intervals, ensuring users always have access to a valid code, unlike SMS, which can sometimes be delayed.</li>
+</ul>
+<h3>3. <strong>Cost:</strong></h3>
+<ul>
+<li><strong>No Additional Costs:</strong> There are no additional costs associated with sending SMS messages or emails, as TOTPs are generated locally on the user's device.</li>
+</ul>
+<h3>4. <strong>User Experience:</strong></h3>
+<ul>
+<li><strong>Quick Access:</strong> Users can quickly access TOTP within an app, without needing to switch to SMS or Email apps to retrieve a code.</li>
+<li><strong>Synchronized Time-based Codes:</strong> TOTP, being time-based, ensures synchronization between the server and the user's authenticator app, generating codes in a time-frame manner, providing a smooth user experience.</li>
+</ul>
+<h3>5. <strong>Standardization:</strong></h3>
+<ul>
+<li><strong>Widespread Adoption:</strong> TOTP is a widely adopted standard (RFC 6238) supported by many authentication apps and security solutions, making integration relatively straightforward.</li>
+</ul>
+<h3>Conclusion:</h3>
+<p>While each 2FA method has its place and may be suitable in different scenarios, TOTP generally offers a more secure and reliable option, particularly important in environments where high security is paramount. It avoids many of the vulnerabilities associated with SMS and Email-based 2FA, such as interception, phishing, and reliance on third-party services.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When utilizing JWTs (JSON Web Tokens) with short expiration times, it’s common to pair them with refresh tokens to avoid forcing users to manually re-authenticate frequently. A refresh token typically has a longer expiration time and is used to obtain a new access token (JWT) when the current one expires.</p>
+<h3>Common Process with Refresh Tokens:</h3>
+<ol>
+<li><p><strong>User Authentication:</strong></p>
+<ul>
+<li>The user logs in using their credentials.</li>
+<li>Upon successful authentication, the server issues an access token (JWT) and a refresh token.</li>
+</ul>
+</li>
+<li><p><strong>Access Token Usage:</strong></p>
+<ul>
+<li>The access token (JWT) is used to access protected resources.</li>
+<li>It has a short expiration time (e.g., 30 minutes).</li>
+</ul>
+</li>
+<li><p><strong>Token Expiry &amp; Refresh:</strong></p>
+<ul>
+<li>When the access token expires, the client uses the refresh token to request a new access token from the server.</li>
+<li>If the refresh token is valid, the server issues a new access token (and possibly a new refresh token).</li>
+</ul>
+</li>
+<li><p><strong>Refresh Token Expiry:</strong></p>
+<ul>
+<li>Refresh tokens usually have a much longer expiration time than access tokens.</li>
+<li>If the refresh token expires, the user needs to re-authenticate to obtain a new set of tokens.</li>
+</ul>
+</li>
+</ol>
+<h3>Benefits of Using Refresh Tokens:</h3>
+<ol>
+<li><p><strong>Security:</strong></p>
+<ul>
+<li>The short-lived access token reduces the risk associated with token leakage.</li>
+<li>Even if an attacker gets hold of the access token, they can only use it for a limited time.</li>
+</ul>
+</li>
+<li><p><strong>User Experience:</strong></p>
+<ul>
+<li>Users don’t have to repeatedly log in, as new access tokens can be obtained using the refresh token.</li>
+</ul>
+</li>
+<li><p><strong>Control Over Sessions:</strong></p>
+<ul>
+<li>The server can revoke refresh tokens at any time, giving more control over user sessions.</li>
+<li>It allows implementing features like user logout, forced logout on suspicious activity, or device management (e.g., logging out from all other devices).</li>
+</ul>
+</li>
+</ol>
+<h3>Implementation Details:</h3>
+<p>When implementing refresh tokens, ensure that they are stored securely. Storing them in HTTP-only, secure cookies is a common approach to prevent XSS (Cross-site Scripting) and CSRF (Cross-Site Request Forgery) attacks. Also, make sure to follow best practices for token management, such as rotating refresh tokens and handling token revocation effectively.</p>
+<p>This approach ensures a balance between security and user experience, allowing for secure and seamless interactions with the application without frequent interruptions for re-authentication.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Implementing TOTP-based 2FA in an ASP.NET Core Web API involves several steps. Below is a simplistic example of how it could be done, focusing on the most crucial parts.</p>
+<h3>1. Install the required package</h3>
+<p>Install the <code>Otp.NET</code> package, a .NET library for TOTP, which can help in generating and validating OTPs:</p>
+<pre><code class="language-sh">dotnet add package Otp.NET
+</code></pre>
+<h3>2. Setup a User Model</h3>
+<p>Here, a simplistic <code>User</code> model is assumed with <code>Id</code>, <code>Email</code>, <code>Password</code>, and <code>TwoFactorKey</code>.</p>
+<pre><code class="language-csharp">public class User
+{
+    public int Id { get; set; }
+    public string Email { get; set; }
+    public string Password { get; set; }
+    public string TwoFactorKey { get; set; }
+}
+</code></pre>
+<h3>3. 2FA Setup - Generate TOTP Key and QR Code</h3>
+<p>Create an endpoint to set up 2FA for a user. This endpoint generates a TOTP Key and returns a URL for a QR code to scan using an authenticator app.</p>
+<pre><code class="language-csharp">[HttpGet(&quot;setup-2fa&quot;)]
+public IActionResult SetupTwoFactor()
+{
+    // Assume you have a way to get the currently logged-in user
+    var user = GetCurrentUser();
+
+    var totpSetupGenerator = new TotpSetupGenerator();
+    var totpSetup = totpSetupGenerator.Generate(&quot;YourApp&quot;, user.Email, user.TwoFactorKey, 300, 6);
+
+    return Ok(new { QrCodeUrl = totpSetup.QrCodeSetupImageUrl });
+}
+</code></pre>
+<h3>4. 2FA Verification</h3>
+<p>Create an endpoint to verify the TOTP token entered by the user.</p>
+<pre><code class="language-csharp">[HttpPost(&quot;verify-2fa&quot;)]
+public IActionResult VerifyTwoFactor([FromBody] VerifyTwoFactorModel model)
+{
+    // Assume you have a way to get the currently logged-in user
+    var user = GetCurrentUser();
+
+    var totp = new Totp(user.TwoFactorKey);
+    if (!totp.VerifyTotp(model.Token, out _, new VerificationWindow(1, 1)))
+        return Unauthorized(&quot;Invalid token&quot;);
+
+    // On successful verification, you can grant access, return a token, etc.
+    return Ok(new { Success = true });
+}
+
+public class VerifyTwoFactorModel
+{
+    public string Token { get; set; }
+}
+</code></pre>
+<h3>5. Additional Setup</h3>
+<p>Ensure you have proper mechanisms in place to secure sensitive user information, handle user authentication, manage user sessions, and protect your API endpoints.</p>
+<p>Remember, this is a simplified example to illustrate the process, and in a real-world application, you would need to consider additional aspects such as error handling, user experience, and security measures such as encrypting the TwoFactorKey.</p>
+<p>This example also assumes that the user object and the method to get the currently logged-in user (GetCurrentUser()) are already defined in your system, and you should replace them with your actual implementations.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To implement SMS/Email-based 2FA, you need a way to generate OTPs, store them temporarily, and a service to send SMS/Email. Below is a simplified approach to implement 2FA with ASP.NET Core Web API.</p>
+<h3>1. Setup a Model for OTP Storage</h3>
+<p>You need a place to store OTPs temporarily associated with users. Here’s a simplistic model for OTP.</p>
+<pre><code class="language-csharp">public class Otp
+{
+    public string UserId { get; set; }
+    public string Code { get; set; }
+    public DateTime ExpiryTime { get; set; }
+}
+</code></pre>
+<h3>2. Generate and Send OTP</h3>
+<p>Create an endpoint to generate and send OTP via SMS/Email.</p>
+<h4>SMS</h4>
+<p>For SMS, you can use Twilio. Install the Twilio package:</p>
+<pre><code class="language-sh">dotnet add package Twilio
+</code></pre>
+<pre><code class="language-csharp">[HttpGet(&quot;generate-otp&quot;)]
+public async Task&lt;IActionResult&gt; GenerateOtp()
+{
+    var user = GetCurrentUser(); // Assume you have a method to get the current user.
+
+    var otpCode = new Random().Next(100000, 999999).ToString(); // Generate a 6-digit OTP.
+    var expiryTime = DateTime.UtcNow.AddMinutes(5); // Set expiry time for OTP.
+
+    // Store OTP against the user with expiry time.
+    StoreOtp(new Otp { UserId = user.Id.ToString(), Code = otpCode, ExpiryTime = expiryTime });
+
+    // Use Twilio or any other SMS service to send OTP.
+    var message = await TwilioService.SendSms(user.PhoneNumber, $&quot;Your OTP is {otpCode}&quot;);
+
+    if (message.ErrorCode != null)
+        return BadRequest(&quot;Failed to send OTP.&quot;);
+
+    return Ok(new { Success = true });
+}
+</code></pre>
+<h4>Email</h4>
+<p>For sending emails, you can use SMTP or any third-party services like SendGrid.</p>
+<pre><code class="language-csharp">// Use SmtpClient or any other Email service to send OTP.
+await EmailService.SendEmailAsync(user.Email, &quot;Your OTP&quot;, $&quot;Your OTP is {otpCode}&quot;);
+</code></pre>
+<h3>3. Verify OTP</h3>
+<p>Create an endpoint to verify the received OTP.</p>
+<pre><code class="language-csharp">[HttpPost(&quot;verify-otp&quot;)]
+public IActionResult VerifyOtp([FromBody] VerifyOtpModel model)
+{
+    var user = GetCurrentUser(); // Assume you have a method to get the current user.
+
+    var otp = RetrieveOtp(user.Id.ToString()); // Retrieve stored OTP for the user.
+
+    if (otp == null || otp.ExpiryTime &lt; DateTime.UtcNow || otp.Code != model.Code)
+        return Unauthorized(&quot;Invalid or expired OTP.&quot;);
+
+    // OTP is verified, continue with granting access or other operations.
+    return Ok(new { Success = true });
+}
+
+public class VerifyOtpModel
+{
+    public string Code { get; set; }
+}
+</code></pre>
+<h3>Notes</h3>
+<ul>
+<li>The <code>StoreOtp</code> and <code>RetrieveOtp</code> methods are placeholders for whatever method you use to temporarily store and retrieve OTPs.</li>
+<li>The <code>EmailService</code> and <code>TwilioService</code> are placeholders for actual services you would use to send Emails and SMS.</li>
+<li>Don’t forget to handle errors, user feedbacks, and edge cases like OTP retries.</li>
+<li>This is a very simplistic approach; depending on your requirements and architecture, you might need to adjust or expand it. For instance, using a dedicated caching solution like Redis for storing OTPs would be more appropriate in production applications.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Storing One-Time Passwords (OTPs) can be approached in different ways, each with its benefits and drawbacks. Generally, OTPs should be short-lived and securely stored. Here are a couple of strategies:</p>
+<h3>1. <strong>In-Memory Storage:</strong></h3>
+<ul>
+<li><strong>Use Case:</strong> Suitable for lightweight applications or when the server can afford to lose the data, such as if the server restarts.</li>
+<li><strong>Example:</strong> In-memory caches like <code>MemoryCache</code> in ASP.NET Core or distributed cache like Redis.</li>
+<li><strong>Pros:</strong>
+<ul>
+<li>Fast access.</li>
+<li>Data is lost when the application is restarted, minimizing the risk.</li>
+</ul>
+</li>
+<li><strong>Cons:</strong>
+<ul>
+<li>Not persistent, so OTPs are lost if the application restarts.</li>
+<li>Could potentially use a significant amount of memory, depending on the user base and OTP expiry times.</li>
+</ul>
+</li>
+</ul>
+<h3>2. <strong>Database Storage:</strong></h3>
+<ul>
+<li><strong>Use Case:</strong> When persistence is crucial, and losing OTPs due to a restart is not acceptable.</li>
+<li><strong>Pros:</strong>
+<ul>
+<li>Persistent, survives application restarts.</li>
+<li>Can leverage existing security measures like encryption at rest.</li>
+</ul>
+</li>
+<li><strong>Cons:</strong>
+<ul>
+<li>Slower access compared to in-memory storage.</li>
+<li>OTPs need to be securely handled, like hashing, to avoid exposure from database leaks.</li>
+</ul>
+</li>
+</ul>
+<h3>3. <strong>Hybrid Approach:</strong></h3>
+<p>You could use a combination of both. For instance, you could use in-memory storage for fast access and have a background job that persists them to a database periodically and removes them once expired or verified.</p>
+<h3>Best Practices:</h3>
+<ul>
+<li><strong>Short Lived:</strong> OTPs should be short-lived and expire after a short duration.</li>
+<li><strong>Hashing:</strong> Store hashed versions of OTPs to avoid exposure of actual values.</li>
+<li><strong>Cleanup:</strong> Regularly clean up expired OTPs to free up resources.</li>
+<li><strong>Rate Limiting:</strong> Implement rate limiting to prevent abuse.</li>
+<li><strong>Monitoring &amp; Alerting:</strong> Monitor the generation and verification of OTPs and set up alerts for suspicious activities.</li>
+</ul>
+<h3>Example: Using In-Memory Storage in ASP.NET Core</h3>
+<p>Here’s a simple example of storing OTPs in-memory using <code>MemoryCache</code> in ASP.NET Core.</p>
+<pre><code class="language-csharp">public class OtpService
+{
+    private readonly IMemoryCache _cache;
+
+    public OtpService(IMemoryCache cache)
+    {
+        _cache = cache;
+    }
+
+    public void StoreOtp(string userId, string otpCode)
+    {
+        var cacheEntryOptions = new MemoryCacheEntryOptions { AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5) }; // Set expiration time.
+        _cache.Set(userId, otpCode, cacheEntryOptions);
+    }
+
+    public string RetrieveOtp(string userId)
+    {
+        _cache.TryGetValue(userId, out string otpCode);
+        return otpCode;
+    }
+}
+</code></pre>
+<h3>Conclusion:</h3>
+<p>The choice between in-memory and database storage depends on your application’s requirements, infrastructure, and the trade-offs you are willing to make between performance, persistence, and security. Often, in-memory solutions like caching (potentially with a persistent backing store) can offer a balanced approach.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Implementing access tokens and refresh tokens in ASP.NET Core can be done using the built-in Identity system and a package like <code>AspNetCore.IdentityServer4</code>. Here is a high-level overview and a simple example:</p>
+<h3>Overview:</h3>
+<ol>
+<li><p><strong>Access Token:</strong></p>
+<ul>
+<li>Short-lived token used to make authenticated API requests.</li>
+<li>Typically expires in a short amount of time, e.g., 30 minutes.</li>
+</ul>
+</li>
+<li><p><strong>Refresh Token:</strong></p>
+<ul>
+<li>Longer-lived token used to obtain new access tokens.</li>
+<li>Should be stored securely.</li>
+</ul>
+</li>
+<li><p><strong>Flow:</strong></p>
+<ul>
+<li>Upon successful login, the server issues an access token and a refresh token.</li>
+<li>The client uses the access token to make requests.</li>
+<li>When the access token expires, the client uses the refresh token to obtain a new access token.</li>
+</ul>
+</li>
+</ol>
+<h3>Implementation:</h3>
+<h4>1. Setup Identity Server:</h4>
+<p>In <code>Startup.cs</code>, configure the IdentityServer with the necessary resources, clients, and add support for refresh tokens.</p>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    // … other services
+
+    services.AddIdentityServer()
+        .AddInMemoryApiResources(Configuration.GetSection(&quot;ApiResources&quot;))
+        .AddInMemoryClients(Configuration.GetSection(&quot;Clients&quot;))
+        .AddDeveloperSigningCredential(); // In production, you should use a real signing credential.
+
+    services.AddAuthentication(&quot;Bearer&quot;)
+        .AddJwtBearer(&quot;Bearer&quot;, options =&gt;
+        {
+            options.Authority = &quot;Your identity server URL&quot;;
+            options.RequireHttpsMetadata = false; // Set to true in production.
+            options.Audience = &quot;Your API resource name&quot;;
+        });
+}
+
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    // … other middlewares
+
+    app.UseAuthentication();
+    app.UseAuthorization();
+}
+</code></pre>
+<p>In <code>appsettings.json</code>, configure your API resources and clients.</p>
+<pre><code class="language-json">{
+  &quot;ApiResources&quot;: [
+    {
+      &quot;Name&quot;: &quot;Your API resource name&quot;,
+      &quot;DisplayName&quot;: &quot;Your API&quot;,
+      &quot;Scopes&quot;: [ &quot;Your API scope&quot; ]
+    }
+  ],
+  &quot;Clients&quot;: [
+    {
+      &quot;ClientId&quot;: &quot;Your client id&quot;,
+      &quot;AllowedGrantTypes&quot;: [ &quot;password&quot;, &quot;refresh_token&quot; ],
+      &quot;ClientSecrets&quot;: [ { &quot;Value&quot;: &quot;Your client secret&quot; } ],
+      &quot;AllowedScopes&quot;: [ &quot;Your API scope&quot; ],
+      &quot;AllowOfflineAccess&quot;: true,
+      &quot;RefreshTokenUsage&quot;: &quot;OneTimeOnly&quot;,
+      &quot;RefreshTokenExpiration&quot;: &quot;Sliding&quot;
+    }
+  ]
+}
+</code></pre>
+<h4>2. Issue Tokens:</h4>
+<p>When a user logs in successfully, issue access and refresh tokens.</p>
+<pre><code class="language-csharp">[HttpPost(&quot;login&quot;)]
+public async Task&lt;IActionResult&gt; Login(LoginModel model)
+{
+    var user = await _userManager.FindByNameAsync(model.Username);
+    if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
+        return Unauthorized();
+
+    var claims = new[]
+    {
+        new Claim(&quot;sub&quot;, user.Id.ToString()), // subject: unique identifier for the user
+        // … other claims
+    };
+
+    var token = _tokenService.CreateToken(claims); // Assume you have a service to create tokens.
+
+    return Ok(new { AccessToken = token.AccessToken, RefreshToken = token.RefreshToken });
+}
+</code></pre>
+<h4>3. Refresh Tokens:</h4>
+<p>Create an endpoint to handle token refresh requests.</p>
+<pre><code class="language-csharp">[HttpPost(&quot;refresh&quot;)]
+public IActionResult Refresh(RefreshModel model)
+{
+    var validationResult = _tokenService.ValidateRefreshToken(model.RefreshToken);
+    if (!validationResult.IsValid)
+        return BadRequest(validationResult.Errors);
+
+    var newToken = _tokenService.CreateToken(validationResult.Claims);
+
+    return Ok(new { AccessToken = newToken.AccessToken, RefreshToken = newToken.RefreshToken });
+}
+</code></pre>
+<h4>Note:</h4>
+<p>This is a simplistic example to illustrate the concepts, and in a real-world application, you need to handle various considerations and edge cases like token revocation, storing refresh tokens securely, and managing user sessions. The <code>_userManager</code> and <code>_tokenService</code> are placeholders for the actual implementations of user management and token generation/validation services, respectively. You should replace them with actual implementations based on your application's architecture and requirements.</p>
+<p>For more advanced scenarios and production-ready implementations, you might want to explore using IdentityServer4 or OpenIddict more extensively, along with properly managing user consent, storing refresh tokens securely, rotating refresh tokens, and handling client secrets appropriately. Also, consider consulting the official documentation and guidelines for the technology stack you are using for the most accurate and up-to-date information.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, you can certainly extend your existing mechanism to issue a refresh token along with the access token and add a new endpoint, like <code>/refresh</code>, to handle the token refreshing.</p>
+<h3>Adding Refresh Token:</h3>
+<p>When you authenticate the user and generate an access token, you can also generate a refresh token with a longer expiration time. You can return both tokens to the client.</p>
+<h3>Refresh Endpoint:</h3>
+<p>You can create a new endpoint, e.g., <code>/refresh</code>, which takes the refresh token, validates it, and issues a new access token if the refresh token is valid.</p>
+<p>Here is a simplistic example:</p>
+<pre><code class="language-csharp">[HttpPost(&quot;login&quot;)]
+public IActionResult Login(LoginModel model)
+{
+    var user = AuthenticateUser(model.Username, model.Password);
+    if (user == null)
+        return Unauthorized();
+
+    var accessToken = GenerateAccessToken(user);
+    var refreshToken = GenerateRefreshToken(user);
+
+    return Ok(new { AccessToken = accessToken, RefreshToken = refreshToken });
+}
+
+[HttpPost(&quot;refresh&quot;)]
+public IActionResult Refresh(RefreshModel model)
+{
+    var refreshToken = ValidateRefreshToken(model.RefreshToken);
+    if (refreshToken == null)
+        return Unauthorized();
+
+    var newAccessToken = GenerateAccessToken(refreshToken.User);
+
+    return Ok(new { AccessToken = newAccessToken });
+}
+</code></pre>
+<h3>Regarding IdentityServer4:</h3>
+<p>IdentityServer4 is not strictly necessary for implementing refresh tokens. It is a fully-featured OpenID Connect and OAuth 2.0 framework for ASP.NET Core, which means it includes a lot of features, configurations, and extensibility points that cover a wide range of scenarios, including single sign-on (SSO), API security, and consent handling, which may be overkill for simpler use cases.</p>
+<p>However, implementing security features correctly can be complex and error-prone, and using a well-established library or framework like IdentityServer4 can help ensure that you are following best practices and industry standards, and it can save a lot of development effort in more complex scenarios.</p>
+<h3>In Summary:</h3>
+<ul>
+<li>For simpler needs and smaller projects, a custom implementation like the one you are suggesting can be sufficient.</li>
+<li>For larger projects, or when you need to handle a variety of authentication and authorization scenarios, using a solution like IdentityServer4 can provide a more robust and standards-compliant implementation.</li>
+</ul>
+<p>Regardless of the approach, it’s crucial to be mindful of security best practices, like securing the tokens, using HTTPS, handling token expiration and revocation properly, and protecting against various security vulnerabilities.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<h3>Storing Tokens:</h3>
+<h4>Access Tokens:</h4>
+<p>Typically, access tokens are self-contained (for example, JWTs) and do not need to be stored on the server-side, as they can be validated independently by the server. However, in some cases, particularly with opaque tokens, you may need to store them.</p>
+<h4>Refresh Tokens:</h4>
+<p>Refresh tokens, however, do need to be stored securely on the server side since they are used to grant new access tokens. The storage allows you to:</p>
+<ul>
+<li>Revoke refresh tokens if needed.</li>
+<li>Implement sliding expiration.</li>
+<li>Implement one-time-use refresh tokens.</li>
+<li>Ensure that only the issued refresh tokens can be used to acquire new access tokens.</li>
+</ul>
+<h3>Cleaning Old Tokens:</h3>
+<h4>Using a Scheduled Task:</h4>
+<p>You can implement a background service or a scheduled task in your application to periodically delete expired refresh tokens from the database.</p>
+<p>Here’s a simple example of a hosted service in ASP.NET Core that cleans up expired tokens:</p>
+<pre><code class="language-csharp">public class TokenCleanupService : BackgroundService
+{
+    private readonly MyDbContext _dbContext;
+    private readonly TimeSpan _cleanUpInterval = TimeSpan.FromHours(1); // Define your interval.
+
+    public TokenCleanupService(MyDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        while (!stoppingToken.IsCancellationRequested)
+        {
+            var now = DateTime.UtcNow;
+            var expiredTokens = _dbContext.RefreshTokens.Where(t =&gt; t.ExpiryDate &lt; now).ToList();
+
+            _dbContext.RefreshTokens.RemoveRange(expiredTokens);
+            await _dbContext.SaveChangesAsync(stoppingToken);
+
+            await Task.Delay(_cleanUpInterval, stoppingToken);
+        }
+    }
+}
+</code></pre>
+<p>Then, register this service in the <code>Startup.cs</code>:</p>
+<pre><code class="language-csharp">services.AddHostedService&lt;TokenCleanupService&gt;();
+</code></pre>
+<h4>Using a Database Feature:</h4>
+<p>Some databases also offer features for automatically removing outdated records, like TTL (Time To Live) indexes in MongoDB or partitioning and scheduled jobs in SQL Server.</p>
+<h3>Security Considerations:</h3>
+<ul>
+<li><strong>Encrypt/Hash Tokens:</strong> Refresh tokens should be hashed or encrypted before being stored in the database to protect them in case of a database breach.</li>
+<li><strong>Use Secure Connection:</strong> Always use HTTPS to ensure that tokens cannot be intercepted during transmission.</li>
+<li><strong>Implement Token Revocation:</strong> It is essential to have a mechanism to revoke refresh tokens, especially in case of logout or if the token is compromised.</li>
+</ul>
+<h3>Summary:</h3>
+<ul>
+<li><strong>Access Tokens:</strong> Usually, don’t need to be stored in the database.</li>
+<li><strong>Refresh Tokens:</strong> Should be stored securely in the database.</li>
+<li><strong>Cleanup:</strong> Regularly remove expired or revoked tokens from the database using either scheduled tasks, background services, or database-specific features.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, you're correct. Here's a more detailed breakdown of the process:</p>
+<ol>
+<li><p><strong>Storing the Refresh Token:</strong></p>
+<ul>
+<li>When you generate a refresh token for the user, you hash it before saving it to the database.</li>
+<li>You then send the raw (unhashed) refresh token to the client.</li>
+</ul>
+</li>
+<li><p><strong>Refreshing the Access Token:</strong></p>
+<ul>
+<li>When the client sends the refresh token to the <code>/refresh</code> endpoint to get a new access token:
+<ol>
+<li>You hash the provided refresh token.</li>
+<li>You search your database for this hashed value.</li>
+<li>If the hashed token exists (and is valid, not expired, etc.), you issue a new access token (and potentially a new refresh token if you're using a one-time-use policy).</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<p>Here's a simplistic example:</p>
+<pre><code class="language-csharp">[HttpPost(&quot;refresh&quot;)]
+public IActionResult Refresh(RefreshModel model)
+{
+    // Hash the incoming refresh token.
+    var hashedToken = HashRefreshToken(model.RefreshToken);
+
+    // Find the token in your database.
+    var storedToken = _dbContext.RefreshTokens.SingleOrDefault(t =&gt; t.Token == hashedToken);
+
+    // If the token is not found or is invalid, return an error.
+    if (storedToken == null || storedToken.IsExpired)
+        return Unauthorized();
+
+    // Generate a new access token (and potentially a new refresh token).
+    var newAccessToken = GenerateAccessToken(storedToken.User);
+    var newRefreshToken = GenerateRefreshToken(storedToken.User);
+
+    // If using one-time-use refresh tokens, invalidate the old one and store the new one.
+    _dbContext.RefreshTokens.Remove(storedToken);
+    _dbContext.RefreshTokens.Add(new RefreshToken { Token = HashRefreshToken(newRefreshToken), User = storedToken.User, ExpiryDate = DateTime.UtcNow.AddHours(2) });
+    _dbContext.SaveChanges();
+
+    return Ok(new { AccessToken = newAccessToken, RefreshToken = newRefreshToken });
+}
+</code></pre>
+<p>Remember, the hashing mechanism should be consistent and secure. A good practice is to use a cryptographic hashing function like SHA-256. You might also consider adding a salt to the refresh token before hashing, but manage and store salts appropriately. This makes it even harder for an attacker to perform a successful reverse-engineering of the original token from the hash.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Absolutely, yes! One of the key reasons for storing refresh tokens in a persistent store like a database is to maintain state across application restarts, system crashes, or deployments.</p>
+<p>When your API system restarts:</p>
+<ol>
+<li><p><strong>Access Tokens:</strong> These are typically stateless JWTs, which means they don’t depend on the server’s state or the database and can be validated at any time by the server as long as they are not expired.</p>
+</li>
+<li><p><strong>Refresh Tokens:</strong> Since they are stored in the database, they persist across restarts. When the system is back up, it can continue to validate incoming refresh tokens against the ones stored in the database and issue new access tokens as needed.</p>
+</li>
+<li><p><strong>Client Side App:</strong> If the client-side app can handle the downtime gracefully (maybe by retrying the request or showing a relevant message to the user), it should be able to continue working seamlessly once the API system is back online, using the refresh token to obtain a new access token if the old one has expired.</p>
+</li>
+</ol>
+<p>In this way, storing refresh tokens in the database allows your authentication and authorization system to be resilient and to maintain continuity across system restarts and downtime.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">One-time passwords には Redis は向かないか。もっとシンプルに実装する。</p>
+                            <div class="note_ai_generated">
+<p>In C#, you can store a class instance to Redis by serializing the instance to a string representation, typically in JSON format, and then storing that string in Redis. Here is a basic example, assuming you have a class named <code>Person</code> and you are using StackExchange.Redis as the Redis client library.</p>
+<p>Firstly, you will need to install the <code>StackExchange.Redis</code> and <code>Newtonsoft.Json</code> NuGet packages if you haven't already:</p>
+<pre><code class="language-shell">Install-Package StackExchange.Redis
+Install-Package Newtonsoft.Json
+</code></pre>
+<p>Here’s a step-by-step example:</p>
+<h3>1. Define a Class</h3>
+<p>Define a <code>Person</code> class.</p>
+<pre><code class="language-csharp">public class Person
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public int Age { get; set; }
+}
+</code></pre>
+<h3>2. Initialize Redis Connection</h3>
+<p>Initialize a connection to the Redis server.</p>
+<pre><code class="language-csharp">ConnectionMultiplexer redis = ConnectionMultiplexer.Connect(&quot;localhost&quot;);
+IDatabase db = redis.GetDatabase();
+</code></pre>
+<h3>3. Serialize and Store Class Instance</h3>
+<p>Create an instance of <code>Person</code>, serialize it to JSON, and then store it in Redis.</p>
+<pre><code class="language-csharp">Person person = new Person { FirstName = &quot;John&quot;, LastName = &quot;Doe&quot;, Age = 30 };
+string personJson = JsonConvert.SerializeObject(person);
+db.StringSet(&quot;person:1&quot;, personJson);
+</code></pre>
+<h3>4. Retrieve and Deserialize Class Instance</h3>
+<p>Retrieve the JSON string from Redis and deserialize it back to a <code>Person</code> instance.</p>
+<pre><code class="language-csharp">string retrievedPersonJson = db.StringGet(&quot;person:1&quot;);
+Person retrievedPerson = JsonConvert.DeserializeObject&lt;Person&gt;(retrievedPersonJson);
+</code></pre>
+<p>Here’s a more complete example that combines all these steps:</p>
+<pre><code class="language-csharp">using StackExchange.Redis;
+using Newtonsoft.Json;
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Connect to Redis server
+        ConnectionMultiplexer redis = ConnectionMultiplexer.Connect(&quot;localhost&quot;);
+        IDatabase db = redis.GetDatabase();
+
+        // Create a Person instance
+        Person person = new Person { FirstName = &quot;John&quot;, LastName = &quot;Doe&quot;, Age = 30 };
+
+        // Serialize Person instance to JSON
+        string personJson = JsonConvert.SerializeObject(person);
+
+        // Store JSON string in Redis
+        db.StringSet(&quot;person:1&quot;, personJson);
+
+        // Retrieve JSON string from Redis
+        string retrievedPersonJson = db.StringGet(&quot;person:1&quot;);
+
+        // Deserialize JSON string back to Person instance
+        Person retrievedPerson = JsonConvert.DeserializeObject&lt;Person&gt;(retrievedPersonJson);
+
+        // Output the retrieved person's details
+        Console.WriteLine($&quot;FirstName: {retrievedPerson.FirstName}, LastName: {retrievedPerson.LastName}, Age: {retrievedPerson.Age}&quot;);
+    }
+
+    public class Person
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int Age { get; set; }
+    }
+}
+</code></pre>
+<p>Ensure you have a running Redis instance accessible at <code>localhost</code>, or adjust the connection string to point to your Redis instance.</p>
+<p>Keep in mind this is a simple example. For more complex objects, you might need to handle serialization and deserialization in a way that suits your needs, possibly writing custom serialization logic, depending on your requirements. Additionally, consider error handling and connection management for production-grade code.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">サーバーに Redis をインストールできないと詰む。いったん Redis なしで実装してみる。</p>
+                            <div class="note_ai_generated">
+<p>If you want to use Redis as a standalone, in-memory cache, it's quite straightforward to set up and use it in this mode, and it's actually one of the common use cases for Redis. The standalone mode implies that Redis runs on its own, not as part of a cluster, and it can be used by various client applications as an in-memory store.</p>
+<p>Here’s a brief guide on how to use Redis as a standalone, in-memory cache:</p>
+<h3>1. Install Redis</h3>
+<p>If you haven’t installed Redis yet, download and install it by following the instructions on the <a href="https://redis.io/download">official Redis website</a>.</p>
+<h3>2. Start the Redis Server</h3>
+<p>Once installed, start the Redis server. By default, it operates in-memory.</p>
+<pre><code class="language-shell">redis-server
+</code></pre>
+<h3>3. Configure as Cache (Optional)</h3>
+<p>Although not necessary, you may want to configure Redis specifically as a cache, for instance, by setting an eviction policy in the <code>redis.conf</code> file, which tells Redis what to do when it runs out of memory. An example is using the <code>allkeys-lru</code> policy to remove the least recently used keys first:</p>
+<pre><code class="language-conf">maxmemory-policy allkeys-lru
+</code></pre>
+<h3>4. Connect to Redis from your Application</h3>
+<p>After setting up the Redis server, connect to it from your application using a suitable Redis client for your programming language. For example, in Python, you can use the <code>redis-py</code> library, and in C#, you can use the <code>StackExchange.Redis</code> library.</p>
+<p>Here’s a simple example in Python:</p>
+<pre><code class="language-python">import redis
+
+# Connect to local Redis server
+r = redis.Redis(host='localhost', port=6379, db=0)
+
+# Set a key
+r.set('my_key', 'my_value')
+
+# Get a key
+print(r.get('my_key')) # Outputs: b'my_value'
+</code></pre>
+<p>And a simple example in C#:</p>
+<pre><code class="language-csharp">using StackExchange.Redis;
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Connect to local Redis server
+        ConnectionMultiplexer redis = ConnectionMultiplexer.Connect(&quot;localhost&quot;);
+        IDatabase db = redis.GetDatabase();
+
+        // Set a key
+        db.StringSet(&quot;my_key&quot;, &quot;my_value&quot;);
+
+        // Get a key
+        Console.WriteLine(db.StringGet(&quot;my_key&quot;)); // Outputs: my_value
+    }
+}
+</code></pre>
+<p>Remember to ensure the security of your Redis server, especially when deploying in a production environment. By default, Redis is designed to be accessed by trusted clients inside trusted environments, and you shouldn’t expose it directly to the internet unless it’s properly secured, e.g., via a password, firewall rules, or additional security measures like VPNs or VPCs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="75d4c7c9-2d29-4d1e-b186-a95bc01bcec9" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">fanApiJwt で admin がログインできるようにする</span>
+                    <a href="#75d4c7c9-2d29-4d1e-b186-a95bc01bcec9" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">何段階か roles を登録し、そのうち admin に相当するものに関連づけられた初期ユーザーをコードで登録。</p>
+                            <p class="note_contents">admin/admin で入ってパスワードを変更してもらうのか、デプロイ直後の攻撃を避けるために初期パスワードを設定できる仕組みをつくるのかも考える。</p>
+                            <p class="note_contents">admin_password.txt を入れてデプロイしたらその中身が使われてファイルがすぐに消されて……というのが一つの思いつきだが、もっとスマートな方法がありそう。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ユーザー名がメアドのシステムにおいては、admin のメアドの流し込みも必要。</p>
+                            <p class="note_contents">いくつかのパターンを想定しておく。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="de05a8fd-7ffc-4d7b-af0f-9054dde51a8b" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">fanApiJwt で共通化するべきコードを探す</span>
+                    <a href="#de05a8fd-7ffc-4d7b-af0f-9054dde51a8b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Identity を拡張するものとして新たなライブラリーを作る？</p>
+                            <p class="note_contents">10～20年前には何でも単一のライブラリーに詰め込んでいたが、やはりそういう時代でない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ザッと見たが、現行のコードには、メソッドを作るほどのコードが含まれない。五つも六つも引数を受け取り、内部では文字列の結合やインスタンスの生成のみ行うメソッドを少数作っても仕方ない。</p>
+                            <p class="note_contents">ユーザーによるパスワードのリセットなどや管理者による Users の CRUD が終わった頃に再考。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="f89b5a2c-456a-45f1-8c0d-765332424431" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">fanApiJwt が再起動した場合のユーザーへの影響を調べる</span>
+                    <a href="#f89b5a2c-456a-45f1-8c0d-765332424431" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">システムが戻ったときにそのまま使える機能とそうでないものを区別。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="becc6576-9f09-4582-bdea-40775365647f" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">AddDefaultTokenProviders を呼ばなくしてみる</span>
+                    <a href="#becc6576-9f09-4582-bdea-40775365647f" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">パスワードのリセットなどにおけるトークンの生成に関連するものとのこと。JWT ではそこまでやらないので、なくてもよいかもしれない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="007ca757-ea67-4919-a93b-a54b83c07a19" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">fanApiJwt を使うウェブアプリの設計について考える</span>
+                    <a href="#007ca757-ea67-4919-a93b-a54b83c07a19" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">API が動き、AWS でメールや SMS を送れるようになった。ここまでは道なり。</p>
+                            <p class="note_contents">ここからは、最終的にどうしたいかが問われる。それにより、ソリューション全体の構成が左右される。</p>
+                            <p class="note_contents">/user/login でトークンをもらい、それを全ての GET/POST につける流れは間違いない。そのトークンをサーバー側で検証する仕組みが必要。</p>
+                            <p class="note_contents">クライアント側でも、期限切れになっていたらログインし直す必要がある。refresh token についても調べ直す。</p>
+                            <p class="note_contents">ウェブアプリにおいてトークンをどこに保存するのか、よく分かっていない。セッション情報？</p>
+                            <p class="note_contents">ウェブアプリへの GET/POST も基本的にはステートレスだとみなすなら、セッション情報が途切れるリスクもある。それにはクッキーで対処？</p>
+                            <p class="note_contents">ASP.NET のフォーム認証ではトークン的なものをクッキーとして保存していた記憶がある。そのあたりについても再確認。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="08155951-4a46-49f9-8aa6-6bb89aba2a3a" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">fanApiJwt で Users の CRUD を実装</span>
+                    <a href="#08155951-4a46-49f9-8aa6-6bb89aba2a3a" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="1a6eb8df-2037-4509-8f22-f491d631326b" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">fanApiJwt の各部におけるアクセス権のチェックをチェック</span>
+                    <a href="#1a6eb8df-2037-4509-8f22-f491d631326b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">role 単位でやる場合、ちょっとした書き間違えでエラいことになる。ミスを根絶する仕組みがないかも調べる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="34eb3074-a474-4eb2-be06-f2a69a1a0af3" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">fanApiJwt で admin 以外にも Users の CRUD ができるようにする</span>
+                    <a href="#34eb3074-a474-4eb2-be06-f2a69a1a0af3" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="fce5f232-8e1a-4261-a1b6-53abc910dc80" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">fan/fanConsole を追加</span>
+                    <a href="#fce5f232-8e1a-4261-a1b6-53abc910dc80" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">コンソールアプリ<br />
+                                フレームワーク: .NET 7.0<br />
+                                「最上位レベルのステートメントを使用しない」オン</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">さきに API のほうを、もう少し強化する。</p>
+                            <p class="note_contents">こちらには、メールを受け取ってコードを取得したことにする以外の全ての API 操作を自動的にテストしてほしい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="e3f10ffe-24cb-48fe-8e50-ec858e2adafb" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">エンドポイントの例外処理について調べる</span>
+                    <a href="#e3f10ffe-24cb-48fe-8e50-ec858e2adafb" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In an ASP.NET Core Web API, you don't necessarily need to wrap each endpoint with a <code>try/catch</code> block. However, handling exceptions is crucial for maintaining a reliable and user-friendly API. When considering whether or not to use <code>try/catch</code>, think about these factors:</p>
+<ol>
+<li><p><strong>Unhandled Exceptions</strong>: If an exception is thrown and not caught in your API endpoint, the exception will propagate up to the global error handling layer. Without appropriate global exception handling in place, your API might return a <code>500 Internal Server Error</code> response without much context, making it difficult for clients (and developers) to understand the nature of the problem.</p>
+</li>
+<li><p><strong>Global Exception Handling</strong>: Instead of using <code>try/catch</code> in each endpoint, many developers opt to use global exception handling mechanisms provided by ASP.NET Core. This allows for centralized logging, custom error responses, and other benefits. Middleware like <code>UseExceptionHandler</code> can be used for this purpose.</p>
+<pre><code class="language-csharp">if (env.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseExceptionHandler(&quot;/api/error&quot;);
+}
+</code></pre>
+<p>In the above example, any unhandled exception in a non-development environment would be redirected to the <code>/api/error</code> endpoint.</p>
+</li>
+<li><p><strong>ProblemDetails</strong>: ASP.NET Core introduces <code>ProblemDetails</code> and <code>ValidationProblemDetails</code> classes which can be used as standard error responses. These are useful for APIs because they provide a structured format for error details.</p>
+</li>
+<li><p><strong>Logging</strong>: Even if you catch exceptions, it's essential to log them. ASP.NET Core's built-in logging services make this straightforward.</p>
+</li>
+<li><p><strong>Localized Exception Handling</strong>: While global exception handling covers many scenarios, sometimes you might want to handle specific exceptions locally within an endpoint. For example, when catching a specific exception might result in a different HTTP status code or custom business logic needs to be executed.</p>
+</li>
+<li><p><strong>Status Codes</strong>: When exceptions are caught, you have the opportunity to return a meaningful HTTP status code. This provides the client with more information about the nature of the problem (e.g., <code>400 Bad Request</code>, <code>404 Not Found</code>, <code>409 Conflict</code>).</p>
+</li>
+<li><p><strong>3rd Party Libraries</strong>: Some libraries might throw exceptions that you'd want to catch and translate into meaningful responses or log with specific details.</p>
+</li>
+</ol>
+<p>To summarize, while you don't need to wrap every endpoint in a <code>try/catch</code>, you should have a strategy for handling exceptions, be it global exception handling, local <code>try/catch</code>, or a combination of both. Uncaught exceptions will result in a generic error response, which might not be informative for the client.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Certainly! Global exception handling in ASP.NET Core allows developers to centralize the handling of exceptions, providing a consistent way to log errors and return uniform error responses to the client. Instead of scattering <code>try/catch</code> blocks across numerous endpoints, you can manage exceptions in one place, leading to cleaner and more maintainable code.</p>
+<h3>1. UseExceptionHandler Middleware</h3>
+<p>One of the most common ways to handle exceptions globally in ASP.NET Core is with the <code>UseExceptionHandler</code> middleware. This middleware can capture synchronous and asynchronous exceptions.</p>
+<pre><code class="language-csharp">public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    if (env.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+    }
+    else
+    {
+        app.UseExceptionHandler(&quot;/error&quot;); // Redirects to the error route
+    }
+
+    app.UseRouting();
+    // ... other middleware ...
+}
+</code></pre>
+<p>You can then define the <code>/error</code> route to format and return the error as needed:</p>
+<pre><code class="language-csharp">[ApiController]
+public class ErrorController : ControllerBase
+{
+    [Route(&quot;/error&quot;)]
+    public IActionResult Error()
+    {
+        var context = HttpContext.Features.Get&lt;IExceptionHandlerFeature&gt;();
+        var exception = context?.Error; // Your exception
+
+        // Log the exception, etc.
+
+        return Problem(); // Returns a ProblemDetails object by default
+    }
+}
+</code></pre>
+<h3>2. Exception Filters</h3>
+<p>Exception filters are another way to handle exceptions globally. You can create a custom exception filter by implementing the <code>IExceptionFilter</code> or <code>IAsyncExceptionFilter</code> interface.</p>
+<pre><code class="language-csharp">public class CustomExceptionFilter : IExceptionFilter
+{
+    public void OnException(ExceptionContext context)
+    {
+        var exception = context.Exception;
+        // Handle the exception, log, etc.
+
+        context.Result = new ObjectResult(new
+        {
+            status = 500,
+            error = &quot;A server error occurred.&quot;
+        })
+        {
+            StatusCode = StatusCodes.Status500InternalServerError
+        };
+    }
+}
+</code></pre>
+<p>Register the filter globally in <code>Startup.cs</code>:</p>
+<pre><code class="language-csharp">services.AddControllers(options =&gt;
+{
+    options.Filters.Add(new CustomExceptionFilter());
+});
+</code></pre>
+<h3>3. Using ProblemDetails</h3>
+<p>ASP.NET Core 2.2 introduced <code>ProblemDetails</code> and <code>ValidationProblemDetails</code> for better error responses. By default, when an exception is thrown, the framework will use these to provide detailed error responses when in a development environment. For production, you might want to customize or limit the details shared.</p>
+<h3>4. Logging</h3>
+<p>With global exception handling in place, it's essential to integrate logging to record these exceptions for monitoring and troubleshooting. ASP.NET Core integrates seamlessly with various logging providers like Serilog, NLog, etc.</p>
+<pre><code class="language-csharp">public IActionResult Error()
+{
+    var context = HttpContext.Features.Get&lt;IExceptionHandlerFeature&gt;();
+    var exception = context?.Error;
+
+    // Log the exception
+    _logger.LogError(exception, &quot;An unhandled exception occurred.&quot;);
+
+    return Problem();
+}
+</code></pre>
+<h3>Conclusion</h3>
+<p>By using global exception handling in ASP.NET Core, you can ensure that your application responds gracefully to unexpected issues, logs errors consistently, and provides clients with informative and standardized error messages.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="01ea6473-b164-408e-8a18-13ef5307259e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">プロジェクトをいったん廃止</span>
+                    <a href="#01ea6473-b164-408e-8a18-13ef5307259e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">自分でコードを書き、ウェブシステムを動かす時代から、ChatGPT でリファクタリングし、コードは Copilot に任せ、まずは API を作り……といった時代に変わっているのを実感した。やり方から見直す必要がある。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
