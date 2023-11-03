@@ -419,6 +419,43 @@
                     <a href="#125c74d3-24e6-4885-a621-1ec09f741359" class="permalink">&infin;</a>
                 </div>
             </div>
+            <div id="35598345-ca8e-4a86-826a-6ac890f4a4c5" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">今でもたまにリロードが止まりプログラム終了時に落ちる件について調べる</span>
+                    <a href="#35598345-ca8e-4a86-826a-6ac890f4a4c5" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">最近では、サブディレクトリーに分けていたタスクリストをフラットな展開に変更したときに起こった。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">プログラム使用中には落ちず、静かにリロードが止まり、プログラム終了時に例外情報が MessageBox で出力される。リロードのスレッド内でのエラーの可能性が高い。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">タスクリストがたくさん入っているディレクトリーに新しいタスクリストを作り、tkView で繰り返しリロードする間に消してみたが、問題なかった。</p>
+                            <p class="note_contents">サブディレクトリーが必要かと思い、新しいディレクトリーを作ってからその中に新しいタスクリストを作ったが、そちらでも問題なかった。</p>
+                            <p class="note_contents">そこで、Tasks ディレクトリーのみ消してみたところ、iReload が落ちてリロードが止まり、プログラム終了時に例外情報が表示された。</p>
+                            <p class="note_contents">iReload 内で「タスクリストと思われるディレクトリーに Tasks ディレクトリーが本当にあるか」がチェックされないことの問題。タスクリストの移動というより、整理などで全てのタスクを移動したり消したりのタスクリストが空になって Tasks ディレクトリーが消された瞬間に tkView が落ちていた。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">対策を講じ、コードの方にコメントを書いた。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="7ece033d-418b-4e55-9d4d-862d50d4bfb6" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">v0.17 としてアーカイブ</span>
+                    <a href="#7ece033d-418b-4e55-9d4d-862d50d4bfb6" class="permalink">&infin;</a>
+                </div>
+            </div>
         </div>
     </body>
 </html>
