@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>yyGpt</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace;font-size:1rem;line-height:1.5}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="yyGpt.htm" class="title">yyGpt</a>
+        </div>
+        <div class="entries">
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">質問をタイトルっぽく整理してもらうのは Custom instructions でできている。それから答えてもらい、タイトルも回答も英語と日本語の両方でローカル保存するまでは API で間違いなく可能。</p>
+                    <!-- Task: c9c2d62f-b384-40aa-a23e-291cefb83b57 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">たとえば新しいクラスライブラリーを作るにおいて、「こういう機能を入れたいのだが、どういう名前空間が必要か」を会話でやり取りするなら、そのやり取りを /Source/General.gpt にでも入れ、文字列処理に関することを /Source/StringManipulation/General.gpt に入れ……といったことは、ある程度のトレーサビリティーが生じる点において合理的。</p>
+                    <p class="note_contents">ただ、そのうち StringManipulation 名前空間を二つに割るなどがあれば、そこの General.gpt は容易には割れず詰む。</p>
+                    <p class="note_contents">かといって、そういうカテゴリー分けを最初から諦めて時系列的に全て詰め込むのも問題がある。</p>
+                    <p class="note_contents">そのあたりのことから考える必要がある。</p>
+                    <!-- Task: c9c2d62f-b384-40aa-a23e-291cefb83b57 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">ローカル版とリモート版の両方に長短があるので、両方を作る？</p>
+                    <p class="note_contents">ローカル版だとレポジトリーに入れられる。開発関連の情報に向く。</p>
+                    <p class="note_contents">リモート版だと、API 連携により情報の整理・共有のプラットフォームに流し込める。</p>
+                    <!-- Task: c9c2d62f-b384-40aa-a23e-291cefb83b57 -->
+                </div>
+            </div>
+            <div id="fb191f0e-e40b-41c5-8148-153953dea179" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">taskKiller との親和性について考える</span>
+                    <a href="#fb191f0e-e40b-41c5-8148-153953dea179" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">「～について調べる」のタスクのメモにいきなり回答を入れると、多言語ではややこしくなる。タスクを Done などにしたあとに追加したくなることも多かった。taskKiller のほうは、あくまで自分の言葉で自分の考えを。AI の回答でログを肥大化させない。</p>
+                            <p class="note_contents">回答に対する GUID が絶対 URL の一部なら taskKiller のログからリンクを張れる。ベース URL を変更できるなら、URL の変化にも対応できる。ただ、それも本質的には二重管理。</p>
+                            <p class="note_contents">taskKiller のログとこのアプリのデータはリンクしないものとする。コードと関連付けるし、できるだけテーマごとにファイルを作るため、「調べた」という事実が分かっていれば、そのデータがどこにあるかは低コストで分かるし、そうなる使い方に慣れていくだけのこと。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">次のページ以下のドキュメント全体にザッと目を通した。</p>
+                    <p class="note_contents">Overview - OpenAI API<br />
+                        <a href="https://platform.openai.com/docs/overview" target="_blank" class="url">https://platform.openai.com/docs/overview</a></p>
+                    <!-- Task: c9c2d62f-b384-40aa-a23e-291cefb83b57 -->
+                </div>
+            </div>
+            <div id="f20d25cf-7482-475a-a1cd-2b5c5b4df41d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://platform.openai.com/docs/guides/text-generation" target="_blank" class="url">https://platform.openai.com/docs/guides/text-generation</a> をチェック</span>
+                    <a href="#f20d25cf-7482-475a-a1cd-2b5c5b4df41d" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="3981b717-d64a-4098-b50f-2f4f9006b380" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://github.com/wieslawsoltes/ChatGPT" target="_blank" class="url">https://github.com/wieslawsoltes/ChatGPT</a> をチェック</span>
+                    <a href="#3981b717-d64a-4098-b50f-2f4f9006b380" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">以下のページが参考になった。</p>
+                            <p class="note_contents">ChatGPT/src/ChatGPT.Core/ViewModels/Chat/ChatMessageViewModel.cs at main &#183; wieslawsoltes/ChatGPT<br />
+                                <a href="https://github.com/wieslawsoltes/ChatGPT/blob/main/src/ChatGPT.Core/ViewModels/Chat/ChatMessageViewModel.cs" target="_blank" class="url">https://github.com/wieslawsoltes/ChatGPT/blob/main/src/ChatGPT.Core/ViewModels/Chat/ChatMessageViewModel.cs</a></p>
+                            <p class="note_contents">ChatGPT/src/ChatGPT.Core/ViewModels/Chat/ChatSettingsViewModel.cs at main &#183; wieslawsoltes/ChatGPT<br />
+                                <a href="https://github.com/wieslawsoltes/ChatGPT/blob/main/src/ChatGPT.Core/ViewModels/Chat/ChatSettingsViewModel.cs" target="_blank" class="url">https://github.com/wieslawsoltes/ChatGPT/blob/main/src/ChatGPT.Core/ViewModels/Chat/ChatSettingsViewModel.cs</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="9ae849d5-cfa8-4be6-8aa4-8eb049d01202" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://platform.openai.com/docs/guides/speech-to-text/supported-languages" target="_blank" class="url">https://platform.openai.com/docs/guides/speech-to-text/supported-languages</a> をチェック</span>
+                    <a href="#9ae849d5-cfa8-4be6-8aa4-8eb049d01202" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="b54a20da-8a8a-41a6-9cfa-5fc42a4e66f9" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://github.com/betalgo/openai" target="_blank" class="url">https://github.com/betalgo/openai</a> をチェック</span>
+                    <a href="#b54a20da-8a8a-41a6-9cfa-5fc42a4e66f9" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">openai/OpenAI.SDK/Managers/OpenAIChatCompletions.cs at master &#183; betalgo/openai<br />
+                                <a href="https://github.com/betalgo/openai/blob/master/OpenAI.SDK/Managers/OpenAIChatCompletions.cs" target="_blank" class="url">https://github.com/betalgo/openai/blob/master/OpenAI.SDK/Managers/OpenAIChatCompletions.cs</a></p>
+                            <p class="note_contents">openai/OpenAI.SDK/ObjectModels/RequestModels/ChatCompletionCreateRequest.cs at master &#183; betalgo/openai<br />
+                                <a href="https://github.com/betalgo/openai/blob/master/OpenAI.SDK/ObjectModels/RequestModels/ChatCompletionCreateRequest.cs" target="_blank" class="url">https://github.com/betalgo/openai/blob/master/OpenAI.SDK/ObjectModels/RequestModels/ChatCompletionCreateRequest.cs</a></p>
+                            <p class="note_contents">openai/OpenAI.SDK/ObjectModels/RequestModels/ChatMessage.cs at master &#183; betalgo/openai<br />
+                                <a href="https://github.com/betalgo/openai/blob/master/OpenAI.SDK/ObjectModels/RequestModels/ChatMessage.cs" target="_blank" class="url">https://github.com/betalgo/openai/blob/master/OpenAI.SDK/ObjectModels/RequestModels/ChatMessage.cs</a></p>
+                            <p class="note_contents">openai/OpenAI.SDK/ObjectModels/ResponseModels/ChatCompletionCreateResponse.cs at master &#183; betalgo/openai<br />
+                                <a href="https://github.com/betalgo/openai/blob/master/OpenAI.SDK/ObjectModels/ResponseModels/ChatCompletionCreateResponse.cs" target="_blank" class="url">https://github.com/betalgo/openai/blob/master/OpenAI.SDK/ObjectModels/ResponseModels/ChatCompletionCreateResponse.cs</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="901afbc6-78c6-4dc3-a2ec-347bf8807f33" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://github.com/OkGoDoIt/OpenAI-API-dotnet" target="_blank" class="url">https://github.com/OkGoDoIt/OpenAI-API-dotnet</a> をチェック</span>
+                    <a href="#901afbc6-78c6-4dc3-a2ec-347bf8807f33" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">OpenAI-API-dotnet/OpenAI_API/Chat/ChatEndpoint.cs at master &#183; OkGoDoIt/OpenAI-API-dotnet<br />
+                                <a href="https://github.com/OkGoDoIt/OpenAI-API-dotnet/blob/master/OpenAI_API/Chat/ChatEndpoint.cs" target="_blank" class="url">https://github.com/OkGoDoIt/OpenAI-API-dotnet/blob/master/OpenAI_API/Chat/ChatEndpoint.cs</a></p>
+                            <p class="note_contents">OpenAI-API-dotnet/OpenAI_API/Chat/ChatMessage.cs at master &#183; OkGoDoIt/OpenAI-API-dotnet<br />
+                                <a href="https://github.com/OkGoDoIt/OpenAI-API-dotnet/blob/master/OpenAI_API/Chat/ChatMessage.cs" target="_blank" class="url">https://github.com/OkGoDoIt/OpenAI-API-dotnet/blob/master/OpenAI_API/Chat/ChatMessage.cs</a></p>
+                            <p class="note_contents">OpenAI-API-dotnet/OpenAI_API/Chat/ChatMessageRole.cs at master &#183; OkGoDoIt/OpenAI-API-dotnet<br />
+                                <a href="https://github.com/OkGoDoIt/OpenAI-API-dotnet/blob/master/OpenAI_API/Chat/ChatMessageRole.cs" target="_blank" class="url">https://github.com/OkGoDoIt/OpenAI-API-dotnet/blob/master/OpenAI_API/Chat/ChatMessageRole.cs</a></p>
+                            <p class="note_contents">OpenAI-API-dotnet/OpenAI_API/Chat/ChatRequest.cs at master &#183; OkGoDoIt/OpenAI-API-dotnet<br />
+                                <a href="https://github.com/OkGoDoIt/OpenAI-API-dotnet/blob/master/OpenAI_API/Chat/ChatRequest.cs" target="_blank" class="url">https://github.com/OkGoDoIt/OpenAI-API-dotnet/blob/master/OpenAI_API/Chat/ChatRequest.cs</a></p>
+                            <p class="note_contents">OpenAI-API-dotnet/OpenAI_API/Chat/ChatResult.cs at master &#183; OkGoDoIt/OpenAI-API-dotnet<br />
+                                <a href="https://github.com/OkGoDoIt/OpenAI-API-dotnet/blob/master/OpenAI_API/Chat/ChatResult.cs" target="_blank" class="url">https://github.com/OkGoDoIt/OpenAI-API-dotnet/blob/master/OpenAI_API/Chat/ChatResult.cs</a></p>
+                            <p class="note_contents">OpenAI-API-dotnet/OpenAI_API/Chat/Conversation.cs at master &#183; OkGoDoIt/OpenAI-API-dotnet<br />
+                                <a href="https://github.com/OkGoDoIt/OpenAI-API-dotnet/blob/master/OpenAI_API/Chat/Conversation.cs" target="_blank" class="url">https://github.com/OkGoDoIt/OpenAI-API-dotnet/blob/master/OpenAI_API/Chat/Conversation.cs</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="8a652847-865d-4058-8393-27e6a6976d44" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://github.com/RageAgainstThePixel/OpenAI-DotNet" target="_blank" class="url">https://github.com/RageAgainstThePixel/OpenAI-DotNet</a> をチェック</span>
+                    <a href="#8a652847-865d-4058-8393-27e6a6976d44" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">OpenAI-DotNet/OpenAI-DotNet/Chat/ChatEndpoint.cs at main &#183; RageAgainstThePixel/OpenAI-DotNet<br />
+                                <a href="https://github.com/RageAgainstThePixel/OpenAI-DotNet/blob/main/OpenAI-DotNet/Chat/ChatEndpoint.cs" target="_blank" class="url">https://github.com/RageAgainstThePixel/OpenAI-DotNet/blob/main/OpenAI-DotNet/Chat/ChatEndpoint.cs</a></p>
+                            <p class="note_contents">OpenAI-DotNet/OpenAI-DotNet/Chat/ChatRequest.cs at main &#183; RageAgainstThePixel/OpenAI-DotNet<br />
+                                <a href="https://github.com/RageAgainstThePixel/OpenAI-DotNet/blob/main/OpenAI-DotNet/Chat/ChatRequest.cs" target="_blank" class="url">https://github.com/RageAgainstThePixel/OpenAI-DotNet/blob/main/OpenAI-DotNet/Chat/ChatRequest.cs</a></p>
+                            <p class="note_contents">OpenAI-DotNet/OpenAI-DotNet/Chat/ChatResponse.cs at main &#183; RageAgainstThePixel/OpenAI-DotNet<br />
+                                <a href="https://github.com/RageAgainstThePixel/OpenAI-DotNet/blob/main/OpenAI-DotNet/Chat/ChatResponse.cs" target="_blank" class="url">https://github.com/RageAgainstThePixel/OpenAI-DotNet/blob/main/OpenAI-DotNet/Chat/ChatResponse.cs</a></p>
+                            <p class="note_contents">OpenAI-DotNet/OpenAI-DotNet/Chat/Choice.cs at main &#183; RageAgainstThePixel/OpenAI-DotNet<br />
+                                <a href="https://github.com/RageAgainstThePixel/OpenAI-DotNet/blob/main/OpenAI-DotNet/Chat/Choice.cs" target="_blank" class="url">https://github.com/RageAgainstThePixel/OpenAI-DotNet/blob/main/OpenAI-DotNet/Chat/Choice.cs</a></p>
+                            <p class="note_contents">OpenAI-DotNet/OpenAI-DotNet/Chat/Delta.cs at main &#183; RageAgainstThePixel/OpenAI-DotNet<br />
+                                <a href="https://github.com/RageAgainstThePixel/OpenAI-DotNet/blob/main/OpenAI-DotNet/Chat/Delta.cs" target="_blank" class="url">https://github.com/RageAgainstThePixel/OpenAI-DotNet/blob/main/OpenAI-DotNet/Chat/Delta.cs</a></p>
+                            <p class="note_contents">OpenAI-DotNet/OpenAI-DotNet/Chat/Message.cs at main &#183; RageAgainstThePixel/OpenAI-DotNet<br />
+                                <a href="https://github.com/RageAgainstThePixel/OpenAI-DotNet/blob/main/OpenAI-DotNet/Chat/Message.cs" target="_blank" class="url">https://github.com/RageAgainstThePixel/OpenAI-DotNet/blob/main/OpenAI-DotNet/Chat/Message.cs</a></p>
+                            <p class="note_contents">OpenAI-DotNet/OpenAI-DotNet/Chat/Role.cs at main &#183; RageAgainstThePixel/OpenAI-DotNet<br />
+                                <a href="https://github.com/RageAgainstThePixel/OpenAI-DotNet/blob/main/OpenAI-DotNet/Chat/Role.cs" target="_blank" class="url">https://github.com/RageAgainstThePixel/OpenAI-DotNet/blob/main/OpenAI-DotNet/Chat/Role.cs</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="7a648ee5-1d48-4af5-8a87-aaa6baae8683" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">マルチユーザーチャットを試す</span>
+                    <a href="#7a648ee5-1d48-4af5-8a87-aaa6baae8683" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">次のページの Name プロパティーには、An optional name of the user in a multi-user chat というコメントが付いている。</p>
+                            <p class="note_contents">OpenAI-API-dotnet/OpenAI_API/Chat/ChatMessage.cs at master &#183; OkGoDoIt/OpenAI-API-dotnet<br />
+                                <a href="https://github.com/OkGoDoIt/OpenAI-API-dotnet/blob/master/OpenAI_API/Chat/ChatMessage.cs" target="_blank" class="url">https://github.com/OkGoDoIt/OpenAI-API-dotnet/blob/master/OpenAI_API/Chat/ChatMessage.cs</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">試したが、「田中さん、山田さんの言うように～」のようなことはしない。そもそも、田中さんと山田さんが発言してからの POST では、山田さんにしか返事しない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="91f9ccf0-4301-4d6a-be87-bfee40f8f93d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://platform.openai.com/docs/guides/error-codes" target="_blank" class="url">https://platform.openai.com/docs/guides/error-codes</a> をチェック</span>
+                    <a href="#91f9ccf0-4301-4d6a-be87-bfee40f8f93d" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="a3b3f523-405b-4543-80e8-4b255181434e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">過去に得た回答をコンテキストなしで翻訳してもらう場合の精度をチェック</span>
+                    <a href="#a3b3f523-405b-4543-80e8-4b255181434e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">問題なしなら、必要になってからの翻訳を実装できる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">問題なし。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="af950880-1991-485f-801c-4d1d619bd51e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ChatGPT とのやり取りや情報の扱いをライブラリー化</span>
+                    <a href="#af950880-1991-485f-801c-4d1d619bd51e" class="permalink">&infin;</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
