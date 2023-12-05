@@ -10,6 +10,74 @@
             <a href="mediaTime.htm" class="title">mediaTime</a>
         </div>
         <div class="entries">
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">海外にいると、日本時間の設定のまま写真を撮り続けるカメラと、自動的に現地時間に設定される携帯とで Exif のタイムスタンプがズレる問題がある。写真を時系列的に表示するにおいて不便だ。そのため、訪ロ中の今、ちゃんとした対策を講じる。</p>
+                    <!-- Task: d4be6483-45bd-46b0-ba27-41519526fa49 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">具体的なケースを想定。</p>
+                    <p class="note_contents">今回は、関空からドバイに飛び、何時間か空港をウロウロし、それからモスクワに飛んだ。</p>
+                    <p class="note_contents">写真を見ると、飛んでいる間の携帯による写真には GPS 情報がない。GPS の仕組み上、高いところでは受信できないのか、セキュリティー上の理由なのかは分からない（飛行機が機内にジャミングのシグナルを飛ばしているなど）。</p>
+                    <p class="note_contents">ドバイに着いてからも最初の40分ほどは GPS 情報がなかった。しかし、それ以前からタイムゾーンは正確だった。</p>
+                    <!-- Task: d4be6483-45bd-46b0-ba27-41519526fa49 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <div class="note_ai_generated">
+<p>Smartphones automatically update their timezone settings through a combination of methods:</p>
+<ol>
+<li><p><strong>Network-Based Time Updates</strong>: When you travel to a different time zone, your smartphone typically receives a time update from the cellular network it's connected to. Mobile networks have a local time setting that they broadcast to all connected devices. This feature is especially helpful when you cross time zones, as it allows your phone to automatically adjust to the new local time.</p>
+</li>
+<li><p><strong>GPS-Based Time Updates</strong>: Smartphones equipped with GPS can also use this technology to determine the local time. The GPS system can provide precise time and location information. When your phone's GPS detects a change in location that corresponds to a different time zone, it can adjust the time accordingly.</p>
+</li>
+<li><p><strong>Internet-Based Time Updates</strong>: If your phone is connected to the internet (through Wi-Fi or mobile data), it can use Network Time Protocol (NTP) servers to synchronize its clock. While this method is primarily used to ensure accurate time rather than adjusting time zones, it can also contribute to setting the correct local time when combined with location data.</p>
+</li>
+<li><p><strong>Operating System Integration</strong>: Modern smartphone operating systems (like iOS and Android) integrate these methods and use location services to determine the correct time zone. When you enable location services on your device, the OS can use GPS data, nearby Wi-Fi networks, and mobile network information to pinpoint your location and update the time zone accordingly.</p>
+</li>
+<li><p><strong>Manual Settings</strong>: Apart from automatic updates, smartphones also allow users to manually set the time zone. This can be useful in situations where automatic updates are not available or when you need to set a different time zone for specific reasons.</p>
+</li>
+</ol>
+<p>These methods ensure that your smartphone always displays the correct local time, adapting seamlessly as you move across different time zones.</p>
+                    </div>
+                    <!-- Task: d4be6483-45bd-46b0-ba27-41519526fa49 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">AI の回答に基づくなら、文明のあるところに降り立ったなら電波をもらい次第すぐにタイムゾーンは更新されることになる。いろいろな手段があるので、どれか一つはすぐに動く。</p>
+                    <p class="note_contents">タイムゾーンについては、「飛んでいる間は、基本的に更新されないが、何らかの要因により更新される可能性もゼロでない」「降りてからは、降りてすぐのときから現地時間になっている」を前提とする。</p>
+                    <!-- Task: d4be6483-45bd-46b0-ba27-41519526fa49 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">自分は、たとえば IMG_20231115_094216.jpg なら 20231115-094216 (IMG_20231115_094216).jpg になるツールの開発・使用により写真を保存している。</p>
+                    <p class="note_contents">タイムスタンプをファイル名の先頭に入れるのは、携帯やカメラで撮ったものを時系列的に並べるため。ファイル名のフォーマットが異なるので、そのままでは写真がゴチャゴチャになる。</p>
+                    <p class="note_contents">Exif の DateTaken で並び替えられるソフトもあるが、全てでないし、ファイルの中身を読み込むので遅い。また、Exif 依存ではタイムゾーンの問題に対処できない。</p>
+                    <!-- Task: d4be6483-45bd-46b0-ba27-41519526fa49 -->
+                </div>
+            </div>
+            <div id="0f2612a5-9f1f-4335-9c6f-2e356ac6b061" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ザッと実装</span>
+                    <a href="#0f2612a5-9f1f-4335-9c6f-2e356ac6b061" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">&quot;Base Timezone&quot; という考え方を導入し（まだ識別子には使っていないが）、自分の場合はそれが JST であるとして、ファイル名の先頭のタイムスタンプの全てを Base Timezone に統一する運用で考えている。</p>
+                            <p class="note_contents">家族も友だちもいるうちはたとえ海外に住んでいても「今、日本は何時か」を全く意識しないことはない。また、JST には夏時間がなくて UTC との差分が定数なのが好都合。コロナなどの影響があって今は日本が拠点になっているため、「多くの写真において、タイムスタンプが『現地時間でいつだったか』を示す」というのは便利。</p>
+                            <p class="note_contents">データとしての正確性のみを考えるなら世界中どこで撮った写真やビデオでもファイルのタイムスタンプを UTC にするべく、「メタデータの日時が UTC のようならそのまま使い、そうでないならどのタイムゾーンだったかを指定してもらう」というアプリにするのが一つの方法だが、今回はそこまでのことは求めていない。</p>
+                            <p class="note_contents">いずれ「もし」拠点が完全に海外になって JST での写真やビデオが盆や正月くらいしか生じなくなれば、写真やビデオの管理のルートディレクトリーを新たに作り、そこの Base Timezone は別のものだとするのがシンプル。</p>
+                            <p class="note_contents">自分は、渡航時もパソコンのタイムゾーンは変更しないので（ローカルのタイムスタンプしか内部的に保持しないアプリが多いため）、「パソコンのタイムゾーンを変更するくらいガッツリ移住したとき」という考え方もアリ。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
