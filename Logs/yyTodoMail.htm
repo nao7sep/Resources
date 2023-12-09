@@ -69,6 +69,68 @@
                     </div>
                 </div>
             </div>
+            <div id="e2566a4e-2b87-4c15-81f9-cb2c4b371b30" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">最近のエラーメッセージをチェック</span>
+                    <a href="#e2566a4e-2b87-4c15-81f9-cb2c4b371b30" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ChatGPT が禁止されているロシアに来て、VPN でいろいろな国につないで API を使っている。つなぎ忘れての操作ではたいてい落ちるし、東京のサーバーにつないでいても（それまでにユーザーを一意に特定されてか）落ちたことがある。良くも悪くも、質の高いエラーメッセージを得られている。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">サーバーからのレスポンスをそのまま保存する実装に改めて内容をチェックしたところ、全てが「ロシアでは ChatGPT を使えません」関連だった。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="7475f7f0-46a2-4158-b5f8-2f1125e18102" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">ChatGPT 以外による翻訳も可能にする</span>
+                    <a href="#7475f7f0-46a2-4158-b5f8-2f1125e18102" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">日常的に API が落ちている。信頼性が低い。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Google からも Gemini が出てきたわけで、バックエンドの API をニーズに基づいて切り替えるのが当たり前の時代に。しかし、ChatGPT による翻訳も精度が十分に高く、今すぐにするべきは、ChatGPT ベースの決め打ちでよいから機能性を満たすこと。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="53478c7c-b5b0-4a55-a748-5ee4985a0cc7" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">サーバーとの全てのやり取りをその都度出力するモードを実装</span>
+                    <a href="#53478c7c-b5b0-4a55-a748-5ee4985a0cc7" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">yyGptLib の更新により実現した。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="4927fa2d-f665-446b-89a7-aa89c0ab1bce" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">翻訳と送信を一つのボタンで行えるようにする</span>
+                    <a href="#4927fa2d-f665-446b-89a7-aa89c0ab1bce" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">VPN が知らないうちにオフになっているとか、途中までは翻訳できたが API が止まったとかにより、そのまま送るに適さない翻訳文が得られることがある。5～10秒の待ち時間がもったいないが、しばらくは翻訳の結果を待ってからの送信であるべき。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
