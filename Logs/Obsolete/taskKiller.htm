@@ -1,0 +1,517 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>taskKiller</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace;font-size:1rem;line-height:1.5}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="taskKiller.htm" class="title">taskKiller</a>
+        </div>
+        <div class="entries">
+            <div id="b575e9de-0109-4b37-b924-e18b3c1ce65b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">レポジトリー移行後のアーカイブをどこに保存しているのか調べる</span>
+                    <a href="#b575e9de-0109-4b37-b924-e18b3c1ce65b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">「Static\ソース\taskKiller」に0.47から0.52までが入っている。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="0c7bd333-f13b-430b-8f17-13757936b077" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">明暗のテーマから一つを選択できるようにする</span>
+                    <a href="#0c7bd333-f13b-430b-8f17-13757936b077" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ソースを公開することを決めたが（公開しない理由もなくて）、「へぇ、そんなん使ってるんですねぇ」の話題づくり程度のことで、人が使ってくれる想定は今もない。自分はずっとダークテーマなので、そのままでいい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="4acd21ac-300e-4aae-84ce-d7829027795b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">プロジェクト内の全てのファイルを軽くチェック</span>
+                    <a href="#4acd21ac-300e-4aae-84ce-d7829027795b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">前回の更新が昨年7月23日なので、9ヶ月くらいさわっていない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">どういうメソッドが何をやっているかと各部のコメントだけをザッと見た。実装についてはノータッチ。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="7cfe222b-e880-4036-86fb-895666575c5b" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">フォントレンダリングのパラメーターの調整を検討</span>
+                    <a href="#7cfe222b-e880-4036-86fb-895666575c5b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Windows のフォントレンダリングについて知識が乏しい。</p>
+                            <p class="note_contents">WPF ベースの taskKiller より、Mery の DirectWrite (Natural Symmetric) の方が、同じダークテーマにおいて明らかに見やすい。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">探したが、お行儀のいいコードで WPF における DirectWrite の設定を大きく変更する方法はなさそう。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="5ff33d82-ba5b-4961-badf-c51a0943fccc" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">アイコンのライセンスをチェック</span>
+                    <a href="#5ff33d82-ba5b-4961-badf-c51a0943fccc" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="1345300e-d42a-4ad5-8e39-9dd9b2ac12a3" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">リソースファイルの扱いについて書く</span>
+                    <a href="#1345300e-d42a-4ad5-8e39-9dd9b2ac12a3" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">taskKiller に Check.ico として入っていたもののライセンスをチェックした。</p>
+                            <p class="note_contents">Check Icon | Web 2 Iconpack | Cheezen<br />
+                                <a href="https://www.iconarchive.com/show/web-2-icons-by-cheezen/check-icon.html" target="_blank" class="url">https://www.iconarchive.com/show/web-2-icons-by-cheezen/check-icon.html</a></p>
+                            <p class="note_contents">に</p>
+                            <p class="note_contents">License: Freeware<br />
+                                Commercial usage: Allowed</p>
+                            <p class="note_contents">とあり、問題なし。</p>
+                            <p class="note_contents">More Infos: license.txt</p>
+                            <p class="note_contents">とあるので、作法としてこのファイルを同梱することに。</p>
+                            <p class="note_contents">ファイル名の衝突を避けるため、また、ファイルが混ざってややこしくならないため、リソースファイルのディレクトリー分けを考えた。プロジェクトのディレクトリーのルートに置くとリソースファイルが多い場合にうるさくなるので、Resources サブディレクトリーをかました。</p>
+                            <p class="note_contents">それで Resources/Cheezen-Web-2-Check/Cheezen-Web-2-Check.ico を置いて Visual Studio でプロジェクトにアイコンを設定したところ、このファイルが .csproj に入っていて「ソリューション エクスプローラー」に入っていてもそうでなくても、なぜか Cheezen-Web-2-Check.ico がプロジェクトのルートにコピーされた。</p>
+                            <p class="note_contents">taskKiller は、.NET のバージョンも古い。v4.* で動いているのをすぐに変える必要もなくてそのままにしている。最近の .NET ではプロジェクトのディレクトリーの内容が自動的にロードされ、それぞれは .csproj に入らないが、古い .NET だと、まず .csproj に入る管理であり、そこに上記のおかしな挙動が残っている。</p>
+                            <p class="note_contents">ほかにもそういうプロジェクトはあるだろうから、このあたりについては、次のようにしていく。</p>
+                            <p class="note_contents">* .gitignore, srcZip.txt など、IDE が認識していなくてもコンパイルに支障のないファイルを .csproj に入れない<br />
+                                * .ico など、認識が必要なものを IDE 経由でプロジェクトのディレクトリーのルートに置く（.ico 以外ならサブディレクトリーがあっても大丈夫かもしれないので一応試す）<br />
+                                * その他のリソースファイルを、Resources/*/* として置く</p>
+                            <p class="note_contents">Cheezen-Web-2-Check.ico という名前が冗長だが、リソースファイルが多くなれば、使っているファイルの名前と、それに関連するファイルを詰めたディレクトリーの名前が一致することの利便性が生じてくるため、名前を変更しないのをルールとする。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="5a75d299-bc2b-40da-b1ac-ba3c01d0a55b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">srcZip.txt を追加</span>
+                    <a href="#5a75d299-bc2b-40da-b1ac-ba3c01d0a55b" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="4176c212-faaa-423c-9f4d-4440802cb0a9" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ソースコードを公開</span>
+                    <a href="#4176c212-faaa-423c-9f4d-4440802cb0a9" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="68847bb1-37e0-4803-bee3-c4802e4cd4de" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">v0.53 としてアーカイブ</span>
+                    <a href="#68847bb1-37e0-4803-bee3-c4802e4cd4de" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="8923c7c8-85b5-4680-b4f5-ebc72bd1b9ee" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">パラメーターありの起動によりタスクを選択できるようにする</span>
+                    <a href="#8923c7c8-85b5-4680-b4f5-ebc72bd1b9ee" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="b9fd9f96-6ba7-4ab0-ba42-66cd4f06eefd" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">コード分析による不要な警告を非表示にする</span>
+                    <a href="#b9fd9f96-6ba7-4ab0-ba42-66cd4f06eefd" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="edc81885-97f0-43ff-9a5f-c1f77482d967" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">未処理のタスクのないディレクトリーを非表示にすることを検討</span>
+                    <a href="#edc81885-97f0-43ff-9a5f-c1f77482d967" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">runAll でも検討する。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">cleanDesk など、ほかのツールでするべきこと。オン・オフの切り替えも必要のため。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ead374a6-c306-4ba9-8023-265dba611571" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">TextBox 内の行高を指定する方法がないか調べる</span>
+                    <a href="#ead374a6-c306-4ba9-8023-265dba611571" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">なさそう。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="cc590ebd-c105-4874-8e99-31c7ad75994c" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">新しいタスクリストの生成時に「元々どこにあったか」が設定ファイルに入るようにする</span>
+                    <a href="#cc590ebd-c105-4874-8e99-31c7ad75994c" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">タスクを階層的に処理していくシステムを書くかもしれない。この項目があれば、taskKiller のデータを引き継げる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">やめておく。元々どこにあったかがよく分からないタスクリストも出てくる。成果につながらない管理。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="583ac88e-1f0d-45a4-b967-88f23dc9d96d" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">ダークテーマの背景色をグレーにする</span>
+                    <a href="#583ac88e-1f0d-45a4-b967-88f23dc9d96d" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">不可欠でない微調整になる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="0ce24415-9974-4766-b64e-c745658636b6" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">メモで言及した添付ファイルが存在しない場合に警告を表示</span>
+                    <a href="#0ce24415-9974-4766-b64e-c745658636b6" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">負荷が大きくなるし、この警告によりミスが防がれることは稀。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="2f668ca7-20fd-4ba2-b2aa-86743a89b0db" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Ctrl + G で得られる文字列のフォーマットを変更</span>
+                    <a href="#2f668ca7-20fd-4ba2-b2aa-86743a89b0db" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">どこに貼るかにより、適するフォーマットが異なる。そのため、</p>
+                            <p class="note_contents">2f668ca7-20fd-4ba2-b2aa-86743a89b0db<br />
+                                Ctrl + G で得られる文字列のフォーマットを変更</p>
+                            <p class="note_contents">のようにシンプルにする。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="02de6fa7-32aa-4741-a487-4e648c65442a" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">スペルチェックを実装</span>
+                    <a href="#02de6fa7-32aa-4741-a487-4e648c65442a" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">英語でのタスク管理は今後も可能性が低い。必要になってからでよい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="9c015822-d916-49e7-86bc-98e268c013a9" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">周囲のバイナリーが古くないかチェックする機能がエラーを吐かないようにする</span>
+                    <a href="#9c015822-d916-49e7-86bc-98e268c013a9" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">いったんデスクトップに移動した状態で起動すると必ずエラーを吐く。ファイルシステムのパーミッションの問題か。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="0454f0d2-c20c-43f3-8633-d449ad170842" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">タスク処理時に処理日を入力できるようにする</span>
+                    <a href="#0454f0d2-c20c-43f3-8633-d449ad170842" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">成果につながらない過剰な管理。思い出せないときもあるし、思い出しても仕方ないときも。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="fb6941d7-dd1c-44bd-85cf-df7ddfe41bfc" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ファイルを簡易的に添付できるようにする</span>
+                    <a href="#fb6941d7-dd1c-44bd-85cf-df7ddfe41bfc" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="bf84fe42-cb29-405e-bf21-a33470526c63" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ファイルパスの長さの制限について調べる</span>
+                    <a href="#bf84fe42-cb29-405e-bf21-a33470526c63" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">2016年8月2日にリリースされた Windows 10, version 1607 からは MAX_PATH の制限がなくなり、およそ32,767文字を扱えるようになったとのことだが、手元で千文字の名前のファイルを WPF アプリで作ろうとしたところ失敗した。</p>
+                            <p class="note_contents">Maximum Path Length Limitation - Win32 apps | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation" target="_blank" class="url">https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation</a></p>
+                            <p class="note_contents">Windows 10, version 1607 - Wikipedia<br />
+                                <a href="https://en.wikipedia.org/wiki/Windows_10,_version_1607" target="_blank" class="url">https://en.wikipedia.org/wiki/Windows_10,_version_1607</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">taskKiller に、非常識な長さの名前のファイルを添付しようとするニーズは考えにくい。そういうファイルなら、そもそも手元での扱いにおいて困る。そのため、コピーしようとしての例外が飛ぶとしても、そのエラーの原因がファイル名の長さだと表示するほどのことはなく、ほかに問題があってのエラーメッセージと同じでよい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="1f45b3b9-2eb4-49bd-a35a-4cfde504875d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">WPF におけるドラッグ＆ドロップについて書く</span>
+                    <a href="#1f45b3b9-2eb4-49bd-a35a-4cfde504875d" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">よく分かっていなかった。ネットの情報もバラバラ。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">イベントとしては、次の四つおよびそれらに Preview が入ったものがある。</p>
+                            <p class="note_contents">* DragEnter<br />
+                                * DragOver<br />
+                                * Drop<br />
+                                * DragLeave</p>
+                            <p class="note_contents">今現在の理解としては、Window など、重なりにおいて下の方にあるものには「Preview* で e.Handled = true」が良く、上の方のコントロールでは必ずしもそうとも限らないか。（もちろん上の方でもそうしてよいが、すると、下で別の処理をもっと早く行わなければならなくなったときに上の優先度を落とす変更が必要になる）。</p>
+                            <p class="note_contents">e.Handled = true にしないと、たとえば e.Effects = DragDropEffects.Copy にしてもドラッグ中に Move に相当するアイコンが表示され、ListBox の枠線など、特殊なところでのみ Copy になることがある。Window のイベントで Copy にしたものがその上のコントールの（暗黙的な）イベントでデフォルトの Move になるのだろう。</p>
+                            <p class="note_contents">四つのイベントは、いずれも実装するべき。Over だけで視覚的には足りるし、そういうサンプルコードが多いが、ドラッグ＆ドロップの一連の流れを考えるにおいては、DragLeave での e.Effects = DragDropEffects.None までが作法。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">DragDropEffects については、その処理により要素が移動するのか複製されるのかで決める。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="96613d6d-9260-4d55-9290-1b6a96a4477e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">全てのタスクが終わってから1週間以上が経過しているなら特殊なファイルが出力されるようにする</span>
+                    <a href="#96613d6d-9260-4d55-9290-1b6a96a4477e" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="1dfde03a-5cb9-441a-a05a-a15df88f34d1" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">v0.54 としてアーカイブ</span>
+                    <a href="#1dfde03a-5cb9-441a-a05a-a15df88f34d1" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="dad797b0-aab1-415e-9478-795b2c18b6de" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">添付ファイルに GUID をつける</span>
+                    <a href="#dad797b0-aab1-415e-9478-795b2c18b6de" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="561666cb-c074-4991-bf4d-3b7a9ae0a4f6" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">v0.55 としてアーカイブ</span>
+                    <a href="#561666cb-c074-4991-bf4d-3b7a9ae0a4f6" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="51ab2efd-b066-40f1-a808-01445caa0668" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ファイルを、リスト全体、特定のタスク、特定のメモそれぞれに添付できるようにする</span>
+                    <a href="#51ab2efd-b066-40f1-a808-01445caa0668" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="f259f547-9596-4621-81ec-e7cfc8938652" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ファイルの添付時にどこへの添付になるか確認できるようにする</span>
+                    <a href="#f259f547-9596-4621-81ec-e7cfc8938652" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="1a9b957d-b2f6-4425-9224-584934bf7eb2" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">v0.56 としてアーカイブ</span>
+                    <a href="#1a9b957d-b2f6-4425-9224-584934bf7eb2" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="12b3ba3a-a6ff-42bc-975a-25bf57505974" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="http://var.blog.jp/archives/67902617.html" target="_blank" class="url">http://var.blog.jp/archives/67902617.html</a> をチェック</span>
+                    <a href="#12b3ba3a-a6ff-42bc-975a-25bf57505974" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">「WPF のフォントは汚い？」</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">TextFormattingMode, TextHintingMode, TextRenderingMode のデフォルト値は、Ideal, Auto, Auto。</p>
+                            <p class="note_contents">一つ目は Display がより新しいそうだが、そうすると文字が痩せ細ってガタガタになる。</p>
+                            <p class="note_contents">三つ目は ClearType になる Auto で固定。</p>
+                            <p class="note_contents">二つ目のみ、The rendering engine renders text with the highest animated quality とのことである Animated が、より Mac っぽくて自分は好き。For animated text, use Animated to allow for smoother animations at the cost of text quality とのことで、本来の使い方でないのかもしれない。</p>
+                            <p class="note_contents">TextHintingMode Enum (System.Windows.Media) | Microsoft Learn<br />
+                                <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.media.texthintingmode" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/api/system.windows.media.texthintingmode</a></p>
+                            <p class="note_contents">複数のスクショを撮って見比べたところ、Animated と Fixed とでは、デフォルトの後者では文字の各部がぼやけたりキレが良かったりと一貫性がなく、前者では全体的に Mac っぽくボケていた。</p>
+                            <p class="note_contents">後者は鉛筆とボールペンをそれぞれの文字のなかでも使い分けるかのようで、結果的に、細く濃いところがトゲトゲしい。全体的に適度にボケている前者の方が自分は読みやすい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="2a9802ba-7db8-499c-ae26-0540ee00d8e8" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">配色を改善</span>
+                    <a href="#2a9802ba-7db8-499c-ae26-0540ee00d8e8" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">背景色が真っ黒というのは、最近あまりない。グレーにして少しコントラストを落とす。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">GitHub の配色などを少し試したが、生産性が高まるわけでなさそうなのでやめておく。</p>
+                            <p class="note_contents">github-vscode-theme/src/classic/colors.json at main &#183; primer/github-vscode-theme<br />
+                                <a href="https://github.com/primer/github-vscode-theme/blob/main/src/classic/colors.json" target="_blank" class="url">https://github.com/primer/github-vscode-theme/blob/main/src/classic/colors.json</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="e7c2bd77-9363-4266-ba7d-088c2e40a54a" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">タスクリスト間のタスクの移動時に状態が変わらないようにする</span>
+                    <a href="#e7c2bd77-9363-4266-ba7d-088c2e40a54a" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">一度は見送った更新だが、やはり現行の挙動は不便。taskKiller の使用を億劫と感じる理由になっているのでサクッと直す。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="e325878b-a0d4-4aa2-b3cd-cab3e7796d14" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">v0.57 としてアーカイブ</span>
+                    <a href="#e325878b-a0d4-4aa2-b3cd-cab3e7796d14" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="6e83777f-d37a-4b58-96a1-8b09a8795c3a" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">タスクリスト間のタスク移動時に状態ファイルの存在がチェックされるようにする</span>
+                    <a href="#6e83777f-d37a-4b58-96a1-8b09a8795c3a" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">九分九厘、不要なチェック。しかし、チェックしないのは作法として良くない。OneDrive の同期の問題などにより状態ファイルのみ存在しない状況もありえなくはない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="062517f7-95ee-4692-a92d-6403b950062f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">v0.58 としてアーカイブ</span>
+                    <a href="#062517f7-95ee-4692-a92d-6403b950062f" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="cc2d27e5-68e3-4601-ad88-dab1d6a997dd" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">「他リストへ」の移動先を絞り込めるようにする</span>
+                    <a href="#cc2d27e5-68e3-4601-ad88-dab1d6a997dd" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Completed.txt があるものを無視するかどうかをチェックボックスで。デフォルトでは無視。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">cleanDesk でタスクリストの表示・非表示を設定しているので、そちらを判断基準にする。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="1b9b752e-b6a1-45ca-b64b-68c93c8269ff" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">v0.59 としてアーカイブ</span>
+                    <a href="#1b9b752e-b6a1-45ca-b64b-68c93c8269ff" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="9ecc6c65-7473-4f47-ac76-1ac495f651af" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">タスクの移動先に Completed.txt があれば消す</span>
+                    <a href="#9ecc6c65-7473-4f47-ac76-1ac495f651af" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">全て処理済みのタスクリストにタスクを移動により追加しても、次回の runAll により開かれない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="cf3ea6c3-76fd-4d7b-90c5-333acec71657" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">たまにユーザーディレクトリーに States ディレクトリーが作られる原因を特定</span>
+                    <a href="#cf3ea6c3-76fd-4d7b-90c5-333acec71657" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">プログラム起動時のカレントディレクトリーを調べる。また、ステートファイルのパスがマップされるところを調べる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">いろいろと調べたが原因不明。このプログラムなのかどうかも分からない。影響が軽微なので無視。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="a397f2f0-7fb4-410f-ba56-72000c84c6ed" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">v0.60 としてアーカイブ</span>
+                    <a href="#a397f2f0-7fb4-410f-ba56-72000c84c6ed" class="permalink">&infin;</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
