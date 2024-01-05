@@ -1,0 +1,14 @@
+﻿App/runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll
+App/dalleShortName.deps.json
+App/dalleShortName.dll
+App/dalleShortName.exe
+App/dalleShortName.runtimeconfig.json
+App/Microsoft.Win32.SystemEvents.dll
+App/System.Drawing.Common.dll
+dalleShortName/dalleShortName.csproj
+dalleShortName/Program.cs
+.gitignore
+dalleShortName.sln
+LICENSE
+README.md
+srcZip.txt
