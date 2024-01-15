@@ -1,6 +1,6 @@
 <!--
 2024-01-15
-Version: 0.1
+Version: 0.2
 Yoshinao Inoguchi
 -->
 
@@ -19,7 +19,7 @@ Yoshinao Inoguchi
     * They must be static get-only properties that return instance classes' instances
 * Choosing between interfaces and concrete classes for collection properties
     * Model class properties should be Nullable get/set interfaces like IList for flexibility
-        * Let's say a "model class" is any class that is converted from or to JSON and has its JSON property names defined
+        * Let's say a "model class" is any class that is converted from and/or to JSON and has its JSON property names defined
     * More specific classes' properties should be non-Nullable get/private-set concrete classes for functionality and performance
 * Avoid excessive customization capabilities
     * Like new lines can fallback to Environment.NewLine and encodings to Encoding.UTF8
