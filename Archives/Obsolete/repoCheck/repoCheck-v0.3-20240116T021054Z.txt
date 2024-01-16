@@ -1,0 +1,11 @@
+﻿App/repoCheck.deps.json
+App/repoCheck.dll
+App/repoCheck.exe
+App/repoCheck.runtimeconfig.json
+repoCheck/GlobalSuppressions.cs
+repoCheck/Program.cs
+repoCheck/repoCheck.csproj
+.gitignore
+LICENSE
+repoCheck.sln
+srcZip.txt
