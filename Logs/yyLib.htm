@@ -122,6 +122,74 @@
                     </div>
                 </div>
             </div>
+            <div id="2e5ae176-e390-4337-a05d-b723d586faef" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">yySimpleLogger で種類を扱えるようにする</span>
+                    <a href="#2e5ae176-e390-4337-a05d-b723d586faef" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">既存のコードへの影響を調べる。指定なしなら Info へのフォールバック？ LINQ で絞り込めると便利。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">やめておく。simple でなくなる。</p>
+                            <p class="note_contents">すでに Message や Exception といった文字列をキーにすることで最低限の分類をできている。そこに yyTodoMail では Translation RawContent というのも入る。そのアプリ内でユニークな文字列がキーになっているなら、解析上の不都合がない。</p>
+                            <p class="note_contents">いくつかのシステムのログをサーバー上で一カ所に集めるとか、分散しているものをクライアントが集めてきてまとめて処理するとかなら level のようなもので絞り込めた方が便利だ。</p>
+                            <p class="note_contents">一方、SimpleLogger は、あくまで「とても小さなアプリのための、とてもシンプルなロギング」という位置づけである。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="3a7c2b94-c686-4d01-8208-648ff2663ff7" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">AppData ディレクトリー内の Local, LocalLow, Roaming の使い分けを考える</span>
+                    <a href="#3a7c2b94-c686-4d01-8208-648ff2663ff7" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The <code>AppData</code> directory in Windows is a hidden folder that stores application-specific data. It's divided into three main subfolders: <code>Local</code>, <code>LocalLow</code>, and <code>Roaming</code>. Here's how they are generally used:</p>
+<ol>
+<li><p><strong>AppData\Roaming</strong>: This directory is used for data that can be moved with a user's profile between different machines, like when you're part of a domain network. Settings and configuration files that should be consistent across multiple machines for a user are typically stored here. For example, Microsoft Office stores its configuration files here.</p>
+</li>
+<li><p><strong>AppData\Local</strong>: This directory is intended for data that is specific to a single computer and should not move with the user's profile. It's used for data that is too large or not useful on other machines. For instance, a browser might store its cache here.</p>
+</li>
+<li><p><strong>AppData\LocalLow</strong>: This is similar to <code>Local</code> but is specifically for programs that run with lower security settings, like Internet Explorer in Protected Mode. It's less commonly used than the other two folders.</p>
+</li>
+</ol>
+<h3>Best Practices:</h3>
+<ul>
+<li>Use <code>Roaming</code> for user-specific data that is relevant across multiple machines.</li>
+<li>Use <code>Local</code> for machine-specific or large data that doesn't need to be transferred.</li>
+<li>Generally, avoid directly manipulating these folders unless necessary for application functionality, as improper use can lead to issues with software behavior or user profiles.</li>
+<li>For developers, it's important to respect the user's directory structure and privacy, only storing necessary data and following security best practices.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">というのを知らなかった。忘れる前にライブラリーに組み込む。ユーザーごとのディレクトリーにローカルの設定情報などを保存しなければならないケースは今後も多々ある。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="eb4d51a4-bdf8-43f9-89ca-7facbccf152e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">コーディングのガイドラインに準拠しているか調べる</span>
+                    <a href="#eb4d51a4-bdf8-43f9-89ca-7facbccf152e" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="326f0c8f-19af-42c1-8299-84ca3b61d9f1" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">srcZip の設定ファイルを追加</span>
+                    <a href="#326f0c8f-19af-42c1-8299-84ca3b61d9f1" class="permalink">&infin;</a>
+                </div>
+            </div>
         </div>
     </body>
 </html>

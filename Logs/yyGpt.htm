@@ -33,21 +33,6 @@
                     <!-- Task: c9c2d62f-b384-40aa-a23e-291cefb83b57 -->
                 </div>
             </div>
-            <div id="fb191f0e-e40b-41c5-8148-153953dea179" class="task canceled">
-                <div class="task_contents">&cross;
-                    <span class="task_contents">taskKiller との親和性について考える</span>
-                    <a href="#fb191f0e-e40b-41c5-8148-153953dea179" class="permalink">&infin;</a>
-                </div>
-                <div class="notes">
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">「～について調べる」のタスクのメモにいきなり回答を入れると、多言語ではややこしくなる。タスクを Done などにしたあとに追加したくなることも多かった。taskKiller のほうは、あくまで自分の言葉で自分の考えを。AI の回答でログを肥大化させない。</p>
-                            <p class="note_contents">回答に対する GUID が絶対 URL の一部なら taskKiller のログからリンクを張れる。ベース URL を変更できるなら、URL の変化にも対応できる。ただ、それも本質的には二重管理。</p>
-                            <p class="note_contents">taskKiller のログとこのアプリのデータはリンクしないものとする。コードと関連付けるし、できるだけテーマごとにファイルを作るため、「調べた」という事実が分かっていれば、そのデータがどこにあるかは低コストで分かるし、そうなる使い方に慣れていくだけのこと。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="note">
                 <div class="note_contents">
                     <p class="note_contents">次のページ以下のドキュメント全体にザッと目を通した。</p>
@@ -192,11 +177,6 @@
                             <p class="note_contents">問題なしなら、必要になってからの翻訳を実装できる。</p>
                         </div>
                     </div>
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">問題なし。</p>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div id="af950880-1991-485f-801c-4d1d619bd51e" class="task done">
@@ -205,232 +185,44 @@
                     <a href="#af950880-1991-485f-801c-4d1d619bd51e" class="permalink">&infin;</a>
                 </div>
             </div>
-            <div id="89d6ba11-5a47-49f9-a089-c2ec85b6c192" class="task canceled">
-                <div class="task_contents">&cross;
-                    <span class="task_contents">コンソールアプリとして書く</span>
-                    <a href="#89d6ba11-5a47-49f9-a089-c2ec85b6c192" class="permalink">&infin;</a>
-                </div>
-                <div class="notes">
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">Mac で使いたい。.NET MAUI も選択肢だが、.NET MAUI の開発経験がゼロなので調べ物が多くなる。その調べ物のログも記録したいため、まずはコンソール版から。</p>
-                        </div>
-                    </div>
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">ほかの仕事が忙しすぎる。来年は海外出張も多そう。自分が会社を作るなら従業員には Windows パソコンを支給するので、「Windows ユーザーに使いやすく」を考えてまずは WPF 版を書く。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="feeb1570-d1f5-4359-90d8-f3c8357fe338" class="task canceled">
-                <div class="task_contents">&cross;
-                    <span class="task_contents">diff を取りやすく、無変換で人間にも見やすいファイルフォーマットにする</span>
-                    <a href="#feeb1570-d1f5-4359-90d8-f3c8357fe338" class="permalink">&infin;</a>
-                </div>
-                <div class="notes">
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">Markdown で回答が得られるのは賢い。おそらく最小コストの書式付け。</p>
-                            <p class="note_contents">それをそのまま保存し、VSC でプレビュー表示すれば書式が戻り、テキストでも読めて、各エントリーの属性データが HTML コメントとして埋まっているのが最善か。</p>
-                            <p class="note_contents">VSC で HTML コメントが正しく処理されるか調べる必要がある。また、Markdig を以前使ったことがあって好印象なので、これによる HTML 変換も早い段階で想定。</p>
-                        </div>
-                    </div>
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">MIME multipart のように区切り線が本文に登場しないのを確約するのが一つの方法。ChatGPT が出力するものをそのまま保存するので長いハイフンを HTML コメントに入れるのでも問題ないだろうが、それを出力せよとのプロンプトを書かれたら挙動がおかしくなると分かっていて手を抜くこともない。</p>
-                            <p class="note_contents">* ファイルの先頭にフォーマット名とバージョン<br />
-                                * 次の行に「ボーダーラインはこれですよ」<br />
-                                * 続いて、出力する言語やコンテキスト情報といったもの</p>
-                            <p class="note_contents">コンテキストについては、ファイル先頭にリストとして入れるのでなく、いつ何を入れて、いつ何を消したを時系列的に記録。加えて、質問するときも、その内容を正しい英語にしたものをファイルに入れておき、それを聞くことで、「いつ、どういうコンテキストで、何を聞き、何を得たか」までのトレーサビリティーが生じる。</p>
-                        </div>
-                    </div>
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">invariant, ja-jp 的なことも必要。単一ファイルに全ての言語の回答を入れるのでは時系列的な参照に不都合がある。</p>
-                            <p class="note_contents">よって、「そのセッションにおいてはどの言語を主たる言語とし、そこからどの言語の翻訳を出力したか」を指定・保存。</p>
-                            <p class="note_contents">ファイル名にタイムスタンプを入れるのは、EF Core のマイグレーションなどと異なり、さほど意味がない。</p>
-                            <p class="note_contents">よって、イメージとしては、</p>
-                            <p class="note_contents">* Using-ChatGPTs-API-in-C-Sharp.gpt<br />
-                                * Using-ChatGPTs-API-in-C-Sharp.ja-jp.gpt</p>
-                            <p class="note_contents">があれば前者をアプリで開き、回答を追加し、それにより後者が更新される。</p>
-                            <p class="note_contents">Using ChatGPT&#39;s API in C# を web-safe なファイル名にしてもらった。</p>
-                            <div class="note_ai_generated">
-<p>A web-safe filename avoids special characters, spaces, and uses hyphens or underscores to separate words. Here is one way to create a web-safe filename for your title:</p>
-<p><strong>Filename:</strong> Using-ChatGPTs-API-in-C-Sharp</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">その後、JSON 関連のコードを少し書いた。このアプリのファイルにも JSON を使う。</p>
-                            <p class="note_contents">聞く質問を AI で洗い、AI から回答をもらうのだから、VSC などで行ごとにチェックしてのコミットは不要。AI の出力を（誤って）変更していないことをハッシュで確認し、そのままコミットすればよい。</p>
-                            <p class="note_contents">もらう回答が完全に平文ならファイルをテキストエディターで開くだけで内容を閲覧できるのも便利だが、Markdown で階層的な回答をもらうため、その保存とは別に「閲覧」に最適化されたツールがあるべき。</p>
-                            <p class="note_contents">アプリを WPF により「閲覧」に向くように作るなら、ファイルは、ほかのアプリからも追加のライブラリーなしで読めるものであるべき。</p>
-                        </div>
-                    </div>
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">回答が必ず単一言語なら Markdown を平文のファイルに境界線で区切って入れて VSC でプレビューするのも選択肢だが、二つ三つの言葉で回答を保存しておくなら、そのせいでファイルが複数になるのはうるさいし、単一ファイルに全て入るのもうるさい。ユーザーがテキストエディターで開くことを想定しない JSON ファイルに全て入れて WPF の GUI でうまく表示するのが最善。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="d9c88fb3-492a-440e-8564-1139d8572b24" class="task done">
+            <div id="16eb57e2-0954-4ba1-8304-5031d6726d48" class="task done">
                 <div class="task_contents">&check;
-                    <span class="task_contents">簡単な構文解析でデータを再利用できるようにする</span>
-                    <a href="#d9c88fb3-492a-440e-8564-1139d8572b24" class="permalink">&infin;</a>
+                    <span class="task_contents">GPT-4 Turbo を試す</span>
+                    <a href="#16eb57e2-0954-4ba1-8304-5031d6726d48" class="permalink">&infin;</a>
                 </div>
                 <div class="notes">
                     <div class="note">
                         <div class="note_contents">
-                            <p class="note_contents">JSON にするのでクリア。</p>
+                            <p class="note_contents">長文を一発で翻訳できる。ただの GPT-4 だと意味が大幅に削られる。まだプレビュー版なので、決め打ちにはできない。モデル名も設定ファイルなどで指定できるようにする。</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="6c2251d3-6eff-4dba-a8d5-123f5316812c" class="task canceled">
-                <div class="task_contents">&cross;
-                    <span class="task_contents">VSC で Markdown をプレビューするときの HTML コメントの扱いについて調べる</span>
-                    <a href="#6c2251d3-6eff-4dba-a8d5-123f5316812c" class="permalink">&infin;</a>
+            <div id="7c1c3d86-e109-41a1-a356-2111d0168338" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">コーディングのガイドラインに準拠しているか調べる</span>
+                    <a href="#7c1c3d86-e109-41a1-a356-2111d0168338" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="ab7a7929-3cde-4922-9f58-8ce2a94c712c" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">エンドポイントやモデル名をライブラリー側で設定できるようにする</span>
+                    <a href="#ab7a7929-3cde-4922-9f58-8ce2a94c712c" class="permalink">&infin;</a>
                 </div>
                 <div class="notes">
                     <div class="note">
                         <div class="note_contents">
-                            <p class="note_contents">JSON で保存し、WPF の GUI でうまく表示する。</p>
+                            <p class="note_contents">yyLib で chat_endpoint と chat_model を指定できるようにした。これらを設定し、上位のアプリでこれらを設定しなければ、共通設定が全てのアプリで使われるようにしていく。</p>
+                            <p class="note_contents">yyGptLib では、yyGptChatConnectionInfoModel で endpoint を元から指定できる。これは GptChatConnection.json のようなファイルからロードされる。ここに model も入れてしまいたいが、これは「接続」に関する情報の一部でない。</p>
+                            <p class="note_contents">yyGptLibConsole は、テスト用に model を gpt-4 にする。もう yyGptLib のデフォルトを gpt-3.5-turbo から変更してもよいかもしれないが、今後もモデルは更新されていくので、コード内のリテラルをあまりさわりたくない（追い続けることになる）。共通設定や上位アプリの設定で何とかすること。</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="4f575a49-6584-47aa-9a65-b9d40f8617b3" class="task canceled">
-                <div class="task_contents">&cross;
-                    <span class="task_contents">多言語化のベストプラクティスについて AI に聞く</span>
-                    <a href="#4f575a49-6584-47aa-9a65-b9d40f8617b3" class="permalink">&infin;</a>
-                </div>
-                <div class="notes">
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">もう時代が変わったので、言語ファイルがなければ仮のものを AI 翻訳で生成・キャッシュしたい。</p>
-                        </div>
-                    </div>
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">ウェブサイトを作るときに絶対にやることなので、いったん見送る。このアプリは、開発やビジネス関連の活動の補助としてすぐに必要なもの。シンプルなツールになるので UI が英語だけでも誰でも使える。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="590ca176-47d4-44b3-8e81-67ca30fba196" class="task canceled">
-                <div class="task_contents">&cross;
-                    <span class="task_contents">Windows と Mac で挙動や出力が一致するのを確認</span>
-                    <a href="#590ca176-47d4-44b3-8e81-67ca30fba196" class="permalink">&infin;</a>
-                </div>
-                <div class="notes">
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">その OS の改行文字の出力では diff に困る。いったんエントリー単位に分割しての再構築。ベースが .NET なので Windows の改行文字に統一。</p>
-                        </div>
-                    </div>
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">決め打ちにする必要はない。ファイル作成時にどちらか選べ、ファイルの先頭部分に入り、いつでも変換できるように。</p>
-                        </div>
-                    </div>
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">ほかの仕事が忙しくなっているので、いったん WPF 版のみ作る。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="6e4642f8-e3c0-421c-a346-762f9a45c14b" class="task canceled">
-                <div class="task_contents">&cross;
-                    <span class="task_contents">多言語化の処理をライブラリー化</span>
-                    <a href="#6e4642f8-e3c0-421c-a346-762f9a45c14b" class="permalink">&infin;</a>
-                </div>
-                <div class="notes">
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">ASP.NET Core や .NET MAUI との連携も考える。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="ce6aeedd-de6f-461e-8043-f05b79ccc570" class="task canceled">
-                <div class="task_contents">&cross;
-                    <span class="task_contents">Markdig による HTML コメントの扱いについて調べる</span>
-                    <a href="#ce6aeedd-de6f-461e-8043-f05b79ccc570" class="permalink">&infin;</a>
-                </div>
-                <div class="notes">
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">ファイルを JSON にするので、Markdown 中のコメントを扱うことはない。</p>
-                            <p class="note_contents">VSC ならプレビュー時に無視されるのを確認している。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="acca4bdf-472e-4259-b858-110086183faf" class="task canceled">
-                <div class="task_contents">&cross;
-                    <span class="task_contents">コマンド体系を考える</span>
-                    <a href="#acca4bdf-472e-4259-b858-110086183faf" class="permalink">&infin;</a>
-                </div>
-                <div class="notes">
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">せっかく AI が英語を直してくれるので、コンテキスト情報も校正してもらって保存したい。</p>
-                            <p class="note_contents">思い付きだが、</p>
-                            <p class="note_contents">con</p>
-                            <p class="note_contents">で「コンテキスト追加」モードになり、単一行で書いたことを修正してくれ、それを追加するかどうか y/n で聞かれる。入力せず Enter または y/n で n によりモードが終わる。何度も聞かれても使いにくい。</p>
-                            <p class="note_contents">AI に直してもらうので、コンテキストの修正はやりにくい。</p>
-                            <p class="note_contents">表示と削除については、追加より頻度が低いので「con に続けて何か」でよい。con list / con del でよいか。</p>
-                            <p class="note_contents">スマートに実装する。con list で仮の連番を付けて表示。del 直前に list をやっていれば番号のみ聞いてくる。やっていなければ list をやってくれる。con del * で番号を聞かれずいきなりの指定も可能に。連番の選択ミスがありうるので、一応確認。</p>
-                            <p class="note_contents">それなら con * でいきなり追加もやる。con を con add の糖衣構文扱いする考えもあるが、このシンプルなコマンド体系においては冗長。</p>
-                        </div>
-                    </div>
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">ワークフローを考えるとコンソールも悪くない。自分はとても好きだ。慣れるとたいていコンソールの方が速い。</p>
-                            <p class="note_contents">しかし、誰にでも使いやすいツールにはならない。</p>
-                            <p class="note_contents">.NET MAUI も少し試したが、思った以上に開発時のパソコンへの負荷が大きく、メインのノートに 8 GB しかメモリーのない自分には扱いにくい。ちょっとやってみたときには、毎回のコンパイルに数分かかったり、それでも結局失敗したりだった。</p>
-                            <p class="note_contents">新たな学習コストが小さく、すぐに作れて、すぐに動く WPF 版をまずは作る。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="67c4983c-313e-40d0-a31c-9518a32a6632" class="task canceled">
-                <div class="task_contents">&cross;
-                    <span class="task_contents">コンテキストが概ね一致するならファイル間で回答を移動できるようにする</span>
-                    <a href="#67c4983c-313e-40d0-a31c-9518a32a6632" class="permalink">&infin;</a>
-                </div>
-                <div class="notes">
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">ディレクトリー分けするため、ファイル名のみ与えれば同一ディレクトリー内で、パスを与えればそれを特定。</p>
-                            <p class="note_contents">「何を、そこへ移動し、先頭なのか末尾なのか特定のエントリーの前後なのか」を指定。</p>
-                            <p class="note_contents">この処理は、ファイルを構文解析し、エントリー単位に分割し、エントリーを操作し、ファイルを上書きした場合に変更点以外が必ず一致するラウンドトリップ性の高いフォーマットを必要とする。</p>
-                        </div>
-                    </div>
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">プログラムによるファイルをユーザーが絶対にいじらないならバグを取り切れて100％成功する処理だろうが、しばらくはごみ箱にでもバックアップを入れる？ Temp ディレクトリーでもよい。</p>
-                        </div>
-                    </div>
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">管理が複雑なのと、タグ付けの方が便利そうなので、複数ファイルの扱いについて迷っている。単一ファイルに全て詰め込み、リリース時にツールで HTML ページに変換してアーカイブに含めるのも一つの方法。同じ差分が二度、目に入る二重管理を避けたい。Compiled ディレクトリー的なところに入れるなら問題にならない。</p>
-                        </div>
-                    </div>
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">一応、分割モードと統合モードの両方を想定して仕様を考える。コマンドラインで切り替えられてもよい。分割モードなら、ディレクトリーを開くことでそれ以下の全てをロードできるように。途中でモードを切り替えるための変換にも対応する？ merge コマンド？</p>
-                        </div>
-                    </div>
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">ワークフローがシンプルでないと管理コストがかさむ。質問に答えるのは AI にとっては一瞬のことなので、複数のプロジェクトで同じような情報が必要になったなら、それぞれで同じような質問を、できるだけコンテキストを意識しながら聞き直すので十分。それぞれのファイルがそれ単独でそのプロジェクトに必要な情報を含むようにすればよい。</p>
-                        </div>
-                    </div>
+            <div id="94be4167-6205-4230-a967-e252f73e33a2" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">srcZip の設定ファイルを追加</span>
+                    <a href="#94be4167-6205-4230-a967-e252f73e33a2" class="permalink">&infin;</a>
                 </div>
             </div>
         </div>
