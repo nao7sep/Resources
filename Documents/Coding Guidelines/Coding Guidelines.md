@@ -10,7 +10,7 @@ Each class should be moderately SOLID. Aiming for perfection can delay developme
 
 Do not create static classes that contain static properties which are updated through static methods. Such cases should instead utilize static properties that only get instances of other classes.
 
-When creating collection properties, appropriately use interfaces and regular classes. In model classes, properties that are nullable and have getters/setters are suitable. In regular classes, including them as non-nullable properties with getters and private setters, which are more functional or performant, is advisable. Here, "model classes" refer to those that undergo conversion to/from JSON or data mapping with other instances.
+When creating properties for a collection, it is important to appropriately choose between interfaces and regular classes. Within model classes, properties of interfaces that are nullable and have get/set are suitable. In regular classes, including properties as non-nullable and with get/private-set of regular classes, which are more functional and performant, is good. Here, "model classes" refer to those that undergo conversion with JSON or data mapping with other instances.
 
 Do not give excessive customization to the code. For example, it's fine to fall back to Environment.NewLine for line breaks and Encoding.UTF8 for encoding. Designing to allow specifying alternatives or automatically switching based on the environment is costly both to implement and to use.
 
@@ -20,7 +20,7 @@ Use Lazy class as much as possible to have many properties initialized only when
 
 Collection properties' names should be decided based on their contents, not their form or structure. This is fine in regular classes, but in implementing generic classes, one might mistakenly prefer generic names. In such instances, "Items" is better than "List".
 
-Standardize variable names appropriately. For value types or enums, consider "value"; for DateTime, "utc" or "localTime"; for objects or instances, "object" or "obj"; for strings, "string" or "str"; for arrays, "array"; for collections or IEnumerable, "items". Using "value" or "text" for strings can lead to high potential for conflict with other arguments in the former case, and the latter can feel awkward in plural form. Moderation is key in this as well.
+Standardize variable names appropriately. For value types or enums, consider "value"; for DateTime, "utc" or "localTime"; for objects or instances, "object" or "obj"; for strings, "string" or "str"; for arrays, "array"; for collections or IEnumerable, "items". Using "value" or "text" for strings might lead to conflicts with other arguments in the former case, and feel odd in plural form in the latter case.
 
 JSON key names should be lowercase identifiers connected by underscores. If there’s a possibility of user editing, key comparison should be case-insensitive. Where performance is a concern, JSON might not be suitable.
 
