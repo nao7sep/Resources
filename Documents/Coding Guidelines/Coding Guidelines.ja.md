@@ -55,6 +55,6 @@ TODO コメントがソースファイル内に残っていない。
 ファイル名にアンダースコアでなくハイフンが使われている。Google が https://developers.google.com/search/docs/crawling-indexing/url-structure において言うこと。アンダースコアは URL の下線と重なることがある。
 
 <!--
-2024年2月2日
+2024年2月3日
 バージョン0.1
 -->
