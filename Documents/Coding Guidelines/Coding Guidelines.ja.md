@@ -53,8 +53,3 @@ TODO コメントがソースファイル内に残っていない。
 出力されるメッセージのフォーマットが適度に統一されている。
 
 ファイル名にアンダースコアでなくハイフンが使われている。Google が https://developers.google.com/search/docs/crawling-indexing/url-structure において言うこと。アンダースコアは URL の下線と重なることがある。
-
-<!--
-2024年2月3日
-バージョン0.1
--->

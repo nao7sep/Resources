@@ -1,2 +1,0 @@
-﻿Coding Guidelines.ja.md
-Coding Guidelines.md
