@@ -52,4 +52,6 @@ Ensure the output string is visible. Apply GetVisibleString to places that could
 
 Ensure output messages are uniformly formatted.
 
-Use hyphens, not underscores, in file names, as suggested by Google at https://developers.google.com/search/docs/crawling-indexing/url-structure. Underscores can overlap with URL underlines.
+Hyphens, not underscores, are used in the filename. Underscores may overlap with the underline in urls.
+
+https://developers.google.com/search/docs/crawling-indexing/url-structure
