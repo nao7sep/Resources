@@ -1,6 +1,8 @@
 ﻿# Beautiful People and Places
 
-100 images generated in February 2024 with https://github.com/nao7sep/yyGpt/blob/main/yyGptLibConsole/Tester3.cs for testing purposes.
+100 images generated with the following code for testing purposes in February 2024.
+
+https://github.com/nao7sep/yyGpt/blob/main/yyGptLibConsole/Tester3.cs
 
 ## Tropical Serenity: A Vibrant Lady Amidst Sunset Beach and Swaying Palms
 
