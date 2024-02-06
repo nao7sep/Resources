@@ -2,56 +2,58 @@
 
 ## Preparation
 
-When there are many source files, they should be organized into a simple hierarchical structure. Do not create a directory like "Source" just to group all the source files together. While it’s possible to differentiate between source files and others such as UI files, this leads to disorganization, and source files might be related to those other files. They might need to be placed in the project's root directory.
+If there are many source files, they should be organized into a simple hierarchical structure. Do not create a directory like "Source" just to gather all source files in one place. Doing so might distinguish them from other files such as UI files, but it leads to clutter and those files might also be associated with source files. They may need to be placed in the project's root directory.
 
 ## Design
 
-Each class should be moderately SOLID. Aiming for perfection can delay development, so consider what is "moderate". Asking GitHub Copilot whether each source file is SOLID can be useful.
+Each class should be moderately SOLID. Aiming for perfection can delay development, so consider what is "moderate". It can also be useful to ask GitHub Copilot whether each source file is SOLID or not.
 
-Do not create static classes that contain static properties which are updated through static methods. Such cases should instead utilize static properties that only get instances of other classes.
+Do not create static classes that contain static properties updated by static methods. Instead, make such properties static and only include a getter that returns instances of other classes.
 
-When creating properties for a collection, it is important to appropriately choose between interfaces and regular classes. Within model classes, properties of interfaces that are nullable and have get/set are suitable. In regular classes, including properties as non-nullable and with get/private-set of regular classes, which are more functional and performant, is good. Here, "model classes" refer to those that undergo conversion with JSON or data mapping with other instances.
+When creating properties in a collection, it is important to properly distinguish between interfaces and regular classes. Within a model class, properties that are nullable and handle interfaces with get/set are suitable. In regular classes, it is good to include regular classes that are superior in functionality and performance as properties with non-nullable get/private-set. Here, a "model class" refers to something that undergoes conversion with JSON or mapping of data with other instances.
 
-Do not give excessive customization to the code. For example, it's fine to fall back to Environment.NewLine for line breaks and Encoding.UTF8 for encoding. Designing to allow specifying alternatives or automatically switching based on the environment is costly both to implement and to use.
+Do not allow excessive customization of the code. For example, it's fine to fallback to Environment.NewLine for new lines, and to Encoding.UTF8 for encoding. Designing for fallback options or automatic switching depending on the environment incurs significant implementation and usage costs.
 
 ## Implementation
 
-Use Lazy class as much as possible to have many properties initialized only when needed. This not only speeds up startup but also contributes to better SOLID principles.
+Use the Lazy class as much as possible to increase the number of properties that are initialized when needed. This not only speeds up startup but also contributes to improved SOLID principles.
 
-Collection properties' names should be decided based on their contents, not their form or structure. This is fine in regular classes, but in implementing generic classes, one might mistakenly prefer generic names. In such instances, "Items" is better than "List".
+The names of the properties in a collection should be determined by their contents, not their types or structures. For example, when creating a class for a list that automatically expands, a property name for the list's actual data should be "Items" rather than "List".
 
-Standardize variable names appropriately. For value types or enums, consider "value"; for DateTime, "utc" or "localTime"; for objects or instances, "object" or "obj"; for strings, "string" or "str"; for arrays, "array"; for collections or IEnumerable, "items". Using "value" or "text" for strings might lead to conflicts with other arguments in the former case, and feel odd in plural form in the latter case.
+Keep variable names reasonably consistent. For value types or enums, use "value"; for DateTime, use "utc" or "localTime"; for objects or instances, use "object" or "obj"; for strings, use "string" or "str"; for arrays, use "array"; and for collections or IEnumerable, consider using "items". Using "value" or "text" for strings could lead to potential conflicts with other parameters in the former case, and the latter may feel awkward when pluralized.
 
-JSON key names should be lowercase identifiers connected by underscores. If there’s a possibility of user editing, key comparison should be case-insensitive. Where performance is a concern, JSON might not be suitable.
+JSON key names should be lowercase identifiers connected by underscores. If there's a possibility of user editing, key matching should be done without considering case. If performance is a concern, JSON is not suitable in the first place.
 
-Methods for instance conversion or preprocessing should return null or an equivalent when given null. For example, splitting a string into lines should return an empty array or collection even if the input is null. Null not only signifies "undefined" or "unset" but also "fallback to default value". Exclusively removing null in simple conversions or preprocessing might undermine program stability. "Preprocessing" here refers to operations like Trim that are "safe to call multiple times".
+Methods for converting and preprocessing instances should return null or its equivalent when given null. For example, when splitting a string into lines, an input of null should still yield an empty array or List. Null not only means "indefinite" or "unset," but can also mean "I want you to fall back to a default value." Treating null as an error in simple conversions and preprocessing harms the stability of the program.
 
-Use IsNullOrWhiteSpace more actively than IsNullOrEmpty. Performance differences are negligible as it usually matches early on, and the latter confirms if the string contains "visible characters, hence valid." Use the former only when certain conditions like "non-null means a definite value exists" are met within your code.
+Prefer using IsNullOrWhiteSpace over IsNullOrEmpty. Usually, something will match early on, so the performance difference is negligible. Moreover, the latter allows for checking whether it's "a valid string containing visible characters." Use the former only when conditions like "a value certainly exists if it's not null" are guaranteed within the code you implemented.
 
-Actively trim/optimize user-entered strings. Markdown assigns meaning to trailing whitespace, but having invisible elements carry meaning might feel odd to many besides myself. Successive blank lines, for example, are only useful in cases like scrolling to reveal quiz answers. In web applications with multiple contributors, trailing spaces or extra blank lines should not be exploited to annoy others.
+For methods that return an alternative to IEnumerable, prepare both methods that return an array and those that return a List. While it can be easily converted, only preparing one can sometimes lead to double conversion.
 
-Ensure callers of each method can access all intermediate data generated within that method. Examples include responses from servers or temporarily generated paths.
+Ensure that the caller of each method can access all intermediate data generated within that method. Examples include responses from servers or temporarily generated paths.
 
-Verify that all disposable instances are disposed of.
+Ensure that all disposable instances are disposed of.
 
-## Quality Control
+## Quality Management
 
-Split large classes into partials and organize logic into *Helper.cs files to separate UI and logic, especially in tightly coupled frameworks.
+Split a large class into partials, packing backend-like processes into *Helper.cs files. Even when developing with frameworks that tend to tightly couple UI and logic code, utilize two partial classes to separate UI and logic as much as possible.
 
-Add summary comments to thread-unsafe classes or methods, enabling users to lock them as necessary.
+For classes and methods that are not thread-safe, add summary comments so that users can lock them as necessary.
 
-When adding features to libraries, distinguish whether it's for a personal app or a system used by many. For the latter, imagine scenarios like thousands of users accessing a feature simultaneously or generating thousands of instances, anticipating potential overload.
+When adding functionality to a library, distinguish whether it is for an application used by one person or for a system used by many people. In the latter case, consider scenarios of overload, such as a thousand people accessing the feature simultaneously or a thousand instances being created.
+
+If there is a significant sense of discomfort with the specifications of a library and you feel a psychological resistance to developing from it, do not hesitate to make destructive changes and greatly improve it. There have been several instances in the past where, despite not liking the specifications, development was stalled because changing them seemed too difficult, but I always ended up rewriting them in the end. Hesitating is just a waste of time.
 
 ## Check
 
-Ensure no TODO comments remain in source files.
+Ensure no TODO comments remain in the source files.
 
-Specify JsonConverter for each property in model classes as needed.
+Verify that JsonConverter is specified for each property of the model class as necessary.
 
-Ensure the output string is visible. Apply GetVisibleString to places that could be null or empty strings.
+Ensure the output strings are visible. Apply GetVisibleString where the output could be null or an empty string.
 
-Ensure output messages are uniformly formatted.
+Ensure that the format of the messages output is adequately organized, allowing users to understand them immediately.
 
-Hyphens, not underscores, are used in the filename. Underscores may overlap with the underline in urls.
+Confirm that hyphens, not underscores, are used in file names. This is because underscores can overlap with the underline in URLs.
 
 https://developers.google.com/search/docs/crawling-indexing/url-structure
