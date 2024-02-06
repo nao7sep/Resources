@@ -2,7 +2,7 @@
 
 Cette page contient 100 images générées par DALL-E 3 en utilisant le code suivant en février 2024 à des fins de test
 
-https://github.com/nao7sep/yyGpt/blob/main/yyGptLibConsole/Tester3.cs
+https://github.com/nao7sep/yyGptLib/blob/main/yyGptLibConsole/Tester3.cs
 
 ## Sérénité Tropicale: Une Dame Vibrante au Milieu de la Plage au Coucher du Soleil et des Palmiers Ondulants
 

@@ -2,7 +2,7 @@
 
 Questa pagina contiene 100 immagini generate da DALL-E 3 utilizzando il seguente codice nel febbraio 2024 per scopi di test
 
-https://github.com/nao7sep/yyGpt/blob/main/yyGptLibConsole/Tester3.cs
+https://github.com/nao7sep/yyGptLib/blob/main/yyGptLibConsole/Tester3.cs
 
 ## Serenità Tropicale: Una Signora Vivace Tra la Spiaggia al Tramonto e le Palme Ondeggianti
 

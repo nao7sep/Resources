@@ -2,7 +2,7 @@
 
 Esta página contiene 100 imágenes generadas por DALL-E 3 utilizando el siguiente código en febrero de 2024 con fines de prueba
 
-https://github.com/nao7sep/yyGpt/blob/main/yyGptLibConsole/Tester3.cs
+https://github.com/nao7sep/yyGptLib/blob/main/yyGptLibConsole/Tester3.cs
 
 ## Serenidad Tropical: Una Dama Vibrante Entre la Playa al Atardecer y las Palmeras Ondulantes
 

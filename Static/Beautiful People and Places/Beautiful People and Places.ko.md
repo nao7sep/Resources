@@ -2,7 +2,7 @@
 
 이 페이지는 2024년 2월 테스트 목적으로 다음 코드를 사용하여 DALL-E 3이 생성한 100개의 이미지를 포함하고 있습니다
 
-https://github.com/nao7sep/yyGpt/blob/main/yyGptLibConsole/Tester3.cs
+https://github.com/nao7sep/yyGptLib/blob/main/yyGptLibConsole/Tester3.cs
 
 ## 열대의 평온함: 석양이 내리는 해변과 흔들리는 팜 나무 사이에서 빛나는 여성
 

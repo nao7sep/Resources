@@ -1,13 +1,13 @@
 ﻿<!DOCTYPE html>
 <html>
     <head>
-        <title>yyGpt</title>
+        <title>yyGptLib</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace;font-size:1rem;line-height:1.5}</style>
     </head>
     <body>
         <div class="title">
-            <a href="yyGpt.htm" class="title">yyGpt</a>
+            <a href="yyGptLib.htm" class="title">yyGptLib</a>
         </div>
         <div class="entries">
             <div class="note">
@@ -198,6 +198,20 @@
                     </div>
                 </div>
             </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">全体的に簡略化する。余計なことを考えすぎていた。</p>
+                    <p class="note_contents">たとえば、回答の順序を並び替える必要はない。すでに答えてくれていたことを自分がよく分かっていなくて再度聞くとか、最初に聞いたときには教えてくれなかったことがあとから出てきて、あとで読むならそちらを先に読んだ方が良いとかのグダグダはいくらでも起こりうる。そもそも回答は MECE にならない。そのため、「一応はタイトルをつけて記事単位で表示できるが、あくまで会話の一部として存在する」というのがコンセプトのツールだとの位置づけが合理的だ。</p>
+                    <!-- Task: 8816d3be-85f5-4518-836e-a26a30ae09d2 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">GUI での作業を中心とするなら、diff を取れないのは問題でない。そもそも回答を編集できなくする。質問し、回答を得て、その回答が気に入れば残し、そうでないなら消して聞き直す。残すものなら、それが改変されていないということがハッシュ値により保証されるので、その diff をチェックすることなく、そのままコミットすればよい。見るとしても、消そうと思ったものを消し忘れていないか程度で十分だ。</p>
+                    <p class="note_contents">自分は何においてもコミット前の diff のチェックが習慣になっていて、このプログラムの設計でも最初は diff に向くファイルフォーマットを考えた。しかし、AI の回答については、生成されたものが改変されていないということのみ確認できていれば、その一字一句を自分が見る必要性は当然ない。読むのもザッとで、タスクやアイデアの取りこぼしもある。何度も聞き、量から質を高めていくアプローチになる。diff を取れない JSON にするのは、そういった割り切りも考えてのこと。</p>
+                    <!-- Task: 8816d3be-85f5-4518-836e-a26a30ae09d2 -->
+                </div>
+            </div>
             <div id="7c1c3d86-e109-41a1-a356-2111d0168338" class="task done">
                 <div class="task_contents">&check;
                     <span class="task_contents">コーディングのガイドラインに準拠しているか調べる</span>
@@ -229,6 +243,62 @@
                 <div class="task_contents">&check;
                     <span class="task_contents">v0.1 としてアーカイブ</span>
                     <a href="#5cea02b7-6221-48b9-96e6-823aa25882da" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="4a9dc98b-01e5-402a-b95a-be6875a1138f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">画像生成の API を利用できるようにする</span>
+                    <a href="#4a9dc98b-01e5-402a-b95a-be6875a1138f" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">横長の A3 の紙（ロディア）での開発が楽しくなっている。そこになんとなく画像生成のことを書いたところ、思考の途切れない開発の末に2日でいろいろな実装が終わった。</p>
+                            <p class="note_contents">大事なことをコメントに書き、実装に関することを紙に書き、taskKiller にはアイデアを書くという運用を試す。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="227b51a8-771b-46a3-b7b5-09db3ff13518" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">プロンプトを生成しての画像生成をバッチ処理できるようにする</span>
+                    <a href="#227b51a8-771b-46a3-b7b5-09db3ff13518" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">プロンプトを生成してもらい、それぞれについて画像を生成してもらうというのが非常に面白い。ビックリするくらい多様性が生じてくる。自分が一枚ずつプロンプトを書くのでは似たようなアイデアしか出ずの堂々巡りだ。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">これは既存のコードで簡単にできる。1行でやれる拡張メソッドをつくることも可能だが、エラー処理が弱くなる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">このタスクリストの運用をここでいったん終える。</p>
+                    <p class="note_contents">まだ開発黎明期において、「ライブラリーをまずつくり、それと同じソリューション内に、回答を保存していくソフトを入れよう」と考えていたが、プロジェクトとしての独立性を考えるなら、yyGpt は、あくまでライブラリーが主体のプロジェクトとして終わるべきだ。</p>
+                    <p class="note_contents">これは、図らずもほかのプロジェクトではうまくまとまっている。</p>
+                    <p class="note_contents">たとえば yyTodoMail も、カテゴリーとしては「メール」のアプリなのだから yyMail に入れてもよかった。しかし、yyGpt への依存もあるので中立的とするため別のソリューションをつくった。</p>
+                    <p class="note_contents">そうやってライブラリーとアプリを明確に分けていくのでないと、必ず、どちらに入れるか分からないものが出てくる。</p>
+                    <p class="note_contents">yyGpt も「ライブラリー」枠なのだから、ここにアプリを入れていくのは良くない。</p>
+                    <!-- Task: 5f77461d-7d61-46e8-9ee6-0d7eafce7571 -->
+                </div>
+            </div>
+            <div id="e4fdfbd0-1f47-4655-b19c-8b935cb5c289" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">プロダクトとしての完全性を高める</span>
+                    <a href="#e4fdfbd0-1f47-4655-b19c-8b935cb5c289" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">テストコードが出揃い、文章と画像の生成なら安定的に何でもできるようになった。俯瞰的に見るとシンプルなコードで、ウェブまわりの実装もスタンダードだ。ライブラリーとしては、これで十分と言える。</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

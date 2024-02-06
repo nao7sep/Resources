@@ -2,7 +2,7 @@
 
 このページには、2024年2月にテスト目的で次のコードを使用してDALL-E 3によって生成された100枚の画像が含まれています。
 
-https://github.com/nao7sep/yyGpt/blob/main/yyGptLibConsole/Tester3.cs
+https://github.com/nao7sep/yyGptLib/blob/main/yyGptLibConsole/Tester3.cs
 
 ## 熱帯の静けさ：夕日のビーチと揺れるヤシの木の中の鮮やかな女性
 

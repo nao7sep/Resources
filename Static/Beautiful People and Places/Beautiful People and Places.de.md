@@ -2,7 +2,7 @@
 
 Diese Seite enthält 100 Bilder, die im Februar 2024 von DALL-E 3 mit dem folgenden Code zu Testzwecken generiert wurden
 
-https://github.com/nao7sep/yyGpt/blob/main/yyGptLibConsole/Tester3.cs
+https://github.com/nao7sep/yyGptLib/blob/main/yyGptLibConsole/Tester3.cs
 
 ## Tropische Gelassenheit: Eine lebendige Dame inmitten von Sonnenuntergangsstrand und schaukelnden Palmen
 

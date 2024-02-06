@@ -1,1 +1,1 @@
-# yyMail
+# yyMailLib

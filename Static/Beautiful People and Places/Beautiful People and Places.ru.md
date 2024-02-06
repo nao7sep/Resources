@@ -2,7 +2,7 @@
 
 На этой странице содержится 100 изображений, созданных с помощью DALL-E 3 по следующему коду в феврале 2024 года для целей тестирования
 
-https://github.com/nao7sep/yyGpt/blob/main/yyGptLibConsole/Tester3.cs
+https://github.com/nao7sep/yyGptLib/blob/main/yyGptLibConsole/Tester3.cs
 
 ## Тропическое спокойствие: Яркая дама среди закатного пляжа и колышущихся пальм
 

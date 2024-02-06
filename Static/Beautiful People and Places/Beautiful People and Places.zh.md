@@ -2,7 +2,7 @@
 
 此页面包含了由DALL-E 3在2024年2月使用以下代码生成的100张图片，用于测试目的。
 
-https://github.com/nao7sep/yyGpt/blob/main/yyGptLibConsole/Tester3.cs
+https://github.com/nao7sep/yyGptLib/blob/main/yyGptLibConsole/Tester3.cs
 
 ## 热带宁静：落日海滩和摇曳的棕榈树中的活力女士
 

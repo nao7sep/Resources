@@ -2,7 +2,7 @@
 
 Deze pagina bevat 100 afbeeldingen gegenereerd door DALL-E 3 met behulp van de volgende code in februari 2024 voor testdoeleinden
 
-https://github.com/nao7sep/yyGpt/blob/main/yyGptLibConsole/Tester3.cs
+https://github.com/nao7sep/yyGptLib/blob/main/yyGptLibConsole/Tester3.cs
 
 ## Tropische Sereniteit: Een Levendige Dame Tussen Zonsondergang Strand en Wuivende Palmen
 
