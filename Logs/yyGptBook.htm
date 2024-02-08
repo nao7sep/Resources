@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>yyGptBook</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace;font-size:1rem;line-height:1.5}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="yyGptBook.htm" class="title">yyGptBook</a>
+        </div>
+        <div class="entries">
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">月額20ドルだったと思うが、ChatGPT のウェブ版をよく使っている。自分の場合は、ほとんどが調べ物だ。Google って何それ？なくらい、最近は何でも ChatGPT に聞いてしまっている。それはそれでアホになりそうだが、今は結果を急ぐので仕方ない。</p>
+                    <p class="note_contents">ウェブ版の問題は、聞き直せないことだ。ログの一部を消せない。それが可能だと消して聞いて消して聞いて……を繰り返してウェブ上のログを作り込むユーザーが少なくないと OpenAI 側が想定している可能性がある。それをされると、システム側に役立つフィードバックがさほどないのに計算量が大きく増えうる。ログの部分消去の実装に OpenAI 側の利益が乏しいため、今後も聞きっぱなしのはずだ。</p>
+                    <p class="note_contents">聞き直せたら、もっと言うと、質問の文章も見てくれたら、「このプロジェクトに関連する、AI から得た情報（およびそれを得るまでのやりとり）は全てここに入っていますから見てください」が可能になる。</p>
+                    <p class="note_contents">また、それぞれの回答に GUID でもついていれば、メモやソースコード内に「この ID で検索してください」を書けるようになる。その ID に永続性があるなら、アジャイル開発がなおのこと高速化されうる。</p>
+                    <p class="note_contents">これは、といったことをローカルでやるプロジェクトだ。</p>
+                    <!-- Task: 39c251aa-4b8d-4566-943e-9c2de40c5692 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">OpenAI の Pricing のページを見ていて不思議に思うことがある。</p>
+                    <p class="note_contents"><a href="https://openai.com/pricing" target="_blank" class="url">https://openai.com/pricing</a></p>
+                    <p class="note_contents">gpt-3.5-turbo-0125 だと $0.0005 / 1K tokens なのに、gpt-4-0125-preview だと $0.01 / 1K tokens と、20倍のお値段だ。これでも値下げされていて、現行の gpt-4 だと $0.03 / 1K tokens とのこと。それぞれ、input のお値段だ。より長い文章を読み込める gpt-4-32k だと $0.06 / 1K tokens もする。gpt-3.5-turbo-0125 の120倍というのは、さすがにリスキーな価格設定だ。ローカル LLM でもそれなりのことができるようになってきているからだ。</p>
+                    <p class="note_contents">といったことから思うのは、もしかすると OpenAI では input のコストは微々たるもので、output の方が格段にしんどく、API では（ウェブ版と違って）長い会話をやろうとすればコストがかさむようにして、そちらをキャッシュポイントにしているのでないかということだ。</p>
+                    <p class="note_contents">「会話が長くても実は OpenAI 側はしんどくない」という仮説に基づくなら、ウェブ版の ChatGPT では単一の会話を延々と続けても警告が表示されるなどがない理由が見えてくるようだ。（もっとも、ただの仮説であり、大きく間違っている可能性もある）。</p>
+                    <!-- Task: 39c251aa-4b8d-4566-943e-9c2de40c5692 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">といったことをなんとなく考えるのは、このプロジェクトにおいてはコンテキスト情報の扱い方がプロダクトの品質を大きく左右しそうだからだ。</p>
+                    <!-- Task: 39c251aa-4b8d-4566-943e-9c2de40c5692 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">最初に考えた実装は、必要なコンテキスト情報を AI 側が指定してくるようにすることだ。</p>
+                    <p class="note_contents">質問と回答を繰り返すにおいて回答の順序を固定し、それぞれの回答について短い要約を生成してもらう。その際には、最後の回答のみ要約するのではすでに流れを見失っている可能性があるので、「これまでの短い要約全て＋最後の回答の全文」から要約してもらう。そうすることで、「最後のものをどう要約すれば、これまでのものとつながるか」もまた要約時のコンテキスト情報となる。</p>
+                    <p class="note_contents">そういったものをまとめておき、質問時には過去の要約を全て送り、「それでコンテキスト情報として十分ならそのまま回答し、そうでないなら、全文を必要とするものを教えて下さい」的なことをやる。</p>
+                    <p class="note_contents">といったややこしいことをしなければならないだろうと思うようになったのは、ウェブ版で、ロシア語の単語を、よく使われるものから順に100個ずつ出力してもらったときだ。それだとそれぞれがけっこうなデータ量で、要約だけでは「すでに何を出したか」が分からない。要約文は「よく使われる単語のうち201～300番目を出しました」くらいになるからだ。</p>
+                    <p class="note_contents">しかし、ウェブ版はちゃんと201～300番目、301～400番目と継続できる。ウェブ版はサーバー側にそれまでの会話があって、コンテキスト情報も、すでに展開された中間データ的なものがそのまま残っているのだろう。</p>
+                    <p class="note_contents">一方、API で単語リストを出してもらうと、セッション情報的にそれまでの会話のログを全て保持してもらうということができないため、上記のような実装が苦肉の策になってきそうだ。</p>
+                    <!-- Task: 39c251aa-4b8d-4566-943e-9c2de40c5692 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">しかし、完璧を目指すと逆に何もできなくなる。</p>
+                    <p class="note_contents">自分がやりたいのは「ここに全部入ってまっせ」のファイルをローカルにつくり、Git で半永久的に確定し、そこからいつでも調べ物を継続したり、もっと良い回答が見つかったなら古いものを置き換えたり、「この回答より先にこっちを読んだ方が理解が早い」というのがあれば差し込んだり、そのファイルをウェブに丸ごと載せて GUID を含む URL で参照したりだ。</p>
+                    <p class="note_contents">となると、目の前の一つの回答をできるだけ品質の高いものにすることに集中すればよい。</p>
+                    <p class="note_contents">全体的な会話の流れを保つことにこだわっては、コンテキスト情報の扱いの処理が過度に複雑になるし、必死に削って最適化しても結局それなりの量のコンテキスト情報を毎回送ることになって API の利用料がかさむ。</p>
+                    <p class="note_contents">流れを重視しないのでは「単語リストを連続的に出してもらう」というのが絶望的になるし、すでに教えてくれたことを何度も教えてくれるアホな子になってしまうが、それは聞く側が工夫すればよい。回答の内容を1文に要約してもらったものをリスト表示しておき、それらを並び替えたり読み返したりしながら &quot;book&quot; を作り込んでいけばよい。（という思考で、そういう名前にした）。</p>
+                    <p class="note_contents">もちろん、チェックボックスでの選択か何かにより過去の質問と回答の一部を送れるようにすることも選択肢だ。</p>
+                    <p class="note_contents">しかし、それをやると、質問してから、「あっ、これもチェックしておくべきだった」だとか、「これを誤ってチェックしてしまったせいで、最後に得た回答では、その内容をすでにユーザーが知っているとの前提で文章がつくられている」だとかが起こりうる。ユーザーの選択という不確かな操作の結果として回答の品質が左右されるのだ。</p>
+                    <p class="note_contents">そういった「隠れコンテキスト（どの回答が以前のどのやりとりに基づくか）」までユーザーは記憶できない。UI に盛り込むと複雑になる。その確認をユーザーに求めては質問を気軽に行えなくなる。その上でのやりとりから得た回答を（1文の要約だけを見て）並び替えるなどすると、たとえば A について説明してもらわないと分からない説明が先に表示されてから、しばらくあとで A の説明が入るなどが起こりうる。</p>
+                    <p class="note_contents">AI を扱うなら、量は問題にならない。人間と違い、大量の文章を一瞬で出せる。そのため、「どのエピソードから観ても面白いドラマ」のようなものを念頭に、むしろ「前後の流れを読まないと分からない」というのを可能な限り回避し、どの回答だけを見ても、元々のコンテキスト情報（最初にユーザーが指定する短いもの）さえ消失していても、一つの独立した読み物として意味が通じる AI の使い方を考える。</p>
+                    <!-- Task: 39c251aa-4b8d-4566-943e-9c2de40c5692 -->
+                </div>
+            </div>
+            <div id="7eafbc89-5c47-49a9-b6ad-c0c36cbe313b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">プロジェクト開始時のタスクを処理</span>
+                    <a href="#7eafbc89-5c47-49a9-b6ad-c0c36cbe313b" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="1d82b721-d90f-4ccd-a90c-314015b58f11" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">生成された全てのファイルをチェック</span>
+                    <a href="#1d82b721-d90f-4ccd-a90c-314015b58f11" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">別のタスクリストで細かく break down した。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="c68955da-81c5-4a98-a50c-804641933872" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">タスクリストのログが出力されるようにする</span>
+                    <a href="#c68955da-81c5-4a98-a50c-804641933872" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="1dd93458-4bcd-4afb-82e9-22af48929714" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Avalonia UI の学習に関するタスクリストのログについて書く</span>
+                    <a href="#1dd93458-4bcd-4afb-82e9-22af48929714" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents"><a href="https://github.com/nao7sep/Resources/blob/main/Logs/Avalonia-UI.htm" target="_blank" class="url">https://github.com/nao7sep/Resources/blob/main/Logs/Avalonia-UI.htm</a></p>
+                            <p class="note_contents">ここに載せた。</p>
+                            <p class="note_contents">元々は二つのタスクリストを統合して単一のログファイルにするつもりだったが（ログファイルの生成の自作ツールに、そういう機能がある）、Avalonia UI が思った以上に良くできていて、長い付き合いになりそうなので、それはそれで独立的に学習を続けることを決めた。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="181db43c-f910-4b68-84c9-9bad51a10f1b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">README.md を更新</span>
+                    <a href="#181db43c-f910-4b68-84c9-9bad51a10f1b" class="permalink">&infin;</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

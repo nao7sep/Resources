@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>yyBom</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace;font-size:1rem;line-height:1.5}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="yyBom.htm" class="title">yyBom</a>
+        </div>
+        <div class="entries">
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">思いも寄らないところに Shift-JIS のファイルが入る。また、UTF-8 になっていても、一部の（外国の）アプリは BOM がないと Windows-1252 だと誤検出するなどがある。</p>
+                    <p class="note_contents">しょーもないことなので無視してきたが、今度は README.md が Shift-JIS でつくられていて、VSC はスマートに判別するのでステージし、GitKraken で最終チェックしようとしたときに文字化けしていて気づいた。</p>
+                    <p class="note_contents">自分は困らないが、GitHub などにファイルを載せて公開していくにおいては誰かが困りうる。この機会にパッとツールをつくる。</p>
+                    <!-- Task: 5c0f9445-af33-4757-8731-f42f850fbfe7 -->
+                </div>
+            </div>
+            <div id="97985c3a-b58d-4611-8ff1-ca6c14f8700e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">プロジェクト開始時のタスクを処理</span>
+                    <a href="#97985c3a-b58d-4611-8ff1-ca6c14f8700e" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="21ff46e1-d35f-48b4-b372-c31a0387d8cb" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">落ちるところがないようにする</span>
+                    <a href="#21ff46e1-d35f-48b4-b372-c31a0387d8cb" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="807c78f4-2f2e-499c-b615-294d036cf361" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">タスクリストのログが出力されるようにする</span>
+                    <a href="#807c78f4-2f2e-499c-b615-294d036cf361" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="df7464a1-b537-4f09-ba28-0f8e7f402a0d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">README.md を更新</span>
+                    <a href="#df7464a1-b537-4f09-ba28-0f8e7f402a0d" class="permalink">&infin;</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
