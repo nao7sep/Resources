@@ -1,0 +1,1468 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>Avalonia-UI</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace;font-size:1rem;line-height:1.5}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="Avalonia-UI.htm" class="title">Avalonia-UI</a>
+        </div>
+        <div class="entries">
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">以前からマルチプラットフォームの開発に関心がある。自分は Windows 派だが、それは Windows 用のアプリしか書けないからというのも大きい。なんでも使ってみたい性格だが、自作ツールは Windows 用しかなくて、数年前に買った MacBook がトイレ専用機だ。それはそれでもったいない。知識が広がりにくい。</p>
+                    <!-- Task: 931a5bb6-ee0f-4418-85b1-5a72b73ad40d -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">マルチプラットフォームというと .NET MAUI が本流の感じがあるが、Avalonia UI も捨てがたい。前者はまだまだ infant だとネットのコミュニティーで揶揄される。また、Xamarin ベースなので WPF からの移行が比較的めんどくさいとも。</p>
+                    <p class="note_contents">Avalonia の方は、元々が WPF に寄せられている。また、そこから派生したようである XPF は、WPF のコードを変更なしでマルチプラットフォーム化できるとされている。となるとそれが答えに思えたが、スタートアップのライセンスでも1アプリあたり5千ユーロとのことで、完全に業務用だ。</p>
+                    <div class="note_ai_generated">
+<p>Basic for Startups: Priced at €4,999 per app, per platform, which includes a perpetual license, email support, priority support, and hot fixes.</p>
+<p>Pro for Startups: Priced at €9,999 per app, per platform, with additional features such as the ability to mix-and-match WPF and Avalonia controls, along with compatibility with various third-party control vendors like Telerik, DevExpress, Actipro, Infragistics, Syncfusion, and SciChart.</p>
+                    </div>
+                    <p class="note_contents">無料で、成熟していて、WPF と近く、移行のための学習が最小限で済みそうなので、Avalonia UI について学んでみる。</p>
+                    <!-- Task: 931a5bb6-ee0f-4418-85b1-5a72b73ad40d -->
+                </div>
+            </div>
+            <div id="f81d811e-8bad-466f-b5e1-668515f7fa1c" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://avaloniaui.net/Blog/is-wpf-dead" target="_blank" class="url">https://avaloniaui.net/Blog/is-wpf-dead</a> をチェック</span>
+                    <a href="#f81d811e-8bad-466f-b5e1-668515f7fa1c" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="0ca06d4c-9f45-4e5b-9f18-d7068b61f3d3" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://docs.avaloniaui.net/docs/get-started/wpf/comparison-of-avalonia-with-wpf-and-uwp" target="_blank" class="url">https://docs.avaloniaui.net/docs/get-started/wpf/comparison-of-avalonia-with-wpf-and-uwp</a> をチェック</span>
+                    <a href="#0ca06d4c-9f45-4e5b-9f18-d7068b61f3d3" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="c1299d51-014c-4a41-a095-bbafdc35078d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://docs.avaloniaui.net/docs/get-started/wpf" target="_blank" class="url">https://docs.avaloniaui.net/docs/get-started/wpf</a> をチェック</span>
+                    <a href="#c1299d51-014c-4a41-a095-bbafdc35078d" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="fede834c-91f1-43e9-b8da-89d481939351" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://docs.avaloniaui.net/docs/welcome" target="_blank" class="url">https://docs.avaloniaui.net/docs/welcome</a> をチェック</span>
+                    <a href="#fede834c-91f1-43e9-b8da-89d481939351" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="491e0382-1351-4360-a243-b3aba69119a8" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">dotnet new install Avalonia.Templates を実行</span>
+                    <a href="#491e0382-1351-4360-a243-b3aba69119a8" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">次のパッケージがインストールされます:<br />
+                                &nbsp;&nbsp;&nbsp;Avalonia.Templates</p>
+                            <p class="note_contents">成功: Avalonia.Templates::11.0.6により次のテンプレートがインストールされました。<br />
+                                テンプレート名 短い名前 言語 タグ<br />
+                                ----------------------------------- ------------------------- ------- -----------------------------------------<br />
+                                Avalonia .NET App avalonia.app [C#],F# Desktop/Xaml/Avalonia/Windows/Linux/macOS<br />
+                                Avalonia .NET MVVM App avalonia.mvvm [C#],F# Desktop/Xaml/Avalonia/Windows/Linux/macOS<br />
+                                Avalonia Cross Platform Application avalonia.xplat [C#],F# Desktop/Xaml/Avalonia/Web/Mobile<br />
+                                Avalonia Resource Dictionary avalonia.resource Desktop/Xaml/Avalonia/Windows/Linux/macOS<br />
+                                Avalonia Styles avalonia.styles Desktop/Xaml/Avalonia/Windows/Linux/macOS<br />
+                                Avalonia TemplatedControl avalonia.templatedcontrol [C#],F# Desktop/Xaml/Avalonia/Windows/Linux/macOS<br />
+                                Avalonia UserControl avalonia.usercontrol [C#],F# Desktop/Xaml/Avalonia/Windows/Linux/macOS<br />
+                                Avalonia Window avalonia.window [C#],F# Desktop/Xaml/Avalonia/Windows/Linux/macOS</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d1f0ae8d-7b1b-4014-a96f-63c946ad7c41" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://marketplace.visualstudio.com/items?itemName=AvaloniaTeam.AvaloniaVS" target="_blank" class="url">https://marketplace.visualstudio.com/items?itemName=AvaloniaTeam.AvaloniaVS</a> をインストール</span>
+                    <a href="#d1f0ae8d-7b1b-4014-a96f-63c946ad7c41" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="0f8a1f23-efe3-4b4d-98cf-b13fc8786c70" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">dotnet new avalonia.mvvm -o yyGptBook を C:\Repositories で実行</span>
+                    <a href="#0f8a1f23-efe3-4b4d-98cf-b13fc8786c70" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="dd45f3be-3580-4ce2-8bbe-1dc052d73c2b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ソリューションをつくってプロジェクトを入れる</span>
+                    <a href="#dd45f3be-3580-4ce2-8bbe-1dc052d73c2b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">コマンドラインでは、ソリューションをつくりたかったところに *.csproj がいきなりつくられる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="753595e2-2268-40b7-8755-8bb0aaaa54c0" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ダークテーマが組み込まれているようなので調べる</span>
+                    <a href="#753595e2-2268-40b7-8755-8bb0aaaa54c0" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents"><a href="https://docs.avaloniaui.net/docs/stay-up-to-date/upgrade-from-0.10" target="_blank" class="url">https://docs.avaloniaui.net/docs/stay-up-to-date/upgrade-from-0.10</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="a4b4ba2b-e2ff-4229-8d50-4372d6802da9" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Skia のフォントレンダリングについて調べる</span>
+                    <a href="#a4b4ba2b-e2ff-4229-8d50-4372d6802da9" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">WPF より日本語が Mac っぽくて美しい気がする。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Skia is a powerful open-source 2D graphics library that serves as the rendering engine behind many products, including Google Chrome, Chrome OS, Android, Flutter, and others. When it comes to font rendering on Windows, Skia provides high-quality text rendering capabilities, utilizing various technologies to ensure text looks clear, sharp, and consistent across different platforms.</p>
+<p>Here are some key points about Skia's font rendering on Windows:</p>
+<h3>Font Discovery and Selection</h3>
+<ul>
+<li>Skia uses the native platform's font discovery mechanisms to find and select fonts. On Windows, this typically means integrating with DirectWrite or GDI (depending on the version and configuration) to access the system's font collection.</li>
+</ul>
+<h3>Font Rendering Techniques</h3>
+<ul>
+<li><strong>Anti-Aliasing</strong>: Skia applies anti-aliasing to smooth out font edges, making text appear less jagged and more readable, especially on lower-resolution displays.</li>
+<li><strong>Subpixel Rendering</strong>: For LCD screens, Skia can use subpixel rendering (similar to Microsoft's ClearType) to increase the horizontal resolution of text rendering by taking advantage of the RGB stripe layout of LCD panels. This makes text look even sharper.</li>
+<li><strong>Hinting</strong>: Skia respects font hinting, which is a set of instructions embedded within a font to adjust its display at smaller sizes for better legibility and consistency.</li>
+</ul>
+<h3>Text Layout</h3>
+<ul>
+<li>Skia provides mechanisms for text layout, which is especially important for complex scripts or languages that require special handling, such as right-to-left languages or scripts with complex ligatures.</li>
+</ul>
+<h3>Integration with Platform APIs</h3>
+<ul>
+<li>On Windows, Skia can integrate with DirectWrite for advanced text features like kerning, ligatures, and text shaping, which are essential for high-quality text rendering and accurate representation of complex scripts.</li>
+</ul>
+<h3>Performance Considerations</h3>
+<ul>
+<li>Skia is designed with performance in mind, offering hardware acceleration options through GPU backends. This is beneficial for applications requiring high-performance rendering, including smooth animations and transitions.</li>
+</ul>
+<h3>Customization and Control</h3>
+<ul>
+<li>Developers using Skia have a great deal of control over text rendering, including specifying custom fonts, sizes, styles, and rendering options. This flexibility allows for a wide range of creative and stylistic text effects in applications.</li>
+</ul>
+<h3>Cross-Platform Consistency</h3>
+<ul>
+<li>While Skia adapts to use the best of the underlying platform's capabilities, it also strives to maintain consistency across different platforms. This means that applications using Skia for text rendering can achieve a similar look and feel on Windows as on other platforms like macOS, Linux, Android, etc.</li>
+</ul>
+<p>When implementing Skia for font rendering in your Windows application, it's essential to consider the specific requirements of your application, such as the need for advanced text features, performance considerations, and how much control you need over the text rendering process. Skia's documentation and community resources can be invaluable in helping to make these decisions and implement high-quality text rendering in your application.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="35edaaca-ad2b-4271-926e-9fdbe6c5ac81" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://docs.avaloniaui.net/docs/get-started/" target="_blank" class="url">https://docs.avaloniaui.net/docs/get-started/</a> をチェック</span>
+                    <a href="#35edaaca-ad2b-4271-926e-9fdbe6c5ac81" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">後半をだいぶ飛ばしたが、一応、全体的に目を通した。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="1681d311-02b4-4514-84a4-bb2378914353" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://github.com/AvaloniaUI/Avalonia" target="_blank" class="url">https://github.com/AvaloniaUI/Avalonia</a> をチェック</span>
+                    <a href="#1681d311-02b4-4514-84a4-bb2378914353" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="135f1856-2a7c-4f6f-8af5-2310d8d72179" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://avaloniaui.net/" target="_blank" class="url">https://avaloniaui.net/</a> をチェック</span>
+                    <a href="#135f1856-2a7c-4f6f-8af5-2310d8d72179" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="3daadc92-9ad5-45c6-8826-bda1254e10d4" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://github.com/AvaloniaUI/AvaloniaVS" target="_blank" class="url">https://github.com/AvaloniaUI/AvaloniaVS</a> をチェック</span>
+                    <a href="#3daadc92-9ad5-45c6-8826-bda1254e10d4" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="d5d229f4-b43f-4692-ab47-180226b092f9" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://play.avaloniaui.net/" target="_blank" class="url">https://play.avaloniaui.net/</a> をチェック</span>
+                    <a href="#d5d229f4-b43f-4692-ab47-180226b092f9" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">コントロールをどういう見た目にするにはどう書くかの見本として有用なのでブックマークした。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="53c55ad8-58dc-49ca-a0e0-40e6066041b3" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://github.com/AvaloniaUI/Avalonia.Samples/tree/main/src/Avalonia.Samples/MVVM" target="_blank" class="url">https://github.com/AvaloniaUI/Avalonia.Samples/tree/main/src/Avalonia.Samples/MVVM</a> をチェック</span>
+                    <a href="#53c55ad8-58dc-49ca-a0e0-40e6066041b3" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="150596ef-b985-4f3b-96a2-d0289a41a05e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">MVVM における model と view model の分離について調べる</span>
+                    <a href="#150596ef-b985-4f3b-96a2-d0289a41a05e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents"><a href="https://docs.avaloniaui.net/docs/tutorials/todo-list-app/creating-a-view-model" target="_blank" class="url">https://docs.avaloniaui.net/docs/tutorials/todo-list-app/creating-a-view-model</a></p>
+                            <p class="note_contents">このページに次のようにある。</p>
+                            <p class="note_contents">In a real application, you would aim to ensure separation between the view model and the model, for similar reasons. However this is beyond the scope of this tutorial, so here you will make the view model dependent on the model.</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">AI に聞いたところ、予想通りのコードが出てきた。これは小さなツールの開発においては完全にやりすぎだ。Avalonia UI のサンプルコードに含まれる程度の MVVM でも十分に有用なので、そこを現実的な落としどころとする。</p>
+                            <div class="note_ai_generated">
+<p>To use Dependency Injection (DI) in an Avalonia UI application to decouple your ViewModel from the Model, you can follow these general steps. The idea is to introduce an interface that represents the operations or data your ViewModel needs from the Model. Then, implement this interface in your Model class. Use a DI container to inject the interface implementation into your ViewModel, rather than directly using the Model class.</p>
+<ol>
+<li><p><strong>Define an Interface</strong>: Create an interface that represents the functionality or data your ViewModel needs from the Model. This interface will be used as a contract between the ViewModel and the Model.</p>
+<pre><code class="language-csharp">public interface IModelService
+{
+    // Define methods and properties that your ViewModel needs
+    void PerformOperation();
+    string Data { get; }
+}
+</code></pre>
+</li>
+<li><p><strong>Implement the Interface in your Model</strong>: Your Model class should implement the <code>IModelService</code> interface. This way, your ViewModel can interact with the Model through the interface, without knowing the concrete implementation.</p>
+<pre><code class="language-csharp">public class MyModel : IModelService
+{
+    public void PerformOperation()
+    {
+        // Implementation of the operation
+    }
+
+    public string Data
+    {
+        get { return &quot;some data&quot;; }
+    }
+}
+</code></pre>
+</li>
+<li><p><strong>Setup Dependency Injection</strong>: Use a DI container to register the interface and its implementation. Avalonia doesn't come with a built-in DI container, but you can use popular .NET DI containers like Microsoft.Extensions.DependencyInjection.</p>
+<pre><code class="language-csharp">var serviceCollection = new ServiceCollection();
+serviceCollection.AddSingleton&lt;IModelService, MyModel&gt;();
+// Register other services and ViewModels as needed
+var serviceProvider = serviceCollection.BuildServiceProvider();
+</code></pre>
+</li>
+<li><p><strong>Inject Interface into ViewModel</strong>: Modify your ViewModel to accept an instance of <code>IModelService</code> through its constructor. This is known as constructor injection.</p>
+<pre><code class="language-csharp">public class MyViewModel
+{
+    private readonly IModelService _modelService;
+
+    public MyViewModel(IModelService modelService)
+    {
+        _modelService = modelService;
+    }
+
+    // Use _modelService to interact with the Model
+}
+</code></pre>
+</li>
+<li><p><strong>Configure Avalonia to Use DI</strong>: In your Avalonia application, you need to set up the DI container so that it can resolve the ViewModels and their dependencies when needed. This typically happens in the <code>App.xaml.cs</code> or a similar startup file, where you can override <code>OnFrameworkInitializationCompleted</code>.</p>
+<pre><code class="language-csharp">protected override void OnFrameworkInitializationCompleted()
+{
+    if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+    {
+        var viewModel = serviceProvider.GetService&lt;MyViewModel&gt;();
+        desktop.MainWindow = new MainWindow
+        {
+            DataContext = viewModel,
+        };
+    }
+
+    base.OnFrameworkInitializationCompleted();
+}
+</code></pre>
+</li>
+</ol>
+<p>By following these steps, your ViewModel will depend on an interface (<code>IModelService</code>) rather than a concrete Model class, achieving a decoupled architecture through Dependency Injection. This approach promotes better testing capabilities and adheres to the Dependency Inversion Principle, one of the SOLID principles of object-oriented design.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="7386ef9e-9760-4569-be29-b1e05d9bc72f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ReactiveObject について調べる</span>
+                    <a href="#7386ef9e-9760-4569-be29-b1e05d9bc72f" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents"><a href="https://github.com/reactiveui/ReactiveUI/blob/main/src/ReactiveUI/ReactiveObject/ReactiveObject.cs" target="_blank" class="url">https://github.com/reactiveui/ReactiveUI/blob/main/src/ReactiveUI/ReactiveObject/ReactiveObject.cs</a></p>
+                            <p class="note_contents">IReactiveNotifyPropertyChanged を継承する。データバインディングに必要な INotifyPropertyChanged の実装のようだ。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="e43050f6-ce6e-424e-a0b7-53db50dc8df7" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">単一のファイルを読み書きする場合の service のつくり方を調べる</span>
+                    <a href="#e43050f6-ce6e-424e-a0b7-53db50dc8df7" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">我流でやりそうなところだが、おそらくベストプラクティスがある。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Designing a service class for managing data entries, with serialization and deserialization capabilities in an Avalonia UI and MVVM context, involves several considerations to ensure efficiency, maintainability, and adherence to MVVM principles. Here's a best practice approach:</p>
+<h3>1. <strong>Service Class Responsibilities</strong></h3>
+<ul>
+<li><strong>Data Management</strong>: The service should provide methods to add, update, delete, and retrieve data entries from an in-memory list.</li>
+<li><strong>Serialization</strong>: It should have the ability to serialize the in-memory list of data entries into a JSON file.</li>
+<li><strong>Deserialization</strong>: It should be capable of deserializing the JSON file back into the in-memory list of data entries.</li>
+<li><strong>Data Integrity</strong>: Ensure data integrity through validation and error handling during CRUD operations and serialization/deserialization processes.</li>
+</ul>
+<h3>2. <strong>Adherence to MVVM</strong></h3>
+<ul>
+<li><strong>Separation of Concerns</strong>: The service class should be purely a 'Model' component in the MVVM architecture, with no direct dependencies on the View or ViewModel.</li>
+<li><strong>Dependency Injection</strong>: Inject the service into ViewModels, rather than having the ViewModel directly instantiate it. This enhances testability and decoupling.</li>
+</ul>
+<h3>3. <strong>Implementation Details</strong></h3>
+<ul>
+<li><strong>Generic Service</strong>: If your data entries share a common structure or interface, consider making your service class generic to increase reusability.</li>
+<li><strong>Asynchronous Operations</strong>: Implement asynchronous methods for IO operations (serialization/deserialization) to avoid blocking the UI thread.</li>
+<li><strong>Notification Mechanism</strong>: Use an event or messaging system (like <code>INotifyPropertyChanged</code> or a Mediator) to notify the ViewModel of changes in the data list due to background operations, if necessary.</li>
+</ul>
+<h3>4. <strong>Serialization/Deserialization</strong></h3>
+<ul>
+<li><strong>Json.NET or System.Text.Json</strong>: Use a robust JSON library like Json.NET (Newtonsoft.Json) or the built-in <code>System.Text.Json</code> for serialization tasks.</li>
+<li><strong>Custom Converters</strong>: Implement custom converters if you have complex types that require special handling during the serialization/deserialization process.</li>
+<li><strong>Error Handling</strong>: Add try-catch blocks around serialization/deserialization logic to handle potential errors gracefully.</li>
+</ul>
+<h3>5. <strong>Data Storage and Retrieval</strong></h3>
+<ul>
+<li><strong>File Handling</strong>: Ensure safe file handling practices, such as checking for file existence before deserialization and handling file access exceptions.</li>
+<li><strong>Data Encryption</strong>: If the data is sensitive, consider encrypting the JSON file to protect the data at rest.</li>
+</ul>
+<h3>6. <strong>Testing</strong></h3>
+<ul>
+<li><strong>Unit Testing</strong>: Write unit tests for your service class to test all functionalities independently of the UI and ViewModel.</li>
+<li><strong>Mocking</strong>: Use mocking frameworks to mock external dependencies like file IO operations during testing.</li>
+</ul>
+<h3>Example Structure</h3>
+<pre><code class="language-csharp">public interface IDataService&lt;T&gt;
+{
+    Task AddEntryAsync(T entry);
+    Task UpdateEntryAsync(T entry);
+    Task DeleteEntryAsync(T entry);
+    Task&lt;IEnumerable&lt;T&gt;&gt; GetAllEntriesAsync();
+    Task SerializeDataAsync();
+    Task DeserializeDataAsync();
+}
+
+public class DataService&lt;T&gt; : IDataService&lt;T&gt;
+{
+    private List&lt;T&gt; _entries;
+
+    public DataService()
+    {
+        _entries = new List&lt;T&gt;();
+    }
+
+    // Implement all interface methods here...
+}
+</code></pre>
+<h3>Integration with Avalonia UI and ViewModel</h3>
+<ul>
+<li>Inject <code>IDataService&lt;T&gt;</code> into your ViewModel and use it to manipulate data entries and handle serialization/deserialization.</li>
+<li>Bind ViewModel properties to your Avalonia UI controls and use commands for actions (like saving data), which internally use the service class.</li>
+</ul>
+<p>Following these guidelines will help you design a robust, maintainable, and testable service class for your Avalonia UI and MVVM application.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Injecting <code>IDataService&lt;T&gt;</code> into your ViewModel and binding the ViewModel to your Avalonia UI views involves a few key steps. Here's how you can approach it:</p>
+<h3>Dependency Injection for <code>IDataService&lt;T&gt;</code></h3>
+<p>Dependency injection (DI) in Avalonia applications typically involves using a DI container to manage dependencies. Avalonia doesn't enforce a specific DI container, so you can choose one that fits your needs, like Microsoft.Extensions.DependencyInjection, Autofac, or any other.</p>
+<ol>
+<li><strong>Set Up the DI Container</strong>:
+<ul>
+<li>In your application's entry point (<code>App.xaml.cs</code> or a similar location), set up the DI container. Here's an example using <code>Microsoft.Extensions.DependencyInjection</code>:</li>
+</ul>
+</li>
+</ol>
+<pre><code class="language-csharp">using Microsoft.Extensions.DependencyInjection;
+public class App : Application
+{
+    public IServiceProvider Container { get; private set; }
+
+    public override void Initialize()
+    {
+        var serviceCollection = new ServiceCollection();
+        ConfigureServices(serviceCollection);
+        Container = serviceCollection.BuildServiceProvider();
+
+        AvaloniaXamlLoader.Load(this);
+    }
+
+    private void ConfigureServices(IServiceCollection services)
+    {
+        // Register the IDataService&lt;T&gt; with its implementation
+        services.AddSingleton&lt;IDataService&lt;MyDataType&gt;, DataService&lt;MyDataType&gt;&gt;();
+        // Register ViewModels
+        services.AddTransient&lt;MyViewModel&gt;();
+    }
+}
+</code></pre>
+<ol start="2">
+<li><strong>Inject <code>IDataService&lt;T&gt;</code> into ViewModel</strong>:
+<ul>
+<li>Modify your ViewModel to accept <code>IDataService&lt;T&gt;</code> through its constructor. This allows the DI container to inject the dependency automatically.</li>
+</ul>
+</li>
+</ol>
+<pre><code class="language-csharp">public class MyViewModel : ViewModelBase
+{
+    private readonly IDataService&lt;MyDataType&gt; _dataService;
+
+    public MyViewModel(IDataService&lt;MyDataType&gt; dataService)
+    {
+        _dataService = dataService;
+    }
+
+    // ViewModel implementation...
+}
+</code></pre>
+<h3>Binding ViewModel to Avalonia UI</h3>
+<p>Avalonia uses data binding to connect UI elements to ViewModel properties and commands. Here's how you can bind a ViewModel to your view:</p>
+<ol>
+<li><strong>Set the DataContext</strong>:
+<ul>
+<li>In Avalonia, the <code>DataContext</code> property of a view determines the source of data bindings. Set the <code>DataContext</code> of your view to an instance of your ViewModel. This is often done in the code-behind of your view or through DI.</li>
+</ul>
+</li>
+</ol>
+<p>For example, in your view's code-behind (<code>MyView.xaml.cs</code>):</p>
+<pre><code class="language-csharp">public partial class MyView : UserControl
+{
+    public MyView()
+    {
+        InitializeComponent();
+        DataContext = new MyViewModel(new DataService&lt;MyDataType&gt;());
+        // Or resolve MyViewModel from the DI container if set up
+    }
+}
+</code></pre>
+<p>Or using DI to resolve <code>MyViewModel</code>:</p>
+<pre><code class="language-csharp">public partial class MyView : UserControl
+{
+    public MyView(MyViewModel viewModel)
+    {
+        InitializeComponent();
+        DataContext = viewModel;
+    }
+}
+</code></pre>
+<ol start="2">
+<li><strong>Use Data Bindings in XAML</strong>:
+<ul>
+<li>In your view's XAML (<code>MyView.xaml</code>), bind UI elements to properties and commands in the ViewModel using the <code>{Binding}</code> syntax.</li>
+</ul>
+</li>
+</ol>
+<pre><code class="language-xml">&lt;UserControl xmlns=&quot;https://github.com/avaloniaui&quot;
+             xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+             x:Class=&quot;YourNamespace.MyView&quot;&gt;
+    &lt;TextBox Text=&quot;{Binding SomeProperty}&quot; /&gt;
+    &lt;Button Command=&quot;{Binding SomeCommand}&quot; Content=&quot;Click Me&quot; /&gt;
+&lt;/UserControl&gt;
+</code></pre>
+<p>In this example, <code>SomeProperty</code> is a property in <code>MyViewModel</code> that you want to bind to the <code>TextBox</code>, and <code>SomeCommand</code> is an <code>ICommand</code> implementation in the ViewModel that you bind to the <code>Button</code>.</p>
+<p>By setting up your DI container correctly, injecting <code>IDataService&lt;T&gt;</code> into your ViewModel, and using data bindings, you can cleanly separate concerns between your UI (View), data handling logic (Model), and the intermediary (ViewModel) in your Avalonia application.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">実際にやってみないと分からないが、選択肢の一つをだいたい理解した。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="3225f720-0bd8-4802-90d5-11f70a2ca0eb" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">このタスクリストのログが yyGptBook のものに組み込まれるように設定</span>
+                    <a href="#3225f720-0bd8-4802-90d5-11f70a2ca0eb" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">いろいろと急ぐので、まず Avalonia UI の学習だけをしっかりとやる時間がない。あまり良くないが、yyGptBook を書くのと同時に Avalonia UI を学ぶ。それならログを統合してもよい。しかし、単一のタスクリストで両方をやるのはリスクがありそうだ。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">yyGptBook のあとはウェブ系の開発が続くため、Avalonia UI については、yyGptBook が動く程度にサラッと学ぶ考えだった。</p>
+                            <p class="note_contents">しかし、良くできている。設計が考え抜かれている。WPF で気になっていたことそれぞれに、ほどほどに論理的な答えや迂回路が用意されている。もう WPF に戻ることはできないかもしれないくらいだ。</p>
+                            <p class="note_contents">となると、.NET MAUI が Avalonia UI を圧倒的に上回るまで後者を使ってしまう可能性がある。</p>
+                            <p class="note_contents">業務用のツールも Avalonia UI で書く可能性が見えてきたため、その学習もまた一つのプロジェクトとして長期的にきちんと取り組むに値する。</p>
+                            <p class="note_contents">そのことから、タスクリストの統合をやめておく。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="aefe7f63-8c78-4875-8986-0da2797aef22" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://docs.avaloniaui.net/docs/guides/data-binding/inotifypropertychanged" target="_blank" class="url">https://docs.avaloniaui.net/docs/guides/data-binding/inotifypropertychanged</a> をチェック</span>
+                    <a href="#aefe7f63-8c78-4875-8986-0da2797aef22" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="ba7ba098-e948-4667-bdf5-5268fecacff4" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://docs.avaloniaui.net/docs/basics/user-interface/styling/control-themes" target="_blank" class="url">https://docs.avaloniaui.net/docs/basics/user-interface/styling/control-themes</a> をチェック</span>
+                    <a href="#ba7ba098-e948-4667-bdf5-5268fecacff4" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="4ba25e17-fafa-47a8-9dc9-43195737e316" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://github.com/AvaloniaUI/Avalonia.Samples/tree/main/src/Avalonia.Samples/MVVM/ValidationSample" target="_blank" class="url">https://github.com/AvaloniaUI/Avalonia.Samples/tree/main/src/Avalonia.Samples/MVVM/ValidationSample</a> をチェック</span>
+                    <a href="#4ba25e17-fafa-47a8-9dc9-43195737e316" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="765824af-df8f-4020-bf4a-588e39d68ff6" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://docs.avaloniaui.net/docs/guides/development-guides/data-validation" target="_blank" class="url">https://docs.avaloniaui.net/docs/guides/development-guides/data-validation</a> をチェック</span>
+                    <a href="#765824af-df8f-4020-bf4a-588e39d68ff6" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ChatGPT にサンプルコードをもっと出してもらおうとしたところ、ビルトインの機能はないと言われた。ググるように言えば、しれっと修正してきた。</p>
+                            <p class="note_contents"><a href="https://github.com/AvaloniaUI/Avalonia/releases" target="_blank" class="url">https://github.com/AvaloniaUI/Avalonia/releases</a></p>
+                            <p class="note_contents">このページによると、11.0.0 のリリース日は Jul 5, 2023 のようだ。最新版は意外と新しい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="6fc077d1-4e74-487f-aa3a-9f9d8a53689d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://docs.avaloniaui.net/docs/basics/user-interface/file-dialogs" target="_blank" class="url">https://docs.avaloniaui.net/docs/basics/user-interface/file-dialogs</a> をチェック</span>
+                    <a href="#6fc077d1-4e74-487f-aa3a-9f9d8a53689d" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="e4527f8d-6495-476a-a51b-eb8932096095" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://docs.avaloniaui.net/docs/tutorials/todo-list-app/wiring-up-the-views" target="_blank" class="url">https://docs.avaloniaui.net/docs/tutorials/todo-list-app/wiring-up-the-views</a> をチェック</span>
+                    <a href="#e4527f8d-6495-476a-a51b-eb8932096095" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="dc4eb885-0c24-48a3-866a-e429c59f24f1" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://docs.avaloniaui.net/docs/basics/data/data-binding/compiled-bindings" target="_blank" class="url">https://docs.avaloniaui.net/docs/basics/data/data-binding/compiled-bindings</a> をチェック</span>
+                    <a href="#dc4eb885-0c24-48a3-866a-e429c59f24f1" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="a396f285-0495-4002-80f5-4787f5fe3f13" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://www.codeproject.com/Articles/1161127/Why-is-reflection-slow" target="_blank" class="url">https://www.codeproject.com/Articles/1161127/Why-is-reflection-slow</a> をチェック</span>
+                    <a href="#a396f285-0495-4002-80f5-4787f5fe3f13" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="f56f0137-013c-4f7c-8817-25304fce1425" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">AvaloniaUseCompiledBindingsByDefault について復習</span>
+                    <a href="#f56f0137-013c-4f7c-8817-25304fce1425" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">先ほどチラッと読んだ。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="0f872a9e-534b-4a03-a843-fe1155adcea4" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">BuiltInComInteropSupport について調べる</span>
+                    <a href="#0f872a9e-534b-4a03-a843-fe1155adcea4" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Avalonia UI, a cross-platform framework for building desktop applications, seems to have some limitations and considerations regarding COM interop support, especially when working with .NET Native Ahead-of-Time (AOT) compilation and trimming. From a GitHub issue, it appears that an Avalonia project was built with NativeAOT and faced exceptions related to COM interop not being supported. The project file included a setting for <code>BuiltInComInteropSupport</code> set to <code>true</code>, indicating an attempt to use built-in COM interop support, which might have contributed to the issue【10†source】.</p>
+<p>Additionally, Avalonia developers have encountered trim warnings related to COM interop and other functionalities when publishing applications with trimming enabled. For instance, using <code>BuiltInComInteropSupport</code> and enabling trimming could lead to warnings about potential breaks in functionality due to the trimming process possibly removing required code for COM interop【11†source】.</p>
+<p>Avalonia's documentation and API reference, however, do not provide extensive details on <code>BuiltInComInteropSupport</code> specifically within the context of Avalonia UI. The available documentation mainly focuses on the broader aspects of Avalonia's interop capabilities, such as the <code>Avalonia.Platform.Interop</code> namespace, which includes types for working with dynamic libraries rather than COM interop specifically【12†source】.</p>
+<p>Given these considerations, if you're working on an Avalonia project that requires COM interop, it might be beneficial to explore alternative approaches for interop or consult the Avalonia community for guidance on best practices, especially when using features like AOT compilation or application trimming that can affect COM interop functionality.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">自分でググって得た認識と近い。</p>
+                            <p class="note_contents">マルチプラットフォームのライブラリーなので、ネイティブの何かを使うこともあるのだろう。デフォルトで true だ。false にする理由がないため、そのまま。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="1e1a45f9-59de-4332-b426-b748bf4d484d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Avalonia UI をつくった会社について調べる</span>
+                    <a href="#1e1a45f9-59de-4332-b426-b748bf4d484d" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Based on a <a href="https://chat.openai.com/backend-api/bing/redirect?query=Avalonia%20UI%20creator">quick search</a>, here's what I discovered.</p>
+<p>Avalonia UI is a cross-platform UI framework that was originally developed by Steven Kirk. The project, initially known as Perspex, made its first commit on December 5, 2013. It was designed with the goal of creating a cross-platform UI framework inspired by the Windows Presentation Foundation (WPF). The framework supports development in various .NET languages, including C#, for multiple operating systems like Windows, Linux, macOS, iOS, and Android. Avalonia UI has since become a part of the .NET Foundation, and it is distributed under the MIT license, making it free and open-source【7†source】.</p>
+<p>Furthermore, a company called AvaloniaUI OÜ was established in 2019 to provide support, development services, and products for Avalonia UI, addressing the growing demand for enterprise-level services. This company was founded by the creators and maintainers of the Avalonia UI project【8†source】. For more detailed information, you can visit the official <a href="https://github.com/AvaloniaUI/Avalonia">Avalonia UI GitHub page</a>【6†source】.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Steven Kirk is the original developer of Avalonia, a project he started with the aim of creating a cross-platform UI framework inspired by the Windows Presentation Foundation (WPF). The initial commit for Avalonia, initially named Perspex, was made by Kirk on December 5, 2013. The project has since evolved to support a wide range of platforms, including Windows, Linux, macOS, iOS, Android, and WebAssembly, using .NET languages like C#【14†source】.</p>
+<p>Kirk's vision for Avalonia was to address some of the limitations and dated aspects of WPF's architecture, making it more suited for modern cross-platform development. The project gained momentum with the release of .NET Core, as there was a demand for a UI framework that could work across different operating systems. Avalonia became particularly appealing to developers and enterprises looking for a more open and flexible solution than what was available through traditional Microsoft offerings like UWP, which was limited in scope and did not support .NET Core【15†source】.</p>
+<p>In addition to leading the technical development of Avalonia, Kirk, along with Nikita Tsukanov and Dan Walmsley, founded AvaloniaUI OÜ, a company set up to provide commercial support and fund further development of Avalonia. This move was in response to the growing interest and adoption of Avalonia in the developer community, despite the lack of official support from Microsoft【15†source】.</p>
+<p>Avalonia has also spurred the creation of Avalonia XPF, a separate project aimed at offering enterprises the ability to port their existing WPF applications to other platforms like macOS and Linux, maintaining API compatibility through a fork of Microsoft's open-source WPF. This initiative reflects the demand for Avalonia and its potential to keep organizations within the .NET ecosystem by providing a viable path for cross-platform application development【16†source】.</p>
+<p>For more detailed insights into Steven Kirk's contributions and the evolution of Avalonia, you can explore further through the sources provided.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>I did a <a href="https://chat.openai.com/backend-api/bing/redirect?query=AvaloniaUI%20O%C3%9C%20company%20information">quick search</a> for more information and here's what I found.</p>
+<p>AvaloniaUI OÜ is a company registered in Estonia on November 1, 2019, and it's actively operating. The company reported net sales of 349,254 euros in 2022, which was an increase from the previous year. However, its profit margin of 30.49% in 2022 marked a decrease compared to 2021. AvaloniaUI OÜ engages in other information service activities not elsewhere classified【23†source】.</p>
+<p>The company has not published any business news about itself, but it has garnered attention with 375 visits to its Business Media profile. Despite the interest, there are no user comments or ratings provided, and the company's activities are monitored by users of the Storybook platform【24†source】.</p>
+<p>For further details, you can visit their profiles on <a href="https://creditreports.ee/avaloniaui-ou">Dun &amp; Bradstreet</a> and <a href="https://www.inforegister.ee/en/14839404-AVALONIAUI-OU">Inforegister.ee</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d590ee77-94db-47a8-bff1-8d0910f3b675" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Avalonia UI の競合製品について調べる</span>
+                    <a href="#d590ee77-94db-47a8-bff1-8d0910f3b675" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Avalonia UI is a cross-platform framework designed for creating desktop applications with .NET. It competes with several other frameworks in the .NET ecosystem and beyond. Some of its competitors include:</p>
+<ol>
+<li><p><strong>Windows Presentation Foundation (WPF)</strong>: A .NET framework for building desktop applications on Windows. WPF is known for its rich UI capabilities and extensive control library but is limited to Windows.</p>
+</li>
+<li><p><strong>Universal Windows Platform (UWP)</strong>: A platform for building applications that can run across many Windows devices, including PCs, tablets, smartphones, and more. UWP supports a wide range of Windows-specific features but is limited to Windows 10 devices.</p>
+</li>
+<li><p><strong>Uno Platform</strong>: A framework that enables the creation of single-source applications for Windows, WebAssembly, iOS, Android, macOS, and Linux. Uno Platform uses a UWP-based approach for its UI definitions, making it a direct competitor for cross-platform development.</p>
+</li>
+<li><p><strong>Xamarin.Forms</strong>: A UI toolkit that allows developers to create native user interfaces for iOS, Android, and Windows with a single, shared C# codebase. Xamarin.Forms is particularly strong in the mobile app development space but also supports desktop platforms.</p>
+</li>
+<li><p><strong>MAUI (.NET Multi-platform App UI)</strong>: The evolution of Xamarin.Forms, MAUI, is a cross-platform framework introduced by Microsoft to create applications for Android, iOS, macOS, and Windows with a single codebase. It represents the next generation of Xamarin.Forms and aims to improve and streamline the development of cross-platform applications with .NET.</p>
+</li>
+<li><p><strong>Qt</strong>: A widely-used cross-platform framework for developing applications with C++. Qt is not limited to .NET but is a competitor due to its capability to create applications for various platforms, including Linux, Windows, macOS, and embedded systems.</p>
+</li>
+<li><p><strong>Electron</strong>: A framework for creating native applications with web technologies like JavaScript, HTML, and CSS. Electron is often used for developing cross-platform desktop applications and competes with Avalonia UI in this space.</p>
+</li>
+<li><p><strong>Flutter</strong>: Originally known for mobile app development, Flutter has expanded to support web and desktop applications, making it a competitor for cross-platform UI frameworks like Avalonia UI.</p>
+</li>
+</ol>
+<p>Each of these frameworks has its strengths and weaknesses, and the choice between them often depends on the specific requirements of the project, such as the target platforms, performance needs, and the preferred programming language.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="f07c9668-61e9-43a3-8aaf-7894a556e7ba" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">デスクトップ版とモバイル版のつくり分けのベストプラクティスについて調べる</span>
+                    <a href="#f07c9668-61e9-43a3-8aaf-7894a556e7ba" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">たとえば Visual Studio は逆立ちしてもモバイル版になりえない。中央にエディターがあり、左右の細枠にアイコンとしてパネルが格納されていて……といったことはギリギリ可能かもしれないが、全く実用的でない。GitHub のモバイルアプリもそうで、なぜ出したか不思議なくらい使いにくい。</p>
+                            <p class="note_contents">それでも、幅広のデスクトップアプリのモバイル版を用意するにおける落としどころのようなものはあるはず。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When designing mobile apps from existing desktop apps, the primary challenge is adapting to the smaller screen size and touch-based interaction of mobile devices. Here are some general guidelines to consider for this process:</p>
+<ol>
+<li><p><strong>Simplify the User Interface</strong>: Mobile screens have limited real estate compared to desktops. It's important to simplify the interface by removing non-essential elements and focusing on the core functionalities that users need most often.</p>
+</li>
+<li><p><strong>Adopt a Responsive Design</strong>: Ensure that your app's design adapts well to different screen sizes and orientations. This might involve using flexible layouts, scalable elements, and media queries to provide an optimal viewing experience across a range of devices.</p>
+</li>
+<li><p><strong>Optimize Navigation</strong>: Desktop apps can afford complex navigation menus, but on mobile, it's essential to streamline navigation. Consider using a bottom navigation bar for key functions, a hamburger menu for secondary options, or tabs to separate content sections.</p>
+</li>
+<li><p><strong>Prioritize Content</strong>: Due to the smaller screen size, it's crucial to prioritize content and functionalities that are most important to your users. This might involve rethinking the layout and presentation of information to ensure that key features are easily accessible.</p>
+</li>
+<li><p><strong>Touch-friendly Interfaces</strong>: Design controls and buttons with touch interaction in mind. This means making them large enough to be easily tapped without errors and placing them in reachable areas of the screen, considering thumb reach.</p>
+</li>
+<li><p><strong>Optimize Forms and Inputs</strong>: Forms can be particularly challenging on mobile. Minimize the number of fields, use the correct keyboard types for different inputs (e.g., numeric for phone numbers), and consider using input masks and pickers (for dates, times, etc.) to simplify data entry.</p>
+</li>
+<li><p><strong>Performance and Load Times</strong>: Mobile devices may have less powerful hardware and slower internet connections than desktops. Optimize your app for performance by reducing the size of assets, optimizing images, and ensuring efficient data usage.</p>
+</li>
+<li><p><strong>Test on Real Devices</strong>: Emulators can only provide an approximation of the mobile experience. Test your app on actual devices to understand how it performs in real-world conditions, including different screen sizes, resolutions, and operating systems.</p>
+</li>
+<li><p><strong>Consider Mobile-Specific Features</strong>: Take advantage of mobile-specific functionalities like GPS, accelerometers, cameras, and push notifications to enhance the user experience in ways that might not have been possible or relevant on the desktop version.</p>
+</li>
+<li><p><strong>Follow Platform Guidelines</strong>: Both Android and iOS have their design guidelines (Material Design for Android and Human Interface Guidelines for iOS). Following these guidelines helps ensure that your app feels at home on the platform and leverages common design patterns that users are familiar with.</p>
+</li>
+</ol>
+<p>Adapting a desktop app to mobile is not just about shrinking down the interface; it's about rethinking the user experience to fit the context, capabilities, and constraints of mobile devices. It may also involve prioritizing certain features over others or even reimagining functionalities to better suit mobile usage patterns.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">チェックリストのようなものはないか聞いた。</p>
+                            <div class="note_ai_generated">
+<p>While there isn't a one-size-fits-all checklist due to the diversity in apps and their specific requirements, there is a generalized checklist that can guide the process of adapting a desktop app for mobile platforms. This checklist can help ensure that key considerations are addressed during the design and development process:</p>
+<h3>Mobile App Adaptation Checklist</h3>
+<h4>Design and User Experience</h4>
+<ul>
+<li>[ ] <strong>Simplify the UI</strong>: Reduce clutter by focusing on essential elements.</li>
+<li>[ ] <strong>Prioritize Content</strong>: Highlight key features and functionalities.</li>
+<li>[ ] <strong>Responsive Design</strong>: Ensure the app looks good on various screen sizes and orientations.</li>
+<li>[ ] <strong>Touch-friendly Controls</strong>: Design larger, easily tappable buttons and interactive elements.</li>
+<li>[ ] <strong>Streamlined Navigation</strong>: Implement a mobile-friendly navigation system (e.g., bottom navigation bar, swipe gestures).</li>
+<li>[ ] <strong>Accessibility</strong>: Ensure text sizes are readable, and the app is navigable for users with disabilities.</li>
+</ul>
+<h4>Technical Considerations</h4>
+<ul>
+<li>[ ] <strong>Performance Optimization</strong>: Minimize load times and ensure smooth performance on various devices.</li>
+<li>[ ] <strong>Offline Functionality</strong>: Consider what features can be made available offline.</li>
+<li>[ ] <strong>Data Usage</strong>: Optimize data consumption for users with limited data plans.</li>
+<li>[ ] <strong>Battery Usage</strong>: Optimize app to prevent excessive battery drain.</li>
+</ul>
+<h4>User Interaction</h4>
+<ul>
+<li>[ ] <strong>Form Optimization</strong>: Simplify forms, use appropriate keyboard types, and implement field validation.</li>
+<li>[ ] <strong>Feedback Mechanisms</strong>: Provide visual or haptic feedback for user interactions.</li>
+<li>[ ] <strong>Error Handling</strong>: Design user-friendly error messages and recovery options.</li>
+</ul>
+<h4>Platform-Specific Guidelines</h4>
+<ul>
+<li>[ ] <strong>Follow iOS/Android Design Guidelines</strong>: Adhere to Human Interface Guidelines for iOS and Material Design for Android to ensure a native feel.</li>
+<li>[ ] <strong>Leverage Platform Features</strong>: Integrate with platform-specific features like cameras, GPS, and push notifications where applicable.</li>
+</ul>
+<h4>Testing and Validation</h4>
+<ul>
+<li>[ ] <strong>Device Testing</strong>: Test the app on a wide range of devices and screen sizes.</li>
+<li>[ ] <strong>User Testing</strong>: Conduct usability tests with real users to gather feedback on the app's design and functionality.</li>
+<li>[ ] <strong>Performance Testing</strong>: Test the app's performance, including loading times and responsiveness.</li>
+</ul>
+<h4>Security and Privacy</h4>
+<ul>
+<li>[ ] <strong>Data Protection</strong>: Implement strong data encryption and secure data storage.</li>
+<li>[ ] <strong>Privacy Compliance</strong>: Ensure the app complies with privacy laws and regulations (e.g., GDPR, CCPA).</li>
+<li>[ ] <strong>Permission Requests</strong>: Request permissions in a user-friendly manner, clearly explaining why each permission is needed.</li>
+</ul>
+<p>This checklist serves as a starting point. Depending on the specific app and target audience, additional items may need to be considered. The key is to focus on delivering a seamless, intuitive, and efficient user experience tailored to the mobile environment.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">デスクトップ版が便利なアプリだからといって、モバイル版も出してそれが必ず便利になる保証はない。場合によっては機能を制限したり、モバイル版だけの機能を追加したりして、できるだけ別物として根本から最適化していくのが当たり前の答えのようだ。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="734dbd49-a78c-4434-8721-24db4113736b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Greeting プロパティーで CA1822 の警告がオフにされている理由を調べる</span>
+                    <a href="#734dbd49-a78c-4434-8721-24db4113736b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">&quot;Welcome to Avalonia!&quot; を返すもの。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">完璧に答えられると、やっぱり中にオッサンが入っているのでないかとビビる。</p>
+                            <div class="note_ai_generated">
+<p>In Avalonia UI, as with many UI frameworks that follow the MVVM (Model-View-ViewModel) pattern, properties in a ViewModel that are bound to UI elements should not be static because they are meant to represent the state specific to an instance of the ViewModel. Each instance of a ViewModel is associated with a view, and the properties within the ViewModel reflect the state of that specific view. Making a property static would mean that its value is shared across all instances of the ViewModel class, which is typically not desired in the context of UI development where each view might need to maintain its own state.</p>
+<p>For example, if you have a <code>MainWindowViewModel</code> with a property <code>Title</code> that is bound to a TextBlock in your MainWindow, making <code>Title</code> static would mean that every instance of <code>MainWindowViewModel</code> (and consequently every MainWindow, if you were to create multiple windows) would share the same <code>Title</code>. This would lead to undesirable behavior where changing the title in one window would change it across all windows.</p>
+<p>The CA1822 warning, which suggests making members static if they do not access instance data, is disabled in this context because it doesn't account for the binding requirements of properties in a ViewModel. The properties need to be instance members so that they can be bound to and reflect the state of their corresponding view instances. Even if a property does not access any other instance data, it still represents part of the state of the view and should therefore be an instance property.</p>
+<p>In summary, properties in a ViewModel should not be marked as static because they are designed to represent and manage the state of a specific view instance in an MVVM application. Disabling the CA1822 warning in this context is a common practice to accommodate the design requirements of the MVVM pattern.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">view model がどこかでインスタンス化されるから Greeting もまた static であってはいけないのは分かるが、なぜコンパイラーが警告を出すのかを深く考えていなかった。単に、「返すものがリテラルなら static でいいでしょう」ということ。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="a8916450-d53b-4651-b56e-c2f88e43c163" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ReactiveUI が具体的に何をやっているのか調べる</span>
+                    <a href="#a8916450-d53b-4651-b56e-c2f88e43c163" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Avalonia UI and ReactiveUI are two different but complementary frameworks often used together in .NET application development. Here's why Avalonia UI might need or benefit from ReactiveUI:</p>
+<ol>
+<li><p><strong>MVVM Architecture</strong>: Avalonia UI is a cross-platform UI framework similar to WPF, designed for creating UIs that can run on multiple operating systems. It supports the Model-View-ViewModel (MVVM) architecture, which separates the business logic from the UI, making the code more maintainable and testable. ReactiveUI is an advanced MVVM framework that provides powerful features for building responsive and dynamic UIs. By using ReactiveUI with Avalonia, developers can leverage these features to enhance the MVVM implementation.</p>
+</li>
+<li><p><strong>Reactive Programming Model</strong>: ReactiveUI is based on the Reactive Extensions (Rx) library, which enables a functional reactive programming model. This model allows developers to work with asynchronous data streams and complex event handling more efficiently. Integrating ReactiveUI with Avalonia UI allows developers to handle UI events, asynchronous operations, and data bindings in a more declarative and concise way, leading to cleaner and more maintainable code.</p>
+</li>
+<li><p><strong>Data Bindings and Observables</strong>: ReactiveUI enhances the data binding capabilities of Avalonia by introducing observables. Observables make it easier to manage data flows and state changes within the application, ensuring that the UI stays in sync with the underlying data models. This is particularly useful for dynamic and data-intensive applications, where the UI needs to react to frequent data changes.</p>
+</li>
+<li><p><strong>Advanced Features</strong>: ReactiveUI comes with a set of advanced features such as commands, schedulers, and reactive properties that are not inherently part of Avalonia UI. These features provide additional tools for developers to handle complex scenarios, such as executing commands based on user interactions, scheduling tasks, and creating properties that automatically notify the UI of changes.</p>
+</li>
+<li><p><strong>Community and Ecosystem</strong>: By adopting ReactiveUI along with Avalonia, developers gain access to a broader community and ecosystem of libraries, tools, and best practices. This can accelerate development, provide more resources for solving complex problems, and improve the overall quality of the application.</p>
+</li>
+</ol>
+<p>In summary, while Avalonia UI provides a robust framework for building cross-platform UIs, integrating ReactiveUI can significantly enhance its capabilities by introducing a reactive programming model, improving data bindings, and providing advanced features that facilitate the development of responsive and dynamic applications.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">とてもよく分かる。</p>
+                            <div class="note_ai_generated">
+<p>Certainly! Let's create a simple example to illustrate the differences between using ReactiveUI with Avalonia UI and using Avalonia UI on its own. We'll make a small application with a button and a label. Clicking the button will update the label with the current time. This will help you see how the code structure changes with and without ReactiveUI.</p>
+<h3>Using Avalonia UI with ReactiveUI</h3>
+<p>First, let's see how this is done with ReactiveUI integrated. We will use ReactiveCommand from ReactiveUI to handle the button click and a ReactiveObject as the ViewModel to notify the view of property changes.</p>
+<p><strong>ViewModel.cs:</strong></p>
+<pre><code class="language-csharp">using ReactiveUI;
+using System;
+using System.Reactive;
+
+public class ViewModel : ReactiveObject
+{
+    private string _currentTime;
+    public string CurrentTime
+    {
+        get =&gt; _currentTime;
+        set =&gt; this.RaiseAndSetIfChanged(ref _currentTime, value);
+    }
+
+    public ReactiveCommand&lt;Unit, Unit&gt; UpdateTimeCommand { get; }
+
+    public ViewModel()
+    {
+        UpdateTimeCommand = ReactiveCommand.Create(UpdateTime);
+        CurrentTime = &quot;Press the button&quot;;
+    }
+
+    private void UpdateTime()
+    {
+        CurrentTime = DateTime.Now.ToString(&quot;T&quot;);
+    }
+}
+</code></pre>
+<p><strong>MainWindow.axaml:</strong></p>
+<pre><code class="language-xml">&lt;Window xmlns=&quot;https://github.com/avaloniaui&quot;
+        xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+        xmlns:d=&quot;http://schemas.microsoft.com/expression/blend/2008&quot;
+        xmlns:mc=&quot;http://schemas.openxmlformats.org/markup-compatibility/2006&quot;
+        xmlns:vm=&quot;clr-namespace:YourNamespace&quot;
+        mc:Ignorable=&quot;d&quot;
+        x:Class=&quot;YourNamespace.MainWindow&quot;
+        Title=&quot;ReactiveUI Example&quot;&gt;
+    &lt;Window.DataContext&gt;
+        &lt;vm:ViewModel/&gt;
+    &lt;/Window.DataContext&gt;
+    &lt;StackPanel Margin=&quot;20&quot;&gt;
+        &lt;Button Command=&quot;{Binding UpdateTimeCommand}&quot; Content=&quot;Update Time&quot;/&gt;
+        &lt;TextBlock Text=&quot;{Binding CurrentTime}&quot; Margin=&quot;0,10&quot;/&gt;
+    &lt;/StackPanel&gt;
+&lt;/Window&gt;
+</code></pre>
+<h3>Using Avalonia UI without ReactiveUI</h3>
+<p>Now, let's implement a similar functionality without using ReactiveUI. We'll manually implement INotifyPropertyChanged in the ViewModel and use event handlers for button clicks.</p>
+<p><strong>ViewModel.cs:</strong></p>
+<pre><code class="language-csharp">using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+public class ViewModel : INotifyPropertyChanged
+{
+    private string _currentTime;
+    public string CurrentTime
+    {
+        get =&gt; _currentTime;
+        set
+        {
+            _currentTime = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    public void UpdateTime()
+    {
+        CurrentTime = DateTime.Now.ToString(&quot;T&quot;);
+    }
+
+    public ViewModel()
+    {
+        CurrentTime = &quot;Press the button&quot;;
+    }
+}
+</code></pre>
+<p><strong>MainWindow.axaml:</strong></p>
+<pre><code class="language-xml">&lt;Window xmlns=&quot;https://github.com/avaloniaui&quot;
+        xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+        xmlns:d=&quot;http://schemas.microsoft.com/expression/blend/2008&quot;
+        xmlns:mc=&quot;http://schemas.openxmlformats.org/markup-compatibility/2006&quot;
+        xmlns:vm=&quot;clr-namespace:YourNamespace&quot;
+        mc:Ignorable=&quot;d&quot;
+        x:Class=&quot;YourNamespace.MainWindow&quot;
+        Title=&quot;Avalonia Example&quot;&gt;
+    &lt;Window.DataContext&gt;
+        &lt;vm:ViewModel/&gt;
+    &lt;/Window.DataContext&gt;
+    &lt;StackPanel Margin=&quot;20&quot;&gt;
+        &lt;Button Content=&quot;Update Time&quot; Click=&quot;Button_OnClick&quot;/&gt;
+        &lt;TextBlock Text=&quot;{Binding CurrentTime}&quot; Margin=&quot;0,10&quot;/&gt;
+    &lt;/StackPanel&gt;
+&lt;/Window&gt;
+</code></pre>
+<p><strong>MainWindow.axaml.cs:</strong></p>
+<pre><code class="language-csharp">public partial class MainWindow : Window
+{
+    public MainWindow()
+    {
+        InitializeComponent();
+    }
+
+    private void Button_OnClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        var viewModel = DataContext as ViewModel;
+        viewModel?.UpdateTime();
+    }
+}
+</code></pre>
+<h3>Differences</h3>
+<ul>
+<li><strong>ReactiveUI version</strong> uses <code>ReactiveCommand</code> and <code>ReactiveObject</code> to handle actions and property changes. This approach provides a more declarative way of binding commands and reacting to property changes.</li>
+<li><strong>Non-ReactiveUI version</strong> relies on the traditional <code>INotifyPropertyChanged</code> interface and event handlers for UI interactions. This approach is more imperative and requires more boilerplate code for property change notifications and event handling.</li>
+</ul>
+<p>Both approaches are valid in Avalonia UI, but using ReactiveUI can lead to more concise and maintainable code, especially for larger applications with complex interactions.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">MVC が流行りだした頃に ASP.NET でやってみては、おまじない的なコピペのコードが多すぎて自分に向かないと思った。</p>
+                            <p class="note_contents">その後、MVVM が出てきては、「mode と view に view model だなんて、もうちょっと命名を」というのと、「どうしても view model でないといけないくらい、その言葉通りで理解しやすく役に立つものがデザインパターンとして定着してきたのだろう」というのを考えた。</p>
+                            <p class="note_contents">WPF はバインディングなしでも動くが、それだとコントロールのプロパティーから値を取ったり入れたりのコードがグチャグチャになる。といっても、とても小さなツールならそれで全く困らない。</p>
+                            <p class="note_contents">しかし、ListBox があって、ボタンも10個くらいあって、ウィンドウも複数あって……くらいの、まだまだ小さいうちのツールでも、コントロールのプロパティーにアクセスする実装では管理性が著しく落ちてくる。</p>
+                            <p class="note_contents">それが嫌で、「その処理に必要なコントロールやデータを渡せば、そちらでロジックをやってくれるメソッド」を作るようになり、ウィンドウのコードビハインドは多少きれいになった。</p>
+                            <p class="note_contents">しかし、バインディングの活用は、ListBox など、DataTemplate で内容を表示せざるを得ないところに限られていた。Button や TextBox などにまで個別にバインディング先を用意し、そちらを操作するのは、多くの場合にただの糖衣構文だからだ。</p>
+                            <p class="note_contents">ただ、こうして ReactiveUI について知ってから当時のコードを思い出すと、自分がバインディングの使用を最小限にしていたのは、「結局、コードビハインドでイベントドリブンな実装をゴリゴリやっているじゃないか」という違和感があったからだろう。</p>
+                            <p class="note_contents">イベントドリブンをなくせるのでないとバインディングの有用性は大きく落ちる。</p>
+                            <p class="note_contents">といっても、Button に Command プロパティーを設定するのでも「それが押されたときのコード」をどこかにまとめる以上は、結局はイベントドリブンだ。ただ、それをコードビハインドに書かず、view model の方に書くなら、view model でしか書けない書き方が強いられることで UI とロジックの癒着が自然と回避される。</p>
+                            <p class="note_contents">要は、セルフ縛りプレイだ。コードをもっと短く早く書くための仕組みでなく、むしろ逆だ。GitHub Copilot がだいぶ助けてくれるだろうが、コントロールのプロパティーへの直接アクセスと比べ、機械作業的に定義するものが爆増し、コードの量が増えるのは間違いない。それでも、そういうことが自らに自然と強いられる仕組みで実装していれば、派生開発で困らないのだろう。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ebc0f561-84e6-42d7-9c4b-8b58a8fe8666" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">&lt;vm:MainWindowViewModel /&gt; の必要性について調べる</span>
+                    <a href="#ebc0f561-84e6-42d7-9c4b-8b58a8fe8666" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In Avalonia UI, the <code>Design.DataContext</code> property is used to provide a data context for design-time data binding in XAML files. This is particularly useful when working with design tools that can preview your UI as you develop it, allowing you to see how your UI will look with data bound controls without needing to run the application.</p>
+<p>However, the <code>Design.DataContext</code> property is only relevant at design-time and has no effect at runtime. Therefore, it can be safely removed from your production code if you prefer to clean up or if you're concerned about the clarity and maintainability of your XAML files. Removing it will not impact the functionality of your application at runtime.</p>
+<p>Before you decide to remove <code>Design.DataContext</code>, consider if you or your team frequently use design-time data for UI development and debugging. If it's an integral part of your development workflow, you might want to keep it for ease of use during the development process. Otherwise, if it's not being used or you prefer not to have design-time data in your production XAML files, it's safe to remove it.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Preserving the <code>Design.DataContext</code> in your production code will not affect the runtime behavior or performance of your Avalonia UI application. The <code>Design.DataContext</code> is specifically recognized and used by design tools and is ignored at runtime. Its primary purpose is to enhance the design-time experience by providing a way to bind design-time data, which can be very helpful for visualizing how controls will appear and behave with actual data.</p>
+<p>However, there are a few considerations to keep in mind if you choose to preserve it:</p>
+<ol>
+<li><p><strong>Clarity and Maintainability</strong>: Keeping design-time properties in your production XAML files could potentially clutter your code, making it slightly more challenging to read and maintain, especially for someone unfamiliar with Avalonia UI or the specific purpose of <code>Design.DataContext</code>.</p>
+</li>
+<li><p><strong>Consistency</strong>: If you decide to use design-time data bindings in some parts of your application, consider maintaining consistency across your project to avoid confusion among team members or when returning to the project after some time.</p>
+</li>
+<li><p><strong>Version Control and Collaboration</strong>: In collaborative environments, additional properties like <code>Design.DataContext</code> might lead to minor merge conflicts or discrepancies in version control systems. It's generally manageable but something to be aware of.</p>
+</li>
+</ol>
+<p>Overall, leaving <code>Design.DataContext</code> in your production code is perfectly fine from a technical standpoint and won't impact the functionality or performance of your application. The decision to keep or remove it should be based on your development workflow preferences, code readability standards, and team practices.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">This only sets the DataContext for the previewer in an IDE, to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs)</p>
+                            <p class="note_contents">上記のコメントがついているが、リリース時に残してよいのか分からなかった。デザインツールだけが見る要素とのことで、特に消す理由はない。もしバイナリーに入ったとして、何らかの方法でそこにアクセスされたとしても、そこから漏洩する情報はない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="aeee4bf0-af62-415e-a409-fb404ca42161" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">コードビハインドにはコンストラクターだけが入っているのが理想的なのか調べる</span>
+                    <a href="#aeee4bf0-af62-415e-a409-fb404ca42161" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In the context of Avalonia UI, which is a cross-platform framework for building desktop applications, striving for minimal code in the code-behind of windows, including primarily constructors, aligns with the Model-View-ViewModel (MVVM) design pattern. This pattern encourages separation of concerns, making your application more modular, easier to test, maintain, and evolve.</p>
+<p>The ideal scenario you described—having code-behind files with minimal code, mainly constructors—is a goal when using MVVM. In MVVM, the View (your UI components, like windows in Avalonia) should be as dumb as possible, meaning they only handle displaying the UI and user interaction without containing business logic or direct data manipulation.</p>
+<p>Here's why minimizing code in the code-behind is often seen as ideal:</p>
+<ol>
+<li><p><strong>Separation of Concerns:</strong> Keeping the UI code separate from business logic and data handling makes the code cleaner and more manageable. It allows developers to work on the UI and business logic independently.</p>
+</li>
+<li><p><strong>Testability:</strong> Business logic and application data are contained within ViewModels and Models, which are easier to unit test without the need for a UI. This improves the overall testability of your application.</p>
+</li>
+<li><p><strong>Reusability:</strong> By decoupling the UI from its logic, you can more easily reuse Views or ViewModels across different parts of your application or even in different applications.</p>
+</li>
+<li><p><strong>Maintainability:</strong> Changes to the UI layout or style won't affect the business logic, and vice versa, making the application easier to maintain and evolve over time.</p>
+</li>
+<li><p><strong>Data Binding and Commands:</strong> Avalonia, like WPF, supports data binding and commands, which reduces the need for code in the code-behind. Data binding allows your UI elements to directly bind to data properties, and commands provide a way to handle user actions without code in the code-behind.</p>
+</li>
+</ol>
+<p>However, it's worth noting that while minimizing code in the code-behind is a good practice, it's not always entirely achievable or practical. There might be cases where you need to include some code in the code-behind for UI-specific tasks that are difficult to achieve through bindings or are specific to the View's implementation, such as complex animations, event handling that doesn't neatly fit into commands, or interactions with non-bindable UI elements.</p>
+<p>In conclusion, while it is ideal to aim for minimal code in the code-behind files of windows when using Avalonia UI, practical considerations and specific requirements of your application might necessitate some deviations from this ideal. The key is to keep such deviations minimal and well-justified to maintain the benefits of the MVVM pattern.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="a68a325c-46e5-4903-881f-9508709a2aae" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">RequestedThemeVariant をランタイムで変更できるか調べる</span>
+                    <a href="#a68a325c-46e5-4903-881f-9508709a2aae" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">できそう。</p>
+                            <div class="note_ai_generated">
+<p>Yes, you can dynamically change the <code>RequestedThemeVariant</code> at runtime in Avalonia UI. This property allows you to override the theme variant and specify a desired variant for an application, window (top level), or <code>ThemeVariantScope</code>. By default, Avalonia inherits the theme variant set by user preferences system-wide, but you can control the theme variants through the <code>ActualThemeVariant</code> and <code>RequestedThemeVariant</code> properties to manage and switch theme variants at different levels within your application.</p>
+<p>To change the theme for the entire application, you can set the <code>RequestedThemeVariant</code> property in your <code>App.axaml</code> file to a specific theme variant like &quot;Dark&quot; or &quot;Light&quot;. For example:</p>
+<pre><code class="language-xml">&lt;Application xmlns=&quot;https://github.com/avaloniaui&quot;
+              xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+              x:Class=&quot;YourNamespace.App&quot;
+              RequestedThemeVariant=&quot;Dark&quot;&gt;
+  &lt;Application.Styles&gt;
+    &lt;FluentTheme /&gt;
+  &lt;/Application.Styles&gt;
+&lt;/Application&gt;
+</code></pre>
+<p>You can also redefine the theme variant for specific parts of your application by using the <code>ThemeVariantScope</code> control. This allows you to have different theme variants in different parts of your application. For instance, you might have a window with a &quot;Dark&quot; theme variant, and within it, a <code>ThemeVariantScope</code> that specifies a &quot;Light&quot; theme for its child elements.</p>
+<p>To dynamically change the theme at runtime, you can modify the <code>RequestedThemeVariant</code> property from your code. This could involve setting up a method or command in your view model that updates the <code>RequestedThemeVariant</code> property based on user interactions or other application logic.</p>
+<p>For more details on using theme variants in Avalonia and examples on how to switch themes at runtime, you can refer to the Avalonia documentation on theme variants【6†source】【7†source】.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="0b1fc462-312c-4a87-beb4-b1823d15f268" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">&lt;FluentTheme /&gt; の必要性について調べる</span>
+                    <a href="#0b1fc462-312c-4a87-beb4-b1823d15f268" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>I did a <a href="https://chat.openai.com/backend-api/bing/redirect?query=Avalonia%20UI%20app.axaml%20FluentTheme%20explanation">quick search</a> for more information and here's what I found.</p>
+<p>In Avalonia UI, the <code>FluentTheme</code> within the <code>app.axaml</code> file refers to the application's visual styling, which is inspired by Microsoft's Fluent Design System. This design system is known for its modern aesthetics, smooth animations, and intuitive interactions, aiming to provide a consistent and visually appealing user interface across different platforms【6†source】.</p>
+<p>To use the FluentTheme in Avalonia, you first need to install the <code>Avalonia.Themes.Fluent</code> NuGet package. Then, you include the theme in your Application class in the <code>app.axaml</code> file, which allows you to apply the Fluent visual styling to your entire application. This is done by declaring the <code>&lt;FluentTheme /&gt;</code> within the <code>&lt;Application.Styles&gt;</code> section of your <code>app.axaml</code> file【6†source】.</p>
+<p>The FluentTheme class in Avalonia is designed to incorporate this theme into an application, providing properties and methods that manage the visual aspects, such as the theme's mode (light or dark) and the ability to attach styles and resources to your application components【7†source】.</p>
+<p>Avalonia also supports theme variants, such as light and dark modes, that can be set globally for the application or overridden for specific parts of the UI. This flexibility allows developers to cater to different user preferences or system settings. You can specify the desired theme variant directly in the <code>app.axaml</code> file or use the <code>ThemeVariantScope</code> control to apply different variants to specific parts of your application's UI【8†source】.</p>
+<p>For more detailed information, you can refer to the Avalonia documentation on using the Fluent Theme【6†source】, the FluentTheme class【7†source】, and theme variants【8†source】.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>I did a <a href="https://chat.openai.com/backend-api/bing/redirect?query=Avalonia%20UI%20available%20themes">quick search</a> for more information and here's what I discovered.</p>
+<p>Avalonia provides two official themes: the Fluent Theme, which is inspired by Microsoft's Fluent Design System, and the Simple Theme, which offers minimal styling. Additionally, the community has developed themes like Material.Avalonia, inspired by Google's Material Design, and Semi.Avalonia, inspired by Semi Design【15†source】. For more details, you can visit the Avalonia documentation on themes.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">なぜ Application.Styles 内にパラメーターを持たない &lt;FluentTheme /&gt; を入れる設計なのか、なぜ Application 要素の属性などでないのかを知りたかったが、「開発元がそうしたかっただけ」以外の理由はなさそう。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="74166969-2878-4aa6-bccc-597d9594fd05" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">app.manifest の assemblyIdentity について調べる</span>
+                    <a href="#74166969-2878-4aa6-bccc-597d9594fd05" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">version=&quot;1.0.0.0&quot; となっている。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The <code>assemblyIdentity</code> element in an <code>app.manifest</code> file is used to uniquely identify an assembly in the context of .NET applications. This element is part of the application manifest, which provides metadata about the application, such as its version, dependencies, and security requirements.</p>
+<p>Here's a breakdown of the <code>assemblyIdentity</code> element and its common attributes:</p>
+<ul>
+<li><strong>name</strong>: Specifies the name of the assembly. This is a required attribute.</li>
+<li><strong>version</strong>: Defines the version of the assembly using the format &quot;major.minor.build.revision&quot;. This is also a required attribute.</li>
+<li><strong>publicKeyToken</strong>: Represents a public key token, which is a shortened version of the public key used to sign the assembly. This is used in strongly named assemblies to ensure the assembly's authenticity.</li>
+<li><strong>processorArchitecture</strong>: Indicates the processor architecture that the assembly targets, such as <code>x86</code>, <code>x64</code>, <code>msil</code> (Microsoft Intermediate Language), <code>arm</code>, etc. This helps ensure that the application runs on the appropriate hardware architecture.</li>
+<li><strong>culture</strong>: Specifies the culture information for the assembly, such as <code>en-US</code> for English (United States). This is important for assemblies that contain localized resources.</li>
+</ul>
+<p>Here's an example of how the <code>assemblyIdentity</code> element might look in an <code>app.manifest</code> file:</p>
+<pre><code class="language-xml">&lt;assemblyIdentity name=&quot;YourApplicationName&quot;
+                  version=&quot;1.0.0.0&quot;
+                  publicKeyToken=&quot;abcdef1234567890&quot;
+                  processorArchitecture=&quot;x86&quot;
+                  culture=&quot;neutral&quot; /&gt;
+</code></pre>
+<p>In this example, <code>YourApplicationName</code> is the name of the assembly, <code>1.0.0.0</code> is the version, <code>abcdef1234567890</code> is the public key token (for a strongly named assembly), <code>x86</code> is the targeted processor architecture, and <code>neutral</code> indicates that the assembly is not culture-specific.</p>
+<p>The <code>assemblyIdentity</code> element is crucial for defining and enforcing the identity and integrity of assemblies, especially in contexts where multiple versions of an assembly might exist, or where security and compatibility are concerns.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, ideally, the version specified in the <code>assemblyIdentity</code> element within the <code>app.manifest</code> file should match the version specified in the <code>.csproj</code> file for consistency and clarity. In .NET projects, the version of an assembly is typically defined in the <code>.csproj</code> file or AssemblyInfo file (<code>AssemblyInfo.cs</code> for older projects) using attributes such as <code>AssemblyVersion</code> and <code>AssemblyFileVersion</code>.</p>
+<ul>
+<li><code>AssemblyVersion</code> is used by the runtime for binding and for strongly named assemblies. Changing this version will require updating references to this assembly in other projects.</li>
+<li><code>AssemblyFileVersion</code> is used for informational purposes and does not affect assembly binding. It's typically displayed in the file properties in Windows.</li>
+</ul>
+<p>When you distribute your application or library, it's important for the version information in the manifest to match the actual version of the assembly to avoid confusion and potential binding issues. This ensures that the correct version of the assembly is loaded at runtime, especially in cases where multiple versions of the same assembly may exist in the Global Assembly Cache (GAC) or in different directories.</p>
+<p>If you are manually managing versions in your <code>.csproj</code> file, make sure to update the <code>app.manifest</code> file accordingly whenever you change the version. In modern .NET projects (using SDK-style project files), you can automate this process by using MSBuild properties to ensure that the version information stays in sync across different parts of your application. For example, you can define the version in the <code>.csproj</code> file and use MSBuild tasks or variables to automatically update the manifest file during the build process.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="47288dd8-9aa4-4f3b-8057-6f29bda5f58c" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ViewLocator.cs について調べる</span>
+                    <a href="#47288dd8-9aa4-4f3b-8057-6f29bda5f58c" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In Avalonia UI, a framework for building cross-platform desktop applications with .NET, <code>App.axaml</code> is a markup file that defines the application's resources, styles, and overall structure. Within <code>App.axaml</code>, the <code>Application.DataTemplates</code> section allows you to define data templates that the application will use to render UI elements based on data types.</p>
+<p>The <code>Local:ViewLocator</code> within <code>Application.DataTemplates</code> is a custom mechanism used to map ViewModel classes to their corresponding View classes automatically. This pattern is often used in MVVM (Model-View-ViewModel) applications to decouple the UI (View) from the business logic and data (ViewModel), making the code more modular, easier to maintain, and test.</p>
+<p>Here's a breakdown of what this code does:</p>
+<ol>
+<li><p><strong>DataTemplates</strong>: Data templates in Avalonia UI are used to specify how data objects should be presented in the UI. They define the appearance of data objects and can be applied automatically based on the data type, or manually through binding.</p>
+</li>
+<li><p><strong>Local:ViewLocator</strong>: This refers to a class named <code>ViewLocator</code> in the local namespace (the namespace of your Avalonia application). The <code>ViewLocator</code> class is responsible for determining which View should be used to display a given ViewModel.</p>
+<ul>
+<li>When the application runs, and a ViewModel is bound to a part of the UI (like a ContentControl or a UserControl), the <code>ViewLocator</code> checks the type of the ViewModel.</li>
+<li>It then looks for a View class that matches the ViewModel by convention (e.g., a ViewModel named <code>ExampleViewModel</code> might be paired with a View named <code>ExampleView</code>).</li>
+<li>Once the appropriate View is found, it is instantiated and used to render the UI for that ViewModel.</li>
+</ul>
+</li>
+</ol>
+<p>The use of <code>ViewLocator</code> simplifies the process of matching Views to ViewModels, making it easier to develop and manage complex UIs. It enables developers to add new ViewModels and Views to the application without having to manually set up each connection between them, as long as they follow the naming conventions expected by the <code>ViewLocator</code>.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">MVVM を動かすためのボイラープレートコードという理解でよさそう。ASP.NET Core でもサービスの登録などがそうなっている。AvaloniaUseCompiledBindingsByDefault のように、ライブラリー側に実装を入れて設定ファイルなどでトグルするのも一つの選択肢だろうが、ここではカスタマイズ性が重視されているか。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Build と Match の二つのメソッドが含まれるが、いずれも現時点では使われていない。</p>
+                            <p class="note_contents">しかし、App.axaml で ViewLocator が指定されている。</p>
+                            <p class="note_contents">また、いずれかのメソッドを改名すると、インターフェースが実装されていないと叱られる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents"><a href="https://docs.avaloniaui.net/docs/0.10.x/templates/implement-idatatemplates" target="_blank" class="url">https://docs.avaloniaui.net/docs/0.10.x/templates/implement-idatatemplates</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">インターフェースとして内部的に使われるのか、今後の実装において自分が使うのかは分からないが、コードそのものはシンプルなので、view model から view を探すためのものとザクッと理解しておく。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="976ae694-29e7-4eb8-a76d-ed52e068fad2" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Program.cs の各メソッドについて調べる</span>
+                    <a href="#976ae694-29e7-4eb8-a76d-ed52e068fad2" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The <code>Program</code> class in the provided code snippet performs the following actions:</p>
+<ol>
+<li><p>Defines a static method named <code>Main</code>, which serves as the entry point of the application. This method:</p>
+<ul>
+<li>Calls the <code>BuildAvaloniaApp</code> method to set up the Avalonia application.</li>
+<li>Invokes <code>StartWithClassicDesktopLifetime</code> on the result, passing <code>args</code> to it. This method manages the application's lifetime in a desktop environment, handling start-up and shut-down sequences.</li>
+</ul>
+</li>
+<li><p>Defines another static method named <code>BuildAvaloniaApp</code>, which configures the Avalonia application by:</p>
+<ul>
+<li>Invoking <code>Configure&lt;App&gt;()</code> to set up the application using the <code>App</code> class.</li>
+<li>Applying <code>UsePlatformDetect()</code> to automatically detect and use the appropriate windowing and rendering platform for the current operating system.</li>
+<li>Calling <code>WithInterFont()</code> to presumably set up a default font for the application (note: <code>WithInterFont()</code> is not a standard Avalonia method and might be a custom extension or a typo).</li>
+<li>Using <code>LogToTrace()</code> to enable logging of Avalonia's internal operations to the system's diagnostic trace.</li>
+<li>Applying <code>UseReactiveUI()</code> to integrate ReactiveUI, a framework for building reactive applications in .NET, with Avalonia.</li>
+</ul>
+</li>
+</ol>
+<p>The <code>Program</code> class is marked as <code>sealed</code>, indicating that it cannot be inherited by other classes. It's contained within the <code>yyGptBook</code> namespace and utilizes the Avalonia framework for UI elements, along with the ReactiveUI extension for reactive programming support.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">終了時にどういうことが行われるのかも聞いた。</p>
+                            <div class="note_ai_generated">
+<p>When an Avalonia UI-based application is shutting down, several internal operations are carried out to ensure a smooth and clean exit. These operations include:</p>
+<ol>
+<li><p><strong>Raising Shutdown Events</strong>: Avalonia will raise application lifecycle events, such as <code>Exiting</code>, to notify components within the application that the shutdown process has begun. This gives components a chance to perform cleanup operations, save state, or cancel the shutdown under certain conditions if the application logic allows it.</p>
+</li>
+<li><p><strong>Closing Windows</strong>: All open windows within the application will be closed. As part of this process, each window will raise its closing events, allowing for any window-specific cleanup or state-saving operations to occur. If any window vetoes the close request (for example, by setting the <code>Cancel</code> property of the <code>CancelEventArgs</code> in a window's <code>Closing</code> event to <code>true</code>), the shutdown process may be halted, depending on the application's shutdown mode and logic.</p>
+</li>
+<li><p><strong>Disposing Resources</strong>: Avalonia will dispose of any resources that implement the <code>IDisposable</code> interface and are managed by the application's lifecycle. This ensures that all unmanaged resources are properly released and that the application cleans up after itself, preventing resource leaks.</p>
+</li>
+<li><p><strong>Shutting Down the Dispatcher</strong>: The Avalonia UI dispatcher, which manages UI thread operations and event dispatching, will be shut down. This means that no further UI operations, event handling, or message processing will take place, effectively halting the UI thread's activity.</p>
+</li>
+<li><p><strong>Terminating Background Operations</strong>: Although Avalonia itself does not directly manage background threads or tasks that the application might have started, the application should ensure that any background operations are properly terminated or signaled to stop during the shutdown process. This might involve setting cancellation tokens, joining threads, or otherwise ensuring that these operations complete gracefully.</p>
+</li>
+<li><p><strong>Releasing Application Resources</strong>: The application will release any global resources it holds, such as fonts, images, or other assets that were loaded during its operation. This step is crucial to avoid memory leaks and ensure that all memory used by the application is available for garbage collection.</p>
+</li>
+<li><p><strong>Application Exit</strong>: Once all the necessary cleanup and resource release operations are completed, the application's process will terminate, and the application will exit. The exit code returned to the operating system can indicate the success or failure status of the application, based on the application's logic and shutdown conditions.</p>
+</li>
+</ol>
+<p>It's important for developers to be aware of these operations and to complement them with their own cleanup logic where necessary, especially for releasing unmanaged resources, saving application state, and ensuring that background operations are properly managed during shutdown.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">dispatcher についても。</p>
+                            <div class="note_ai_generated">
+<p>The Avalonia UI dispatcher is a crucial component in Avalonia applications, playing a significant role in managing UI thread operations. Similar to dispatchers in other UI frameworks, Avalonia's dispatcher ensures that UI updates and interactions occur on the correct thread, typically the main UI thread, to prevent concurrency issues and ensure a smooth user experience. Here's more detail on its functionality and usage:</p>
+<h3>Main Functions of Avalonia's UI Dispatcher</h3>
+<ol>
+<li><p><strong>Thread Affinity</strong>: The UI dispatcher enforces thread affinity for UI operations, meaning it ensures that all modifications to the UI, such as updating UI elements or interacting with user controls, are performed on the main UI thread. This is essential because most UI frameworks, including Avalonia, are not thread-safe, meaning that direct UI manipulations from background threads can lead to race conditions, deadlocks, or other concurrency issues.</p>
+</li>
+<li><p><strong>Message Queue Management</strong>: The dispatcher manages a queue of messages or actions that need to be executed on the UI thread. When operations need to be performed on the UI thread, such as updating a control's properties or adding elements to a layout, these operations are queued in the dispatcher's message queue and executed in a serialized manner on the UI thread.</p>
+</li>
+<li><p><strong>Invoke and BeginInvoke Methods</strong>: Avalonia's dispatcher provides <code>Invoke</code> and <code>BeginInvoke</code> methods, similar to those in WPF or WinForms. <code>Invoke</code> is used for executing a delegate synchronously on the UI thread, blocking the calling thread until the operation is completed. <code>BeginInvoke</code>, on the other hand, executes a delegate asynchronously on the UI thread, allowing the calling thread to continue execution without waiting for the delegate to complete. These methods are essential for safely updating UI elements from background threads.</p>
+</li>
+<li><p><strong>Synchronization Context</strong>: Avalonia's dispatcher integrates with the .NET <code>SynchronizationContext</code>, providing a context for asynchronous operations that ensures continuations are posted back to the UI thread. This is particularly useful in asynchronous programming patterns, where you want to ensure that after an asynchronous operation completes, any continuation code that updates the UI is executed on the correct thread.</p>
+</li>
+</ol>
+<h3>Usage in Avalonia Applications</h3>
+<p>In Avalonia applications, you might need to interact with the UI dispatcher in scenarios involving background processing or tasks that require updates to the UI. For example, if you're performing a long-running operation on a background thread and need to update a progress bar or display results in the UI, you would use the dispatcher's <code>Invoke</code> or <code>BeginInvoke</code> methods to marshal those updates back to the UI thread.</p>
+<p>Here's a simple example of using <code>BeginInvoke</code> to update a label text from a background thread:</p>
+<pre><code class="language-csharp">Dispatcher.UIThread.BeginInvoke(() =&gt;
+{
+    myLabel.Text = &quot;Update from background thread&quot;;
+});
+</code></pre>
+<p>In this example, <code>myLabel.Text</code> is updated safely from a background thread by marshaling the update call to the UI thread through the dispatcher.</p>
+<p>The UI dispatcher is a fundamental part of Avalonia's architecture, ensuring thread-safe UI operations and enabling developers to build responsive and interactive applications. It abstracts the complexities of thread management, allowing developers to focus on building their application logic.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">WithInterFont については以下に情報がある。重要ではなさそう。</p>
+                            <p class="note_contents"><a href="https://docs.avaloniaui.net/docs/stay-up-to-date/upgrade-from-0.10" target="_blank" class="url">https://docs.avaloniaui.net/docs/stay-up-to-date/upgrade-from-0.10</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ロギングについても。</p>
+                            <div class="note_ai_generated">
+<p>Avalonia UI includes robust logging capabilities that are essential for diagnosing issues, understanding application behavior, and debugging. The framework uses a flexible logging abstraction that allows developers to plug in different logging providers depending on their needs. Here's an overview of Avalonia's logging functions and how they can be utilized:</p>
+<h3>Configuration</h3>
+<p>Logging in Avalonia is typically configured during the application startup, within the <code>BuildAvaloniaApp</code> method of the <code>App</code> class. This is where you specify the logging framework and the level of detail you want in your logs.</p>
+<h3>Log Levels</h3>
+<p>Avalonia supports various log levels, allowing developers to control the verbosity of the log output. These levels include:</p>
+<ul>
+<li><strong>Verbose</strong>: Detailed information, typically for debugging issues that are hard to pinpoint.</li>
+<li><strong>Debug</strong>: Information that is useful for developers during the development process.</li>
+<li><strong>Information</strong>: General information about the application's operation, useful for tracking the flow of the application and its major events.</li>
+<li><strong>Warning</strong>: Indications of potential issues or things that might need attention but aren't necessarily errors.</li>
+<li><strong>Error</strong>: Error events that are fatal to a specific request but not the application as a whole.</li>
+<li><strong>Critical</strong>: Fatal errors that indicate a problem that will terminate the application.</li>
+</ul>
+<h3>Setting Up Logging</h3>
+<p>You can set up logging in Avalonia by configuring the <code>AppBuilder</code> in the <code>BuildAvaloniaApp</code> method. Avalonia uses Serilog as its default logging provider, but you can configure it to use other logging frameworks if needed. Here's an example of setting up basic logging with Serilog:</p>
+<pre><code class="language-csharp">public static AppBuilder BuildAvaloniaApp()
+{
+    return AppBuilder.Configure&lt;App&gt;()
+        .UsePlatformDetect()
+        .LogToTrace(LogEventLevel.Debug) // Sets the minimum log level to Debug and uses the Trace for logging output
+        .UseReactiveUI();
+}
+</code></pre>
+<p>In this example, <code>.LogToTrace(LogEventLevel.Debug)</code> configures Avalonia to log messages at the <code>Debug</code> level and above to the system's diagnostic trace.</p>
+<h3>Custom Logging Configuration</h3>
+<p>For more advanced logging configurations, such as logging to a file, filtering logs, or integrating with other logging frameworks like NLog, log4net, or Microsoft.Extensions.Logging, you may need to set up a custom Serilog configuration. This typically involves configuring a Serilog <code>LoggerConfiguration</code> object and then setting it as the logger for Avalonia:</p>
+<pre><code class="language-csharp">var logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.Console()
+    .WriteTo.File(&quot;app.log&quot;)
+    .CreateLogger();
+
+SerilogLogger.Initialize(logger);
+
+AppBuilder.Configure&lt;App&gt;()
+    .UsePlatformDetect()
+    .UseReactiveUI();
+</code></pre>
+<p>In this example, Serilog is configured to log to both the console and a file named <code>app.log</code>, with a minimum log level of <code>Debug</code>.</p>
+<h3>Using Logs in Your Application</h3>
+<p>Once logging is set up, you can use it in your application by obtaining an <code>ILogger</code> instance, typically through dependency injection or by using the static logger instance. You can then log messages, exceptions, or other information as needed:</p>
+<pre><code class="language-csharp">logger.LogInformation(&quot;Application started.&quot;);
+logger.LogError(exception, &quot;An error occurred.&quot;);
+</code></pre>
+<p>Avalonia's logging functions are a powerful tool for developers, providing insights into the framework's internal operations and helping with the diagnosis of issues and debugging of applications. By leveraging these capabilities, you can gain a deeper understanding of your application's behavior and ensure its reliability and stability.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="7035ef37-c88a-4507-aa2c-85beccc2cc57" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">STAThread の必要性について調べる</span>
+                    <a href="#7035ef37-c88a-4507-aa2c-85beccc2cc57" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The <code>[STAThread]</code> attribute is used in programs that utilize the Avalonia UI, as well as other UI frameworks like Windows Forms and WPF, to indicate that the COM threading model for the application is single-threaded apartment (STA). This attribute is applied to the <code>Main</code> method in the program class in generated code for several reasons:</p>
+<ol>
+<li><p><strong>COM Interoperability:</strong> STA is a requirement for many legacy COM components that are not thread-safe. By marking the thread with <code>[STAThread]</code>, it ensures these components are accessed in a thread-safe manner, as STA ensures that a single thread will execute the code, avoiding concurrency issues.</p>
+</li>
+<li><p><strong>UI Thread Affinity:</strong> UI frameworks often require that UI components are created and accessed from a single thread, typically the main UI thread of the application. The <code>[STAThread]</code> attribute ensures that the application's main thread adheres to this requirement, preventing potential threading issues related to UI updates and event handling.</p>
+</li>
+<li><p><strong>Drag-and-Drop and Clipboard Operations:</strong> Operations such as drag-and-drop and clipboard interactions often involve COM components under the hood, which require STA to function correctly. The <code>[STAThread]</code> attribute ensures that these features work as expected in applications that might use them.</p>
+</li>
+<li><p><strong>Consistency and Compatibility:</strong> Applying the <code>[STAThread]</code> attribute maintains consistency with other .NET applications that interact with UI elements or COM components, ensuring compatibility across different parts of an application or with other applications and libraries that might rely on STA.</p>
+</li>
+</ol>
+<p>While Avalonia UI is designed to be cross-platform and does not rely on Windows-specific COM components, the <code>[STAThread]</code> attribute is still used in generated code for consistency and to ensure compatibility with parts of the .NET framework that might require STA, especially when the application is running on Windows. Avalonia applications might still interface with parts of the system that require STA, so including the <code>[STAThread]</code> attribute is a safe default practice.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In a simple console application, adding the <code>[STAThread]</code> attribute to the <code>Main</code> method typically does not have a noticeable impact on performance. The attribute specifies the apartment state model for COM (Component Object Model) interop, and it is most relevant in applications that use COM components directly or indirectly (e.g., through Windows Forms, WPF, or certain system functionalities like clipboard access or drag-and-drop).</p>
+<p>For console applications that do not interact with COM components or perform operations that require the STA model, the presence of the <code>[STAThread]</code> attribute is generally inconsequential. The attribute's primary role is to ensure that the thread is initialized in a way that is compatible with STA COM components, but if no such components are used, there is no additional overhead or performance impact associated with the attribute itself.</p>
+<p>It's important to note that performance in applications is more often influenced by factors such as algorithm efficiency, I/O operations, and resource management rather than the presence of the <code>[STAThread]</code> attribute. In the specific context of a simple console application that doesn't involve UI elements or COM interop, the use of <code>[STAThread]</code> should not be a concern for performance.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Technically, it is usually safe to attach the <code>[STAThread]</code> attribute to the <code>Main</code> method of any program, but it's not always appropriate or necessary. The attribute indicates that the COM threading model for the application's main thread is set to Single-Threaded Apartment (STA), which is a requirement for applications that use certain UI technologies or COM components that need to be accessed in a thread-safe manner. Here are some considerations:</p>
+<ol>
+<li><p><strong>Compatibility:</strong> For applications that interact with COM components, especially those that require STA, such as UI frameworks like Windows Forms and WPF, or operations like drag-and-drop and clipboard functionalities in Windows, the <code>[STAThread]</code> attribute is necessary for proper operation.</p>
+</li>
+<li><p><strong>Unnecessary in Some Contexts:</strong> In console applications or services that do not use COM components or the specific features of STA, the attribute is unnecessary. While it doesn't harm to include it, it's not serving any purpose in these contexts.</p>
+</li>
+<li><p><strong>Multi-threaded Applications:</strong> In applications that heavily rely on multi-threading, especially those that create multiple COM objects in parallel threads, marking the main thread as STA (using <code>[STAThread]</code>) might not be ideal. In such cases, the Multi-Threaded Apartment (MTA) model might be more appropriate, and threads should be explicitly marked as such if they need to interact with COM components.</p>
+</li>
+<li><p><strong>Clarity and Intent:</strong> Applying the <code>[STAThread]</code> attribute where it is not needed could potentially confuse other developers or mislead them about the application's architecture or requirements. It's generally good practice to use attributes and other code elements intentionally to reflect the design and requirements of your application.</p>
+</li>
+<li><p><strong>Future Proofing:</strong> If your application might evolve to include UI elements or COM interactions that require STA, starting with <code>[STAThread]</code> could be seen as future-proofing. However, this should be balanced with the principle of not adding unnecessary elements to your codebase.</p>
+</li>
+</ol>
+<p>In summary, while it is usually safe to include the <code>[STAThread]</code> attribute, it's best to use it judiciously, applying it when your application's architecture requires it, rather than using it as a default for every program. This approach helps maintain clarity, efficiency, and appropriateness in your application design.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The design decision in .NET to not make <code>[STAThread]</code> the default behavior for all applications and instead require developers to explicitly specify it when needed can be attributed to a few key considerations:</p>
+<ol>
+<li><p><strong>Flexibility and Explicitness:</strong> .NET is designed to support a wide range of application types, from simple console applications to complex UI-based applications and web services. By not enforcing <code>[STAThread]</code> as the default, .NET provides developers with the flexibility to choose the most appropriate threading model (STA, MTA, or free-threaded) for their application's requirements. This design encourages explicitness in code, making the developer's intentions clear and allowing for more tailored application behavior.</p>
+</li>
+<li><p><strong>Performance and Scalability:</strong> The STA model, while necessary for certain UI components and COM interactions, imposes certain threading constraints that can affect the scalability and performance of multi-threaded applications. For example, in an STA model, COM calls that need to cross apartment boundaries are marshaled, which can introduce overhead. Applications that heavily rely on concurrency and parallelism, especially server-side applications, often benefit from the MTA model, which is more aligned with scalable, multi-threaded environments. Making STA the default could inadvertently impact the performance and scalability of applications that do not require it.</p>
+</li>
+<li><p><strong>Backward Compatibility and Evolution of .NET:</strong> When .NET was initially designed, it was important to provide a clear migration path for developers coming from COM and Windows-based development backgrounds, for whom STA was a familiar concept. However, as .NET evolved to support a wider array of application types, including web and cloud-based applications where COM interop is less relevant, the need to keep STA as a default became less critical. This evolution reflects the broader shift in software development practices and application requirements.</p>
+</li>
+<li><p><strong>COM Interoperability Is Not Universal:</strong> While .NET provides robust support for COM interop, not all .NET applications require or use COM components. Defaulting to <code>[STAThread]</code> would impose unnecessary constraints on applications that do not use COM. By making STA opt-in rather than the default, .NET allows applications that don't need COM interop to avoid the overhead and limitations associated with STA.</p>
+</li>
+</ol>
+<p>In summary, the decision to not make <code>[STAThread]</code> the default behavior in .NET is driven by the desire to provide developers with greater flexibility, to optimize for performance and scalability in a variety of application scenarios, and to reflect the evolving nature of application development that increasingly moves away from COM dependencies.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">以前から、「あって困るケースが少ないなら、なぜそれがデフォルトでないのか」が気になっていた。20年近く前には、考えるのがめんどくさくて全てのプロジェクトの Main メソッドに一応つけていた記憶もある。ChatGPT により、そのあたりの謎がとけた。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="f2e1a3c5-6db5-4c65-90dc-a22bba4a71f6" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">一通り調べてから、生成されたコードに自分が説明できないところがないようにする</span>
+                    <a href="#f2e1a3c5-6db5-4c65-90dc-a22bba4a71f6" class="permalink">&infin;</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
