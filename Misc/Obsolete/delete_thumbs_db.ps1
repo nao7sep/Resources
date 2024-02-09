@@ -1,4 +1,4 @@
-# Define the path to search in
+﻿# Define the path to search in
 $path = "C:\Repositories"
 
 # Search for thumbs.db files including hidden ones

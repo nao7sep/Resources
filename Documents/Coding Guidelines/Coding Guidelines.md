@@ -1,4 +1,4 @@
-# Coding Guidelines
+﻿# Coding Guidelines
 
 ## Preparation
 
