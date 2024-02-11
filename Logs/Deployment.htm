@@ -1,0 +1,2014 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>デプロイ</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="Deployment.htm" class="title">デプロイ</a>
+        </div>
+        <div class="entries">
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">ソフト開発を我流でやってきた。自社や自分の友だちが使えれば十分だった。</p>
+                    <p class="note_contents">だから一人で変なことをしている部分が多々ある。それでコストが発生しているところもある。</p>
+                    <p class="note_contents">いろいろと放置してきた。</p>
+                    <p class="note_contents">たとえば、GitKraken は BOM の入っていない UTF-8 を認識できないことがある。VSC では問題なくてステージしてから GitKraken で最終チェックのためザッと見返せば化けていることがたびたびある。</p>
+                    <p class="note_contents">しかし VSC では大丈夫で、CJK でない人たちも VSC を使っている人が多いだろうし、そもそも自分のソースコードをダウンロードしてローカルで開く人なんてまだゼロだろうから……と思い、ファイルによって BOM が入っていたり入っていなかったりなのを気にしてこなかった。</p>
+                    <p class="note_contents">それでまた文字化けしては、一瞬で書けるからと yyBom を書いたところ、現行の8つのプロジェクトといくつかの開発関連のレポジトリーだけで数十のファイルに BOM が入っていなかった。</p>
+                    <p class="note_contents">そういうのを整えても、自分の側でのそれぞれのプログラムの機能性や性能は全く変わらない。どうせコンパイルするからだ。</p>
+                    <p class="note_contents">だからこそ放置してきたわけだが、そういうマインドのまま、いろいろと我流になっているところもそのままでは、「変なものをリリースするために一人で無駄な時間をかける」というのが続く。</p>
+                    <p class="note_contents">yyBom は、BOM の検出以外もできる。</p>
+                    <p class="note_contents">また、srcZip を更新することでアーカイブの自動化の選択肢もある。</p>
+                    <p class="note_contents">この機会に、「ふつう」の出し方に切り替える。</p>
+                    <!-- Task: 44cdb63f-0059-46e1-8557-d002e59c59f1 -->
+                </div>
+            </div>
+            <div id="ff8c5573-d2c5-409d-ae41-80718736fca8" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">気になるところを探す</span>
+                    <a href="#ff8c5573-d2c5-409d-ae41-80718736fca8" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="3fb58746-2a06-4db0-ae8c-4ff6173e4098" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">開発関連の全てのタスクリストをチェック</span>
+                    <a href="#3fb58746-2a06-4db0-ae8c-4ff6173e4098" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="3b7d09f7-5dd1-44bc-9a05-5ed4ed77702d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">コンパイルの自動化のツールについて調べる</span>
+                    <a href="#3b7d09f7-5dd1-44bc-9a05-5ed4ed77702d" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>For automating the compilation of .NET projects, there are several tools and services available that cater to different aspects of the build and deployment process. Some popular choices include:</p>
+<ol>
+<li><p><strong>MSBuild</strong>: The Microsoft Build Engine (MSBuild) is the build platform for .NET and Visual Studio. It provides an XML schema for a project file that controls how the build platform processes and builds software.</p>
+</li>
+<li><p><strong>Azure DevOps Services</strong>: Formerly known as Visual Studio Team Services, this suite provides a set of cloud-hosted tools that work with your existing IDE or editor, enabling continuous integration (CI), testing, and deployment for .NET projects.</p>
+</li>
+<li><p><strong>Jenkins</strong>: An open-source automation server that can be used to automate all sorts of tasks related to building, testing, and delivering or deploying software.</p>
+</li>
+<li><p><strong>TeamCity</strong>: A build management and continuous integration server from JetBrains. It supports .NET projects and provides advanced features for automating the build, test, and deploy processes.</p>
+</li>
+<li><p><strong>GitHub Actions</strong>: Allows you to automate your workflow from within GitHub. You can set up CI/CD pipelines to build, test, and deploy your .NET projects.</p>
+</li>
+<li><p><strong>AppVeyor</strong>: A CI/CD service specifically designed for Windows and .NET applications. It provides a scalable build environment for every push, feature branch, or pull request.</p>
+</li>
+<li><p><strong>Cake (C# Make)</strong>: A cross-platform build automation system with a C# DSL. Cake allows you to write build scripts in C#, making it a familiar option for .NET developers.</p>
+</li>
+<li><p><strong>FAKE (F# Make)</strong>: A cross-platform build automation system using F#. It's a DSL for tasks such as building, testing, deploying .NET applications and libraries.</p>
+</li>
+<li><p><strong>Nuke</strong>: A cross-platform build automation system that allows you to define builds using C# instead of scripts, making it more maintainable and user-friendly for .NET developers.</p>
+</li>
+</ol>
+<p>Each of these tools has its own strengths and can be selected based on specific project requirements, team preferences, and existing infrastructure.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Jenkins is an open-source automation server widely used for continuous integration and continuous delivery (CI/CD) in software development. It's written in Java and facilitates the automation of building, testing, and deploying software projects. Jenkins is highly versatile, supporting projects in various languages and technologies, including .NET.</p>
+<h3>Key Features of Jenkins for .NET Projects:</h3>
+<ul>
+<li><p><strong>Extensive Plugin Ecosystem</strong>: Jenkins has a vast repository of plugins, including those specifically designed for .NET projects, such as the MSBuild plugin for building projects or solutions, and the NUnit plugin for running tests.</p>
+</li>
+<li><p><strong>Cross-platform Support</strong>: While Jenkins runs on a Java platform, it can orchestrate a .NET build process on different operating systems, including Windows, Linux, and macOS, especially with the .NET Core projects.</p>
+</li>
+<li><p><strong>Integration Capabilities</strong>: Jenkins can integrate with various development, testing, and deployment tools commonly used in .NET environments, such as Git, NuGet, and Azure DevOps.</p>
+</li>
+<li><p><strong>Flexible Build Configuration</strong>: Jenkins allows the configuration of build pipelines through its web UI or by defining pipelines as code using the Jenkinsfile, which can be version-controlled along with your project.</p>
+</li>
+<li><p><strong>Automated Testing and Reporting</strong>: It supports the automation of testing for .NET applications, including unit tests, integration tests, and UI tests, and can generate and publish reports on test results, code coverage, and other metrics.</p>
+</li>
+<li><p><strong>Scalability</strong>: Jenkins can scale horizontally by running jobs on different machines (nodes), which is beneficial for large .NET projects requiring significant build and test resources.</p>
+</li>
+</ul>
+<h3>Getting Started with Jenkins for .NET:</h3>
+<ol>
+<li><p><strong>Install Jenkins</strong>: Download and install Jenkins from the official website. It can be installed on various operating systems or run as a Docker container.</p>
+</li>
+<li><p><strong>Install .NET SDK</strong>: Ensure the .NET SDK is installed on the Jenkins server or agents where the .NET projects will be built.</p>
+</li>
+<li><p><strong>Configure Jenkins</strong>: Set up Jenkins through its web interface. Install necessary plugins for .NET development, such as the MSBuild plugin, NUnit plugin, or any other required for your project's needs.</p>
+</li>
+<li><p><strong>Create a Build Job</strong>: Set up a new job in Jenkins for your .NET project, specifying the source control management (SCM) details and build triggers.</p>
+</li>
+<li><p><strong>Define Build Steps</strong>: Use the MSBuild plugin to define build steps for compiling the .NET project or solution. Additional steps can be added for testing, packaging, or deploying the application.</p>
+</li>
+<li><p><strong>Run and Monitor Builds</strong>: Execute the build process manually or through triggers like SCM changes. Jenkins will report the build status, logs, and artifacts.</p>
+</li>
+</ol>
+<p>Jenkins' flexibility and plugin ecosystem make it a powerful tool for automating .NET project builds, although it may require some initial setup and configuration effort.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>GitHub Actions is a CI/CD (Continuous Integration and Continuous Deployment) feature integrated into GitHub, enabling automation of build, test, and deployment workflows directly within your GitHub repository. For .NET projects, GitHub Actions offers a seamless way to automate the entire software development workflow, from code push to deployment, within the GitHub ecosystem.</p>
+<h3>Key Features for .NET Projects:</h3>
+<ul>
+<li><p><strong>Native Integration with GitHub</strong>: Since GitHub Actions is embedded within GitHub, it provides a smooth experience for repository management, issue tracking, and CI/CD without needing to integrate an external service.</p>
+</li>
+<li><p><strong>Workflow Configuration as Code</strong>: Workflows are defined in YAML files within the repository, making them easy to create, modify, and version control alongside your .NET code.</p>
+</li>
+<li><p><strong>Cross-Platform Support</strong>: GitHub Actions supports Windows, Linux, and macOS runners, allowing you to build, test, and deploy .NET Framework, .NET Core, and .NET 5/6 applications across different environments.</p>
+</li>
+<li><p><strong>Matrix Builds</strong>: You can define a matrix of configurations for testing against multiple versions of .NET or operating systems, ensuring your code works as expected in various environments.</p>
+</li>
+<li><p><strong>Marketplace Actions</strong>: The GitHub Marketplace offers a wide range of pre-built actions that you can use to set up your .NET workflows, including actions for setting up .NET SDK, publishing to NuGet, and deploying to various platforms.</p>
+</li>
+<li><p><strong>Secrets and Environment Management</strong>: Securely manage sensitive information such as API keys, tokens, and connection strings, and configure environment-specific settings for different stages of the development lifecycle.</p>
+</li>
+</ul>
+<h3>Setting Up a .NET CI Workflow:</h3>
+<p>Here's a basic example of setting up a GitHub Actions workflow for a .NET project:</p>
+<ol>
+<li><p><strong>Create a Workflow File</strong>: In your GitHub repository, create a new file under <code>.github/workflows/</code> directory, for example, <code>dotnet-ci.yml</code>.</p>
+</li>
+<li><p><strong>Define Workflow Triggers</strong>: Specify when the workflow should run, commonly on push and pull request events to the main branch.</p>
+<pre><code class="language-yaml">name: .NET CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+</code></pre>
+</li>
+<li><p><strong>Configure Jobs</strong>: Define the jobs, such as building and testing your .NET application. Each job runs in a runner environment specified by <code>runs-on</code>.</p>
+<pre><code class="language-yaml">jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.1'
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --no-restore
+
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+</code></pre>
+</li>
+</ol>
+<p>This example defines a simple CI workflow for a .NET Core application that checks out the code, sets up the .NET environment, restores dependencies, builds the application, and runs tests. You can expand this workflow by adding more steps, such as code quality checks, packaging, and deployment.</p>
+<p>GitHub Actions provides a powerful, integrated solution for automating the build, test, and deployment processes of .NET projects, making it an attractive option for teams looking to streamline their development workflows within GitHub.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, you can configure GitHub Actions to build your libraries first and then build the applications that depend on those libraries when you push code to one of the app projects. This can be achieved through a combination of multi-step jobs within a single workflow, using artifacts to share build outputs between jobs, and potentially using repository dispatch events or workflow triggers if the libraries are in separate repositories. Here's how you can approach this:</p>
+<h3>If Libraries and Apps Are in the Same Repository:</h3>
+<p>You can define a single workflow that contains multiple jobs, where the first set of jobs builds the libraries, and subsequent jobs build the applications. You can use job dependencies to ensure the apps are built after the libraries.</p>
+<ol>
+<li><p><strong>Define the Library Build Job</strong>: Create a job in your workflow to build the library or libraries.</p>
+</li>
+<li><p><strong>Use Artifacts to Share Build Outputs</strong>: After building the libraries, upload the build outputs as artifacts, which can be used by subsequent jobs.</p>
+</li>
+<li><p><strong>Define the App Build Job with a Dependency</strong>: Create another job to build the application, and set it to depend on the library build job. This job should start only after the library build job completes successfully.</p>
+</li>
+<li><p><strong>Download Artifacts in the App Build Job</strong>: At the beginning of the app build job, download the artifacts produced by the library build job.</p>
+</li>
+</ol>
+<p>Here's an example snippet of how this could look in a GitHub Actions workflow file:</p>
+<pre><code class="language-yaml">jobs:
+  build-library:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build Library
+      run: dotnet build path/to/library
+
+    - name: Upload Library Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: library-artifacts
+        path: path/to/library/build/output
+
+  build-app:
+    needs: build-library
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Download Library Artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: library-artifacts
+        path: path/to/expected/library/location
+
+    - name: Build App
+      run: dotnet build path/to/app
+</code></pre>
+<h3>If Libraries and Apps Are in Separate Repositories:</h3>
+<p>If your libraries and apps are in separate repositories, you can use the repository dispatch event or workflow triggers to coordinate the builds.</p>
+<ol>
+<li><p><strong>Setup a Workflow in the Library Repository</strong>: Configure a workflow in your library repository that builds the library and possibly publishes it to a package registry (like GitHub Packages or NuGet) upon a push to the main branch.</p>
+</li>
+<li><p><strong>Trigger the Library Workflow from the App Repository</strong>: In your app repository's workflow, use the <code>repository_dispatch</code> event or a manual trigger to start the library's workflow. This requires using the GitHub API to send a dispatch event to the library repository.</p>
+</li>
+<li><p><strong>Setup the App Workflow to Wait or Check for the Library Build</strong>: Configure the app's workflow to wait for a successful build of the library (if necessary) and then proceed to build the app, possibly fetching the latest library package from the package registry.</p>
+</li>
+</ol>
+<p>This approach is more complex and might involve dealing with authentication for the GitHub API to trigger workflows across repositories and ensuring versioning is handled correctly to prevent breaking changes in libraries from affecting apps.</p>
+<p>Both approaches allow you to automate the build process for your libraries and applications in a coordinated manner using GitHub Actions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="8d0e8e31-2576-4378-975a-9fba3188bd8e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://docs.github.com/en/actions/quickstart" target="_blank" class="url">https://docs.github.com/en/actions/quickstart</a> をチェック</span>
+                    <a href="#8d0e8e31-2576-4378-975a-9fba3188bd8e" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="26f70276-782f-498d-ab9e-0d402f1cc77f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">GitHub Actions を使ってみる</span>
+                    <a href="#26f70276-782f-498d-ab9e-0d402f1cc77f" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">一つのライブラリーと一つのアプリがあり、アプリがライブラリーに依存しているにおいて、ライブラリーを三つのプラットフォーム用にコンパイルし、アプリもそうして、正しくリンクし、ソースコードの入っているものと3セットのバイナリーの入っているものの計4つのアーカイブをつくる方法を聞いた。</p>
+                            <div class="note_ai_generated">
+<p>To achieve this setup with GitHub Actions across two separate repositories, you will need two different workflow configurations. One for the library repository to build and archive the library for Windows, macOS, and Linux, and another for the app repository that builds the app using the library for the three platforms and archives both the source and binaries.</p>
+<h3>Library Repository Workflow</h3>
+<p>In your library repository, create a <code>.github/workflows/build-library.yml</code> file:</p>
+<pre><code class="language-yaml">name: Build and Archive Library
+
+on:
+  push:
+    branches:
+      - main # Adjust this as per your main branch
+
+jobs:
+  build:
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.1' # Specify your .NET version here
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Zip binaries
+      run: |
+        $version = dotnet msbuild /t:PrintVersion
+        Compress-Archive -Path **/bin/Release/**/* -DestinationPath ${{ runner.os }}-library-$version.zip
+      shell: pwsh
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ runner.os }}-library
+        path: ${{ runner.os }}-library-*.zip
+</code></pre>
+<p>This workflow triggers on pushes to the main branch, builds the library for each specified OS, zips the binaries with the version number included in the file name, and then uploads the zip files as artifacts.</p>
+<h3>App Repository Workflow</h3>
+<p>In your app repository, create a <code>.github/workflows/build-app.yml</code> file:</p>
+<pre><code class="language-yaml">name: Build and Archive App
+
+on:
+  push:
+    branches:
+      - main # Adjust this as per your main branch
+
+jobs:
+  build:
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.1' # Specify your .NET version here
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Zip source code
+      run: |
+        $version = dotnet msbuild /t:PrintVersion
+        git archive -o source-$version.zip HEAD
+      shell: pwsh
+
+    - name: Zip binaries
+      run: |
+        $version = dotnet msbuild /t:PrintVersion
+        Compress-Archive -Path **/bin/Release/**/* -DestinationPath ${{ runner.os }}-app-$version.zip
+      shell: pwsh
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ runner.os }}-app
+        path: |
+          source-*.zip
+          ${{ runner.os }}-app-*.zip
+</code></pre>
+<p>This workflow is similar to the library workflow but includes an additional step to zip and upload the source code. The <code>dotnet msbuild /t:PrintVersion</code> command assumes you have a target <code>PrintVersion</code> in your <code>.csproj</code> or <code>.sln</code> file that prints the version to the console. You might need to adjust this command to suit how you manage versioning in your project.</p>
+<h3>Notes</h3>
+<ul>
+<li>You need to manage the versioning of your library and ensure the app project references the correct version. This could involve manual updates or an automated process to update project references in your app repository.</li>
+<li>The <code>Compress-Archive</code> command and <code>git archive</code> are used for zipping files in these examples and might need adjustments based on your directory structure or requirements.</li>
+<li>This setup assumes that the app can directly use the zipped library binaries. In a real-world scenario, you might publish your library to a package feed (like NuGet or GitHub Packages) and restore it during the app build process.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">たぶん無料の範囲内。</p>
+                            <p class="note_contents"><a href="https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions" target="_blank" class="url">https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ドキュメントに軽く目を通し、ちょっとハンズオンもしてみたが、ワークフローが好きになれない。大勢で開発するなら GitHub 側でコードを編集するのも理にかなうが、まだ一人なのでローカルでいじりたい。コンパイルや ZIP アーカイブの作成までを手元で試行錯誤し、うまくいってから一度だけコミットしたい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="af011534-4a70-42bc-a88d-97f566e4c549" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents"><a href="https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net" target="_blank" class="url">https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net</a> をチェック</span>
+                    <a href="#af011534-4a70-42bc-a88d-97f566e4c549" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="a3851e8f-9bb1-4bc3-8d16-9d727071239e" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents"><a href="https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages" target="_blank" class="url">https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages</a> をチェック</span>
+                    <a href="#a3851e8f-9bb1-4bc3-8d16-9d727071239e" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="706be968-41bb-4bbf-8036-82da98608b09" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents"><a href="https://docs.github.com/en/actions/deployment/deploying-to-your-cloud-provider/deploying-to-azure/deploying-net-to-azure-app-service" target="_blank" class="url">https://docs.github.com/en/actions/deployment/deploying-to-your-cloud-provider/deploying-to-azure/deploying-net-to-azure-app-service</a> をチェック</span>
+                    <a href="#706be968-41bb-4bbf-8036-82da98608b09" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="0b5b76cd-b3e0-41f0-b012-fe8914d3f0b2" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">GitHub の pull request について調べる</span>
+                    <a href="#0b5b76cd-b3e0-41f0-b012-fe8914d3f0b2" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">やったことがないので、「『変更したからチェックしてくれ』をほかのメンバーに言う仕組みなのか」と聞いた。</p>
+                            <div class="note_ai_generated">
+<p>Yes, that's a good summary of the basic concept behind GitHub pull requests (PRs). A pull request is a method for a developer to notify team members that they have completed a feature or fixed a bug in the code. Here's a more detailed breakdown:</p>
+<ol>
+<li><p><strong>Branching</strong>: Typically, a developer creates a new branch from the main project (or another designated branch) to work on a specific task or feature.</p>
+</li>
+<li><p><strong>Making Changes</strong>: The developer makes changes, fixes, or adds new features in this separate branch without affecting the main codebase.</p>
+</li>
+<li><p><strong>Committing</strong>: After completing the changes, the developer commits them to the branch, along with descriptive commit messages that explain what has been done and why.</p>
+</li>
+<li><p><strong>Pushing</strong>: The committed changes are pushed to the remote repository on GitHub.</p>
+</li>
+<li><p><strong>Creating the Pull Request</strong>: The developer then opens a pull request against the main branch (or another target branch). The PR contains all the commits and changes made in the feature branch.</p>
+</li>
+<li><p><strong>Review</strong>: Team members, maintainers, or collaborators review the changes. They can look at the diffs, which show the differences between the new code and the existing code in the target branch. They can also leave comments, suggest changes, or ask for clarifications.</p>
+</li>
+<li><p><strong>Discussion</strong>: There might be some back-and-forth between the developer and the reviewers in the comments of the PR to refine the code, make improvements, or explain certain decisions.</p>
+</li>
+<li><p><strong>Approval</strong>: Once the changes are reviewed and approved by the required number of reviewers or a specific maintainer, the pull request can be merged.</p>
+</li>
+<li><p><strong>Merging</strong>: Merging incorporates the changes from the feature branch into the target branch. This is often done using a merge commit, but there are other strategies like rebasing or squashing commits.</p>
+</li>
+<li><p><strong>Closure</strong>: After merging, the pull request is closed, and the feature branch can be deleted to keep the repository clean.</p>
+</li>
+</ol>
+<p>In summary, a pull request is a way to propose changes to a codebase and facilitate code review, discussion, and approval before those changes are merged into the main codebase.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="0903bd38-d781-4aae-ab05-5a5f40a1137e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Git のブランチについて調べる</span>
+                    <a href="#0903bd38-d781-4aae-ab05-5a5f40a1137e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">基本は理解できていたが、一人での開発ではお世話になったことがない。</p>
+                            <div class="note_ai_generated">
+<p>Yes, your analogy of &quot;alternative timelines&quot; is a good way to conceptualize branches in Git. In Git, a branch represents an independent line of development. You can think of the main branch (often called <code>master</code> or <code>main</code>) as the main timeline, where the final, stable version of the project lives. When you create a new branch, you're creating a parallel timeline where you can make changes without affecting the main timeline.</p>
+<p>Here's a bit more detail on how branches work and how they're used:</p>
+<ol>
+<li><p><strong>Starting Point</strong>: When you create a branch, it starts as an exact copy of the branch you're branching from, typically the <code>main</code> branch. At this point, both the new branch and the <code>main</code> branch point to the same commit in the project history.</p>
+</li>
+<li><p><strong>Divergence</strong>: As you start making commits on your new branch, it begins to diverge from the <code>main</code> branch. These commits exist only on your new branch and do not affect the <code>main</code> branch or any other branches.</p>
+</li>
+<li><p><strong>Parallel Development</strong>: You can switch back and forth between branches, making different changes on each. Each branch maintains its own history of commits, separate from the others. This allows multiple features or fixes to be developed in parallel, without interfering with each other or with the stable version of the project.</p>
+</li>
+<li><p><strong>Merging</strong>: When the work on a branch is complete and tested, you can merge it back into the <code>main</code> branch (or any other branch). Merging takes the changes made on your branch and applies them to the target branch. If there are no conflicts (i.e., changes that contradict changes made on the target branch), Git can automatically merge the branches.</p>
+</li>
+<li><p><strong>Conflict Resolution</strong>: If there are conflicts (for example, if changes were made to the same part of a file on both the feature branch and the <code>main</code> branch), Git will require you to manually resolve these conflicts before the merge can be completed.</p>
+</li>
+<li><p><strong>Discarding a Branch</strong>: If the work on a branch is no longer needed, or if you want to start over, you can simply switch back to the <code>main</code> branch (or any other branch) and delete the feature branch. The commits made on that branch will be removed from the project history (though they can still be recovered in Git if needed).</p>
+</li>
+</ol>
+<p>Using branches allows developers to work on new features, experiment with changes, or fix bugs in isolation from the main codebase. This keeps the main codebase more stable and allows for easier code review and testing of changes before they are integrated.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, it is possible to completely remove a branch from the server side in Git, which typically means deleting the branch from a remote repository (like GitHub, GitLab, Bitbucket, etc.). This operation is often used to clean up feature branches that are no longer needed after their changes have been merged.</p>
+<p>To delete a branch from the remote repository, you can use the following Git command:</p>
+<pre><code class="language-bash">git push &lt;remote-name&gt; --delete &lt;branch-name&gt;
+</code></pre>
+<p>Here's what each part of the command means:</p>
+<ul>
+<li><p><code>&lt;remote-name&gt;</code>: This is the name of the remote repository. In most cases, the default remote name is <code>origin</code>, which is the default name Git gives to the server you cloned the repository from.</p>
+</li>
+<li><p><code>&lt;branch-name&gt;</code>: This is the name of the branch you want to delete on the remote server.</p>
+</li>
+</ul>
+<p>For example, if your remote is named <code>origin</code> and your branch is named <code>feature-xyz</code>, you would use the following command:</p>
+<pre><code class="language-bash">git push origin --delete feature-xyz
+</code></pre>
+<p>This command tells Git to push a &quot;delete&quot; for the <code>feature-xyz</code> branch to the <code>origin</code> remote, effectively removing the branch from the remote repository.</p>
+<p>It's important to note that this operation only affects the remote repository. If you or anyone else has a local copy of the branch, it will remain on your local machines until explicitly deleted using the <code>git branch -d &lt;branch-name&gt;</code> command for a safe delete or <code>git branch -D &lt;branch-name&gt;</code> for a force delete.</p>
+<p>Also, be cautious when deleting branches, especially if they contain unique commits that haven't been merged or saved elsewhere, as this operation can lead to loss of work.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">新しいブランチのコードをメインのブランチに統合したあとに新しい方を消しても、そのなかでの細かい更新履歴は残るようだ。</p>
+                            <div class="note_ai_generated">
+<p>When you merge a branch into the main branch and then delete the merged branch, the individual commits from the merged branch are still retained in the history of the main branch. Git preserves the complete history of changes, including all individual commits that were made on the feature branch, even after the feature branch itself is deleted.</p>
+<p>Here's a step-by-step breakdown of what happens:</p>
+<ol>
+<li><p><strong>Merging</strong>: When you merge a feature branch into the main branch (let's say using a merge commit for simplicity), Git creates a new commit on the main branch that ties together the histories of both branches. This merge commit has two parent commits: the previous commit on the main branch and the last commit on the feature branch. This way, the history of the feature branch is integrated into the history of the main branch.</p>
+</li>
+<li><p><strong>Viewing History</strong>: After the merge, if you look at the history of the main branch (e.g., using <code>git log</code>), you'll see all the individual commits from the feature branch in the order they were made, interwoven with commits that were made directly on the main branch. Tools like <code>git log --graph</code> can visually show the branching and merging paths, making it easier to understand the history.</p>
+</li>
+<li><p><strong>Deleting the Feature Branch</strong>: Deleting the feature branch removes the reference to the tip of that branch, but it does not remove the commits that were part of the branch from the repository's history. Those commits are now part of the main branch's history due to the merge.</p>
+</li>
+<li><p><strong>Preserved History</strong>: As a result, the history of the changes made in the feature branch is preserved in the main branch. It does not appear as one big complex change but rather as the sequence of individual changes that were made on the feature branch. The merge commit itself represents the point at which those changes were officially integrated into the main branch.</p>
+</li>
+</ol>
+<p>Therefore, even after deleting the feature branch, the detailed history of its changes remains part of the main branch's history, preserving the context and evolution of your project's code over time.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="09dbe0ad-806d-49fc-b03d-9a0e7c735643" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">各プロジェクトに複数のブランチがないか調べる</span>
+                    <a href="#09dbe0ad-806d-49fc-b03d-9a0e7c735643" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="1cac61e3-1c03-4478-8314-480591ad15e2" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">現行の8つのプロジェクトを2つの Windows パソコンと1つの Mac でコミットできるようにする</span>
+                    <a href="#1cac61e3-1c03-4478-8314-480591ad15e2" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="448da586-32f9-464e-b010-74897798255e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Windows でも Mac でも VSC でコンパイルできるようにする</span>
+                    <a href="#448da586-32f9-464e-b010-74897798255e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Compiling a .NET application using Visual Studio Code (VS Code) on Windows involves several steps, including setting up your development environment, writing your code, and then compiling it. Below is a general guide on how to do this:</p>
+<ol>
+<li><p><strong>Install the Prerequisites:</strong></p>
+<ul>
+<li><strong>.NET SDK:</strong> Make sure you have the .NET SDK installed on your machine. You can download it from the <a href="https://dotnet.microsoft.com/download">.NET official website</a>. The SDK includes everything you need to compile and run .NET applications.</li>
+<li><strong>Visual Studio Code:</strong> If you haven't already, download and install VS Code from the <a href="https://code.visualstudio.com/">official website</a>.</li>
+<li><strong>C# Extension for VS Code:</strong> Open VS Code, go to the Extensions view by clicking on the square icon on the sidebar or pressing <code>Ctrl+Shift+X</code>, and search for &quot;C# for Visual Studio Code&quot; by Microsoft. Install this extension to add support for .NET development.</li>
+</ul>
+</li>
+<li><p><strong>Create Your .NET Application:</strong></p>
+<ul>
+<li>Open VS Code.</li>
+<li>Open the Terminal in VS Code by going to <code>View</code> &gt; <code>Terminal</code> or pressing <code>Ctrl+` </code>.</li>
+<li>Navigate to the directory where you want to create your project.</li>
+<li>Create a new .NET application by running the <code>dotnet new</code> command followed by the template name. For example, to create a new console application, you would run:
+<pre><code>dotnet new console -n YourProjectName
+</code></pre>
+</li>
+<li>This command creates a new directory with the same name as your project, containing a simple &quot;Hello World&quot; application.</li>
+</ul>
+</li>
+<li><p><strong>Open Your Project:</strong></p>
+<ul>
+<li>Go to <code>File</code> &gt; <code>Open Folder...</code> and select the folder that was created for your project.</li>
+</ul>
+</li>
+<li><p><strong>Restore Dependencies:</strong></p>
+<ul>
+<li>.NET Core projects use NuGet packages as dependencies. To restore any dependencies, run the following command in the terminal:
+<pre><code>dotnet restore
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong>Compile and Run Your Application:</strong></p>
+<ul>
+<li>To build (compile) your project, run:
+<pre><code>dotnet build
+</code></pre>
+</li>
+<li>This command compiles your project and outputs any compilation errors in the terminal.</li>
+<li>To run your application, execute:
+<pre><code>dotnet run
+</code></pre>
+</li>
+<li>This command will compile your application if necessary and run the resulting executable.</li>
+</ul>
+</li>
+<li><p><strong>Debugging:</strong></p>
+<ul>
+<li>To debug your application, open the file you want to debug, set a breakpoint by clicking to the left of the line number, and press <code>F5</code> to start debugging. Follow the prompts to configure the debugging environment if you're doing this for the first time.</li>
+</ul>
+</li>
+</ol>
+<p>By following these steps, you should be able to compile and run a .NET application using Visual Studio Code on Windows. Remember, the specific commands might vary depending on the type of .NET application you are developing (e.g., console, web, library).</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, you can compile both a library and an application that references it within a single instance of Visual Studio Code (VS Code) by using a solution file or by manually managing the build order through the terminal. Here’s how you can do it:</p>
+<h3>Using a Solution File</h3>
+<p>If your solution contains a library and an application, and the application depends on the library, you can manage this dependency through a solution file (<code>*.sln</code>). This solution file can define the build order, ensuring the library is compiled before the application. Here's how to set it up:</p>
+<ol>
+<li><p><strong>Create a Solution File (if not already present):</strong></p>
+<ul>
+<li>Open the terminal in VS Code.</li>
+<li>Navigate to the root directory where you want the solution file to reside.</li>
+<li>Run the following command to create a new solution file:
+<pre><code>dotnet new sln -n YourSolutionName
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong>Add Projects to the Solution:</strong></p>
+<ul>
+<li>Add your library project to the solution:
+<pre><code>dotnet sln YourSolutionName.sln add path/to/your/library/LibraryProject.csproj
+</code></pre>
+</li>
+<li>Add your application project to the solution:
+<pre><code>dotnet sln YourSolutionName.sln add path/to/your/app/AppProject.csproj
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong>Ensure the Application References the Library:</strong></p>
+<ul>
+<li>If your application does not already reference the library, add the reference:
+<pre><code>dotnet add path/to/your/app/AppProject.csproj reference path/to/your/library/LibraryProject.csproj
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong>Build the Solution:</strong></p>
+<ul>
+<li>You can now build the entire solution, which will compile the projects in the correct order based on dependencies:
+<pre><code>dotnet build YourSolutionName.sln
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<h3>Manually Managing Build Order</h3>
+<p>If you prefer not to use a solution file, you can manually compile each project in the correct order using the terminal within VS Code:</p>
+<ol>
+<li><p><strong>Compile the Library First:</strong></p>
+<ul>
+<li>Navigate to the library project directory and run:
+<pre><code>dotnet build
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong>Compile the Application:</strong></p>
+<ul>
+<li>After the library has successfully compiled, navigate to the application project directory and run:
+<pre><code>dotnet build
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<p>This manual approach ensures that the library is compiled before the application, satisfying the dependency requirement.</p>
+<h3>Note</h3>
+<ul>
+<li>When using a solution file, Visual Studio Code and the C# extension will understand the project dependencies and can provide better IntelliSense, refactoring tools, and debugging capabilities across the entire solution.</li>
+<li>Regardless of the approach you choose, ensure that the application project file (<code>*.csproj</code>) correctly references the library project to resolve dependencies at compile time.</li>
+</ul>
+<p>By following either of these approaches, you can manage and compile multiple related projects (such as a library and an application that depends on it) within a single instance of Visual Studio Code on Windows.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Updating NuGet packages in a .NET project using Visual Studio Code (VS Code) can be done through the integrated terminal. While VS Code does not have a built-in UI for managing NuGet packages like Visual Studio, you can easily manage packages using the <code>dotnet</code> CLI or third-party extensions. Here's how to update NuGet packages using the <code>dotnet</code> CLI:</p>
+<h3>Using the <code>dotnet</code> CLI</h3>
+<ol>
+<li><p><strong>Open your project in VS Code:</strong></p>
+<ul>
+<li>Open the folder containing your .NET project in VS Code.</li>
+</ul>
+</li>
+<li><p><strong>Open the integrated terminal:</strong></p>
+<ul>
+<li>You can open the terminal in VS Code by going to <code>View</code> &gt; <code>Terminal</code> or by using the shortcut <code>Ctrl+` </code> (the backtick character).</li>
+</ul>
+</li>
+<li><p><strong>List the installed NuGet packages:</strong></p>
+<ul>
+<li>To see a list of the NuGet packages your project is currently using, type the following command in the terminal:
+<pre><code>dotnet list package
+</code></pre>
+</li>
+<li>This command will show you the current installed packages along with their versions.</li>
+</ul>
+</li>
+<li><p><strong>Update a specific NuGet package:</strong></p>
+<ul>
+<li>To update a specific package, use the <code>dotnet add package</code> command with the package name. This command will add the latest version of the package to your project, effectively updating it. For example, to update a package named <code>ExamplePackage</code>, you would run:
+<pre><code>dotnet add package ExamplePackage
+</code></pre>
+</li>
+<li>This command will remove the older version and add the latest version of <code>ExamplePackage</code> to your project.</li>
+</ul>
+</li>
+<li><p><strong>Update all NuGet packages:</strong></p>
+<ul>
+<li>If you want to update all packages in your project to their latest versions, you can run the following command for each package listed by the <code>dotnet list package</code> command:
+<pre><code>dotnet add package &lt;PackageName&gt;
+</code></pre>
+</li>
+<li>Replace <code>&lt;PackageName&gt;</code> with the name of each package you want to update. This process can be a bit tedious if you have many packages, but it ensures that all packages are updated.</li>
+</ul>
+</li>
+</ol>
+<h3>Using a Third-party Extension</h3>
+<p>There are also third-party VS Code extensions that can help manage NuGet packages with a more user-friendly interface. One such extension is &quot;NuGet Package Manager GUI&quot; which can be found and installed from the VS Code Extensions marketplace:</p>
+<ol>
+<li><p><strong>Install the NuGet Package Manager GUI extension:</strong></p>
+<ul>
+<li>Go to the Extensions view by clicking on the square icon on the sidebar or pressing <code>Ctrl+Shift+X</code>.</li>
+<li>Search for &quot;NuGet Package Manager GUI&quot; and install it.</li>
+</ul>
+</li>
+<li><p><strong>Use the extension to manage NuGet packages:</strong></p>
+<ul>
+<li>After installing the extension, you can access its features from the VS Code Command Palette (<code>Ctrl+Shift+P</code>) by typing &quot;NuGet&quot; and selecting the relevant commands to browse, install, update, or remove packages.</li>
+</ul>
+</li>
+</ol>
+<p>Using the <code>dotnet</code> CLI directly or leveraging a third-party extension can effectively manage and update NuGet packages in your .NET projects within Visual Studio Code.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To update all NuGet packages for all projects within a solution using the <code>dotnet</code> CLI, there isn't a single built-in command that accomplishes this directly. However, you can achieve this by combining a few commands and scripting techniques. Here's a method to do this using a PowerShell script, which is suitable for Windows environments:</p>
+<ol>
+<li><p><strong>Open PowerShell:</strong></p>
+<ul>
+<li>You can open PowerShell directly from the folder containing your solution by typing <code>powershell</code> in the address bar of the folder's window and pressing Enter. Alternatively, you can open PowerShell from the Start menu and navigate to your solution's directory.</li>
+</ul>
+</li>
+<li><p><strong>Run the Update Script:</strong></p>
+<ul>
+<li>Use the following PowerShell script to update all NuGet packages in every project within your solution. This script iterates through all <code>.csproj</code> files in the solution's directory and its subdirectories, then uses the <code>dotnet add package</code> command to update each package.</li>
+</ul>
+<pre><code class="language-powershell">Get-ChildItem -Recurse *.csproj | ForEach-Object {
+  Write-Host &quot;Updating packages for project $($_.FullName)&quot;
+  dotnet list $_.FullName package --outdated | Select-String -Pattern &quot;&gt;\s+([^\s]+)\s+([^\s]+)\s+([^\s]+)\s+([^\s]+)&quot; | ForEach-Object {
+    $packageName = $_.Matches[0].Groups[1].Value
+    Write-Host &quot;Updating package $packageName for project $($_.FullName)&quot;
+    dotnet add $_.FullName package $packageName
+  }
+}
+</code></pre>
+<p>This script does the following:</p>
+<ul>
+<li>Finds all <code>.csproj</code> files within the solution folder and its subfolders.</li>
+<li>For each project file found, it lists outdated packages using <code>dotnet list package --outdated</code>.</li>
+<li>Parses the output to find package names.</li>
+<li>Updates each package found to the latest version using <code>dotnet add package</code>.</li>
+</ul>
+</li>
+<li><p><strong>Execute the Script:</strong></p>
+<ul>
+<li>Copy the script above into your PowerShell window and press Enter to execute it. The script will go through each project in your solution, identify all outdated NuGet packages, and update them to the latest versions.</li>
+</ul>
+</li>
+</ol>
+<h3>Note:</h3>
+<ul>
+<li>This script assumes that your solution structure places project files within the solution directory or its subdirectories. If your projects are located elsewhere, you might need to adjust the script.</li>
+<li>Make sure you have a backup or your code is under version control before running the script, as updating packages can sometimes introduce breaking changes.</li>
+<li>The script uses regex to parse the output of <code>dotnet list package --outdated</code>, which might need adjustments if the output format changes in future <code>dotnet</code> CLI versions.</li>
+<li>Execution policies might prevent the script from running. If you encounter an execution policy error, you can temporarily change the execution policy for the current PowerShell session by running <code>Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass</code>. Be cautious with changing execution policies and ensure you understand the implications.</li>
+</ul>
+<p>This approach provides a way to update all NuGet packages across all projects in a solution using a single command sequence in PowerShell, leveraging the capabilities of the <code>dotnet</code> CLI.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="a9015b08-b311-4125-a80a-43736b2f91e3" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">.NET なら PowerShell でのコンパイルやパッケージ化も一般的か調べる</span>
+                    <a href="#a9015b08-b311-4125-a80a-43736b2f91e3" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">シームレスにできそうなので一定数の人がやっているだろうが、もっと圧倒的に便利で簡単なツールもありうる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, it is quite common to automate the building and packaging of .NET applications using PowerShell. PowerShell is a powerful scripting language and command-line shell that is widely used in the Windows environment. Its deep integration with the Windows operating system and the .NET framework makes it an excellent tool for automating tasks related to .NET applications.</p>
+<p>Automating the build and package process with PowerShell can include tasks such as:</p>
+<ol>
+<li><strong>Compiling the Application</strong>: Using MSBuild (Microsoft Build Engine) commands within a PowerShell script to compile the .NET application.</li>
+<li><strong>Running Tests</strong>: Automating the execution of unit tests or integration tests as part of the build process.</li>
+<li><strong>Versioning</strong>: Automatically updating version numbers in assembly info files or through the use of version management tools.</li>
+<li><strong>Packaging</strong>: Creating NuGet packages or other package formats for the application or its libraries for distribution or deployment.</li>
+<li><strong>Deployment</strong>: Automating the deployment of the application to various environments, such as development, testing, staging, or production.</li>
+</ol>
+<p>PowerShell scripts can be integrated into continuous integration/continuous deployment (CI/CD) pipelines using tools like Jenkins, Azure DevOps, GitHub Actions, etc., to further streamline and automate the entire software development lifecycle.</p>
+<p>This approach allows for more consistent builds and deployments, reduces human error, and can significantly improve the efficiency and reliability of the development process.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To accomplish the tasks of compiling, running tests, versioning, packaging, and deploying .NET applications using PowerShell, you can follow these general steps. Each task will require specific PowerShell cmdlets, .NET CLI commands, or calls to other utilities:</p>
+<h3>1. Compiling the Application</h3>
+<p>You can use MSBuild, which is part of the .NET framework and .NET Core SDK, to compile .NET applications. A PowerShell script to compile a .NET application might look like this:</p>
+<pre><code class="language-powershell"># Path to the solution or project file
+$solutionPath = &quot;path\to\your\Solution.sln&quot;
+
+# Building the solution using MSBuild
+&amp; &quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\MSBuild.exe&quot; $solutionPath /p:Configuration=Release /p:Platform=&quot;Any CPU&quot;
+</code></pre>
+<h3>2. Running Tests</h3>
+<p>To run tests, you can use the <code>dotnet test</code> command for .NET Core applications or <code>vstest.console.exe</code> for .NET Framework applications:</p>
+<pre><code class="language-powershell"># For .NET Core
+dotnet test $solutionPath --configuration Release
+
+# For .NET Framework using Visual Studio Test Runner
+&amp; &quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe&quot; &quot;path\to\your\TestProject\bin\Release\TestProject.dll&quot;
+</code></pre>
+<h3>3. Versioning</h3>
+<p>Versioning can be done by modifying assembly info files or using the .NET CLI for .NET Core projects:</p>
+<pre><code class="language-powershell"># For .NET Framework, update AssemblyInfo.cs
+$assemblyInfoPath = &quot;path\to\your\Project\Properties\AssemblyInfo.cs&quot;
+(Get-Content $assemblyInfoPath) -replace 'AssemblyVersion\(&quot;1.0.0.0&quot;\)', 'AssemblyVersion(&quot;1.0.1.0&quot;)' | Set-Content $assemblyInfoPath
+
+# For .NET Core, update the project file
+$projectPath = &quot;path\to\your\Project.csproj&quot;
+[xml]$project = Get-Content $projectPath
+$ns = @{ 'msbuild'='http://schemas.microsoft.com/developer/msbuild/2003' }
+$versionNode = $project.SelectSingleNode(&quot;//msbuild:Project/msbuild:PropertyGroup/msbuild:Version&quot;, $ns)
+$versionNode.InnerText = &quot;1.0.1&quot;
+$project.Save($projectPath)
+</code></pre>
+<h3>4. Packaging</h3>
+<p>For packaging, you can create NuGet packages using the <code>dotnet pack</code> command or the NuGet CLI:</p>
+<pre><code class="language-powershell"># For .NET Core
+dotnet pack $projectPath --configuration Release --output &quot;path\to\output\directory&quot;
+
+# For .NET Framework using NuGet CLI
+&amp; &quot;path\to\nuget.exe&quot; pack &quot;path\to\your\NuSpec.nuspec&quot; -OutputDirectory &quot;path\to\output\directory&quot;
+</code></pre>
+<h3>5. Deployment</h3>
+<p>Deployment can vary greatly depending on the target environment (e.g., IIS, Azure, Docker). For a simple file copy deployment to an IIS server, you might use:</p>
+<pre><code class="language-powershell"># Copy files to the target directory
+$targetPath = &quot;\\Server\Share\YourApplication&quot;
+Copy-Item -Path &quot;path\to\your\build\output\*&quot; -Destination $targetPath -Recurse -Force
+</code></pre>
+<p>For more complex deployments, you might use web deployment packages, Docker containers, or integration with cloud services' CLI tools.</p>
+<p>These examples provide a basic framework. Depending on your specific requirements, environment, and .NET version, you may need to adjust these scripts. Integrating them into a CI/CD pipeline or automating further will also require additional steps and considerations.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, you can create zip archives using PowerShell on macOS and Linux. PowerShell Core, which is the cross-platform version of PowerShell, provides cmdlets that work across Windows, macOS, and Linux. The <code>Compress-Archive</code> cmdlet is used to create zip archives. Here's how you can use it:</p>
+<pre><code class="language-powershell"># Compressing a folder into a zip file
+Compress-Archive -Path /path/to/source/folder -DestinationPath /path/to/destination/archive.zip
+
+# Compressing multiple files into a zip file
+Compress-Archive -Path /path/to/source/file1, /path/to/source/file2 -DestinationPath /path/to/destination/archive.zip
+</code></pre>
+<p>Here are the steps to create a zip archive using PowerShell on macOS and Linux:</p>
+<ol>
+<li><p><strong>Open PowerShell</strong>: You can open a PowerShell terminal by typing <code>pwsh</code> in your terminal if PowerShell Core is installed.</p>
+</li>
+<li><p><strong>Use Compress-Archive</strong>: Use the <code>Compress-Archive</code> cmdlet with the appropriate parameters to specify the source files or directories and the destination of the zip file.</p>
+</li>
+<li><p><strong>Run the Command</strong>: After typing your <code>Compress-Archive</code> command with the desired paths, press Enter to execute the command and create the zip archive.</p>
+</li>
+</ol>
+<p>If you encounter any issues with <code>Compress-Archive</code> or if it's not available for some reason, you can fall back on native shell commands available in macOS and Linux. For instance, on both systems, you can use the <code>zip</code> command in the terminal:</p>
+<pre><code class="language-shell">zip -r /path/to/destination/archive.zip /path/to/source/folder
+</code></pre>
+<p>This command recursively (<code>-r</code>) compresses the contents of the specified source folder into a zip archive at the specified destination path. Ensure you have the <code>zip</code> utility installed on your system, which is typically available by default on macOS and can be easily installed on most Linux distributions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="6cbd3a5d-e56a-4095-b008-d235a6cb75d5" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">対応するプラットフォームそれぞれの識別子を決める</span>
+                    <a href="#6cbd3a5d-e56a-4095-b008-d235a6cb75d5" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Packaging .NET applications for multiple operating systems (OS) and processors involves creating distinct builds for each target environment. To effectively differentiate the file names, you should adopt a naming convention that includes key identifiers such as the application name, version, target OS, and processor architecture. This approach helps in organizing and identifying the correct package for a given environment. Here's a suggested naming convention:</p>
+<pre><code>&lt;ApplicationName&gt;_&lt;Version&gt;_&lt;OS&gt;_&lt;Architecture&gt;.&lt;PackageExtension&gt;
+</code></pre>
+<p>For example, if you have an application named &quot;MyApp,&quot; version 1.0, targeting Windows on x64 and Linux on ARM64, the file names could be:</p>
+<ul>
+<li><code>MyApp_1.0_Windows_x64.exe</code> for Windows x64</li>
+<li><code>MyApp_1.0_Linux_ARM64.tar.gz</code> for Linux ARM64</li>
+</ul>
+<h3>Key Components of the Naming Convention:</h3>
+<ul>
+<li><strong>ApplicationName</strong>: The name of your application, which helps in identifying the software.</li>
+<li><strong>Version</strong>: The version of the application, usually following Semantic Versioning (e.g., 1.0.0, 2.1.3). It's crucial for managing updates and compatibility.</li>
+<li><strong>OS</strong>: The target operating system. Common abbreviations include Win for Windows, Linux for Linux, MacOS for macOS, etc.</li>
+<li><strong>Architecture</strong>: The processor architecture, such as x86, x64 (or amd64), ARM64, etc. This specifies the hardware platform for which the application is built.</li>
+<li><strong>PackageExtension</strong>: The extension of the package, which might vary based on the OS and the packaging method (e.g., <code>.exe</code> for Windows executables, <code>.tar.gz</code> for compressed Linux packages, <code>.dmg</code> for macOS disk images).</li>
+</ul>
+<h3>Additional Considerations:</h3>
+<ul>
+<li><strong>Environment Tags</strong>: In some cases, you might also want to include environment-specific tags if your application targets different environments within the same OS, such as <code>development</code>, <code>staging</code>, or <code>production</code>.</li>
+<li><strong>Build or Revision Number</strong>: For applications that are frequently updated or have continuous integration/continuous deployment (CI/CD) pipelines, including a build or revision number can be helpful.</li>
+</ul>
+<p>By following this convention, you ensure that each package is easily identifiable and correctly matched with its intended environment, reducing the risk of deployment errors. Remember to adjust the naming convention as per your organization's standards and the specific requirements of your project.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When you compile a C# application on a x64 Windows PC using a tool like Visual Studio or the .NET command-line interface (CLI), the default target platform of the compiled application depends on the project settings rather than the architecture of the development machine. In .NET, projects can be configured to target specific frameworks and platforms, and these settings determine the compatibility of the compiled application.</p>
+<h3>Default Behavior:</h3>
+<ul>
+<li><p><strong>Visual Studio</strong>: In Visual Studio, the default target platform for a new project can vary based on the project template and the version of Visual Studio. However, many project templates default to &quot;Any CPU&quot;, which means the compiled application can run on any platform supported by the .NET runtime installed on the target machine, including x86 and x64 architectures. &quot;Any CPU&quot; is a versatile setting that allows the application to run in 32-bit mode on x86 systems and in 64-bit mode on x64 systems.</p>
+</li>
+<li><p><strong>.NET CLI</strong>: When using the .NET CLI (<code>dotnet</code> command) to create a new project, the default setting is also typically &quot;Any CPU&quot;, allowing the application to be platform-agnostic. When you publish the application using the <code>dotnet publish</code> command without specifying a runtime identifier (RID), it targets &quot;Any CPU&quot;.</p>
+</li>
+</ul>
+<h3>Specifying Target Platform:</h3>
+<p>You can specify the target platform explicitly in the project settings in Visual Studio or by using the <code>-r</code> (or <code>--runtime</code>) option with the <code>dotnet publish</code> command in the .NET CLI. For example, to specifically target x64 Windows, you could use a command like:</p>
+<pre><code>dotnet publish -c Release -r win-x64
+</code></pre>
+<p>This command creates a build specifically for Windows x64, which may include optimizations for that platform.</p>
+<h3>Conclusion:</h3>
+<p>By default, a C# application compiled on a x64 Windows PC is likely configured to target &quot;Any CPU&quot;, making it capable of running on both x86 and x64 architectures, unless the project settings explicitly specify a different target platform. If you need your application to specifically target x64 Windows, you should ensure that the project settings or the publish command reflect that requirement.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>For macOS, targeting different architectures like ARM64 (Apple Silicon) and x64 (Intel-based Macs) can indeed present more challenges compared to the &quot;Any CPU&quot; option available for Windows in .NET applications. The &quot;Any CPU&quot; option is primarily a .NET feature that allows applications to run on any CPU architecture supported by the .NET runtime on the target machine, adjusting dynamically. However, this concept doesn't directly apply to macOS, especially with the introduction of Apple Silicon, which uses the ARM64 architecture.</p>
+<h3>Universal Binaries for macOS:</h3>
+<p>To support both ARM64 and x64 architectures on macOS, Apple introduced the concept of Universal Binaries. A Universal Binary contains code for both Intel (x64) and Apple Silicon (ARM64) architectures, allowing the application to run natively on both types of processors without modification.</p>
+<h3>Creating Universal Binaries in .NET:</h3>
+<p>As of .NET 6 and later, you can create Universal Binaries for macOS applications by specifying multiple Runtime Identifiers (RIDs) when publishing the application. Here's how you can do it using the .NET CLI:</p>
+<ol>
+<li><p><strong>Edit the Project File</strong>: Open your <code>.csproj</code> file and add the following property group to specify both <code>osx-x64</code> and <code>osx-arm64</code> as supported runtimes:</p>
+<pre><code class="language-xml">&lt;PropertyGroup&gt;
+  &lt;RuntimeIdentifiers&gt;osx-x64;osx-arm64&lt;/RuntimeIdentifiers&gt;
+&lt;/PropertyGroup&gt;
+</code></pre>
+</li>
+<li><p><strong>Publish the Application</strong>: Use the <code>dotnet publish</code> command with the <code>-r</code> option set to <code>osx-x64;osx-arm64</code> and include the <code>--self-contained</code> flag if you want a self-contained deployment. For a framework-dependent deployment, you can omit the <code>--self-contained</code> flag.</p>
+<pre><code class="language-bash">dotnet publish -c Release -r osx-x64;osx-arm64 --self-contained
+</code></pre>
+<p>This command tells .NET to compile the application for both x64 and ARM64 architectures.</p>
+</li>
+<li><p><strong>Create a Universal Binary</strong>: After publishing, you'll have separate builds for <code>osx-x64</code> and <code>osx-arm64</code>. To create a Universal Binary, you can use the <code>lipo</code> tool available on macOS to combine these architectures into a single binary.</p>
+<pre><code class="language-bash">lipo -create -output &quot;MyAppUniversal&quot; &quot;path/to/osx-x64/MyApp&quot; &quot;path/to/osx-arm64/MyApp&quot;
+</code></pre>
+<p>Replace <code>&quot;path/to/osx-x64/MyApp&quot;</code> and <code>&quot;path/to/osx-arm64/MyApp&quot;</code> with the actual paths to your compiled applications for each architecture.</p>
+</li>
+</ol>
+<h3>Conclusion:</h3>
+<p>While there isn't a direct &quot;Any CPU&quot; equivalent for macOS in .NET, you can achieve similar functionality by creating Universal Binaries that support both ARM64 and x64 architectures. This approach ensures your .NET application can run natively on all Macs, regardless of the underlying processor.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>For Linux, packaging and distribution of .NET applications can indeed be more complex due to the variety of Linux distributions and their respective package management systems. Unlike Windows and macOS, where a single executable or package can often suffice, Linux applications may need to be packaged differently for distributions that use <code>dpkg</code> (e.g., Debian, Ubuntu) versus those that use <code>rpm</code> (e.g., Fedora, CentOS, openSUSE).</p>
+<h3>Packaging for Different Distributions:</h3>
+<ul>
+<li><p><strong>Debian-based distributions (using <code>dpkg</code>)</strong>: For these distributions, you would typically package your application as a <code>.deb</code> package. The Debian package management system uses these packages, and tools like <code>dpkg</code> and <code>apt</code> can be used to install them.</p>
+</li>
+<li><p><strong>Red Hat-based distributions (using <code>rpm</code>)</strong>: For these distributions, you would create an <code>.rpm</code> package. The RPM Package Manager uses these packages, and they can be installed using tools like <code>rpm</code> and <code>yum</code> or <code>dnf</code>.</p>
+</li>
+</ul>
+<h3>.NET Core Applications on Linux:</h3>
+<p>For .NET Core applications, there are a few common approaches to deployment on Linux:</p>
+<ol>
+<li><p><strong>Framework-Dependent Deployment (FDD)</strong>: This method relies on the .NET runtime being installed on the target system. Your application is published without the .NET runtime included, making it smaller but requiring the runtime to be installed separately.</p>
+</li>
+<li><p><strong>Self-Contained Deployment (SCD)</strong>: This method packages your application with the .NET runtime included, making it larger but not dependent on the .NET runtime being installed on the target system. This can be beneficial for ensuring your application runs with the correct version of .NET, regardless of what is installed on the system.</p>
+</li>
+<li><p><strong>Creating Native Packages</strong>: For a more seamless installation experience, you can create native Linux packages (<code>.deb</code>, <code>.rpm</code>, etc.) that include your application (and optionally the .NET runtime). Tools like <code>dotnet-packaging</code> (a third-party NuGet package) can help automate the creation of these packages.</p>
+</li>
+<li><p><strong>Containers</strong>: Another popular approach is to package and deploy .NET applications as Docker containers. This method encapsulates the application and its dependencies (including the .NET runtime) within a container image, which can then be run on any system with Docker installed, providing a consistent runtime environment regardless of the underlying Linux distribution.</p>
+</li>
+</ol>
+<h3>Considerations:</h3>
+<p>When deploying to Linux, consider the following:</p>
+<ul>
+<li><p><strong>Dependencies</strong>: Ensure all necessary dependencies are included or specified as part of your package. Linux distributions may have different versions of system libraries and components.</p>
+</li>
+<li><p><strong>Runtime Identifiers (RIDs)</strong>: When publishing a .NET application, you can specify a RID to target a specific Linux distribution and architecture. This ensures the correct dependencies are included for the targeted environment.</p>
+</li>
+<li><p><strong>Testing</strong>: Due to differences between Linux distributions (such as different system libraries or default configurations), it's important to test your application on the specific distributions you intend to support.</p>
+</li>
+</ul>
+<p>In summary, while Linux offers flexibility and a wide range of deployment options for .NET applications, it also requires careful consideration of the target distributions and packaging formats to ensure compatibility and ease of installation.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>For distributing your project &quot;MyProject&quot; version 0.1 across different platforms, including an AnyCPU version for Windows, a Universal Binary for macOS, and specific packages for various Linux distributions, you can follow a structured naming convention to clearly differentiate each package. Here's how the file names could be structured:</p>
+<h3>Windows (AnyCPU):</h3>
+<ul>
+<li><code>MyProject_0.1_Windows_AnyCPU.exe</code>
+<ul>
+<li>This is an executable for Windows that is architecture-agnostic, meaning it can run on both x86 and x64 architectures.</li>
+</ul>
+</li>
+</ul>
+<h3>macOS (Universal Binary):</h3>
+<ul>
+<li><code>MyProject_0.1_macOS_Universal.pkg</code>
+<ul>
+<li>This package contains binaries for both x64 (Intel-based Macs) and ARM64 (Apple Silicon Macs) architectures, making it a Universal Binary that can run natively on any Mac.</li>
+</ul>
+</li>
+</ul>
+<h3>Linux:</h3>
+<p>For Linux, you might create different packages tailored to the package management systems of various distributions. Here are some examples:</p>
+<ul>
+<li><p><strong>Debian-based distributions (<code>.deb</code> package)</strong>:</p>
+<ul>
+<li><code>MyProject_0.1_Linux_Debian_x64.deb</code></li>
+<li><code>MyProject_0.1_Linux_Ubuntu_x64.deb</code>
+<ul>
+<li>Although Debian and Ubuntu packages are often interchangeable, you might target them separately for specific dependencies or configurations.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Red Hat-based distributions (<code>.rpm</code> package)</strong>:</p>
+<ul>
+<li><code>MyProject_0.1_Linux_Fedora_x64.rpm</code></li>
+<li><code>MyProject_0.1_Linux_CentOS_x64.rpm</code></li>
+<li><code>MyProject_0.1_Linux_openSUSE_x64.rpm</code>
+<ul>
+<li>Similar to Debian and Ubuntu, while there's a lot of compatibility among RPM-based distributions, targeting them separately can address distribution-specific nuances.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Arch Linux (Arch User Repository, AUR, or <code>.tar.gz</code> package)</strong>:</p>
+<ul>
+<li><code>MyProject_0.1_Linux_Arch_x64.tar.gz</code>
+<ul>
+<li>Arch Linux users often compile from source or use scripts from the AUR, so a <code>.tar.gz</code> source package might be preferred.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Notes:</h3>
+<ul>
+<li>The use of <code>_x64</code> in Linux package names assumes targeting 64-bit systems, which is common. If you're also targeting 32-bit systems or other architectures (like ARM), you should include those in your naming convention (e.g., <code>_x86</code>, <code>_ARM64</code>).</li>
+<li>The <code>.exe</code>, <code>.pkg</code>, <code>.deb</code>, <code>.rpm</code>, and <code>.tar.gz</code> extensions are used to indicate the type of package and the intended platform or package manager.</li>
+<li>The version number (<code>0.1</code>) is included in each file name to manage versioning and updates.</li>
+</ul>
+<p>This structured approach helps in organizing your distributions and makes it easier for users to identify the correct package for their platform and architecture.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Certainly, we can simplify the file names by using shorter abbreviations for operating systems and omitting some details that might be inferred from the context. Here's a more streamlined version:</p>
+<h3>Windows (AnyCPU):</h3>
+<ul>
+<li><code>MyProject_0.1_win.exe</code>
+<ul>
+<li>Abbreviating &quot;Windows&quot; as &quot;win&quot; simplifies the file name while keeping it recognizable.</li>
+</ul>
+</li>
+</ul>
+<h3>macOS (Universal Binary):</h3>
+<ul>
+<li><code>MyProject_0.1_mac.pkg</code>
+<ul>
+<li>Using &quot;mac&quot; instead of &quot;macOS_Universal&quot; shortens the file name. The <code>.pkg</code> extension implies that it's for macOS, and we can assume it's a Universal Binary if that's the standard for your macOS distributions.</li>
+</ul>
+</li>
+</ul>
+<h3>Linux:</h3>
+<p>For Linux, we can simplify by using just the distribution name or a common abbreviation, assuming x64 architecture as the standard:</p>
+<ul>
+<li><p><strong>Debian-based (<code>.deb</code> package)</strong>:</p>
+<ul>
+<li><code>MyProject_0.1_deb.deb</code>
+<ul>
+<li>This file name implies it's for Debian-based systems without specifying each (like Debian or Ubuntu).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Red Hat-based (<code>.rpm</code> package)</strong>:</p>
+<ul>
+<li><code>MyProject_0.1_rpm.rpm</code>
+<ul>
+<li>This indicates it's for RPM-based systems, covering Fedora, CentOS, and openSUSE without specifying each individually.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Arch Linux (<code>.tar.gz</code> package for AUR or compilation)</strong>:</p>
+<ul>
+<li><code>MyProject_0.1_arch.tar.gz</code>
+<ul>
+<li>Using &quot;arch&quot; indicates it's for Arch Linux, and the <code>.tar.gz</code> suggests it might be source code or a script for building the package.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Notes:</h3>
+<ul>
+<li>This simplified naming convention assumes that your users have a basic understanding of their system requirements and that the architecture (x64) does not need to be specified explicitly.</li>
+<li>Simplifying too much might lead to confusion in some cases, especially in environments where multiple architectures or versions are common. Ensure your target audience is comfortable with the level of simplification.</li>
+<li>Version numbering remains explicit in each file name to facilitate version management and updates.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>You're right; having the distribution abbreviation followed by the same extension can indeed seem redundant. We can further simplify the file names by removing the redundancy and still maintain clarity:</p>
+<h3>Windows (AnyCPU):</h3>
+<ul>
+<li><code>MyProject_0.1_win.exe</code></li>
+</ul>
+<h3>macOS (Universal Binary):</h3>
+<ul>
+<li><code>MyProject_0.1_mac.pkg</code></li>
+</ul>
+<h3>Linux:</h3>
+<ul>
+<li><p><strong>Debian-based distributions</strong>:</p>
+<ul>
+<li><code>MyProject_0.1_deb.deb</code> becomes <code>MyProject_0.1_deb</code>
+<ul>
+<li>The <code>.deb</code> extension already implies that it's for Debian-based systems, so we can omit the <code>_deb</code> part from the name.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Red Hat-based distributions</strong>:</p>
+<ul>
+<li><code>MyProject_0.1_rpm.rpm</code> becomes <code>MyProject_0.1_rpm</code>
+<ul>
+<li>Similarly, the <code>.rpm</code> extension indicates it's for RPM-based systems, allowing us to remove the <code>_rpm</code> part.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Arch Linux</strong>:</p>
+<ul>
+<li><code>MyProject_0.1_arch.tar.gz</code>
+<ul>
+<li>For Arch Linux, since the <code>.tar.gz</code> extension doesn't specifically denote a package format, we keep the <code>_arch</code> part to clarify the target distribution.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Simplified Names:</h3>
+<ul>
+<li><code>MyProject_0.1_win.exe</code></li>
+<li><code>MyProject_0.1_mac.pkg</code></li>
+<li><code>MyProject_0.1_deb</code></li>
+<li><code>MyProject_0.1_rpm</code></li>
+<li><code>MyProject_0.1_arch.tar.gz</code></li>
+</ul>
+<p>This approach maintains clarity while eliminating the redundancy in the Linux package names, making them more concise and easier to understand.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>You're correct, and I appreciate your attention to detail. Ensuring clarity in file naming is crucial to prevent confusion, especially among users who may not be familiar with different package formats. Let's refine the naming to avoid ambiguity and to indicate that the <code>.deb</code> and <code>.rpm</code> files are intended for Linux:</p>
+<h3>Windows (AnyCPU):</h3>
+<ul>
+<li><code>MyProject_0.1_Win.exe</code>
+<ul>
+<li>Keeping &quot;Win&quot; in the name clearly indicates this file is for Windows.</li>
+</ul>
+</li>
+</ul>
+<h3>macOS (Universal Binary):</h3>
+<ul>
+<li><code>MyProject_0.1_Mac.pkg</code>
+<ul>
+<li>&quot;Mac&quot; in the name signifies this package is for macOS.</li>
+</ul>
+</li>
+</ul>
+<h3>Linux:</h3>
+<p>To ensure it's clear that the <code>.deb</code> and <code>.rpm</code> files are for Linux, and to avoid redundancy, we can include &quot;Linux&quot; in the filename and drop the repeated extension part:</p>
+<ul>
+<li><p><strong>Debian-based distributions</strong>:</p>
+<ul>
+<li><code>MyProject_0.1_Linux.deb</code>
+<ul>
+<li>Including &quot;Linux&quot; in the name clarifies that this package is for Linux systems, specifically those using the <code>.deb</code> package format (like Debian and Ubuntu).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Red Hat-based distributions</strong>:</p>
+<ul>
+<li><code>MyProject_0.1_Linux.rpm</code>
+<ul>
+<li>Similarly, this name makes it clear that the package is for Linux systems that use the RPM package manager.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Arch Linux</strong>:</p>
+<ul>
+<li><code>MyProject_0.1_Linux_Arch.tar.gz</code>
+<ul>
+<li>Specifying &quot;Linux_Arch&quot; indicates this is for Linux, specifically Arch Linux, and the <code>.tar.gz</code> format suggests it might be used for source distribution or scripts.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Refined Names:</h3>
+<ul>
+<li><code>MyProject_0.1_Win.exe</code></li>
+<li><code>MyProject_0.1_Mac.pkg</code></li>
+<li><code>MyProject_0.1_Linux.deb</code></li>
+<li><code>MyProject_0.1_Linux.rpm</code></li>
+<li><code>MyProject_0.1_Linux_Arch.tar.gz</code></li>
+</ul>
+<p>This naming convention maintains simplicity while ensuring clarity, helping users to identify the correct package for their operating system and reducing the likelihood of confusion.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Adopting your suggestions, we can adjust the file names to use hyphens, a lowercase &quot;v&quot; for the version prefix, and lowercase letters for platform identifiers. Here's the revised list:</p>
+<h3>Windows (AnyCPU):</h3>
+<ul>
+<li><code>myproject-v0.1-win.exe</code>
+<ul>
+<li>This name uses a hyphen to separate the project name from the version and platform, with &quot;win&quot; indicating Windows.</li>
+</ul>
+</li>
+</ul>
+<h3>macOS (Universal Binary):</h3>
+<ul>
+<li><code>myproject-v0.1-mac.pkg</code>
+<ul>
+<li>Here, &quot;mac&quot; specifies the package is for macOS.</li>
+</ul>
+</li>
+</ul>
+<h3>Linux:</h3>
+<p>For Linux distributions, incorporating &quot;linux&quot; into the file names, along with using hyphens and lowercase letters, clarifies the target platform:</p>
+<ul>
+<li><p><strong>Debian-based distributions</strong>:</p>
+<ul>
+<li><code>myproject-v0.1-linux.deb</code>
+<ul>
+<li>This file name indicates the package is for Linux systems using the Debian package format.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Red Hat-based distributions</strong>:</p>
+<ul>
+<li><code>myproject-v0.1-linux.rpm</code>
+<ul>
+<li>Similarly, this name specifies the package is for Linux systems that utilize RPM packages.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Arch Linux</strong>:</p>
+<ul>
+<li><code>myproject-v0.1-linux-arch.tar.gz</code>
+<ul>
+<li>Including &quot;linux-arch&quot; differentiates this package for Arch Linux users, with the <code>.tar.gz</code> extension suggesting a source or script package.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Summary of Revised Names:</h3>
+<ul>
+<li><code>myproject-v0.1-win.exe</code></li>
+<li><code>myproject-v0.1-mac.pkg</code></li>
+<li><code>myproject-v0.1-linux.deb</code></li>
+<li><code>myproject-v0.1-linux.rpm</code></li>
+<li><code>myproject-v0.1-linux-arch.tar.gz</code></li>
+</ul>
+<p>This naming convention is concise, clear, and follows your guidelines, making it easy for users to identify the correct package for their platform.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The naming conventions for distributing software packages vary widely among developers and organizations, depending on their preferences, the complexity of their software, and the target audience's familiarity with software installations. There isn't a one-size-fits-all approach, but several common practices and principles are generally followed:</p>
+<h3>Common Practices:</h3>
+<ol>
+<li><p><strong>Include the Project Name</strong>: This is universally common to help users identify the software.</p>
+</li>
+<li><p><strong>Version Information</strong>: Including the version number (often prefixed by <code>v</code> or using semantic versioning) is standard practice to help users and administrators manage software versions and updates.</p>
+</li>
+<li><p><strong>Platform Identifiers</strong>: Indicating the target platform (e.g., Windows, macOS, Linux) and sometimes the architecture (e.g., x64, ARM) helps users choose the correct package for their system.</p>
+</li>
+<li><p><strong>Use of Hyphens and Underscores</strong>: Both are common for separating different parts of the file name, though there's a slight preference for hyphens as they are more URL-friendly.</p>
+</li>
+<li><p><strong>Lowercase Letters</strong>: Lowercase letters are often used for ease of typing and because some file systems are case-sensitive.</p>
+</li>
+</ol>
+<h3>Variations:</h3>
+<ul>
+<li><p><strong>Simplicity vs. Detail</strong>: Some developers prefer very detailed names including architecture, platform, build numbers, and even the build date, especially for nightly builds or continuous integration systems. Others keep it simple with just the essential information to avoid overwhelming users.</p>
+</li>
+<li><p><strong>Extensions and Formats</strong>: Depending on the target operating system, the file extension or format (.exe, .dmg, .app, .deb, .rpm, etc.) provides a clue about the intended platform, which might reduce the need for explicit platform identifiers in the name.</p>
+</li>
+<li><p><strong>Case Sensitivity</strong>: While lowercase is common, some developers use CamelCase or PascalCase, especially if it reflects the branding or official naming of the project.</p>
+</li>
+</ul>
+<h3>Examples from Popular Software:</h3>
+<ul>
+<li><p><strong>Visual Studio Code</strong>: Uses detailed names like <code>code_1.48.2-1598353430_amd64.deb</code> for Linux, indicating the version, build, and architecture.</p>
+</li>
+<li><p><strong>Mozilla Firefox</strong>: Simplifies its naming to <code>Firefox Setup 80.0.exe</code> for Windows, focusing on the version number.</p>
+</li>
+<li><p><strong>Ubuntu</strong>: For its distributions, Ubuntu uses names like <code>ubuntu-20.04.1-desktop-amd64.iso</code>, including the version and architecture.</p>
+</li>
+</ul>
+<h3>Conclusion:</h3>
+<p>The best practice depends on your audience and your software's distribution scale and complexity. For broad distribution, especially to less technical users, simplicity and clarity are key. For more technical or specialized software, especially where multiple versions and architectures are common, more detailed names can be helpful. Observing how similar projects in your domain name their files can provide useful insights.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Certainly, here's a list of file names from various well-known projects, showcasing how they name their distribution files. These examples reflect a range of naming conventions, emphasizing version numbers, platforms, and sometimes architecture:</p>
+<h3>Operating Systems and Large Projects:</h3>
+<ul>
+<li><p><strong>Ubuntu</strong>: <code>ubuntu-20.04.1-desktop-amd64.iso</code></p>
+<ul>
+<li>Indicates the Ubuntu version (20.04.1), the edition (desktop), and the architecture (amd64).</li>
+</ul>
+</li>
+<li><p><strong>Fedora</strong>: <code>Fedora-Workstation-Live-x86_64-34-1.2.iso</code></p>
+<ul>
+<li>Shows the Fedora edition (Workstation Live), architecture (x86_64), version (34), and a minor version (1.2).</li>
+</ul>
+</li>
+<li><p><strong>Debian</strong>: <code>debian-10.7.0-amd64-netinst.iso</code></p>
+<ul>
+<li>Specifies the Debian version (10.7.0), architecture (amd64), and type of installer (netinst, or network installer).</li>
+</ul>
+</li>
+</ul>
+<h3>Applications and Utilities:</h3>
+<ul>
+<li><p><strong>Visual Studio Code</strong>: <code>VSCode-win32-x64-1.48.2.zip</code></p>
+<ul>
+<li>Contains the platform (win32), architecture (x64), and version (1.48.2).</li>
+</ul>
+</li>
+<li><p><strong>Google Chrome</strong>: <code>ChromeSetup.exe</code></p>
+<ul>
+<li>Google Chrome often uses a simple installer name without version or platform, relying on their website to deliver the correct version.</li>
+</ul>
+</li>
+<li><p><strong>Mozilla Firefox</strong>: <code>Firefox Setup 91.0.exe</code></p>
+<ul>
+<li>Includes the version number (91.0) directly in the setup file name.</li>
+</ul>
+</li>
+</ul>
+<h3>Development Tools and Libraries:</h3>
+<ul>
+<li><p><strong>Node.js</strong>: <code>node-v14.17.0-linux-x64.tar.xz</code></p>
+<ul>
+<li>Indicates the version (v14.17.0), platform (linux), and architecture (x64).</li>
+</ul>
+</li>
+<li><p><strong>Git</strong>: <code>Git-2.29.2.2-64-bit.exe</code></p>
+<ul>
+<li>Shows the version (2.29.2.2) and architecture (64-bit).</li>
+</ul>
+</li>
+<li><p><strong>Docker</strong>: <code>Docker Desktop Installer.exe</code></p>
+<ul>
+<li>Docker's desktop installer for Windows uses a simple name without versioning, similar to Chrome.</li>
+</ul>
+</li>
+</ul>
+<h3>Multimedia and Creativity Software:</h3>
+<ul>
+<li><p><strong>Blender</strong>: <code>blender-2.83.5-windows64.msi</code></p>
+<ul>
+<li>Specifies the version (2.83.5) and platform/architecture (windows64).</li>
+</ul>
+</li>
+<li><p><strong>GIMP</strong>: <code>gimp-2.10.22-setup.exe</code></p>
+<ul>
+<li>Includes the version (2.10.22) in the setup file name.</li>
+</ul>
+</li>
+</ul>
+<h3>Gaming and Entertainment:</h3>
+<ul>
+<li><p><strong>Steam</strong>: <code>SteamSetup.exe</code></p>
+<ul>
+<li>Valve's Steam client uses a straightforward installer name, similar to Chrome and Docker.</li>
+</ul>
+</li>
+<li><p><strong>VLC Media Player</strong>: <code>vlc-3.0.11-win64.exe</code></p>
+<ul>
+<li>Specifies the version (3.0.11) and architecture (win64).</li>
+</ul>
+</li>
+</ul>
+<h3>Productivity Software:</h3>
+<ul>
+<li><strong>LibreOffice</strong>: <code>LibreOffice_7.0.3_Win_x64.msi</code>
+<ul>
+<li>Indicates the version (7.0.3), platform (Win), and architecture (x64).</li>
+</ul>
+</li>
+</ul>
+<h3>Security and Networking:</h3>
+<ul>
+<li><strong>Wireshark</strong>: <code>Wireshark-win64-3.4.2.exe</code>
+<ul>
+<li>Shows the version (3.4.2) and architecture (win64).</li>
+</ul>
+</li>
+</ul>
+<p>These examples illustrate the diversity in naming conventions, balancing the need for specificity with the desire for simplicity. Some projects opt for detailed names that include version numbers, platforms, and architectures, while others rely on their distribution channels to provide the correct file to users, using simpler names.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">自分としては、「ユーザーが自分に必要なものを最も容易に選べて、そのツールがちゃんと起動する」というところを目指す。</p>
+                            <p class="note_contents">* MyProject-v0.1-win.exe<br />
+                                * MyProject-v0.1-mac.pkg<br />
+                                * MyProject-v0.1-linux.deb<br />
+                                * MyProject-v0.1-linux.rpm<br />
+                                * MyProject-v0.1-linux-arch.tar.gz</p>
+                            <p class="note_contents">上記を想定し、そのうち win と mac のみまずはサポートする。win では AnyCPU を、mac では universal binary を用意する。特に問題がなければ、これら2つのファイルでこれら2つの OS のユーザーのほとんどに対応できるだろう。</p>
+                            <p class="note_contents">linux を短くする書き方で誰もがそうするようなものを見たことがないので、省略を諦める。lnx なども可能だが、win や mac ほど広く使われていない。</p>
+                            <p class="note_contents">それなりの数のユーザーに使われているアプリがマルチプラットフォームな言語で開発されているなら、開発チームにも余力があって Linux 用のバイナリーが細かく用意されていることも多々ある。</p>
+                            <p class="note_contents">しかし、今のところ一人でやっている自分がわざわざ Linux の仮想マシンを用意してまでバイナリーを今すぐに用意するほどのことはない。</p>
+                            <p class="note_contents">Linux については、「たぶん上記のような名前にするだろう」となんとなく思いながら、いったん見送る。あとから枝分かれしていくことは問題でないので、Linux だけディストリビューション名が入るとかアーキテクチャー名も入るとかは問題でない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="94cdbb79-a56c-4566-bee0-ac42d356fd3f" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">テスト用のバイナリーのレポジトリーへのコミットについて考える</span>
+                    <a href="#94cdbb79-a56c-4566-bee0-ac42d356fd3f" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">やめておく。</p>
+                            <p class="note_contents">Windows で開発し、そちらでバイナリーを生成し、すぐにアーカイブする。アーカイブのコミットに加えてバイナリーもそのまま別のレポジトリーに入れてしまえば、それがクローンされているほかのパソコンですぐにテストを開始できる。しかし、そうすると設定ファイルも入れたくなる。そちらに何らかの情報を含めたくなる。それをしないなら、バイナリーが非圧縮でレポジトリーに入っていることのメリットは乏しい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="2efdcc45-6cd6-49e3-9645-61f811272818" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">アーカイブにバイナリーファイルを入れないようにする</span>
+                    <a href="#2efdcc45-6cd6-49e3-9645-61f811272818" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">やめておくことがもう決まっているが、念のため再確認した。</p>
+                            <div class="note_ai_generated">
+<p>Including compiled binary files in source file archives is not common practice for several reasons:</p>
+<ol>
+<li><strong>Compatibility</strong>: Binary files are typically platform-specific. Including them might cause compatibility issues for users on different platforms or architectures.</li>
+<li><strong>Security Concerns</strong>: Distributing binaries can raise security concerns, as they can be harder to inspect for malicious code compared to source files.</li>
+<li><strong>Size</strong>: Binaries tend to significantly increase the size of archives, making downloads slower and consuming more storage space.</li>
+<li><strong>Version Control</strong>: Source files are usually managed through version control systems like Git. Binary files do not diff well, making them unsuitable for version control systems, leading to bloated repository sizes.</li>
+<li><strong>Build Environment</strong>: Binaries are the result of a compilation process that might involve specific dependencies and configurations. Users typically need to compile the source code within their own environment to ensure compatibility with their system and dependencies.</li>
+</ol>
+<p>However, there are exceptions:</p>
+<ul>
+<li><strong>Documentation or Examples</strong>: In some cases, small binary files might be included as part of documentation or examples if they are essential for understanding or using the source code.</li>
+<li><strong>Libraries</strong>: Pre-compiled libraries might be included if they are difficult to compile or if the source code is not available, although this practice is less common with the availability of package managers that handle dependencies.</li>
+<li><strong>Specific Use Cases</strong>: For certain applications, such as those intended for embedded systems or where the build process is complex and requires a specific environment, binaries might be included to simplify the setup process for the end user.</li>
+</ul>
+<p>In general, it's preferable to provide a comprehensive build system or instructions that allow users to compile the source code themselves, ensuring that the binaries they use are compatible with their systems and are built from the exact source code they have inspected.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="02392daa-018a-4c2d-bed5-7c8206ddd79f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">コード分析をスクリプトでやれないか調べる</span>
+                    <a href="#02392daa-018a-4c2d-bed5-7c8206ddd79f" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, you can run Visual Studio's code analysis via PowerShell. This process typically involves using the <code>MSBuild</code> command-line tool to build your project or solution with code analysis enabled. Here's a general approach:</p>
+<ol>
+<li><p><strong>Open PowerShell</strong>: First, open a PowerShell window. You might need to run it as an administrator depending on your setup and what you're trying to do.</p>
+</li>
+<li><p><strong>Navigate to Your Project</strong>: Use the <code>cd</code> command to navigate to the directory containing your Visual Studio solution or project file.</p>
+</li>
+<li><p><strong>Run MSBuild with Code Analysis</strong>: Use the <code>MSBuild</code> command to build your project or solution with code analysis enabled. You can enable code analysis by setting the <code>RunCodeAnalysis</code> property to <code>true</code>.</p>
+</li>
+</ol>
+<p>Here's an example command:</p>
+<pre><code class="language-powershell">MSBuild.exe YourSolution.sln /p:RunCodeAnalysis=true /p:Configuration=Release
+</code></pre>
+<p>In this command:</p>
+<ul>
+<li><code>YourSolution.sln</code> should be replaced with the name of your solution or project file.</li>
+<li><code>/p:RunCodeAnalysis=true</code> enables code analysis.</li>
+<li><code>/p:Configuration=Release</code> specifies the build configuration (you can change <code>Release</code> to <code>Debug</code> or any other configuration you have set up).</li>
+</ul>
+<p><strong>Note</strong>: Ensure that <code>MSBuild.exe</code> is in your PATH. If it's not, you'll need to provide the full path to the <code>MSBuild.exe</code> executable, which is typically located in a subdirectory of your Visual Studio installation directory.</p>
+<p>If you need to customize the analysis further, such as specifying rule sets or excluding certain rules, you can do so by editing your project file or through additional MSBuild command-line parameters.</p>
+<p>Remember, the specific commands and options might vary based on your Visual Studio version and project setup, so you might need to adjust the commands accordingly.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, <code>MSBuild.exe</code> and <code>dotnet build</code> are different, although they share some similarities. Both are used for building .NET projects, but they target different environments and have some differences in capabilities and usage.</p>
+<h3>MSBuild.exe</h3>
+<ul>
+<li><strong>MSBuild</strong> (Microsoft Build Engine) is the build platform for .NET and Visual Studio. It builds projects and solutions using MSBuild project files (.csproj, .vbproj, etc.), which are XML files specifying how to build the software.</li>
+<li>MSBuild is used primarily with projects targeting the .NET Framework and can be used directly from the command line or through Visual Studio.</li>
+<li>It's a part of the .NET Framework and Visual Studio and can build projects targeting various .NET versions, including .NET Framework, .NET Core, and .NET Standard.</li>
+<li><code>MSBuild.exe</code> can be invoked directly from the command line, and its path is usually under the Visual Studio installation directory.</li>
+</ul>
+<h3>dotnet build</h3>
+<ul>
+<li><code>dotnet build</code> is a command from the .NET Core CLI (Command Line Interface) that builds a .NET project. It implicitly uses MSBuild to compile the project, but it's designed to work with the .NET Core and .NET 5+ SDK-style projects.</li>
+<li>It's more cross-platform focused, targeting .NET Core and .NET 5+ applications, which can run on Windows, Linux, and macOS.</li>
+<li><code>dotnet build</code> simplifies the build process for .NET Core projects by abstracting some of MSBuild's complexity and providing a more straightforward command-line interface.</li>
+<li>The .NET Core SDK, which includes the <code>dotnet</code> CLI, must be installed to use <code>dotnet build</code>.</li>
+</ul>
+<h3>Key Differences</h3>
+<ul>
+<li><strong>Target Frameworks</strong>: <code>MSBuild.exe</code> is more versatile in terms of targeting different .NET frameworks, while <code>dotnet build</code> is optimized for .NET Core and .NET 5+ projects.</li>
+<li><strong>Usage</strong>: <code>MSBuild.exe</code> is traditionally used with .NET Framework applications and can be more complex to use directly from the command line. <code>dotnet build</code>, part of the .NET Core SDK, is designed for simplicity and cross-platform development.</li>
+<li><strong>Environment</strong>: <code>MSBuild.exe</code> is closely tied to the Windows and Visual Studio ecosystem, whereas <code>dotnet build</code> is designed for cross-platform .NET development.</li>
+</ul>
+<p>In summary, while both can build .NET applications, <code>MSBuild.exe</code> is more traditional and versatile, especially for older .NET Framework applications or complex builds, and <code>dotnet build</code> is tailored for modern, cross-platform .NET Core and .NET 5+ applications with a simpler command-line experience.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Running Visual Studio's full code analysis, as it is integrated within the Visual Studio IDE on Windows, is not directly available on macOS because Visual Studio for Mac does not support all of the same project types or features, including some of the detailed code analysis tools found in Visual Studio for Windows.</p>
+<p>However, you can still perform code analysis on .NET projects on macOS using alternative methods, such as:</p>
+<ol>
+<li><p><strong>.NET CLI Analyzers</strong>: For .NET Core and .NET 5+ projects, you can use Roslyn analyzers, which are integrated with the .NET SDK. These analyzers can be run using the <code>dotnet build</code> or <code>dotnet publish</code> commands, which will automatically perform code analysis if analyzers are included in the project. You can add analyzers to your project via NuGet packages.</p>
+</li>
+<li><p><strong>SonarQube/SonarCloud</strong>: Tools like SonarQube or SonarCloud can be used for continuous code quality analysis and can be integrated with your CI/CD pipeline. They support a wide range of languages and platforms, including .NET projects on macOS.</p>
+</li>
+<li><p><strong>JetBrains Rider</strong>: Rider is a cross-platform .NET IDE from JetBrains that runs on macOS. It includes its own set of code analysis tools and inspections that can provide feedback similar to Visual Studio's code analysis.</p>
+</li>
+<li><p><strong>Visual Studio Code with Extensions</strong>: Visual Studio Code is a lightweight, cross-platform editor that supports .NET development through extensions like C# for Visual Studio Code (powered by OmniSharp) and .NET Core Test Explorer. While it may not offer the same depth of analysis as Visual Studio on Windows, it does provide basic code analysis, linting, and IntelliSense.</p>
+</li>
+<li><p><strong>Command Line Tools</strong>: Tools like <code>StyleCop</code>, <code>FxCopAnalyzers</code>, or <code>Roslynator</code> can be used from the command line or integrated into your build process for code analysis.</p>
+</li>
+</ol>
+<p>If you have a specific need for Visual Studio's code analysis features on a macOS environment, consider using a Windows virtual machine or a cloud-based Windows development environment. This approach allows you to use Visual Studio with full capabilities, including code analysis, on a macOS machine indirectly.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, you can configure <code>MSBuild</code> to run code analysis without building the entire project or solution, essentially using it to perform only the code analysis step. This can be achieved by using certain MSBuild properties and targets in your command.</p>
+<p>To run only code analysis with <code>MSBuild</code>, you can use the <code>RunCodeAnalysis</code> property and set it to <code>true</code>, along with specifying the <code>CodeAnalysis</code> target. Here is a general command structure:</p>
+<pre><code class="language-powershell">MSBuild.exe YourSolution.sln /t:CodeAnalysis /p:RunCodeAnalysis=true /p:Configuration=Release
+</code></pre>
+<p>In this command:</p>
+<ul>
+<li><code>/t:CodeAnalysis</code> specifies that only the code analysis target should be run.</li>
+<li><code>/p:RunCodeAnalysis=true</code> enables code analysis.</li>
+<li><code>YourSolution.sln</code> should be replaced with your actual solution or project file.</li>
+<li><code>/p:Configuration=Release</code> sets the build configuration. You can change <code>Release</code> to whatever configuration you're interested in, like <code>Debug</code>.</li>
+</ul>
+<p>This command instructs <code>MSBuild</code> to focus on running code analysis instead of performing a full build. However, it's important to note that for code analysis to run, the binaries for the projects must be up to date. If the binaries are not up to date, a build might be triggered to ensure that the code analysis is performed on the latest code.</p>
+<p>Keep in mind that the effectiveness and behavior of this approach can vary depending on the specific setup of your projects, the version of MSBuild, and the version of Visual Studio you're using. It's always a good idea to test this in your specific environment to ensure it works as expected. Additionally, some newer versions of .NET (like .NET Core and .NET 5/6+) might handle code analysis differently, often integrating it more seamlessly with the build process itself.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">MSBuild.exe にオプションをつけることで、コード分析だけをやれそう。</p>
+                            <p class="note_contents">それとは別に、よりユニバーサルらしい dotnet build でコンパイルを行う流れになるか。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d71f2f17-9f09-4f13-a25f-27a118c7cff8" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">アーカイブのファイル名のタイムスタンプが必要か考える</span>
+                    <a href="#d71f2f17-9f09-4f13-a25f-27a118c7cff8" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">不要。</p>
+                            <p class="note_contents">今は yyLib-v0.2-20240205T140809Z.zip のように、「含まれるファイルのうち最後に更新されたものの UTC の最終更新日時」がつくようになっている。srcZip という圧縮ソフトをそのように実装した。ビルド番号をいじるのがめんどくさかったため。</p>
+                            <p class="note_contents">しかし、誰得な情報だ。自分でさえ、この情報が必要になったことは過去にないかもしれない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="c7c4dfe5-fb2f-48c0-a96b-a1c72539748d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">アーカイブのファイル名にバージョン番号を自動的に入れられないか考える</span>
+                    <a href="#c7c4dfe5-fb2f-48c0-a96b-a1c72539748d" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">PowerShell の文字列処理により、これは確実に可能。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">C# のコードをそのまま埋め込むことができるようで、これなら無敵だ。</p>
+                            <div class="note_ai_generated">
+<p>Yes, you can run native C# code within a PowerShell script. PowerShell allows you to use the <code>Add-Type</code> cmdlet to add a C# code snippet to your session, compile it, and then use the types and methods defined in that code. This feature is particularly useful for tasks that might be complex or cumbersome to achieve with standard PowerShell cmdlets but can be easily handled with a few lines of C#.</p>
+<p>Here's a basic example of how you might include and execute C# code within a PowerShell script:</p>
+<pre><code class="language-powershell"># Define C# source code
+$source = @&quot;
+using System;
+
+namespace MyNamespace
+{
+    public class MyClass
+    {
+        public static void MyMethod()
+        {
+            Console.WriteLine(&quot;Hello from C#&quot;);
+        }
+    }
+}
+&quot;
+</code></pre>
+                            </div>
+                            <p class="note_contents"># Add the C# type to the session<br />
+                                Add-Type -TypeDefinition $source</p>
+                            <p class="note_contents"># Use the newly added type<br />
+                                [MyNamespace.MyClass]::MyMethod()<br />
+                                ```</p>
+                            <p class="note_contents">This script defines a simple C# class with a static method that prints a message to the console. The `Add-Type` cmdlet is used to compile this class and make it available in the PowerShell session. After that, you can invoke the static method just like you would in C#.</p>
+                            <p class="note_contents">This capability makes PowerShell incredibly powerful, as you can leverage the full strength of the .NET Framework directly within your scripts.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="4338f114-e583-4297-b84d-23dcfcca47a6" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">現行のプロジェクトの srcZip.txt を消す</span>
+                    <a href="#4338f114-e583-4297-b84d-23dcfcca47a6" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="b332a919-2b94-49cb-b6dc-d2efe0298f39" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">README.md へのスクショの掲載について考える</span>
+                    <a href="#b332a919-2b94-49cb-b6dc-d2efe0298f39" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">良いアプリが書けたら、その宣伝において自然と考えること。自分一人で使うショボ～いアプリにまで細かくスクショを用意する必要はない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="c830486d-8391-4d99-a5d5-6ce2e6ba0813" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">多言語の README.md を自動生成できないか考える</span>
+                    <a href="#c830486d-8391-4d99-a5d5-6ce2e6ba0813" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">柔軟に考えるべき。</p>
+                            <p class="note_contents">たぶん2024年末にはさらに10くらいレポジトリーが増えて現行のプロジェクトが20に迫っているだろうが、そのうち他者に使ってもらえるかもしれないほどのものは、多くても5つくらいだろう。AI に英語を書いてもらうのが自分の勉強にもなって面白く、よって最近は日本語版が副産物的に出てきてしまうが、誰も使わないツールに形だけ用意する README.md なら、半分は AI が、半分は自分が書いた英語版のみ簡単に用意されていれば足りる。</p>
+                            <p class="note_contents">そして、他者にも使ってもらえるかもしれないほどのものについては、紹介のサイトをつくる。ブラウザーの言語設定で表示言語を切り替えるし、日本語から英語への翻訳の精度を確認できていれば、主語などが欠損していないのは確かなので、AI がサポートする10ほどの言語全てでページを用意すればよい。これには手間がかからない。</p>
+                            <p class="note_contents">よって、README.md については、今現在のところは次のように考える。</p>
+                            <p class="note_contents">* 日本語版を用意したとしても、README.ja.md を見つけてくれる人はほとんどいない<br />
+                                * AI と自分が半々くらいで書いたショボ～い英語版が、ほぼ単独で自己完結する形で用意されていれば誰も困らない<br />
+                                * そこから自分やその取り組みについて知りたい人のために、GitHub に自己紹介を載せてそちらへリンク</p>
+                            <p class="note_contents">その自己紹介のページにコーディングのガイドラインなど、主流のドキュメントへのリンクも用意しておけば、一通り伝わる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="322002b0-9bae-4d01-bbb4-4baf5e7503a3" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">新たにつくるシンプルな構成の README.md を古いレポジトリーにも入れることを検討</span>
+                    <a href="#322002b0-9bae-4d01-bbb4-4baf5e7503a3" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">「自分の GitHub アカウントをすみずみまで見る人などいないだろうから、死んでいるコードにコメントをつけても仕方ない」というのが以前の考えだが、予備知識なくコードを見られて「えっ、ショボすぎるやん！」と思われては不利益がありうるほど雑な実装も散見される。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">まあ、やはり時間を節約してよいだろう。</p>
+                            <p class="note_contents">「変に言い訳をした方が悪目立ちする」という考えがちょうど良い落としどころになる。</p>
+                            <p class="note_contents">今まさにこのメモを書いている taskKiller は、15年くらい前に大学院の社会人コースに通い始めたときにタスクが急増してわけが分からなくなって GTD のために書いた TaskManager という WinForms のツールをその数年後に WPF で書き直したものだ。</p>
+                            <p class="note_contents">何でもかんでもコンソールアプリにしたがる自分が WPF についてちゃんと勉強せず「動けばいい」と思ってノリで実装したコードベースに派生開発であれやこれや付け加えたため、教科書に載せられるくらいダメな実装になっている。</p>
+                            <p class="note_contents">しかし、自分にとってはものすごく便利なもので、ワークフローの根幹を成すものになっている。使い込んで全ての問題を修正してきたので安定性も高い。ATOK がバグるくらいのことがないと落ちない。ここ数年は一度も落ちたことがないかもしれない。</p>
+                            <p class="note_contents">バグだらけのコードならまだしも、「安定していて、便利だが、個人的に実装（＝コードの品質）が気に入らない」というだけのものをもレポジトリーごと非公開にするなら、オープンソースは成り立たない。それなら、全てプライベート化してプロプライエタリーなものとして一部のみ販売するのを目指す方が自然だ。</p>
+                            <p class="note_contents">また、taskKiller のログを tk2Text という自作ツールで HTML ページにして公開するまでが一つのワークフローになっている。</p>
+                            <p class="note_contents">その HTML ページを今も公開していて、今後も増やすのが間違いない。taskKiller を非公開にするなら、同じくらいノリで雑に書いた tk2Text もそうすることになるが、それだと生成物だけを公開することになる。</p>
+                            <p class="note_contents">それもいずれはウェブ上のツールだけで完結させたいが、「すでに枯れていて、それで単独での開発を効率的に行えているツール」を今すぐに優先的に見直せるほど自分にはリソースがない。ビジネスの方が忙しく、そちらを優先せざるを得ない。</p>
+                            <p class="note_contents">さらに、他者はどうしているかというのを調べると、100も200もレポジトリーがあって、チョロッと書き始めてそのまま投げ出したようなコードだらけの人が多い。他者の有名なアプリをフォークして少しさわって終わりだとか、ツールに生成させたコードをコミットして終わりだとかもいくらでも見られる。</p>
+                            <p class="note_contents">全部一応、実装を終えて、使えるようにして、バグを取り切る自分の方が圧倒的に珍しいのを実感する。</p>
+                            <p class="note_contents">といったことを勘案するなら、やはり「価値のあるものの価値を高めていくべきであり、ないものの見せ方を頑張ってもそこから価値は生じてこない」という当たり前の考え方をするのがよさそうだ。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="1ac36aba-c2ca-427e-9a6d-9e6f9281c14b" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">バージョン番号のつけ方について見直す</span>
+                    <a href="#1ac36aba-c2ca-427e-9a6d-9e6f9281c14b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">今は、「動くものを出すたびにマイナーバージョンを上げる」しか考えていない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">自分はそれで足りているので、これはこのままでよい。</p>
+                            <p class="note_contents">自分の考え方では、プログラムが存在しない状態から未完成の状態までは v0.0 だ。</p>
+                            <p class="note_contents">しかし、&quot;0.0&quot; と設定すると落ちるツールが一部にあるため、「最初から &quot;0.1&quot; と設定し、一通りの機能が揃うまではナイトリービルドを出さない」というのを落としどころとしている。</p>
+                            <p class="note_contents">yyLib は、クラスライブラリーとしての機能は想定の1/10も揃っていない。</p>
+                            <p class="note_contents">しかし、すでに実装できた部分は一応動いていて、それでほかのツールが動くため、ほかのツールの v0.1 を出すときに、それまでにできている部分だけで yyLib も v0.1 から出すということをした。</p>
+                            <p class="note_contents">それは今後も同じで、またほかのツールで v0.1 を出すのであっても、その時点の yyLib が v0.1 から変化していれば、それが v0.2 になる。</p>
+                            <p class="note_contents">ブラウザーのようにマーケティング関連の意味づけが自分には不要なので、自分は10年かけて v0.150 などになってもよい。</p>
+                            <p class="note_contents">一応、「大勢が使ってくれるくらいのものになれば v1.0 にする」という想定もあるが、おそらく一生そこには至らない。会社の上場のようなことで、「どこの誰が見ても文句のつけようがないくらい何もかもが整えば」くらいの考え方だからだ。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="05141c92-1274-4450-8f40-ac8288d29a2a" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">README.md の管理コストの最小化について考える</span>
+                    <a href="#05141c92-1274-4450-8f40-ac8288d29a2a" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In the <code>README.md</code> of a .NET application or library project, the goal is to provide essential information that helps users and developers understand, use, and contribute to the project. Here's a guideline on what to include and what to avoid:</p>
+<h3>What to Include:</h3>
+<ol>
+<li><strong>Project Name and Description</strong>: Clearly state the name of your project and a brief description of what it does.</li>
+<li><strong>Installation Instructions</strong>: Provide step-by-step instructions on how to install and set up your project, including any dependencies that need to be installed beforehand.</li>
+<li><strong>Usage</strong>: Include examples on how to use your application or library. For libraries, code snippets showing how to use the API are very helpful.</li>
+<li><strong>Features</strong>: Highlight the key features of your project. What makes it stand out?</li>
+<li><strong>Requirements</strong>: List any prerequisites required to run your project, such as the .NET version, operating system compatibility, and any other software dependencies.</li>
+<li><strong>Configuration</strong>: If your project requires configuration, provide details on how to configure it.</li>
+<li><strong>Building and Running</strong>: Include instructions for building and running your project from source, if applicable.</li>
+<li><strong>Testing</strong>: Explain how to run the tests, if you have any.</li>
+<li><strong>Contribution Guidelines</strong>: If you're open to contributions, provide guidelines on how others can contribute to your project. This may include coding standards, branch naming conventions, and the pull request process.</li>
+<li><strong>License</strong>: State the license under which your project is released, and include a copy of the license text in your repository.</li>
+<li><strong>Contact Information</strong>: Provide a way for users to get in touch with you or your team for support or inquiries.</li>
+</ol>
+<h3>What to Avoid:</h3>
+<ol>
+<li><strong>Sensitive Information</strong>: Never include passwords, API keys, or any sensitive data in your <code>README.md</code>.</li>
+<li><strong>Outdated Information</strong>: Ensure that all the information in the README is up to date. Outdated documentation can lead to confusion and misuse of your project.</li>
+<li><strong>Too Much Detail</strong>: While it's important to be thorough, avoid going into excessive detail. The README should be concise and to the point. Detailed documentation can be linked or included in separate files.</li>
+<li><strong>Unnecessary Technical Jargon</strong>: Keep the language simple and accessible to accommodate users with different levels of expertise.</li>
+<li><strong>Subjective Claims Without Evidence</strong>: Avoid making unverified claims about your project, such as it being the &quot;fastest&quot; or &quot;most efficient&quot; without providing benchmarks or comparisons to back up those claims.</li>
+<li><strong>Personal Opinions or Bias</strong>: The README should be professional and focused on the project. Personal opinions, especially those unrelated to the project, should be left out.</li>
+</ol>
+<p>A well-crafted <code>README.md</code> is an essential part of any project. It's often the first thing users and potential contributors will look at, so making a good impression is crucial.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When you discover a minor mistake like a typo in the <code>README.md</code> after you've already updated the code, tested it, updated the <code>README.md</code>, packaged the source code, and uploaded it to the repository, the best course of action can depend on a few factors:</p>
+<h3>If the typo is in the <code>README.md</code> only:</h3>
+<ul>
+<li><strong>For Minor Typos</strong>: If the typo is minor and does not lead to misunderstanding or incorrect usage of your project, it's often acceptable to correct it directly in the repository without repackaging and releasing a new version. This is because the typo fix in the <code>README.md</code> does not impact the functionality or usability of the actual code.</li>
+<li><strong>For Significant Typos</strong>: If the typo is significant and could potentially lead to confusion, misunderstandings, or incorrect usage of your project, it's a good idea to fix it immediately, commit the change to the repository, and note the correction in the release notes or documentation section. Repackaging and releasing a new version solely for a documentation fix is typically unnecessary unless the documentation error is critical.</li>
+</ul>
+<h3>If the typo affects code or critical documentation:</h3>
+<ul>
+<li><strong>For Code or Critical Documentation</strong>: If the typo is in a critical part of the documentation (like installation instructions) or in the code itself and could affect functionality, it's advisable to fix the issue, update the package, and release a new version. This ensures that users have access to the most accurate and functional version of your project.</li>
+</ul>
+<h3>What do people usually do?</h3>
+<ul>
+<li><strong>Common Practice</strong>: The common practice among developers is to correct minor typos in documentation directly in the repository without repackaging and releasing a new version. For non-critical documentation updates, this approach is generally accepted and understood within the developer community.</li>
+<li><strong>Release Notes</strong>: If you're making several minor updates or corrections over time, these can be bundled into the next planned release. You can also mention these minor fixes in the release notes for transparency.</li>
+</ul>
+<h3>Best Practices:</h3>
+<ul>
+<li><strong>Commit Messages</strong>: When you fix a typo, make sure your commit message is clear. For example, &quot;Fixed typo in README.md&quot; gives a clear indication of the change's nature.</li>
+<li><strong>Versioning</strong>: If the fix is part of a larger set of changes that warrants a new release, follow semantic versioning practices. For minor and patch fixes that don't add new features or break backward compatibility, increment the minor or patch version number accordingly.</li>
+<li><strong>Transparency</strong>: Be transparent with your changes. If you're fixing something in the documentation, it's helpful to mention it in the repository's change log or release notes, even if you're not releasing a new version immediately.</li>
+</ul>
+<p>In summary, for a minor typo in the <code>README.md</code>, it's usually fine to fix it in the repository directly without updating the package, especially if it doesn't affect the project's usability or understanding. For more significant issues, consider the impact and proceed with a more formal update and release process if necessary.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ここでも柔軟に考える必要がある。</p>
+                            <p class="note_contents">自分はめんどくさがりなので、物事をシンプルに保ちたい。だからこそ、「開発が一段落ついたプロジェクトにおいては、現行のコードが最新のアーカイブのものと完全に一致する」というのが「シンプル」であるとの考え方において、「やろうと思えば、ちょっとしたツールを書いて全プロジェクトにおける一致を確認できる」という状態の維持に努める。</p>
+                            <p class="note_contents">しかし、自分は究極的には「機能」を提供するのであって、ソースそのものが誰かの役に立つことは極めて稀だし、上記の一致のあるなしが他者の利便性を左右することは考えにくい。</p>
+                            <p class="note_contents">オープンソースに取り組むにおいては、ソースそのものを見て理解してくれる人も少なくないことから、ソースの方にも価値があるように（なんとなく）思ってしまうことが自分にはあるが、あくまでトレーサビリティーを実現しているだけと割り切った方がワークフローにブレや無駄が生じにくいだろう。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">書くなら書くで、ガイドラインをつくりながら複数のプロジェクトの分を一気に書き、全体的にチェックしてからコミットするというのもコツになりそう。一つずつ書いてはコミット・プッシュするから、ほかのものを書くときに書き忘れに気づき、作業の後戻りが発生する。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d45e9189-583b-4e4f-947e-56f8ec6d6a21" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">コミットメッセージの書き方について調べる</span>
+                    <a href="#d45e9189-583b-4e4f-947e-56f8ec6d6a21" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Writing good Git commit messages is important for maintaining a clear and useful project history. Here are some general guidelines for writing effective commit messages:</p>
+<ol>
+<li><p><strong>Keep it concise and informative:</strong> The first line of the commit message should be a brief summary (ideally 50 characters or less) of the changes, followed by a blank line and then a more detailed explanation if necessary.</p>
+</li>
+<li><p><strong>Use the imperative mood:</strong> It's recommended to use the imperative mood for the first line of the Git commit message. For example, &quot;Add feature X&quot; or &quot;Fix bug in Y&quot;, as if you were giving an order or instruction. This convention matches up with commit messages generated by commands like <code>git merge</code> and <code>git revert</code>.</p>
+</li>
+<li><p><strong>Avoid past tense:</strong> It's generally considered bad practice to use past tense in the summary line of commit messages, like &quot;Added feature X&quot; or &quot;Fixed bug in Y&quot;. The reason for this is that the imperative mood is clearer and more direct. However, this is more of a convention than a hard rule, and some projects might have their own guidelines.</p>
+</li>
+<li><p><strong>Provide context in the detailed explanation:</strong> If your commit warrants a longer explanation, use the space after the summary line to provide context, explain what and why of the changes, rather than how. This can include linking to the relevant issue tracker IDs.</p>
+</li>
+<li><p><strong>Use bullet points for multiple changes:</strong> If a commit contains multiple changes, list them as bullet points in the detailed section of the commit message.</p>
+</li>
+<li><p><strong>Avoid generic messages:</strong> Avoid vague messages like &quot;fix bug&quot; or &quot;make changes&quot;. They don't provide useful information about what was done and why.</p>
+</li>
+</ol>
+<p>Here's an example of a good commit message:</p>
+<pre><code>Refactor subsystem X for readability
+
+- Split the functionality of method Y into smaller methods
+- Renamed variables to clarify their purpose
+- Removed redundant checks in Z
+
+Related to issue #123
+</code></pre>
+<p>Ultimately, the goal of a commit message is to make it easy for others (and your future self) to understand the intention behind the changes, so clarity and consistency are key. It's also important to check if the project you're contributing to has specific guidelines for commit messages.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">コードのコメントを英語で書くようになり、なんとなくコミットメッセージも英語になったが、なぜか過去形で書くようになり、そのまま定着した。他者のコミットを見ると、AI の言う as if you were giving an order or instruction の書き方がほとんどで、以前から気になっていた。今後はそういう書き方に統一する。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="6350c4e2-adcd-4341-b386-1c4c70e58451" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">マルチプラットフォームの開発における改行文字の扱いについて調べる</span>
+                    <a href="#6350c4e2-adcd-4341-b386-1c4c70e58451" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Git の設定で改行を自動的に整えるか何かがあって、たまたま目の前の作業に不具合があってオフにした記憶がある。あれはオンの方が良いかもしれない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When working on .NET applications across different operating systems like Windows and Mac, handling newline characters can become important due to the differences in how these operating systems represent line endings. Windows uses the carriage return and line feed characters (<code>\r\n</code>) as a newline indicator, while macOS (and other Unix-like systems) use just the line feed character (<code>\n</code>).</p>
+<p>Git has a feature called <code>core.autocrlf</code> that helps manage these differences by automatically converting newline characters when files are committed to the repository and checked out. Here's how you can use it:</p>
+<ul>
+<li><p><code>git config --global core.autocrlf true</code>: This setting is usually recommended for Windows users. It converts LF to CRLF when you check out code and converts back to LF when you commit changes. This ensures that your repository maintains LF as its line endings (which is generally preferred) while also ensuring that the files in your working directory have the appropriate line endings for Windows.</p>
+</li>
+<li><p><code>git config --global core.autocrlf input</code>: This setting is recommended for macOS and Linux users. It ensures that line endings are converted to LF on commit but does not alter them when you check out code. This is useful if you're working on a project that should maintain LF line endings (which is standard for macOS and Linux) but might be shared with Windows users.</p>
+</li>
+<li><p><code>git config --global core.autocrlf false</code>: This setting disables the automatic conversion. This might lead to issues if you're sharing your repository across different OSes, as line endings might not be consistent, leading to potential merge conflicts or other issues.</p>
+</li>
+</ul>
+<p>Given that you're developing on both Windows and Mac, you might want to enable <code>core.autocrlf</code> to ensure smooth cross-platform development. On your Windows machine, you could set it to <code>true</code> to handle the conversion from LF to CRLF and back. On your Mac, setting it to <code>input</code> would ensure that any files you commit have their line endings normalized to LF, which is the Unix standard.</p>
+<p>To enable or check the current setting, you can use the <code>git config</code> command. For example, to enable <code>core.autocrlf</code> on Windows, you would use:</p>
+<pre><code class="language-bash">git config --global core.autocrlf true
+</code></pre>
+<p>And on Mac, to set it to <code>input</code>:</p>
+<pre><code class="language-bash">git config --global core.autocrlf input
+</code></pre>
+<p>To check the current setting, you can use:</p>
+<pre><code class="language-bash">git config --global --get core.autocrlf
+</code></pre>
+<p>This setup should help ensure that your development experience is smooth across both operating systems and that your repository remains consistent in terms of how line endings are handled.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">言われた通りに設定した。様子を見る。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="9f36c6d9-3680-4e79-85cd-59415c79ecf3" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Mac で PowerShell を使えるようにする</span>
+                    <a href="#9f36c6d9-3680-4e79-85cd-59415c79ecf3" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, PowerShell can be used on macOS and Linux. PowerShell Core, now known simply as PowerShell 7 (and beyond), is a cross-platform version of PowerShell that has been built to run on Windows, macOS, and Linux. It is open-source and can be installed on various operating systems, providing a consistent experience across all platforms.</p>
+<h3>Installing PowerShell on macOS:</h3>
+<p>You can install PowerShell on macOS using several methods, including Homebrew (a package manager for macOS) or by downloading the package directly from the GitHub releases page. Here's how to install it using Homebrew:</p>
+<ol>
+<li>Open the Terminal application on your Mac.</li>
+<li>If you don't have Homebrew installed, you can install it by running the following command in the Terminal:
+<pre><code class="language-sh">/bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;
+</code></pre>
+</li>
+<li>Once Homebrew is installed, you can install PowerShell by running:
+<pre><code class="language-sh">brew install --cask powershell
+</code></pre>
+</li>
+<li>After installation, you can start PowerShell by typing <code>pwsh</code> in the Terminal.</li>
+</ol>
+<h3>Installing PowerShell on Linux:</h3>
+<p>PowerShell can be installed on various Linux distributions using package managers specific to those distributions. For example, here's how to install it on Ubuntu:</p>
+<ol>
+<li>Open the Terminal application.</li>
+<li>Update the list of products with <code>sudo apt-get update</code>.</li>
+<li>Install prerequisites using <code>sudo apt-get install -y wget apt-transport-https software-properties-common</code>.</li>
+<li>Download and add the Microsoft repository GPG keys:
+<pre><code class="language-sh">wget -q &quot;https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb&quot;
+sudo dpkg -i packages-microsoft-prod.deb
+</code></pre>
+</li>
+<li>Update the list of products again with <code>sudo apt-get update</code>.</li>
+<li>Install PowerShell by running:
+<pre><code class="language-sh">sudo apt-get install -y powershell
+</code></pre>
+</li>
+<li>Start PowerShell by typing <code>pwsh</code> in the Terminal.</li>
+</ol>
+<h3>Note:</h3>
+<p>The installation commands and procedures might vary slightly depending on the specific version of macOS or Linux distribution you are using, so it's a good idea to consult the official PowerShell documentation or the GitHub page for the most up-to-date instructions: <a href="https://github.com/PowerShell/PowerShell">PowerShell GitHub</a>.</p>
+<p>Using PowerShell on macOS and Linux provides you with powerful scripting and automation capabilities similar to what is available on Windows. It's particularly useful for developers and system administrators who work across different operating systems and need a consistent scripting language and toolset.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">インストールし、*.ps1 を実行できるのも確認した。pwsh コマンドで PowerShell モードにしてからスクリプトのファイルをドラッグ＆ドロップすることで実行できる。</p>
+                            <p class="note_contents">さらに別の、Mac のスクリプトファイルをあらかじめつくり、そちらに権限を与えておくことでダブルクリックでの作業が可能になるだろうが、プロジェクトごとに用意するのがめんどくさいので、しばらくはドラッグ＆ドロップの方法で粘る。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="e0c43324-75db-443f-934a-8392f8fc205a" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">このタスクリストのログが出力されるようにする</span>
+                    <a href="#e0c43324-75db-443f-934a-8392f8fc205a" class="permalink">&infin;</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
