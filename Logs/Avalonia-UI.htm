@@ -1500,6 +1500,1849 @@ logger.LogError(exception, &quot;An error occurred.&quot;);
                     </div>
                 </div>
             </div>
+            <div id="acbb6916-85b5-4056-831e-4657fbf53146" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">WPF の AssemblyInfo.cs について調べる</span>
+                    <a href="#acbb6916-85b5-4056-831e-4657fbf53146" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p><code>AssemblyInfo.cs</code> is a file used in .NET applications, including Windows Presentation Foundation (WPF) projects, to define assembly metadata. This metadata includes information like the version number, copyright, description, and other attributes about the assembly. These attributes are used by the .NET runtime and tools that interact with your assembly, providing important information about your application or library.</p>
+<p>Here's a brief overview of what might be included in an <code>AssemblyInfo.cs</code> file:</p>
+<ul>
+<li><code>AssemblyTitle</code>: The title of the assembly.</li>
+<li><code>AssemblyDescription</code>: A short description of the assembly.</li>
+<li><code>AssemblyConfiguration</code>: Configuration information, such as &quot;Release&quot; or &quot;Debug&quot;.</li>
+<li><code>AssemblyCompany</code>: The name of the company that produced the assembly.</li>
+<li><code>AssemblyProduct</code>: The name of the product that the assembly is part of.</li>
+<li><code>AssemblyCopyright</code>: Copyright notice for the assembly.</li>
+<li><code>AssemblyTrademark</code>: The trademark notice.</li>
+<li><code>AssemblyCulture</code>: The culture supported by the assembly.</li>
+<li><code>AssemblyVersion</code>: The version of the assembly in the format &quot;major.minor.build.revision&quot;.</li>
+<li><code>AssemblyFileVersion</code>: The file version of the assembly.</li>
+<li><code>AssemblyInformationalVersion</code>: A more human-readable version of the assembly, sometimes used to represent semantic versioning.</li>
+</ul>
+<p>When you switch from WPF to AvaloniaUI, the concept of assembly metadata remains relevant, as AvaloniaUI applications are also .NET applications. However, the way you manage this metadata might differ slightly due to differences in project structure and SDK-style project files introduced with .NET Core and later versions.</p>
+<p>In newer .NET projects (including those targeting AvaloniaUI), much of the assembly information can be defined directly within the <code>.csproj</code> project file using <code>&lt;PropertyGroup&gt;</code> elements, reducing the need for a separate <code>AssemblyInfo.cs</code> file. For example, you can define version information in the <code>.csproj</code> file like this:</p>
+<pre><code class="language-xml">&lt;PropertyGroup&gt;
+  &lt;Version&gt;1.0.0.0&lt;/Version&gt;
+  &lt;FileVersion&gt;1.0.0.0&lt;/FileVersion&gt;
+  &lt;AssemblyVersion&gt;1.0.0.0&lt;/AssemblyVersion&gt;
+  &lt;Company&gt;Your Company&lt;/Company&gt;
+  &lt;Product&gt;Your Product&lt;/Product&gt;
+  &lt;Copyright&gt;Your Copyright&lt;/Copyright&gt;
+  &lt;Description&gt;Your Description&lt;/Description&gt;
+&lt;/PropertyGroup&gt;
+</code></pre>
+<p>This approach is often cleaner and more integrated with the project configuration, especially for projects targeting .NET Core and .NET 5/6 and beyond. However, if you have custom attributes or specific reasons to keep the <code>AssemblyInfo.cs</code>, you can still include it in your AvaloniaUI project. Just ensure that it doesn't conflict with attributes defined in your <code>.csproj</code> file, as duplicate attribute definitions can lead to compilation errors.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The <code>ThemeInfo</code> attribute in the <code>AssemblyInfo.cs</code> file of a WPF project provides information about where to find theme-specific and generic resource dictionaries. Resource dictionaries in WPF are used to manage and apply resources like styles, control templates, and other XAML-defined resources. The <code>ThemeInfo</code> attribute helps WPF determine how to locate these resources, especially when dealing with themes and generic resources.</p>
+<p>The <code>ThemeInfo</code> attribute takes two parameters, both of which are of the type <code>ResourceDictionaryLocation</code>:</p>
+<ol>
+<li><p><strong>ThemeDictionaryLocation</strong>: Specifies the location of theme-specific resource dictionaries. For example, if your application supports different themes (like Light, Dark, etc.), this parameter tells WPF where to find the resources specific to each theme.</p>
+</li>
+<li><p><strong>GenericDictionaryLocation</strong>: Specifies the location of the generic resource dictionary. The generic resource dictionary contains resources that are used regardless of the current theme (if themes are used).</p>
+</li>
+</ol>
+<p><code>ResourceDictionaryLocation</code> can have the following values:</p>
+<ul>
+<li><strong>None</strong>: Indicates that the resource dictionary does not exist.</li>
+<li><strong>SourceAssembly</strong>: The resource dictionary is located in the same assembly as the one where the <code>ThemeInfo</code> attribute is applied.</li>
+<li><strong>ExternalAssembly</strong>: The resource dictionary is located in an external assembly.</li>
+</ul>
+<p>An example of the <code>ThemeInfo</code> attribute might look like this:</p>
+<pre><code class="language-csharp">[assembly: ThemeInfo(
+    ResourceDictionaryLocation.None, // where theme specific resource dictionaries are located
+    ResourceDictionaryLocation.SourceAssembly // where the generic resource dictionary is located
+)]
+</code></pre>
+<p>This tells WPF that there are no theme-specific resource dictionaries, and the generic resource dictionary is located in the same assembly as the application.</p>
+<p>When switching to Avalonia UI, the concept of resource dictionaries exists but is handled differently. Avalonia also supports styles and resources, but the mechanism for including and referencing these resources differs from WPF. In Avalonia, styles and resources are typically defined in XAML files and included in the application using Avalonia's own mechanisms, such as <code>&lt;StyleInclude&gt;</code> and <code>&lt;ResourceInclude&gt;</code>. The <code>ThemeInfo</code> attribute is specific to WPF and is not used in Avalonia applications. Instead, you would manage your resources and styles according to Avalonia's documentation and best practices, which often involve defining them in Avalonia XAML files and referencing them in your application as needed.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">移行時には消しても大丈夫そう。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="4773625a-8ea3-47f6-ac46-c026b997bd84" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">WPF の *.csproj.user について調べる</span>
+                    <a href="#4773625a-8ea3-47f6-ac46-c026b997bd84" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The <code>*.csproj.user</code> file in a WPF (Windows Presentation Foundation) project is a user-specific project settings file used by Visual Studio. It stores settings that are specific to a user, such as personal preferences for the development environment, and is not typically shared between different developers working on the same project. These settings might include:</p>
+<ul>
+<li>The startup project configuration when debugging.</li>
+<li>User-specific debug settings.</li>
+<li>Personalized IDE preferences related to the project.</li>
+</ul>
+<p>When switching from WPF to Avalonia UI, which is a cross-platform framework, the specific settings stored in the <code>*.csproj.user</code> file for WPF might not be directly applicable or necessary for an Avalonia project. Avalonia projects might not use the same user-specific settings, or they might manage those settings differently. Here are a few considerations:</p>
+<ol>
+<li><p><strong>Project Configuration Differences</strong>: Avalonia UI projects might have different configuration needs compared to WPF projects, making some of the settings in the <code>*.csproj.user</code> file irrelevant.</p>
+</li>
+<li><p><strong>IDE and Tooling</strong>: If you are continuing to use Visual Studio or similar IDEs, some of the environment-specific settings might still be applicable, but they may need to be adjusted for the Avalonia project setup.</p>
+</li>
+<li><p><strong>Team Settings</strong>: If you are working in a team, consider which settings should be shared among all developers and which should remain user-specific. It's often best practice to keep personal IDE settings out of source control to avoid conflicts between team members' environments.</p>
+</li>
+</ol>
+<p>In general, when transitioning to Avalonia UI, you might not need to directly preserve the <code>*.csproj.user</code> file. Instead, consider the following steps:</p>
+<ul>
+<li>Review the settings in the <code>.csproj.user</code> file to determine if any are crucial for your development workflow and should be migrated or manually configured in your new Avalonia project.</li>
+<li>Set up your Avalonia project and configure it according to your needs and preferences. The Avalonia project might generate its own <code>.csproj.user</code> file if necessary, based on your personal IDE settings.</li>
+<li>Test your new Avalonia setup thoroughly to ensure all configurations and settings are correct and meet your development needs.</li>
+</ul>
+<p>If you are unsure about specific settings, it might be helpful to temporarily keep a backup of the <code>.csproj.user</code> file while setting up your Avalonia project, so you can refer to any custom settings you might want to replicate or adapt.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d6e1255d-2b48-4f0f-b7d1-94a6a3cfdcc0" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">なぜ MessageBox の代わりがないのか調べる</span>
+                    <a href="#d6e1255d-2b48-4f0f-b7d1-94a6a3cfdcc0" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ほとんど全ての Windows プログラマーが欲しがるものなので良いパッケージがいくつもある想定だったが、そうでもなさそう。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">AI は次のように言うが、そういうパッケージは存在しない。代わりに、個人プログラマーが書いた、テーマの仕組みなどとの整合性の不透明なものがいくつか乱立している。</p>
+                            <div class="note_ai_generated">
+<p>Yes, in AvaloniaUI, you can add messagebox functionality by using the <code>Avalonia.Controls</code> namespace, which includes various dialog boxes that can be used similarly to message boxes. However, AvaloniaUI does not have a built-in <code>MessageBox</code> class like Windows Forms or WPF. Instead, you can use <code>Window</code> or <code>Dialog</code> classes to create custom message boxes.</p>
+<p>To create a simple message box, you can define a new window that will act as the message box and then display it using <code>ShowDialog()</code> or <code>Show()</code> methods from your main window or view model. Additionally, there are community packages and libraries that extend AvaloniaUI with more traditional message box functionality, making it easier to display alerts, prompts, and confirmations.</p>
+<p>One such library is <code>Avalonia.Dialogs</code>. It's a third-party package that provides common dialog implementations for Avalonia applications, including message boxes. You can install it via NuGet package manager and use it to display message boxes in a more straightforward manner.</p>
+<p>To install a package like <code>Avalonia.Dialogs</code>, you can use the following command in your Package Manager Console:</p>
+<pre><code class="language-plaintext">Install-Package Avalonia.Dialogs
+</code></pre>
+<p>After installing, you can refer to the library's documentation or source code for examples on how to use it to display message boxes in your AvaloniaUI application. Remember, since AvaloniaUI targets multiple platforms, the appearance and behavior of these dialogs may vary slightly across different operating systems.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">なぜ公式のものがないのか聞いた。</p>
+                            <div class="note_ai_generated">
+<p>AvaloniaUI is designed as a cross-platform UI framework that aims to be flexible and adaptable across various operating systems, including Windows, Linux, macOS, and potentially others. The absence of an official <code>MessageBox</code> functionality in AvaloniaUI can be attributed to several reasons:</p>
+<ol>
+<li><p><strong>Cross-Platform Consistency</strong>: Implementing a standard <code>MessageBox</code> that looks and behaves identically across all platforms can be challenging. Each operating system has its own design language and user experience guidelines. AvaloniaUI aims to provide a consistent development experience across all platforms, which sometimes means leaving out features that are difficult to standardize.</p>
+</li>
+<li><p><strong>Customizability and Flexibility</strong>: AvaloniaUI focuses on giving developers the flexibility to design and customize their UI elements extensively. By not providing a default <code>MessageBox</code>, Avalonia encourages developers to create custom dialogs that better fit their application's overall design and user experience. This approach aligns with AvaloniaUI's goal of enabling highly customizable and adaptable UI designs.</p>
+</li>
+<li><p><strong>Community Contributions and Extensions</strong>: The AvaloniaUI ecosystem relies significantly on community contributions and third-party libraries to extend its functionality. The community has developed various packages and extensions, such as <code>Avalonia.Dialogs</code>, to fill gaps in functionality, including message boxes. This model allows the core AvaloniaUI framework to remain lightweight and focused while still offering a wide range of features through extensions.</p>
+</li>
+<li><p><strong>Design Philosophy</strong>: AvaloniaUI's design philosophy might prioritize more fundamental UI components and architecture over specific widgets like a <code>MessageBox</code>. The framework provides the essential building blocks for creating complex UIs, and it's up to the developer or the community to implement more specialized components as needed.</p>
+</li>
+</ol>
+<p>In summary, the lack of an official <code>MessageBox</code> functionality in AvaloniaUI is likely a deliberate choice to maintain cross-platform consistency, encourage customizability, leverage community contributions, and adhere to the framework's core design philosophy. Developers have the flexibility to implement custom dialogs or use community-developed libraries to add <code>MessageBox</code>-like functionality to their applications.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>I did a <a href="https://chat.openai.com/backend-api/bing/redirect?query=Avalonia.Dialogs%20NuGet%20package">quick search</a> for more information and here's what I discovered.</p>
+<p>It appears I made an error earlier. There isn't a package named <code>Avalonia.Dialogs</code> specifically designed for message box functionality in Avalonia UI. Instead, there are other libraries and approaches within the Avalonia community that can be used to create dialog boxes or message boxes. For example, <code>Dialogs.Avalonia</code> is a package available on NuGet, but it seems to be a community-contributed package rather than an official AvaloniaUI library【7:0†source】.</p>
+<p>For creating message boxes in AvaloniaUI, developers often use custom dialogs or third-party libraries tailored to their specific needs. The AvaloniaUI framework itself is designed to be highly extensible, allowing for the creation of custom controls and dialogs that can fit any application's design requirements.</p>
+<p>If you're looking to implement message boxes in your AvaloniaUI application, you might need to create custom dialogs or look into community resources for libraries that can help achieve this functionality.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">OS ごとに MessageBox のデザインが異なるし、もしかするとダイアログより通知が好まれるプラットフォームもあるのかもしれないし、モバイル版とデスクトップ版とでも実装が異なってくるのだろう。</p>
+                            <p class="note_contents">自分も、WPF の MessageBox を使うときには、フォントを変更できないとか、内容にスクロールバーをつけられないとか、色をほかと合わせられないとか、さまざまな点が気になる。それでも楽だから使ってしまうだけだ。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="8d6ca120-07af-4f1f-b32f-e1560aaa3cb3" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">WPF の Application クラスの Startup イベントなどに相当するものについて調べる</span>
+                    <a href="#8d6ca120-07af-4f1f-b32f-e1560aaa3cb3" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Avalonia UI, much like WPF, provides a mechanism for handling application-level events, although the specific events and the way you subscribe to them may differ due to the differences in frameworks.</p>
+<p>In Avalonia, the <code>Application</code> class is the starting point of your application, similar to WPF. However, the exact counterparts for WPF's <code>Startup</code>, <code>Exit</code>, and <code>SessionEnding</code> events might not be directly available or might be named differently. Here's how you can implement similar functionality:</p>
+<h3>1. Startup</h3>
+<p>In Avalonia, you typically override the <code>OnFrameworkInitializationCompleted</code> method in your <code>App.xaml.cs</code> file to perform actions that you would normally place in the WPF <code>Startup</code> event handler. This method is called when the Avalonia framework has completed its initialization.</p>
+<pre><code class="language-csharp">public override void OnFrameworkInitializationCompleted()
+{
+    if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+    {
+        // Your startup code here
+        desktop.MainWindow = new MainWindow();
+    }
+
+    base.OnFrameworkInitializationCompleted();
+}
+</code></pre>
+<h3>2. Exit</h3>
+<p>For handling exit events, you can use the <code>Exit</code> event of the <code>IClassicDesktopStyleApplicationLifetime</code> interface, which is equivalent to the application lifetime in a typical desktop application. You can subscribe to this event to execute code when the application is about to shut down.</p>
+<pre><code class="language-csharp">public override void OnFrameworkInitializationCompleted()
+{
+    if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+    {
+        desktop.Exit += Desktop_Exit;
+    }
+
+    base.OnFrameworkInitializationCompleted();
+}
+
+private void Desktop_Exit(object sender, ControlledApplicationLifetimeExitEventArgs e)
+{
+    // Your exit code here
+}
+</code></pre>
+<h3>3. SessionEnding</h3>
+<p>Avalonia doesn't have a direct equivalent to WPF's <code>SessionEnding</code> event, which is used to detect logoff or system shutdown events. Handling such events in Avalonia would typically require platform-specific code because Avalonia aims to be a cross-platform framework, and session management can vary significantly between different operating systems.</p>
+<p>For handling session ending in Avalonia, you might need to hook into the underlying operating system's events (for example, using P/Invoke on Windows to listen to WM_QUERYENDSESSION messages). This is more complex and goes beyond the typical use cases of Avalonia, so it's essential to consider whether this is necessary for your application.</p>
+<p>In summary, while Avalonia provides mechanisms for handling application startup and exit, it doesn't offer a direct equivalent for session ending due to its cross-platform nature. You'll need to adapt your WPF experience to fit the Avalonia model and potentially use platform-specific code for certain scenarios.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In Avalonia UI, the <code>IClassicDesktopStyleApplicationLifetime</code> interface is used for desktop applications and provides properties and events that are relevant to the lifecycle of such applications. Two of the important events in this interface are <code>Exit</code> and <code>ShutdownRequested</code>.</p>
+<h3>1. Exit Event</h3>
+<p>The <code>Exit</code> event occurs when the application is about to shut down. You can subscribe to this event to perform cleanup operations or final tasks before the application closes. This event is similar to the <code>Application.Exit</code> event in WPF. The event handler for the <code>Exit</code> event receives arguments that allow you to inspect the exit code that the application will return to the operating system.</p>
+<p>Here is an example of how you might subscribe to the <code>Exit</code> event:</p>
+<pre><code class="language-csharp">if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+{
+    desktop.Exit += (sender, e) =&gt;
+    {
+        // Perform cleanup tasks here
+    };
+}
+</code></pre>
+<h3>2. ShutdownRequested Event</h3>
+<p>The <code>ShutdownRequested</code> event is raised when a shutdown of the application is requested, but before the shutdown process actually begins. This event gives you the opportunity to cancel the shutdown process if necessary, based on some condition within your application. This could be useful, for example, if you need to prompt the user to save changes or if there are background tasks that need to be completed before the application can safely exit.</p>
+<p>You can handle the <code>ShutdownRequested</code> event like this:</p>
+<pre><code class="language-csharp">if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+{
+    desktop.ShutdownRequested += (sender, e) =&gt;
+    {
+        // Check if shutdown should be canceled based on some condition
+        if (shouldCancelShutdown)
+        {
+            e.Cancel = true; // Cancel the shutdown
+        }
+    };
+}
+</code></pre>
+<p>In this example, <code>e.Cancel</code> is a property you can set to <code>true</code> to cancel the shutdown process. This can be particularly useful for implementing logic to prevent the application from closing under certain conditions, such as when there are unsaved changes or ongoing operations that need to be completed or confirmed by the user before exiting.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Implementing functionality equivalent to WPF's <code>SessionEnding</code> in Avalonia UI requires a more platform-specific approach, as Avalonia aims to be cross-platform and does not provide a direct equivalent out of the box. The <code>SessionEnding</code> event in WPF is specifically designed for Windows and is triggered when the user session is ending, such as during logoff or system shutdown.</p>
+<p>For Avalonia, you would need to handle this scenario differently, depending on the target operating system(s). Here are some general strategies you could use:</p>
+<h3>1. Use Platform-Specific Code</h3>
+<p>On Windows, you might need to use P/Invoke to listen to system messages like <code>WM_QUERYENDSESSION</code>, which indicates that the session is ending. You would then need to integrate this into your Avalonia application, possibly via a native windowing hook.</p>
+<h3>2. Application Shutdown Hooks</h3>
+<p>For a more cross-platform approach, you could rely on the application shutdown hooks provided by Avalonia, such as the <code>ShutdownRequested</code> event of <code>IClassicDesktopStyleApplicationLifetime</code>, to perform any necessary cleanup or last-minute operations. While this doesn't give you the session ending context (logoff vs. shutdown), it does allow you to execute code during the application shutdown sequence.</p>
+<h3>3. Custom Solutions Based on Application Needs</h3>
+<p>Depending on the specific needs of your application, you might implement a custom solution that periodically checks for certain conditions that would indicate a session ending scenario. This could be based on detecting user activity, system events, or other criteria relevant to your application's domain.</p>
+<h3>Example of Handling System Shutdown or Logoff</h3>
+<p>If you're targeting Windows and need to handle the session ending due to shutdown or logoff, you might consider integrating with the Windows API. This involves using P/Invoke to interact with Windows messages. Here's a basic outline of what this could look like:</p>
+<ol>
+<li>Create a native window class in your Avalonia application that can receive Windows messages.</li>
+<li>Use P/Invoke to override the window procedure (<code>WndProc</code>) to listen for <code>WM_QUERYENDSESSION</code>.</li>
+<li>When <code>WM_QUERYENDSESSION</code> is received, execute your session ending logic.</li>
+</ol>
+<p>Keep in mind that this approach requires a good understanding of Windows API programming and how to integrate it with Avalonia, which might involve handling Avalonia's windowing system at a lower level than usual.</p>
+<p>For cross-platform applications, you would need to implement equivalent functionality on other operating systems, which could involve significant platform-specific code. This is more complex and may not always be feasible, depending on the resources available and the requirements of your application.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Avalonia's <code>Exit</code> event is similar to WPF's <code>Exit</code> event, which is raised when the application is about to shut down. However, it does not directly correspond to WPF's <code>SessionEnding</code> event, which is specifically designed to handle scenarios where the user session is ending, such as logging off or system shutdown, before the application itself initiates the shutdown process.</p>
+<p>In cross-platform frameworks like Avalonia, there isn't a built-in, universal way to handle session ending events across all operating systems due to the differences in how operating systems handle user sessions and shutdown notifications. The <code>Exit</code> event in Avalonia will be raised during the shutdown process of the application, which could be triggered by a user logging off or system shutdown, but it doesn't specifically indicate that the session is ending due to a logoff or shutdown event.</p>
+<p>For cross-platform applications that need to detect when a user is logging off or the system is shutting down:</p>
+<ol>
+<li><p><strong>Platform-Specific Implementations:</strong> You might need to implement platform-specific code for each target operating system. For example, on Windows, you could use P/Invoke to listen for <code>WM_QUERYENDSESSION</code>. On macOS and Linux, you would need to find equivalent system signals or events.</p>
+</li>
+<li><p><strong>Application Shutdown Hooks:</strong> Utilize the shutdown events provided by the framework, such as Avalonia's <code>Exit</code> or <code>ShutdownRequested</code> events, to perform cleanup or last-minute save operations. While these don't specifically indicate a logoff or system shutdown, they can still be used to safely close the application.</p>
+</li>
+<li><p><strong>Custom Middleware or Services:</strong> In some cases, you might develop a middleware or service that runs in the background and listens for system-wide events or signals indicating a shutdown or logoff. This would likely involve native code and possibly native extensions for each platform you intend to support.</p>
+</li>
+<li><p><strong>User Notification and Manual Handling:</strong> Another approach could be to inform users about the need to manually save their work or perform certain actions before logging off or shutting down the system, especially if implementing cross-platform session ending detection is not feasible.</p>
+</li>
+</ol>
+<p>It's important to note that handling session ending events in a cross-platform manner involves dealing with platform-specific behaviors, which can complicate development and maintenance. Therefore, it's essential to carefully consider whether this functionality is critical for your application and, if so, plan for the additional complexity involved in supporting multiple operating systems.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In WPF, the behavior of the <code>Exit</code> event in relation to user logoff or system shutdown scenarios can be a bit nuanced. Generally, the <code>Exit</code> event is raised whenever the application is closing, regardless of the reason. This includes scenarios where the application is closed by the user through the UI, programmatically via <code>Application.Current.Shutdown()</code>, or due to system-level events like user logoff or system shutdown.</p>
+<p>However, WPF also provides a <code>SessionEnding</code> event, which is specifically designed to handle logoff and shutdown scenarios. The <code>SessionEnding</code> event is raised before the <code>Exit</code> event in these cases, giving you an opportunity to cancel the logoff or shutdown (if the event allows it) or to perform specific cleanup tasks related to the session ending.</p>
+<p>The key difference is that the <code>SessionEnding</code> event gives you context about why the session is ending (logoff vs. shutdown) and a chance to intervene, whereas the <code>Exit</code> event is a more general notification that the application is closing, without specifics on why it's closing.</p>
+<p>So, to clarify:</p>
+<ul>
+<li><strong>When a user logs off or the system shuts down</strong>, WPF first raises the <code>SessionEnding</code> event, then the <code>Exit</code> event if the application continues to close.</li>
+<li><strong>When the application is closed by the user or programmatically</strong>, only the <code>Exit</code> event is raised.</li>
+</ul>
+<p>This distinction allows applications to handle session-ending scenarios differently from regular application shutdowns if needed.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="477b6691-0475-45cd-abd9-b3e9b5141818" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Dispatcher.Invoke 的なことで TextBox に文字列を何度も追加してよいか調べる</span>
+                    <a href="#477b6691-0475-45cd-abd9-b3e9b5141818" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">できそう。</p>
+                            <div class="note_ai_generated">
+<p>When working with Avalonia UI and handling asynchronous operations like receiving data from the Internet, you indeed can use a concept similar to a dispatcher to update the UI in a thread-safe manner. Avalonia UI, much like WPF, has a mechanism to ensure that UI updates are done on the UI thread. This is important because attempting to update UI elements from background threads can lead to runtime exceptions.</p>
+<p>To implement the functionality you described, you can follow these steps:</p>
+<ol>
+<li><p><strong>Disable the Form</strong>: Initially, you can disable the form or specific controls by setting their <code>IsEnabled</code> property to <code>false</code>.</p>
+</li>
+<li><p><strong>Asynchronous Data Fetching</strong>: Use asynchronous operations (e.g., <code>HttpClient.GetAsync</code> or similar) to fetch data from the Internet. This ensures that your UI remains responsive while the data is being fetched.</p>
+</li>
+<li><p><strong>Updating the TextBox</strong>: As you receive data in chunks, you will need to update the TextBox. Avalonia uses <code>Dispatcher.UIThread.InvokeAsync</code> to safely update UI elements from a background thread. This is similar to WPF's <code>Dispatcher.Invoke</code>.</p>
+</li>
+<li><p><strong>Enabling the Form</strong>: Once the data transfer is complete, re-enable the form by setting <code>IsEnabled</code> to <code>true</code> again, ensuring this is also done on the UI thread.</p>
+</li>
+</ol>
+<p>Here's a simplified example to illustrate this process:</p>
+<pre><code class="language-csharp">private async void Button_Click(object sender, RoutedEventArgs e)
+{
+    // Disable the form
+    this.IsEnabled = false;
+
+    try
+    {
+        // Simulate receiving data in chunks from the internet
+        for (int i = 0; i &lt; 10; i++)
+        {
+            // Simulate a delay for data fetching
+            await Task.Delay(500); // 500 milliseconds delay
+
+            // Simulate received data chunk
+            string dataChunk = $&quot;Data chunk {i + 1}\n&quot;;
+
+            // Update the TextBox on the UI thread
+            await Dispatcher.UIThread.InvokeAsync(() =&gt;
+            {
+                MyTextBox.Text += dataChunk;
+            });
+        }
+    }
+    finally
+    {
+        // Re-enable the form
+        this.IsEnabled = true;
+    }
+}
+</code></pre>
+<p>In this example, <code>Button_Click</code> is the event handler for your button's <code>Click</code> event. Replace <code>MyTextBox</code> with the name of your TextBox control. This code simulates receiving data in chunks by using <code>Task.Delay</code>. In a real-world scenario, you would replace this with your actual data fetching logic.</p>
+<p>Make sure to handle any exceptions that may occur during the data fetching and processing to avoid leaving your form in a disabled state. The <code>try</code>/<code>finally</code> block ensures that the form is re-enabled even if an error occurs during the data fetching process.</p>
+<p>This approach should provide a smooth user experience, with the TextBox being updated incrementally as data arrives, without freezing the UI.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">AI の知る限り、コントロールの再描画を一時的に止める方法はないらしい。ググっても、これといった情報がない。</p>
+                            <p class="note_contents">バインディングで処理していくなら、ロジック側が「これからたくさんの更新処理を行うから、あなた、止まっときなさい」は、すでに UI との癒着なのかもしれない。</p>
+                            <div class="note_ai_generated">
+<p>When dealing with frequent UI updates, especially when appending small chunks of text to a TextBox potentially thousands of times, performance can indeed become a concern. Continuously updating a TextBox in a tight loop can lead to noticeable UI lag and inefficiency, primarily because each update may trigger layout recalculations and rendering passes.</p>
+<p>To optimize this process, consider the following strategies:</p>
+<h3>1. <strong>Batch Updates</strong></h3>
+<p>Instead of updating the TextBox on every chunk received, you can accumulate a certain number of chunks and then update the TextBox in batches. This reduces the number of UI thread invocations and updates.</p>
+<h3>2. <strong>Use StringBuilder</strong></h3>
+<p>Utilize a <code>StringBuilder</code> to concatenate your strings in memory. <code>StringBuilder</code> is more efficient for frequent string manipulations because it avoids creating multiple intermediate string objects. Once you have accumulated a batch of updates, you can then set the TextBox's text in one operation.</p>
+<h3>3. <strong>Disable UI Updates</strong></h3>
+<p>Some UI frameworks provide ways to temporarily suspend rendering or layout updates for a control while updating its content. If Avalonia supports a similar mechanism, you can use it to update the TextBox's content and then re-enable rendering once the update is complete. However, as of my last update, Avalonia doesn't have a direct equivalent to WPF's <code>BeginUpdate</code> and <code>EndUpdate</code> methods or WinForms' <code>SuspendLayout</code> and <code>ResumeLayout</code>. You might need to implement a custom control or use a different strategy to minimize the performance impact.</p>
+<h3>4. <strong>Virtualization</strong></h3>
+<p>If the content is extensive and not all of it needs to be visible at once, consider using a control that supports virtualization. Virtualization means that the control only creates UI elements for the part of the content that is currently visible, which can significantly improve performance. However, this is more applicable to items controls like ListBox or DataGrid and might not be directly applicable to a TextBox.</p>
+<h3>5. <strong>Offload Processing</strong></h3>
+<p>If applicable, process the data in chunks in a background thread and only update the UI once the processing is complete or at certain intervals. This keeps the UI responsive and reduces the frequency of updates.</p>
+<h3>Example Using StringBuilder and Batch Updates:</h3>
+<pre><code class="language-csharp">private async void Button_Click(object sender, RoutedEventArgs e)
+{
+    // Disable the form
+    this.IsEnabled = false;
+
+    StringBuilder sb = new StringBuilder();
+
+    try
+    {
+        for (int i = 0; i &lt; 1000; i++) // Assume 1000 chunks of data
+        {
+            // Simulate receiving a chunk of data
+            string dataChunk = $&quot;Data chunk {i + 1}\n&quot;;
+            sb.Append(dataChunk);
+
+            // Update the TextBox every 100 chunks, for example
+            if ((i + 1) % 100 == 0)
+            {
+                string textToUpdate = sb.ToString();
+                sb.Clear(); // Clear the StringBuilder for the next batch
+
+                await Dispatcher.UIThread.InvokeAsync(() =&gt;
+                {
+                    MyTextBox.Text += textToUpdate;
+                });
+            }
+
+            await Task.Delay(5); // Simulate a delay for data fetching
+        }
+    }
+    finally
+    {
+        // Re-enable the form
+        this.IsEnabled = true;
+    }
+}
+</code></pre>
+<p>This approach significantly reduces the number of UI updates by batching them, and it uses <code>StringBuilder</code> to efficiently manage string concatenation. Adjust the batch size and delay based on your application's requirements and performance characteristics.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="57bdcbaf-92ba-4d4a-81d4-3dfa7c257abe" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://github.com/AvaloniaUI/Avalonia/issues/5550" target="_blank" class="url">https://github.com/AvaloniaUI/Avalonia/issues/5550</a> をチェック</span>
+                    <a href="#57bdcbaf-92ba-4d4a-81d4-3dfa7c257abe" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In Avalonia UI, a cross-platform UI framework, <code>Dispatcher.UIThread.Post</code> is a method used to execute code on the UI thread. In UI frameworks, it's essential to perform updates to the UI elements on the UI thread because most UI components are not thread-safe. This means that attempting to modify UI elements from background threads can lead to exceptions or undefined behavior.</p>
+<p>The <code>Post</code> method allows you to schedule a delegate to be executed on the UI thread without waiting for the delegate to complete. This is particularly useful for updating UI elements from background tasks or threads. When you use <code>Post</code>, you're effectively saying, &quot;Please run this code on the UI thread when it's available to do so.&quot;</p>
+<p>Here's a basic example of how you might use it:</p>
+<pre><code class="language-csharp">Dispatcher.UIThread.Post(() =&gt;
+{
+    // Code here will be executed on the UI thread.
+    // You can safely update UI elements here.
+});
+</code></pre>
+<p>This method is handy for ensuring that UI updates or interactions that need to happen as a result of background operations (like data fetching, processing, etc.) are executed safely on the UI thread, thus preventing potential cross-thread operation errors.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The difference between <code>Dispatcher.UIThread.Post</code> and <code>Dispatcher.UIThread.Invoke</code> (or <code>InvokeAsync</code> in some frameworks) in Avalonia UI, or similar methods in other UI frameworks, lies primarily in how these methods schedule and execute the given delegate on the UI thread.</p>
+<ol>
+<li><p><strong><code>Dispatcher.UIThread.Post</code>:</strong></p>
+<ul>
+<li><strong>Asynchronous and Fire-and-Forget:</strong> This method schedules the delegate to be executed on the UI thread as soon as the thread becomes available, but it does not wait for the delegate to complete. It's essentially a &quot;fire-and-forget&quot; method, meaning that once you schedule the delegate, your code continues to execute without waiting for the delegate to finish.</li>
+<li><strong>Use Case:</strong> You would use <code>Post</code> when you need to update the UI from a background thread but don't need to wait for the operation to complete before moving on to the next line of your code. It's useful for non-blocking UI updates.</li>
+</ul>
+</li>
+<li><p><strong><code>Dispatcher.UIThread.Invoke</code> or <code>InvokeAsync</code>:</strong></p>
+<ul>
+<li><strong>Synchronous or Asynchronous with Waiting:</strong> These methods also schedule a delegate to be executed on the UI thread, but they differ in how the calling thread waits for the delegate to complete. <code>Invoke</code> is synchronous, meaning it blocks the calling thread until the delegate has finished executing. <code>InvokeAsync</code>, as the name suggests, is the asynchronous version, which returns a <code>Task</code> that represents the operation; the calling thread can await this task, thereby not blocking the thread but still waiting for the operation to complete.</li>
+<li><strong>Use Case:</strong> You would use <code>Invoke</code> or <code>InvokeAsync</code> when you need to ensure that the UI update or operation is completed before proceeding. For example, when you need the result of a UI operation to continue, or when you need to ensure that UI updates happen in a specific order.</li>
+</ul>
+</li>
+</ol>
+<p>In summary, <code>Post</code> is for when you need to update the UI without caring about when the update completes, making it suitable for quick, non-blocking updates. <code>Invoke</code> or <code>InvokeAsync</code> is used when you need to perform a UI operation and then continue with operations that depend on the completion of the UI update, making it suitable for sequential operations or when needing the result of a UI operation.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">おそらく、AI の回答を chunk 単位で TextBox に足していくなら Post の方が良さそう。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="495521fb-aede-427c-8ff1-ebdd7144e7c7" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">スタートアップ時のアプリケーションの閉じ方を調べる</span>
+                    <a href="#495521fb-aede-427c-8ff1-ebdd7144e7c7" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In Avalonia UI, which is a cross-platform framework inspired by WPF, you typically manage application lifecycle through the <code>Application</code> class. Unlike WPF, which has a <code>Shutdown</code> method directly available on the <code>Application</code> class, in Avalonia, you often use the <code>Environment.Exit</code> method to terminate an application programmatically. This is a .NET standard method that works across different platforms, making it suitable for the cross-platform nature of Avalonia.</p>
+<p>Here's an example of how you might use it within an Avalonia application, particularly in a startup event or similar initialization code:</p>
+<pre><code class="language-csharp">using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+    }
+
+    public static AppBuilder BuildAvaloniaApp()
+        =&gt; AppBuilder.Configure&lt;App&gt;()
+                     .UsePlatformDetect()
+                     .LogToTrace()
+                     .AfterSetup(AfterSetupCallback);
+
+    private static void AfterSetupCallback(AppBuilder builder)
+    {
+        if (builder.Instance.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
+        {
+            desktopLifetime.Startup += (sender, e) =&gt;
+            {
+                // Your initialization code here
+
+                // Condition to check whether to terminate the program
+                bool shouldTerminate = /* your condition */;
+                if (shouldTerminate)
+                {
+                    // Terminate the application
+                    Environment.Exit(0); // Use a non-zero value to indicate an error if needed
+                }
+            };
+        }
+    }
+}
+</code></pre>
+<p>In this example, the <code>AfterSetupCallback</code> method is used to attach an event handler to the <code>Startup</code> event of the <code>IClassicDesktopStyleApplicationLifetime</code>. Inside this event handler, you can place your initialization code and use <code>Environment.Exit(0)</code> to terminate the program based on your specific conditions. The <code>0</code> passed to <code>Environment.Exit</code> indicates that the program is terminating successfully. You can use a non-zero value to indicate an error condition if needed.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, there are commonly defined values for exit codes in programming, which are used to indicate the success or failure of a program's execution to the operating system. These values are not specific to any one programming language or framework but are generally followed conventions across different systems. Here are some of the most commonly used exit codes:</p>
+<ul>
+<li><p><strong>0</strong>: Success - This indicates that the program has executed successfully without any errors. It's the most commonly used success code.</p>
+</li>
+<li><p><strong>1</strong>: General error - This is a catch-all error code indicating that the program has encountered an unspecified error.</p>
+</li>
+<li><p><strong>2</strong>: Misuse of shell builtins (according to Bash documentation) - While more specific to Unix and Linux systems, it can also be used in other environments to indicate incorrect usage of the system.</p>
+</li>
+</ul>
+<p>Additionally, there are other exit codes that are less standardized but still commonly used in certain contexts:</p>
+<ul>
+<li><p><strong>-1</strong>: Often used to indicate an uninitialized or abnormal exit condition in many programming languages, but its interpretation can vary.</p>
+</li>
+<li><p><strong>128 + n</strong>: Fatal error signal &quot;n&quot; - This is used in Unix systems to indicate that a program was terminated by signal &quot;n&quot;. For example, <code>128 + 9</code> would indicate termination by SIGKILL.</p>
+</li>
+<li><p><strong>255</strong>: Exit status out of range - This is used by some programs to indicate that the exit status is out of the expected range. This can happen if a script uses exit codes beyond the usual 8-bit range (0-255).</p>
+</li>
+</ul>
+<p>It's important to note that while 0 is universally recognized as success, the meaning of non-zero exit codes can vary between different programs and systems. If you're developing software, it's a good practice to document the exit codes used by your program so that users and other developers can understand what each code means in the context of your application.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents"><a href="https://stackoverflow.com/questions/1538884/what-standard-application-return-exit-codes-should-an-application-support" target="_blank" class="url">https://stackoverflow.com/questions/1538884/what-standard-application-return-exit-codes-should-an-application-support</a><br />
+                                <a href="https://learn.microsoft.com/en-us/cpp/c-runtime-library/exit-success-exit-failure" target="_blank" class="url">https://learn.microsoft.com/en-us/cpp/c-runtime-library/exit-success-exit-failure</a></p>
+                            <p class="note_contents">これらのページによると、stdlib.h の EXIT_SUCCESS と EXIT_FAILURE がそれぞれ0と1とのこと。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, there are differences between WPF's <code>Application.Shutdown</code> method and the <code>Environment.Exit</code> method in terms of how they handle the termination of an application. Each has its own use case and implications on the application's lifecycle and cleanup process.</p>
+<h3>WPF's <code>Application.Shutdown</code>:</h3>
+<ol>
+<li><strong>Graceful Closure</strong>: <code>Application.Shutdown</code> initiates a more graceful shutdown process of a WPF application. It closes all windows and releases resources in an orderly fashion.</li>
+<li><strong>Event Handling</strong>: Before the application shuts down, it raises the <code>Exit</code> event, giving you an opportunity to perform cleanup tasks or cancel the shutdown.</li>
+<li><strong>Specific to WPF</strong>: This method is specific to WPF applications and is part of the <code>System.Windows.Application</code> class. It respects the WPF application lifecycle, including session ending scenarios like user logoff or system shutdown.</li>
+<li><strong>Shutdown Mode</strong>: WPF allows you to configure the application's shutdown mode via the <code>ShutdownMode</code> property, affecting how and when the application shuts down.</li>
+</ol>
+<h3><code>Environment.Exit</code>:</h3>
+<ol>
+<li><strong>Immediate Termination</strong>: <code>Environment.Exit</code> terminates the process immediately, regardless of what is currently happening in the application. It does not guarantee that all finalizers will run and may not release all unmanaged resources properly.</li>
+<li><strong>Global</strong>: This method is not specific to WPF and can be used in any .NET application. It's a more abrupt way to stop the execution of a program.</li>
+<li><strong>Exit Code</strong>: It allows you to specify an exit code, indicating the reason for the shutdown or the application's state at the time of termination.</li>
+<li><strong>Less Graceful</strong>: Since it terminates the process immediately, it might not allow for a proper cleanup, such as flushing data to files, closing database connections gracefully, or releasing external resources.</li>
+</ol>
+<p>In summary, when working within a WPF application, it's generally recommended to use <code>Application.Shutdown</code> for terminating the application, as it integrates with the WPF lifecycle and offers a more controlled shutdown process. <code>Environment.Exit</code> should be reserved for scenarios where an immediate termination of the application is required, regardless of the state, or in non-WPF contexts where <code>Application.Shutdown</code> is not applicable.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d376818f-63fb-4548-9a05-f7393b27016d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">必要なアセンブリーだけを出力する方法を調べる</span>
+                    <a href="#d376818f-63fb-4548-9a05-f7393b27016d" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">使っていない Avalonia.Controls.ColorPicker.dll だけで 485KB もある。こういうものが多数出力される。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When working with Avalonia UI, a cross-platform framework, and noticing many unnecessary assemblies being included in your final build, there are a few strategies you can adopt to minimize the footprint and include only what you need:</p>
+<ol>
+<li><p><strong>Trimming</strong>: .NET 5 and later versions support assembly trimming which can remove unused code from your assemblies. This can significantly reduce the size of your final output. You can enable trimming in your project file (<code>.csproj</code>) by setting the <code>PublishTrimmed</code> property to <code>true</code>:</p>
+<pre><code class="language-xml">&lt;PropertyGroup&gt;
+  &lt;PublishTrimmed&gt;true&lt;/PublishTrimmed&gt;
+&lt;/PropertyGroup&gt;
+</code></pre>
+<p>Be cautious with trimming, as it may remove code that is used in ways that the trimmer does not detect, leading to runtime errors. Always thoroughly test your application after enabling trimming.</p>
+</li>
+<li><p><strong>PublishSingleFile</strong>: You can combine your application and its dependencies into a single executable. This doesn't reduce the size but makes distribution simpler. In your project file, set the <code>PublishSingleFile</code> property:</p>
+<pre><code class="language-xml">&lt;PropertyGroup&gt;
+  &lt;PublishSingleFile&gt;true&lt;/PublishSingleFile&gt;
+&lt;/PropertyGroup&gt;
+</code></pre>
+<p>Combine this with trimming for better size optimization.</p>
+</li>
+<li><p><strong>Self-Contained Deployment</strong>: Publishing your app as self-contained can include only the necessary .NET runtime assemblies. Specify the <code>RuntimeIdentifier</code> and set <code>SelfContained</code> to <code>true</code>:</p>
+<pre><code class="language-xml">&lt;PropertyGroup&gt;
+  &lt;RuntimeIdentifier&gt;win-x64&lt;/RuntimeIdentifier&gt; &lt;!-- Adjust as needed --&gt;
+  &lt;SelfContained&gt;true&lt;/SelfContained&gt;
+&lt;/PropertyGroup&gt;
+</code></pre>
+</li>
+<li><p><strong>Review Project References</strong>: Ensure your project only references Avalonia packages you need. If there are any unnecessary package references, remove them to prevent their assemblies from being included in the final build.</p>
+</li>
+<li><p><strong>Conditional References</strong>: If certain assemblies are only needed under specific conditions, you can conditionally include them in your project file based on those conditions.</p>
+</li>
+<li><p><strong>Custom MSBuild Targets</strong>: For advanced scenarios, you can create custom MSBuild targets that explicitly define which assemblies to include or exclude during the build process. This approach requires a good understanding of MSBuild and might be more complex to maintain.</p>
+</li>
+<li><p><strong>Avalonia Specific Options</strong>: Check Avalonia's documentation and community resources for any Avalonia-specific build options or tools that might help in optimizing the build output.</p>
+</li>
+</ol>
+<p>It's important to note that trimming and single-file publishing might not work as expected with all projects, especially those that use reflection or dynamically load assemblies. Always test your application after making these changes to ensure it still functions correctly.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The message stating that &quot;MVID was not detected or extracted&quot; during the build process, especially after enabling the <code>PublishSingleFile</code> option, typically relates to the .NET Core's single-file publishing mechanism. The MVID, or Module Version ID, is a unique identifier for a .NET assembly. It's used internally by the runtime for various purposes, including assembly identification and loading.</p>
+<p>When you encounter an error regarding the MVID not being detected or extracted, it usually indicates an issue with how the assemblies are being bundled into the single file, or a problem with one or more specific assemblies. Here are a few steps you can take to troubleshoot and potentially resolve this issue:</p>
+<ol>
+<li><p><strong>Update .NET SDK</strong>: Ensure you're using the latest version of the .NET SDK. Sometimes, these kinds of issues are resolved in newer versions of the SDK.</p>
+</li>
+<li><p><strong>Check for Known Issues</strong>: Look through the .NET Core and Avalonia GitHub repositories, and their respective issue trackers, for known issues related to single-file publishing and MVID extraction. Someone else might have encountered the same problem, and there could be a workaround or a fix available.</p>
+</li>
+<li><p><strong>Assembly Loading Mechanisms</strong>: If your application uses dynamic assembly loading (e.g., through <code>Assembly.Load</code> or similar mechanisms), the single-file publishing process might not handle these scenarios well by default. In such cases, you might need to adjust your approach to assembly loading or explore alternative solutions.</p>
+</li>
+<li><p><strong>Third-Party Libraries</strong>: If you're using third-party libraries, one of them might be causing this issue. Try to isolate the problem by temporarily removing third-party references and see if the problem persists. If the issue is resolved, you may need to contact the library authors or find an alternative solution.</p>
+</li>
+<li><p><strong>Verbose Build Output</strong>: Run your build process with verbose output enabled to get more detailed information about what's happening during the build. This can be done by adding the <code>-v:diag</code> switch to your <code>dotnet publish</code> command. The detailed output might provide clues about where the process is failing.</p>
+</li>
+<li><p><strong>Publishing Options</strong>: Review and experiment with different <code>PublishSingleFile</code> settings and runtime identifiers. Sometimes, tweaking these settings can resolve issues.</p>
+</li>
+<li><p><strong>Consult Documentation and Forums</strong>: Check the official .NET documentation on single-file applications and seek advice from forums such as Stack Overflow or the official .NET and Avalonia communities. Someone might have encountered and solved a similar problem.</p>
+</li>
+<li><p><strong>Fallback to Non-Single-File Publishing</strong>: If you cannot resolve the issue and it's blocking your progress, consider temporarily disabling the <code>PublishSingleFile</code> option as a workaround while you investigate further or wait for a fix.</p>
+</li>
+</ol>
+<p>If none of these steps resolve the issue, consider filing an issue in the .NET Core or Avalonia GitHub repositories with detailed information about your project setup, the exact error message, and steps to reproduce the issue.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">PublishTrimmed を設定し、出力先ディレクトリーを消してからリビルドしたところ、明らかに不要なファイルはなくなった。</p>
+                            <p class="note_contents">その設定をなくして同じことをしても同じ結果だったので、Avalonia.Controls.ColorPicker.dll などが出力されていたのは、WPF から Avalonia UI への移行を最初に試したときに古いコードをあらかじめ消さなかったことでコンパイラーが必要と判断したものが残っていたのかもしれない。</p>
+                            <p class="note_contents">掃除してからのリビルドでは明らかに不要なファイルはないので、設定しないでおく。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">PublishSingleFile については、JsonSerializer.Serialize に関する警告が表示されたり、MVID を抽出できないか何かのエラーメッセージが出たりで、一つのファイルにはならなかった。試してみただけで、そういう形でのリリースを考えていないので、この件については深掘りしないでおく。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d140e8b4-5e9d-417a-8baf-9fc32d205e61" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">MainWindow の Loaded などの実装方法を調べる</span>
+                    <a href="#d140e8b4-5e9d-417a-8baf-9fc32d205e61" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In Avalonia UI, which is a cross-platform framework inspired by WPF (Windows Presentation Foundation), event handling can be a bit different due to its unique architecture. However, you can achieve similar functionalities to WPF's <code>Loaded</code>, <code>Closing</code>, and other events with Avalonia's own set of lifecycle events and methods. Here's how you can implement similar functionalities in Avalonia UI:</p>
+<h3>Loaded Event</h3>
+<p>In Avalonia, the equivalent of WPF's <code>Loaded</code> event can be handled using the <code>AttachedToVisualTree</code> event. This event is fired when the control is added to the visual tree, which is similar to when a WPF control is loaded and rendered on the screen.</p>
+<pre><code class="language-csharp">public MyUserControl()
+{
+    this.AttachedToVisualTree += OnAttachedToVisualTree;
+}
+
+private void OnAttachedToVisualTree(object sender, VisualTreeAttachmentEventArgs e)
+{
+    // Your code here
+}
+</code></pre>
+<h3>Unloaded Event</h3>
+<p>Similarly, for handling the <code>Unloaded</code> event, you can use the <code>DetachedFromVisualTree</code> event in Avalonia. This event is fired when the control is removed from the visual tree.</p>
+<pre><code class="language-csharp">public MyUserControl()
+{
+    this.DetachedFromVisualTree += OnDetachedFromVisualTree;
+}
+
+private void OnDetachedFromVisualTree(object sender, VisualTreeAttachmentEventArgs e)
+{
+    // Your code here
+}
+</code></pre>
+<h3>Closing Event</h3>
+<p>For handling the closing event of a window, you can override the <code>OnClosing</code> method in your <code>Window</code> class. This method is called just before the window is closed.</p>
+<pre><code class="language-csharp">public class MyWindow : Window
+{
+    protected override void OnClosing(CancelEventArgs e)
+    {
+        base.OnClosing(e);
+
+        // Your code here, e.g., to confirm closing or cancel it
+        // e.Cancel = true; // To prevent the window from closing
+    }
+}
+
+</code></pre>
+<h3>Opened Event</h3>
+<p>Avalonia does not have a direct equivalent to WPF's <code>Window.Loaded</code> event that signifies the window is fully created, rendered, and ready for interaction. However, you can use the <code>Opened</code> event of the <code>Window</code> class to execute code right after the window is displayed:</p>
+<pre><code class="language-csharp">public MyWindow()
+{
+    this.Opened += OnOpened;
+}
+
+private void OnOpened(object sender, EventArgs e)
+{
+    // Your code here
+}
+</code></pre>
+<p>These examples show how to handle some common lifecycle events in Avalonia UI that correspond to WPF's events. Keep in mind that Avalonia has its own unique set of events and properties, so it's a good idea to explore Avalonia's documentation and resources for more detailed information and best practices.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To focus on the first <code>TextBox</code> or any control when a window is shown in Avalonia UI, you can handle the <code>Opened</code> event of the <code>Window</code> class. The <code>Opened</code> event occurs when the window is fully loaded and opened. Inside the event handler, you can set the focus to the desired control.</p>
+<p>Here's an example of how you can do this:</p>
+<ol>
+<li><p>First, ensure your <code>TextBox</code> has a name assigned to it in your XAML, so you can reference it in your code-behind:</p>
+<pre><code class="language-xml">&lt;Window xmlns=&quot;https://github.com/avaloniaui&quot;
+        xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+        x:Class=&quot;YourNamespace.YourWindow&quot;&gt;
+    &lt;TextBox x:Name=&quot;FirstTextBox&quot; /&gt;
+&lt;/Window&gt;
+</code></pre>
+</li>
+<li><p>In your window's constructor in the code-behind file, subscribe to the <code>Opened</code> event:</p>
+<pre><code class="language-csharp">public class YourWindow : Window
+{
+    public YourWindow()
+    {
+        InitializeComponent();
+</code></pre>
+</li>
+</ol>
+<p>#if DEBUG
+this.AttachDevTools();
+#endif
+this.Opened += OnWindowOpened;
+}</p>
+<pre><code>    private void OnWindowOpened(object sender, EventArgs e)
+    {
+        FirstTextBox.Focus();
+    }
+
+    private void InitializeComponent()
+    {
+        AvaloniaXamlLoader.Load(this);
+    }
+}
+```
+</code></pre>
+<p>In the <code>OnWindowOpened</code> event handler, the <code>Focus()</code> method is called on <code>FirstTextBox</code>, which is the <code>TextBox</code> you want to focus when the window opens. This ensures that as soon as the window is displayed and ready for interaction, the specified <code>TextBox</code> will receive focus, allowing the user to start typing in it immediately.</p>
+<p>Make sure that your <code>TextBox</code> is accessible in the code-behind, either by naming it in the XAML as shown above or by finding it programmatically if necessary. This approach should provide a smooth user experience similar to focusing a control in a WPF application when the window loads.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The WPF <code>Window</code> class has a variety of events that cater to different stages of the window's lifecycle, user interaction, and other activities. Here's a list of some of the key events provided by the <code>Window</code> class in WPF:</p>
+<h3>Lifecycle Events</h3>
+<ul>
+<li><strong><code>Activated</code></strong>: Occurs when a window becomes the foreground window.</li>
+<li><strong><code>Closed</code></strong>: Occurs directly after <code>Close()</code> is called, and the window is closed.</li>
+<li><strong><code>Closing</code></strong>: Occurs when the window is about to close, which can be canceled.</li>
+<li><strong><code>ContentRendered</code></strong>: Occurs after the window's content has been rendered and the window is ready for interaction.</li>
+<li><strong><code>Deactivated</code></strong>: Occurs when the window loses foreground status.</li>
+<li><strong><code>Loaded</code></strong>: Occurs when the window is laid out, rendered, and ready for interaction.</li>
+<li><strong><code>LocationChanged</code></strong>: Occurs when the window's location changes.</li>
+<li><strong><code>SizeChanged</code></strong>: Occurs when the window's size changes.</li>
+<li><strong><code>StateChanged</code></strong>: Occurs when the window's <code>WindowState</code> property changes.</li>
+<li><strong><code>SourceInitialized</code></strong>: Occurs after the window's source is initialized, which allows access to its underlying Win32 handle.</li>
+</ul>
+<h3>Input Events</h3>
+<ul>
+<li><strong><code>KeyDown</code></strong>, <strong><code>KeyUp</code></strong>: Occur when a key is pressed or released while the window has focus.</li>
+<li><strong><code>MouseWheel</code></strong>: Occurs when the mouse wheel moves while the window has focus.</li>
+<li><strong><code>MouseMove</code></strong>: Occurs when the mouse pointer moves within the window bounds.</li>
+<li><strong><code>MouseUp</code></strong>, <strong><code>MouseDown</code></strong>: Occur when a mouse button is released or pressed within the window.</li>
+<li><strong><code>MouseEnter</code></strong>, <strong><code>MouseLeave</code></strong>: Occur when the mouse pointer enters or leaves the window bounds.</li>
+</ul>
+<h3>Other Events</h3>
+<ul>
+<li><strong><code>PreviewKeyDown</code></strong>, <strong><code>PreviewKeyUp</code></strong>: Tunneling counterparts to the <code>KeyDown</code> and <code>KeyUp</code> events, which occur before the respective bubbling events.</li>
+<li><strong><code>GotFocus</code></strong>, <strong><code>LostFocus</code></strong>: Occur when the window gains or loses focus.</li>
+<li><strong><code>GotKeyboardFocus</code></strong>, <strong><code>LostKeyboardFocus</code></strong>: Occur when the window gains or loses keyboard focus.</li>
+</ul>
+<p>These events provide a comprehensive set of hooks into the window's behavior, allowing developers to respond to a wide range of user interactions and window state changes. Remember that many other events inherited from the <code>FrameworkElement</code> and <code>UIElement</code> classes are also available, providing even more granularity for handling user interactions and other aspects of the window's behavior.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In Avalonia UI, accomplishing similar tasks as those provided by the WPF <code>Window</code> class events involves using Avalonia's specific events and properties. Here's a guide to some common WPF window events and their Avalonia equivalents or alternatives:</p>
+<h3>Lifecycle and State Events</h3>
+<ul>
+<li><p><strong><code>Opened</code></strong>: Similar to WPF's <code>Loaded</code> event, it occurs when the window is opened. Avalonia doesn't have a direct equivalent to WPF's <code>ContentRendered</code> event, but <code>Opened</code> can be used for initial setup after the window is displayed.</p>
+<pre><code class="language-csharp">this.Opened += (sender, args) =&gt; { /* Your code here */ };
+</code></pre>
+</li>
+<li><p><strong><code>Closing</code></strong>: Similar to WPF, this event is raised when the window is about to close. You can cancel the closing operation by setting <code>e.Cancel</code> to <code>true</code>.</p>
+<pre><code class="language-csharp">this.Closing += (sender, args) =&gt; { /* Your code here, possibly args.Cancel = true; */ };
+</code></pre>
+</li>
+<li><p><strong><code>Closed</code></strong>: This event is raised after the window is closed.</p>
+<pre><code class="language-csharp">this.Closed += (sender, args) =&gt; { /* Your code here */ };
+</code></pre>
+</li>
+<li><p><strong><code>Activated</code></strong> and <strong><code>Deactivated</code></strong>: These events are similar to WPF and are used to detect when the window gains or loses focus.</p>
+<pre><code class="language-csharp">this.Activated += (sender, args) =&gt; { /* Window activated code here */ };
+this.Deactivated += (sender, args) =&gt; { /* Window deactivated code here */ };
+</code></pre>
+</li>
+</ul>
+<h3>Input Events</h3>
+<ul>
+<li><p><strong><code>KeyDown</code></strong>, <strong><code>KeyUp</code></strong>: Avalonia supports these events for handling keyboard input.</p>
+<pre><code class="language-csharp">this.KeyDown += (sender, args) =&gt; { /* Key down code here */ };
+this.KeyUp += (sender, args) =&gt; { /* Key up code here */ };
+</code></pre>
+</li>
+<li><p><strong>Mouse Events</strong>: Avalonia provides a set of mouse events similar to WPF, such as <code>PointerPressed</code>, <code>PointerReleased</code>, <code>PointerMoved</code>, etc., which can be used to handle mouse actions.</p>
+<pre><code class="language-csharp">this.PointerPressed += (sender, args) =&gt; { /* Mouse down code here */ };
+this.PointerReleased += (sender, args) =&gt; { /* Mouse up code here */ };
+this.PointerMoved += (sender, args) =&gt; { /* Mouse move code here */ };
+</code></pre>
+</li>
+</ul>
+<h3>Focus Events</h3>
+<ul>
+<li><p><strong><code>GotFocus</code></strong> and <strong><code>LostFocus</code></strong>: These events can be used to track when the window or a control within it gains or loses focus.</p>
+<pre><code class="language-csharp">this.GotFocus += (sender, args) =&gt; { /* Got focus code here */ };
+this.LostFocus += (sender, args) =&gt; { /* Lost focus code here */ };
+</code></pre>
+</li>
+</ul>
+<h3>Size and Position Events</h3>
+<ul>
+<li><p><strong><code>PositionChanged</code></strong>: This event can be used in place of WPF's <code>LocationChanged</code> event.</p>
+<pre><code class="language-csharp">this.PositionChanged += (sender, args) =&gt; { /* Window position changed code here */ };
+</code></pre>
+</li>
+<li><p><strong><code>LayoutUpdated</code></strong>: While not directly equivalent to WPF's <code>SizeChanged</code>, this event can be used to respond to changes in the layout, which may include size changes.</p>
+<pre><code class="language-csharp">this.LayoutUpdated += (sender, args) =&gt; { /* Layout updated code here */ };
+</code></pre>
+</li>
+</ul>
+<p>Avalonia's event model is designed to be familiar to those with WPF experience, but there are differences due to its cross-platform nature and architecture. It's a good idea to explore Avalonia's documentation and resources for detailed information on handling events and understanding the Avalonia application lifecycle.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In Avalonia UI, the concept of a <code>Loaded</code> event, similar to what exists in WPF, is not as straightforward due to its architecture and the way the visual tree is managed. Avalonia applications are designed to work across multiple platforms, which means that certain lifecycle events behave differently from WPF.</p>
+<h3>Avalonia's Approach</h3>
+<p>Instead of a direct <code>Loaded</code> event equivalent, Avalonia provides several events and mechanisms to handle the readiness and rendering states of controls and windows:</p>
+<ul>
+<li><p><strong><code>AttachedToVisualTree</code> and <code>DetachedFromVisualTree</code></strong>: These events are somewhat similar to WPF's <code>Loaded</code> and <code>Unloaded</code> events. <code>AttachedToVisualTree</code> is fired when a control is added to the visual tree, which could be considered as the control being &quot;loaded&quot; in terms of visual rendering. However, it doesn't necessarily indicate that the window or control is fully rendered and interactive, as it might be called multiple times if the control is added and removed from the visual tree.</p>
+<pre><code class="language-csharp">this.AttachedToVisualTree += (sender, e) =&gt; {
+    // Initialization or setup code here
+};
+</code></pre>
+</li>
+<li><p><strong><code>Initialized</code></strong>: This event is fired when a control is initialized, which occurs before the control is attached to the visual tree. It's more about the control's logical initialization rather than its visual representation and readiness for user interaction.</p>
+</li>
+<li><p><strong><code>Opened</code></strong>: For windows, the <code>Opened</code> event can serve a role similar to <code>Loaded</code>, indicating that the window is open and ready. It's a good place for final initialization tasks that require the window to be fully visible and potentially interactive.</p>
+<pre><code class="language-csharp">this.Opened += (sender, e) =&gt; {
+    // Final initialization or setup code here
+};
+</code></pre>
+</li>
+</ul>
+<h3>Key Differences</h3>
+<p>The key difference between Avalonia's approach and WPF's <code>Loaded</code> event lies in the timing and the context in which these events are fired. In WPF, the <code>Loaded</code> event signifies that the control is both logically and visually ready, having been added to the visual tree and rendered. In Avalonia, the similar events might not convey the exact same state due to its cross-platform nature and the potential for controls to be attached and detached from the visual tree multiple times during their lifecycle.</p>
+<p>When porting applications from WPF to Avalonia or designing Avalonia applications with WPF experience, it's important to understand these differences and test the behavior of these events to ensure they meet the application's requirements. Always consider the specific needs of your application, such as initialization timing and visual tree manipulation, to choose the most appropriate event or combination of events for setup and initialization tasks.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Visual Studio で開発していると Loaded イベントが IntelliSense で出てくる。コードビハインド側にイベント用のコードを生成する機能もある。しかし、それを使ってもコードが生成されず、手作業で書いてもコンパイルできない。</p>
+                            <p class="note_contents">どうやら IntelliSense あるいは Avalonia UI のツールによるコード生成のミスのようで、そういうイベントが Avalonia UI の Window クラスにはなさそうだ。</p>
+                            <p class="note_contents"><a href="https://reference.avaloniaui.net/api/Avalonia.Controls/Window/" target="_blank" class="url">https://reference.avaloniaui.net/api/Avalonia.Controls/Window/</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In Avalonia UI, you can handle this scenario by subscribing to the <code>Closing</code> event of your window. Within the event handler, you can show a dialog asking the user if they wish to close the application despite having unsaved changes. Based on the user's response, you can either proceed with closing the application or cancel the close operation.</p>
+<p>Here's a step-by-step guide on how to implement this:</p>
+<ol>
+<li><p><strong>Handle the Closing Event</strong></p>
+<p>First, you need to subscribe to the <code>Closing</code> event of your window. This is typically done in the constructor of your window class.</p>
+<pre><code class="language-csharp">public MainWindow()
+{
+    InitializeComponent();
+    this.Closing += MainWindow_Closing;
+}
+</code></pre>
+</li>
+<li><p><strong>Implement the Event Handler</strong></p>
+<p>In the event handler, you can display a dialog asking the user whether they want to close the window. Based on the user's choice, you can either proceed with the closing operation or cancel it by setting <code>e.Cancel</code> to <code>true</code>.</p>
+<pre><code class="language-csharp">private async void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+{
+    // Check if there are unsaved changes
+    if (/* condition to check for unsaved changes */)
+    {
+        // Show a dialog to ask the user if they really want to close the window
+        var result = await ShowCloseConfirmationDialog();
+
+        if (!result)
+        {
+            // If the user doesn't want to close, cancel the close operation
+            e.Cancel = true;
+        }
+    }
+}
+</code></pre>
+</li>
+<li><p><strong>Implement the Dialog</strong></p>
+<p>The <code>ShowCloseConfirmationDialog</code> method could use Avalonia's built-in dialogs or a custom dialog to ask the user for confirmation. Here's an example using Avalonia's <code>MessageBox</code> from the <code>Avalonia.Controls</code> namespace to show a simple confirmation dialog:</p>
+<pre><code class="language-csharp">private async Task&lt;bool&gt; ShowCloseConfirmationDialog()
+{
+    var messageBoxStandardWindow = MessageBox.Avalonia.MessageBoxManager
+        .GetMessageBoxStandardWindow(&quot;Confirmation&quot;,
+            &quot;You have unsaved changes. Are you sure you want to close?&quot;,
+            ButtonEnum.YesNo, Icon.Question);
+
+    var result = await messageBoxStandardWindow.ShowDialog(this);
+    return result == ButtonResult.Yes;
+}
+</code></pre>
+<p>Note: The <code>MessageBox.Avalonia</code> namespace is part of the <code>MessageBox.Avalonia</code> package, which is an extension library for Avalonia UI and needs to be added to your project separately.</p>
+</li>
+<li><p><strong>Subscribe to the Event and Test</strong></p>
+<p>Ensure that your window is correctly subscribing to the <code>Closing</code> event and that your dialog logic is in place. Test the application to ensure that the dialog appears as expected when there are unsaved changes and that the window only closes when the user confirms.</p>
+</li>
+</ol>
+<p>This approach allows you to intercept the window closing process, giving the user a chance to save their work or cancel the operation, thus preventing potential data loss.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">コードビハインドの Closing イベントで各コントロールのデータにアクセスしてダイアログを出すのでは MVVM 的にダメでないかと聞いてみた。</p>
+                            <div class="note_ai_generated">
+<p>You're correct in noting that MVVM (Model-View-ViewModel) aims to strictly separate logic from UI code. Handling a closing event with logic that directly interacts with UI controls and user input, as described, does seem to blur the lines between the UI and the underlying logic, which can be seen as not fully adhering to the MVVM principles.</p>
+<p>In a strict MVVM approach, the ViewModel should not directly manipulate the View or interact with user input dialogs. Instead, it should communicate its state and intentions through data bindings, commands, and properties, allowing the View to react accordingly.</p>
+<p>To handle a scenario like confirming unsaved changes when closing a window in an MVVM-compliant way, you can consider the following approach:</p>
+<ol>
+<li><p><strong>Command Binding and Data Binding</strong>: Bind the window's closing behavior to a command in the ViewModel, and use data binding to communicate any unsaved changes from the ViewModel to the View.</p>
+</li>
+<li><p><strong>Event Handling in the View</strong>: The View can subscribe to the window's closing event and handle it by invoking the ViewModel's command or checking the ViewModel's properties.</p>
+</li>
+<li><p><strong>Service Layer for User Interaction</strong>: Use a service layer that can be called from the ViewModel to display dialogs. This service can be abstracted behind an interface to maintain separation and allow for mocking in unit tests.</p>
+</li>
+</ol>
+<p>Here's a simplified example of how this could be implemented:</p>
+<h3>ViewModel</h3>
+<pre><code class="language-csharp">public class MainViewModel : ViewModelBase
+{
+    private readonly IUserDialogService _dialogService;
+
+    public MainViewModel(IUserDialogService dialogService)
+    {
+        _dialogService = dialogService;
+        ClosingCommand = ReactiveCommand.CreateFromTask(ExecuteClosingAsync);
+    }
+
+    public IReactiveCommand ClosingCommand { get; }
+
+    private async Task ExecuteClosingAsync()
+    {
+        if (HasUnsavedChanges)
+        {
+            bool result = await _dialogService.ShowConfirmationDialogAsync(&quot;You have unsaved changes. Do you want to close?&quot;);
+            if (!result)
+            {
+                // Logic to cancel the closing operation
+            }
+        }
+    }
+
+    // Property to track unsaved changes
+    public bool HasUnsavedChanges { get; set; }
+}
+</code></pre>
+<h3>Service Interface</h3>
+<pre><code class="language-csharp">public interface IUserDialogService
+{
+    Task&lt;bool&gt; ShowConfirmationDialogAsync(string message);
+}
+</code></pre>
+<h3>View (Code-Behind)</h3>
+<pre><code class="language-csharp">public partial class MainWindow : Window
+{
+    public MainWindow()
+    {
+        InitializeComponent();
+        this.DataContextChanged += MainWindow_DataContextChanged;
+    }
+
+    private void MainWindow_DataContextChanged(object sender, EventArgs e)
+    {
+        if (DataContext is MainViewModel vm)
+        {
+            this.Closing += async (sender, args) =&gt;
+            {
+                args.Cancel = true; // Prevent closing
+                await vm.ClosingCommand.Execute();
+            };
+        }
+    }
+}
+</code></pre>
+<h3>UserDialogService Implementation</h3>
+<pre><code class="language-csharp">public class UserDialogService : IUserDialogService
+{
+    public async Task&lt;bool&gt; ShowConfirmationDialogAsync(string message)
+    {
+        // Implementation to show dialog and return user response
+    }
+}
+</code></pre>
+<p>In this setup, the ViewModel remains unaware of the View's specifics and interacts with the user through a service abstraction. The View handles the window closing event but delegates the decision-making to the ViewModel via bindings and commands. This approach maintains a clear separation of concerns while still allowing for rich interactions like confirmation dialogs.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In real-world applications, adhering strictly to MVVM principles can sometimes lead to overly complex solutions for simple problems, such as showing a confirmation dialog when closing a window. While MVVM aims to separate concerns and reduce code-behind to a minimum, pragmatic exceptions are often made for the sake of simplicity, maintainability, and development efficiency.</p>
+<h3>Practical Considerations</h3>
+<ul>
+<li><strong>Convenience and Simplicity</strong>: For straightforward tasks like showing a confirmation dialog on closing, writing a few lines of code in the code-behind can be more convenient and easier to understand than creating a more complex, fully decoupled solution.</li>
+<li><strong>Maintainability</strong>: If the code is simple, well-documented, and unlikely to require extensive testing or reusability, implementing it directly in the code-behind might not significantly impact maintainability.</li>
+</ul>
+<h3>Common Practices</h3>
+<ul>
+<li><strong>Minimal Logic in Code-Behind</strong>: It's generally accepted to have some UI logic in the code-behind, such as event handlers for UI elements that do not contain business logic or directly manipulate the ViewModel. The key is to keep the ViewModel free of UI-specific code.</li>
+<li><strong>Service Abstractions</strong>: For more complex scenarios or when testability is a concern, developers often use service abstractions (e.g., dialog services) to keep the code-behind minimal while still enabling interactions like confirmation dialogs.</li>
+</ul>
+<h3>Community and Team Preferences</h3>
+<ul>
+<li><strong>Team Standards</strong>: Some teams might strictly adhere to MVVM principles and avoid any logic in the code-behind, while others adopt a more pragmatic approach, allowing for exceptions when they lead to simpler, more readable code.</li>
+<li><strong>Project Requirements</strong>: The choice can also depend on the project's requirements, such as the need for unit testing, which might necessitate stricter adherence to MVVM to facilitate testing.</li>
+</ul>
+<h3>Conclusion</h3>
+<p>In practice, a balance is often struck between strict adherence to MVVM and practical considerations of development efficiency and code simplicity. Writing code for displaying confirmation dialogs in the code-behind of a view is a common and widely accepted practice, provided it doesn't lead to tangled dependencies or complex logic that belongs in the ViewModel.</p>
+<p>Ultimately, the decision should be guided by the principles of maintainability, testability, and simplicity, considering the specific context and requirements of the project and team preferences.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Closing イベントでアプリを閉じるかどうか聞く場合のベストプラクティスを聞いた。やはり複雑になるか。</p>
+                            <div class="note_ai_generated">
+<p>For a scenario where you want to check a few controls' data and ask the user if they want to discard the input and close the application, the best practice within the MVVM framework would involve a few steps:</p>
+<ol>
+<li><p><strong>ViewModel Data Binding</strong>: Ensure that the data input from the controls is bound to properties in your ViewModel. This keeps the user input data in sync with your ViewModel, allowing you to easily check the state of this data when needed.</p>
+</li>
+<li><p><strong>Unsaved Changes Flag</strong>: Maintain a flag or a method in your ViewModel that determines whether there are unsaved changes. This could be based on comparing the current values of the ViewModel properties to their original values or by tracking user interactions.</p>
+</li>
+<li><p><strong>Closing Command in ViewModel</strong>: Implement a command in your ViewModel that gets triggered when the user attempts to close the application. This command can check the unsaved changes flag and decide whether to proceed with closing.</p>
+</li>
+<li><p><strong>Service for User Interaction</strong>: Utilize a service abstraction for showing dialogs. This keeps your ViewModel decoupled from the UI and makes it easier to unit test. The service can be injected into your ViewModel and used within the closing command to show a confirmation dialog when unsaved changes are detected.</p>
+</li>
+<li><p><strong>Invoke Command from View's Code-Behind</strong>: In the code-behind of your View, handle the window's <code>Closing</code> event to invoke the ViewModel's closing command. If the command determines that the window should not close (based on the user's choice in the confirmation dialog), set <code>CancelEventArgs.Cancel</code> to <code>true</code> to prevent the window from closing.</p>
+</li>
+</ol>
+<h3>Example Implementation</h3>
+<h4>ViewModel</h4>
+<pre><code class="language-csharp">public class MainViewModel : ViewModelBase
+{
+    private readonly IDialogService _dialogService;
+
+    // Flag or method to determine unsaved changes
+    public bool HasUnsavedChanges =&gt; /* Your logic here */;
+
+    public ICommand CloseCommand { get; }
+
+    public MainViewModel(IDialogService dialogService)
+    {
+        _dialogService = dialogService;
+        CloseCommand = new RelayCommand(ExecuteCloseCommand);
+    }
+
+    private void ExecuteCloseCommand()
+    {
+        if (HasUnsavedChanges)
+        {
+            bool result = _dialogService.ShowConfirmation(&quot;You have unsaved changes. Do you want to discard them?&quot;);
+            if (!result)
+            {
+                // Logic to cancel closing, possibly by setting a cancel flag
+            }
+        }
+    }
+}
+</code></pre>
+<h4>IDialogService</h4>
+<pre><code class="language-csharp">public interface IDialogService
+{
+    bool ShowConfirmation(string message);
+}
+</code></pre>
+<h4>View's Code-Behind</h4>
+<pre><code class="language-csharp">public partial class MainWindow : Window
+{
+    public MainWindow()
+    {
+        InitializeComponent();
+        Closing += MainWindow_Closing;
+    }
+
+    private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+        if (DataContext is MainViewModel vm)
+        {
+            vm.CloseCommand.Execute(null);
+            if (/* Check if closing is canceled based on ViewModel's state */)
+            {
+                e.Cancel = true;
+            }
+        }
+    }
+}
+</code></pre>
+<h4>DialogService Implementation</h4>
+<pre><code class="language-csharp">public class DialogService : IDialogService
+{
+    public bool ShowConfirmation(string message)
+    {
+        // Implementation to show a confirmation dialog and return the user's response
+    }
+}
+</code></pre>
+<p>This approach keeps the UI logic minimal in the code-behind, leverages data binding for data management, and maintains separation of concerns by using a service for user interactions. It provides a clean, testable, and maintainable way to handle unsaved changes and user confirmation when closing the application, adhering to MVVM principles.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Implementing <code>HasUnsavedChanges</code> in a ViewModel, especially within the MVVM design pattern, involves tracking changes to your data-bound properties rather than directly interacting with the UI controls. Here's a step-by-step guide on how to implement this:</p>
+<h3>1. Data Binding</h3>
+<p>First, ensure that your UI controls (e.g., TextBoxes, CheckBoxes) are data-bound to properties in your ViewModel. This is essential for the MVVM pattern, as it separates the UI (View) from the business logic and data (ViewModel).</p>
+<pre><code class="language-xml">&lt;!-- Example XAML binding --&gt;
+&lt;TextBox Text=&quot;{Binding SomeProperty, UpdateSourceTrigger=PropertyChanged}&quot; /&gt;
+</code></pre>
+<h3>2. NotifyPropertyChange</h3>
+<p>Your ViewModel properties should notify the UI about changes, typically by implementing the <code>INotifyPropertyChanged</code> interface. This is crucial for data binding to work properly.</p>
+<pre><code class="language-csharp">public class MainViewModel : INotifyPropertyChanged
+{
+    private string _someProperty;
+
+    public string SomeProperty
+    {
+        get =&gt; _someProperty;
+        set
+        {
+            if (_someProperty != value)
+            {
+                _someProperty = value;
+                OnPropertyChanged(nameof(SomeProperty));
+                // Optionally, check for unsaved changes whenever a property changes
+                CheckForUnsavedChanges();
+            }
+        }
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+}
+</code></pre>
+<h3>3. Implementing <code>HasUnsavedChanges</code></h3>
+<p>There are several strategies to implement <code>HasUnsavedChanges</code>, depending on your application's complexity and requirements. Here are two common approaches:</p>
+<h4>a. Tracking Changes Manually</h4>
+<p>You can manually set a flag whenever any of the data-bound properties change. This approach is straightforward but can become cumbersome with many properties.</p>
+<pre><code class="language-csharp">private bool _hasUnsavedChanges;
+
+public bool HasUnsavedChanges
+{
+    get =&gt; _hasUnsavedChanges;
+    private set
+    {
+        _hasUnsavedChanges = value;
+        OnPropertyChanged(nameof(HasUnsavedChanges));
+    }
+}
+
+private void CheckForUnsavedChanges()
+{
+    // Logic to determine if there are unsaved changes
+    HasUnsavedChanges = /* your logic to check changes */;
+}
+</code></pre>
+<h4>b. Using Original Values for Comparison</h4>
+<p>For a more scalable approach, especially with complex forms, you might keep a copy of the original values (e.g., when the ViewModel is first loaded) and compare the current property values to these originals to determine if there are unsaved changes.</p>
+<pre><code class="language-csharp">private YourDataType _originalData;
+
+public MainViewModel(YourDataType data)
+{
+    _originalData = data.DeepCopy(); // Ensure this is a deep copy if it's a complex object
+    // Initialize your ViewModel properties with the data
+}
+
+private bool CheckForUnsavedChanges()
+{
+    // Compare each property to its original value
+    return SomeProperty != _originalData.SomeProperty || /* other comparisons */;
+}
+</code></pre>
+<p>Whenever you need to check for unsaved changes (e.g., when the user tries to close the application), you can simply evaluate the <code>HasUnsavedChanges</code> property.</p>
+<h3>4. Usage</h3>
+<p>When the user attempts to close the application or navigate away, you can check the <code>HasUnsavedChanges</code> property and, if true, prompt the user to save changes or cancel the action.</p>
+<p>This approach ensures that your logic for determining unsaved changes is encapsulated within the ViewModel, maintaining a clear separation from the UI and adhering to the MVVM principles.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">「動けばいい」で WPF で書いてきたコードの多くが Avalonia UI への移行により今さら否定されていてヘコみ続けている。</p>
+                            <div class="note_ai_generated">
+<p>Implementing the logic to check all the properties bound to the controls directly within the getter of <code>HasUnsavedChanges</code> is generally not recommended for several reasons:</p>
+<h3>Performance Concerns</h3>
+<p>Each time <code>HasUnsavedChanges</code> is accessed, it would re-evaluate the entire set of properties to determine if any have changed. This could lead to performance issues, especially if the properties are numerous or the checks are complex.</p>
+<h3>Violation of Single Responsibility Principle</h3>
+<p>The <code>HasUnsavedChanges</code> property's primary responsibility should be to indicate the state of unsaved changes, not to calculate or determine that state each time it's accessed. Embedding the logic for checking changes directly in the getter mixes concerns and responsibilities, making the code less maintainable and more difficult to understand.</p>
+<h3>Potential for Side Effects</h3>
+<p>Getters should ideally be side-effect-free and idempotent, meaning they shouldn't change the state of the object and should return the same result if called multiple times with the same object state. Implementing complex logic within a getter could introduce unexpected side effects, making the application's behavior more difficult to predict and debug.</p>
+<h3>Difficulty in Testing</h3>
+<p>Having complex logic within a property getter makes unit testing more challenging. It's easier to test discrete methods that perform specific tasks than to test property getters that contain complex logic.</p>
+<h3>Best Practice</h3>
+<p>A better approach would be to update a private field or property representing the &quot;unsaved changes&quot; state whenever a bound property changes. This can be done within the setter of each property that could affect the unsaved state. Alternatively, you could use a method to calculate the unsaved changes state and call this method at appropriate times (e.g., when a save operation occurs, when the user attempts to navigate away, or at specific intervals).</p>
+<p>For example:</p>
+<pre><code class="language-csharp">private bool _hasUnsavedChanges;
+public bool HasUnsavedChanges =&gt; _hasUnsavedChanges;
+
+private string _someProperty;
+public string SomeProperty
+{
+    get =&gt; _someProperty;
+    set
+    {
+        if (_someProperty != value)
+        {
+            _someProperty = value;
+            OnPropertyChanged(nameof(SomeProperty));
+            UpdateHasUnsavedChanges();
+        }
+    }
+}
+
+private void UpdateHasUnsavedChanges()
+{
+    // Logic to determine if there are unsaved changes
+    _hasUnsavedChanges = /* your logic to check changes */;
+    OnPropertyChanged(nameof(HasUnsavedChanges));
+}
+</code></pre>
+<p>In this approach, <code>UpdateHasUnsavedChanges</code> could be a method that checks all relevant properties to determine if there are any unsaved changes and updates the <code>_hasUnsavedChanges</code> field accordingly. This method should be called in the setter of each property that can affect the unsaved changes state. This keeps the logic for determining unsaved changes separate from the property getter, adhering to good design principles and ensuring better performance and maintainability.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">イベント駆動型で書くと、HasUnsavedChanges のようなものに影響しうる全てのコントロールにイベント用のコードを用意して UpdateControls 的なメソッドを呼ぶことになり、コードビハインドが肥大化する。また、そうやってイベント用のコードを用意してしまうと、惰性でそこにロジックを書き足してしまう。</p>
+                            <p class="note_contents">MVVM で実装するにおいては、まず全てのコントロールに対し、そのビューに対応するビューモデル内のプロパティーをあてがうことになりそう。それらにはプライベートフィールドが用意され、その値が変化するときには OnPropertyChanged 的なものによりコントロール側に通知を送り、また、HasUnsavedChanges のようなものを更新するメソッドを呼ぶ。</p>
+                            <div class="note_ai_generated">
+<p>Yes, your understanding is correct. In an MVVM approach, each UI control that interacts with user data should be bound to a property in the ViewModel. When the user modifies the data in the UI, the corresponding property setter in the ViewModel gets called due to data binding. In the setter of each of these properties, you can then call a method to evaluate whether there are unsaved changes. This method updates a private field, such as <code>_hasUnsavedChanges</code>, which is then exposed by a public <code>HasUnsavedChanges</code> property or similar.</p>
+<p>This approach ensures that the check for unsaved changes is performed efficiently, only when relevant data changes, rather than every time the <code>HasUnsavedChanges</code> property is accessed. It also keeps the property getters simple and free of complex logic, adhering to best practices for property design.</p>
+<p>Here's a simplified example to illustrate this pattern:</p>
+<pre><code class="language-csharp">public class MainViewModel : INotifyPropertyChanged
+{
+    private string _someProperty;
+    private bool _hasUnsavedChanges;
+
+    public string SomeProperty
+    {
+        get =&gt; _someProperty;
+        set
+        {
+            if (_someProperty != value)
+            {
+                _someProperty = value;
+                OnPropertyChanged(nameof(SomeProperty));
+                CheckForUnsavedChanges();
+            }
+        }
+    }
+
+    public bool HasUnsavedChanges
+    {
+        get =&gt; _hasUnsavedChanges;
+        private set
+        {
+            if (_hasUnsavedChanges != value)
+            {
+                _hasUnsavedChanges = value;
+                OnPropertyChanged(nameof(HasUnsavedChanges));
+            }
+        }
+    }
+
+    public MainViewModel()
+    {
+        // Initial setup
+    }
+
+    private void CheckForUnsavedChanges()
+    {
+        // This method should contain the logic to determine if there are unsaved changes.
+        // For example, it might compare the current property values with their original values,
+        // or it could simply flag that changes have been made since the last save.
+
+        // Update the _hasUnsavedChanges field based on the check. This is just an example.
+        HasUnsavedChanges = /* your logic here */;
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+}
+</code></pre>
+<p>In this example, whenever <code>SomeProperty</code> is set to a new value, <code>CheckForUnsavedChanges()</code> is called to evaluate if the ViewModel's state reflects unsaved changes. The result updates <code>_hasUnsavedChanges</code>, and the <code>HasUnsavedChanges</code> property getter simply returns this field's value. This setup avoids the need for the getter to perform any complex checks, improving performance and maintainability.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">プロパティーに値を設定するならそれがコントロールに通知されるのは分かるが、コントロール側が更新されてプロパティーの setter のコードが実行されるとコントロールに再度通知が送られて無駄な処理にならないか聞いた。</p>
+                            <div class="note_ai_generated">
+<p>Yes, you are correct in your understanding of how data binding works in MVVM, both when the property is updated programmatically and when the user updates the UI control. Let's break down the process for clarity:</p>
+<h3>Updating Property Programmatically</h3>
+<p>When you set a value to <code>SomeProperty</code> via code, and the value is different from the current value of the private backing field <code>_someProperty</code>, the setter logic is executed. This includes updating the private field with the new value, raising the <code>PropertyChanged</code> event to notify bound UI elements of the change, and potentially calling additional logic such as checking for unsaved changes. The UI control bound to <code>SomeProperty</code> will then re-render to display the new value.</p>
+<h3>User Updates Control</h3>
+<p>When the user interacts with a control bound to <code>SomeProperty</code> (e.g., typing in a <code>TextBox</code>), the data binding mechanism in WPF or a similar framework updates the bound property with the new value from the UI. This triggers the property's setter, just as if the property were updated programmatically.</p>
+<ul>
+<li><p><strong>Back to the Control</strong>: Even though the setter is called and the <code>PropertyChanged</code> event is raised, the UI control that initiated the change won't &quot;react&quot; to this notification in a way that causes any visible change or recursion. This is because the control already displays the new value that the user entered. The data binding system is smart enough to handle this efficiently and prevent unnecessary updates or infinite loops.</p>
+</li>
+<li><p><strong>Efficiency</strong>: Modern UI frameworks like WPF are designed to handle this data flow efficiently. The <code>PropertyChanged</code> event is used to inform other components or controls that might depend on this property, but it doesn't cause the source control (e.g., the <code>TextBox</code> the user typed into) to update unnecessarily.</p>
+</li>
+</ul>
+<h3>Summary</h3>
+<p>So, while it might seem like updating the property would cause a redundant update back to the UI control, in practice, this is handled gracefully by the data binding system. The UI updates only when necessary, such as when the property value is changed from elsewhere in the code or when another control depends on the same property. This efficient data flow is part of what makes the MVVM pattern powerful for building responsive and interactive UIs.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">自分は完璧な MVVM にしたいというより、コントロールの状態管理をそれなりにシンプルにしながらプログラムをサッと動かしたいだけなので、「コントロールにはプロパティーをあてがう」「状態管理をバインディングで行う」「Windows クラスなどのイベントのコードは、ダイアログを出す程度で数行ならコードビハインドに書く」というので考えてみる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">というのでよいか聞いてみたところ、リストで与えたガイドラインの原案を完全版にしてくれてビビった。</p>
+                            <div class="note_ai_generated">
+<p>Your guidelines are a good starting point and align well with common MVVM practices. Here's a slightly refined version with some additional details for clarity:</p>
+<ol>
+<li><p><strong>Data Binding</strong>: For every UI control that interacts with user data or requires synchronization with the ViewModel, there should be a corresponding property in the ViewModel bound to them. This ensures a clear separation between the presentation layer (View) and the business logic/data layer (ViewModel).</p>
+</li>
+<li><p><strong>Property Setters</strong>: The setters of these properties should handle updating the ViewModel's state based on user interactions or programmatic changes. They can also enforce data validation and consistency checks as needed. It's important that setters only contain logic related to the property's data and its implications on the ViewModel's state, avoiding direct manipulation of View elements or application logic unrelated to the data model.</p>
+</li>
+<li><p><strong>Event Handlers in Code-Behind</strong>: Event handlers for UI-specific events (such as startup events in the App class, closing events in the Window class, or other UI lifecycle events) can be implemented in the code-behind of the Views. This is acceptable for scenarios where the event handling is purely related to UI concerns (e.g., animations, visual state changes) and does not involve business logic. For events that do involve business logic or application state changes, consider using commands in the ViewModel or services to handle these interactions.</p>
+</li>
+<li><p><strong>Commands for UI Actions</strong>: For user actions that trigger more complex operations or business logic (such as button clicks that initiate data processing), use commands in the ViewModel. Commands help maintain separation between the View and ViewModel by allowing the View to invoke logic in the ViewModel without direct method calls.</p>
+</li>
+<li><p><strong>Services for Cross-Cutting Concerns</strong>: For functionality that involves cross-cutting concerns such as showing dialogs, accessing external resources, or performing complex user interactions, use services. Services can be injected into the ViewModel, keeping it decoupled from the specific implementation details and allowing for easier testing and maintenance.</p>
+</li>
+<li><p><strong>Minimal Logic in Code-Behind</strong>: Keep the code-behind as lean as possible, focusing on View-specific logic that doesn't fit well into the MVVM pattern. Avoid placing business logic or state management code in the code-behind.</p>
+</li>
+</ol>
+<p>These refined guidelines offer a structured approach to applying MVVM, balancing the separation of concerns with practical considerations for handling UI-specific tasks. Adhering to these principles can help you build maintainable, testable, and scalable applications while leveraging the benefits of the MVVM pattern.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="a0de13d5-0f58-4b01-b0ef-79da2438b3c2" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">コントロールの状態管理のベストプラクティスを調べる</span>
+                    <a href="#a0de13d5-0f58-4b01-b0ef-79da2438b3c2" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">yyTodoMail を WPF から Avalonia UI に移行するにおいては、意外と各コントロールの状態管理に手間がかかっていることに気づかされる。TextBox が空だからボタンを無効にするなどだ。ロジックよりその方がめんどくさいかもしれないくらいだ。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ほかのタスクのメモでいろいろと調べたので、こちらでは、入力欄の内容がメアドかどうかでボタンの状態を更新する方法を聞いてみた。</p>
+                            <p class="note_contents">ボタンの状態にもプロパティーを用意してバインディングすること、バリデーションの結果を表示するところは（おそらくプロパティーでも大丈夫だろうが）Converter を使うことは、いずれも興味深い。自然とそういうコードが出てくるようになれば、ただ書くのがめんどくさいだけで、むしろコードがシンプルになり、難易度は下がるのだろう。</p>
+                            <div class="note_ai_generated">
+<p>To minimize the amount of code needed for managing state changes in Avalonia UI controls based on data, you can leverage the MVVM (Model-View-ViewModel) design pattern, which Avalonia supports. This approach involves binding properties in your ViewModel to controls in your View and using Data Validation and Converters to manage state. Here's a step-by-step guide to achieve your requirements:</p>
+<h3>Step 1: ViewModel Setup</h3>
+<p>Create properties in your ViewModel to represent the text in the TextBox and a Boolean to represent the state of the Send button. Implement <code>INotifyPropertyChanged</code> to notify the View of property changes.</p>
+<pre><code class="language-csharp">public class MyViewModel : INotifyPropertyChanged
+{
+    private string _emailText;
+    private bool _isSendEnabled;
+
+    public string EmailText
+    {
+        get =&gt; _emailText;
+        set
+        {
+            _emailText = value;
+            OnPropertyChanged(nameof(EmailText));
+            // Call method to check email validity
+            CheckEmailValidity();
+        }
+    }
+
+    public bool IsSendEnabled
+    {
+        get =&gt; _isSendEnabled;
+        set
+        {
+            _isSendEnabled = value;
+            OnPropertyChanged(nameof(IsSendEnabled));
+        }
+    }
+
+    private void CheckEmailValidity()
+    {
+        // Simple email validation logic
+        IsSendEnabled = !string.IsNullOrEmpty(EmailText) &amp;&amp; EmailText.Contains(&quot;@&quot;);
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+}
+</code></pre>
+<h3>Step 2: Data Binding and Validation</h3>
+<p>In your View (XAML), bind the TextBox's <code>Text</code> property to <code>EmailText</code> and the Button's <code>IsEnabled</code> property to <code>IsSendEnabled</code>. Use DataValidation for more complex validation rules if needed.</p>
+<pre><code class="language-xml">&lt;Window xmlns=&quot;https://github.com/avaloniaui&quot;
+        xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+        xmlns:d=&quot;http://schemas.microsoft.com/expression/blend/2008&quot;
+        xmlns:mc=&quot;http://schemas.openxmlformats.org/markup-compatibility/2006&quot;
+        xmlns:vm=&quot;clr-namespace:YourNamespace.ViewModels&quot;
+        mc:Ignorable=&quot;d&quot;
+        x:Class=&quot;YourNamespace.Views.MainWindow&quot;
+        Title=&quot;MainWindow&quot;&gt;
+    &lt;Window.DataContext&gt;
+        &lt;vm:MyViewModel/&gt;
+    &lt;/Window.DataContext&gt;
+
+    &lt;StackPanel&gt;
+        &lt;TextBox Text=&quot;{Binding EmailText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}&quot;/&gt;
+        &lt;TextBlock Text=&quot;{Binding EmailText, Converter={StaticResource YourConverter}}&quot;/&gt;
+        &lt;Button Content=&quot;Send&quot; IsEnabled=&quot;{Binding IsSendEnabled}&quot;/&gt;
+    &lt;/StackPanel&gt;
+&lt;/Window&gt;
+</code></pre>
+<h3>Step 3: Converters for Display Messages</h3>
+<p>For displaying messages like &quot;It's empty&quot; or &quot;It's not an email address,&quot; use an <code>IValueConverter</code> that converts the <code>EmailText</code> property to an appropriate message.</p>
+<pre><code class="language-csharp">public class EmailTextToMessageConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        var text = value as string;
+        if (string.IsNullOrEmpty(text))
+        {
+            return &quot;It's empty&quot;;
+        }
+        if (!text.Contains(&quot;@&quot;))
+        {
+            return &quot;It's not an email address&quot;;
+        }
+        return string.Empty; // or any default message
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotSupportedException();
+    }
+}
+</code></pre>
+<p>Register your converter in XAML and use it for a TextBlock or any other control to display the message based on the <code>EmailText</code> property.</p>
+<h3>Step 4: Handling Real-time Updates</h3>
+<p>Your ViewModel already handles real-time updates due to the <code>PropertyChanged</code> mechanism. Every time the user edits the TextBox, the <code>EmailText</code> property setter is called, which in turn checks the validity of the email and updates the <code>IsSendEnabled</code> property accordingly.</p>
+<p>By following these steps, you minimize repetitive code and keep the UI responsive to data changes, adhering to the MVVM pattern's principles.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">検証の結果を表示するコントロールにもプロパティーを用意する方法との違いを聞いた。</p>
+                            <p class="note_contents">再利用できるというのは間違いなくそうだろう。</p>
+                            <p class="note_contents">特定のコントロールに付随する補助的なコントロールに実体（？）を与えないという考え方が自分にはしっくりくる。</p>
+                            <div class="note_ai_generated">
+<p>Yes, you can create a property in your ViewModel specifically for validation-related messages instead of using a converter. Both approaches are valid, but they have different advantages and use cases. Choosing between them often depends on the complexity of your validation logic, the need for reusability, and personal or project-specific preferences.</p>
+<h3>ViewModel Property for Validation Messages:</h3>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li><strong>Simplicity:</strong> Directly updating a property in the ViewModel based on validation logic can be more straightforward and easier to read, especially for simple validation scenarios.</li>
+<li><strong>Testability:</strong> It's easier to unit test the ViewModel logic, including the validation and the resulting messages or state changes.</li>
+<li><strong>Performance:</strong> This approach might perform slightly better since it avoids the overhead of the conversion process during binding.</li>
+</ul>
+<p><strong>Implementation Example:</strong>
+Extend the ViewModel to include a property for the validation message and update it within your validation logic:</p>
+<pre><code class="language-csharp">public class MyViewModel : INotifyPropertyChanged
+{
+    private string _emailText;
+    private bool _isSendEnabled;
+    private string _validationMessage;
+
+    public string EmailText
+    {
+        get =&gt; _emailText;
+        set
+        {
+            _emailText = value;
+            OnPropertyChanged(nameof(EmailText));
+            ValidateEmail();
+        }
+    }
+
+    public bool IsSendEnabled
+    {
+        get =&gt; _isSendEnabled;
+        private set
+        {
+            _isSendEnabled = value;
+            OnPropertyChanged(nameof(IsSendEnabled));
+        }
+    }
+
+    public string ValidationMessage
+    {
+        get =&gt; _validationMessage;
+        private set
+        {
+            _validationMessage = value;
+            OnPropertyChanged(nameof(ValidationMessage));
+        }
+    }
+
+    private void ValidateEmail()
+    {
+        if (string.IsNullOrEmpty(EmailText))
+        {
+            ValidationMessage = &quot;It's empty&quot;;
+            IsSendEnabled = false;
+        }
+        else if (!EmailText.Contains(&quot;@&quot;))
+        {
+            ValidationMessage = &quot;It's not an email address&quot;;
+            IsSendEnabled = false;
+        }
+        else
+        {
+            ValidationMessage = string.Empty;
+            IsSendEnabled = true;
+        }
+    }
+
+    // INotifyPropertyChanged implementation
+}
+</code></pre>
+<p>Bind the <code>ValidationMessage</code> property to a TextBlock in your View:</p>
+<pre><code class="language-xml">&lt;TextBlock Text=&quot;{Binding ValidationMessage}&quot;/&gt;
+</code></pre>
+<h3>Converters:</h3>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li><strong>Reusability:</strong> Converters can be reused across different Views and ViewModels, making them a good choice for common or complex conversion logic that applies to multiple data types or UI elements.</li>
+<li><strong>Separation of Concerns:</strong> Converters keep the UI-specific conversion logic separate from the ViewModel, adhering to MVVM principles by maintaining a clear separation between the View and the ViewModel.</li>
+</ul>
+<p><strong>Choosing the Best Approach:</strong></p>
+<ul>
+<li>For simple validation feedback directly related to a specific property, adding a validation message property to the ViewModel can be more straightforward and maintainable.</li>
+<li>For more complex or reusable conversion logic that might be used across different Views or ViewModels, or when you want to keep your ViewModel cleaner and more focused on the application logic rather than UI concerns, a converter might be the better choice.</li>
+</ul>
+<p>Ultimately, the &quot;best&quot; approach depends on your specific requirements, the complexity of the validation logic, and your project's architectural preferences.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="b6acafea-20a6-4c38-adb4-6fc6552b885f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://github.com/AvaloniaCommunity/MessageBox.Avalonia" target="_blank" class="url">https://github.com/AvaloniaCommunity/MessageBox.Avalonia</a> をチェック</span>
+                    <a href="#b6acafea-20a6-4c38-adb4-6fc6552b885f" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ちょっと使ってみたが、やはりダイアログを自分でつくるべき。たいていのプロジェクトでコピペで済む。それをライブラリーに入れる必要もないし、そうするなら Avalonia UI に共通的なものが入っていない理由と不整合になる。結局のところ、すぐにつくれるものだからプロジェクトごとに（その）デザインガイドラインなどに基づくものをパッとつくるべきということ。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="6e95de86-50de-4d63-95f7-a34ea3a4db44" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">App クラスで発生したエラーの見せ方を調べる</span>
+                    <a href="#6e95de86-50de-4d63-95f7-a34ea3a4db44" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">厳密にやるなら、App クラスからは MessageBox などを出してはいけないことになる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ちょっと分かってきているようで、想定していた「設定の読み込みを App クラスのコードビハインドで行っても、問題があったときのエラーメッセージは MainWindow で表示する」というのが推奨された。</p>
+                            <div class="note_ai_generated">
+<p>In an Avalonia UI application, the App class's code-behind is typically used for application-wide concerns rather than for UI-specific code. This means that ideally, you should minimize UI-related code in the App class to maintain a clean separation of concerns and to adhere to the MVVM (Model-View-ViewModel) pattern that Avalonia supports.</p>
+<p>When it comes to loading settings like font settings that are applicable to every window of the application, including the main window, it is appropriate to load these settings in the App class's code-behind. This ensures that the settings are applied globally and are in effect as soon as the application starts.</p>
+<p>Here is a general approach to handling global settings and error messages in Avalonia:</p>
+<ol>
+<li><p><strong>Load Global Settings in App.xaml.cs:</strong>
+In the <code>OnFrameworkInitializationCompleted</code> method of your App class, you can load your font settings or any other global settings. This is a suitable place for such initialization code because it runs after Avalonia's framework is initialized but before the application starts running.</p>
+<pre><code class="language-csharp">public override void OnFrameworkInitializationCompleted()
+{
+    // Load your global font settings here
+    LoadFontSettings();
+
+    base.OnFrameworkInitializationCompleted();
+}
+
+private void LoadFontSettings()
+{
+    // Implementation for loading font settings
+}
+</code></pre>
+</li>
+<li><p><strong>Handling Errors During Initialization:</strong>
+If there is an error while loading settings, such as the settings file not being found or being corrupt, you have a few options for handling this:</p>
+<ul>
+<li><p><strong>Logging the Error:</strong> Log the error using a logging framework or write to a file. This is useful for non-critical errors that do not prevent the application from running.</p>
+</li>
+<li><p><strong>Displaying an Error Message:</strong> For critical errors, you might want to inform the user immediately. Since the App class's code-behind is not ideal for displaying UI elements, consider deferring the display of error messages until the main window is loaded.</p>
+<p>You can achieve this by setting a flag or storing the error message in a property or a static/global class that is accessible from the main window. Then, in the main window's <code>OnOpened</code> event or ViewModel, check this flag or property and display the error message accordingly.</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Displaying a Dialog or Message Box Directly:</strong>
+Although it's generally advisable to avoid direct UI manipulation in the App class, Avalonia does support showing dialogs from anywhere in the application. If it's absolutely necessary to show an error message before any window is shown, you can instantiate and show a dialog in the <code>OnFrameworkInitializationCompleted</code> method. However, this should be done sparingly and only for critical errors that must be addressed before the application can proceed.</p>
+<pre><code class="language-csharp">public override void OnFrameworkInitializationCompleted()
+{
+    try
+    {
+        LoadFontSettings();
+    }
+    catch (Exception ex)
+    {
+        // Log the error
+        // Optionally, show a critical error dialog
+        ShowCriticalErrorDialog(ex.Message);
+    }
+
+    base.OnFrameworkInitializationCompleted();
+}
+
+private void ShowCriticalErrorDialog(string message)
+{
+    // Implementation to show a dialog with the error message
+}
+</code></pre>
+</li>
+</ol>
+<p>In summary, prefer loading global settings in the App class's code-behind and defer UI-specific actions like showing error messages to the relevant UI components such as windows or view models. This maintains a clean architecture and separation of concerns within your Avalonia application.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">App クラスのコードで読んだ設定ファイルが壊れている場合に MainWindow でそのことを表示したあとの閉じ方を聞いた。</p>
+                            <div class="note_ai_generated">
+<p>Yes, you can safely close an Avalonia application programmatically and ensure that any code associated with the application's exit event is executed. In Avalonia, the exit event corresponds to the handling of the application lifecycle, which you can manage through the <code>Application</code> class.</p>
+<p>To close the application from the code-behind of the main window, especially after displaying a message about corrupt settings or any critical error, you can use the <code>Close</code> method on the main window to close it. If the main window is the only open window, closing it will typically terminate the application. However, to explicitly ensure the application exits and to run any associated exit code, you can use the <code>Environment.Exit</code> method or the <code>Application.Current.Shutdown</code> method.</p>
+<p>Here's a step-by-step guide on how to do this:</p>
+<ol>
+<li><p><strong>Display the Error Message</strong>: When the main window loads and detects that there is a critical error (such as corrupt settings detected by the <code>App</code> class), display an error message. This can be done through a dialog box or any suitable UI element.</p>
+</li>
+<li><p><strong>Close the Application</strong>: After the user acknowledges the error message (e.g., by clicking an &quot;OK&quot; button on the dialog), you can then proceed to close the application. You can do this by calling <code>this.Close()</code> to close the main window.</p>
+</li>
+<li><p><strong>Ensure Application Exits</strong>: If you have additional cleanup or exit code defined in your application lifecycle, you might want to ensure that it is executed. You can explicitly call <code>Application.Current.Shutdown()</code> to terminate the application. Alternatively, for a more forceful exit, you can use <code>Environment.Exit(0)</code>, where <code>0</code> is the exit code indicating a successful termination. Note that <code>Environment.Exit</code> is more abrupt and might not allow for graceful cleanup in all cases.</p>
+</li>
+</ol>
+<p>Here's a sample code snippet that demonstrates these steps in the context of an event handler in the main window's code-behind, assuming an error has been detected:</p>
+<pre><code class="language-csharp">private void OnErrorAcknowledged(object sender, EventArgs e)
+{
+    // Close the main window
+    this.Close();
+
+    // Optional: Ensure the application shuts down and executes any associated exit code
+    Application.Current.Shutdown();
+
+    // Alternatively, for a more forceful exit (use with caution)
+    // Environment.Exit(0);
+}
+</code></pre>
+<p>When using <code>Application.Current.Shutdown()</code>, make sure any exit-related code is properly configured in your App class's disposal or cleanup methods. This way, when <code>Shutdown()</code> is called, the application will perform any necessary cleanup operations before exiting.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Application.Current.Shutdown というのが出てきたので聞いた。WPF と混同しているようだ。</p>
+                            <p class="note_contents">Avalonia UI では、全てのウィンドウの Close を呼べばプログラムも閉じるとのこと。</p>
+                            <div class="note_ai_generated">
+<p>In Avalonia UI, the direct equivalent of WPF's <code>Application.Current.Shutdown()</code> method is not available. Avalonia's application lifecycle management is slightly different, and the framework does not provide a <code>Shutdown</code> method directly off the <code>Application.Current</code> object for terminating the application.</p>
+<p>To programmatically close an Avalonia application, you would typically close all open windows. Avalonia applications usually exit automatically when the last window is closed, assuming there are no non-daemon background threads preventing the application from exiting.</p>
+<p>Here's how you can approach closing your Avalonia application:</p>
+<ol>
+<li><p><strong>Close the Main Window</strong>: If you have a reference to your main window or are executing code within the main window, you can call the <code>Close</code> method on the window instance to close it. If the main window is the only window open, this should terminate the application.</p>
+<pre><code class="language-csharp">this.Close(); // Assuming 'this' is a reference to the MainWindow
+</code></pre>
+</li>
+<li><p><strong>Close All Open Windows</strong>: If your application might have multiple windows open and you want to ensure that the application exits, you can iterate over all open windows and close them. You can access all open windows through <code>Application.Current.Windows</code>.</p>
+<pre><code class="language-csharp">foreach (var window in Application.Current.Windows)
+{
+    window.Close();
+}
+</code></pre>
+</li>
+<li><p><strong>Application Lifetime Management</strong>: Avalonia supports different models of application lifetime management, such as <code>IClassicDesktopStyleApplicationLifetime</code> for desktop applications. If you're using this lifetime model, you can call the <code>Shutdown</code> method on the lifetime instance:</p>
+<pre><code class="language-csharp">if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
+{
+    desktopLifetime.Shutdown();
+}
+</code></pre>
+<p>This approach is more aligned with the typical <code>Shutdown</code> method found in other UI frameworks and is suitable for desktop applications.</p>
+</li>
+</ol>
+<p>When closing the application, especially after displaying an error message due to corrupt settings or any other critical error, it's important to ensure that any necessary cleanup code is executed. This might involve saving user data, releasing resources, or logging. You can handle such cleanup in the destructors or disposal methods of your windows or view models, or by subscribing to the <code>Closing</code> event of your main window to perform actions just before the window closes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d5e4120a-3a54-49d8-bb8b-47997a18501e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">MVVM がうまくいっているか確認する方法を調べる</span>
+                    <a href="#d5e4120a-3a54-49d8-bb8b-47997a18501e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">これまでに学んだことを読み返していて思ったが、「UI のコードを全て消してもロジックの全ての機能をテストできるか」というのは有用な質問かもしれない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">starting point としては上記の質問でよいようで、さらにいろいろと教えてくれた。</p>
+                            <p class="note_contents">まずは不慣れな MVVM への習熟度を高めたいので、UI とロジックの分離を優先的にチェックする。</p>
+                            <p class="note_contents">そのうえ、リリース時にはほかのこともチェックする。</p>
+                            <div class="note_ai_generated">
+<p>Your question is a good starting point for evaluating the adherence to the MVVM (Model-View-ViewModel) pattern, particularly regarding the separation of concerns between the UI (User Interface) and the business logic. In MVVM, the ViewModel acts as an intermediary between the View (UI) and the Model (data/logic), and ideally, it should not contain any UI-specific code. This separation allows for more testable, maintainable, and reusable code.</p>
+<p>However, to refine your approach and ensure a more comprehensive evaluation of your implementation, consider the following aspects:</p>
+<ol>
+<li><p><strong>ViewModel Independence</strong>: Can the ViewModel operate independently of the View? Ensure that the ViewModel does not reference any UI elements directly. It should only expose data and commands that the View can bind to.</p>
+</li>
+<li><p><strong>Data Binding</strong>: Are you utilizing data binding effectively to communicate between the View and ViewModel? This includes checking if you are using observable properties in the ViewModel to update the UI automatically when data changes.</p>
+</li>
+<li><p><strong>Commanding</strong>: Are you using commands for user actions instead of event handlers in the code-behind? This ensures that actions like button clicks are handled in the ViewModel, keeping the View code-free from logic.</p>
+</li>
+<li><p><strong>Testability</strong>: Can the ViewModel be easily tested without the View? Ensure that you can instantiate and test the ViewModel in isolation, using unit tests to cover various scenarios and logic paths.</p>
+</li>
+<li><p><strong>Single Responsibility</strong>: Does each ViewModel have a clear, single responsibility? This ensures that the ViewModel is focused and not overburdened with multiple roles, which could complicate testing and maintenance.</p>
+</li>
+<li><p><strong>Dependency Injection</strong>: Are you using dependency injection to manage dependencies in your ViewModels? This can help in creating more modular, testable, and maintainable code by decoupling the ViewModel from specific implementations of services or data providers.</p>
+</li>
+<li><p><strong>Services and Helpers</strong>: Are business logic and platform-specific functionalities abstracted into services or helper classes that the ViewModel can consume? This ensures that the ViewModel remains agnostic of the specific implementations and focuses on the application logic.</p>
+</li>
+</ol>
+<p>By considering these additional questions, you can gain a more nuanced understanding of your application's adherence to the MVVM pattern and identify areas for improvement. It's not just about being able to drop the UI code but ensuring that the architecture promotes a clean separation of concerns, testability, and maintainability throughout the application.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="365ce094-533b-4519-8889-dfc9dc053676" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://docs.avaloniaui.net/docs/concepts/application-lifetimes" target="_blank" class="url">https://docs.avaloniaui.net/docs/concepts/application-lifetimes</a> をチェック</span>
+                    <a href="#365ce094-533b-4519-8889-dfc9dc053676" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents"><a href="https://reference.avaloniaui.net/api/Avalonia.Controls.ApplicationLifetimes/IClassicDesktopStyleApplicationLifetime/" target="_blank" class="url">https://reference.avaloniaui.net/api/Avalonia.Controls.ApplicationLifetimes/IClassicDesktopStyleApplicationLifetime/</a><br />
+                                <a href="https://reference.avaloniaui.net/api/Avalonia.Controls.ApplicationLifetimes/ISingleViewApplicationLifetime/" target="_blank" class="url">https://reference.avaloniaui.net/api/Avalonia.Controls.ApplicationLifetimes/ISingleViewApplicationLifetime/</a></p>
+                            <p class="note_contents">ISingleViewApplicationLifetime の方には MainView しかない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
