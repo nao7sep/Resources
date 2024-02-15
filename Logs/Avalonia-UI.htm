@@ -3343,6 +3343,1168 @@ private void ShowCriticalErrorDialog(string message)
                     </div>
                 </div>
             </div>
+            <div id="2a463e34-555d-4425-94b8-750ecee818c8" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">スタートアップ時にダイアログを表示してアプリケーションを終了する方法を調べる</span>
+                    <a href="#2a463e34-555d-4425-94b8-750ecee818c8" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">App クラスのコードビハインドに Startup イベントのコードを追加し、そこで Shutdown を呼んでも、数秒間、ウィンドウが表示される。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To achieve your goal of showing a dialog and then immediately closing the application in AvaloniaUI without having the main window appear, you can follow these steps:</p>
+<ol>
+<li><p><strong>Override the OnFrameworkInitializationCompleted Method</strong>: In your App.xaml.cs, override the <code>OnFrameworkInitializationCompleted</code> method. This method is called when Avalonia's framework initialization is completed, and it's a suitable place to show your dialog and exit the application.</p>
+</li>
+<li><p><strong>Show the Dialog</strong>: Within the <code>OnFrameworkInitializationCompleted</code> method, show your dialog. You can do this synchronously or asynchronously depending on your needs. If you're showing the dialog asynchronously, ensure you await it properly.</p>
+</li>
+<li><p><strong>Close the Application</strong>: After the dialog is closed, you can call <code>this.ApplicationLifetime.Shutdown();</code> to programmatically close the application. Ensure that <code>ApplicationLifetime</code> is cast to the correct type, such as <code>IClassicDesktopStyleApplicationLifetime</code>, to access the <code>Shutdown</code> method.</p>
+</li>
+<li><p><strong>Disable the Main Window</strong>: To prevent the main window from showing, you can modify the <code>Startup</code> event in your <code>IClassicDesktopStyleApplicationLifetime</code>. In the App.xaml.cs constructor or <code>OnFrameworkInitializationCompleted</code>, set the <code>MainWindow</code> property of <code>IClassicDesktopStyleApplicationLifetime</code> to null or avoid setting it entirely.</p>
+</li>
+</ol>
+<p>Here's an example implementation:</p>
+<pre><code class="language-csharp">using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Markup.Xaml;
+
+public class App : Application
+{
+    public override void Initialize()
+    {
+        AvaloniaXamlLoader.Load(this);
+    }
+
+    public override void OnFrameworkInitializationCompleted()
+    {
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
+        {
+            // Optionally, disable the main window here by not setting it or setting it to null.
+            // desktopLifetime.MainWindow = null;
+
+            // Show your dialog here
+            var dialog = new YourDialogWindow(); // Replace YourDialogWindow with your actual dialog window class
+            dialog.ShowDialog(desktopLifetime.MainWindow).ContinueWith(t =&gt;
+            {
+                // Close the application once the dialog is closed
+                desktopLifetime.Shutdown();
+            }, TaskScheduler.FromCurrentSynchronizationContext());
+        }
+
+        base.OnFrameworkInitializationCompleted();
+    }
+}
+</code></pre>
+<p>In this code, <code>YourDialogWindow</code> should be replaced with the actual dialog window you want to display. Note that <code>ShowDialog</code> is called on the <code>dialog</code> instance, and <code>desktopLifetime.Shutdown()</code> is used to close the application after the dialog is closed.</p>
+<p>This approach should prevent the main window from appearing and allow your application to show a dialog and then exit immediately after the dialog is closed.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="def9ffb3-aab0-468f-8197-2596c1a92a87" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ウィンドウの大きさの初期値について調べる</span>
+                    <a href="#def9ffb3-aab0-468f-8197-2596c1a92a87" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">d:DesignWidth と d:DesignHeight があり、通常の Width などや Max* もある。</p>
+                            <p class="note_contents">d:DesignWidth は、あくまで開発中にプレビューを表示するときのサイズのようで、コンパイルして実行するときには適用されない。</p>
+                            <p class="note_contents">となると、最終的な初期サイズが決まっているなら d:DesignWidth などを指定しない方がよさそうだと思った。</p>
+                            <p class="note_contents">しかし、むしろ逆で、できるだけ初期サイズを実行環境に任せ、それでは UI のデザインに困るから d:DesignWidth などで便宜的に設定してプレビューのみうまく表示するというのがマルチプラットフォームの開発に向きそうだ。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">それでよさそう。</p>
+                            <div class="note_ai_generated">
+<p>In Avalonia UI, it's common to avoid setting fixed window sizes directly to allow the application to be more responsive and adaptable to different screen sizes and resolutions. Instead, Avalonia supports various properties and methods that can help you manage window sizes and behaviors effectively:</p>
+<ol>
+<li><p><strong>SizeToContent</strong>: This property can be used to automatically size a window based on its content. It's useful for dialogs or small windows where the content size is known and fixed【5†source】.</p>
+</li>
+<li><p><strong>WindowState</strong>: This property allows you to control the window's state, such as minimized or maximized, which can be useful for main application windows【5†source】.</p>
+</li>
+<li><p><strong>Width and Height Properties</strong>: While it's advisable to avoid hard-coding these, they are available if you need to set a specific size for your window. Use these judiciously, keeping in mind the responsiveness and adaptability of your application【7†source】.</p>
+</li>
+<li><p><strong>Styles and Resources</strong>: Consider using styles and resources to manage the appearance and layout of your window's content. Avalonia's styling system is quite powerful and allows for a lot of flexibility in defining how your application looks and behaves across different sizes and resolutions【6†source】.</p>
+</li>
+</ol>
+<p>Your approach of using <code>d:DesignWidth</code> and similar properties for design-time previews while avoiding fixed sizes at runtime is generally a good practice. It ensures that your application can adapt to various environments without being constrained by fixed dimensions.</p>
+<p>For more detailed information on working with windows in Avalonia UI, you can refer to the Avalonia documentation on <a href="https://docs.avaloniaui.net/docs/reference/controls/window">Windows</a> and <a href="https://docs.avaloniaui.net/docs/reference/controls/styles">Styles</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="f7cabdb6-f6d9-4baa-a0b0-f4fbd29ef925" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">データバインディングが同期か非同期か調べる</span>
+                    <a href="#f7cabdb6-f6d9-4baa-a0b0-f4fbd29ef925" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When you work with Avalonia UI, a cross-platform XAML-based UI framework, data binding can operate both synchronously and asynchronously, depending on the specific circumstances and your implementation.</p>
+<ol>
+<li><p><strong>Synchronous Binding</strong>: By default, data binding in Avalonia, similar to other XAML frameworks like WPF, is synchronous. This means that when a property changes, the bound UI element is updated immediately on the same thread. This is usually the case for properties of simple types like <code>string</code>, <code>int</code>, <code>bool</code>, etc., where the change notification and UI update are straightforward and quick.</p>
+</li>
+<li><p><strong>Asynchronous Binding</strong>: For more complex scenarios, especially when dealing with long-running operations like network calls or intensive computations, you might want to update your properties asynchronously to avoid blocking the UI thread. In Avalonia, you can achieve this by updating your properties in the background and then using the <code>Avalonia.Threading.Dispatcher</code> to marshal the final property update back to the UI thread.</p>
+</li>
+</ol>
+<p>For example, if you have a property that depends on a time-consuming operation, you could update it like this:</p>
+<pre><code class="language-csharp">Task.Run(() =&gt;
+{
+    // Perform time-consuming operation in the background
+    var result = LongRunningOperation();
+
+    // Use Dispatcher to update property on UI thread
+    Avalonia.Threading.Dispatcher.UIThread.Post(() =&gt;
+    {
+        MyProperty = result;
+    });
+});
+</code></pre>
+<p>This approach ensures that the UI remains responsive, as the heavy lifting is done on a background thread, and only the final update is performed on the UI thread.</p>
+<p>In summary, while the default behavior of data binding in Avalonia is synchronous, you can implement asynchronous updates where necessary to ensure your application remains responsive during long-running operations. It's essential to carefully manage these updates to avoid threading issues and ensure that property changes are reflected in the UI correctly.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="82639cfc-dc1b-4dc1-bc89-37dd62780761" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">イベントのコードを非同期にするべきか調べる</span>
+                    <a href="#82639cfc-dc1b-4dc1-bc89-37dd62780761" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In an event-driven model, especially within a UI framework like Avalonia UI, whether the implementations for events like <code>Startup</code>, <code>Closing</code>, etc., should be asynchronous depends on the nature of the operations you need to perform within these event handlers.</p>
+<ol>
+<li><p><strong>Synchronous Handlers</strong>: If the operations are quick and non-blocking (such as initializing some simple UI components or setting initial values for certain properties), synchronous handlers would suffice. These operations are executed on the UI thread and should not cause any noticeable delay or freezing in the UI.</p>
+</li>
+<li><p><strong>Asynchronous Handlers</strong>: For more complex operations that might involve IO operations, network requests, database interactions, or any other potentially time-consuming tasks, it's advisable to make these operations asynchronous. This ensures that the UI thread is not blocked, maintaining the responsiveness of your application.</p>
+</li>
+</ol>
+<p>For example, in an Avalonia application, you might want to load some data from a database or make a web request when the application starts. Instead of performing these operations directly in the <code>Startup</code> event handler, you should ideally offload these tasks to a background thread or use asynchronous methods and then update the UI accordingly, possibly using <code>Avalonia.Threading.Dispatcher.UIThread.InvokeAsync()</code> to marshal the updates back to the UI thread safely.</p>
+<p>Here's a basic example of handling a long-running operation asynchronously in an event like <code>OnStartup</code>:</p>
+<pre><code class="language-csharp">protected override void OnStartup(StartupEventArgs e)
+{
+    base.OnStartup(e);
+
+    // Run asynchronous operation without awaiting it directly
+    InitializeApplicationAsync();
+}
+
+private async void InitializeApplicationAsync()
+{
+    // Asynchronously perform initial data loading, API calls, etc.
+    var data = await LoadDataAsync();
+
+    // Update UI with the loaded data
+    // Ensure UI updates are done on the UI thread
+    Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =&gt;
+    {
+        // Update your view models or UI elements here
+    });
+}
+</code></pre>
+<p>Using <code>async void</code> is generally discouraged due to error handling complexities, but it can be acceptable for top-level event handlers like this, where you don't have an awaiting context. However, always ensure proper error handling within such asynchronous void methods to prevent unhandled exceptions.</p>
+<p>For <code>Closing</code> and other teardown events, similar considerations apply. If you need to perform clean-up operations that could take time (like closing database connections, gracefully disconnecting from services, etc.), doing so asynchronously can help prevent delays in the application's shutdown process.</p>
+<p>In summary, use asynchronous implementations for events like <code>Startup</code>, <code>Closing</code>, and others when you expect to perform time-consuming operations. This approach helps maintain a smooth and responsive user experience in your Avalonia UI applications.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="b3b44209-f30e-4038-8467-5ba2fb7bb22e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ダイアログを表示する方法を調べる</span>
+                    <a href="#b3b44209-f30e-4038-8467-5ba2fb7bb22e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">うまくいかない。WPF と異なり、デフォルトで非同期的に開かれる。そのまま開くと、結果が得られる前に処理が戻る。結果を待つと UI スレッドがブロックされる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Implementing an asynchronous <code>Closing</code> event that shows a confirmation dialog and waits for the user's response before proceeding can be a bit tricky, as event handlers are typically synchronous. However, you can achieve this by handling the <code>Closing</code> event, showing the dialog, and then asynchronously waiting for the user's choice before deciding whether to cancel the closing operation.</p>
+<p>Here's a step-by-step guide on how to implement this in an Avalonia UI application:</p>
+<ol>
+<li><p><strong>Handle the <code>Closing</code> event</strong>: First, you need to subscribe to the <code>Closing</code> event of your window. This is where you will initiate the showing of the confirmation dialog.</p>
+</li>
+<li><p><strong>Show the Confirmation Dialog</strong>: Use Avalonia's dialog utilities to show a modal dialog asking for the user's confirmation. Avalonia supports asynchronous message boxes and dialogs that can be awaited.</p>
+</li>
+<li><p><strong>Await User's Choice</strong>: Await the user's response from the dialog and then decide whether to proceed with the closing operation based on their choice.</p>
+</li>
+<li><p><strong>Cancel or Proceed with Closing</strong>: Based on the user's choice, either cancel the closing operation by setting <code>e.Cancel = true;</code> or allow the window to close.</p>
+</li>
+</ol>
+<p>Here is an example code snippet that demonstrates this process:</p>
+<pre><code class="language-csharp">public class MainWindow : Window
+{
+    public MainWindow()
+    {
+        this.Closing += MainWindow_Closing;
+    }
+
+    private async void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+        // Prevent the window from closing immediately
+        e.Cancel = true;
+
+        // Show the confirmation dialog asynchronously
+        var result = await ShowConfirmationDialogAsync();
+
+        if (result == MessageBoxResult.Yes)
+        {
+            // If the user confirms, unsubscribe from the Closing event and close the window programmatically
+            this.Closing -= MainWindow_Closing;
+            this.Close();
+        }
+        // If the user cancels, the window stays open, and the Closing event remains subscribed
+    }
+
+    private async Task&lt;MessageBoxResult&gt; ShowConfirmationDialogAsync()
+    {
+        // Replace this with your actual dialog code
+        // This is just a placeholder to simulate a dialog box
+        // Avalonia does not have MessageBox out of the box, you might use a custom dialog or a third-party library
+        var dialog = new MyConfirmationDialog(); // Assume this is your custom dialog class
+        return await dialog.ShowDialog&lt;MessageBoxResult&gt;(this); // ShowDialog is asynchronous and waits for the dialog to close
+    }
+}
+</code></pre>
+<p>In this example, <code>MyConfirmationDialog</code> should be a custom dialog that you implement, which should return a result indicating the user's choice. Avalonia doesn't have a built-in <code>MessageBox</code> like WPF, so you typically need to create your own dialog window or use a third-party library for dialogs.</p>
+<p>This approach allows you to asynchronously handle the <code>Closing</code> event, showing a dialog to confirm the user's intention, and only proceeding with the window closure based on the user's response.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Using the generic version of <code>ShowDialog&lt;T&gt;</code> in Avalonia UI allows you to show a modal dialog and receive a typed result back when the dialog is closed. This is useful when you want to pass specific data from the dialog back to the caller. Here's how you can implement and use this pattern:</p>
+<h3>Creating the Dialog Window</h3>
+<p>First, create the dialog window that you want to show. This window should be designed to collect input or confirmation from the user and then close with a result.</p>
+<p>For example, let's create a simple confirmation dialog that can return a boolean value:</p>
+<pre><code class="language-csharp">public class ConfirmationDialog : Window
+{
+    // Constructor
+    public ConfirmationDialog()
+    {
+        // Initialize your dialog components here
+        // For example, add buttons and set up event handlers
+    }
+
+    // Method to close the dialog and return a result
+    public void CloseWithResult(bool result)
+    {
+        // Close the dialog and set the DialogResult
+        this.Close(result);
+    }
+}
+</code></pre>
+<p>In this dialog, you might have buttons for &quot;OK&quot; and &quot;Cancel&quot;, and in their event handlers, you would call <code>CloseWithResult(true)</code> or <code>CloseWithResult(false)</code> respectively.</p>
+<h3>Showing the Dialog and Awaiting the Result</h3>
+<p>To show the dialog and get the result back, you use the <code>ShowDialog&lt;T&gt;</code> method from the parent window or another dialog, specifying the type of result you expect (<code>bool</code> in this case).</p>
+<p>Here's how you might show the <code>ConfirmationDialog</code> and await its result in your main window or another part of your application:</p>
+<pre><code class="language-csharp">private async Task&lt;bool&gt; ShowConfirmationDialogAsync()
+{
+    var dialog = new ConfirmationDialog();
+
+    // ShowDialog&lt;T&gt; is an extension method, make sure you've imported Avalonia.Controls.ApplicationLifetimes
+    bool result = await dialog.ShowDialog&lt;bool&gt;(this);
+
+    return result;
+}
+</code></pre>
+<h3>Using the Result</h3>
+<p>After the dialog is closed, the <code>result</code> variable will contain the value passed to <code>Close(result)</code> in the dialog. You can then use this value to take further action:</p>
+<pre><code class="language-csharp">private async void SomeEventHandler(object sender, EventArgs e)
+{
+    bool confirmation = await ShowConfirmationDialogAsync();
+    if (confirmation)
+    {
+        // User confirmed the action
+    }
+    else
+    {
+        // User canceled the action
+    }
+}
+</code></pre>
+<h3>Notes</h3>
+<ul>
+<li>Ensure your dialog's closing mechanism uses the <code>CloseWithResult</code> method to properly pass the result back.</li>
+<li>The generic version of <code>ShowDialog&lt;T&gt;</code> relies on the dialog window's <code>Close</code> method being called with a parameter of type <code>T</code>. If the dialog is closed without calling <code>Close(T result)</code>, the task may not complete as expected.</li>
+<li>Design your dialog windows with clear mechanisms for setting the result and closing the window to ensure a smooth user experience and reliable data passing back to the caller.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">久々にガッツリと詰まった。Closing イベントのメソッドを減らして Close を呼ぶ方法は AI により早くから示されていたが、どうしても e.Cancel を使いたくて粘った。</p>
+                            <p class="note_contents">UI スレッドをブロックしないためにほかのタスクをつくり、そちらで処理が終わったときにその結果が返るようにして……のようなコードが散見されたが、ダイアログをつくるたびに個別にやりたいことかと自問すればそうでなかった。</p>
+                            <p class="note_contents">そもそも Closing は特殊なのだと思う。ほかのところでは、まだ UI が存在するため、ダイアログが閉じられてユーザーが元のウィンドウを操作できるようになってすぐの頃にデータが届き、それが UI の各所に反映される。</p>
+                            <p class="note_contents">Closing では、UI スレッドを止めないことには即時的には結果が返らず、それが返るまでのほんの一瞬に Closing イベントの処理が終わってしまう。e.Cancel の値を確定する頃には Closing を抜けている。</p>
+                            <p class="note_contents">作法としてはほかにもあるようだし、Closing でないところでは自分も非同期的に UI にデータを反映する実装を考えるが、Closing では AI によるコードをいったんの落としどころとし、Mac でも試してみることにする。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="93861148-f02d-45ed-be82-98a45c3e6976" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">十字キーによるコントロール間の移動について調べる</span>
+                    <a href="#93861148-f02d-45ed-be82-98a45c3e6976" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ダイアログの No ボタンへのフォーカスがうまく設定されていないように見えたが、そうでなく、設定されているが、十字キーでの移動ができないだけのようだ。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In an Avalonia UI application, you can use the arrow keys to move between controls by setting up keyboard navigation. Avalonia UI, like other XAML-based UI frameworks, supports keyboard navigation through the <code>KeyboardNavigation</code> class, which provides attached properties to control how keyboard focus moves between controls.</p>
+<p>To enable arrow key navigation between controls in Avalonia UI, you can set the <code>KeyboardNavigation.TabNavigation</code> attached property on your container controls (like Panels). This property determines how the focus moves between the child controls of the container when the arrow keys are pressed.</p>
+<p>Here's a basic example to illustrate how you might set up arrow key navigation in an Avalonia UI application:</p>
+<ol>
+<li><p><strong>Setting Keyboard Navigation Mode</strong>: First, you need to set the navigation mode to <code>Cycle</code> or <code>Continue</code> on your container control. This will allow the focus to move between its child controls when arrow keys are pressed.</p>
+</li>
+<li><p><strong>Focusable Controls</strong>: Ensure that the controls you want to navigate between are focusable. You can set the <code>IsFocusable</code> property to <code>true</code> on controls that you want to receive focus.</p>
+</li>
+</ol>
+<p>Here is a simple XAML example:</p>
+<pre><code class="language-xml">&lt;UserControl xmlns=&quot;https://github.com/avaloniaui&quot;
+             xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+             xmlns:d=&quot;http://schemas.microsoft.com/expression/blend/2008&quot;
+             xmlns:mc=&quot;http://schemas.openxmlformats.org/markup-compatibility/2006&quot;
+             mc:Ignorable=&quot;d&quot; d:DesignWidth=&quot;800&quot; d:DesignHeight=&quot;450&quot;
+             x:Class=&quot;YourNamespace.YourUserControl&quot;&gt;
+    &lt;StackPanel KeyboardNavigation.TabNavigation=&quot;Cycle&quot;&gt;
+        &lt;Button Content=&quot;Button 1&quot; IsFocusable=&quot;True&quot;/&gt;
+        &lt;Button Content=&quot;Button 2&quot; IsFocusable=&quot;True&quot;/&gt;
+        &lt;TextBox IsFocusable=&quot;True&quot;/&gt;
+        &lt;Button Content=&quot;Button 3&quot; IsFocusable=&quot;True&quot;/&gt;
+    &lt;/StackPanel&gt;
+&lt;/UserControl&gt;
+</code></pre>
+<p>In this example, the <code>StackPanel</code> container has the <code>KeyboardNavigation.TabNavigation</code> property set to <code>Cycle</code>, which means that when you use the arrow keys, the focus will move through the <code>Button</code> and <code>TextBox</code> controls in a cycle.</p>
+<p>Please note, the default behavior for arrow keys in UI frameworks is typically reserved for scrolling or moving within a control (like in a <code>ListBox</code> or <code>TextBox</code>), so using them for navigation between controls might require some custom handling or consideration of user experience.</p>
+<p>If you need more advanced or customized navigation logic, you might need to handle the <code>KeyDown</code> or <code>PreviewKeyDown</code> events on your container or controls and implement the logic to move the focus based on the pressed arrow key.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">WPF のように初めからちょうど良い動き方をしてくれる設定はなさそう。UI 関連コードの増加につながるし、マルチプラットフォームでの動作において弊害もありそうなので、フォーカスの移動にはタブキーを使うのを基本とする。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d5bd9581-6084-44d3-8e6d-37a129182f51" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Watermark を使ってみる</span>
+                    <a href="#d5bd9581-6084-44d3-8e6d-37a129182f51" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="cc01b96e-f891-4590-8afe-466812984f80" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">ステータスバーのつくり方を調べる</span>
+                    <a href="#cc01b96e-f891-4590-8afe-466812984f80" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">StatusBar コントロールがないとのこと。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents"><a href="https://docs.avaloniaui.net/docs/reference/controls/" target="_blank" class="url">https://docs.avaloniaui.net/docs/reference/controls/</a></p>
+                            <p class="note_contents">このページの左側のメニューには入っていないが。。。</p>
+                            <div class="note_ai_generated">
+<p>In Avalonia UI, creating a <code>StatusBar</code> is quite straightforward. The <code>StatusBar</code> is a control that typically displays at the bottom of a window and is used to show status information or controls related to the current window's content. Here's a basic guide on how to create a <code>StatusBar</code> in an Avalonia application:</p>
+<ol>
+<li><p><strong>XAML Definition</strong>: You would typically define your <code>StatusBar</code> in the XAML file of your Avalonia window or user control. Here's a simple example:</p>
+<pre><code class="language-xml">&lt;Window xmlns=&quot;https://github.com/avaloniaui&quot;
+        xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+        ...&gt;
+    &lt;DockPanel&gt;
+        &lt;!-- Other controls here --&gt;
+
+        &lt;StatusBar DockPanel.Dock=&quot;Bottom&quot;&gt;
+            &lt;TextBlock Text=&quot;Ready&quot; /&gt;
+        &lt;/StatusBar&gt;
+    &lt;/DockPanel&gt;
+&lt;/Window&gt;
+</code></pre>
+<p>In this example, the <code>StatusBar</code> is placed inside a <code>DockPanel</code> and docked to the bottom. It contains a single <code>TextBlock</code> control displaying the text &quot;Ready&quot;.</p>
+</li>
+<li><p><strong>Adding Multiple Items</strong>: You can add multiple items to the <code>StatusBar</code> by simply including more controls within it. For example:</p>
+<pre><code class="language-xml">&lt;StatusBar DockPanel.Dock=&quot;Bottom&quot;&gt;
+    &lt;TextBlock Text=&quot;Ready&quot; /&gt;
+    &lt;ProgressBar Width=&quot;100&quot; Height=&quot;20&quot; /&gt;
+    &lt;TextBlock Text=&quot;Some other status info&quot; /&gt;
+&lt;/StatusBar&gt;
+</code></pre>
+<p>This <code>StatusBar</code> now includes a <code>ProgressBar</code> in addition to the two <code>TextBlock</code> controls.</p>
+</li>
+<li><p><strong>Styling and Customization</strong>: You can style your <code>StatusBar</code> and its items using Avalonia's styling system. For example, to set the background color of the <code>StatusBar</code>, you might do something like this:</p>
+<pre><code class="language-xml">&lt;Style Selector=&quot;StatusBar&quot;&gt;
+    &lt;Setter Property=&quot;Background&quot; Value=&quot;#FFDDDDDD&quot;/&gt;
+&lt;/Style&gt;
+</code></pre>
+</li>
+<li><p><strong>Dynamic Content</strong>: You can bind the contents of the <code>StatusBar</code> to your view model properties to make it dynamic. For instance, you might bind the <code>Text</code> property of a <code>TextBlock</code> in the <code>StatusBar</code> to a status message property in your view model:</p>
+<pre><code class="language-xml">&lt;StatusBar DockPanel.Dock=&quot;Bottom&quot;&gt;
+    &lt;TextBlock Text=&quot;{Binding StatusMessage}&quot; /&gt;
+&lt;/StatusBar&gt;
+</code></pre>
+<p>Ensure that your view model implements the <code>INotifyPropertyChanged</code> interface to support binding.</p>
+</li>
+<li><p><strong>Integration with Commands and Events</strong>: You can also integrate the <code>StatusBar</code> with commands or handle events. For example, you might have a button in the <code>StatusBar</code> that refreshes data when clicked:</p>
+<pre><code class="language-xml">&lt;StatusBar DockPanel.Dock=&quot;Bottom&quot;&gt;
+    &lt;Button Content=&quot;Refresh&quot; Command=&quot;{Binding RefreshCommand}&quot; /&gt;
+&lt;/StatusBar&gt;
+</code></pre>
+</li>
+</ol>
+<p>This basic guide should help you get started with using a <code>StatusBar</code> in Avalonia UI. Remember to adjust the examples to fit the specific requirements and structure of your application.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents"><a href="https://github.com/AvaloniaUI/Avalonia/issues/1041" target="_blank" class="url">https://github.com/AvaloniaUI/Avalonia/issues/1041</a></p>
+                            <p class="note_contents">このページに、it&#39;s quite useless control to be included to the core repo. And in most cases can be replaced with dockpanel and/or itemspanel とある。</p>
+                            <p class="note_contents">Windows XP くらいの頃のステータスバーには凹凸があって、それぞれが四角いクレーターのようにヘコんでいるところにデータが表示されていたので、「まず箱をつくり、それぞれに名前を与え、そこにデータを放り込む」という実装が感覚と一致した。</p>
+                            <p class="note_contents">しかし、今、ステータスバーは、あってもフラットなデザインなのでほかで代用が利くし、携帯アプリだとステータスバー的なものを持つものはかなり少ない印象だし、Windows でも、以前からステータスバーがあったわけでないツールに新たに実装されるものでなく、新しいツールだと初めからステータスバーがないことの方が多い。</p>
+                            <p class="note_contents">なくてよいという公式の判断が正しい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="af52f5c5-d626-400d-ba7f-73f3756121be" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">別スレッドからのウィンドウの表示が可能か調べる</span>
+                    <a href="#af52f5c5-d626-400d-ba7f-73f3756121be" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In Avalonia UI, as with most UI frameworks, it is generally not safe to directly interact with the UI from a thread that is not the UI thread. This can lead to unexpected behavior or application crashes because UI frameworks are typically not thread-safe. To safely show a dialog or perform any UI operation from a non-UI thread, you need to marshal the call back onto the UI thread.</p>
+<p>Avalonia provides mechanisms to ensure that code meant to interact with the UI is executed on the UI thread. The <code>Dispatcher.UIThread</code> property can be used for this purpose. You can use its <code>InvokeAsync</code> method to execute a method on the UI thread safely from another thread.</p>
+<p>Here's an example of how you might show a dialog from a non-UI thread safely:</p>
+<pre><code class="language-csharp">// Assume this code is running on a non-UI thread
+Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =&gt;
+{
+    var dialog = new MyDialog();
+    dialog.ShowDialog(parentWindow); // Assuming 'parentWindow' is a reference to your main or parent window
+});
+</code></pre>
+<p>Using <code>InvokeAsync</code> ensures that the code block inside the lambda expression is executed on the UI thread, thus avoiding any thread safety issues.</p>
+<p>It's important to be mindful of the fact that <code>InvokeAsync</code> will not block the calling thread. If you need the calling thread to wait until the dialog has been closed, you might need a more complex approach, such as using synchronization primitives (e.g., <code>TaskCompletionSource</code>, <code>ManualResetEvent</code>) to signal between threads. However, blocking a non-UI thread until a UI operation completes can lead to deadlocks and other issues, so it should be done with caution and a good understanding of threading in applications.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">良い情報が得られた。</p>
+                            <div class="note_ai_generated">
+<p>In WPF (Windows Presentation Foundation), showing a message box from a non-UI thread using <code>MessageBox.Show</code> can be seen as &quot;safer&quot; in some contexts, primarily because the <code>MessageBox</code> class internally marshals the call to the UI thread. This behavior allows a message box to be displayed from any thread without explicitly marshaling the call to the UI thread yourself. This is a bit of a special case and doesn't apply to all UI operations in WPF.</p>
+<p>However, it's important to note that while this may work without throwing exceptions or causing immediate visible issues, it's generally not a best practice to interact with the UI from background threads. The main reason for this is that it can lead to code that is difficult to understand and maintain, and it might introduce subtle bugs in other scenarios where UI components do not handle cross-thread access as gracefully as <code>MessageBox</code>.</p>
+<p>For most UI operations in WPF, similar to Avalonia and other UI frameworks, you should marshal the call to the UI thread using the <code>Dispatcher</code> associated with a UI element, typically using the <code>Invoke</code> or <code>BeginInvoke</code> methods. This explicit marshaling makes the intention clear and ensures that your application behaves consistently.</p>
+<p>Even though showing a message box from a non-UI thread might work in WPF due to its internal handling, adopting the practice of explicitly marshaling UI operations to the UI thread is a good habit. It ensures your application is more robust, easier to understand, and consistent across different UI frameworks and scenarios.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To illustrate how WPF's <code>MessageBox.Show</code> might be internally implemented to handle calls from non-UI threads safely, let's consider a simplified example. Note that this is a theoretical implementation and simplification for educational purposes. The actual implementation within the .NET Framework or .NET Core might be more complex and optimized for various scenarios.</p>
+<p>In WPF, each window and most UI elements are associated with a <code>Dispatcher</code> object, which is responsible for managing the queue of work items for that UI thread. When you want to perform an operation on the UI thread from another thread, you use the <code>Dispatcher.Invoke</code> or <code>Dispatcher.BeginInvoke</code> methods to marshal the call to the UI thread.</p>
+<p>Here's how a simplified version of the <code>MessageBox.Show</code> method might be implemented to ensure it's safe to call from any thread:</p>
+<pre><code class="language-csharp">public static class MessageBox
+{
+    public static MessageBoxResult Show(string messageBoxText)
+    {
+        MessageBoxResult result = MessageBoxResult.None;
+
+        // Check if the current thread is the UI thread
+        if (Application.Current.Dispatcher.CheckAccess())
+        {
+            // This code runs on the UI thread
+            result = ShowMessageBoxInternal(messageBoxText);
+        }
+        else
+        {
+            // This code runs on a non-UI thread
+            Application.Current.Dispatcher.Invoke(() =&gt;
+            {
+                // Marshal the call to the UI thread
+                result = ShowMessageBoxInternal(messageBoxText);
+            });
+        }
+
+        return result;
+    }
+
+    private static MessageBoxResult ShowMessageBoxInternal(string messageBoxText)
+    {
+        // Actual implementation of showing the message box and capturing the result
+        // This is a placeholder for the real message box implementation
+        // For simplicity, we'll return OK in this example
+        return MessageBoxResult.OK;
+    }
+}
+</code></pre>
+<p>In this theoretical example:</p>
+<ul>
+<li><code>Application.Current.Dispatcher.CheckAccess()</code> checks if the current thread is the UI thread associated with the main application window. If it is, the message box can be shown directly.</li>
+<li>If <code>CheckAccess</code> returns <code>false</code>, indicating the call is from a non-UI thread, <code>Application.Current.Dispatcher.Invoke</code> is used to marshal the call to the UI thread. The <code>Invoke</code> method executes the specified delegate synchronously on the thread the <code>Dispatcher</code> is associated with.</li>
+<li><code>ShowMessageBoxInternal</code> is a hypothetical method that contains the actual implementation details for showing the message box and getting the user's response. In a real-world scenario, this would involve a lot of P/Invoke or platform-specific code to display the native message box dialog and capture the result.</li>
+</ul>
+<p>Remember, this is a simplified example for illustrative purposes. The actual implementation in WPF would handle various edge cases, support different message box options (like buttons, icons, default button, etc.), and involve more complex interaction with the underlying Windows API.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Implementing a similar mechanism in Avalonia UI to show a message box from any thread, with the framework handling thread marshaling as needed, involves creating a wrapper or utility class around Avalonia's dialog or message box functionality. This class would check if the current operation is on the UI thread and, if not, marshal the call to the UI thread using Avalonia's <code>Dispatcher.UIThread</code>.</p>
+<p>Here's a simplified example of how you might implement this in Avalonia:</p>
+<pre><code class="language-csharp">using Avalonia.Controls;
+using Avalonia.Threading;
+
+public static class AvaloniaMessageBox
+{
+    public static async Task ShowAsync(Window parent, string message)
+    {
+        // Check if the current thread is the UI thread
+        if (Dispatcher.UIThread.CheckAccess())
+        {
+            // This code runs on the UI thread
+            await ShowMessageBoxInternalAsync(parent, message);
+        }
+        else
+        {
+            // This code runs on a non-UI thread
+            await Dispatcher.UIThread.InvokeAsync(async () =&gt;
+            {
+                // Marshal the call to the UI thread
+                await ShowMessageBoxInternalAsync(parent, message);
+            });
+        }
+    }
+
+    private static async Task ShowMessageBoxInternalAsync(Window parent, string message)
+    {
+        // Actual implementation of showing the message box
+        var messageBox = new Window
+        {
+            // Configure your message box window here
+            // This is a placeholder for simplicity
+            Content = new TextBlock { Text = message },
+            Width = 300,
+            Height = 200
+        };
+
+        // Show the message box as a dialog
+        await messageBox.ShowDialog(parent);
+    }
+}
+</code></pre>
+<p>In this example:</p>
+<ul>
+<li><code>ShowAsync</code> is the method you'd call to show a message box. It takes a <code>Window</code> parameter that represents the parent window and a string for the message.</li>
+<li><code>Dispatcher.UIThread.CheckAccess()</code> checks if the current thread is the UI thread. If it is, the message box is shown directly through <code>ShowMessageBoxInternalAsync</code>.</li>
+<li>If <code>CheckAccess</code> returns <code>false</code>, <code>Dispatcher.UIThread.InvokeAsync</code> is used to marshal the call to the UI thread. <code>InvokeAsync</code> is used here to allow asynchronous operation, which is common in Avalonia for UI-related tasks.</li>
+<li><code>ShowMessageBoxInternalAsync</code> contains the actual implementation for showing the message box. In a real application, you might use Avalonia's built-in dialogs or implement a custom message box window depending on your needs.</li>
+</ul>
+<p>This example provides a basic structure. Depending on your application's requirements, you might need to expand this with additional features, such as customizing the appearance of the message box, handling different types of message box buttons (OK, Cancel, Yes, No, etc.), and capturing the user's response.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">マルチプラットフォームでの開発においては、スレッドまわりなど、OS の設計による影響の大きいところについては、できるだけ無難なコードを書いてテストしまくる以外にない。よって、AI にチョロッと出してもらった情報を確定的に採用することはできない。</p>
+                            <p class="note_contents">そのうえでも、おそらく大丈夫と考えられるのは、以下のようなこと。</p>
+                            <p class="note_contents">* Avalonia UI ではダイアログの表示が非同期で、それが閉じられたときに終了になる Task が得られるため、その状態を見てダイアログがまだ開かれているかどうかを調べたり、ContinueWith などを使ってダイアログの結果を、それを呼んだ側の UI に反映するなどが想定されている。</p>
+                            <p class="note_contents">* UI 関連のことはとにかく UI スレッドで行われないといけない。それが忙しくなると UI がフリーズするので、体感的に一瞬で終わるのでないボタンなどのコマンドやイベントハンドラーには async をつけるべき。その場合、そのコードも fire-and-forget 的なものになるので、その間に実行できてよい処理とそうでないものを区別し、UI の一部の無効化などを行う。また、ちゃんとした実装の必要なアプリなら、処理中に中止や中断のボタンを押せるようにする。</p>
+                            <p class="note_contents">* WPF において UI スレッド以外（たとえば、UI スレッドが始めた別の Task のなか）から MessageBox を表示できるのは、そうできるように MessageBox 内の実装が工夫されているからに過ぎない。WPF でも Avalonia UI でも UI スレッドを静的プロパティーで取れるので、「UI に関わることなら UI スレッドに invoke する」「UI スレッドが重たくなりそうなことなら別スレッドで行う」「そのために、UI なのかロジックなのかを常に意識する」というのを、UI を伴うプログラミングにおける基本とする。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Your memo about Avalonia UI contains some important points, but there are a few areas that could be clarified or expanded upon:</p>
+<ol>
+<li><p><strong>Asynchronous Dialogs</strong>: You mentioned that dialogues in Avalonia UI are asynchronous and a <code>Task</code> is obtained when the dialog is closed, which can be used to check if the dialogue is still open or to apply the dialogue results to the calling UI using <code>ContinueWith</code>. This is essentially correct, but it's important to note that using <code>await</code> with the <code>Task</code> returned by the dialog can lead to more readable and less error-prone code compared to using <code>ContinueWith</code>. <code>await</code> also makes it easier to handle exceptions that might occur during the execution of the dialogue.</p>
+</li>
+<li><p><strong>UI Thread Operations</strong>: You're right in stating that UI-related operations must be performed on the UI thread to avoid freezing the UI. However, when you mention adding <code>async</code> to event handlers and commands to prevent the UI thread from being blocked, it's crucial to ensure that any asynchronous operations don't directly update the UI from a background thread. Instead, updates should be dispatched back to the UI thread, which can be done using Avalonia's <code>Dispatcher.UIThread.InvokeAsync</code> method.</p>
+</li>
+<li><p><strong>Handling Long-Running Tasks</strong>: Your advice to differentiate between tasks that can be executed in the background and those that cannot, and to potentially disable parts of the UI during long operations, is sound. Implementing cancellable operations with a cancellation token and providing a way for the user to cancel these operations is also a good practice.</p>
+</li>
+<li><p><strong>UI Thread in WPF and Avalonia UI</strong>: You mentioned that both WPF and Avalonia UI allow accessing the UI thread through a static property and that UI-related tasks should be invoked on the UI thread. This is correct, and it's good practice to always be mindful of whether code is executing on the UI thread or a background thread. However, it's worth noting that Avalonia specifically aims to simplify cross-platform UI development, and its threading model might have some differences from WPF. For example, Avalonia's design to be more platform-agnostic means that it might handle threading and dispatching slightly differently, especially on non-Windows platforms.</p>
+</li>
+</ol>
+<p><strong>Additional Points to Consider</strong>:</p>
+<ul>
+<li><p><strong>MVVM Pattern</strong>: In the context of Avalonia UI, which supports the MVVM (Model-View-ViewModel) pattern, it's beneficial to structure your application in a way that separates the UI logic from the business logic. This separation helps in maintaining a clean codebase and makes it easier to manage asynchronous operations and UI updates.</p>
+</li>
+<li><p><strong>Error Handling</strong>: When dealing with asynchronous operations, especially in UI applications, robust error handling is crucial. Ensure that you are catching and properly handling exceptions that may arise from asynchronous tasks to prevent unhandled exceptions from crashing the application.</p>
+</li>
+<li><p><strong>Performance Considerations</strong>: When updating the UI in response to long-running tasks, consider the performance implications. For instance, updating a UI element in a tight loop could lead to performance bottlenecks. Batch updates or throttle updates where possible.</p>
+</li>
+</ul>
+<p>In summary, your memo covers important aspects of working with Avalonia UI, especially around asynchronous operations and the importance of the UI thread. Enhancing the points with the considerations mentioned above could provide a more comprehensive overview.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="e7c8a4d2-2513-405b-846c-77a2bc3f95ac" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Task の処理中に発生した例外の処理について調べる</span>
+                    <a href="#e7c8a4d2-2513-405b-846c-77a2bc3f95ac" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">これは理解していた通り。</p>
+                            <div class="note_ai_generated">
+<p>In C#, when a task throws an exception and it's not handled within the task, the exception is caught by the task infrastructure and stored inside the task itself. This happens because the task's execution is often happening on a different thread than the one that created and started the task, so the exception can't simply be thrown back to the originating thread.</p>
+<p>Here's what happens in detail:</p>
+<ol>
+<li><p><strong>Task Status</strong>: The task's status is set to <code>Faulted</code>. This is one of the possible final states for a task, alongside <code>RanToCompletion</code> and <code>Canceled</code>.</p>
+</li>
+<li><p><strong>AggregateException</strong>: The exception thrown by the task is wrapped in an <code>AggregateException</code> object. This is because potentially multiple exceptions could be thrown by the task (especially in the case of a <code>Task.WhenAll</code> operation), so <code>AggregateException</code> provides a way to handle multiple exceptions at once.</p>
+</li>
+<li><p><strong>Exception Handling</strong>: The wrapped <code>AggregateException</code> can be observed and handled in several ways:</p>
+<ul>
+<li><strong>Awaiting the Task</strong>: If the task is awaited using the <code>await</code> keyword, the <code>AggregateException</code> is unwrapped, and the original exception is re-thrown. This allows for the typical <code>try-catch</code> exception handling mechanism to be used.</li>
+<li><strong>Task.Result Property</strong>: If the <code>Result</code> property of a <code>Task&lt;T&gt;</code> is accessed and the task has faulted, the <code>AggregateException</code> is thrown. To properly handle exceptions in this case, you would typically use a <code>try-catch</code> block around the code accessing the <code>Result</code> property.</li>
+<li><strong>Task.Wait Method</strong>: If the <code>Wait()</code> method is called on a task, and the task has faulted, the <code>AggregateException</code> is thrown. Again, use a <code>try-catch</code> block to handle exceptions when using <code>Wait()</code>.</li>
+</ul>
+</li>
+<li><p><strong>Unobserved Task Exceptions</strong>: If a faulted task's exception is not observed (i.e., the exception is neither awaited nor the <code>Result</code> or <code>Wait()</code> method accessed), the exception is considered unobserved. In .NET Framework, unobserved exceptions could cause the application to terminate. In .NET Core and .NET (5.0 and onwards), unobserved exceptions do not cause the application to terminate by default, but they can be logged or handled by subscribing to the <code>TaskScheduler.UnobservedTaskException</code> event.</p>
+</li>
+</ol>
+<p>To prevent unhandled exceptions and potential application crashes, it's important to always observe and handle exceptions from tasks, either by awaiting the task, accessing the <code>Result</code> property, or using the <code>Wait()</code> method within a try-catch block.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="3a5dbfdf-951a-422d-9fd6-3836324daad2" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://docs.avaloniaui.net/docs/guides/building-cross-platform-applications/architecture" target="_blank" class="url">https://docs.avaloniaui.net/docs/guides/building-cross-platform-applications/architecture</a> をチェック</span>
+                    <a href="#3a5dbfdf-951a-422d-9fd6-3836324daad2" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">コードが動きだした頃にレイヤリングを再考。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="977951e3-acff-499a-a223-07bff507361e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">command からコントロールにフォーカスを設定する作法を調べる</span>
+                    <a href="#977951e3-acff-499a-a223-07bff507361e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Setting the focus to a control directly from a ViewModel in AvaloniaUI (or any MVVM framework) is generally discouraged, as it goes against the principles of MVVM by introducing a dependency on the View layer within the ViewModel. MVVM aims to separate the concerns of the View (UI) and the ViewModel (binding logic and data) to make the code more maintainable and testable.</p>
+<p>However, there are scenarios where you might need to set the focus from the ViewModel. In such cases, it's recommended to use a more MVVM-friendly approach, like using behaviors, messages, or service abstractions that allow the ViewModel to remain agnostic of the View details.</p>
+<p>Here's a way to achieve focusing in a more MVVM-compliant manner:</p>
+<h3>Using Behaviors or Attached Properties</h3>
+<ol>
+<li><p><strong>Create an Attached Property or Behavior</strong>: This will listen for a specific property change in the ViewModel and will set the focus to the control when the property changes. This keeps your ViewModel clean from View-related code.</p>
+</li>
+<li><p><strong>Bind the Attached Property to a ViewModel Property</strong>: The ViewModel will have a property (e.g., <code>ShouldFocus</code>) that gets set to <code>true</code> when you want to focus the control. The attached property in the View will listen to this property and set the focus accordingly.</p>
+</li>
+</ol>
+<p>Example of an Attached Property that could be used to set focus:</p>
+<pre><code class="language-csharp">public static class FocusExtensions
+{
+    public static readonly AvaloniaProperty&lt;bool&gt; IsFocusedProperty =
+        AvaloniaProperty.RegisterAttached&lt;Control, bool&gt;(&quot;IsFocused&quot;, typeof(FocusExtensions), defaultBindingMode: BindingMode.TwoWay, propertyChanged: OnIsFocusedPropertyChanged);
+
+    public static bool GetIsFocused(AvaloniaObject obj) =&gt; (bool)obj.GetValue(IsFocusedProperty);
+
+    public static void SetIsFocused(AvaloniaObject obj, bool value) =&gt; obj.SetValue(IsFocusedProperty, value);
+
+    private static void OnIsFocusedPropertyChanged(IAvaloniaObject d, bool e)
+    {
+        if (d is Control control &amp;&amp; e)
+        {
+            control.Focus();
+            SetIsFocused(control, false); // Reset the property to allow for future focus changes
+        }
+    }
+}
+</code></pre>
+<p>In your View (XAML), bind the attached property to your ViewModel property:</p>
+<pre><code class="language-xml">&lt;TextBox local:FocusExtensions.IsFocused=&quot;{Binding ShouldFocus}&quot; /&gt;
+</code></pre>
+<p>In your ViewModel, when you execute the command, set <code>ShouldFocus</code> to <code>true</code>:</p>
+<pre><code class="language-csharp">public class MyViewModel : ViewModelBase
+{
+    private bool _shouldFocus;
+
+    public bool ShouldFocus
+    {
+        get =&gt; _shouldFocus;
+        set =&gt; this.RaiseAndSetIfChanged(ref _shouldFocus, value);
+    }
+
+    public void MyCommand()
+    {
+        // Logic here
+        ShouldFocus = true;
+    }
+}
+</code></pre>
+<p>This approach allows you to keep your ViewModel free from any direct UI manipulation code and adheres to the principles of MVVM.</p>
+<h3>Good Practice Consideration</h3>
+<p>While this approach provides a workaround, it's important to evaluate why you need to set the focus from the ViewModel. If it's a common scenario, consider whether your application's design aligns well with MVVM principles. In many cases, focusing can and should be handled directly within the View layer, for instance, by responding to events or user interactions directly in the View or using View-specific code behind that doesn't violate MVVM principles.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">妄想っぽいコードが出てきたが、本当に動くなら、かなり便利な仕組み。</p>
+                            <div class="note_ai_generated">
+<p>In the scenario you described, where a &quot;Translate&quot; button is pressed and the user expects the focus to shift to a &quot;Send&quot; button to facilitate quick actions (like pressing Enter twice to translate and send), you can still adhere to MVVM principles by utilizing a more indirect approach to manipulate focus. Here's how you can achieve this while maintaining a separation of concerns:</p>
+<h3>Using Event Aggregators or Messaging</h3>
+<ol>
+<li><p><strong>Event Aggregator/Messaging Service</strong>: Use an event aggregator or a messaging service within your application to send messages or events between loosely coupled components. This service can be used to broadcast a &quot;focus request&quot; from the ViewModel, which can be handled in the View layer.</p>
+</li>
+<li><p><strong>Handling the Focus Request in the View</strong>: Subscribe to the event aggregator or messaging service in your View's code-behind and listen for the &quot;focus request&quot; messages. When a message indicating that the focus should be shifted to the &quot;Send&quot; button is received, set the focus to the &quot;Send&quot; button accordingly.</p>
+</li>
+</ol>
+<p>Here's a simplified example of how this could be implemented:</p>
+<h4>ViewModel</h4>
+<pre><code class="language-csharp">public class MyViewModel
+{
+    private readonly IMessageService _messageService;
+
+    public MyViewModel(IMessageService messageService)
+    {
+        _messageService = messageService;
+    }
+
+    public void TranslateCommandExecute()
+    {
+        // Translation logic here
+
+        // Request to set focus to the &quot;Send&quot; button
+        _messageService.Send(new FocusRequestMessage(&quot;SendButton&quot;));
+    }
+}
+</code></pre>
+<h4>Message Service and Message</h4>
+<pre><code class="language-csharp">public interface IMessageService
+{
+    void Send&lt;TMessage&gt;(TMessage message);
+    void Subscribe&lt;TMessage&gt;(Action&lt;TMessage&gt; action);
+    // Unsubscribe methods etc.
+}
+
+public class FocusRequestMessage
+{
+    public string TargetControlName { get; }
+
+    public FocusRequestMessage(string targetControlName)
+    {
+        TargetControlName = targetControlName;
+    }
+}
+</code></pre>
+<h4>View's Code-Behind</h4>
+<pre><code class="language-csharp">public partial class MyView : UserControl
+{
+    public MyView(IMessageService messageService)
+    {
+        InitializeComponent();
+        messageService.Subscribe&lt;FocusRequestMessage&gt;(HandleFocusRequest);
+    }
+
+    private void HandleFocusRequest(FocusRequestMessage message)
+    {
+        if (message.TargetControlName == &quot;SendButton&quot;)
+        {
+            SendButton.Focus();
+        }
+    }
+}
+</code></pre>
+<h4>XAML</h4>
+<p>No changes are needed in your XAML, except ensuring that your &quot;Send&quot; button has the appropriate x:Name=&quot;SendButton&quot; for reference in the code-behind.</p>
+<p>This approach keeps your ViewModel free from direct UI manipulation, utilizing a messaging service to communicate between the ViewModel and View layers. It allows you to achieve the desired user experience while adhering to MVVM principles.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>An Event Aggregator is a pattern used in software development to facilitate communication between components, such as between ViewModels in an MVVM application, in a decoupled manner. This pattern is particularly useful in complex applications with multiple layers or modules that need to interact without having direct references to each other, thus promoting loose coupling and maintainability.</p>
+<h3>How it Works</h3>
+<p>An Event Aggregator acts as a central hub through which events or messages are passed. Components within the application can subscribe to specific types of events or messages through the aggregator, and can also publish events or messages to the aggregator. When an event is published, the aggregator forwards it to all subscribed components.</p>
+<h3>Key Components</h3>
+<ul>
+<li><strong>Aggregator</strong>: The central hub that maintains a list of subscriptions and dispatches incoming messages to subscribers.</li>
+<li><strong>Messages/Events</strong>: The data or notification that is sent through the aggregator. These can be simple identifiers, or they can carry complex data.</li>
+<li><strong>Publishers</strong>: Components that send messages or raise events through the aggregator.</li>
+<li><strong>Subscribers</strong>: Components that listen for specific types of messages or events and react to them.</li>
+</ul>
+<h3>Benefits</h3>
+<ul>
+<li><strong>Loose Coupling</strong>: Components don't need to know about each other to communicate, reducing dependencies and making the system easier to maintain and extend.</li>
+<li><strong>Flexibility</strong>: New subscribers can be added without changing the publisher's code, and vice versa.</li>
+<li><strong>Centralized Management</strong>: Having a single point for message passing simplifies the monitoring and debugging of inter-component communication.</li>
+</ul>
+<h3>Implementation in AvaloniaUI or .NET Applications</h3>
+<p>In the context of AvaloniaUI or more broadly .NET applications, you can implement an Event Aggregator manually or use existing libraries that provide this pattern, such as Prism's <code>EventAggregator</code>, or Reactive Extensions (<code>System.Reactive</code>).</p>
+<h4>Example Implementation</h4>
+<p>Here's a simplified version of an Event Aggregator:</p>
+<pre><code class="language-csharp">public interface IEventAggregator
+{
+    void Subscribe&lt;TEvent&gt;(Action&lt;TEvent&gt; action);
+    void Publish&lt;TEvent&gt;(TEvent eventToPublish);
+}
+
+public class SimpleEventAggregator : IEventAggregator
+{
+    private readonly Dictionary&lt;Type, List&lt;Action&lt;object&gt;&gt;&gt; _subscribers = new();
+
+    public void Subscribe&lt;TEvent&gt;(Action&lt;TEvent&gt; action)
+    {
+        if (_subscribers.ContainsKey(typeof(TEvent)))
+        {
+            _subscribers[typeof(TEvent)].Add(x =&gt; action((TEvent)x));
+        }
+        else
+        {
+            _subscribers.Add(typeof(TEvent), new List&lt;Action&lt;object&gt;&gt; { x =&gt; action((TEvent)x) });
+        }
+    }
+
+    public void Publish&lt;TEvent&gt;(TEvent eventToPublish)
+    {
+        if (_subscribers.ContainsKey(typeof(TEvent)))
+        {
+            foreach (var subscriberAction in _subscribers[typeof(TEvent)])
+            {
+                subscriberAction(eventToPublish);
+            }
+        }
+    }
+}
+</code></pre>
+<h3>Usage</h3>
+<p>Components can subscribe to specific events and react when those events are published. For example, a ViewModel can subscribe to a &quot;UserLoggedIn&quot; event and update its state when that event is received.</p>
+<pre><code class="language-csharp">public class MyViewModel
+{
+    public MyViewModel(IEventAggregator eventAggregator)
+    {
+        eventAggregator.Subscribe&lt;UserLoggedInEvent&gt;(OnUserLoggedIn);
+    }
+
+    private void OnUserLoggedIn(UserLoggedInEvent loggedInEvent)
+    {
+        // React to the event, e.g., update the UI
+    }
+}
+</code></pre>
+<p>To publish an event, you simply call the <code>Publish</code> method on the aggregator with the event instance:</p>
+<pre><code class="language-csharp">eventAggregator.Publish(new UserLoggedInEvent());
+</code></pre>
+<p>This approach allows for a very flexible and decoupled system, where changes in one part of the application can be reflected in other parts without direct dependencies.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>A Messaging Service in software architecture is a way to enable different parts of an application, or different applications altogether, to communicate with each other in a loosely coupled manner. It allows components to exchange messages without having direct dependencies or knowledge of each other, facilitating scalability, maintainability, and modularity.</p>
+<h3>Core Concepts</h3>
+<ul>
+<li><strong>Message</strong>: A data packet that is sent from one component to another. A message can contain any kind of data and can represent commands, events, requests, or responses.</li>
+<li><strong>Sender/Publisher</strong>: The component that sends or publishes a message. It does not need to know who will consume the message or how it will be processed.</li>
+<li><strong>Receiver/Subscriber</strong>: The component that receives messages. It subscribes to specific types of messages it's interested in and processes them accordingly.</li>
+<li><strong>Message Channel</strong>: A virtual channel through which messages are sent. Channels can be topic-based (publish/subscribe model) or point-to-point (direct messaging).</li>
+<li><strong>Broker or Messaging Service</strong>: The intermediary that routes messages from senders to the appropriate receivers. It manages subscriptions and ensures the delivery of messages.</li>
+</ul>
+<h3>Benefits</h3>
+<ul>
+<li><strong>Loose Coupling</strong>: Components communicate through messages without direct knowledge of each other, making it easier to change, replace, or extend them independently.</li>
+<li><strong>Flexibility</strong>: New components can subscribe to messages without requiring changes to the publishers, allowing the system to evolve more easily.</li>
+<li><strong>Scalability</strong>: The system can scale by adding more publishers or subscribers, and can handle high volumes of messages through asynchronous processing.</li>
+<li><strong>Reliability</strong>: Many messaging services provide features like message queuing, delivery acknowledgments, and retry mechanisms to ensure message delivery.</li>
+</ul>
+<h3>Implementation in .NET Applications</h3>
+<p>In .NET applications, a messaging service can be implemented in various ways, including using built-in frameworks, third-party libraries, or custom solutions. For example:</p>
+<ul>
+<li><strong>In-Process Messaging</strong>: For simpler or smaller-scale applications, an in-process messaging service can facilitate communication between components within the same application. This can be a custom implementation or a lightweight library.</li>
+<li><strong>Enterprise Service Bus (ESB)</strong>: For more complex applications, especially in microservices architectures, an ESB provides advanced routing, transformation, and orchestration of messages between services.</li>
+<li><strong>Message Queues and Brokers</strong>: Technologies like RabbitMQ, Azure Service Bus, or AWS SQS provide robust solutions for message queuing and delivery in distributed systems.</li>
+</ul>
+<h3>Example: Simple In-Process Messaging Service</h3>
+<p>Here's a simplified example of an in-process messaging service in a .NET application:</p>
+<pre><code class="language-csharp">public interface IMessageService
+{
+    void Subscribe&lt;TMessage&gt;(Action&lt;TMessage&gt; handler);
+    void Publish&lt;TMessage&gt;(TMessage message);
+}
+
+public class SimpleMessageService : IMessageService
+{
+    private readonly Dictionary&lt;Type, List&lt;Action&lt;object&gt;&gt;&gt; _handlers = new();
+
+    public void Subscribe&lt;TMessage&gt;(Action&lt;TMessage&gt; handler)
+    {
+        var messageType = typeof(TMessage);
+        if (!_handlers.ContainsKey(messageType))
+        {
+            _handlers[messageType] = new List&lt;Action&lt;object&gt;&gt;();
+        }
+
+        _handlers[messageType].Add((msg) =&gt; handler((TMessage)msg));
+    }
+
+    public void Publish&lt;TMessage&gt;(TMessage message)
+    {
+        var messageType = typeof(TMessage);
+        if (_handlers.ContainsKey(messageType))
+        {
+            foreach (var handler in _handlers[messageType])
+            {
+                handler(message);
+            }
+        }
+    }
+}
+</code></pre>
+<h3>Usage</h3>
+<p>Components can subscribe to messages they are interested in and define how to process those messages. When a component needs to communicate a change or request, it publishes a message, which is then dispatched to all interested subscribers.</p>
+<pre><code class="language-csharp">// Subscription
+messageService.Subscribe&lt;MyMessage&gt;(message =&gt; Console.WriteLine(message.Content));
+
+// Publishing
+messageService.Publish(new MyMessage { Content = &quot;Hello, World!&quot; });
+</code></pre>
+<p>This example demonstrates a basic in-process messaging service, which can be extended or adapted based on the needs of the application, including adding thread safety, asynchronous message handling, or more complex routing logic.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="bbfd0e0c-b9c7-4d98-b5e0-cb0bef015ecf" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">処理中にウィンドウ全体を無効化する方法を調べる</span>
+                    <a href="#bbfd0e0c-b9c7-4d98-b5e0-cb0bef015ecf" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">処理を非同期的に行い、それが終わるまで全体を無効化したい。ちゃんとした実装ならさらに「中止」ボタンが必要だが、今つくっている yyTodoMail 程度では、そこまでのことは不要。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">view model の command が view の方に手を出すのは作法として微妙かもしれない。Window の IsEnabled あるいはそれに類するものにデータバインディングで false を設定するのはどうか。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">また、command の実行後には別のコントロールへのフォーカスの設定が必要になることも多い。そういうのも view model から無理やりやるのはスマートと感じられない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, in Avalonia UI, you can disable the entire window during a time-consuming operation by setting the <code>IsEnabled</code> property of the window to <code>false</code>. This will make the window and all its child controls non-interactive, effectively indicating to the user that an operation is in progress and they must wait. Once the operation is completed, you can set <code>IsEnabled</code> back to <code>true</code> to re-enable user interaction with the window and its controls.</p>
+<p>Here's a simplified example to illustrate this approach:</p>
+<pre><code class="language-csharp">public async Task PerformTimeConsumingOperation()
+{
+    // Assuming 'this' refers to your Avalonia window
+    this.IsEnabled = false; // Disable the window
+
+    try
+    {
+        // Perform the time-consuming operation here
+        await Task.Delay(5000); // Simulating a long-running task
+    }
+    finally
+    {
+        this.IsEnabled = true; // Re-enable the window, ensuring this runs even if an exception occurs
+    }
+}
+</code></pre>
+<p>In this example, <code>Task.Delay(5000)</code> simulates a time-consuming operation by introducing a 5-second delay. In a real-world scenario, this would be replaced with your actual operation, such as a network request, file I/O, etc.</p>
+<p>It's important to use the <code>try</code>/<code>finally</code> block to ensure that the window is re-enabled even if the operation encounters an error or exception. This prevents your application from becoming unusable in the event of a failure during the operation.</p>
+<p>For a better user experience, consider providing some visual feedback (like a progress bar or spinner) during the operation, so users know that something is happening and how long they might need to wait.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>When a window is &quot;disabled&quot; in Avalonia UI (or most UI frameworks), it means that the window and all its child controls do not respond to user input. This includes actions like clicking buttons, typing in text fields, selecting items from a list, etc. However, the internal state and behavior of the window from the code's perspective can still be modified. Let's address each of your specific questions:</p>
+<ol>
+<li><p><strong>Adding a new control to the window by code</strong>: Yes, you can still modify the window's control tree by adding or removing controls programmatically while the window is disabled. Disabling the window affects user interaction, not the programmatic manipulation of the window's contents or structure.</p>
+</li>
+<li><p><strong>Resizing the window</strong>: Whether the window can be resized while it is disabled depends on the window manager of the OS and how it interprets a disabled window state. In most cases, a disabled window might still be resizable from the window's frame or border, because this action is often handled at the OS level, outside the application's direct control. However, this behavior can vary between different operating systems and window managers.</p>
+</li>
+<li><p><strong>Raising the Closing event if the user logs off from the OS</strong>: The <code>Closing</code> event (or its equivalent in Avalonia UI) is typically raised when the window is about to close, regardless of the reason. This includes user actions like clicking the close button, system-initiated shutdowns like logging off or shutting down the OS, and programmatically closing the window. So, yes, the window should still raise the <code>Closing</code> event in such a scenario. However, the exact behavior can depend on how the OS handles session logoff and application termination. Some operating systems may forcefully terminate applications without allowing for a graceful shutdown process, which might bypass such events.</p>
+</li>
+</ol>
+<p>It's essential to understand that while disabling a window prevents user interaction, it does not entirely isolate the window from the system or the application. The window can still participate in programmatic changes, and system-level actions (like OS shutdown) can still affect it.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="89b78e65-81f5-4748-b6f1-4c22a8398c46" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">UI スレッド以外でウィンドウをつくれないようである件について調べる</span>
+                    <a href="#89b78e65-81f5-4748-b6f1-4c22a8398c46" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">message box もどきの表示において、CheckAccess に入る前の、ウィンドウをつくるところで Call from invalid thread という例外が投げられていることに気づいた。ボタンの command 内で Task.Run を行い、別スレッドから ShowDialog を呼んでみるテストにおいて発覚した。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In Avalonia UI, the &quot;call from invalid thread&quot; error occurs when you try to interact with UI elements from a thread that is not the UI thread. This is a common issue in many UI frameworks, not just Avalonia, due to the single-threaded nature of UI components. UI frameworks like Avalonia, WPF, and others have a main UI thread responsible for rendering and handling user interactions. This thread is also known as the dispatcher thread.</p>
+<p>When you try to create or manipulate UI elements from a background or non-UI thread, it can lead to unpredictable behavior and race conditions, as UI components are not thread-safe. To prevent these issues, Avalonia (like many UI frameworks) enforces thread affinity for UI components, which means that UI components must be created and accessed only from the UI thread.</p>
+<p>To solve this problem, you need to marshal the call back to the UI thread. In Avalonia, you can achieve this using the <code>Dispatcher.UIThread.InvokeAsync</code> method to run your code on the UI thread. Here's a basic example:</p>
+<pre><code class="language-csharp">Dispatcher.UIThread.InvokeAsync(() =&gt;
+{
+    // Create and manipulate UI elements here
+    var window = new MyWindow();
+    window.Show();
+});
+</code></pre>
+<p>By wrapping the code that interacts with UI elements inside <code>Dispatcher.UIThread.InvokeAsync</code>, you ensure that it runs on the UI thread, thus avoiding the &quot;call from invalid thread&quot; error.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Creating a window in a UI framework like Avalonia is not just about generating an instance of a class with default values for its properties. Although it might seem like a straightforward instantiation of an object, creating a window involves a lot more interaction with the underlying UI framework and the graphical subsystem of the operating system.</p>
+<p>When you create a window, several things happen behind the scenes:</p>
+<ol>
+<li><p><strong>Resource Allocation:</strong> The window needs to allocate resources such as handles and graphical resources that are managed by the operating system. This involves interacting with the OS's windowing system to create the actual window that will be displayed.</p>
+</li>
+<li><p><strong>Rendering Cycle:</strong> Even if the window is not immediately shown, creating an instance initializes part of the rendering infrastructure, preparing it for eventual display. This might involve setting up the render tree, calculating layout, and more.</p>
+</li>
+<li><p><strong>Event Loop Integration:</strong> Windows are part of the application's event loop, receiving events from the OS like resize, close, or repaint requests. The instantiation process integrates the window into this loop, enabling it to process these events.</p>
+</li>
+<li><p><strong>Thread Affinity:</strong> UI elements, including windows, have thread affinity, meaning they are bound to the thread on which they were created. This is primarily the UI thread. This ensures that all interactions with the window, including its creation, manipulation, and destruction, happen in a thread-safe manner.</p>
+</li>
+</ol>
+<p>Due to these factors, creating a window is considered a UI interaction, and attempting to do so from a non-UI thread violates the thread affinity rule, leading to errors like &quot;call from invalid thread.&quot; To maintain application stability and avoid such errors, UI-related operations, including window creation, should be marshaled to the UI thread using mechanisms provided by the framework, such as <code>Dispatcher.UIThread.InvokeAsync</code> in Avalonia.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Creating an instance of a view model in most cases does not involve direct interaction with the UI or the UI thread, unlike creating a window or manipulating UI elements. View models are part of the Model-View-ViewModel (MVVM) pattern, which is commonly used in UI frameworks like Avalonia, WPF, and others. In MVVM, the view model acts as an abstraction of the view, providing data and commands that the view can bind to, but it doesn't directly manipulate UI elements or require interaction with the UI thread.</p>
+<p>Since view models typically consist of plain C# classes without direct dependencies on UI elements, you can usually instantiate and modify view model objects on any thread without encountering thread affinity issues. This flexibility allows for better separation of concerns, making it easier to unit test view models without requiring a UI context.</p>
+<p>However, there are a few considerations to keep in mind:</p>
+<ol>
+<li><p><strong>Thread Safety:</strong> If your view model is going to be accessed or modified from multiple threads, ensure that it is thread-safe. This may involve locking or using thread-safe collections.</p>
+</li>
+<li><p><strong>UI Binding Updates:</strong> If your view model properties are bound to UI elements and you update these properties from a background thread, you might still need to marshal these updates back to the UI thread. Many UI frameworks provide a way to automatically marshal property change notifications to the UI thread, but you should verify this behavior in your specific context.</p>
+</li>
+<li><p><strong>Complex Operations:</strong> If initializing your view model involves complex operations or long-running tasks, it's a good practice to perform these operations asynchronously or in a background thread to avoid blocking the UI thread. Once the operation is complete, if you need to update the UI based on the result, remember to marshal those updates back to the UI thread.</p>
+</li>
+</ol>
+<p>In summary, creating and manipulating view model instances is generally thread-agnostic and does not require the UI thread. However, when your view model interacts with the UI, especially when notifying property changes, ensure that these interactions comply with the thread affinity requirements of your UI framework.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In Avalonia UI, and similar frameworks that use reactive programming patterns, a view model often inherits from <code>ReactiveObject</code>. <code>ReactiveObject</code> is part of the ReactiveUI library, which Avalonia supports for MVVM implementations. <code>ReactiveObject</code> provides a convenient base class for view models, enabling reactive property changes and command handling, which are essential for data binding and UI updates.</p>
+<p>Inheriting from <code>ReactiveObject</code> does not inherently require interaction with UI elements or the UI thread during initialization. However, there are scenarios where initializing a view model that inherits from <code>ReactiveObject</code> might indirectly involve UI-related interactions:</p>
+<ol>
+<li><p><strong>Property Changes Notification:</strong> When properties in the view model change, <code>ReactiveObject</code> raises <code>PropertyChanged</code> events. If these properties are bound to UI elements, the UI needs to update accordingly. The framework usually handles marshaling these updates to the UI thread, but it's something to be aware of, especially if you have custom scheduling or threading logic.</p>
+</li>
+<li><p><strong>Reactive Commands:</strong> <code>ReactiveObject</code> view models often use <code>ReactiveCommand</code> for command binding. A command might be initialized with execution logic that interacts with the UI, such as opening a dialog, updating a visual element, or navigating between views. While the command initialization itself might not require the UI thread, the execution logic might, depending on what it does.</p>
+</li>
+<li><p><strong>Subscription to Observables:</strong> If the view model subscribes to observables that interact with UI elements upon initialization (e.g., observables that trigger UI updates or rely on UI element states), these interactions should be considered. Care should be taken to ensure that such subscriptions and their side effects are handled on the appropriate thread, typically the UI thread.</p>
+</li>
+<li><p><strong>Initialization Logic:</strong> Sometimes, the view model's constructor or initialization logic might involve loading data or state that will immediately affect bound UI elements upon instantiation. If this data loading is not handled asynchronously or is not properly marshaled to the UI thread, it could lead to performance issues or errors.</p>
+</li>
+</ol>
+<p>In practice, while <code>ReactiveObject</code> itself is designed to facilitate the separation of view model logic from UI concerns, the specific way you implement your view model and its interaction with the UI can introduce dependencies on UI thread handling. It's essential to design your view models with thread safety in mind and to be cautious about how and when you interact with the UI, especially in reactive scenarios where changes can propagate automatically to the UI layer.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">view model だけ先にインスタンス化した方がコードがシンプルだが、詳しく知らないクラスを継承しているので、一応 window も view model も Invoke* 内で生成することにする。</p>
+                            <div class="note_ai_generated">
+<p>When you want to create a new window with a view model attached as the DataContext in Avalonia UI, it is generally a good practice to ensure that both the window creation and the view model attachment happen on the UI thread, especially if the view model interacts with the UI immediately upon creation or is bound to UI elements that will be rendered right away.</p>
+<p>Here's a general approach:</p>
+<ol>
+<li><p><strong>Create the ViewModel:</strong> If the view model's initialization does not involve any UI interaction or does not depend on being on the UI thread (for example, it just sets up some initial property values and does not immediately trigger UI updates), you could potentially create the view model outside of the dispatcher's code block. This can be beneficial if the view model's construction involves time-consuming operations, which you can offload to a background thread to keep the UI responsive.</p>
+</li>
+<li><p><strong>Create the Window and Assign the ViewModel:</strong> The creation of the window and the assignment of the view model to the DataContext should be done on the UI thread. This is because creating the window involves UI interaction, and setting the DataContext may immediately impact the UI due to data binding.</p>
+</li>
+</ol>
+<p>If there's no specific reason to initialize the view model off the UI thread, or if the view model's initialization is lightweight, you could encapsulate both actions within the dispatcher's code block for simplicity and to ensure thread safety. Here's an example:</p>
+<pre><code class="language-csharp">Dispatcher.UIThread.InvokeAsync(() =&gt;
+{
+    // Create the view model
+    var viewModel = new MyViewModel();
+
+    // Create the window and set the DataContext
+    var window = new MyWindow
+    {
+        DataContext = viewModel
+    };
+
+    // Show the window
+    window.Show();
+});
+</code></pre>
+<p>By doing this within the <code>Dispatcher.UIThread.InvokeAsync</code> call, you ensure that the window creation, view model assignment, and any immediate UI updates triggered by the view model's initialization occur on the UI thread, thus avoiding any potential threading issues.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
