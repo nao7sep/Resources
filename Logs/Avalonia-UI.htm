@@ -4505,6 +4505,1022 @@ messageService.Publish(new MyMessage { Content = &quot;Hello, World!&quot; });
                     </div>
                 </div>
             </div>
+            <div id="89edc96a-619f-42f2-b033-0b0f24b814cf" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">メッセージボックスのタイトルのベストプラクティスを調べる</span>
+                    <a href="#89edc96a-619f-42f2-b033-0b0f24b814cf" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Setting window titles, particularly for one-function dialogs, is important for enhancing user experience and usability in software applications. The title of a window or dialog should give a clear and concise indication of its purpose or function. Here are some best practices for setting window titles, especially for one-function dialogs:</p>
+<ol>
+<li><p><strong>Be Descriptive and Concise</strong>: The title should accurately describe the purpose of the window or dialog without being overly verbose. For example, &quot;Settings&quot;, &quot;Print Document&quot;, or &quot;Export Data&quot; are concise yet descriptive.</p>
+</li>
+<li><p><strong>Use Action Words for Dialogs</strong>: If the dialog is meant for a specific action, consider starting the title with a verb that describes the action. For instance, &quot;Add Contact&quot;, &quot;Delete File&quot;, or &quot;Configure Network&quot;.</p>
+</li>
+<li><p><strong>Consistency with UI Language</strong>: Ensure that the terminology and language used in the title align with the rest of the application's user interface. Consistency helps users navigate and understand the application more intuitively.</p>
+</li>
+<li><p><strong>Avoid Technical Jargon</strong>: Unless the application is meant for a technical audience, avoid using technical terms or acronyms that might not be familiar to all users.</p>
+</li>
+<li><p><strong>Contextual Information</strong>: If applicable, include contextual information that helps the user understand the scope or object of the action. For example, &quot;Edit Profile - [Username]&quot; or &quot;Save As - [Document Name]&quot;.</p>
+</li>
+<li><p><strong>Title Case or Sentence Case</strong>: Choose whether to use title case or sentence case and apply it consistently across all window titles in your application. Title case (Where Every Major Word Is Capitalized) can make titles stand out more, whereas sentence case (Only the first word and proper nouns are capitalized) might feel more informal and friendly.</p>
+</li>
+<li><p><strong>Avoid Generic Titles</strong>: Titles like &quot;Error&quot;, &quot;Warning&quot;, or &quot;Information&quot; are too generic and do not provide enough context. They should be accompanied by more specific information, such as &quot;Error: File Not Found&quot; or &quot;Warning: Low Battery&quot;.</p>
+</li>
+<li><p><strong>Localization Considerations</strong>: If your application will be used in multiple languages, ensure that window titles are properly localized and make sense in the target language. This might also involve adjusting the length of the titles to fit well in the window title bar.</p>
+</li>
+<li><p><strong>Accessibility</strong>: Ensure that window titles are accessible to all users, including those using screen readers. Titles should be programmatically exposed so assistive technologies can read them out.</p>
+</li>
+<li><p><strong>Testing with Users</strong>: If possible, test your window titles with real users to ensure they are clear, understandable, and meet the users' expectations. User feedback can be invaluable in refining UI elements like window titles.</p>
+</li>
+</ol>
+<p>Remember, the goal of a window or dialog title is to enhance clarity and usability. By following these best practices, you can ensure that your application's window titles contribute positively to the overall user experience.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Confirmation より Confirm だろう。ほかも見る。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="1aa9f094-ddee-46fe-bbf1-800f7d29fa4e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://docs.avaloniaui.net/docs/concepts/" target="_blank" class="url">https://docs.avaloniaui.net/docs/concepts/</a> から下のページをチェック</span>
+                    <a href="#1aa9f094-ddee-46fe-bbf1-800f7d29fa4e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">動くコードができてきたので、そろそろ全体像を学べる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="f789a76b-7779-497b-a406-50790916544b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ReactiveUI の MessageBus の使い方を調べる</span>
+                    <a href="#f789a76b-7779-497b-a406-50790916544b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">AI に言われた通り message service を実装してみたが、view 側でメッセージが処理される仕組みが欠落していて、やはり動かなかった。ASP.NET Core だと、「こう書いたら、コンパイル時にそれが動くコードが生成される」のようなことも多いので、message service についてもそういう仕組みを期したが。</p>
+                            <p class="note_contents">Avalonia UI は MVVM まわりを ReactiveUI に依存しているので、まずはそのメッセージングの機能から調べる。</p>
+                            <p class="note_contents"><a href="https://www.reactiveui.net/docs/handbook/message-bus.html" target="_blank" class="url">https://www.reactiveui.net/docs/handbook/message-bus.html</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>ReactiveUI's <code>MessageBus</code> is a mechanism for components within an application to communicate with each other in a loosely coupled way. It allows different parts of an application to send messages to each other without needing to know anything about each other, thereby promoting a modular and testable architecture. This is particularly useful in applications built with the MVVM (Model-View-ViewModel) pattern, which ReactiveUI is designed to support.</p>
+<p>Here are some key points about ReactiveUI's <code>MessageBus</code>:</p>
+<ol>
+<li><p><strong>Decoupled Communication</strong>: It enables components to communicate without having direct references to each other, which helps in reducing dependencies between components.</p>
+</li>
+<li><p><strong>Publish-Subscribe Pattern</strong>: The <code>MessageBus</code> works on a publish-subscribe model where components can publish messages to the bus without knowing who will consume them, and subscribers can listen for messages without knowing who published them.</p>
+</li>
+<li><p><strong>Flexibility</strong>: You can publish and subscribe to any type of message, from simple strings or integers to complex custom objects.</p>
+</li>
+<li><p><strong>Ease of Use</strong>: Implementing <code>MessageBus</code> is straightforward, requiring only a few lines of code to publish or subscribe to messages.</p>
+</li>
+<li><p><strong>Integration with Reactive Extensions</strong>: ReactiveUI is built on top of Reactive Extensions (Rx), and the <code>MessageBus</code> makes extensive use of Rx observables, providing a reactive way to handle asynchronous message passing.</p>
+</li>
+</ol>
+<h3>How to Use MessageBus</h3>
+<p>Here's a basic example of how to use the <code>MessageBus</code> in a ReactiveUI application:</p>
+<h4>Publishing a Message</h4>
+<pre><code class="language-csharp">// Assume this is a part of some component that wants to send out a message
+var messageBus = new MessageBus();
+messageBus.Publish(new YourMessageType(&quot;Hello, World!&quot;));
+</code></pre>
+<h4>Subscribing to Messages</h4>
+<pre><code class="language-csharp">// In the component that wants to receive messages
+var messageBus = new MessageBus();
+messageBus.Listen&lt;YourMessageType&gt;()
+    .Subscribe(message =&gt; {
+        // Handle the message
+        Console.WriteLine(message.Content);
+    });
+</code></pre>
+<p>In this example, <code>YourMessageType</code> is a custom class that you define which contains the data you want to pass through the <code>MessageBus</code>. When a message is published, all subscribers that are listening for that type of message will receive it and can act upon it.</p>
+<p>Using the <code>MessageBus</code> is particularly useful in scenarios where you need to pass messages or data between different layers or components of your application, such as between view models, or from services to view models, especially when those components should not have direct references to each other.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p><code>MessageBus.Current</code> in ReactiveUI refers to a static property that provides a singleton instance of the message bus that can be used application-wide. This means you don't have to instantiate your own <code>MessageBus</code> in every part of your application where you need messaging capabilities. Instead, you can use this shared instance to publish and subscribe to messages across different components, making it a convenient and central point for handling application-wide messaging.</p>
+<p>Using <code>MessageBus.Current</code> is particularly useful for scenarios where you want to ensure that messages are easily and consistently accessible across various parts of your application, without having to pass around a <code>MessageBus</code> instance or manage its lifecycle.</p>
+<p>Here's an example of how you can use <code>MessageBus.Current</code> to publish and subscribe to messages:</p>
+<h3>Publishing a Message</h3>
+<pre><code class="language-csharp">// To publish a message using the shared instance
+MessageBus.Current.Publish(new YourMessageType(&quot;Hello, World!&quot;));
+</code></pre>
+<h3>Subscribing to a Message</h3>
+<pre><code class="language-csharp">// To subscribe to messages of a particular type using the shared instance
+MessageBus.Current.Listen&lt;YourMessageType&gt;()
+    .Subscribe(message =&gt; {
+        // Handle the message, for example, by updating the UI or performing some action
+        Console.WriteLine(message.Content);
+    });
+</code></pre>
+<p>In these examples, <code>YourMessageType</code> would be a custom class that you define to encapsulate the data you want to pass through the <code>MessageBus</code>. All components that subscribe to <code>YourMessageType</code> will receive the message when it's published.</p>
+<p>Using <code>MessageBus.Current</code> is a straightforward way to leverage the message bus pattern in your ReactiveUI application, facilitating loose coupling between components and promoting a more modular architecture.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The thread-safety of ReactiveUI's <code>MessageBus</code>, including the <code>MessageBus.Current</code> singleton instance, largely depends on how it is used within your application, particularly in regard to how messages are published and subscribed to across different threads.</p>
+<p>ReactiveUI's <code>MessageBus</code> is designed to be used in reactive applications, which often involve handling streams of data asynchronously. It integrates with Reactive Extensions (Rx), which provides mechanisms to control the context in which the message subscriptions are executed, using schedulers.</p>
+<h3>Key Points on Thread-Safety:</h3>
+<ol>
+<li><p><strong>Publishing Messages</strong>: When you publish a message on the <code>MessageBus</code>, the thread-safety of that operation depends on the thread from which the <code>Publish</code> method is called. In most cases, publishing messages is thread-safe in the sense that you can call <code>Publish</code> from any thread. However, the state changes that result from those messages might need to be handled carefully if they affect shared resources or UI elements.</p>
+</li>
+<li><p><strong>Subscribing to Messages</strong>: When you subscribe to messages, the <code>Subscribe</code> method itself is thread-safe, but you need to consider on which thread the subscription's action is executed. By default, Rx subscriptions execute on the same thread the message was published on. If the message is published on a background thread but the subscription updates UI elements, you must ensure the subscription's action is marshaled to the UI thread, often using <code>ObserveOn</code> with an appropriate scheduler (like <code>RxApp.MainThreadScheduler</code> in ReactiveUI).</p>
+</li>
+<li><p><strong>Schedulers</strong>: ReactiveUI and Rx provide schedulers (like <code>RxApp.MainThreadScheduler</code>, <code>Scheduler.Default</code>, etc.) that help ensure that the execution of subscription actions occurs on the correct thread. Using these schedulers, you can make your message handling logic thread-safe by ensuring that operations that need to run on specific threads (like UI updates) are executed on the appropriate thread.</p>
+</li>
+</ol>
+<h3>Example of Thread-Safe Subscription:</h3>
+<pre><code class="language-csharp">MessageBus.Current.Listen&lt;YourMessageType&gt;()
+    .ObserveOn(RxApp.MainThreadScheduler) // Ensure the subscription action is executed on the UI thread
+    .Subscribe(message =&gt; {
+        // This code is safe to run on the UI thread
+        UpdateUI(message);
+    });
+</code></pre>
+<p>In this example, <code>ObserveOn(RxApp.MainThreadScheduler)</code> ensures that the <code>UpdateUI</code> method is called on the UI thread, making it safe to update UI elements in response to messages, regardless of the thread from which the message was published.</p>
+<p>In summary, while the <code>MessageBus</code> itself facilitates thread-safe publication of messages, ensuring thread safety in the handling of those messages—especially when it comes to updating shared resources or UI elements—requires careful consideration of execution contexts and the use of schedulers provided by Rx and ReactiveUI.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Using ReactiveUI's <code>MessageBus</code> in an Avalonia UI project to set focus to a control from a ViewModel command involves a few steps. Here's a simplified approach:</p>
+<ol>
+<li><p><strong>Define a Message Type</strong>: First, define a message type that will be used to communicate the intent to set focus from the ViewModel to the View. This can be a simple class with minimal content since its primary purpose is to signal an action rather than carry detailed data.</p>
+</li>
+<li><p><strong>Publish the Message</strong>: In your ViewModel, publish this message on the <code>MessageBus</code> when you want to set focus to the control, typically in response to a command or some other action.</p>
+</li>
+<li><p><strong>Subscribe to the Message in the View</strong>: In your View's code-behind, subscribe to the message type you defined and set the focus to the desired control when the message is received.</p>
+</li>
+</ol>
+<p>Here's how you can implement it:</p>
+<h3>Step 1: Define a Message Type</h3>
+<pre><code class="language-csharp">public class SetFocusMessage
+{
+    // You can add additional details here if needed, like an identifier for which control to focus
+}
+</code></pre>
+<h3>Step 2: Publish the Message in ViewModel</h3>
+<p>In your ViewModel, publish the <code>SetFocusMessage</code> when you want to set focus. This is typically done in a command execution method.</p>
+<pre><code class="language-csharp">public class YourViewModel : ReactiveObject
+{
+    public ReactiveCommand&lt;Unit, Unit&gt; YourCommand { get; }
+
+    public YourViewModel()
+    {
+        YourCommand = ReactiveCommand.Create(() =&gt;
+        {
+            // Publish the message when the command is executed
+            MessageBus.Current.Publish(new SetFocusMessage());
+        });
+    }
+}
+</code></pre>
+<h3>Step 3: Subscribe to the Message in the View</h3>
+<p>In your View's code-behind, subscribe to the <code>SetFocusMessage</code> and set the focus to the control when the message is received.</p>
+<pre><code class="language-csharp">public partial class YourView : UserControl
+{
+    public YourView()
+    {
+        InitializeComponent();
+        this.WhenActivated(disposables =&gt;
+        {
+            // Subscribe to the SetFocusMessage
+            MessageBus.Current.Listen&lt;SetFocusMessage&gt;()
+                .ObserveOn(RxApp.MainThreadScheduler) // Ensure this runs on the UI thread
+                .Subscribe(_ =&gt;
+                {
+                    // Set focus to the desired control
+                    YourControl.Focus();
+                })
+                .DisposeWith(disposables); // Dispose subscription when the view is deactivated
+        });
+    }
+}
+</code></pre>
+<p>In this example, <code>YourControl</code> should be replaced with the name of the control you want to set focus to. This approach ensures that the ViewModel can request focus changes in a decoupled manner without having direct knowledge of the View's controls, adhering to the MVVM pattern principles.</p>
+<p>Remember to ensure that the control you want to focus on is focusable. Some controls might need properties set to allow focus, such as setting <code>Focusable</code> to <code>true</code>.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To set focus on a control in Avalonia UI directly from the ViewModel without using the <code>MessageBus</code>, you can use an event or a direct method call that the View listens to or invokes. However, this approach requires a bit more coupling between your ViewModel and View, which somewhat deviates from the strict MVVM pattern. Despite this, it's still a viable option for simpler scenarios or when you prefer not to use the <code>MessageBus</code>.</p>
+<p>Here are two common approaches:</p>
+<h3>Approach 1: Using an Event</h3>
+<p>You can define an event in your ViewModel that the View subscribes to. When the event is raised, the View can then set the focus to the desired control.</p>
+<h4>ViewModel</h4>
+<pre><code class="language-csharp">public class YourViewModel : ReactiveObject
+{
+    // Define an event
+    public event EventHandler RequestFocusEvent;
+
+    // Method to raise the event
+    public void RequestFocus()
+    {
+        RequestFocusEvent?.Invoke(this, EventArgs.Empty);
+    }
+
+    // Your command or method that triggers focus change
+    public void SomeAction()
+    {
+        RequestFocus();
+    }
+}
+</code></pre>
+<h4>View</h4>
+<p>In your View's code-behind, subscribe to the ViewModel's event and set the focus in the event handler.</p>
+<pre><code class="language-csharp">public partial class YourView : UserControl
+{
+    public YourView()
+    {
+        InitializeComponent();
+        ViewModel = new YourViewModel();
+
+        // Subscribe to the ViewModel's event
+        ViewModel.RequestFocusEvent += (sender, args) =&gt;
+        {
+            Dispatcher.UIThread.InvokeAsync(() =&gt; YourControl.Focus());
+        };
+    }
+
+    // Ensure you have a ViewModel property in your View
+    public YourViewModel ViewModel
+    {
+        get =&gt; DataContext as YourViewModel;
+        set =&gt; DataContext = value;
+    }
+}
+</code></pre>
+<h3>Approach 2: Using a Direct Method Call</h3>
+<p>Another approach is to directly call a method on the View from the ViewModel. This requires you to pass a reference of the View to the ViewModel, which increases coupling.</p>
+<h4>ViewModel</h4>
+<p>Define a method in your ViewModel that accepts an action. This action will be executed by the View and can include focusing a control.</p>
+<pre><code class="language-csharp">public class YourViewModel : ReactiveObject
+{
+    public void SetFocusAction(Action focusAction)
+    {
+        focusAction?.Invoke();
+    }
+}
+</code></pre>
+<h4>View</h4>
+<p>In your View, you can call this method and pass a lambda expression or method that sets the focus.</p>
+<pre><code class="language-csharp">public partial class YourView : UserControl
+{
+    public YourView()
+    {
+        InitializeComponent();
+
+        // Assuming you have access to the ViewModel instance
+        var viewModel = DataContext as YourViewModel;
+        viewModel?.SetFocusAction(() =&gt; Dispatcher.UIThread.InvokeAsync(() =&gt; YourControl.Focus()));
+    }
+}
+</code></pre>
+<h3>Note</h3>
+<p>Both approaches involve more coupling between the ViewModel and View than using <code>MessageBus</code>, which might not be ideal in all scenarios. When using these methods, it's important to manage the lifecycle of events and references to avoid memory leaks, especially if your ViewModels live longer than your Views.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, you can use the <code>WhenAny</code> observable from ReactiveUI to reactively set focus on a control in an Avalonia UI project based on ViewModel properties. This approach adheres more closely to the MVVM pattern, keeping your ViewModel and View decoupled.</p>
+<p><code>WhenAny</code> is used to observe changes on ViewModel properties. You can tie a property change to a command or a direct action in the View that sets focus on a specific control. This way, whenever the property changes in a way that should trigger a focus change, the View reacts by setting the focus accordingly.</p>
+<p>Here's how you can implement this:</p>
+<h3>Step 1: Define a ViewModel Property</h3>
+<p>First, define a property in your ViewModel that represents a condition for when the focus should be set. For example, this could be a boolean property that becomes true when focus should be moved.</p>
+<pre><code class="language-csharp">public class YourViewModel : ReactiveObject
+{
+    private bool _shouldFocus;
+    public bool ShouldFocus
+    {
+        get =&gt; _shouldFocus;
+        set =&gt; this.RaiseAndSetIfChanged(ref _shouldFocus, value);
+    }
+
+    // Your logic that changes ShouldFocus, triggering the focus in the View
+    public void TriggerFocus()
+    {
+        ShouldFocus = true; // This will be observed by the View
+    }
+}
+</code></pre>
+<h3>Step 2: Observe the Property in the View</h3>
+<p>In your View's code-behind, use <code>WhenAnyValue</code> to observe the ViewModel property. When the property changes to the condition that requires focus (e.g., <code>ShouldFocus</code> becomes <code>true</code>), set the focus on the desired control.</p>
+<pre><code class="language-csharp">public partial class YourView : UserControl
+{
+    public YourView()
+    {
+        InitializeComponent();
+        this.WhenActivated(disposables =&gt;
+        {
+            // Assuming ViewModel is properly set as DataContext
+            this.WhenAnyValue(x =&gt; x.ViewModel.ShouldFocus)
+                .Where(shouldFocus =&gt; shouldFocus) // Only react when ShouldFocus is true
+                .ObserveOn(RxApp.MainThreadScheduler) // Ensure this runs on the UI thread
+                .Subscribe(_ =&gt;
+                {
+                    YourControl.Focus();
+
+                    // Optionally reset the focus trigger in the ViewModel if it's a one-time action
+                    ViewModel.ShouldFocus = false;
+                })
+                .DisposeWith(disposables); // Dispose subscription when the view is deactivated
+        });
+    }
+
+    // Ensure you have a ViewModel property in your View
+    public YourViewModel ViewModel =&gt; DataContext as YourViewModel;
+}
+</code></pre>
+<p>In this setup, whenever <code>TriggerFocus</code> is called in the ViewModel, causing <code>ShouldFocus</code> to be set to <code>true</code>, the View reacts by setting focus to <code>YourControl</code>. If <code>ShouldFocus</code> is meant to be a one-time trigger, you might reset it to <code>false</code> after the focus is set to prevent unintended focus changes.</p>
+<p>This approach maintains a clear separation between the ViewModel and View, with the ViewModel only signaling a state change and the View defining how to react to that change, keeping in line with the principles of MVVM.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Disposing subscriptions in ReactiveUI (and more broadly in Reactive Extensions, Rx) is crucial for several reasons, mainly related to resource management and memory leak prevention. When you subscribe to an observable, under the hood, it sets up event handlers and possibly other resources such as timers, network connections, or file handles. If these subscriptions are not properly disposed of, it can lead to several issues:</p>
+<ol>
+<li><p><strong>Memory Leaks</strong>: The most common problem with not disposing subscriptions is memory leaks. As long as the subscription is alive, it holds references to the objects involved in the subscription chain (such as the subscriber, the observable, and any captured variables in lambda expressions). This prevents the garbage collector from reclaiming the memory used by these objects, even if they are no longer needed in the application.</p>
+</li>
+<li><p><strong>Unwanted Side Effects</strong>: Subscriptions often involve executing code in response to events or data changes. If a subscription is not disposed when a component (like a ViewModel or View) is no longer in use, it may continue to react to events or changes, leading to unintended side effects or behavior in the application.</p>
+</li>
+<li><p><strong>Resource Exhaustion</strong>: Non-disposed subscriptions can lead to the exhaustion of system resources. For example, if a subscription involves a network connection or a file handle and it's not disposed of, these resources remain allocated and can eventually lead to resource exhaustion, affecting application performance or stability.</p>
+</li>
+<li><p><strong>UI Components and Lifecycle Management</strong>: In UI frameworks like Avalonia or WPF, Views and ViewModels have lifecycles. Disposing of subscriptions when a View is deactivated or a ViewModel is no longer in use ensures that any associated resources are cleaned up accordingly, aligning with the component lifecycle and preventing issues when UI elements are no longer visible or in use.</p>
+</li>
+</ol>
+<h3>How to Dispose Subscriptions</h3>
+<p>In ReactiveUI, there are convenient ways to manage subscription lifetimes, especially within the context of UI components:</p>
+<ul>
+<li><p><strong>Using <code>DisposeWith</code></strong>: Within a <code>WhenActivated</code> block, you can add your subscriptions to a <code>CompositeDisposable</code> (which is provided as a parameter to the <code>WhenActivated</code> lambda). This ensures that all subscriptions added to the <code>CompositeDisposable</code> are disposed of when the View or ViewModel is deactivated.</p>
+<pre><code class="language-csharp">this.WhenActivated(disposables =&gt;
+{
+    this.WhenAnyValue(x =&gt; x.ViewModel.SomeProperty)
+        .Subscribe(_ =&gt; { /* Do something */ })
+        .DisposeWith(disposables); // Adds the subscription to the disposables
+});
+</code></pre>
+</li>
+<li><p><strong>Manual Disposal</strong>: You can also manually manage the disposal by keeping a reference to the <code>IDisposable</code> returned by the <code>Subscribe</code> method and disposing of it at an appropriate time, such as in a destructor, a disposal method, or when the component is deactivated.</p>
+<pre><code class="language-csharp">private IDisposable subscription;
+
+public void Activate()
+{
+    subscription = this.WhenAnyValue(x =&gt; x.ViewModel.SomeProperty)
+                        .Subscribe(_ =&gt; { /* Do something */ });
+}
+
+public void Deactivate()
+{
+    subscription?.Dispose();
+}
+</code></pre>
+</li>
+</ul>
+<p>Properly managing subscription lifetimes is essential for writing efficient, leak-free, and reliable ReactiveUI applications, especially in resource-constrained environments or applications with complex lifecycles and many dynamic components.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The concept of &quot;subscribing&quot; in the context of ReactiveUI (and Reactive Extensions, or Rx) is quite different from the common usage of the term in everyday contexts, such as subscribing to a streaming service like Netflix. In programming, particularly in reactive programming, subscribing has a specific technical meaning related to how an application responds to data or events over time.</p>
+<p>Here's a breakdown to clarify the difference:</p>
+<h3>Subscribing in Reactive Programming</h3>
+<ul>
+<li><p><strong>Event Stream</strong>: In reactive programming, data changes or events are represented as streams. A stream can emit items or signals over time, which can represent anything from user inputs, data changes, timer ticks, to even errors or completion signals.</p>
+</li>
+<li><p><strong>Observable</strong>: The source of these streams is called an &quot;Observable&quot;. It's called this because it is something that can be observed. You can think of it as a TV channel that broadcasts a show (data/events).</p>
+</li>
+<li><p><strong>Observer</strong>: To watch the show, you need a TV (or a device) that can tune into the channel. In reactive programming, this is called an &quot;Observer&quot;. The observer is interested in the data/events that the Observable emits.</p>
+</li>
+<li><p><strong>Subscribe</strong>: The act of tuning your TV to a channel to watch a show is akin to &quot;subscribing&quot; in reactive programming. When you subscribe, you're essentially saying, &quot;I'm interested in this data/event stream, and I want to be notified whenever something new happens.&quot; The subscription creates a connection between the Observable and the Observer.</p>
+</li>
+<li><p><strong>Handling Data/Events</strong>: Once subscribed, the Observer can define how to react to each piece of data or event that comes through the stream. This could be updating the UI, processing data, or triggering other actions in the application.</p>
+</li>
+</ul>
+<h3>Subscription Example</h3>
+<p>Imagine you're developing an app with a button and a label. You want the label to update every time the button is clicked. In reactive programming:</p>
+<ul>
+<li>The button clicks are the <strong>Observable</strong> (the TV channel).</li>
+<li>The code that updates the label is the <strong>Observer</strong> (you, watching the TV).</li>
+<li>When you write code to update the label on button clicks, you're <strong>subscribing</strong> to the button click events (tuning into the channel).</li>
+</ul>
+<pre><code class="language-csharp">// Example in a ReactiveUI context
+buttonClicksObservable.Subscribe(clickEvent =&gt; {
+    // This is the observer, reacting to each button click
+    label.Text = &quot;Button clicked!&quot;;
+});
+</code></pre>
+<h3>How It Differs from Netflix Subscription</h3>
+<p>Subscribing to a service like Netflix involves paying for continuous access to content, which you can watch at your leisure. It's a commercial transaction giving you rights to access and consume content.</p>
+<p>In contrast, &quot;subscribing&quot; in reactive programming is about expressing interest in data/event streams and defining how to react as data/events occur. There's no concept of payment or access rights; it's purely about data flow and handling within an application.</p>
+<p>Understanding this distinction helps clarify how the term &quot;subscribe&quot; is used in different contexts and illustrates the event-driven nature of reactive programming.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The guidance from ReactiveUI to prefer observables and <code>WhenAny</code> over the <code>MessageBus</code> for communication between ViewModels and Views is rooted in the principles of reactive programming, which emphasizes direct, observable-based communication. However, the recommendation to use observables and avoid <code>MessageBus</code> doesn't necessarily mean you should always use a boolean flag that gets toggled just to trigger actions like setting focus. The key is finding a balance between maintainability, clarity, and adherence to reactive principles.</p>
+<p>The suggestion to use a property that you set to <code>true</code>, observe it in the View, and then set it back to <code>false</code> can indeed feel a bit redundant or cumbersome for certain actions, like setting focus. This approach might be justified for more complex state changes where the state itself carries meaning and subsequent actions depend on observing those state changes over time.</p>
+<h3>Considerations for Using Observables</h3>
+<ul>
+<li><strong>State Changes</strong>: If the action (like setting focus) represents a significant state change that the rest of your application might need to be aware of, encapsulating this in an observable property makes sense.</li>
+<li><strong>Repeated Actions</strong>: For actions that occur frequently and are central to the application's behavior, using observables allows you to leverage ReactiveUI's powerful binding and state management features.</li>
+</ul>
+<h3>Alternative Approaches</h3>
+<p>For actions that are more imperative in nature (like setting focus on a control), it's sometimes more practical to use methods or commands that can be called directly, even if it means slightly more coupling between the ViewModel and View. This can be done in a way that still respects the MVVM pattern:</p>
+<ul>
+<li><p><strong>Commands</strong>: Use a <code>ReactiveCommand</code> that the View binds to, which can perform the focus action directly in the View's code-behind. This keeps the logic out of the ViewModel but allows the action to be triggered reactively.</p>
+<pre><code class="language-csharp">// ViewModel
+public ReactiveCommand&lt;Unit, Unit&gt; SetFocusCommand { get; }
+
+// In the ViewModel constructor
+SetFocusCommand = ReactiveCommand.Create(() =&gt; { /* Command logic here */ });
+
+// View
+this.BindCommand(ViewModel, vm =&gt; vm.SetFocusCommand, v =&gt; v.YourButton);
+</code></pre>
+<p>In the View's code-behind, you can then handle the command to set the focus:</p>
+<pre><code class="language-csharp">ViewModel.SetFocusCommand.Subscribe(_ =&gt;
+{
+    Dispatcher.UIThread.InvokeAsync(() =&gt; YourControl.Focus());
+});
+</code></pre>
+</li>
+<li><p><strong>Events</strong>: For simpler cases, handling a ViewModel event in the View (as described in one of the previous responses) can be an effective way to initiate View-specific actions without making the ViewModel &quot;aware&quot; of the View's internals.</p>
+</li>
+</ul>
+<h3>Conclusion</h3>
+<p>While it's ideal to use observables for state management and communication in a ReactiveUI application, there are cases where other patterns might be more practical. The choice between using observables, commands, events, or even the <code>MessageBus</code> depends on the specific requirements of your application, the complexity of the interactions, and the need to balance adherence to reactive principles with practicality and maintainability.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>In the code examples provided earlier, <code>ViewModel</code> is used as a placeholder for whatever your actual ViewModel instance is called in the context of your Avalonia UI application. In a typical MVVM setup, the View is bound to its ViewModel through a property, often named <code>DataContext</code> in XAML-based frameworks like WPF and Avalonia. The <code>ViewModel</code> property in these examples is a convenience property that casts the <code>DataContext</code> to the specific ViewModel type you're working with, making it easier to access ViewModel properties and methods in the View's code-behind.</p>
+<p>Here's how you can define and use such a property in your View's code-behind:</p>
+<h3>Defining the ViewModel Property</h3>
+<pre><code class="language-csharp">public partial class YourView : UserControl
+{
+    public YourView()
+    {
+        InitializeComponent();
+    }
+
+    public YourViewModel ViewModel =&gt; DataContext as YourViewModel;
+}
+</code></pre>
+<p>In this example, <code>YourView</code> is the name of your View class, and <code>YourViewModel</code> is the name of your ViewModel class. This <code>ViewModel</code> property provides a strongly-typed way to access your ViewModel from the View's code-behind, assuming that the <code>DataContext</code> is set to an instance of <code>YourViewModel</code>.</p>
+<h3>Setting the DataContext</h3>
+<p>The <code>DataContext</code> is usually set in one of the following ways:</p>
+<ul>
+<li><p><strong>Directly in XAML</strong>: By setting the <code>DataContext</code> property in the XAML file of your View, often through data binding or directly instantiating the ViewModel.</p>
+<pre><code class="language-xml">&lt;!-- XAML --&gt;
+&lt;UserControl.DataContext&gt;
+    &lt;local:YourViewModel /&gt;
+&lt;/UserControl.DataContext&gt;
+</code></pre>
+</li>
+<li><p><strong>In the View's Constructor</strong>: By instantiating the ViewModel in the View's constructor and assigning it to the <code>DataContext</code>.</p>
+<pre><code class="language-csharp">// In YourView's constructor
+public YourView()
+{
+    InitializeComponent();
+    DataContext = new YourViewModel();
+}
+</code></pre>
+</li>
+<li><p><strong>Using a ViewModel Locator</strong>: In more complex applications, especially those using dependency injection, a ViewModel Locator pattern might be used to dynamically assign the <code>DataContext</code>.</p>
+</li>
+</ul>
+<h3>Using the ViewModel Property</h3>
+<p>Once you have the <code>ViewModel</code> property set up, you can easily access your ViewModel from the View's code-behind. For example, you might bind commands or handle events by attaching to properties or methods on the ViewModel:</p>
+<pre><code class="language-csharp">// Example of using the ViewModel property in YourView's code-behind
+public YourView()
+{
+    InitializeComponent();
+    this.WhenActivated(disposables =&gt;
+    {
+        this.BindCommand(ViewModel, vm =&gt; vm.YourCommand, v =&gt; v.YourButton)
+            .DisposeWith(disposables);
+    });
+}
+</code></pre>
+<p>This setup keeps your View and ViewModel decoupled, adhering to the MVVM pattern, while providing convenient access to your ViewModel in the View's code-behind.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p><code>ReactiveCommand</code> in ReactiveUI is a type of command that integrates with the Reactive Extensions (Rx) library, providing a way to encapsulate actions that can be bound to UI elements and executed reactively. Unlike traditional commands, <code>ReactiveCommand</code> provides rich support for asynchronous operations, error handling, and the ability to enable/disable the command based on observable conditions.</p>
+<p>The <code>.Subscribe</code> method is used with <code>ReactiveCommand</code> to react to the execution of the command. When a <code>ReactiveCommand</code> is executed (for example, by a button click in the UI), it emits a value through an observable sequence. Subscribing to a <code>ReactiveCommand</code> allows you to specify what should happen when the command is executed.</p>
+<p>Here's a basic overview of how you might use <code>.Subscribe</code> with <code>ReactiveCommand</code>:</p>
+<h3>Defining a ReactiveCommand</h3>
+<p>First, you define a <code>ReactiveCommand</code>. This command could, for example, perform some action when a button is clicked:</p>
+<pre><code class="language-csharp">public class YourViewModel : ReactiveObject
+{
+    public ReactiveCommand&lt;Unit, Unit&gt; YourCommand { get; }
+
+    public YourViewModel()
+    {
+        // Define the command and what it should do when executed
+        YourCommand = ReactiveCommand.Create(() =&gt;
+        {
+            // Action to perform
+            Console.WriteLine(&quot;Command executed&quot;);
+        });
+    }
+}
+</code></pre>
+<h3>Subscribing to a ReactiveCommand</h3>
+<p>You can then subscribe to the command to handle its execution in a specific way, such as updating the UI or processing the result of the command's action:</p>
+<pre><code class="language-csharp">// Subscribe to the command execution
+YourCommand.Subscribe(result =&gt;
+{
+    // Handle the result of the command execution
+    // In this example, 'result' is of type 'Unit' since the command is defined as ReactiveCommand&lt;Unit, Unit&gt;
+    // For commands that produce a result, the result type would be specified in the ReactiveCommand definition
+    Console.WriteLine(&quot;Handled command execution&quot;);
+});
+</code></pre>
+<h3>Using ReactiveCommand in the View</h3>
+<p>In the View, you can bind UI elements, such as buttons, to the <code>ReactiveCommand</code>. This is typically done through XAML bindings or programmatically in the View's code-behind. When the UI element is activated (e.g., the button is clicked), the command is executed, and any subscribers to the command will react to its execution:</p>
+<pre><code class="language-xml">&lt;!-- XAML example --&gt;
+&lt;Button Content=&quot;Click Me&quot; Command=&quot;{Binding YourCommand}&quot; /&gt;
+</code></pre>
+<h3>Handling Execution Results and Errors</h3>
+<p><code>ReactiveCommand</code> also provides additional observables like <code>ThrownExceptions</code> for handling errors and <code>IsExecuting</code> to track the execution state. You can subscribe to these as well to handle different aspects of command execution:</p>
+<pre><code class="language-csharp">// Handling errors
+YourCommand.ThrownExceptions.Subscribe(exception =&gt;
+{
+    // Handle the error
+    Console.WriteLine($&quot;An error occurred: {exception.Message}&quot;);
+});
+
+// Observing execution state
+YourCommand.IsExecuting.Subscribe(isExecuting =&gt;
+{
+    // Handle the execution state, e.g., show a loading spinner
+    if (isExecuting)
+    {
+        Console.WriteLine(&quot;Command is executing&quot;);
+    }
+    else
+    {
+        Console.WriteLine(&quot;Command has finished executing&quot;);
+    }
+});
+</code></pre>
+<p><code>ReactiveCommand</code> provides a powerful way to handle command execution reactively, with built-in support for asynchronous operations, error handling, and execution state tracking, making it a valuable tool in the ReactiveUI framework for building responsive and robust applications.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Using <code>ReactiveCommand.Subscribe</code> in ReactiveUI to set focus to a specific control after a button click is indeed a possible and valid use case, although it's somewhat specific and might not be the most common or recommended use of <code>ReactiveCommand</code>. The primary purpose of <code>ReactiveCommand</code> is to encapsulate an action that is triggered by a user interaction or other event, and the <code>.Subscribe</code> method allows you to respond to the completion of this action.</p>
+<h3>Setting Focus with ReactiveCommand</h3>
+<p>Setting focus to a control can be part of the UI feedback you provide in response to a command execution. For example, after performing a calculation or submitting a form with a button click, you might want to set focus back to a specific control for user convenience. In such cases, subscribing to the <code>ReactiveCommand</code> and setting the focus in the subscription handler is a practical approach:</p>
+<pre><code class="language-csharp">YourCommand.Subscribe(_ =&gt;
+{
+    // Assuming this code is in the View's code-behind and &quot;SomeControl&quot; is a control in the View
+    Dispatcher.UIThread.InvokeAsync(() =&gt; SomeControl.Focus());
+});
+</code></pre>
+<p>This pattern is useful when the action involves updating the UI in a way that is not directly related to the data or state changes within the ViewModel.</p>
+<h3>Other Common Purposes of ReactiveCommand.Subscribe</h3>
+<p><code>ReactiveCommand</code> is versatile and can be used for a variety of purposes beyond setting UI focus:</p>
+<ol>
+<li><p><strong>Updating UI Elements</strong>: Beyond setting focus, you can update other UI elements in response to a command execution. This could include displaying a message, updating a progress bar, or enabling/disabling other controls.</p>
+</li>
+<li><p><strong>Handling Command Results</strong>: If your command returns a result (e.g., <code>ReactiveCommand&lt;Unit, TResult&gt;</code>), you can use <code>.Subscribe</code> to process this result, such as displaying data fetched from a database or a web service.</p>
+</li>
+<li><p><strong>Chaining Commands</strong>: You can use the completion of one command to trigger another command or action, enabling complex workflows and interactions within your application.</p>
+</li>
+<li><p><strong>Logging and Analytics</strong>: Subscribe to command executions to log actions or send analytics data, helping track how users interact with your application.</p>
+</li>
+<li><p><strong>Error Handling</strong>: While <code>ReactiveCommand</code> has a dedicated <code>ThrownExceptions</code> observable for error handling, you can also use <code>.Subscribe</code> to handle errors in a more contextual manner, especially if the command execution result includes error information.</p>
+</li>
+<li><p><strong>UI Feedback for Asynchronous Operations</strong>: For commands performing asynchronous operations, you can provide immediate UI feedback (like showing a loading indicator) when the command starts, and then update the UI again once the operation completes.</p>
+</li>
+</ol>
+<h3>Considerations</h3>
+<p>While subscribing to a command for UI-related actions is valid, it's essential to ensure that the ViewModel remains agnostic of the View's specific implementation details to maintain a clean separation of concerns as per the MVVM pattern. For actions tightly coupled with UI elements (like setting focus), it might be more appropriate to handle these directly in the View or use behaviors or other mechanisms that keep the ViewModel decoupled from the View.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">MVVM 的な view と view model の分離状態を崩すことなく、ボタン押下後のフォーカスの移動を実装する正しい方法が分からなくて右往左往した。</p>
+                            <p class="note_contents">ボタンなどに ReactiveCommand を関連づけるのが推奨されていること、そのクラスの標準の機能として Subscribe が用意されていて chaining commands などがその目的とされていることから、いったん、これが正しい方法の一つであるとみなす。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="4bb3331a-d792-4f21-b3e5-87f55829f8e5" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://www.reactiveui.net/docs/handbook/when-activated.html" target="_blank" class="url">https://www.reactiveui.net/docs/handbook/when-activated.html</a> をチェック</span>
+                    <a href="#4bb3331a-d792-4f21-b3e5-87f55829f8e5" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="ee1362ce-fa54-47cb-b5fb-c43398267605" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://www.reactiveui.net/docs/handbook/when-any.html" target="_blank" class="url">https://www.reactiveui.net/docs/handbook/when-any.html</a> をチェック</span>
+                    <a href="#ee1362ce-fa54-47cb-b5fb-c43398267605" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="bdfe7400-4f71-423c-89a7-c489f86a21af" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://www.reactiveui.net/docs/handbook/commands/" target="_blank" class="url">https://www.reactiveui.net/docs/handbook/commands/</a> をチェック</span>
+                    <a href="#bdfe7400-4f71-423c-89a7-c489f86a21af" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="0783d716-a0aa-4706-8e09-d38521d83d30" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://www.reactiveui.net/api/reactiveui.reactivecommandbase-2" target="_blank" class="url">https://www.reactiveui.net/api/reactiveui.reactivecommandbase-2</a> をチェック</span>
+                    <a href="#0783d716-a0aa-4706-8e09-d38521d83d30" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="f580b6c5-aa59-4136-b8ce-ce4c1c865ad5" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">WebAssembly によりブラウザーで実行できるのか調べる</span>
+                    <a href="#f580b6c5-aa59-4136-b8ce-ce4c1c865ad5" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents"><a href="https://docs.avaloniaui.net/docs/guides/platforms/how-to-use-web-assembly" target="_blank" class="url">https://docs.avaloniaui.net/docs/guides/platforms/how-to-use-web-assembly</a></p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents"><a href="https://github.com/AvaloniaUI/Avalonia/discussions/13330" target="_blank" class="url">https://github.com/AvaloniaUI/Avalonia/discussions/13330</a></p>
+                            <p class="note_contents">.NET 側の制限がまだ多く、実用には遠いとのこと。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="fb247fdd-a41f-4455-a9c9-8ba64632008b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Dispatcher.UIThread.Post について調べ直す</span>
+                    <a href="#fb247fdd-a41f-4455-a9c9-8ba64632008b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Task を受け取って待つ必要がないなら Post でよいようだが、Post でないといけない理由もなさそう。</p>
+                            <div class="note_ai_generated">
+<p>The Avalonia UI framework, which is a cross-platform XAML-based UI framework inspired by WPF, Silverlight, and UWP, provides mechanisms to ensure that operations affecting the UI are executed on the UI thread. This is crucial because most UI frameworks require that changes to the UI elements be made from the UI thread to prevent race conditions and other concurrency issues. In Avalonia, this is typically managed through the <code>Dispatcher.UIThread</code> object, which provides <code>InvokeAsync</code> and <code>Post</code> methods among others, to schedule work on the UI thread.</p>
+<h3><code>InvokeAsync</code> Method</h3>
+<p>The <code>InvokeAsync</code> method is used to execute a delegate on the UI thread asynchronously. It does not block the calling thread while the delegate is being executed on the UI thread. This is useful for updating UI elements from background threads without freezing the UI while the operation completes. The method can be awaited, which allows for asynchronous code to be written more linearly.</p>
+<h4>Example Usage:</h4>
+<pre><code class="language-csharp">await Dispatcher.UIThread.InvokeAsync(() =&gt;
+{
+    // Code to update UI elements goes here
+});
+</code></pre>
+<h3><code>Post</code> Method</h3>
+<p>The <code>Post</code> method is similar to <code>InvokeAsync</code> in that it schedules work to be done on the UI thread. However, it's a fire-and-forget method, meaning that it does not provide a mechanism to wait for the work to be completed. It's useful for updating the UI when you don't need to wait for the operation to complete or capture its result.</p>
+<h4>Example Usage:</h4>
+<pre><code class="language-csharp">Dispatcher.UIThread.Post(() =&gt;
+{
+    // Code to update UI elements goes here
+});
+</code></pre>
+<h3>Choosing Between <code>InvokeAsync</code> and <code>Post</code></h3>
+<ul>
+<li>Use <code>InvokeAsync</code> when you need to wait for the operation to complete, possibly to use the result of the operation. This is especially useful in asynchronous methods where you can <code>await</code> the <code>InvokeAsync</code> call.</li>
+<li>Use <code>Post</code> when you do not need to wait for the operation to complete or when you are not in an asynchronous context. This is a non-blocking call and is useful for quick UI updates.</li>
+</ul>
+<p>Both methods ensure that the UI updates are performed safely on the UI thread, adhering to the thread affinity requirements of most UI frameworks, including Avalonia.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ae82649e-5c76-459f-841d-1650e927b73e" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents"><a href="https://introtorx.com/" target="_blank" class="url">https://introtorx.com/</a> をチェック</span>
+                    <a href="#ae82649e-5c76-459f-841d-1650e927b73e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">各ページが鬼のように長文。すでに学んだ知識により、だいたいどのページについても「こういう話だろうなぁ」というのは分かる。今すぐに詳しく理解する必要のあることとは思えない。やりたいことは全てできるようになったので先を急ぐ。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="abe7a671-159f-4b84-be6b-489704599267" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents"><a href="https://docs.avaloniaui.net/docs/guides/implementation-guides/localizing" target="_blank" class="url">https://docs.avaloniaui.net/docs/guides/implementation-guides/localizing</a> を試す</span>
+                    <a href="#abe7a671-159f-4b84-be6b-489704599267" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Using <code>.resx</code> files to localize an AvaloniaUI application involves a few steps. AvaloniaUI is a cross-platform UI framework, and while it doesn't directly support <code>.resx</code> files in the same way that Windows Forms or WPF do, you can still use them for localization with some additional setup.</p>
+<p>Here's a general approach to achieve localization in an AvaloniaUI app using <code>.resx</code> files:</p>
+<h3>1. Create Resource Files</h3>
+<p>For each language you want to support, create a <code>.resx</code> file. For example, for English, you might have <code>Strings.resx</code>, and for French, <code>Strings.fr.resx</code>. These files should be placed in a Resources folder within your AvaloniaUI project.</p>
+<h3>2. Generate Resource Designer Class</h3>
+<p>When you add <code>.resx</code> files to a .NET project, Visual Studio typically generates a designer class that provides strongly typed access to the resources. If you're not using Visual Studio or the designer class isn't generated, you may need to generate it manually or access the resources using the <code>ResourceManager</code> class.</p>
+<h3>3. Access Resources in Code</h3>
+<p>You can access the localized strings in your code using the generated properties in the designer class or using the <code>ResourceManager</code> class. For dynamic language switching, you might need to implement a mechanism to refresh your views when the language changes.</p>
+<h3>4. Bind Localized Strings in XAML</h3>
+<p>To use the localized strings in your Avalonia XAML, you can bind them just like any other property. Since Avalonia doesn't directly support <code>.resx</code> files, you might need to implement a custom <code>IValueConverter</code> or use a markup extension to access the resources.</p>
+<h3>Example:</h3>
+<p>Assuming you have a <code>Strings.resx</code> with a string named <code>HelloWorld</code>, you might access it in code like this:</p>
+<pre><code class="language-csharp">var helloWorld = Strings.HelloWorld; // Accessing via generated designer class
+</code></pre>
+<p>And in XAML, you might use it like this (assuming you've set up a binding or a markup extension):</p>
+<pre><code class="language-xml">&lt;TextBlock Text=&quot;{Binding Path=HelloWorld}&quot;/&gt;
+</code></pre>
+<h3>5. Switching Languages</h3>
+<p>To switch languages at runtime, you can change the <code>CurrentCulture</code> and <code>CurrentUICulture</code> properties of the <code>Thread</code> class to the desired culture. After changing the culture, you would need to refresh your UI to reflect the new language.</p>
+<h3>6. Testing</h3>
+<p>Test your application thoroughly to ensure that all strings are properly localized and that switching languages works as expected.</p>
+<h3>Note:</h3>
+<ul>
+<li>The direct support for <code>.resx</code> files in non-Windows Forms or WPF applications might require additional work, such as custom build actions to embed the resources into the assembly or custom loading mechanisms.</li>
+<li>You might consider using alternative approaches or libraries specifically designed for localization in AvaloniaUI, which could provide a more integrated experience.</li>
+</ul>
+<p>This is a general approach, and the specific implementation details can vary based on your project setup and requirements.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>You are correct in several aspects regarding the use of <code>.resx</code> files for localization in .NET applications, including those using AvaloniaUI. Here's a breakdown based on your points:</p>
+<ol>
+<li><p><strong>Code Generation by the IDE:</strong></p>
+<ul>
+<li>When you add <code>.resx</code> files to a .NET project, Visual Studio typically generates a designer class that provides strongly typed access to the resources. This is done to facilitate easier access to these resources in code.</li>
+</ul>
+</li>
+<li><p><strong>Switching Binary Files for Localization:</strong></p>
+<ul>
+<li>The localized strings and other resources in <code>.resx</code> files are compiled into the assembly as embedded resources. To switch languages, the application typically changes the current culture, and the appropriate resource file is used based on the culture settings. You don't switch binary files manually; instead, the .NET runtime handles this by loading the correct resource based on the application's current UI culture.</li>
+</ul>
+</li>
+<li><p><strong>Real-Time Translation and Missing Strings:</strong></p>
+<ul>
+<li>Standard <code>.resx</code> file usage doesn't natively support real-time translation or dynamic fetching of missing strings. Once compiled, the resources are static, and any changes require recompilation of the resources. For dynamic or real-time translation features, you would need to implement a custom solution or use third-party libraries that support such functionality.</li>
+</ul>
+</li>
+<li><p><strong>Lack of Native Message Formatting:</strong></p>
+<ul>
+<li>While <code>.resx</code> files themselves don't provide a built-in message formatting feature, the .NET framework offers ways to format strings, such as <code>string.Format</code> and interpolated strings. You can store format strings in <code>.resx</code> files and use them with these formatting methods to construct messages dynamically at runtime. For example, you might store a value like <code>Hello, {0}!</code> in a <code>.resx</code> file and use <code>string.Format</code> to insert the user's name into the placeholder.</li>
+</ul>
+</li>
+</ol>
+<p>In summary, while <code>.resx</code> files and the associated .NET localization infrastructure provide a robust mechanism for localizing applications, they do have limitations, particularly around dynamic content and real-time updates. For scenarios requiring greater flexibility, such as real-time translation or dynamic loading of resources, you might explore alternative localization strategies or third-party solutions that offer more dynamic capabilities.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, you are correct. Once a <code>.resx</code> file is compiled into an assembly, the resources it contains, including strings, become part of the binary. If you need to change any of these resources, such as to correct a typo or update a string, you would indeed need to:</p>
+<ol>
+<li>Modify the <code>.resx</code> file where the change is needed.</li>
+<li>Recompile the application so that the updated <code>.resx</code> file is embedded into the assembly.</li>
+</ol>
+<p>This means that even for minor changes, a full recompilation of the application is necessary, and then the updated version of the application needs to be redistributed to end users. This can be cumbersome, especially for large applications or in scenarios where updates need to be made frequently or quickly.</p>
+<p>For applications that require more flexibility in updating localized content without recompilation, alternative approaches might be considered, such as:</p>
+<ul>
+<li><strong>External Localization Files:</strong> Storing localization data in external files (such as JSON or XML) that the application reads at runtime. This allows for updates to be made to these files without the need to recompile the application.</li>
+<li><strong>Database-Driven Localization:</strong> Storing localized strings in a database that the application queries. This can allow for real-time updates and even user-contributed translations.</li>
+<li><strong>Localization Services:</strong> Using cloud-based localization services that provide APIs to fetch localized strings. This can offer a balance between localization flexibility and ease of management.</li>
+</ul>
+<p>Each of these approaches has its own set of trade-offs in terms of performance, complexity, and ease of use, and the best choice depends on the specific requirements and constraints of the project.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>For AvaloniaUI applications, considering a localization framework that is both flexible and compatible with the cross-platform nature of AvaloniaUI is important. Here are some popular localization frameworks and libraries that are free and can be well-suited for use with AvaloniaUI:</p>
+<ol>
+<li><p><strong>Portable Object Localization (PO Files):</strong></p>
+<ul>
+<li><strong>Overview:</strong> Portable Object (PO) files are a widely used format for localization, originally used in the GNU gettext localization framework. There are .NET libraries that allow you to use PO files for localization, providing a simple and effective way to manage translations.</li>
+<li><strong>Integration with AvaloniaUI:</strong> You can integrate PO file-based localization by using a .NET library that parses PO files and provides localized strings at runtime. The integration would involve loading the appropriate PO file based on the current culture and using the localized strings in your AvaloniaUI application.</li>
+</ul>
+</li>
+<li><p><strong>Humanizer:</strong></p>
+<ul>
+<li><strong>Overview:</strong> Humanizer is a .NET library that simplifies many common tasks related to localization, such as date/time formatting, number to words, and more. While it's not a complete localization framework, it can significantly enhance the localization experience by handling various culture-specific formatting and conversions.</li>
+<li><strong>Integration with AvaloniaUI:</strong> You can use Humanizer to handle specific localization tasks within your AvaloniaUI application, complementing other localization methods for a more comprehensive approach.</li>
+</ul>
+</li>
+<li><p><strong>ResXResourceManager:</strong></p>
+<ul>
+<li><strong>Overview:</strong> ResXResourceManager is a tool for managing ResX-based resources in .NET applications. It provides a more convenient interface for managing localization resources compared to the default Visual Studio resource editor.</li>
+<li><strong>Integration with AvaloniaUI:</strong> While ResXResourceManager is primarily a management tool, it can help streamline the process of maintaining and updating your <code>.resx</code> files. The localized resources can then be accessed in your AvaloniaUI application through standard .NET localization mechanisms.</li>
+</ul>
+</li>
+<li><p><strong>JsonLocalization:</strong></p>
+<ul>
+<li><strong>Overview:</strong> JsonLocalization is an approach where localization strings are stored in JSON files. This method is not tied to a specific framework but can be implemented using standard JSON parsing libraries available in .NET.</li>
+<li><strong>Integration with AvaloniaUI:</strong> You can implement a simple service to load and parse JSON files based on the current culture, and then use the localized strings from these files in your AvaloniaUI application. This approach offers flexibility and easy integration with source control systems.</li>
+</ul>
+</li>
+</ol>
+<p>When choosing a localization framework or library, consider factors such as ease of use, community support, and compatibility with your existing development workflow and tools. Additionally, ensure that the chosen method aligns with the overall architecture and deployment strategy of your AvaloniaUI application.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ResX についての認識は概ね正しかった。</p>
+                            <p class="note_contents">IDE によるコードの生成に頼る部分があるし、コンパイル後に誤字・脱字を見つけては1文字だけでも再コンパイルが必要になるし、外部 API による自動翻訳機能（ないものだけを翻訳する）を組み込めないし、文章のフォーマットも自動化できない。</p>
+                            <p class="note_contents">ASP.NET Core をかじったときに使おうとしたが、やれることが少ないわりにコードが長く、GUI のエディターを使ってみてもエントリーのグループ分けや並び替えができないなど作業性に問題があり、これでは使い物にならないと思ったのを覚えている。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">しばらくローカライズを考えないでおく。</p>
+                            <p class="note_contents">最近、Twitter でインド人などから少しずつ声がかかるようになっている。そのうち LinkedIn を本格的に使うことを決めているが、そちらでも「英語を話せない人は社会人でない」くらいの空気があり、自分も当然、英語メインで発信や交流をすることになる。</p>
+                            <p class="note_contents">以前は Windows が強すぎたのでマルチランゲージの方がマルチプラットフォームより大事だったが、今は逆転している。そのうち後者が Avalonia UI により可能になった。</p>
+                            <p class="note_contents">限られた時間のなか、仮にこれら二つから一つだけ学ぶなら絶対に後者だ。それができているので、いったん先を急ぐ。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="bf42c564-2792-4d6b-a4db-5c7f17276e2a" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://docs.avaloniaui.net/docs/tutorials/todo-list-app/navigate-views" target="_blank" class="url">https://docs.avaloniaui.net/docs/tutorials/todo-list-app/navigate-views</a> をチェック</span>
+                    <a href="#bf42c564-2792-4d6b-a4db-5c7f17276e2a" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">チュートリアルを読んでいて、初めて、初見では全く分からないページ。ほかは、ライブラリーが良くできているので今のところ大丈夫そう。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ページに含まれるコードを AI に説明してもらった。</p>
+                            <div class="note_ai_generated">
+<p>This code snippet is a part of a Model-View-ViewModel (MVVM) architecture, commonly used in applications like those built with Avalonia UI. It defines a <code>MainWindowViewModel</code> class, which acts as a bridge between the view (UI components) and the model (data). Here's a breakdown of its components:</p>
+<h3>Namespace</h3>
+<ul>
+<li><code>namespace ToDoList.ViewModels</code>: The <code>MainWindowViewModel</code> class is part of the <code>ToDoList.ViewModels</code> namespace, organizing it within the larger application structure, specifically under ViewModels related to the ToDoList application.</li>
+</ul>
+<h3>Class Definition</h3>
+<ul>
+<li><code>public class MainWindowViewModel : ViewModelBase</code>: This defines the <code>MainWindowViewModel</code> class, which inherits from <code>ViewModelBase</code>. <code>ViewModelBase</code> is likely a custom class that provides base functionality for all view models, such as property notification changes.</li>
+</ul>
+<h3>Fields</h3>
+<ul>
+<li><code>private ViewModelBase _contentViewModel</code>: This private field holds the current content view model displayed in the main window. It's of type <code>ViewModelBase</code>, allowing it to store any view model that inherits from <code>ViewModelBase</code>.</li>
+</ul>
+<h3>Constructor</h3>
+<ul>
+<li><code>public MainWindowViewModel()</code>: The constructor initializes the <code>MainWindowViewModel</code> instance. Inside it:
+<ul>
+<li><code>var service = new ToDoListService();</code>: Creates an instance of <code>ToDoListService</code>, which is likely responsible for managing to-do list items (e.g., fetching from a database).</li>
+<li><code>ToDoList = new ToDoListViewModel(service.GetItems());</code>: Initializes the <code>ToDoList</code> property with a new <code>ToDoListViewModel</code>, passing in the list of to-do items fetched by the <code>ToDoListService</code>. This sets up the initial view model to display in the main window.</li>
+<li><code>_contentViewModel = ToDoList;</code>: Sets the private field <code>_contentViewModel</code> to the <code>ToDoListViewModel</code> instance, making the to-do list the content currently displayed in the main window.</li>
+</ul>
+</li>
+</ul>
+<h3>Properties</h3>
+<ul>
+<li><p><code>public ToDoListViewModel ToDoList { get; }</code>: This read-only property exposes the <code>ToDoListViewModel</code> instance created in the constructor, allowing other parts of the application to access the to-do list view model.</p>
+</li>
+<li><p><code>public ViewModelBase ContentViewModel</code>: This property manages the current content view model displayed in the main window. It uses a getter to return <code>_contentViewModel</code> and a private setter to change its value, employing the <code>RaiseAndSetIfChanged</code> method. This method likely checks if the new value is different from the current one and, if so, updates the <code>_contentViewModel</code> field and notifies any subscribers about the change (a common pattern in MVVM to update the UI when data changes).</p>
+</li>
+</ul>
+<h3>Methods</h3>
+<ul>
+<li><code>public void AddItem()</code>: This method changes the current content view model to a new instance of <code>AddItemViewModel</code>, which is likely a view model for adding new items to the to-do list. By setting <code>ContentViewModel</code> to a new <code>AddItemViewModel</code>, the main window's content is switched to the add item view.</li>
+</ul>
+<h3>Dependency Note</h3>
+<ul>
+<li>The comment <code>//this has a dependency on the ToDoListService</code> indicates that <code>MainWindowViewModel</code> depends on <code>ToDoListService</code> for its operation, specifically for fetching to-do list items. This is a crucial piece of information for understanding how data flows within the application and for managing dependencies.</li>
+</ul>
+<p>Overall, this code snippet establishes the main window's view model for a to-do list application, handling the initial display of to-do list items and the transition to adding new items.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Window に Content=&quot;{Binding ContentViewModel}&quot; を行うことで、そちらを丸ごと切り替えるだけのこと。</p>
+                            <p class="note_contents">初見では分からなかったが、一通り実装が終わった今では問題なし。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="43cb0f33-eede-45c5-a7b3-e9bab3f53557" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://docs.avaloniaui.net/docs/tutorials/todo-list-app/process-a-new-item" target="_blank" class="url">https://docs.avaloniaui.net/docs/tutorials/todo-list-app/process-a-new-item</a> をチェック</span>
+                    <a href="#43cb0f33-eede-45c5-a7b3-e9bab3f53557" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">これもよく分からない。たぶんハンズオンの方が早いので、いったん読み流した。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">view model が別の view model と連携してロジックの処理を行うだけのこと。</p>
+                            <div class="note_ai_generated">
+<p>This code snippet is part of a larger application using Avalonia UI, a cross-platform XAML-based UI framework, alongside ReactiveUI, a reactive programming library for .NET. The code defines a <code>MainWindowViewModel</code> class that inherits from <code>ViewModelBase</code>. Here's a breakdown of its components:</p>
+<h3>Namespaces</h3>
+<ul>
+<li><strong>ReactiveUI</strong>: This namespace provides classes and interfaces for reactive programming. It helps in implementing the Model-View-ViewModel (MVVM) pattern in a way that allows for reactive data bindings and event handling.</li>
+<li><strong>System</strong>: The root namespace for fundamental classes in .NET.</li>
+<li><strong>System.Reactive.Linq</strong>: This namespace extends LINQ to provide observable sequences and LINQ-style query operators on those sequences.</li>
+<li><strong>ToDoList.DataModel</strong>: This namespace likely contains data models used by the application, such as <code>ToDoItem</code>.</li>
+<li><strong>ToDoList.Services</strong>: This namespace likely contains services for business logic, including <code>ToDoListService</code> used to interact with to-do list items.</li>
+</ul>
+<h3>Class Structure</h3>
+<ul>
+<li><strong>MainWindowViewModel</strong>: This class serves as the view model for the main window of the application. It inherits from <code>ViewModelBase</code>, which likely provides common functionality for all view models, such as property notification changes.</li>
+</ul>
+<h3>Fields and Properties</h3>
+<ul>
+<li><strong>_contentViewModel</strong>: A private field of type <code>ViewModelBase</code>. It represents the current content ViewModel displayed in the main window.</li>
+<li><strong>ContentViewModel</strong>: A public property providing access to <code>_contentViewModel</code>. It uses <code>RaiseAndSetIfChanged</code> (a ReactiveUI method) to update the value and notify any observers of the change, ensuring the UI stays in sync with the data.</li>
+<li><strong>ToDoList</strong>: A public read-only property of type <code>ToDoListViewModel</code>. It's initialized in the constructor and represents the ViewModel handling the to-do list logic.</li>
+</ul>
+<h3>Constructor</h3>
+<ul>
+<li>Initializes a new instance of <code>ToDoListService</code> to interact with to-do list items.</li>
+<li>Creates and assigns a <code>ToDoListViewModel</code> to the <code>ToDoList</code> property using items fetched from <code>ToDoListService</code>.</li>
+<li>Sets <code>_contentViewModel</code> to <code>ToDoList</code>, making the to-do list the initial content displayed in the main window.</li>
+</ul>
+<h3>Methods</h3>
+<ul>
+<li><strong>AddItem</strong>: This method creates a new instance of <code>AddItemViewModel</code> for adding a new to-do item. It uses Reactive Extensions (Rx) to merge the <code>OkCommand</code> and <code>CancelCommand</code> from <code>addItemViewModel</code>. When either command is executed, it takes the first emitted item (using <code>Take(1)</code>) and subscribes to it with an action:
+<ul>
+<li>If a new item is added (<code>newItem != null</code>), it's added to the <code>ToDoList.ListItems</code>.</li>
+<li>Regardless of adding a new item or cancelling, it sets <code>ContentViewModel</code> back to <code>ToDoList</code>, switching the displayed content back to the to-do list.</li>
+</ul>
+</li>
+</ul>
+<h3>Reactive Programming Concepts</h3>
+<ul>
+<li><strong>Observable.Merge</strong>: Combines multiple observables into one by merging their sequences.</li>
+<li><strong>Select</strong>: Projects each element of an observable sequence into a new form.</li>
+<li><strong>Take</strong>: Returns a specified number of contiguous elements from the start of an observable sequence.</li>
+<li><strong>Subscribe</strong>: Attaches an observer to an observable sequence.</li>
+</ul>
+<p>In summary, <code>MainWindowViewModel</code> manages the content displayed in the main window, switching between the to-do list view and the add item view based on user interactions, facilitated by reactive programming principles.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="98be770a-f57d-4de2-ae88-3b4e32f6f6d2" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://avaloniaui.net/Showcase" target="_blank" class="url">https://avaloniaui.net/Showcase</a> をチェック</span>
+                    <a href="#98be770a-f57d-4de2-ae88-3b4e32f6f6d2" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">面白いアプリがいくつかある。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
