@@ -5521,6 +5521,311 @@ YourCommand.IsExecuting.Subscribe(isExecuting =&gt;
                     </div>
                 </div>
             </div>
+            <div id="c9fc1dbf-d24c-465e-96a5-29dadfc9bd36" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Mac で動かしたときのメニューバーのタイトルの変更方法を調べる</span>
+                    <a href="#c9fc1dbf-d24c-465e-96a5-29dadfc9bd36" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To change the menu bar title of an Avalonia UI application running on macOS, you typically need to modify the application's metadata, specifically the <code>CFBundleName</code> in the <code>Info.plist</code> file associated with your application package. The <code>Info.plist</code> file contains key-value pairs that define properties of your application, such as its name, version, and the types of documents it supports.</p>
+<p>Here's a general approach to change the menu bar title:</p>
+<ol>
+<li><p>Locate the <code>Info.plist</code> file in your application bundle. If you're packaging your application for macOS, this file will be in the <code>Contents</code> directory of your <code>.app</code> package.</p>
+</li>
+<li><p>Open the <code>Info.plist</code> file in a text editor or a plist editor. If you can't see the <code>.app</code> contents directly, you can right-click on your application in Finder and select &quot;Show Package Contents.&quot;</p>
+</li>
+<li><p>Look for the <code>CFBundleName</code> key. This key specifies the short name of the bundle, which is used by the Finder and the macOS menu bar. If it's not present, you can add it.</p>
+</li>
+<li><p>Change the value of the <code>CFBundleName</code> key to the desired title you want to appear in the menu bar.</p>
+<p>For example:</p>
+<pre><code class="language-xml">&lt;key&gt;CFBundleName&lt;/key&gt;
+&lt;string&gt;Your Desired Title&lt;/string&gt;
+</code></pre>
+</li>
+<li><p>Save the <code>Info.plist</code> file and restart your application to see the changes.</p>
+</li>
+</ol>
+<p>If your application doesn't have an <code>Info.plist</code> file or if modifying it doesn't change the menu bar title, it's possible that Avalonia UI or the way your application is packaged might require a different approach. In some cases, you might need to set the title programmatically at the start of your application, but this depends on the specifics of Avalonia UI and how it interacts with macOS.</p>
+<p>Keep in mind that changes to <code>Info.plist</code> and other app bundle resources might need to be redone or preserved if you repackage or update your application.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Setting the title of the menu bar from code in an Avalonia UI application running on macOS might not be straightforward due to the way macOS applications handle menu bars, which is different from Windows and Linux. In macOS, the menu bar is usually associated with the application as a whole, rather than with individual windows, and is managed by the system.</p>
+<p>However, you can try setting the title of your main window, which might indirectly affect the menu bar title, although this is not guaranteed to work on macOS due to its application-centric menu bar model. Here's how you can set the title of the main window in Avalonia:</p>
+<pre><code class="language-csharp">this.Title = &quot;Your Desired Title&quot;;
+</code></pre>
+<p>This code should be placed in the constructor of your main window class after the <code>InitializeComponent</code> method call, assuming you are using the MVVM pattern and XAML for your UI definitions.</p>
+<p>If this approach does not change the menu bar title on macOS, you might need to resort to platform-specific code that uses macOS APIs to set the application name displayed in the menu bar. This would involve invoking Objective-C or Swift code from C# using platform invoke (P/Invoke) or a similar mechanism, which can be quite complex and is generally not recommended unless absolutely necessary.</p>
+<p>Another potential workaround is to modify the application's <code>Info.plist</code> file as previously mentioned, but this is a static change and not done from code at runtime.</p>
+<p>Given the complexities and potential platform-specific requirements, it's important to carefully consider whether changing the menu bar title from code is essential for your application's functionality or user experience, especially if it involves intricate cross-platform compatibility issues.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To programmatically change the menu bar title of an application on macOS, you might need to interact with Cocoa APIs, specifically those related to the application's bundle and possibly its NSMenu and NSMenuItem classes. However, it's important to note that directly modifying the menu bar title that reflects the application name (as opposed to individual menu items) is not a common practice in macOS development, and macOS does not provide a straightforward API for changing the application name at runtime because it's typically set from the <code>Info.plist</code> file under <code>CFBundleName</code>.</p>
+<p>If you still need to explore this, here are some areas and APIs you might look into:</p>
+<ol>
+<li><p><strong>NSApplication</strong>: The central class for macOS applications. While it might not provide a direct way to change the application name in the menu bar, it's the starting point for any modifications to the application's behavior and appearance.</p>
+</li>
+<li><p><strong>NSBundle</strong>: This class represents the bundle structure of the application. You can use it to access information typically stored in the <code>Info.plist</code> file, but changes to bundle properties at runtime might not reflect in the menu bar title.</p>
+</li>
+<li><p><strong>NSMenu and NSMenuItem</strong>: These classes represent the menu bar and its items, respectively. While they are used to modify the menu bar's contents, changing the application's main menu item (which usually displays the application name) is unconventional and might not be supported directly.</p>
+</li>
+</ol>
+<p>To integrate Cocoa APIs in your Avalonia UI application, you would typically use a binding library like Xamarin.Mac (for .NET Framework or .NET Core applications) or Objective-C# (for Mono-based applications). This allows you to write C# code that interacts with Objective-C APIs. Here's a very basic example of how you might use Xamarin.Mac to access Cocoa APIs:</p>
+<pre><code class="language-csharp">using AppKit;
+
+...
+
+NSApplication.SharedApplication.MainMenu.Title = &quot;Your Desired Title&quot;;
+</code></pre>
+<p>Keep in mind, though, that changing the application name in the menu bar at runtime is not a standard operation in macOS applications and might lead to unexpected behavior or be reset by the system under certain circumstances.</p>
+<p>Given these constraints, consider whether this modification is essential for your application. If it's for branding or user interface reasons, it might be more effective to ensure that the <code>CFBundleName</code> in your <code>Info.plist</code> is set correctly before distribution, or to design your application's user interface in a way that doesn't rely on dynamically changing the application name in the menu bar.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">バンドルをつくるときに再調査。Mac で仕事をこなせるというところには至っている。バイナリーのリリース方法は二の次。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="0cbdcc86-217a-4ed6-9a7e-891fceec672e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Mac で動かしたときのメニューバーの内容の変更方法を調べる</span>
+                    <a href="#0cbdcc86-217a-4ed6-9a7e-891fceec672e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To customize the menu items in the menu bar of your Avalonia UI application on macOS, you will need to modify the menu definitions in your application. Avalonia UI supports creating and customizing menus through XAML and code. Here's a general approach to customizing the menu bar:</p>
+<ol>
+<li><p><strong>Define the Menu in XAML</strong>: You typically define your menu structure in your main window's XAML file. If you haven't done this yet, you can start by adding a <code>Menu</code> control to your main window and defining <code>MenuItem</code>s within it.</p>
+</li>
+<li><p><strong>Use NativeMenuItems for macOS Integration</strong>: For better integration with macOS, especially for the top menu bar, you might need to use <code>NativeMenu</code> and <code>NativeMenuItem</code> controls that Avalonia provides for platform-specific menu functionality.</p>
+</li>
+<li><p><strong>Customize the Menu Items</strong>: You can then customize the menu items, add new ones, or modify existing ones according to your application's requirements. You can also handle clicks on these menu items by binding commands or click event handlers.</p>
+</li>
+</ol>
+<p>Here's a basic example of how you might define a menu in XAML with Avalonia:</p>
+<pre><code class="language-xml">&lt;Window xmlns=&quot;https://github.com/avaloniaui&quot;
+        xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+        x:Class=&quot;YourNamespace.MainWindow&quot;&gt;
+    &lt;Design.DataContext&gt;
+        &lt;local:ViewModel/&gt;
+    &lt;/Design.DataContext&gt;
+
+    &lt;NativeMenu.Menu&gt;
+        &lt;NativeMenu&gt;
+            &lt;NativeMenuItem Header=&quot;File&quot;&gt;
+                &lt;NativeMenuItem Header=&quot;New&quot; Command=&quot;{Binding NewCommand}&quot;/&gt;
+                &lt;NativeMenuItem Header=&quot;Open&quot; Command=&quot;{Binding OpenCommand}&quot;/&gt;
+                &lt;NativeMenuItem Header=&quot;Save&quot; Command=&quot;{Binding SaveCommand}&quot;/&gt;
+            &lt;/NativeMenuItem&gt;
+            &lt;NativeMenuItem Header=&quot;Edit&quot;&gt;
+                &lt;NativeMenuItem Header=&quot;Undo&quot; Command=&quot;{Binding UndoCommand}&quot;/&gt;
+                &lt;NativeMenuItem Header=&quot;Redo&quot; Command=&quot;{Binding RedoCommand}&quot;/&gt;
+                &lt;!-- Add more menu items here --&gt;
+            &lt;/NativeMenuItem&gt;
+            &lt;!-- Add more top-level menus here --&gt;
+        &lt;/NativeMenu&gt;
+    &lt;/NativeMenu.Menu&gt;
+
+    &lt;!-- Your window content here --&gt;
+&lt;/Window&gt;
+</code></pre>
+<p>In this example, <code>NativeMenu</code> and <code>NativeMenuItem</code> are used to define a menu bar with &quot;File&quot; and &quot;Edit&quot; menus, each containing several items. You can bind commands to these menu items, which will be executed when the items are clicked. These commands should be defined in your ViewModel or code-behind.</p>
+<p>Remember that the exact structure and features of your menu will depend on your application's specific needs. You might need to refer to the <a href="https://docs.avaloniaui.net/">Avalonia Documentation</a> for more advanced features and customization options, such as adding separators, checkable items, or handling the opening event of a menu to update its items dynamically.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, it's generally safe to consider the menu at the top edge of the screen on a Mac as the equivalent of the &quot;default menu bar&quot; that appears under the title bar in a Windows application. However, there are some important distinctions and conventions to be aware of:</p>
+<ol>
+<li><p><strong>Global Menu Bar</strong>: On macOS, the menu bar is global for the entire desktop environment and changes contextually based on the active application. This is different from Windows, where each application window has its own menu bar directly under the title bar.</p>
+</li>
+<li><p><strong>User Experience Conventions</strong>: macOS has specific user experience conventions for menu bars that might differ from Windows. For example, macOS applications typically include specific menus like &quot;App Name&quot;, &quot;File&quot;, &quot;Edit&quot;, &quot;View&quot;, &quot;Window&quot;, and &quot;Help&quot;. The &quot;App Name&quot; menu contains items specific to the application itself, such as &quot;About&quot;, &quot;Preferences&quot;, and &quot;Quit&quot;.</p>
+</li>
+<li><p><strong>Integration with macOS</strong>: To ensure your Avalonia UI application feels native on macOS, it's important to adhere to these conventions and use <code>NativeMenu</code> and <code>NativeMenuItem</code> controls for better integration, as mentioned earlier.</p>
+</li>
+<li><p><strong>Consistency Across Platforms</strong>: Avalonia UI aims to provide a consistent development experience across platforms. When you define menus using Avalonia UI, the framework will attempt to render them appropriately on each platform. This means that the same menu definition should result in a top-level menu bar on macOS and a window-level menu bar on Windows, with each adhering to the platform's conventions as closely as possible.</p>
+</li>
+</ol>
+<p>In summary, while the concept of a &quot;default menu bar&quot; is similar across macOS and Windows, the implementation and user experience conventions differ. When developing cross-platform applications with Avalonia UI, it's important to be mindful of these differences to ensure your application integrates well with each platform's native look and feel.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, your analogy is quite insightful. In a way, macOS applications can be thought of as operating within a full-screen, Multiple Document Interface (MDI)-like environment where the menu bar is at the top edge of the screen, and individual windows float freely within the desktop space, rather than being contained within a parent window. Here are some key points to consider in this comparison:</p>
+<ol>
+<li><p><strong>Global Menu Bar</strong>: Unlike traditional MDI applications where the menu bar is contained within the parent window, macOS maintains a single, global menu bar at the top of the screen that changes contextually based on the active application. This approach maximizes screen real estate and maintains a clean, uncluttered desktop environment.</p>
+</li>
+<li><p><strong>Application Windows</strong>: On macOS, application windows are not confined within a parent window but are free-floating and can be moved anywhere on the desktop. This is similar to the concept of an MDI application where multiple document windows are managed within a larger parent window, but with the key difference that there's no outer boundary confining the windows.</p>
+</li>
+<li><p><strong>Window Management</strong>: macOS provides sophisticated window management features, such as Mission Control and Spaces, which allow users to organize and navigate between application windows and virtual desktops efficiently. This provides a level of flexibility and control similar to what an MDI environment aims to achieve but in a more global and dynamic context.</p>
+</li>
+<li><p><strong>Consistency Across Applications</strong>: macOS enforces a consistent user experience across applications, particularly with regard to the menu bar and window management. This consistency helps users understand and predict how applications behave, which is one of the goals of an MDI system—to provide a unified interface for managing multiple documents or views.</p>
+</li>
+</ol>
+<p>In summary, while the underlying principles and implementations differ, the conceptual model of macOS applications does share similarities with the MDI paradigm, particularly in how it centralizes menu functions at the top of the screen and allows for the management of multiple windows within a shared environment. This model emphasizes efficiency, consistency, and a clean user interface, which are core principles in both MDI applications and macOS design philosophy.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, you can use the <code>NativeMenu</code> class in Avalonia UI to create a menu that will display as a top-edge-of-the-screen menu bar on macOS and as a default menu bar under the title bar in a Windows application without writing platform-specific code. Avalonia UI is designed to abstract away the platform-specific differences, allowing you to write your UI code once and have it adapt to the conventions of the platform it's running on.</p>
+<p>When you define a menu using <code>NativeMenu</code> and <code>NativeMenuItem</code> in your Avalonia application, the framework takes care of rendering it according to the native look and feel of the operating system. On macOS, this means integrating with the global menu bar at the top of the screen. On Windows, the same menu structure will be rendered as part of the application window, typically below the title bar.</p>
+<p>Here's an example of how you might define such a menu in your Avalonia application's XAML:</p>
+<pre><code class="language-xml">&lt;Window xmlns=&quot;https://github.com/avaloniaui&quot;
+        xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+        x:Class=&quot;YourNamespace.MainWindow&quot;&gt;
+    &lt;NativeMenu.Menu&gt;
+        &lt;NativeMenu&gt;
+            &lt;NativeMenuItem Header=&quot;File&quot;&gt;
+                &lt;NativeMenuItem Header=&quot;New&quot;/&gt;
+                &lt;NativeMenuItem Header=&quot;Open&quot;/&gt;
+                &lt;NativeMenuItem Header=&quot;Save&quot;/&gt;
+                &lt;!-- More File menu items --&gt;
+            &lt;/NativeMenuItem&gt;
+            &lt;NativeMenuItem Header=&quot;Edit&quot;&gt;
+                &lt;NativeMenuItem Header=&quot;Undo&quot;/&gt;
+                &lt;NativeMenuItem Header=&quot;Redo&quot;/&gt;
+                &lt;!-- More Edit menu items --&gt;
+            &lt;/NativeMenuItem&gt;
+            &lt;!-- More top-level menus --&gt;
+        &lt;/NativeMenu&gt;
+    &lt;/NativeMenu.Menu&gt;
+&lt;/Window&gt;
+</code></pre>
+<p>This menu definition will be rendered appropriately on both macOS and Windows, adapting to the native styling and behavior of each platform. This approach simplifies cross-platform development by allowing you to focus on defining your application's functionality, rather than dealing with the intricacies of each operating system's UI conventions.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Windows アプリならタイトルバー直下のメニューバーになるものが Mac では全てのウィンドウに共通のメニューバーとして画面上部に表示される仕組み。Mac では context-aware な実装が必要になりそうだが、NativeMenu が存在する以上、Avalonia UI の側でそのあたりも想定されている可能性が高い。</p>
+                            <p class="note_contents">メニューの内容をコードで変更できるなら、タイトルもコードで変更できそう。#if でプラットフォーム固有のコードを含め、Mac の API を呼ぶことになるか。メニューをつくり込むくらいのアプリを開発するようになれば調べる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="30312e6c-05a2-4878-9a17-5f0ae47fda55" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Mac で動かしたときのドックのアイコンの変更方法を調べる</span>
+                    <a href="#30312e6c-05a2-4878-9a17-5f0ae47fda55" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To change the dock icon for an Avalonia UI application running on macOS, you'll need to modify the application bundle to include your custom icon. Here's a general outline of steps you can follow:</p>
+<ol>
+<li><p><strong>Create an Icon</strong>: Ensure you have an icon in <code>.icns</code> format. macOS uses the <code>.icns</code> format for application icons. You can create this icon using a graphic editor or convert a <code>.png</code> or <code>.jpeg</code> file to <code>.icns</code> using online tools or macOS's built-in <code>iconutil</code> command.</p>
+</li>
+<li><p><strong>Locate Your Application Bundle</strong>: An Avalonia application running on macOS should be packaged inside an <code>.app</code> application bundle. If you've run your application directly through a development environment, you might not have an application bundle. In such cases, you need to package your application into a <code>.app</code> bundle.</p>
+</li>
+<li><p><strong>Add the Icon to Your Application Bundle</strong>:</p>
+<ul>
+<li>Right-click on your <code>.app</code> bundle and select &quot;Show Package Contents&quot;.</li>
+<li>Navigate to the <code>Contents/Resources</code> folder within the package contents.</li>
+<li>Place your <code>.icns</code> icon file in the <code>Resources</code> directory.</li>
+</ul>
+</li>
+<li><p><strong>Modify the Info.plist File</strong>:</p>
+<ul>
+<li><p>Inside the <code>Contents</code> folder of your application bundle, there should be an <code>Info.plist</code> file. This file contains configuration information for your application.</p>
+</li>
+<li><p>Open <code>Info.plist</code> with a text editor or a plist editor.</p>
+</li>
+<li><p>Locate the <code>&lt;key&gt;CFBundleIconFile&lt;/key&gt;</code> entry. If it doesn't exist, you'll need to add it.</p>
+</li>
+<li><p>Ensure the string value associated with this key matches the name of your <code>.icns</code> file (excluding the <code>.icns</code> extension). For example, if your icon file is named <code>AppIcon.icns</code>, the plist entry should look like this:</p>
+<pre><code class="language-xml">&lt;key&gt;CFBundleIconFile&lt;/key&gt;
+&lt;string&gt;AppIcon&lt;/string&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong>Refresh the Dock</strong>: Sometimes, the dock may not immediately update with the new icon. To refresh it, you can try removing the application from the dock and adding it again, or you can restart the dock via the Terminal with the command <code>killall Dock</code>.</p>
+</li>
+<li><p><strong>Test Your Application</strong>: Run your application again. You should see your custom icon in the dock.</p>
+</li>
+</ol>
+<p>If your application isn't yet packaged into a <code>.app</code> bundle, you'll need to look into how you can package your Avalonia application for macOS. This might involve using tools like <code>dotnet publish</code> with specific runtime identifiers for macOS, and then manually creating an <code>.app</code> bundle structure around your published output, or using a tool designed to package .NET applications for macOS.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Dynamically changing the dock icon for an application based on its state is a bit more complex and generally requires interacting with macOS-specific APIs, which might not be directly accessible or straightforward to use in an Avalonia UI application since Avalonia aims to be platform-agnostic.</p>
+<p>However, you can achieve this by invoking Objective-C or Swift code from your C# application that interacts with the macOS APIs responsible for managing the dock icon. Here's a general approach you could take:</p>
+<h3>Using P/Invoke to Call Cocoa APIs</h3>
+<ol>
+<li><p><strong>Create a Native macOS Library</strong>: Write a small library in Objective-C or Swift that provides functionality to change the application's dock icon. This library will use the Cocoa framework to interact with the dock.</p>
+</li>
+<li><p><strong>Expose a C Interface</strong>: Your Objective-C or Swift library should expose a C-compatible interface (using <code>extern &quot;C&quot;</code> in Objective-C) so that it can be called from C# code using P/Invoke.</p>
+</li>
+<li><p><strong>P/Invoke from C#</strong>: In your Avalonia application, use P/Invoke to call the functions you've exposed from your Objective-C or Swift library. You'll need to declare the external functions in your C# code and then call them as needed based on the application state.</p>
+</li>
+</ol>
+<h3>Example Objective-C Function to Change Dock Icon</h3>
+<pre><code class="language-objc">#import &lt;Cocoa/Cocoa.h&gt;
+
+extern &quot;C&quot; void SetDockIcon(const char* iconName) {
+    NSString *iconNameNSString = [NSString stringWithUTF8String:iconName];
+    NSImage *iconImage = [NSImage imageNamed:iconNameNSString];
+    if (iconImage != nil) {
+        [NSApp setApplicationIconImage:iconImage];
+    }
+}
+</code></pre>
+<h3>Calling the Native Function from C#</h3>
+<pre><code class="language-csharp">using System.Runtime.InteropServices;
+
+class DockIconChanger
+{
+    [DllImport(&quot;YourNativeLibrary&quot;, EntryPoint = &quot;SetDockIcon&quot;)]
+    public static extern void SetDockIcon(string iconName);
+
+    public static void ChangeDockIcon(string iconName)
+    {
+        SetDockIcon(iconName);
+    }
+}
+</code></pre>
+<h3>Considerations</h3>
+<ul>
+<li><strong>Security and Sandboxing</strong>: If your application is sandboxed or distributed through the Mac App Store, there might be restrictions on what your application can do, including interacting with system-level features like the dock icon.</li>
+<li><strong>Packaging and Distribution</strong>: Incorporating native macOS code into your Avalonia application means you'll have an additional component to manage when packaging and distributing your application. Make sure your build process includes the native library and that it's properly loaded at runtime.</li>
+<li><strong>Platform Checks</strong>: Ensure your code that calls into macOS-specific APIs is only executed when running on macOS to avoid runtime errors on other platforms.</li>
+</ul>
+<p>This approach requires a good understanding of both C# and Objective-C/Swift, as well as familiarity with macOS development concepts. It's more advanced and might not be suitable for all projects, especially those looking for a quick solution or those without macOS development experience.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">これもバンドル内のファイルまたは Mac の API での処理になるようだ。優先度は低いので、いったん見送る。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
