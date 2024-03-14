@@ -1,0 +1,380 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>low_priority_queue.py</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="low_priority_queue_py.htm" class="title">low_priority_queue.py</a>
+        </div>
+        <div class="entries">
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">Python で書くことを考えている。Avalonia UI を使って GUI で書くと細かいところに時間がかかって結局2～3日の開発になりそうだが、Python なら数時間で完成する。</p>
+                    <!-- Task: 0cc3a40f-2ef8-4bd4-b1da-b8f0431e268c -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">そもそも何をしたいのか。</p>
+                    <p class="note_contents">自分は、集中力が抜きん出ていると自負している。これはたぶん若干そういう特性もあってのことで、発達支援教室の経営者や先生などから「あなた、間違いなく持ってますね」と言われたことも過去に数例ある。けなす意図でなく、「特性を活かしなさい」とのニュアンスでのことだ。</p>
+                    <p class="note_contents">今、部屋の片付けは昨年12月末の帰国以来一度もできていなくて、奥さんも自分もズボラで掃除機なんてかけないので自室の床は屋外から持ち帰った砂利などでジャリジャリしているが、タスクは完璧に整理できていて、やるべきことは完璧にやれている。おまけに、自分より育児をやっている父親はまず見ないと大勢から言われる。良くも悪くも「するべきことからする」を徹底できすぎていて、できていないことが「なんとなく気になる」というのがない。</p>
+                    <p class="note_contents">自分の日々のワークフローでは、「ほかのことを押しのけてまでやるべきことか、そうでないか」の二択しかない。そうでないことには永遠にフォーカスが当たらない。だから、たまに何か必要なものがあって探していると、その過程で10年前のレシートやヨドバシの段ボールが出てくることもある。そこに10年あったことに驚くが、そのくらい、するべきことしか目に入ってこない。</p>
+                    <p class="note_contents">というのを少しだけ改善したい。</p>
+                    <!-- Task: 0cc3a40f-2ef8-4bd4-b1da-b8f0431e268c -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">別にこんなことをプログラミングのメモとして書いても仕方ないが、「なぜ」の部分をしっかりと書いておかないとこのプログラムについてはゴールがブレうるので書いておくと、たとえば1ヶ月前にコーナンで5歳の娘が若い夫婦と仲良くなった。娘は誰にでも声をかけるフレンドリーな性格だ。それで夫婦と仲良くなっては、奥さんが保育士だそうで、娘をずいぶんと気に入ってくれた。今度はコーナン以外でも遊んでくれるかのような話し方だった。</p>
+                    <p class="note_contents">それで結局2時間くらい接しては、買い物ができないまま閉店になり、その後、店外で別れた。直後、娘の上着を持って帰ってしまったと LINE で連絡を受けた。娘が店内で暑がって脱いだものを、たまたま一緒にいた保育士の奥さんが持っていたようだった。</p>
+                    <p class="note_contents">自分の問題は、そのことについての LINE もそのまま1ヶ月くらい放置していることだ。最初に何度かやりとりしたが、その途中で自宅に到着しては、それからは夕食だったので携帯をさわらず、そこで会話が途切れ、そのまま忘れてしまった。上着を持って帰ってしまった側から「で？ どうするんですか？？？」のようなことは言いにくいだろう。だいぶ年下だというのも日本では関係しているのかもしれない。</p>
+                    <p class="note_contents">もちろん、ほかの人に返信するなどのときに「あっ、これ、忘れてた」というのは気づく。LINE をあまりさわらないので頻度は高くないが、それでも週に1回くらいは思い出している。しかし、そういうときにはたいてい「LINE を開かざるを得ない用事」があって開いているのであって、ただ暇でなんとなく開いているなどではないため、その用事が終わると次の用事に移行してしまう。</p>
+                    <p class="note_contents">発達関連の人からは、「マルチタスクが元々苦手だから、マルチタスクに頼らない働き方を確立でき、それが今の集中力につながっているのでないか」といったことも聞いた。その可能性は十分にあると思うので、何でもかんでもすぐにやってしまうワークフローに移行して何一つガッツリとできない自分にはなりたくない。</p>
+                    <p class="note_contents">しかし、「その人に別の用事が生じて連絡することになるまで返事が『タスク』に昇格せず相手を放置してしまう」というのは、もちろん悪気は全くないことだが、やられている相手にとって気分の良いものでない。（そのことも分かっているが、それでも常に目の前に5個も10個も「タスク」があって、そのリストが完成しているので、そこに差し込んでまでやるべきでないことを永遠に先送りしてしまう）。</p>
+                    <p class="note_contents">凡庸な落としどころを模索するかのようで面白くないが、やはり極端は問題であり、やはりバランスは大事だ。「やるべきことに集中する」というのを2割ほど削り、その2割でほかのことをきちんと処理できた方が、一極集中で仕事や育児だけするより社会的な恩恵にあずかれる可能性がある。</p>
+                    <!-- Task: 0cc3a40f-2ef8-4bd4-b1da-b8f0431e268c -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">といったことは些細な問題であり、スケジュールを管理するだけで解決できると他者は言う。しかし、自分はどうしてもカレンダーを使えない。それも「特性」なのか、あるいは、職業柄、「やるべきことを最後までズドーン」が適するからなのかは分からないが、内部的な予定を守れない。</p>
+                    <p class="note_contents">人と会うなどの外部的な予定は大丈夫だ。しかし、自宅で働く日に「午後○時から△△をやる」のようなことは、そもそも○時が迫るときにその予定自体を覚えていないので、概念が脳内でよみがえらない。その解決のためアラームを鳴らすなどしても、「あと5時間くらいやった方が一段落つくこと」のど真ん中で音だけ鳴るなどしたところで、そこで即座にそれを止めて生産性を落としてまで、「タスク」としての価値は低いことを優先するというのが、どうしてもできない。</p>
+                    <p class="note_contents">では、そもそも「あと5時間くらいやった方がよいこと」に没入してしまわないよう、2時間前、3時間前からアラームを定期的に鳴らすのはどうかと思うのだが、それをすると、大した価値のない単純作業に明け暮れるようになり、なおのこと生産性が下がる。</p>
+                    <p class="note_contents">箱に大きな石と小さな石をたくさん詰めるなら、まず大きな石を詰めてから隙間に小さな石を落とし込むのが良い。そう考えるにおいて「小さな石を落とし込むのが下手すぎる」というのを解決したいのだ。</p>
+                    <!-- Task: 0cc3a40f-2ef8-4bd4-b1da-b8f0431e268c -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">とにかく優先度を考えすぎている。「気になることをなんとなくやってよい空白の時間」がほとんどない。</p>
+                    <p class="note_contents">平日は、起床し、娘を幼稚園に連れて行き、急いで帰宅し、夕方のお迎えまでの8時間ほどを仕事に費やす。お迎えの帰りにスーパーに寄るとか娘とブラブラするとかは自分の役割で、帰宅してからは夕飯で、そのまま寝かしつけまでが自分ということも多い。そうでない日にはさらに2～3時間、机に向かえるが、その2～3時間を最優先の仕事に費やしては、「今すぐに寝ても7時間しか眠れない」というラインを過ぎ、ギリギリのところまで睡眠を削って最後の仕上げをして寝ている。</p>
+                    <p class="note_contents">土日は、午前中だけは働かせてもらえることが多いが、午後は自分が娘の世話をしている。朝から丸一日、二人で出かけるようなことも多い。気質の違いもあってか、外遊びの99％が自分の役割になっている。妻が最後に娘と二人だけで外遊びをしたのは1年と4ヶ月くらい前かもしれない。娘との距離感について妻は真剣に悩んでいるようだが、そのうち父親のことをキモいと言いだすだろうし、親子関係には波があって普通だろうから、たまたま父親の負荷が大きい時期なら、父親としての責任を果たそうとは思っている。</p>
+                    <p class="note_contents">だから単純に「机に向かえる時間が短いから、しなければならないことからする」というのが続いているだけとも思える。</p>
+                    <p class="note_contents">しかし、お迎えから帰宅し、まだご飯ができておらず、娘は園から持ち帰ったもので遊んでいるなどの時間に脳内が「もうすぐご飯だ」というモードになっていて和室でダラダラと夕食を待つとか、夕食後に満腹で頭がまわらないからネトフリを観ていたところ娘がやってきてそのまま寝かしつけになるとかは少なくないし、6時間あるかないかの睡眠で日中にフルパワーが出ているとも感じられないので、「ほんのちょっとの工夫で全体の効率性が高まるのでないか」という妄想を抱くこともないわけでない。</p>
+                    <p class="note_contents">とにかくマルチタスクが苦手で、だからこそシングルタスクではすごいのだが、それでほかのことが止まるのは全体としては非効率なことだ。</p>
+                    <p class="note_contents">と書いてみて改めて思うのだが、自分は、結局のところ、もうちょっとだけマルチタスクもできるようになりたく、しかしタスクリストでは優先度を考えすぎてしまうので「ほかのこと」に気が向かず、また、スケジュール管理ができるほどマルチタスクの能力が高くないことから、「隙間時間にするべきことをパッと教えてくれる」および「最近できていないことを優先的に選んでくれる」というツールが欲しいのだと思う。</p>
+                    <!-- Task: 0cc3a40f-2ef8-4bd4-b1da-b8f0431e268c -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">このツールは、自分の特性をきちんと理解していないと無用の長物になる。だから自己分析が要件定義の重要な部分を占める。</p>
+                    <!-- Task: 83178165-0980-43bb-9174-6c53704f041a -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">これまでのメモを読み返してすぐに思ったのは、「先送りしていて困らない程度のことが本当に必要なのか」および「『仕事人間』という言葉もあるのだし、大きい石に追いつめられているような人のなかには、自分と同じく小さな石を扱うのが苦手な人はおそらく少なくないのだろう」の二つだ。</p>
+                    <p class="note_contents">そのうち後者は、「それでその人が幸せなら、その人の人生なのだから」といった程度のことだ。自分のような特性を持つ人はほかにもいるだろうから、そこに過度にネガティブな認識を持つことはせず、有用な対策を考えることに専念したい。</p>
+                    <p class="note_contents">前者については、たとえば片付けや掃除は必要かどうかと問うなら、自分の部屋がきれいであることに社会的価値はなく、他者にとってどうでもよいことなので、それで自分の作業性などが落ちていないならどうでもよいというのが自分の考え方だ。片付けや掃除の方法やストーリーをマネタイズできるキャラをつくれる人にとっては武器だが、自分が片付けや掃除をがんばったところで、ただのオッサンが片付けや掃除をがんばったというだけのことだ。</p>
+                    <p class="note_contents">読書についても同じようなことを思う。知識が増えると考え方の幅が広がるので、仕事にも貢献がありうる。しかし、自分は学生時代には年間1千冊以上の本を読むと決めてそれを容易に継続できたので（そういうところが「持っている」のかもしれないが）、もう十分に頭でっかちだ。とにかく手を動かすべき時期に手を止めてまでさらに情報を集めることの費用対効果には疑問がある。</p>
+                    <p class="note_contents">しかし、「やる価値がある」ということと「やれるからやってしまう」ということを過度に区別しない方が、想定外の利益が生じてくる可能性がある。</p>
+                    <p class="note_contents">このメモを書いている間も、「今、鬼軍曹が『今すぐに5分だけ片付けろ！！！』と言ってくれば、その5分は絶対に捻出できる」といったことを思う。それが30分でも何とでもなるし、なんなら半日仕事を止めて片付けだけをやっても仕事が破綻することはない。要は、「強い割り込み」がないから着手しないだけで、時間がないわけでない。</p>
+                    <p class="note_contents">自分は昔から「始めたら徹底的」と言われる。それは親からも言われたことで、掃除も、始めたら完璧にやり遂げる。その自覚があるから、「すぐに終わることであっても、着手してしまうと、関連することまでやってしまい、するべきことが大幅に遅れる」という恐れがある可能性は高い。「ほかにすることのない時間」が全くないので、何に着手するにおいても、必ず何かが犠牲になる。</p>
+                    <p class="note_contents">サラリーマンでないというのも大きいだろう。自分は、起きている限り、生きている限り、いつでも働けてしまう。出社も退社もない。「お金をもらえなくてもやりたいくらい面白いことだけをするのでないと自分は社会の役に立てない」という認識があり、そういう働き方を徹底しているつもりだ。宮崎駿監督も、映画をつくるのが好きだからやっているだけだろうと思う。それで息子とは顔を合わせることもほとんどなかったなどのエピソードをどこかで目にした。自分は育児はするが、ほかのことには気がまわらない。「オン状態」が解除される時間がないからだろう。</p>
+                    <!-- Task: 83178165-0980-43bb-9174-6c53704f041a -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">といった、しょーもないことを十分に書いたので、自分の特性を鑑みたうえで有用性を見込めるツールを考える。</p>
+                    <!-- Task: 83178165-0980-43bb-9174-6c53704f041a -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">最近、着目しているのは、午後5時台だ。自分は午後6時に仕事をとめて急いで準備して出発しないと閉園に間に合わない。連絡すれば待ってくれるが、それで先生方が帰れなくなるのはさすがに申し訳なく、午後6時のラインは強い。</p>
+                    <p class="note_contents">そのラインが強いせいで午後4時過ぎからはソワソワとしてくる。コーディングなどをしていても、午後5時台に入るとそのソワソワが大きくなり、数分ごとに時計を見ては、残り時間でどのあたりまでをつくれるのかなどを頻繁に気にしている。</p>
+                    <p class="note_contents">それなら午後5時半にもう一つのラインを引き、30分だけ「やるべきこと」の時間を削り、5時半に必ずツールを起動し、「最近やれていないこと」をその30分のうちにできるだけ多くやるというのが一つの試みだ。</p>
+                    <p class="note_contents">自分は taskKiller という自作タスク管理ソフトで何でも管理しているが、それが日々の生活の根幹にまで浸透していることこそが「大事でないことが永遠に滞留する」の根本的原因なのは間違いないので、そのツールから taskKiller のデータにアクセスしてタスクを選ぶようなことは合理的でない。</p>
+                    <p class="note_contents">このツールは、「5分だけやって5分後に無理やりそこでやめても困らない」くらいの単位に分割されたタスクおよびそれらが週に何回くらい実行されるべきかのリストデータを内包し、鬼軍曹の代わりに「最近できていないから片付けろ」的なことを言ってくれれば十分だ。</p>
+                    <p class="note_contents">そういうツールがそれなりに賢く実装されていれば、リストデータと実行履歴から、タスクを入れすぎているとか、もっと入れられるとかも、ある程度は分析できる。データで言ってくれれば説得力があり、「その日暮らしのアーティスト」みたいになってしまっている自分にも響くかもしれない。</p>
+                    <p class="note_contents">そういったツールを毎日午後5時半に起動するというのをまずは想定してみる。</p>
+                    <!-- Task: 83178165-0980-43bb-9174-6c53704f041a -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">ついでに、どういったことを入れたいかについても書いておく。</p>
+                    <p class="note_contents">一つは郵便物のチェックだ。仕事はメールなどで届く。郵便物からタスクが生じることは皆無に近く、だから溜まる。それも毎日1分ほどで仕分けられる。しかし、急がないからこそ放置するうちに3～4箱が満タンになっている。数年前のものも多い。</p>
+                    <p class="note_contents">SNS のチェックも入れたい。自分はとにかく見るのを忘れる。SNS を見ることが「タスク」として第一選択になることがない。移動中にはひたすら ChatGPT と、そのときにやっている仕事の技術的なところなどを話している。LinkedIn は自分の使い方次第で有用になりうるので、せめて週に2回くらい、せめて5分は「面白い人を探す」というのをやってみてもよいと思う。</p>
+                    <p class="note_contents">写真の整理も毎日5分くらいはやるべきだ。撮るばかりで整理をほとんどしないので、今5歳の娘が産まれる前からのものがすでに10万枚ほどある。選別には千枚あたり1時間ほどかかるので、選別だけで100時間だ。そんな時間をすぐには捻出できないので、なおさら放置しているが、このままでは保存コストがかさむ。毎日5分だけでも整理すれば、少なくとも今よりは増えない。</p>
+                    <p class="note_contents">毎日30分なら6枠だ。いったん土日を除外するなら週30枠だ。週30回、「5分くらいで終わること」をできるなら、行動の多様性が劇的に高まり、実にさまざまなことを放置してしまうのが少しだけ改善されるかもしれない。</p>
+                    <!-- Task: 83178165-0980-43bb-9174-6c53704f041a -->
+                </div>
+            </div>
+            <div id="ad74b292-9be0-4db0-b97d-d734f2d3abf9" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">プロジェクト開始時のタスクを登録</span>
+                    <a href="#ad74b292-9be0-4db0-b97d-d734f2d3abf9" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Python で書くので pyddle レポジトリーで足りる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="a83847cb-df73-4e7e-9573-c92666162f79" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">名前を決める</span>
+                    <a href="#a83847cb-df73-4e7e-9573-c92666162f79" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Naming your tool can be both an exciting and challenging process. It's great to pick a name that's catchy, descriptive, and gives a hint about the purpose of the tool. Here are a few suggestions:</p>
+<ol>
+<li><strong>TaskNudge</strong>: Suggests a gentle reminder or push towards completing small tasks.</li>
+<li><strong>MicroMomentum</strong>: Emphasizes gaining momentum through completing micro-tasks.</li>
+<li><strong>QuickWins</strong>: Highlights the satisfaction of quickly completing tasks and achieving wins.</li>
+<li><strong>BiteSizedTasks</strong>: Suggests tasks that are small or &quot;bite-sized&quot; and easy to complete.</li>
+<li><strong>MiniTaskMaster</strong>: Implies a tool that masters the organization of smaller tasks.</li>
+<li><strong>SpareMoments</strong>: Captures the idea of utilizing those spare moments effectively.</li>
+<li><strong>InterTasker</strong>: A play on &quot;inter&quot; for between and &quot;tasker&quot; for tasks, indicating a tool for tasks in between larger ones.</li>
+<li><strong>TaskletTrove</strong>: Suggests a treasure trove of small, manageable tasks or 'tasklets'.</li>
+<li><strong>PauseProductive</strong>: Implies productivity during short pauses or breaks.</li>
+<li><strong>TaskSnippet</strong>: Indicates small snippets of tasks that can be completed quickly.</li>
+</ol>
+<p>Consider your target users and the core features of your tool when deciding on a name. A good name can make your tool more memorable and appealing to potential users.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>For a Python script, following the snake_case naming convention is indeed a good practice. If you prefer a straightforward name that describes exactly what the tool does or how it helps, here are some suggestions:</p>
+<ol>
+<li><strong>task_suggester</strong>: Simply suggests tasks to the user.</li>
+<li><strong>micro_task_helper</strong>: Helps with micro or small tasks.</li>
+<li><strong>quick_task_picker</strong>: Picks quick tasks for you to tackle.</li>
+<li><strong>gap_filler_tasks</strong>: Fills the small gaps in your schedule with tasks.</li>
+<li><strong>short_break_tasks</strong>: Suggests tasks for short breaks.</li>
+<li><strong>idle_time_optimizer</strong>: Optimizes idle or spare time.</li>
+<li><strong>between_tasks</strong>: For tasks to be done in between more significant ones.</li>
+<li><strong>task_intervals</strong>: Suggests tasks for interval periods.</li>
+<li><strong>moment_utilizer</strong>: Utilizes small moments or periods effectively.</li>
+<li><strong>tiny_task_advisor</strong>: Advises on tiny tasks you can complete.</li>
+</ol>
+<p>Each of these names aims to be descriptive and functional, indicating the purpose of the script without necessarily needing to be catchy.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Certainly, here are some more descriptive and straightforward Python script name suggestions in snake_case:</p>
+<ol>
+<li><strong>time_gap_tasks</strong>: Suggests tasks to fill time gaps in your schedule.</li>
+<li><strong>brief_task_guide</strong>: Guides you to brief tasks that can be quickly completed.</li>
+<li><strong>mini_task_queue</strong>: Creates a queue of mini tasks for short time slots.</li>
+<li><strong>task_break_filler</strong>: Fills breaks or pauses with small tasks.</li>
+<li><strong>small_task_suggester</strong>: Specifically suggests small tasks.</li>
+<li><strong>quick_fix_tasks</strong>: Offers quick fix tasks for immediate action.</li>
+<li><strong>spare_minute_tasks</strong>: Utilizes spare minutes with productive tasks.</li>
+<li><strong>interlude_tasks</strong>: Provides tasks for interludes between major activities.</li>
+<li><strong>task_snack</strong>: Offers small, snackable tasks for quick consumption.</li>
+<li><strong>pause_task_planner</strong>: Plans tasks for your pauses or downtime.</li>
+</ol>
+<p>These names focus on functionality and clarity, making it evident what the script is designed to do.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Given your focus on managing routine tasks that are minor but can become problematic if neglected, here are some Python script name suggestions that reflect this goal:</p>
+<ol>
+<li><strong>neglect_minimizer</strong>: Aims to minimize the neglect of small tasks.</li>
+<li><strong>routine_maintenance</strong>: Focuses on the maintenance of routine tasks.</li>
+<li><strong>task_overlook_guard</strong>: Guards against overlooking minor tasks.</li>
+<li><strong>minor_task_manager</strong>: Manages minor tasks effectively.</li>
+<li><strong>trivial_task_tracker</strong>: Tracks trivial tasks to ensure completion.</li>
+<li><strong>routine_task_reminder</strong>: Reminds you of routine tasks to be done.</li>
+<li><strong>small_issue_preventer</strong>: Works to prevent small issues from becoming bigger.</li>
+<li><strong>weekly_task_organizer</strong>: Organizes tasks that need weekly attention.</li>
+<li><strong>task_slip_catcher</strong>: Catches tasks that might slip through the cracks.</li>
+<li><strong>low_priority_helper</strong>: Helps in managing low-priority tasks.</li>
+</ol>
+<p>These names suggest the tool's function of handling routine, less critical tasks that require attention to avoid future complications.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Focusing on the &quot;low priority&quot; aspect, here are some Python script name variations that emphasize tasks of lesser importance, ensuring you allocate appropriate time and attention to them:</p>
+<ol>
+<li><strong>low_priority_tasks</strong>: Directly indicates the script deals with tasks of low importance.</li>
+<li><strong>low_priority_queue</strong>: Suggests a queue of tasks that are low in priority.</li>
+<li><strong>minor_focus_tasks</strong>: Indicates tasks that should have a minor focus.</li>
+<li><strong>low_stakes_scheduler</strong>: Implies scheduling for tasks that are low stakes.</li>
+<li><strong>minimal_effort_tasks</strong>: Suggests tasks that require minimal effort.</li>
+<li><strong>low_impact_todo</strong>: A to-do list focusing on low-impact tasks.</li>
+<li><strong>trivial_task_list</strong>: Emphasizes a list of trivial, low-priority tasks.</li>
+<li><strong>secondary_task_sorter</strong>: Sorts out tasks that are secondary in importance.</li>
+<li><strong>backburner_task_helper</strong>: Helps with tasks that can be put on the backburner.</li>
+<li><strong>light_duty_scheduler</strong>: For scheduling tasks that are light duty or low priority.</li>
+</ol>
+<p>These names keep the focus on managing tasks that are not urgent or critical, helping you maintain perspective on their importance.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">low_priority_queue にする。それ自体は優先度の低いことがキューに入っていて、あまりに放置しすぎると実害が生じてくるかもしれないというニュアンスにしたい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="a73caed1-0dc6-456b-a9fa-7df6f098fada" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">その日にするべきことを選ぶアルゴリズムをつくる</span>
+                    <a href="#a73caed1-0dc6-456b-a9fa-7df6f098fada" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">週7日なのか週5日なのかで切り分けるとややこしくなる。週は必ず7日だと固定し、平日毎日するべきことなら「週5回」と設定するのが一つの方法か。</p>
+                            <p class="note_contents">行動の多様性を高めるためのツールで、仕事をしすぎてほかのことが止まるのを改善するのが目的なので、週が月曜から始まるのは固定でよい。</p>
+                            <p class="note_contents">それで毎週月曜からカウントするにおいて、「回数」を7で割った値を、やれなかった日に加算していくだけでよいか。</p>
+                            <p class="note_contents">たとえば週2回するべきことなら、1日あたり2/7点が加算される。最初の3日やらなくても、4日目には8/7点になって1を超える。</p>
+                            <p class="note_contents">という実装では「できれば毎日」と思うことが毎日7/7点の加算になり無敵になる。</p>
+                            <p class="note_contents">また、「週に2回くらいは」と思うことと「週に5回は」と思うこととで後者の方が恒常的に目立つのも気になる。</p>
+                            <p class="note_contents">この頻度の指定は必ずしも重要性とリンクしない。「それほど大事でないが、毎日やらないと溜まること」もあれば、「大事だが、週2回やっておけば足りること」もある。</p>
+                            <p class="note_contents">また、加算方式だと「週に2回」のことが木曜日まで1点を超えない。</p>
+                            <p class="note_contents">もっと言うと、「今週全くできなかった」などのときに、「週に2回」のことは次週の初めから目立つべきということも考えうる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">変に動的にせず、信号の3色くらいで優先度を区別し、その3段階の優先度をユーザーが設定するようにしておき、「週○回」というのを達成したかどうかのみ区別するのも選択肢か。</p>
+                            <p class="note_contents">なんならノルマを達成したことをリストから消してもよい。「消える」というゲーム感覚は悪くない。それなら「5分&#215;2回」程度の片付けも、パッとやってしまえると体が覚えて月曜から1回目を消せる自分になるかもしれない。</p>
+                            <p class="note_contents">あくまで「量」を指定しているのだから、片付けを月曜と火曜に二日連続で行ってリストから消えるのは問題でない。それでは「量」が足りないなら増やせばよく、「タイミング」の方に改善の余地があるなら、実行を遅らせるだけでよい。</p>
+                            <p class="note_contents">それなら「今日は表示しない」の機能も絶対に便利だ。</p>
+                            <p class="note_contents">しかし、たとえば片付けが週に2回だからといって、月曜にやれば木曜まで表示されないなどを自動的にやるのは、その週の予定を把握していないスクリプトが生半可なことをするべきでない。ここを自動化するのは、むしろ使いにくくなりそうだ。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">「量」の指定だと考え、「ノルマの達成」あるいは「今日は非表示」のいずれかでその日のリストから消えるというのが使いやすそうなので、おそらく3段階の優先度の区別もしなくてよい。部屋が片付いてきたら片付けの優先度を下げるとか、写真を多く撮る季節になったから写真の整理の優先度を上げるとかの細々とした管理に時間を浪費するべきでない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="10db6a3f-d3e5-4f0d-aad7-1cdd6fb24610" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">1日の終わりの時刻を指定できるようにする</span>
+                    <a href="#10db6a3f-d3e5-4f0d-aad7-1cdd6fb24610" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">12時ではスマートでない。ほとんどの人は、だいたい12時くらいに寝て、7時くらいに起きているだろうから、その真ん中なら3時半だ。しかし、3時だと自分はまだ働いている日がある。4時はまずない。そのため、デフォルトでは4時で考えている。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">決め打ちでよい気がしてきた。「day starts at 4:00」のようなコマンドは容易に実装できるが、海外出張中のタイムゾーンをどうするのかとか、やはり日曜日から週を始めることで最初に予備日があるように処理してみるとかの右往左往を楽しむことに利益のあるツールでない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="7e9cd1a5-0ad2-4f9f-9ed8-e2c0bff70dfd" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">リストデータに GUID が自動挿入されるようにする</span>
+                    <a href="#7e9cd1a5-0ad2-4f9f-9ed8-e2c0bff70dfd" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">「何を」「どのくらいの頻度で」の二つを自分が書く。それで起動すれば、まだ GUID が空のエントリーなら新しい GUID が設定されるようにする。それを消してしまうとデータが破損するので、is_active 的なものも用意する。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">どうせなのでコマンドで CRUD をやれるようにする。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="dbca4f57-0f22-4341-870f-bba00c380e3b" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">入力の受けつけをやめてループの次の回に進む方法を調べる</span>
+                    <a href="#dbca4f57-0f22-4341-870f-bba00c380e3b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To achieve the behavior you're describing in Python, you can use threading or multiprocessing to run the input waiting in a separate thread or process. This allows your main loop to continue running and check periodically if input has been received.</p>
+<p>However, keep in mind that Jupyter environments, like this one, don't handle real-time user inputs from the command line or standard input (<code>stdin</code>) in the same way a script running in a terminal would. So, the code I'll show you is meant to be used in a standard Python environment, not directly in this chat or a Jupyter notebook.</p>
+<p>Here's an example using <code>threading</code> and a <code>queue</code> to accomplish this. The <code>queue</code> is used to safely transfer input from the thread reading input to the main thread:</p>
+<pre><code class="language-python">import threading
+import queue
+import time
+
+def read_input(input_queue):
+    while True:
+        try:
+            # This will block until input is received
+            inp = input(&quot;Enter something: &quot;)
+            input_queue.put(inp)
+        except:
+            break
+
+def main():
+    input_queue = queue.Queue()
+
+    # Start the thread that reads user input
+    input_thread = threading.Thread(target=read_input, args=(input_queue,))
+    input_thread.daemon = True
+    input_thread.start()
+
+    while True:
+        # Main loop logic here. For example, waiting for a certain interval:
+        time.sleep(5) # 5-second interval
+
+        # Check if there is anything in the queue
+        if not input_queue.empty():
+            user_input = input_queue.get()
+            print(f&quot;Received input: {user_input}&quot;)
+
+            # Optionally, break the loop if a certain input is received
+            if user_input == &quot;exit&quot;:
+                print(&quot;Exiting.&quot;)
+                break
+
+        print(&quot;Continuing loop...&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<p>This script starts a thread that continuously waits for user input and puts it into a <code>queue</code>. The main loop periodically checks this <code>queue</code> for new input while also executing its other tasks. If &quot;exit&quot; is entered, the loop breaks, and the program will end.</p>
+<p>Remember, this approach is for a typical Python script environment and won't function as expected within this chat or a Jupyter notebook environment due to their different handling of standard input and threading.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">簡単そうだが、インターバルを短くしたところでコマンド入力と処理の間に一瞬の待機が生じるのが気になる。</p>
+                            <p class="note_contents">また、1文字でも入力が始まっていれば遅延なくリロードが止まるというのをスクリプト言語で100％完璧にやれるのか分からない。C# なら余裕だろうが、Python は、それがどこのターミナルで走っているのかによる IO 関連の処理の微妙な違いなどもありうる。</p>
+                            <p class="note_contents">そこまで作りこみたいところでないのでやめておく。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="a3e6cd04-b94f-440c-b6ff-f586eb461a13" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">このタスクリストのログが出力されるようにする</span>
+                    <a href="#a3e6cd04-b94f-440c-b6ff-f586eb461a13" class="permalink">&infin;</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

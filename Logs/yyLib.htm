@@ -221,6 +221,44 @@
                     <a href="#16864810-2374-4445-b95a-7e44ede3f18e" class="permalink">&infin;</a>
                 </div>
             </div>
+            <div id="91e71911-0341-40fe-9241-fb9ff43490af" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">スクリプトでコンパイルとアーカイブをできるようにする</span>
+                    <a href="#91e71911-0341-40fe-9241-fb9ff43490af" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="82625a02-bb3b-416a-bdb3-e795822cc4b6" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">プロダクトとしての完全性を高める</span>
+                    <a href="#82625a02-bb3b-416a-bdb3-e795822cc4b6" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ちょっと Python をさわった。ビルドしなくても走るのが衝撃だった。橋が落ちていても、そこに到達するまでは全速力で走るかのようで、やっぱり予想通りのところで落ちる。走る前に型の照合などにより、ある程度のチェックを行いたい自分としては、スペルミスがあっても起動できる Python には違和感があった。</p>
+                            <p class="note_contents">ただ、習得も開発も早かった。試行錯誤のイテレーションが爆速だ。ビルドというめんどくさい作業が必ず入る前提で毎回ある程度のクオリティーのコードを書こうとしてしまわないことのメリットが際立っていた。</p>
+                            <p class="note_contents">.NET では、A が B に依存し、B が C に依存していれば、まず C をつくり、ビルドし、次に B をビルドし、最後に A をビルドし、それでようやく A を起動できる。思いのほか C の更新が大きくなったなどですぐにはビルドできない状態なら、B と A の開発が止まる。もちろん仮のコードを書いておく程度のことはできるが、動かしてみての仮確定ができないので、どうしても、まず C をビルドしたいという気持ちが生じる。</p>
+                            <p class="note_contents">といった非効率性を build_changed_projects.py により劇的に軽減できた。まだアーカイブが作成されていないプロジェクト、つまりは更新中のものを特定し、それぞれの依存関係を分析し、必要なものだけを最適な順序でビルドしてくれる。</p>
+                            <p class="note_contents">これからは、ある程度のクオリティーのコードを考えるというより、試行錯誤のイテレーションを爆速で回し、見つかっている問題を即座に修正するという、まさしくアジャイルな開発が可能だ。</p>
+                            <p class="note_contents">そのため、このタスクを廃止する。多少なりとも全体的なチェックを意識させるタスクは、これからの開発のワークフローと整合しない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="f1482e7e-09f0-44b4-8c3a-95ab63e38177" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">[2/2] コーディングのガイドラインに準拠しているか調べる</span>
+                    <a href="#f1482e7e-09f0-44b4-8c3a-95ab63e38177" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ある程度は意識しているが、気づいたときに直すのもアリだ。ここにこだわって全体をチェックするたびに開発が止まる。</p>
+                            <p class="note_contents">VSC だと検索が高速だし、検索結果をその場で消していけるので、タスクリスト的な使い方もできる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

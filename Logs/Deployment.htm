@@ -1986,6 +1986,199 @@ sudo dpkg -i packages-microsoft-prod.deb
                     <a href="#106a34e4-37e7-43ad-ad14-52e980b76ce0" class="permalink">&infin;</a>
                 </div>
             </div>
+            <div id="0134f2a3-8eed-4f77-8cb6-fa56974ee51b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">新しい仕組みで全てのアーカイブをつくる</span>
+                    <a href="#0134f2a3-8eed-4f77-8cb6-fa56974ee51b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">build_changed_projects.py により一括で処理した。数分で数十のアーカイブが完璧にできてしまってビビった。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="3c769964-6c25-4ad4-ab99-3cd85ebe991b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">「全プロジェクトに影響するちょっとした変更」への対応力を高める</span>
+                    <a href="#3c769964-6c25-4ad4-ab99-3cd85ebe991b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Visual Studio を起動しなくてもコンパイルやアーカイブができるようにするだけのこと。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">build_changed_projects.py により、ビルド、NuGet のパッケージの更新、バイナリーとソースのアーカイブまでが劇的に高速化された。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="9583b655-75c0-4d3b-8bff-446725ee9d49" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">GitHub のアカウントに自己紹介を書く</span>
+                    <a href="#9583b655-75c0-4d3b-8bff-446725ee9d49" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">そういう仕組みが初めからあると昨晩知った。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">そこからコーディングのガイドラインなどにリンクを張ることで、一通り伝わる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">各プロジェクトの README.md からリンクを張る。</p>
+                            <p class="note_contents">ソフトについては本体に書き、その作者についてはネットを見てもらうという論理的な構成。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">どういうことを書くべきか他者の例にならい、また、ChatGPT にも聞いてみる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">といったことにはメリットがない。自分は開発そのものの労力を提供するつもりは今もない。余計なことをしてはならない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="277a0311-9af2-4ee3-bacb-a7088192249b" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">Mac 用の Universal Binaries をつくってみる</span>
+                    <a href="#277a0311-9af2-4ee3-bacb-a7088192249b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">&lt;PropertyGroup&gt;<br />
+                                &nbsp;&nbsp;&lt;RuntimeIdentifiers&gt;osx-x64;osx-arm64&lt;/RuntimeIdentifiers&gt;<br />
+                                &lt;/PropertyGroup&gt;</p>
+                            <p class="note_contents">dotnet publish -c Release -r osx-x64;osx-arm64 --self-contained</p>
+                            <p class="note_contents">lipo -create -output &quot;MyAppUniversal&quot; &quot;path/to/osx-x64/MyApp&quot; &quot;path/to/osx-arm64/MyApp&quot;</p>
+                            <p class="note_contents">といったコードが過去の回答に含まれていた。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">そこまでのことは不要。アーキテクチャーごとに生成するのは、build_changed_projects.py にそういう機能を実装した。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="68456532-38d6-492a-b026-7860ac4b6d1e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">各プロジェクトの .gitignore を更新</span>
+                    <a href="#68456532-38d6-492a-b026-7860ac4b6d1e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">バイナリーのディレクトリー名が入っている。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="89d00a85-ef20-4d55-9d80-4181bf136853" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">README.md の書き方のガイドラインをまとめる</span>
+                    <a href="#89d00a85-ef20-4d55-9d80-4181bf136853" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">これもドキュメントとして公開してよいか。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="7c3640e9-35f2-4e06-ae45-c0567ffa423d" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">プロジェクトの開始時のタスクのメモを見直す</span>
+                    <a href="#7c3640e9-35f2-4e06-ae45-c0567ffa423d" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Documents ディレクトリーに入れて公開するのも選択肢。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">現行のもので困らない。つまらない内容なので公開の必要性もない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="54f9a5e2-f9bc-4fd6-9e8d-f722ee5958b7" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">ソフトのリリースの流れのメモを見直す</span>
+                    <a href="#54f9a5e2-f9bc-4fd6-9e8d-f722ee5958b7" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Documents ディレクトリーに入れて公開するのも選択肢。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">古い方法では数十工程に20分ほどかかる。いろいろとチェックもした場合だが、ちょっとかかりすぎだ。スクリプトにより多くの作業を自動化したい。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ビルドに数秒、NuGet のパッケージの更新に数秒、アーカイブに数秒という自動化に成功した。</p>
+                            <p class="note_contents">バージョン番号がおかしいことくらいしか考えうるミスがないので、現行のメモをザッと見ながらの作業でよい。ほとんど自動化してしまったので、メモがなくてもいけそうなくらいだ。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="573e369a-c270-42cf-9ae4-81fe88815b5c" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">Resources レポジトリーにも README.md を入れる</span>
+                    <a href="#573e369a-c270-42cf-9ae4-81fe88815b5c" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">現行のレポジトリーなので一応。GitHub Pages で静的ページを公開するなら、そのことにも言及。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ほかにも入れるべきレポジトリーがないか探す。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="1fb5907f-6f14-4041-a89f-eb6a6545fbcd" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://docs.github.com/en/pages/quickstart" target="_blank" class="url">https://docs.github.com/en/pages/quickstart</a> をチェック</span>
+                    <a href="#1fb5907f-6f14-4041-a89f-eb6a6545fbcd" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="0142faab-334a-42a7-894c-e77fdc20b2d2" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">GitHub Pages について調べ直す</span>
+                    <a href="#0142faab-334a-42a7-894c-e77fdc20b2d2" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">たいそうなものでない。すでにタスクリストのログを公開できている。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

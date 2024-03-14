@@ -56,6 +56,60 @@
                     <a href="#181db43c-f910-4b68-84c9-9bad51a10f1b" class="permalink">&infin;</a>
                 </div>
             </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">昨日、夜中に腹痛で目覚めてすぐに眠れなかったときに暇で仕方なかったので、Mia AI, your Voice AI Companion という GPTs をいじってみた。どういうことを言えば本題から外れるのか、そこからどう復旧するのか、通常の ChatGPT としての機能性はどのくらい残っているのかといったことを確かめるためだ。</p>
+                    <p class="note_contents">そのうち、しゃべり方のパターンが見えてきたので、別のウィンドウで「そういうしゃべり方をするように GPT-4 の API の system キーのところを設定する方法を教えてほしいと言ったところ、以下が得られた。</p>
+                    <div class="note_ai_generated">
+<pre><code class="language-json">{
+  &quot;system&quot;: {
+    &quot;behavior&quot;: &quot;consultative&quot;,
+    &quot;instructions&quot;: &quot;You are a consultative bot designed to encourage thoughtful conversation. Start by asking a broad, open-ended question to understand the user's current focus or challenge. After the user responds, acknowledge their input positively and follow up with thought-provoking questions that relate to their situation. Your goal is to stimulate reflection and deeper exploration of their topic. Always maintain a positive and supportive tone.&quot;
+  }
+}
+</code></pre>
+                    </div>
+                    <p class="note_contents">Mia AI, your Voice AI Companion が GPT-3.5 ベースのようで、その設定のまま相談してしまったので回答のレベルが低く、結局よく分かっていないようだったが、「じゃあ、そのプロンプトを自身に適用して会話を再スタートしてください」を旨とすることを英語で依頼したところ、Mia AI, your Voice AI Companion とほぼ全く同じ話し方をするようになった。</p>
+                    <p class="note_contents">それからは、とにかく何でもかんでも肯定してくれ、情報を追加してくれ、そのうえで thought-provoking な質問をしてくるボットとの会話が思いのほか面白く、「これを人間にやれたらコンサルで食えるなぁ」と心底思った。自分にはそういうコミュ力がないので向かないが、そのうち AI が顔と音声を自然に生成するようになれば、もう人間のコンサルさえ必要でなくなりそうだ。</p>
+                    <p class="note_contents">そのうち思ったのは、やはり AI としゃべると一気に視野が広がるということだ。もう人間としゃべる必要性がなくなってしまうくらい、上記のようなプロンプトは強い。毎回ちゃんと考えて返信しなければならず、それをするたびに、その数倍の深みのある情報を返してくれる。気づきの連続で、それだけで事業計画などもまとまってしまいそうに感じた。</p>
+                    <!-- Task: 37905546-63a1-4528-8964-79a710bc5469 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">夜な夜なそういうことをしていて最後に思ったのは、ツリー構造でそういうことをやっていくことの有用性だ。</p>
+                    <p class="note_contents">「会話」として質問に答えるなら並列的につなげればいい。つまりは、同じ階層で横並びのメッセージにする。</p>
+                    <p class="note_contents">そのうえで、ちょくちょく秀逸な回答が得られたときにそこからブランチを切るかのように「○○について、もっと教えて」と言ってみるなら、そのときにはプロンプトが切り替わってほしい。教えてもらうことに専念できるモードがあってほしい。</p>
+                    <p class="note_contents">それで情報が得られては、またコンサルのプロンプトに切り替えて横に情報をつなげてもよい。AI は、ステートレスなので、それまでの会話ログのうち関連している部分を全て受け取るなら、最初の system 部分がすり替わっていても問題視しない。</p>
+                    <p class="note_contents">そのうちまた秀逸な回答が得られれば、「○○の部分をまとめ直して」と言い、そうしてもらったものにフラグを立てることで「ツリー構造のやりとりから得られた情報のうち特に重要な部分」を確定することができる。</p>
+                    <p class="note_contents">といったことをやっていけば、次のようなデータが揃う。</p>
+                    <p class="note_contents">1. どういうやりとりをしてきたかの、ヘッドラインだけのツリー構造<br />
+                        2. コンサルなのか先生なのか、二つの system を使い分けての、並列または垂直につながる膨大な情報<br />
+                        3. そのやりとりから得た「確定すべき内容」のみ抽出したもの</p>
+                    <p class="note_contents">そのうち三つ目を ListBox に入れるなどすれば、それぞれが選択されたときにツリー側でそこに移動するなどが可能だ。</p>
+                    <p class="note_contents">全てのノードを「未処理」から始めて、内容を咀嚼したなどでそれ以上の処理が不要になれば「処理済み」にすることもできる。そうやって「未処理」のノードをなくしていくというワークフローはシンプルで無駄がない。</p>
+                    <p class="note_contents">そういったデータが JSON のファイルにおさまっていれば、それを開くことでいつでも調査や研究を再開できる。</p>
+                    <!-- Task: 37905546-63a1-4528-8964-79a710bc5469 -->
+                </div>
+            </div>
+            <div id="4f4a596b-0fd0-4ac5-b19d-0a1e489f4b72" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">タスクリストのログのこれまでの部分をチェック</span>
+                    <a href="#4f4a596b-0fd0-4ac5-b19d-0a1e489f4b72" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Avalonia UI をやったり Python を学んだりで時間が経った。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">設計に関することをいろいろと入れて Done にした記憶があったが、その後の大きな仕様変更により古いログをほとんど消したようだ。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
