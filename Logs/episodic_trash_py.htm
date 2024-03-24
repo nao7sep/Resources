@@ -1,0 +1,374 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>episodic_trash.py</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="episodic_trash_py.htm" class="title">episodic_trash.py</a>
+        </div>
+        <div class="entries">
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">このツールについては、何が問題で、何をやりたいのか、書いておく必要がある。</p>
+                    <!-- Task: 22ba2475-251f-4cd2-bdf3-680bba79a7ad -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">何日か、build_changed_projects.py と pyddle_dotnet.py の更新につまずいた。</p>
+                    <p class="note_contents">「コードを更新する → テストする → うまくいく → なぜうまくいったかを分析する → 得た知見などをコメントにまとめる → コードとコメントをコミットする → アーカイブのときにイレギュラーが発生する → コードの更新からやり直し」というのが何周か起こった。</p>
+                    <p class="note_contents">「もう少しなので終わらせてしまいたい」という気持ちがあり、かかりきりになり、ほかのことが止まってしまった。</p>
+                    <p class="note_contents">もう済んだことなので次に進もうとも思ったが、またありそうなので再発防止策を考えることにした。</p>
+                    <!-- Task: 22ba2475-251f-4cd2-bdf3-680bba79a7ad -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">コメントの長さは本質的な問題でない。自分が全く何も分かっていない領域について、AI に聞いても良い回答が得られず、ドンピシャで教えてくれるページも見つからないなら、自分で調べるということは今も不可避だ。</p>
+                    <p class="note_contents">その情報に体系性があるなら独立したドキュメントにするべきだが、「こういうことをしたい特殊なコード」というのがまずあっての、特定のコンテキストに関しての、汎用性の乏しい情報なら、コードと密結合しているものをドキュメント化してコードについてもそちらで説明するなどは、まさに誰得になってくる。</p>
+                    <p class="note_contents">コードが特殊で、それに直接的に関連する情報なら、多少長くなろうとコードのところに書くのが効率的だ。</p>
+                    <p class="note_contents">（蛇足だが、もっとも、チームで開発しているなどで、その特殊なコードについても大勢が理解する必要があるなら、まず仕様書としての独立したドキュメントで情報を整理し、それを見ながらコードを見ると一番分かりやすいような実装をしていくのが一つの方法だ。しかし、一人でチョロッと書く Python スクリプト程度なら、この方法はたいてい過剰だ）。</p>
+                    <!-- Task: 22ba2475-251f-4cd2-bdf3-680bba79a7ad -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">それなりの長さのコメントを便宜的にコードに書くにおいての問題は、たぶん老化もあって記憶の揮発が早く、試行錯誤したり、そのたびに調べ物をしたりのコードや情報もそのうち忘れてしまうことだ。</p>
+                    <p class="note_contents">自分は午後6時になれば強制的に仕事を止めて娘のお迎えに行かないといけないし、昼間に発熱などで呼ばれることも冬期は多い。土日だと、娘が起きたら仕事が終わりで、そのうち外遊びに連れて行くことになる。</p>
+                    <p class="note_contents">いくらでも残業できるプログラマーの方などと異なり、「働いてよいと保証されている時間」が比較的少ないので、そのなかでのコーディングには、いつ中断されるか分からないというリスクが常に伴う。</p>
+                    <p class="note_contents">だから、ある程度以上の大きさの課題に取り組むにおいては、「どうせ途中で中断される」というのがまずあっての開発なので、「現時点で分かっていることでコードとコメントの両方をまとめておく」という、RPG でいうならこまめにセーブをするようなやり方になりがちだ。</p>
+                    <p class="note_contents">いくらでも残業できるなら、最後にコメントとしてまとめうることの要点のみ紙のノートにでも書きながら、まずコードだけつくり込み、テストをやり込み、絶対に大丈夫になってからコメントをまとめるのが良いだろう。</p>
+                    <p class="note_contents">しかし、自分は、もう記憶力が落ちているので、たとえば金曜に要点のみ紙のノートに書いて土日に山に登ったりプールで泳いだりして月曜に机に戻ったときには、紙のノートだけでは全てを思い出せないことがある。</p>
+                    <p class="note_contents">その回避のために紙のノートにかなり細かく情報を書くなら、手書きより入力の方が速いのでコメントとしてコードのところに書いた方が良い。</p>
+                    <p class="note_contents">というところで、結局、「お迎えまでに、ある程度のコードを書き、ある程度のコメントをまとめる」という、時間に制限された働き方になってしまう。テストをやり込む前に暫定的なコメントを書かざるを得ないのは、かなり不便だ。</p>
+                    <!-- Task: 22ba2475-251f-4cd2-bdf3-680bba79a7ad -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">単位の小さいコードは、そういう制限があっても簡単にまとまる。</p>
+                    <p class="note_contents">そもそも、ほとんどの課題には明確な答えがある。ファイルシステムへの典型的なアクセスだとか、データベースの典型的な処理だとかだ。そういうのは、「ググったら誰でも同じ情報を得る」という前提があってのことなので、そもそもコメントをほとんど書かなくてよい。</p>
+                    <p class="note_contents">よって、たまに書かなければならない、それなりに試行錯誤や調べ物を必要とするコードについてのみ、それが自分の時間を過度に奪わないとか、自分を過度に消耗させないとかの仕組みを考えておけばよいだろう。</p>
+                    <!-- Task: 22ba2475-251f-4cd2-bdf3-680bba79a7ad -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">そういったことを考えるにおいて思ったことの一つは、「コメントのエピソード化」という概念およびそれを軸とする解決策の模索だ。</p>
+                    <p class="note_contents">AI に「コメントが episodic になることがあるか」と聞き、その長短などについていろいろと聞いた。</p>
+                    <p class="note_contents">変遷の記録を残した方が他者により深い理解をもたらすというのは自分も同意だが、それがコードコメントとして入っていると、ちょっとうるさいとも感じる。</p>
+                    <p class="note_contents">長くコーディングをしていると頭が疲れてくるので雑談の一歩手前のようなことをコメントに入れてしまうこともなくはないが、自分は、理想としては、コードコメントには、「そのコードを他者が疑わない最小限の情報」を入れたい。</p>
+                    <p class="note_contents">だから極端な話、「これはこれでいいんだ」だとか、「この部分はテスト済みだ」だとかでも、そのコードを自分でなく他者がその後の派生開発でさわる可能性が十分に低いなら、そして、自分がさわるときには高確率で思い出せるなら、それでよいと思う。（コメントは仕事をしない。コードだけが動くので、コメントに時間を割きすぎてはいけない）。</p>
+                    <p class="note_contents">そういう理想と episodic comments は、結果的に大きく乖離する。</p>
+                    <p class="note_contents">それなら、「コメントが episodic になってきたなぁ」と認識した時点で「以下のコードについては、こちらにコメントがある」とだけコメントを書ける方法があってよい。少なくともコードがグダグダになることを回避できる。</p>
+                    <p class="note_contents">また、分けてしまうと、コメントが未完成でも、コードをチェックし、ステージし、テストし、うまくいけばコミットするというのをやりやすい。</p>
+                    <p class="note_contents">これはコメントがコードの近くに書かれていても可能だが、それでコードの複数箇所に「まだ書き終わっていないからステージできないコメント」が散在していると、差分をチェックして確定していくときにそれらが残り、確定しうるコードとの区別がつきにくく、ページのスクロールの繰り返しになり、作業性が低下する。</p>
+                    <!-- Task: 22ba2475-251f-4cd2-bdf3-680bba79a7ad -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">分けたいだけなら、そこの episodic comments についてのみ、適当に名前をつけたファイルを用意して、そちらに移し、コードの方に「○○.txt を見て」とコメントすることも可能だ。</p>
+                    <p class="note_contents">しかし、それでは、episodic comments が増えるにつれてファイル名を変えたくなったり、それで既存のコメントとの整合性がいつの間にか失われたり、そうならないように検索に明け暮れたりしうる。</p>
+                    <p class="note_contents">たとえば OpenAI の API を使い込んでの episodic comments などは、複数のプロジェクトから参照しうる。「このあたりの処理については、昔グダグダになったから、もしよかったら、そのときのコメントを見て」の1行コメントで済ませられるのは便利だ。</p>
+                    <p class="note_contents">しかし、そのときにファイル名を微妙に書き間違えたとか、眠気がピークのときに episodic comments のファイルの側の名前の変更を忘れて寝てしまい、そのままリンクが切れたまましばらく経ったからその後の再度の名前変更のときには検索しても出てこないとか、そういったことの全ては本質的に時間の無駄だ。</p>
+                    <p class="note_contents">かといってファイル名を GUID にすると、パッと見で区別がつきにくい。正しいファイルにリンクしたのか、1行コメントを見るだけでは分からない。他者も、コードの読解中にその1行コメントに遭遇したなら、そのファイルを開くまで、それが何に関するものなのか分からない。</p>
+                    <p class="note_contents">また、独立したファイルに情報を追記していくだけでは、タイムスタンプも関連性も分かりにくい。それを防ぐために自分はコメントに日付を入れることがあるが、このやり方では、「それ以前のコメントについては、誤字・脱字程度しか修正してはならない」という暗黙のルールが生じてしまう。</p>
+                    <p class="note_contents">内容そのものを変更するなら丸ごと書き直した方がきれいだが、古い内容は、たいていの場合、「当時はそれでうまくいくと思っていたから頑張って書いたコメント」であり、「今となっては間違っているもの」でもある。「これでコードを確定できる」という気持ちがあったからこそ書けたコメントを、今となっては間違いだと分かっていながら起承転結があるようにまとめ直すのは苦痛の大きい作業だ。</p>
+                    <p class="note_contents">かといって、AI には任せられない。いろいろとやってみて思ったが、「こういう場合にはこういう結果になる」といった複雑な分岐を伴う内容を AI に整理してもらうと、とにかくむちゃくちゃになる。膨大なサンプル数のある情報なら統計的にかなり正確なことを言うが、自分が書いたコメントという「1サンプル」だけを、しかもロジックの複雑なものをまとめ直してもらうのは絶望的に苦手なのが確認できている。</p>
+                    <!-- Task: 22ba2475-251f-4cd2-bdf3-680bba79a7ad -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">といったことを最初から想定し、時間の制限のあるなかで働くにおいてどうしても発生しうる episodic comments を最小コストで、できるだけ分かりやすく管理するために、episodic_trash.py を書く。</p>
+                    <p class="note_contents">このスクリプトは、episode に notes の CRUD が入るもので、note は、parent が episode でも note でもよく、その違いは parent type により区別される。よって、データはツリー構造になる。</p>
+                    <p class="note_contents">JSON ファイルは、episode ごとにつくられる。一つにまとめることも考えたが、それでは特定の episode を参照するまでの作業が増える。</p>
+                    <p class="note_contents">ファイル名には自動的に「英字2文字＋数字2文字」のコードが入る。タイトルがそれに続く。しばらくはローカル参照だけなので、ファイル名に空白が含まれるのを問題視しない。しかし、Resources/Documents にならい、文章というよりタイトルっぽいタイトルとし、各単語の先頭を大文字にする。要は、映画によくあるタイトルのようにする。</p>
+                    <p class="note_contents">ファイル内では、episode にも note それぞれにもタイムスタンプがつくので、いつ追加されたものかが分かる。ソートしてからの出力により、上のものほど古いようにする。</p>
+                    <p class="note_contents">note の content においては行を分割して配列として出力する。それにより diff をチェックしやすくする。複数行が単一の値になるのでは参照性が低く、閲覧用に HTML ファイルくらいは出したくなるが、それで誤字・脱字に気づいたときに JSON ファイルを開いて、そこを探して……といったことは二重管理になる。行が分割されているなら、JSON の方を見るのでも十分に見やすい。</p>
+                    <p class="note_contents">コンソールアプリのようにつくるので、複数行の編集に向かない。よって、一応は CRUD を用意しながらも、基本的には C と D がメインのツールとみなし、content の U をテキストエディターで行う。差分をチェックして確定しながら簡単な誤字・脱字を直す程度なので、たとえ U をつくり込んだとしても、結局、VSC でやってしまうだろう。</p>
+                    <p class="note_contents">コードからリンクするときには # AB12 Hoge Moge Poge のように書くだけでよい。AB12 の部分が不変なので、タイトルの変更時にコメント内のタイトルまで更新するかどうかは「非推奨」とする。</p>
+                    <p class="note_contents">すぐにやれるが、それが .NET のプロジェクトであるなどでアーカイブにも影響しうるなら、「ほかのプロジェクトに取り組むにおいて episodic comments が増えてどうしてもタイトルが変わっただけのことで、コードに一切の変更のない .NET プロジェクトのバージョンが上がってソースもバイナリーも新しくなる」というのは誰得だ。</p>
+                    <p class="note_contents">ツリー構造なので、今やっている「以前、○○だと思ったが、実は△△だった」の書き方における「○○」の部分を今後は省略できる。いきなり訂正内容を書けばよい。</p>
+                    <p class="note_contents">それで結果的に生じる JSON ファイルを上から参照すれば、間違っているところには即座に訂正内容が添えられて先に表示されるので、上から下へと単純に読み進めるにおいて、「ある程度の説得力のある内容を咀嚼したと思ったら、その後の追加コメントで全否定される」といったことが起こりにくい。</p>
+                    <!-- Task: 22ba2475-251f-4cd2-bdf3-680bba79a7ad -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">ワークフローとしては、先ほども書いたが、「episodic になってきているなぁ」と思った時点で、初回の分で episode を登録し、暫定的なタイトルを設定し、ファイル名を確定する。</p>
+                    <p class="note_contents">ファイルは、所定のディレクトリーに保存される。そのファイル名のコピペでもよいし、スクリプトの出力のコピペでもよいので、それをコードの側に1行コメントとして書く。それでコードの側は終わりだ。</p>
+                    <p class="note_contents">その後は、とにかくコードを書く。</p>
+                    <p class="note_contents">コメントの方は、極端な話、日本語でザッと書いておいてあとで英語で書き直してコミットするのでもよい。追記、追記、追記といったことができるので、思ったこと、分かったことなどをキーワードだけ書いておいて、最後に英語でまとめて一つの新しい note として追加し、日本語のネタを消すのでもよい。おそらく、この使い方になるだろう。</p>
+                    <p class="note_contents">所定のディレクトリーとしては、個別のレポジトリーをつくるほどのことでないため、Resources/Misc/Episodic を考えている。Episodic レポジトリーをつくった方が細かく更新しやすいが、それをすると生産性が下がる。</p>
+                    <p class="note_contents">今、taskKiller という自作タスク管理ソフトのログを HTML ページにしたものを Resources/Logs に入れているが、その更新もあまりしなくなっている。tk2Text という自作ツールのダブルクリックにより全自動でログが出力されるので、その差分をチェックしてコミットするだけだが、終わったタスクについてのログの「確定」作業から付加価値が生じるわけでないため、こまめな処理を意図的に避けている。</p>
+                    <p class="note_contents">それと同様、episodic comments も、「あとは整理して確定するだけ」という状態には早めに持ち込むが、その整理には数日の遅延があった方が良いと思う。その間にほかのことに気が向けば、episodic comments の方は頭のなかですでに「済んだこと」になっていて、当事者感の少し落ちた状態で適度な整理にとどめやすいだろう。</p>
+                    <p class="note_contents">というのは pyddle_dotnet.py のコメントを書いていて思ったことでもあって、「えっ？！ マジで？！！！」のようなことがあって書くコメントには、どうしてもドラマ性を求めてしまう。</p>
+                    <p class="note_contents">できるだけ淡々と書いたつもりだが、自分も人間なので、「まさか、そうだとは思っていなかった」という感情をなんらかの形でコメントに反映したい部分はあり、「気づいたことを最後にドーンと出すために足場をかためる」のような書き方を自ら認識したところもある。</p>
+                    <p class="note_contents">それは全然アリだと思う。人間なのだから、他者に迷惑をかけない範囲内で仕事を自分にとって少しでも楽しいものにする努力を肯定したい。それをやってはいけないのでは仕事の生産性の方が落ちてくる。</p>
+                    <p class="note_contents">しかし、それをやるならごみ箱のなかでやるべきなので、episodic_trash.py という名前にする。</p>
+                    <!-- Task: 22ba2475-251f-4cd2-bdf3-680bba79a7ad -->
+                </div>
+            </div>
+            <div id="dafbfa02-3d26-4f05-8673-d2d328fba655" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">コマンドを分割する機能を pyddle_console に追加</span>
+                    <a href="#dafbfa02-3d26-4f05-8673-d2d328fba655" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">すでに完成している low_priority_queue.py には適用しない。そちらはそちらでテストが済んでいるし、値の型などもチェックできている。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="23015c9d-8050-4532-a958-19a7277db897" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">複数行の文字列 =&gt; 配列のメソッドを pyddle_string に追加</span>
+                    <a href="#23015c9d-8050-4532-a958-19a7277db897" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">行末の空白系文字や不要な空行を削る機能も入れる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="29618177-d2d1-444f-8e07-715b740cde64" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">try/except や press any key... を実装</span>
+                    <a href="#29618177-d2d1-444f-8e07-715b740cde64" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">Resources/Misc/Episodic では少し遠くて作業性が下がりそうなので、Resources/Episodes にする。Resources/Logs にタスクリストのログが入っていることとの整合性もある。</p>
+                    <!-- Task: 22ba2475-251f-4cd2-bdf3-680bba79a7ad -->
+                </div>
+            </div>
+            <div id="05eaec8d-b751-4f59-9d33-3637fd1e18d5" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">関連するキーを KVS のファイルに入れる</span>
+                    <a href="#05eaec8d-b751-4f59-9d33-3637fd1e18d5" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="e7995940-4d56-42be-9879-2092e160d32b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ParentType を実装</span>
+                    <a href="#e7995940-4d56-42be-9879-2092e160d32b" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="ce7c720f-6354-463f-a0ef-705b2b801413" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">EpisodeInfo クラスを実装</span>
+                    <a href="#ce7c720f-6354-463f-a0ef-705b2b801413" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="ff33cc64-1f9e-4781-b21f-e854101d47e1" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">NoteInfo クラスを実装</span>
+                    <a href="#ff33cc64-1f9e-4781-b21f-e854101d47e1" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="dbf0f071-8455-40ba-8df1-ca7dd13c017f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">notes の CRUD を実装</span>
+                    <a href="#dbf0f071-8455-40ba-8df1-ca7dd13c017f" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="87f2bf94-f32b-486f-a241-c9838c830dd1" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">EpisodeInfo &lt;=&gt; JSON を実装</span>
+                    <a href="#87f2bf94-f32b-486f-a241-c9838c830dd1" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="41fb3498-fdfb-482b-b9ff-180e2bd72823" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">差分を見やすい JSON ファイルになっているのを確認</span>
+                    <a href="#41fb3498-fdfb-482b-b9ff-180e2bd72823" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="135fd7fa-09a4-406a-a7a8-fa9a137eac35" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ランダムなコードを生成するメソッドを追加</span>
+                    <a href="#135fd7fa-09a4-406a-a7a8-fa9a137eac35" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="6610ef64-77c4-4235-97ae-10e1db763acf" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">タイトルからファイル名を生成するメソッドを追加</span>
+                    <a href="#6610ef64-77c4-4235-97ae-10e1db763acf" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="02033b25-00b8-4892-adb9-1ddf95d0f343" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">episodes の CRUD のコマンドを実装</span>
+                    <a href="#02033b25-00b8-4892-adb9-1ddf95d0f343" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">create (title)<br />
+                                list<br />
+                                title (code) (new title)<br />
+                                delete (code)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d0b8a48f-57bc-496f-88bf-11dfce585ae2" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Clipboard の内容を content に設定できるようにする</span>
+                    <a href="#d0b8a48f-57bc-496f-88bf-11dfce585ae2" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="0ed93f40-9809-49d7-86b8-2e4f30958a86" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">実装</span>
+                    <a href="#0ed93f40-9809-49d7-86b8-2e4f30958a86" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="0e7d38e7-1cd5-45c5-9732-e1cdab0d97e5" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">テスト</span>
+                    <a href="#0e7d38e7-1cd5-45c5-9732-e1cdab0d97e5" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">実装と同時にどのコマンドもだいたいテストした。個人用なので十分。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="9b0a8716-98c2-4c72-a82f-e19739c09df0" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">各部の CRUD メソッドの呼び方をチェック</span>
+                    <a href="#9b0a8716-98c2-4c72-a82f-e19739c09df0" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">*.parent でなく episode を使っているところを探す。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="76a2022f-d486-4e68-9789-7bd7537f7ff4" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">スクリプトのヘッダーを更新</span>
+                    <a href="#76a2022f-d486-4e68-9789-7bd7537f7ff4" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="4f0bb28a-8708-4a81-b5a4-6753c167d02f" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">各部において episodes と notes をソート</span>
+                    <a href="#4f0bb28a-8708-4a81-b5a4-6753c167d02f" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">episodes のソートは、最初のロード時を除いて不要。ロード後、タイムスタンプも所属も変わらない。</p>
+                            <p class="note_contents">notes については、シリアライズのとき、デシリアライズのとき（2カ所、別々のところ）、parent の変更時に。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="97eddad9-7b00-41cd-9e17-2e30c2952dd0" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">notes の CRUD のコマンドを実装</span>
+                    <a href="#97eddad9-7b00-41cd-9e17-2e30c2952dd0" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">episodes の方と同様なので道なりに。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="351ba7bd-910e-4964-972d-aab563216ce3" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">help コマンドを実装</span>
+                    <a href="#351ba7bd-910e-4964-972d-aab563216ce3" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="666aff23-d76b-422b-affa-5822302cde52" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">guid でなく code で比較しているところをチェック</span>
+                    <a href="#666aff23-d76b-422b-affa-5822302cde52" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">code も一意だが、あくまでユーザーの便宜のためのもの。データとして大事なのは guid。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">CRUD の内部的なメソッドは guid で比較する。問題なし。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="9cb24ad9-eb97-4582-ba6d-5d79fbae59f4" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">episode を開くと同時に notes を表示</span>
+                    <a href="#9cb24ad9-eb97-4582-ba6d-5d79fbae59f4" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="c03ab81e-4575-4e91-99a8-76b209ed0453" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">全てのメッセージをチェック</span>
+                    <a href="#c03ab81e-4575-4e91-99a8-76b209ed0453" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">code を表示していたり title だったりと、現時点ではバラバラ。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">例外のものも。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">コマンドラインなので、エラー発生時、すぐ上に理由が書かれているようなもの。そのため、一部のみで episode の判別のための文字列を出力していたのをなくした。</p>
+                            <p class="note_contents">raise の方は、より内部的なものなので、guid などを出力する現行のコードのままでよい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="98a5ef40-b380-435a-83d0-3e3f2eedf7a6" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">このタスクリストのログが出力されるようにする</span>
+                    <a href="#98a5ef40-b380-435a-83d0-3e3f2eedf7a6" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">タスクリストのログをザッと読み返してからステージした。</p>
+                    <p class="note_contents">自分は複数のプロジェクトを少しずつ着実に進めるのが苦手なので、なぜつくるかの理由から、どうつくるかの仕様までを一気にメモに書いて一気に実装を終わらせたわけだが、そういうメモは、たった数日後に自分が読むのでも冗長に感じる。</p>
+                    <p class="note_contents">一方、自分の知る限り、「ソースコードのコメントがこんなふうになってしまっているから、ツリー構造で管理できるツールを書こう！」だなんてヘンコは思い当たらず、局所的な問題であっても徹底的に、ときには過剰なまでに対処する特性を自分は embrace した方が良いのだろうということも思う。</p>
+                    <p class="note_contents">たとえるなら、散策時の歩行がめんどくさいからモーターつきのスケボーでも開発するのか、歩行の少ない計画を立てるのか、現地で必要に応じてバスやタクシーを探すのか、気合いで歩いてしまうのかといったことで、いずれにも長短がある。</p>
+                    <p class="note_contents">自分は開発するタイプなので散策への出発が遅れる。それで現地で役立たなければ、ただ出発が遅れただけだが、たまにものすごく役立つし、それ自体が売れるようなこともあるので、トータルではうまくいっているような気がする。</p>
+                    <!-- Task: fdf690a3-ce76-4d61-bc3d-4fd48d6c5115 -->
+                </div>
+            </div>
+            <div id="d77f5068-761d-4161-8af7-67a7aa99ce38" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">現行の全てのプロジェクトの episodic comments を処理</span>
+                    <a href="#d77f5068-761d-4161-8af7-67a7aa99ce38" class="permalink">&infin;</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

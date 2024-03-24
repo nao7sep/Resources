@@ -375,6 +375,315 @@ if __name__ == &quot;__main__&quot;:
                     <a href="#a3e6cd04-b94f-440c-b6ff-f586eb461a13" class="permalink">&infin;</a>
                 </div>
             </div>
+            <div id="b0a2011d-30ca-492d-a228-4581765f1f69" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">リストに表示されていないことを一時的に表示できるようにする</span>
+                    <a href="#b0a2011d-30ca-492d-a228-4581765f1f69" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">やりたければやれるように。いったん消したことをやっぱりやりたくなることもありえる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">all コマンドを実装した。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="4ac6b9b8-4e2a-4ece-900a-f12e9ddad7a9" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">KVS によりデータの保存先を指定できるようにする</span>
+                    <a href="#4ac6b9b8-4e2a-4ece-900a-f12e9ddad7a9" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">複数のパソコンで使うなら OneDrive に入れるのが良さそう。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="4e2bb6db-d30b-4e48-a2d2-dcef5a9740bf" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">「今日は非表示」のコマンドを実装</span>
+                    <a href="#4e2bb6db-d30b-4e48-a2d2-dcef5a9740bf" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Python でも GUI を扱えるようだが、完全にオーバーキルになる。</p>
+                            <p class="note_contents">h1 で「1番のタスクを非表示」にできると便利。コマンドがアルファベット、数字がタスクの番号なのだから、1h でも認識されるようにする。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">s により表示するのも可能に。</p>
+                            <p class="note_contents">となると show コマンドとかぶるが、「一つだけを非表示状態から戻す」を1文字に、「全ての非表示なものを一度表示する」を4文字にするのは、処理の大きさと感覚的に整合する。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ちゃんと入力してもらった方が確実なので hide/show コマンドを実装した。</p>
+                            <p class="note_contents">「そのターミナルが開かれているうちは、その日」という実装の方が分かりやすいので、JSON に保存されない is_shown を False にするだけにした。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ce8e11a3-7459-4316-af3f-85e40ad143e7" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">OneDrive などによる同期ミスでデータが破損しないようにする</span>
+                    <a href="#ce8e11a3-7459-4316-af3f-85e40ad143e7" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">スクリプトの起動から終了までを一つのセッションと認識し、セッションごとに新しいファイルをつくっていくなら、同期ミスがあってもデータの上書きは起こらない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">やろうとしたが、過度に複雑になる。スクリプトにバグがなければ、ローカルのファイルが勝手に壊れることはない。OneDrive の同期ミスにまで対応する必要はない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="0ea4f915-17de-4141-9ce9-8585041b8505" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">メインループをつくる</span>
+                    <a href="#0ea4f915-17de-4141-9ce9-8585041b8505" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">exit で正常終了できる無限ループでよい。</p>
+                            <p class="note_contents">Enter キーを押すたびにリロードされる。show により非表示のものが一時的に表示されている場合も、次の Enter キーで元のモードに戻る。</p>
+                            <p class="note_contents">1日の終わりに達すれば自動ロードされるべきか。その瞬間にたまたまコマンドを入力中というのは可能性が低い。キーボードからの入力を待ちながらそれをキャンセルし、ループの次の回に進むというのが Python でスマートに可能なのか分からない。</p>
+                            <p class="note_contents">やったなら d だ。やっていくことがゴールのツールなのだから数字だけというのも選択肢だが、たとえば 1h と書きたくての途中に Enter キーに指が当たる可能性を考えるなら、1d まで書かないと動かないのは軽度の安全策として有用だろう。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">show を特定のタスクの再表示に使い、全て表示するコマンドを all とした。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">自動リロードをやめておく。ややこしくなるし、海外出張中など、時差があるときにも不便。</p>
+                            <p class="note_contents">日をまたいでから Enter キーを押せばその日のタスクが戻ってくるのか、そのセッションを閉じるまでが「その日」と認識されるのかは、実装しながら再考する。これも海外にいるときに困りうる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">やったときのコマンドを done にした。ほかに content で本文を、times で週あたりの回数を変更できる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="422617ae-35a2-4ac6-9d8b-9cb6d279dc8d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">データの CRUD を実装</span>
+                    <a href="#422617ae-35a2-4ac6-9d8b-9cb6d279dc8d" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">コマンドラインなら一瞬で終わる。</p>
+                            <p class="note_contents">たとえば「create 3 ○○」なら、Enter キーが押されるまでの文字列をトリミングしたものがタスクだとみなしてよい。</p>
+                            <p class="note_contents">read と書けば一覧表示し、「update 2 ○○」だったり、「delete 1 confirm」だったりで修正やミスのない削除が可能。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ae902d72-8338-487e-ae73-7da9d963c561" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">落ちるところがないようにする</span>
+                    <a href="#ae902d72-8338-487e-ae73-7da9d963c561" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="d6c623b6-7a7e-4b9d-92b3-e7d194111eec" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">登録されているタスクの量が妥当か分析できるようにする</span>
+                    <a href="#d6c623b6-7a7e-4b9d-92b3-e7d194111eec" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">実装を考えていて、イマイチ役に立たなさそうなのでやめておく。使っているうちに分かるし、あくまで low priority なことを扱うツールなので、毎週きっちりやりきらないといけないわけでもない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="403ada84-77c5-4457-a884-a09c5e628840" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ノルマを達成したことがリストに表示されないようにする</span>
+                    <a href="#403ada84-77c5-4457-a884-a09c5e628840" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="e0dc32af-b36e-4abb-abaa-b77c00b70124" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">タスクのリストに前回実行日またはそれからの経過日数を表示</span>
+                    <a href="#e0dc32af-b36e-4abb-abaa-b77c00b70124" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">表示がうるさくなる。週何回やるべきことを過去7日間で何回できているかのみ表示した。「量」をコントロールしたいのだから、それで十分。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="5f672707-5b27-4be5-ac1f-f1f1d49b6353" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">実装</span>
+                    <a href="#5f672707-5b27-4be5-ac1f-f1f1d49b6353" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">shown_tasks の抽出以外の実装が終わった。</p>
+                            <p class="note_contents">抽出については、過去7日間の実行回数を単純に調べる方法を考えている。</p>
+                            <p class="note_contents">4時や月曜からの決め打ちは、量をコントロールしたいだけなのに、そこに時差や曜日の概念を関連づけ、むしろややこしくする。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Your approach to ensuring a task is performed exactly N times per week by tracking the number of executions in the past 7 days and controlling execution based on that count is fundamentally sound. However, there are a few considerations and potential pitfalls you might want to be aware of:</p>
+<ol>
+<li><p><strong>Time Zone and Daylight Saving Time Changes</strong>: Ensure your system's time tracking aligns with the user's expected time zone and accounts for any changes due to Daylight Saving Time, if applicable. This can affect the calculation of what constitutes &quot;the past 7 days.&quot;</p>
+</li>
+<li><p><strong>Edge Cases at Week Boundaries</strong>: Consider situations where the task is performed late in one day and early the next day. Depending on your implementation, this could lead to edge cases around the boundaries of your 7-day tracking window.</p>
+</li>
+<li><p><strong>Concurrent Executions</strong>: If your tool might be accessed from multiple instances (like different devices or parallel processes), you'll need to ensure that the count of executions is accurately maintained and that two executions cannot simultaneously occur, both thinking they're allowed based on the current count.</p>
+</li>
+<li><p><strong>User Expectations and Time Frame</strong>: Be clear with users about how &quot;a week&quot; is defined in your application. Is it a rolling window of the past 7 days, or is it aligned with calendar weeks? This distinction can significantly impact user expectations and the functionality of your tool.</p>
+</li>
+<li><p><strong>Data Persistence and Reliability</strong>: Ensure that your mechanism for tracking the count of task executions is reliable and resilient to issues like application crashes or power failures. This might involve persisting the execution count and timestamps to a database or file system with regular backups.</p>
+</li>
+<li><p><strong>User Overrides or Adjustments</strong>: Consider whether you need to allow for manual adjustments or overrides to the count. For example, if a task execution was mistakenly counted or needs to be retroactively added or removed, how will your system handle that?</p>
+</li>
+<li><p><strong>Notification and Feedback</strong>: Provide clear feedback to the user about the current count, especially when they are approaching the limit. Consider notifying users when they are close to reaching their N executions, so they can plan their tasks accordingly.</p>
+</li>
+<li><p><strong>Legal and Privacy Considerations</strong>: Depending on the nature of the tasks and the data involved, ensure your implementation complies with relevant data protection and privacy laws.</p>
+</li>
+<li><p><strong>Testing</strong>: Rigorously test your system, especially around the edge cases, to ensure it behaves as expected in all scenarios.</p>
+</li>
+</ol>
+<p>By considering these factors, you can refine your implementation to ensure it is robust, user-friendly, and reliable.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">AI が賢すぎてビビる。</p>
+                            <p class="note_contents">初回と最終回の間が1週間あいたときに、やった直後にタスクが戻ってきて「やりすぎている」と感じうることへの懸念は自分もあった。</p>
+                            <p class="note_contents">しかし、そういうのを秒で言われるとヘコむ。</p>
+                            <div class="note_ai_generated">
+<p>If you implement your system as described, where you count the number of times a task has been done in the past 7 days and only allow it to be done if that count is less than N, then under normal circumstances, you should not be able to exceed doing the task N times in any 7-day span.</p>
+<p>This is because your check is not fixed to a specific &quot;week&quot; in the calendar sense, but rather it's a rolling 7-day period looking back from the current day. Each time you're considering performing the task, you're checking the past 7 days from that moment. If the task has been done N times in that period, you'll have to wait until one of those instances &quot;ages out&quot; of the 7-day window before you can do the task again, thereby maintaining the limit of N times within any 7-day window.</p>
+<p>However, there are a few edge cases to be aware of:</p>
+<ol>
+<li><p><strong>Exact Timing</strong>: If the task is done early in the day, and then exactly 7 days later it's done later in the day, it might feel like it's being done more frequently in a &quot;week&quot; if one is thinking in terms of whole days. However, in terms of rolling 24-hour periods, the limit will be enforced correctly.</p>
+</li>
+<li><p><strong>System Time Changes</strong>: If the system's clock is manually changed or incorrect, it could affect the calculation of what constitutes &quot;the past 7 days.&quot; This is a less common issue and typically only arises if the system clock is not correctly synchronized.</p>
+</li>
+<li><p><strong>Concurrent Access</strong>: If the task could be initiated from multiple sources simultaneously, and your system doesn't synchronize these checks and updates to the count, you might end up with a race condition where two instances of the task are allowed because they both checked the count when it was one less than N.</p>
+</li>
+</ol>
+<p>Assuming these edge cases are managed or are not relevant to your situation, your proposed implementation should effectively ensure that the task is not done more than N times in any 7-day period.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="5a10b2cb-1d50-42b5-8fb7-c06bd88e2c26" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">テスト</span>
+                    <a href="#5a10b2cb-1d50-42b5-8fb7-c06bd88e2c26" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">一通りのことをやってみた。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="4ada4811-b035-4813-89af-25f8b7269b02" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ちょっと使ってみたデータをコミット</span>
+                    <a href="#4ada4811-b035-4813-89af-25f8b7269b02" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">そのまま登録できるデータを AI に生成してもらった。</p>
+                            <p class="note_contents">create 1 Vacuum living room<br />
+                                create 2 Do laundry<br />
+                                create 7 Prepare healthy meals<br />
+                                create 3 Exercise for 30 minutes<br />
+                                create 2 Call a family member or friend<br />
+                                create 3 Write in a journal<br />
+                                create 2 Spend time in nature<br />
+                                create 1 Review and pay bills<br />
+                                create 2 Run errands<br />
+                                create 7 Pet care tasks</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">全て登録し、後ろから9番、6番、3番を実行し、スクリプトを再起動したときの表示内容。</p>
+                            <p class="note_contents">tasks_file_path: C:\Repositories\pyddle\data\tasks.json<br />
+                                done_tasks_file_path: C:\Repositories\pyddle\data\done_tasks.json<br />
+                                Tasks:<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;1. Vacuum living room (0/1)<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;2. Do laundry (0/2)<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;3. Prepare healthy meals (1/7)<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;4. Exercise for 30 minutes (0/3)<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;5. Call a family member or friend (0/2)<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;6. Write in a journal (1/3)<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;7. Spend time in nature (0/2)<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;8. Review and pay bills (0/1)<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;9. Run errands (1/2)<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;10. Pet care tasks (0/7)<br />
+                                Commands:</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="165a92e3-6003-49ed-b554-e86360df223d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">やったのか確認だけしたのかを区別できるようにする</span>
+                    <a href="#165a92e3-6003-49ed-b554-e86360df223d" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ややこしくしたくないが、done しかないのでは散髪の管理に向かない。</p>
+                            <p class="note_contents">自分は、done を「やったかやらなかったを問わず、その瞬間にやるべきかどうか判断し、やるべきならやったし、そうでなかったならやらなかった」程度に捉えていたし、散髪も前回がいつだったかより今どうなのかが大事なのでそれで足りると思ったが、AI が neglect という言葉を使って表現する「放置」や「滞留」を改善するのがゴールのプログラムなので、「目は通している」のデータが残ってそれらが見えなくなる設計は適さない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">done と postpone を実装し、あとで done と check に変更した。とにかく neglect の回避がゴールなので、極端な話、「分かっているが、今は無理だ」であっても、「思いだしもしない」よりマシだ。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">9時間22分のフロー状態により、done と check を区別し、help/stat コマンドを実装し、SQLite への念のためのバックアップを行えるようにし、コードを全体的に改善し、テストを済ませた。</p>
+                    <p class="note_contents">CRUD はシンプルで、文字のエスケープなどがないため、たぶん大丈夫だ。</p>
+                    <p class="note_contents">データの整合性が問われるのは done/check 時のコピーからだが、単純なコピーであり、一対一の単純結合なので、これもバグが入りようがない。</p>
+                    <p class="note_contents">1アクションごとに保存されるので、しばらくデータの差分をたまに見ておき、そちらで問題がなければ、統計処理などにバグがあったとしてもデータにはダメージが生じない。</p>
+                    <p class="note_contents">統計処理の方も、分子と分母の両方が正しいことおよび分母にゼロが入りえないことのチェックを済ませた。</p>
+                    <p class="note_contents">そのうちまた、ごく簡単なところで落ちたり変な挙動になったりするだろうが、機能的には今のところ十分なので、いったん本格的に使ってみる。</p>
+                    <!-- Task: 6bede2ef-db6f-4f50-9787-f38495725c17 -->
+                </div>
+            </div>
         </div>
     </body>
 </html>
