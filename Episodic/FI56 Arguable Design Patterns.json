@@ -1,0 +1,76 @@
+﻿{
+    "guid": "690b1e23-1084-4b77-8562-49576ac7147a",
+    "creation_utc": "2024-03-28T14:13:11.568099+00:00",
+    "code": "FI56",
+    "title": "Arguable Design Patterns",
+    "notes": [
+        {
+            "guid": "9c6838ce-6c9c-4607-a3fb-910c616b152b",
+            "creation_utc": "2024-03-28T15:02:55.987175+00:00",
+            "code": "RI31",
+            "content": [
+                "As I now have a place to deal with \"episodic comments,\" there's one thing I would like to write about for my own good.",
+                "",
+                "It's about CRUD operations.",
+                "",
+                "Basically, they are creation, reading, updating and deletion.",
+                "",
+                "Some developers design them like:",
+                "",
+                "* create(some_of_extracted_args) => The args are used to initialize a new instance internally.",
+                "* read(key_or_filtering_condition)",
+                "* update(key, some_of_extracted_args) => The args are manually set to the existing instance.",
+                "* delete(key)",
+                "",
+                "That is 100% reasonable and I too occasionally design them like that.",
+                "",
+                "However, I like the keep-it-simple-and-stupid philosophy and I tend to prefer dealing with data as if they were big bags of vegetables containing everything we need and a lot of things we actually dont but nothing harmful or dangerous. If they are not risky and mostly are of reference types, big bags are really not bad.",
+                "",
+                "Why? Because software is updated. And when we update it after months of time, it's impossible to remember every minor detail, on which we have designed the code the way it is now. That's when potential risks are injected into the code. We usually dont find them immediately.",
+                "",
+                "So, knowing they might not exactly be CRUD operations, I like to design them more like:",
+                "",
+                "* create(big_bag) => More like \"add\", but I just call it \"create\".",
+                "* create_with_suffix_if_necessary(some_of_extracted_args) => This one does \"create\" an instance.",
+                "* update(big_bag) => Explained later.",
+                "* delete(big_bag) => This one too.",
+                "",
+                "In many situations, the code is simpler if we collect all the info, sometimes even far more than we need, into an instance at a suitable point of implementation. We freeze our brains and make sure each instance gets as much info as possible when and where it's initialized. What is absolutely unnecessary at that moment can be lazy-loaded.",
+                "",
+                "Then, we just throw the big bag into \"create.\"",
+                "",
+                "If a lot of info is really unnecessary and \"create\" together with an instance initialization operation might seem excessively redundant when repeated, only in that case, exceptionally, I might make a variation of \"create\" that gets only what are most commonly collected and initializes an instance internally, but I prefer to avoid this because \"what we think to be commonly needed\" will eventually change A LOT as the software is updated.",
+                "",
+                "Then, updating an item in a collection with the item might seem overwhelmingly stupid and it probably is (because, if we have the reference to it, we can just set the new values to the instance), but preparing \"update\" like this and calling it offers 2 notable merits: 1) We can instantly find where in the code data is updated, 2) We can bundle other operations like automatic file saving, notifying other instances, etc.",
+                "",
+                "Then, if \"create\" and \"update\" use big bags, why not \"delete?\" It could take a key and return a boolean value signaling whether the item was found or not, but arguments should be given to each group of methods in a fairly consistent manner. Yes, we only need the key to delete an item, but we usually have the instance when we need to delete it.",
+                "",
+                "My CRUD operations are often implemented in an awkward way as well.",
+                "",
+                "\"Delete\"for example can just delete the instance from the collection by searching for it as a reference, but if speed is not critically important, I like to compare their internal (foreign) keys because a lot of instances nowadays are serialized and software must be, if possible, completely and permanently stateless.",
+                "",
+                "It's relatively rare to only partially serialize/deserialize data, but, sometime in the future, each big bag might be serialized temporarily into a certain store and gets deserialized without us knowing it. I believe, in distributed systems, this is a quite common scenario.",
+                "",
+                "Foreign keys are and should be more reliable. So, \"big bags are given to CRUD methods and foreign keys are compared internally\" is the best bad I have become fond of. There, of course, are complications, but they are the best bad."
+            ],
+            "notes": [
+                {
+                    "guid": "4ac3d013-13bc-4f3a-bbfd-a2215f65bc43",
+                    "creation_utc": "2024-03-28T15:19:51.317248+00:00",
+                    "code": "PG69",
+                    "content": [
+                        "I just wrote I liked to compare instances by their (foreign) keys.",
+                        "",
+                        "That is correct.",
+                        "",
+                        "On the other hand, I consider that dictionary keys are (already extracted) (foreign) keys and, therefore, they usually dont need to be compared manually.",
+                        "",
+                        "In Python, a dictionary's keys can be of more than 1 types if I understand it correctly. In a normal implementation, a dictionary's each key is merely data that's used to pinpoint the internal location of the value. They dont really sequential-search for a matching key, get its index and get the value at the same position in their list.",
+                        "",
+                        "With or without serialization, keys are expected to be consistent. So, we can let the implementation of the dictionary class to look for them."
+                    ]
+                }
+            ]
+        }
+    ]
+}
