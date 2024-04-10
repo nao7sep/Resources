@@ -1,0 +1,91 @@
+﻿{
+    "guid": "7d8c298e-6319-4aef-98e9-46e0dc096a1a",
+    "creation_utc": "2024-04-09T02:01:28.464275+00:00",
+    "code": "SH77",
+    "title": "langtree-related Comments",
+    "notes": [
+        {
+            "guid": "e3a6c0fc-587f-43bb-b302-845061a64ad0",
+            "creation_utc": "2024-04-09T02:05:03.131403+00:00",
+            "code": "BX24",
+            "content": [
+                "Some common practice for pyddle_openai_langtree.py:",
+                "",
+                "* Required fields are included in the constructor (even if they are inherited; for clarity)",
+                "* Some required fields have None as a default value, indicating they will be initialized internally OR default instances will be used",
+                "* For \"client\", \"chat_settings\" and \"timeout\", 1) Parameter values, 2) Class field values, 3) Default values (some of which are lazy loaded) are used in this order",
+                "* The classes are far from thread-safe, but each element, if accessed exclusively, should be thread-safe => Meaning we should be able to auto-generate attributes and translations in parallel",
+                "* Methods that access the AI to have things generated, must NOT damage the data structure if the operation fails and an exception is raised => Fields must be updated only at the very end of the operation",
+                "* As nobody wants to wait for every API call to generate the entire response, 1) For messages, we implement waiting (slow) methods and chunk streaming methods, 2) For attributes and translations, we keep the classes open and leave room for future async methods",
+                "* Attributes must be extensible => Explained later",
+                "* Class fields that would cause circular references are not serialized",
+                "",
+                "I initially thought about \"title\" and \"description\" or \"summary\" as required attributes, but if I do so and occasionally require the latter to construct the context for each API call, these fields will have to coexist with what we will add later, making the design less flexible.",
+                "",
+                "That is also why, not a single prompt is embedded in any of the classes.",
+                "",
+                "This module must be no more than an open data structure with some utility methods."
+            ]
+        },
+        {
+            "guid": "cc1b6bc3-3889-4327-9e59-37875936e0a6",
+            "creation_utc": "2024-04-09T02:13:05.497472+00:00",
+            "code": "GL84",
+            "content": [
+                "By default, all system messages are included entirely. Therefore, their summaries arent.",
+                "",
+                "Only the last 2 user messages are included entirely. Additionally, 2 more are, but only their summaries are.",
+                "",
+                "And only the last 1 assistant message is included entirely. Additionally, like user messages, 2 of their summaries are included.",
+                "",
+                "These are merely default values. They can and should be adjusted.",
+                "",
+                "So, the default values are designed to be simple, neutral and reasonable."
+            ],
+            "notes": [
+                {
+                    "guid": "062c21fd-abb6-466c-8997-08ae13736c5e",
+                    "creation_utc": "2024-04-09T02:55:36.144591+00:00",
+                    "code": "ON06",
+                    "content": [
+                        "This is merely how I personally use ChatGPT and may not be applicable to everybody else, but there must be a starting point for anything.",
+                        "",
+                        "When I use the web version of ChatGPT, meaning not the API, I often get a few questions about each response from the AI. I ask them one by one. The AI usually remembers the responses that have provoked the questions, but not always.",
+                        "",
+                        "I played with the AI a number of times. I naturally conversed with it and asked questions that were relevant to what we had discussed many messages ago. In many cases, the AI didnt remember the context.",
+                        "",
+                        "But when I asked the AI to make a list of (relatively) widely spoken languages that were not in the list I supplied to the AI initially, the AI responded at least 3 times with about 10 more languages each time without repeating any of the languages.",
+                        "",
+                        "It's safe to assume their context management algorithms are highly complex.",
+                        "",
+                        "They technically have unlimited access to the AI. I'm fairly confident there are version of the models that are optimized for context management, determining which messages (more precisely the internally tokenized data of them) may remain relevant to the conversation, recalling old messages when necessary, etc.",
+                        "",
+                        "There must be things that the AI is designed NOT to do so that it wont sound unwise. Like, repeating what the user has explained to the AI as if the AI was introducing it to the user for the first time, suggesting the same joke or anything that would emotionally relate to the user multiple times in a short period of time, etc.",
+                        "",
+                        "With all this and much more considered, their context management algorithms must be highly complex. That should be why the AI sometimes doesnt remember something we have just discussed while there are times when it remembers more than we expect it to.",
+                        "",
+                        "Unfortunately, we developers dont always have the luxury to process each response further to determine which ones are most relevant to the current state of the conversation, tripling the cost of the API usage.",
+                        "",
+                        "Soon, there will be a context manager module with a very lightweight local language model embedded so that we can have it choose (for free) what to send back to the API. Until then, we probably should keep it simple and stupid."
+                    ]
+                },
+                {
+                    "guid": "7185ccfe-2211-451d-9759-420332c236b0",
+                    "creation_utc": "2024-04-09T03:12:24.349867+00:00",
+                    "code": "UG17",
+                    "content": [
+                        "The reasons for the default values:",
+                        "",
+                        "System messages are instructions. The official sample code says \"You are a helpful assistant.\" It's just an example. We can tell the AI which language it should stick to, in what kind of tone, whether it should generate short responses or long and detailed ones, etc. These instructions must persist until the end of the conversation. So, they are all included and, therefore, their summaries arent.",
+                        "",
+                        "In a normal conversation, the user asks something to start it and the AI responds. At any moment when the user is asking another question, we must consider the last assistant message and the user message that has led the AI to generate it. So, there must be 2 user messages and the 1 assistant message between them. That should be the very minimum that the AI requires to avoid repeating what it has just said.",
+                        "",
+                        "Plus, as summaries are short and they are anyway generated for usability, it shouldnt hurt to send 2 more interactions of them. Why 2 is because the summaries are significantly shorter and one would kind of defeat the purpose of summarization while 3 wouldnt have a particular reason to be there. Short, then not one, but not three. As a result, the AI will (roughly) remember what it has said 3 messages ago.",
+                        "",
+                        "3 is often a good number. Only very smart people can \"really\" deal with 4, 5, 6... concepts in their mind simultaneously. For ordinary people like myself, \"room for 3\" is often enough in a casual conversation. And if we need more (like we carefully design the conversation with a pen and paper), we can easily increase the room size."
+                    ]
+                }
+            ]
+        }
+    ]
+}
