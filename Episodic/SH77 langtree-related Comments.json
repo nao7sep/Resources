@@ -84,6 +84,48 @@
                         "",
                         "3 is often a good number. Only very smart people can \"really\" deal with 4, 5, 6... concepts in their mind simultaneously. For ordinary people like myself, \"room for 3\" is often enough in a casual conversation. And if we need more (like we carefully design the conversation with a pen and paper), we can easily increase the room size."
                     ]
+                },
+                {
+                    "guid": "0de96ff6-3356-4d75-9e30-126971e69a3f",
+                    "creation_utc": "2024-04-10T08:22:35.557057+00:00",
+                    "code": "HD86",
+                    "content": [
+                        "langtree now doesnt generate or support titles or summaries.",
+                        "",
+                        "I tried a lot of prompts found in a lot of places, but I never found one that could work properly \"almost\" always.",
+                        "",
+                        "It didnt have to be 100%, but no matter what I used, it was like only 60% accurate.",
+                        "",
+                        "The rest were like: 1) The AI, no matter what the prompt said, explained why the input was improper and therefore it couldnt generate a title/summary, 2) Got controlled by the content of the text and started doing something else (such as answering a question the AI thought it found in it, elaborating the text just because it was short, etc), 3) Asked the user to give text to condense when one was already given (because the AI thought it's not worth condensing), 4) Generated a summary that was just as long as the original text, which kind of defeated the purpose, etc.",
+                        "",
+                        "I have spent hours and failed. I wont try again anytime soon.",
+                        "",
+                        "I think, if the text is from the AI, generally, there's not much point in trying to condense it because it's already been condensed. If it's an user input, especially something like a random thought, there should be a good point. langtree is basically a tool that saves what the AI can generate. We dont write a lot to ask questions; not much to summarize in our questions either."
+                    ]
+                },
+                {
+                    "guid": "b50cf8fc-ab2d-4ce1-81cb-8a7f687b9ac8",
+                    "creation_utc": "2024-04-10T08:35:20.859299+00:00",
+                    "code": "FB10",
+                    "content": [
+                        "So, the default values have changed as well.",
+                        "",
+                        "Each message's content is now split into tokens and then counted internally.",
+                        "",
+                        "As all current GPT models (including the turbo version of the GPT 3.5 model) can take at least 8,192 tokens, this allowance is split into 2 for user/assistant messages. Usually, our questions are a lot shorter than the answers, but we sometimes copy and paste something long and ask questions about it. So, 50-50 should be good.",
+                        "",
+                        "It was also an option to consider only the very total token count (of system/user/assistant messages) and set a limit on it, but then we might end up repeatedly sending excessively long AI-generated messages back to the AI and go bankrupt.",
+                        "",
+                        "When I freely conversed and monitored the token counts of everything realtimely, even very long responses contained like up to 1,000 tokens. So, 4,096 should be enough room.",
+                        "",
+                        "There's no limit on system messages. We can send as many as we want and they can be as long as they are. This is because we generally dont set long system messages and, IF we do, we are definitely doing it for a good reason.",
+                        "",
+                        "If we know what we are doing and send very large system messages to the AI using the turbo version of the GPT-4 model's 128,000 token context window, our choice must be respected.",
+                        "",
+                        "Of course, there were security concerns too. But this is Python. We can modify whatever we want and do whatever we want. So, nothing is secure anyway.",
+                        "",
+                        "As for numbers, system messages can be as many as they are. User/assistant messages, by default, are limited to up to 3 / request. Usually, a conversation starts with an user message and, when we are asking a question, we have one more user messages than the assistant messages, but I dont think that's very important to consider; while I was testing the module, the AI anyway responded well based on its own last 3 messages."
+                    ]
                 }
             ]
         }

@@ -1,0 +1,35 @@
+﻿{
+    "guid": "f30b400f-f5c6-43a3-9cbd-cc23811f7adf",
+    "creation_utc": "2024-04-10T08:36:49.662525+00:00",
+    "code": "CB96",
+    "title": "Multithreading in Python",
+    "notes": [
+        {
+            "guid": "9606942f-8974-4b75-a097-0d52dfcd6f3c",
+            "creation_utc": "2024-04-10T08:46:48.799552+00:00",
+            "code": "WD06",
+            "content": [
+                "During the development of test_openai_langtree.py, I first used asyncio.",
+                "",
+                "https://docs.python.org/3/library/asyncio.html",
+                "https://docs.python.org/3/library/asyncio-task.html#running-in-threads",
+                "",
+                "It was simple, but one method that I made async and called using the module didnt run asynchronously because it didnt have any await parts inside.",
+                "",
+                "In C#, I implement a lot of things by myself. As there was no official OpenAI library, I implemented one as well. So, I know exactly what operations take time and what must be asynchronous.",
+                "",
+                "In Python, on the other hand, a lot of modules are available. There usually are convenient async methods implemented, but pyddle_openai.py hasnt wrapped them.",
+                "",
+                "I'm not sure if I will anytime soon considering the GIL of Python.",
+                "",
+                "https://docs.python.org/3/glossary.html#term-global-interpreter-lock",
+                "",
+                "This language does a lot of things very fast, but not ultra fast. If speed is absolutely important, I wont use Python. But when was speed absolutely important? :D A lot of things can be done beautifully by this toy language and its toy architecture.",
+                "",
+                "So, for a lazy development where not many async methods will be implemented while we would want some things to work asynchronously, the threading module may be more suitable because we can use it in some specific areas without affecting the code around them.",
+                "",
+                "https://docs.python.org/3/library/threading.html"
+            ]
+        }
+    ]
+}
