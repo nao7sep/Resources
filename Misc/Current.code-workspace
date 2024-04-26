@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": "../../pyddle"
+		},
+		{
+			"path": "../../yyBom"
+		},
+		{
+			"path": "../../yyDalleShortName"
+		},
+		{
+			"path": "../../yyGptLib"
+		},
+		{
+			"path": "../../yyLib"
+		},
+		{
+			"path": "../../yyMailLib"
+		},
+		{
+			"path": "../../yyMediaTime"
+		},
+		{
+			"path": "../../yyTodoMail"
+		}
+	],
+	"settings": {}
+}
