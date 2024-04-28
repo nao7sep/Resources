@@ -1,0 +1,35 @@
+﻿{
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful assistant.",
+      "name": "System"
+    },
+    {
+      "role": "user",
+      "content": "What is the capital of France? Respond in JSON format.",
+      "name": "User"
+    }
+  ],
+  "model": "gpt-4-turbo",
+  "frequency_penalty": 0.1,
+  "logit_bias": {
+    "50256": 1
+  },
+  "logprobs": true,
+  "top_logprobs": 10,
+  "max_tokens": 100,
+  "n": 2,
+  "presence_penalty": 0.1,
+  "response_format": {
+    "type": "json_object"
+  },
+  "seed": 1317576793,
+  "stop": [
+    "world"
+  ],
+  "stream": false,
+  "temperature": 1.1,
+  "top_p": 0.9,
+  "user": "yyGptLibConsole_Tester4"
+}
