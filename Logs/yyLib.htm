@@ -10,38 +10,6 @@
             <a href="yyLib.htm" class="title">yyLib</a>
         </div>
         <div class="entries">
-            <div class="note">
-                <div class="note_contents">
-                    <p class="note_contents">Nekote というものを1年くらいダラダラと開発したが、ASP.NET Core をいじり、EF Core と Identity を学んで JWT ベースの API を作ってみて、また、ChatGPT や GitHub Copilot をそれなりに使えるようになり、おまけに「やっぱり一人で何でも作るのは限界があるから、ゆくゆくは会社を作ろう」「少なくとも、それが可能な開発を今から心掛けよう」と思っては、「いろいろと不適合の Nekote を無理やり改修するより書き直してしまった方が早い」の状況に陥り、サクッと書き直しを決めた。</p>
-                    <!-- Task: 981121c1-67e3-46e3-9d0b-d706775f9018 -->
-                </div>
-            </div>
-            <div class="note">
-                <div class="note_contents">
-                    <p class="note_contents">これまではコンソールアプリがほとんどで、それも Windows だけを想定したもので、たまに WPF アプリも書く程度だった。これからは、ASP.NET Core のウェブアプリや API を中心に、GUI が必要なら .NET MAUI を使う。コンソールアプリの開発においても、よほどの理由がない限り、Mac でも動くようにする。その点においても、Nekote の古い設計では、もうやっていけない。</p>
-                    <!-- Task: 981121c1-67e3-46e3-9d0b-d706775f9018 -->
-                </div>
-            </div>
-            <div class="note">
-                <div class="note_contents">
-                    <p class="note_contents">一気に全てを作り直すことはできないので、もう13年くらいになる taskKiller を初期的な開発に使うのは今後も続ける。しかし、そちらはあくまで TODO リストとし、コードを理解するにおける重要なコメントやメモがそちらに埋没するのを今よりは減らす。ゼロにはできないし、そこにこだわる利益もないが、今までのように「基本何でも taskKiller のメモに」はすぐにやめる。</p>
-                    <!-- Task: 981121c1-67e3-46e3-9d0b-d706775f9018 -->
-                </div>
-            </div>
-            <div class="note">
-                <div class="note_contents">
-                    <p class="note_contents">一つどうしてもやりたいのは、一つ前のメモに書いた「コメントやメモ」の全てを英語と日本語の両方で残すこと。その徹底に加えて Twitter などで英語で発信すれば、同じくらいのレベルの開発者とつながれる可能性が高い。</p>
-                    <p class="note_contents">それに加えては、少子化のエグい日本で英語力も海外経験も豊富な開発者を探すと目玉どころか脳みそまで飛び出るようなお金が必要になるため、億単位の数の若者がいるアジアから開発者を探せるようにしておきたいというのも大きい。</p>
-                    <!-- Task: 981121c1-67e3-46e3-9d0b-d706775f9018 -->
-                </div>
-            </div>
-            <div class="note">
-                <div class="note_contents">
-                    <p class="note_contents">モジュールの疎結合も徹底したい。SOLID のうち single-responsibility principle を特に重視する。そうすることで各部の仕様が分かりやすくなり、自分以外の派生開発が容易になる。端的には、「ここを直しといて」と言いやすい単位に分割する。</p>
-                    <p class="note_contents">SOLID についてこの機会にちょっと復習してもよさそうだ。</p>
-                    <!-- Task: 981121c1-67e3-46e3-9d0b-d706775f9018 -->
-                </div>
-            </div>
             <div id="211517c9-db16-4290-924f-f936da6aa5c3" class="task done">
                 <div class="task_contents">&check;
                     <span class="task_contents">クラスやその内容の名前だけで「仕様としてどうか」を AI に問えるか調べる</span>
@@ -227,24 +195,6 @@
                     <a href="#91e71911-0341-40fe-9241-fb9ff43490af" class="permalink">&infin;</a>
                 </div>
             </div>
-            <div id="82625a02-bb3b-416a-bdb3-e795822cc4b6" class="task canceled">
-                <div class="task_contents">&cross;
-                    <span class="task_contents">プロダクトとしての完全性を高める</span>
-                    <a href="#82625a02-bb3b-416a-bdb3-e795822cc4b6" class="permalink">&infin;</a>
-                </div>
-                <div class="notes">
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">ちょっと Python をさわった。ビルドしなくても走るのが衝撃だった。橋が落ちていても、そこに到達するまでは全速力で走るかのようで、やっぱり予想通りのところで落ちる。走る前に型の照合などにより、ある程度のチェックを行いたい自分としては、スペルミスがあっても起動できる Python には違和感があった。</p>
-                            <p class="note_contents">ただ、習得も開発も早かった。試行錯誤のイテレーションが爆速だ。ビルドというめんどくさい作業が必ず入る前提で毎回ある程度のクオリティーのコードを書こうとしてしまわないことのメリットが際立っていた。</p>
-                            <p class="note_contents">.NET では、A が B に依存し、B が C に依存していれば、まず C をつくり、ビルドし、次に B をビルドし、最後に A をビルドし、それでようやく A を起動できる。思いのほか C の更新が大きくなったなどですぐにはビルドできない状態なら、B と A の開発が止まる。もちろん仮のコードを書いておく程度のことはできるが、動かしてみての仮確定ができないので、どうしても、まず C をビルドしたいという気持ちが生じる。</p>
-                            <p class="note_contents">といった非効率性を build_changed_projects.py により劇的に軽減できた。まだアーカイブが作成されていないプロジェクト、つまりは更新中のものを特定し、それぞれの依存関係を分析し、必要なものだけを最適な順序でビルドしてくれる。</p>
-                            <p class="note_contents">これからは、ある程度のクオリティーのコードを考えるというより、試行錯誤のイテレーションを爆速で回し、見つかっている問題を即座に修正するという、まさしくアジャイルな開発が可能だ。</p>
-                            <p class="note_contents">そのため、このタスクを廃止する。多少なりとも全体的なチェックを意識させるタスクは、これからの開発のワークフローと整合しない。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div id="f1482e7e-09f0-44b4-8c3a-95ab63e38177" class="task canceled">
                 <div class="task_contents">&cross;
                     <span class="task_contents">[2/2] コーディングのガイドラインに準拠しているか調べる</span>
@@ -257,6 +207,37 @@
                             <p class="note_contents">VSC だと検索が高速だし、検索結果をその場で消していけるので、タスクリスト的な使い方もできる。</p>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div id="5aadd3a0-ba92-4f03-8696-6c15f61cc78e" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">pyddle に実装した機能のうち便利なものをタスク化</span>
+                    <a href="#5aadd3a0-ba92-4f03-8696-6c15f61cc78e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">意外となかった。必要なものを必要なときに。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="9da935cc-e137-494a-841d-20750c5f5953" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">OS と関係なくパスを連結できるようにする</span>
+                    <a href="#9da935cc-e137-494a-841d-20750c5f5953" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="c6495243-7d8c-4df9-bcc2-4950ac6a2062" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">OS を判別できるようにする</span>
+                    <a href="#c6495243-7d8c-4df9-bcc2-4950ac6a2062" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="bd64f21f-3a57-4dc5-89a7-5581a5d606d8" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">OS に適したファイルパスの区切り文字を得られるようにする</span>
+                    <a href="#bd64f21f-3a57-4dc5-89a7-5581a5d606d8" class="permalink">&infin;</a>
                 </div>
             </div>
         </div>
