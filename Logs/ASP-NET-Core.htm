@@ -16,6 +16,822 @@
                     <a href="#9e91b4e4-2f3f-4ecc-872f-340d114802d5" class="permalink">&infin;</a>
                 </div>
             </div>
+            <div id="8cedcf88-14a4-4248-bc27-d9690e707fe1" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">VS/VSC からのアプリのデプロイの方法を調べる</span>
+                    <a href="#8cedcf88-14a4-4248-bc27-d9690e707fe1" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Publishing an ASP.NET Core web application to Azure using Visual Studio or Visual Studio Code is a straightforward process. Below are the steps for both tools:</p>
+<h3>Using Visual Studio</h3>
+<ol>
+<li><p><strong>Open Your Project</strong>:
+Open your ASP.NET Core project in Visual Studio.</p>
+</li>
+<li><p><strong>Build Your Project</strong>:
+Make sure your project builds successfully without any errors.</p>
+</li>
+<li><p><strong>Publish to Azure</strong>:</p>
+<ul>
+<li>Right-click on your project in Solution Explorer.</li>
+<li>Select <strong>Publish</strong>.</li>
+</ul>
+</li>
+<li><p><strong>Choose a Publish Target</strong>:</p>
+<ul>
+<li>In the Publish dialog, choose <strong>Azure</strong>.</li>
+<li>Select <strong>Azure App Service (Windows)</strong> or <strong>Azure App Service (Linux)</strong> depending on your preference.</li>
+<li>Click <strong>Next</strong>.</li>
+</ul>
+</li>
+<li><p><strong>Create a New App Service</strong>:</p>
+<ul>
+<li>If you don't have an existing App Service, select <strong>Create a new Azure App Service</strong>.</li>
+<li>Fill in the necessary details such as the name of the app, resource group, and hosting plan.</li>
+<li>Click <strong>Create</strong>.</li>
+</ul>
+</li>
+<li><p><strong>Configure Settings</strong>:</p>
+<ul>
+<li>Review and configure the necessary settings for your Azure App Service.</li>
+<li>Click <strong>Next</strong> or <strong>Finish</strong> depending on the steps provided.</li>
+</ul>
+</li>
+<li><p><strong>Publish</strong>:</p>
+<ul>
+<li>Click on the <strong>Publish</strong> button.</li>
+<li>Visual Studio will build your project and deploy it to Azure.</li>
+</ul>
+</li>
+</ol>
+<h3>Using Visual Studio Code</h3>
+<ol>
+<li><p><strong>Install Required Extensions</strong>:</p>
+<ul>
+<li>Ensure you have the <strong>Azure App Service</strong> extension installed in Visual Studio Code.</li>
+</ul>
+</li>
+<li><p><strong>Open Your Project</strong>:
+Open your ASP.NET Core project in Visual Studio Code.</p>
+</li>
+<li><p><strong>Build Your Project</strong>:
+Make sure your project builds successfully. You can use the integrated terminal to run <code>dotnet build</code>.</p>
+</li>
+<li><p><strong>Sign In to Azure</strong>:</p>
+<ul>
+<li>Click on the Azure icon in the Activity Bar.</li>
+<li>Sign in to your Azure account.</li>
+</ul>
+</li>
+<li><p><strong>Deploy Your Application</strong>:</p>
+<ul>
+<li>In the Azure App Service extension, right-click on your subscription.</li>
+<li>Select <strong>Create New Web App</strong>.</li>
+<li>Follow the prompts to create a new App Service. Choose the appropriate runtime stack for your application (e.g., .NET Core).</li>
+</ul>
+</li>
+<li><p><strong>Deploy to Azure</strong>:</p>
+<ul>
+<li>After the App Service is created, right-click on it in the Azure App Service explorer.</li>
+<li>Select <strong>Deploy to Web App</strong>.</li>
+<li>Choose your project folder.</li>
+<li>Confirm the deployment when prompted.</li>
+</ul>
+</li>
+<li><p><strong>Monitor Deployment</strong>:</p>
+<ul>
+<li>Visual Studio Code will deploy your application to the selected Azure App Service.</li>
+<li>You can monitor the deployment progress in the Output window.</li>
+</ul>
+</li>
+</ol>
+<h3>Additional Tips</h3>
+<ul>
+<li><strong>Database Connection</strong>: If your application uses a database, ensure that your connection strings are correctly configured for Azure.</li>
+<li><strong>App Settings</strong>: Use Azure App Service application settings to manage your environment variables and configurations.</li>
+<li><strong>Logging and Monitoring</strong>: Enable Application Insights for better logging and monitoring of your application once deployed.</li>
+</ul>
+<p>These steps should help you publish your ASP.NET Core web system to Azure efficiently using either Visual Studio or Visual Studio Code. If you need any more specific details or run into any issues, feel free to ask!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ザッと聞いてみた。TODO ウェブシステムの方で試す。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">ウェブ開発が自分にとって重たいのは、特に ASP.NET Core の場合、Entity Framework, Identity, SQL Server, OAuth, JWT, SignalR, Blazor などまで学んでからの開発になるからか。昔と違い、「GET/POST とフォーム認証で済むため、ロジックも UI もここにベタ書きしてください」の時代でない。</p>
+                    <p class="note_contents">一方、それぞれの技術がオープンソースで練り上げられていて、デフォルトのままでたいてい大丈夫というのも昔と違う。</p>
+                    <p class="note_contents">となると、「単一の技術を掘り下げるより、動くものをつくることを優先し、まず動かせ、それから関連項目を調べたり、AI にチェックしてもらったり」という、より網羅的なアプローチが適することになる。</p>
+                    <p class="note_contents">その観点から、このタスクリストのタスクを早急に消化し、いったん運用をやめる。TODO ウェブシステムの開発を始めているため、そちらで、すぐに必要なことから調べていく。</p>
+                    <!-- Task: f493ba47-7bc3-45ba-aaea-4f809b58d6cc -->
+                </div>
+            </div>
+            <div id="25e50b34-172a-4933-b6e7-4913581eb3e7" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">単一のユーザー管理システムと複数の業務システムでログイン情報を共有する方法を調べる</span>
+                    <a href="#25e50b34-172a-4933-b6e7-4913581eb3e7" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Google などがやっているので方法はあるわけだが、OAuth2 や JWT に関するところは自分のアホな頭には難しすぎる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>The ability to use the same Google account to access multiple Google services is enabled by a combination of technologies and design principles that focus on seamless user experience and security. Here’s a breakdown of how it works:</p>
+<h3>Single Sign-On (SSO)</h3>
+<h4>1. <strong>Authentication with OAuth 2.0</strong>:</h4>
+<ul>
+<li><strong>OAuth 2.0</strong> is an open standard for access delegation commonly used to grant websites or applications limited access to user information without exposing passwords.</li>
+<li>When you sign in to one Google service (e.g., Gmail), you are authenticated via OAuth 2.0, which generates an access token.</li>
+<li>This access token can then be used to authenticate you across other Google services (e.g., Google Drive, YouTube) without needing to log in again.</li>
+</ul>
+<h4>2. <strong>Session Management</strong>:</h4>
+<ul>
+<li>Google uses cookies to maintain session state. When you log in to a Google service, a session cookie is set in your browser.</li>
+<li>This cookie is sent with every request to Google services, allowing the server to recognize that you are already authenticated.</li>
+</ul>
+<h4>3. <strong>Centralized User Profile</strong>:</h4>
+<ul>
+<li>Google maintains a centralized user profile for each account, which includes your credentials, preferences, and settings.</li>
+<li>This profile is accessible by all Google services, ensuring consistent and personalized experiences across different applications.</li>
+</ul>
+<h3>Security Measures</h3>
+<h4>1. <strong>Two-Factor Authentication (2FA)</strong>:</h4>
+<ul>
+<li>Google provides 2FA to enhance security. When enabled, you need to provide a second form of authentication (e.g., a code sent to your phone) in addition to your password.</li>
+</ul>
+<h4>2. <strong>OAuth Scopes</strong>:</h4>
+<ul>
+<li>OAuth 2.0 uses scopes to limit the access an application has to a user’s data. Each Google service specifies what scopes (types of access) are required, ensuring that only necessary data is shared.</li>
+</ul>
+<h3>Authorization</h3>
+<h4>1. <strong>User Consent</strong>:</h4>
+<ul>
+<li>When accessing a new Google service for the first time, you may be prompted to grant permissions for that service to access your data.</li>
+<li>This consent is recorded and can be managed via your Google account settings.</li>
+</ul>
+<h4>2. <strong>Access Tokens</strong>:</h4>
+<ul>
+<li>Access tokens are issued by Google’s authorization server. They are used by applications to access the user’s data on behalf of the user.</li>
+<li>These tokens have a limited lifespan and can be refreshed using refresh tokens without requiring the user to re-authenticate.</li>
+</ul>
+<h3>Seamless Integration</h3>
+<h4>1. <strong>API Integration</strong>:</h4>
+<ul>
+<li>Google services are designed to integrate with each other via APIs. For example, Google Calendar can integrate with Gmail to create events from emails.</li>
+<li>These integrations use the same authentication and authorization mechanisms, making it easy for users to switch between services.</li>
+</ul>
+<h4>2. <strong>Unified User Interface</strong>:</h4>
+<ul>
+<li>Google services share a common design language (Material Design), making it easier for users to navigate and use multiple services seamlessly.</li>
+</ul>
+<h3>Practical Example</h3>
+<p>When you log in to Gmail:</p>
+<ol>
+<li><strong>Authentication</strong>: You provide your credentials (username and password).</li>
+<li><strong>Session Cookie</strong>: A session cookie is set in your browser.</li>
+<li><strong>Single Sign-On</strong>: When you navigate to Google Drive, the session cookie is sent with the request.</li>
+<li><strong>Token Validation</strong>: Google Drive checks the session cookie and recognizes your authenticated session.</li>
+<li><strong>Access Granted</strong>: You can access Google Drive without needing to log in again.</li>
+</ol>
+<p>By using these technologies and design principles, Google ensures a smooth and secure user experience across its vast array of services.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Implementing a Single Sign-On (SSO) solution in C# typically involves using OAuth 2.0 and OpenID Connect protocols, which are the industry standards for SSO. Here’s a step-by-step guide to implementing SSO in an ASP.NET Core application using these protocols:</p>
+<h3>Step 1: Set Up Identity Provider</h3>
+<p>First, choose an Identity Provider (IdP) that supports OAuth 2.0/OpenID Connect, such as Google, Azure AD, or Auth0. For this example, we will use Auth0 as the IdP.</p>
+<h3>Step 2: Create an ASP.NET Core Application</h3>
+<p>Create a new ASP.NET Core web application using Visual Studio or the .NET CLI.</p>
+<pre><code class="language-bash">dotnet new mvc -n SingleSignOnDemo
+cd SingleSignOnDemo
+</code></pre>
+<h3>Step 3: Install Required Packages</h3>
+<p>Install the necessary NuGet packages for authentication.</p>
+<pre><code class="language-bash">dotnet add package Microsoft.AspNetCore.Authentication.OpenIdConnect
+dotnet add package Microsoft.IdentityModel.Protocols.OpenIdConnect
+dotnet add package Microsoft.AspNetCore.Authentication.Cookies
+</code></pre>
+<h3>Step 4: Configure Authentication</h3>
+<p>Modify the <code>Startup.cs</code> file to configure authentication.</p>
+<h4>Add Using Directives</h4>
+<pre><code class="language-csharp">using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+</code></pre>
+<h4>Configure Services</h4>
+<p>In the <code>ConfigureServices</code> method, configure the authentication middleware.</p>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    services.AddControllersWithViews();
+
+    services.AddAuthentication(options =&gt;
+    {
+        options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+    })
+    .AddCookie()
+    .AddOpenIdConnect(options =&gt;
+    {
+        options.ClientId = &quot;your-client-id&quot;;
+        options.ClientSecret = &quot;your-client-secret&quot;;
+        options.Authority = &quot;https://your-auth0-domain&quot;;
+        options.ResponseType = OpenIdConnectResponseType.Code;
+        options.SaveTokens = true;
+        options.Scope.Add(&quot;profile&quot;);
+        options.Scope.Add(&quot;email&quot;);
+
+        options.Events = new OpenIdConnectEvents
+        {
+            OnTokenValidated = context =&gt;
+            {
+                // Add custom logic here if needed
+                return Task.CompletedTask;
+            }
+        };
+    });
+}
+</code></pre>
+<p>Replace <code>your-client-id</code>, <code>your-client-secret</code>, and <code>https://your-auth0-domain</code> with your actual Auth0 credentials.</p>
+<h4>Configure Middleware</h4>
+<p>In the <code>Configure</code> method, configure the authentication middleware.</p>
+<pre><code class="language-csharp">public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    if (env.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+    }
+    else
+    {
+        app.UseExceptionHandler(&quot;/Home/Error&quot;);
+        app.UseHsts();
+    }
+
+    app.UseHttpsRedirection();
+    app.UseStaticFiles();
+
+    app.UseRouting();
+
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.UseEndpoints(endpoints =&gt;
+    {
+        endpoints.MapControllerRoute(
+            name: &quot;default&quot;,
+            pattern: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
+    });
+}
+</code></pre>
+<h3>Step 5: Protect Routes</h3>
+<p>Protect the routes that require authentication by adding the <code>[Authorize]</code> attribute to the controllers or actions.</p>
+<pre><code class="language-csharp">using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+[Authorize]
+public class SecureController : Controller
+{
+    public IActionResult Index()
+    {
+        return View();
+    }
+}
+</code></pre>
+<h3>Step 6: Add Login and Logout Actions</h3>
+<p>Add actions to handle login and logout in a controller, typically the <code>AccountController</code>.</p>
+<pre><code class="language-csharp">using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
+
+public class AccountController : Controller
+{
+    [HttpGet]
+    public IActionResult Login()
+    {
+        return Challenge(new AuthenticationProperties { RedirectUri = &quot;/&quot; }, OpenIdConnectDefaults.AuthenticationScheme);
+    }
+
+    [HttpGet]
+    public IActionResult Logout()
+    {
+        return SignOut(new AuthenticationProperties { RedirectUri = &quot;/&quot; }, CookieAuthenticationDefaults.AuthenticationScheme, OpenIdConnectDefaults.AuthenticationScheme);
+    }
+}
+</code></pre>
+<h3>Step 7: Add Login and Logout Links</h3>
+<p>Update your layout view to include login and logout links.</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;SSO Demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;nav&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a asp-controller=&quot;Home&quot; asp-action=&quot;Index&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+            @if (User.Identity.IsAuthenticated)
+            {
+                &lt;li&gt;&lt;a asp-controller=&quot;Account&quot; asp-action=&quot;Logout&quot;&gt;Logout&lt;/a&gt;&lt;/li&gt;
+            }
+            else
+            {
+                &lt;li&gt;&lt;a asp-controller=&quot;Account&quot; asp-action=&quot;Login&quot;&gt;Login&lt;/a&gt;&lt;/li&gt;
+            }
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+
+    &lt;div&gt;
+        @RenderBody()
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3>Step 8: Run the Application</h3>
+<p>Run your application and navigate to the secure page. You should be redirected to the Auth0 login page. After logging in, you will be redirected back to your application and authenticated.</p>
+<p>This setup leverages OAuth 2.0 and OpenID Connect to implement SSO, allowing you to authenticate once and gain access to multiple services seamlessly. This approach ensures that the authentication process is secure and user-friendly.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="63f8669c-d00b-4f09-b6a0-0defff9ed23e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">常駐型のプログラムをサーバーで走らせる方法を調べる</span>
+                    <a href="#63f8669c-d00b-4f09-b6a0-0defff9ed23e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">アプリ単位での実行になる？ あるいは、アプリのインスタンスが消えてもサーバー全体のインスタンスとして走り続けるような仕組みがある？</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Running background tasks in an ASP.NET Core web application can be efficiently handled using hosted services. A hosted service is a class that implements the <code>IHostedService</code> interface, and it can be registered to run in the background while the application is running. Here's a step-by-step guide to create and run a background task in ASP.NET Core:</p>
+<ol>
+<li><p><strong>Create a Hosted Service</strong>:</p>
+<ul>
+<li>Implement a class that inherits from <code>IHostedService</code>.</li>
+<li>Override the <code>StartAsync</code> and <code>StopAsync</code> methods.</li>
+<li>Implement the background task logic inside a <code>Task</code> running in a loop with a delay to repeat actions at intervals.</li>
+</ul>
+</li>
+<li><p><strong>Register the Hosted Service</strong>:</p>
+<ul>
+<li>Register the hosted service in the <code>Startup.cs</code> file (or <code>Program.cs</code> in .NET 6 and above).</li>
+</ul>
+</li>
+<li><p><strong>Ensure Proper Shutdown</strong>:</p>
+<ul>
+<li>Ensure the background task handles cancellation and proper shutdown using a <code>CancellationToken</code>.</li>
+</ul>
+</li>
+</ol>
+<p>Here's an example implementation:</p>
+<h3>Step 1: Create the Hosted Service</h3>
+<pre><code class="language-csharp">using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+
+public class BackgroundEmailService : IHostedService, IDisposable
+{
+    private readonly ILogger&lt;BackgroundEmailService&gt; _logger;
+    private Timer _timer;
+
+    public BackgroundEmailService(ILogger&lt;BackgroundEmailService&gt; logger)
+    {
+        _logger = logger;
+    }
+
+    public Task StartAsync(CancellationToken cancellationToken)
+    {
+        _logger.LogInformation(&quot;Background Email Service is starting.&quot;);
+
+        _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromMinutes(5));
+
+        return Task.CompletedTask;
+    }
+
+    private void DoWork(object state)
+    {
+        _logger.LogInformation(&quot;Background Email Service is working.&quot;);
+        // Insert email sending logic here
+    }
+
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        _logger.LogInformation(&quot;Background Email Service is stopping.&quot;);
+
+        _timer?.Change(Timeout.Infinite, 0);
+
+        return Task.CompletedTask;
+    }
+
+    public void Dispose()
+    {
+        _timer?.Dispose();
+    }
+}
+</code></pre>
+<h3>Step 2: Register the Hosted Service</h3>
+<h4>For ASP.NET Core 3.1 and 5.0:</h4>
+<p>In <code>Startup.cs</code>:</p>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    services.AddHostedService&lt;BackgroundEmailService&gt;();
+}
+</code></pre>
+<h4>For ASP.NET Core 6.0 and above:</h4>
+<p>In <code>Program.cs</code>:</p>
+<pre><code class="language-csharp">var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddHostedService&lt;BackgroundEmailService&gt;();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+app.MapControllers();
+
+app.Run();
+</code></pre>
+<h3>Step 3: Handle Proper Shutdown</h3>
+<p>Ensure your background service handles cancellation properly. The <code>StopAsync</code> method will be called when the application is shutting down, allowing you to clean up resources.</p>
+<h3>Additional Considerations</h3>
+<ul>
+<li><strong>Dependency Injection</strong>: If your background task needs to use other services (like a database context or email sender), inject them through the constructor of your hosted service.</li>
+<li><strong>Error Handling</strong>: Implement appropriate error handling and logging inside your background task to ensure it runs reliably and issues are traceable.</li>
+</ul>
+<p>By following these steps, you can set up a background task in your ASP.NET Core application to run continuously while the application is running, executing actions at specified intervals.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, the hosted service will start when the server starts. In ASP.NET Core, when the application starts up, it initializes all registered services, including any hosted services that implement the <code>IHostedService</code> interface. The <code>StartAsync</code> method of each registered <code>IHostedService</code> implementation will be called automatically when the application starts, allowing you to run background tasks immediately.</p>
+<p>Here's a recap of how it works:</p>
+<ol>
+<li><p><strong>Application Startup</strong>:</p>
+<ul>
+<li>When the application starts, the ASP.NET Core runtime will automatically invoke the <code>StartAsync</code> method of all registered hosted services.</li>
+</ul>
+</li>
+<li><p><strong>Background Task Initialization</strong>:</p>
+<ul>
+<li>In the <code>StartAsync</code> method, you can initialize and start any background tasks or timers needed for your service.</li>
+</ul>
+</li>
+<li><p><strong>Continuous Execution</strong>:</p>
+<ul>
+<li>The background task will continue to run at the defined intervals until the application shuts down.</li>
+</ul>
+</li>
+<li><p><strong>Graceful Shutdown</strong>:</p>
+<ul>
+<li>When the application is shutting down, the <code>StopAsync</code> method is called to allow for any necessary cleanup before the service stops.</li>
+</ul>
+</li>
+</ol>
+<p>Here's the complete example again, emphasizing the automatic start on server startup:</p>
+<h3>Hosted Service Implementation</h3>
+<pre><code class="language-csharp">using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+
+public class BackgroundEmailService : IHostedService, IDisposable
+{
+    private readonly ILogger&lt;BackgroundEmailService&gt; _logger;
+    private Timer _timer;
+
+    public BackgroundEmailService(ILogger&lt;BackgroundEmailService&gt; logger)
+    {
+        _logger = logger;
+    }
+
+    public Task StartAsync(CancellationToken cancellationToken)
+    {
+        _logger.LogInformation(&quot;Background Email Service is starting.&quot;);
+
+        // Initialize the timer to call DoWork method immediately and then every 5 minutes
+        _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromMinutes(5));
+
+        return Task.CompletedTask;
+    }
+
+    private void DoWork(object state)
+    {
+        _logger.LogInformation(&quot;Background Email Service is working.&quot;);
+        // Insert email sending logic here
+    }
+
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        _logger.LogInformation(&quot;Background Email Service is stopping.&quot;);
+
+        _timer?.Change(Timeout.Infinite, 0);
+
+        return Task.CompletedTask;
+    }
+
+    public void Dispose()
+    {
+        _timer?.Dispose();
+    }
+}
+</code></pre>
+<h3>Service Registration</h3>
+<h4>For ASP.NET Core 3.1 and 5.0</h4>
+<p>In <code>Startup.cs</code>:</p>
+<pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    services.AddHostedService&lt;BackgroundEmailService&gt;();
+}
+</code></pre>
+<h4>For ASP.NET Core 6.0 and above</h4>
+<p>In <code>Program.cs</code>:</p>
+<pre><code class="language-csharp">var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddHostedService&lt;BackgroundEmailService&gt;();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+app.MapControllers();
+
+app.Run();
+</code></pre>
+<p>With this setup, the <code>BackgroundEmailService</code> will automatically start when the application starts, and it will begin executing the <code>DoWork</code> method at the specified intervals (every 5 minutes in this case). The service will continue to run in the background until the application shuts down, at which point the <code>StopAsync</code> method will be called to allow for any necessary cleanup.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d56a7278-d1cb-4851-b428-405e38fe7507" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">それぞれの体系について調べる</span>
+                    <a href="#d56a7278-d1cb-4851-b428-405e38fe7507" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>ASP.NET has evolved significantly since the days of ASP.NET Web Forms, and now it offers several variations to cater to different development needs and preferences. Here's an overview of the main variations and how they differ from each other:</p>
+<h3>1. ASP.NET Web Forms</h3>
+<ul>
+<li><strong>Overview</strong>: Traditional event-driven model, similar to WinForms applications.</li>
+<li><strong>Strengths</strong>: Rapid development, rich server-side controls, view state management.</li>
+<li><strong>Use Case</strong>: Legacy applications, rapid application development with a focus on server-side processing.</li>
+<li><strong>Drawbacks</strong>: Less control over HTML/CSS, less suitable for modern SPA (Single Page Application) development.</li>
+</ul>
+<h3>2. ASP.NET MVC</h3>
+<ul>
+<li><strong>Overview</strong>: Model-View-Controller pattern, separating application logic, UI, and input control.</li>
+<li><strong>Strengths</strong>: Clear separation of concerns, better control over HTML, easy unit testing.</li>
+<li><strong>Use Case</strong>: Applications requiring clear separation between business logic and UI, better SEO, and more control over HTML/CSS.</li>
+<li><strong>Drawbacks</strong>: Steeper learning curve compared to Web Forms.</li>
+</ul>
+<h3>3. ASP.NET Web API</h3>
+<ul>
+<li><strong>Overview</strong>: Framework for building HTTP services that can be consumed by a wide range of clients including browsers, mobile devices, and other third-party applications.</li>
+<li><strong>Strengths</strong>: Ideal for creating RESTful services, stateless, lightweight.</li>
+<li><strong>Use Case</strong>: Backend services for mobile apps, single-page applications, or any system that requires data exchange over HTTP.</li>
+<li><strong>Drawbacks</strong>: Not designed for creating full web pages.</li>
+</ul>
+<h3>4. ASP.NET Core</h3>
+<ul>
+<li><strong>Overview</strong>: A cross-platform, high-performance framework for building modern, cloud-based, and internet-connected applications.</li>
+<li><strong>Strengths</strong>: Cross-platform (Windows, macOS, Linux), modular, high performance, unification of MVC and Web API, supports DI (Dependency Injection) out of the box.</li>
+<li><strong>Use Case</strong>: Modern web applications, microservices, cross-platform development.</li>
+<li><strong>Drawbacks</strong>: Requires learning new concepts if coming from the traditional ASP.NET framework.</li>
+</ul>
+<h3>5. Blazor</h3>
+<ul>
+<li><strong>Overview</strong>: A framework for building interactive web UIs using C# instead of JavaScript.</li>
+<li><strong>Strengths</strong>: Full-stack development with .NET, component-based architecture, supports both server-side (Blazor Server) and client-side (Blazor WebAssembly).</li>
+<li><strong>Use Case</strong>: Single Page Applications (SPAs), interactive web applications, leveraging existing .NET skills.</li>
+<li><strong>Drawbacks</strong>: Client-side Blazor (WebAssembly) is still evolving and may have some performance limitations compared to JavaScript.</li>
+</ul>
+<h3>6. ASP.NET Razor Pages</h3>
+<ul>
+<li><strong>Overview</strong>: Simplified page-based programming model for building web UI, part of ASP.NET Core.</li>
+<li><strong>Strengths</strong>: Page-focused approach, easy to learn, integrates well with ASP.NET Core, good for simple web apps and prototypes.</li>
+<li><strong>Use Case</strong>: Simple web applications, landing pages, where the full MVC pattern may be overkill.</li>
+<li><strong>Drawbacks</strong>: Limited compared to full MVC applications in terms of separation of concerns.</li>
+</ul>
+<h3>Key Differences</h3>
+<ul>
+<li><p><strong>Development Model</strong>:</p>
+<ul>
+<li><strong>Web Forms</strong>: Event-driven, server-side controls.</li>
+<li><strong>MVC</strong>: Model-View-Controller pattern.</li>
+<li><strong>Web API</strong>: RESTful services.</li>
+<li><strong>ASP.NET Core</strong>: Unified development model with high performance and cross-platform capabilities.</li>
+<li><strong>Blazor</strong>: Full-stack development with C# for interactive web UIs.</li>
+<li><strong>Razor Pages</strong>: Page-based model within ASP.NET Core.</li>
+</ul>
+</li>
+<li><p><strong>Control Over HTML/CSS</strong>:</p>
+<ul>
+<li><strong>Web Forms</strong>: Less control, more abstraction.</li>
+<li><strong>MVC</strong>: More control, clear separation.</li>
+<li><strong>Blazor/Razor Pages</strong>: Component-based, combines HTML/CSS with C#.</li>
+</ul>
+</li>
+<li><p><strong>Performance and Scalability</strong>:</p>
+<ul>
+<li><strong>ASP.NET Core</strong>: High performance, scalable, suitable for modern cloud-based applications.</li>
+</ul>
+</li>
+<li><p><strong>Learning Curve</strong>:</p>
+<ul>
+<li><strong>Web Forms</strong>: Lower for those familiar with WinForms.</li>
+<li><strong>MVC/Core</strong>: Higher due to the need to understand MVC patterns, DI, and more modern web practices.</li>
+</ul>
+</li>
+</ul>
+<p>Choosing the right variation depends on your specific needs, existing expertise, and the requirements of the project you're working on. For modern web development, ASP.NET Core, along with MVC, Blazor, and Razor Pages, offers a lot of flexibility and power.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, ASP.NET MVC and ASP.NET Core MVC are technically different, even though they share similar concepts. Here are the key differences:</p>
+<h3>Framework and Runtime</h3>
+<ul>
+<li><strong>ASP.NET MVC</strong>: Built on the .NET Framework, which is Windows-only.</li>
+<li><strong>ASP.NET Core MVC</strong>: Built on .NET Core (now .NET 5/6/7), which is cross-platform (Windows, macOS, Linux).</li>
+</ul>
+<h3>Project Structure</h3>
+<ul>
+<li><strong>ASP.NET MVC</strong>: Follows a traditional project structure with a Global.asax file, web.config, and separate folders for Controllers, Views, and Models.</li>
+<li><strong>ASP.NET Core MVC</strong>: Has a more streamlined project structure, uses a Startup.cs file for configuration, appsettings.json for settings, and does not require a web.config file.</li>
+</ul>
+<h3>Dependency Injection (DI)</h3>
+<ul>
+<li><strong>ASP.NET MVC</strong>: DI is not built-in; you need to use third-party libraries like Autofac or Unity.</li>
+<li><strong>ASP.NET Core MVC</strong>: DI is built-in and integrated into the framework, making it easier to manage dependencies.</li>
+</ul>
+<h3>Middleware Pipeline</h3>
+<ul>
+<li><strong>ASP.NET MVC</strong>: Uses HTTP modules and handlers.</li>
+<li><strong>ASP.NET Core MVC</strong>: Uses a middleware pipeline that is highly configurable, providing more flexibility and control over request processing.</li>
+</ul>
+<h3>Hosting Model</h3>
+<ul>
+<li><strong>ASP.NET MVC</strong>: Runs on IIS.</li>
+<li><strong>ASP.NET Core MVC</strong>: Can run on IIS, Kestrel, or any other HTTP server, offering more flexibility in hosting.</li>
+</ul>
+<h3>Configuration</h3>
+<ul>
+<li><strong>ASP.NET MVC</strong>: Configuration is done primarily through the web.config file.</li>
+<li><strong>ASP.NET Core MVC</strong>: Configuration is done using a combination of appsettings.json, environment variables, and the options pattern, making it more modular and easier to manage.</li>
+</ul>
+<h3>Performance</h3>
+<ul>
+<li><strong>ASP.NET MVC</strong>: Performance is good but can be limited by the older architecture of the .NET Framework.</li>
+<li><strong>ASP.NET Core MVC</strong>: Optimized for performance with a more lightweight and modular design, resulting in higher throughput and lower memory consumption.</li>
+</ul>
+<h3>Unified Framework</h3>
+<ul>
+<li><strong>ASP.NET MVC</strong>: Separate frameworks for MVC and Web API.</li>
+<li><strong>ASP.NET Core MVC</strong>: Combines MVC and Web API into a single framework, simplifying development and reducing duplication.</li>
+</ul>
+<h3>Razor View Engine</h3>
+<ul>
+<li><strong>ASP.NET MVC</strong>: Uses the older Razor view engine.</li>
+<li><strong>ASP.NET Core MVC</strong>: Uses the improved Razor view engine with more features and better performance.</li>
+</ul>
+<h3>Modern Features</h3>
+<ul>
+<li><strong>ASP.NET MVC</strong>: Lacks some of the modern features and improvements found in ASP.NET Core MVC.</li>
+<li><strong>ASP.NET Core MVC</strong>: Includes modern features like Tag Helpers, View Components, and better support for modern front-end development workflows.</li>
+</ul>
+<h3>Community and Support</h3>
+<ul>
+<li><strong>ASP.NET MVC</strong>: As part of the older .NET Framework, it's in maintenance mode with fewer updates and new features.</li>
+<li><strong>ASP.NET Core MVC</strong>: Actively developed with a vibrant community, frequent updates, and new features.</li>
+</ul>
+<h3>Cross-Platform</h3>
+<ul>
+<li><strong>ASP.NET MVC</strong>: Limited to Windows.</li>
+<li><strong>ASP.NET Core MVC</strong>: Cross-platform, allowing you to develop and deploy applications on Windows, macOS, and Linux.</li>
+</ul>
+<p>In summary, ASP.NET Core MVC is a modern, cross-platform framework with built-in dependency injection, a configurable middleware pipeline, and unified support for MVC and Web API. It offers better performance, a more flexible hosting model, and is actively developed with new features and improvements.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Blazor is a framework for building interactive web UIs using C#. It comes in two flavors: Blazor Server and Blazor WebAssembly. Here are the key differences and characteristics of each:</p>
+<h3>Blazor Server</h3>
+<p><strong>Execution Model</strong>:</p>
+<ul>
+<li><strong>Blazor Server</strong>: Runs on the server. The UI updates and event handling are done on the server, and the results are sent to the client via a SignalR connection.</li>
+</ul>
+<p><strong>Performance</strong>:</p>
+<ul>
+<li><strong>Blazor Server</strong>: Typically has lower initial load times because only the minimal necessary JavaScript and HTML are sent to the client. However, there can be latency issues due to the round trips to the server for UI updates and event handling.</li>
+</ul>
+<p><strong>Resource Usage</strong>:</p>
+<ul>
+<li><strong>Blazor Server</strong>: Requires server resources for each connected user because it maintains a SignalR connection and a session for each client.</li>
+</ul>
+<p><strong>Deployment</strong>:</p>
+<ul>
+<li><strong>Blazor Server</strong>: Requires an ASP.NET Core server to host the application, and the server must remain available and responsive to maintain the SignalR connection.</li>
+</ul>
+<p><strong>Interactivity</strong>:</p>
+<ul>
+<li><strong>Blazor Server</strong>: Real-time interaction with the server allows for complex logic and data processing without much client-side resource usage. However, a persistent internet connection is required.</li>
+</ul>
+<h3>Blazor WebAssembly</h3>
+<p><strong>Execution Model</strong>:</p>
+<ul>
+<li><strong>Blazor WebAssembly</strong>: Runs entirely on the client in the browser using WebAssembly. The .NET runtime is downloaded to the client, and the application runs directly on the client's machine.</li>
+</ul>
+<p><strong>Performance</strong>:</p>
+<ul>
+<li><strong>Blazor WebAssembly</strong>: Typically has higher initial load times because the .NET runtime and application files need to be downloaded to the client. However, once loaded, interactions are usually faster because they don't require a round trip to the server for each interaction.</li>
+</ul>
+<p><strong>Resource Usage</strong>:</p>
+<ul>
+<li><strong>Blazor WebAssembly</strong>: Utilizes client resources for execution, reducing the load on the server. This can be more scalable for many concurrent users.</li>
+</ul>
+<p><strong>Deployment</strong>:</p>
+<ul>
+<li><strong>Blazor WebAssembly</strong>: Can be served as static files from any web server, including content delivery networks (CDNs), without requiring a full ASP.NET Core server.</li>
+</ul>
+<p><strong>Interactivity</strong>:</p>
+<ul>
+<li><strong>Blazor WebAssembly</strong>: Runs offline after the initial load, which can be beneficial for Progressive Web Apps (PWAs). However, complex operations may be limited by the client's hardware capabilities.</li>
+</ul>
+<h3>Key Differences</h3>
+<ul>
+<li><strong>Execution Location</strong>: Blazor Server executes on the server, while Blazor WebAssembly executes on the client.</li>
+<li><strong>Performance and Load Time</strong>: Blazor Server has quicker initial load times, but Blazor WebAssembly may offer better performance after loading due to reduced server round trips.</li>
+<li><strong>Resource Management</strong>: Blazor Server uses server resources for each user, while Blazor WebAssembly leverages client resources.</li>
+<li><strong>Deployment</strong>: Blazor Server requires an ASP.NET Core server, whereas Blazor WebAssembly can be deployed as static files.</li>
+<li><strong>Interactivity and Offline Use</strong>: Blazor Server requires a persistent connection to the server, while Blazor WebAssembly can run offline after initial load.</li>
+</ul>
+<h3>Use Cases</h3>
+<ul>
+<li><p><strong>Blazor Server</strong>:</p>
+<ul>
+<li>Applications with real-time requirements and complex server-side logic.</li>
+<li>Scenarios where initial load time needs to be minimal.</li>
+<li>Environments where a reliable and constant internet connection is guaranteed.</li>
+</ul>
+</li>
+<li><p><strong>Blazor WebAssembly</strong>:</p>
+<ul>
+<li>Applications that need to work offline or with intermittent connectivity.</li>
+<li>Scenarios where the application can benefit from running directly on the client for performance reasons.</li>
+<li>Progressive Web Apps (PWAs) and client-heavy applications.</li>
+</ul>
+</li>
+</ul>
+<p>Both Blazor Server and Blazor WebAssembly offer powerful ways to build interactive web applications using C#, but the choice between them depends on the specific requirements and constraints of your project.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="c6464bf5-4df5-4a55-911d-06e4a1560328" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Azure の料金について調べる</span>
+                    <a href="#c6464bf5-4df5-4a55-911d-06e4a1560328" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">イメージしていた「従量課金」と異なり、プランを一つ選ぶ形。ウェブサイト＋いくつかの社内システム程度なら、月額5千円から1万円くらいか。InterServer よりは速いだろうし、それで売り上げが伸びるならコストは全く問題にならない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

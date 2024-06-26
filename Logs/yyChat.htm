@@ -16,6 +16,1183 @@
                     <a href="#e1e7cb51-78c5-4396-bcbd-ff437c61d020" class="permalink">&infin;</a>
                 </div>
             </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">中国への出張が無事に終わり、無事にデータまみれになって死んでいる。30社ほどからさまざまなファイルや情報が届き、それを社内のスペイン人にもロシア人にも伝える必要があり、それぞれからいろいろな経路で自分にタスクが戻ってくる。わけが分からないので、全てを一ヶ所にまとめてしまうシステムが早急に必要だ。先にサイトをやることも考えていたが、ないと困るシステムなので、こちらを急ぐ。</p>
+                    <!-- Task: cec2a66a-d540-4043-8e6a-6b3b4d796370 -->
+                </div>
+            </div>
+            <div id="c83d099b-a537-42ee-9598-1880c2707dc8" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">プロジェクト開始時のタスクを追加</span>
+                    <a href="#c83d099b-a537-42ee-9598-1880c2707dc8" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="70e5db12-ba8d-426d-a4b7-02a665214e77" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">やりたいことをザッとタスク化してみる</span>
+                    <a href="#70e5db12-ba8d-426d-a4b7-02a665214e77" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">できる・できないは別として、やりたいことを。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Designing a multi-user chat room system with task management and automatic translation in ASP.NET Core involves several components and steps. Here's a high-level overview of the architecture and key components:</p>
+<h3>1. <strong>Project Setup</strong></h3>
+<ul>
+<li><strong>ASP.NET Core Web API</strong> for backend services.</li>
+<li><strong>SignalR</strong> for real-time communication.</li>
+<li><strong>Blazor</strong> for the front-end (optional, you can also use other frameworks like Angular, React, or plain Razor pages).</li>
+<li><strong>Entity Framework Core</strong> for database operations.</li>
+<li><strong>Azure Translation Services</strong> (or OpenAI API) for translation.</li>
+</ul>
+<h3>2. <strong>Database Design</strong></h3>
+<p>Create a database schema with tables for Users, ChatRooms, Messages, Tasks, Attachments, and Translations.</p>
+<ul>
+<li><p><strong>Users:</strong></p>
+<ul>
+<li><code>UserId</code></li>
+<li><code>Username</code></li>
+<li><code>Email</code></li>
+<li><code>PreferredLanguage</code></li>
+<li><code>PasswordHash</code> (for authentication)</li>
+</ul>
+</li>
+<li><p><strong>ChatRooms:</strong></p>
+<ul>
+<li><code>RoomId</code></li>
+<li><code>RoomName</code></li>
+<li><code>CreatedByUserId</code></li>
+<li><code>CreatedDate</code></li>
+</ul>
+</li>
+<li><p><strong>Messages:</strong></p>
+<ul>
+<li><code>MessageId</code></li>
+<li><code>RoomId</code></li>
+<li><code>UserId</code></li>
+<li><code>Content</code></li>
+<li><code>Pinned</code> (boolean)</li>
+<li><code>Timestamp</code></li>
+</ul>
+</li>
+<li><p><strong>Tasks:</strong></p>
+<ul>
+<li><code>TaskId</code></li>
+<li><code>RoomId</code></li>
+<li><code>AssignedToUserId</code></li>
+<li><code>Description</code></li>
+<li><code>Status</code></li>
+<li><code>DueDate</code></li>
+</ul>
+</li>
+<li><p><strong>Attachments:</strong></p>
+<ul>
+<li><code>AttachmentId</code></li>
+<li><code>MessageId</code></li>
+<li><code>FilePath</code></li>
+</ul>
+</li>
+<li><p><strong>Translations:</strong></p>
+<ul>
+<li><code>TranslationId</code></li>
+<li><code>MessageId</code></li>
+<li><code>Language</code></li>
+<li><code>TranslatedContent</code></li>
+</ul>
+</li>
+</ul>
+<h3>3. <strong>Backend Services</strong></h3>
+<ul>
+<li><strong>Authentication and Authorization:</strong> Use ASP.NET Core Identity for managing users and authentication.</li>
+<li><strong>SignalR Hub:</strong> Create a SignalR hub for real-time messaging.</li>
+<li><strong>Translation Service:</strong> Integrate with Azure Translation Services or OpenAI API for translating messages.</li>
+<li><strong>File Storage:</strong> Use Azure Blob Storage or a similar service for storing attachments.</li>
+</ul>
+<h3>4. <strong>SignalR Hub</strong></h3>
+<p>Create a SignalR hub to handle real-time communication.</p>
+<pre><code class="language-csharp">public class ChatHub : Hub
+{
+    private readonly ITranslationService _translationService;
+
+    public ChatHub(ITranslationService translationService)
+    {
+        _translationService = translationService;
+    }
+
+    public async Task SendMessage(string roomId, string userId, string message)
+    {
+        var translations = await _translationService.TranslateMessage(message, roomId, userId);
+        await Clients.Group(roomId).SendAsync(&quot;ReceiveMessage&quot;, userId, message, translations);
+    }
+
+    public async Task JoinRoom(string roomId)
+    {
+        await Groups.AddToGroupAsync(Context.ConnectionId, roomId);
+    }
+
+    public async Task LeaveRoom(string roomId)
+    {
+        await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomId);
+    }
+}
+</code></pre>
+<h3>5. <strong>Translation Service</strong></h3>
+<p>Create a service to handle translations.</p>
+<pre><code class="language-csharp">public interface ITranslationService
+{
+    Task&lt;Dictionary&lt;string, string&gt;&gt; TranslateMessage(string message, string roomId, string userId);
+}
+
+public class TranslationService : ITranslationService
+{
+    // Assume you have a method to get user preferred languages
+    public async Task&lt;Dictionary&lt;string, string&gt;&gt; TranslateMessage(string message, string roomId, string userId)
+    {
+        var translations = new Dictionary&lt;string, string&gt;();
+        var languages = GetUserPreferredLanguages(roomId, userId);
+
+        foreach (var language in languages)
+        {
+            var translatedText = await TranslateText(message, language); // Call to external translation API
+            translations.Add(language, translatedText);
+        }
+
+        return translations;
+    }
+
+    private List&lt;string&gt; GetUserPreferredLanguages(string roomId, string userId)
+    {
+        // Fetch preferred languages of users in the chat room
+    }
+
+    private async Task&lt;string&gt; TranslateText(string text, string targetLanguage)
+    {
+        // Call to Azure Translation API or OpenAI API
+    }
+}
+</code></pre>
+<h3>6. <strong>Blazor Front-End</strong></h3>
+<p>Create a Blazor component for the chat interface.</p>
+<pre><code class="language-razor">@page &quot;/chat/{RoomId}&quot;
+@inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
+
+&lt;h3&gt;Chat Room&lt;/h3&gt;
+
+@code {
+    [Parameter]
+    public string RoomId { get; set; }
+
+    private string newMessage;
+    private List&lt;Message&gt; messages = new List&lt;Message&gt;();
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Initialize SignalR connection
+    }
+
+    private async Task SendMessage()
+    {
+        // Send message via SignalR hub
+    }
+}
+</code></pre>
+<h3>7. <strong>Task Management</strong></h3>
+<p>Create components and services to manage tasks.</p>
+<pre><code class="language-csharp">public class TaskService
+{
+    private readonly AppDbContext _context;
+
+    public TaskService(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task AssignTask(Task task)
+    {
+        _context.Tasks.Add(task);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task&lt;List&lt;Task&gt;&gt; GetTasksForUser(string userId)
+    {
+        return await _context.Tasks.Where(t =&gt; t.AssignedToUserId == userId).ToListAsync();
+    }
+}
+</code></pre>
+<h3>8. <strong>Notifications</strong></h3>
+<p>Implement browser notifications using SignalR and the Notification API in JavaScript.</p>
+<pre><code class="language-js">function showNotification(title, body) {
+    if (Notification.permission === &quot;granted&quot;) {
+        new Notification(title, { body: body });
+    } else if (Notification.permission !== &quot;denied&quot;) {
+        Notification.requestPermission().then(function (permission) {
+            if (permission === &quot;granted&quot;) {
+                new Notification(title, { body: body });
+            }
+        });
+    }
+}
+</code></pre>
+<h3>9. <strong>Hosting and Deployment</strong></h3>
+<p>Host your application on Azure, using Azure App Service, Azure SQL Database, and Azure Blob Storage.</p>
+<h3>Final Thoughts</h3>
+<p>This is a high-level overview to get you started. You'll need to fill in the details for each part, especially the services and components for translation, real-time communication, file handling, and user interface. Make sure to follow best practices for security, performance, and scalability throughout your development process.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>You can name the three states of the chat room as follows:</p>
+<ol>
+<li><strong>Active</strong>: This is the default state where the chat room is actively being used.</li>
+<li><strong>Pending</strong>: This state indicates that the chat room is not archived yet, but there is nothing that can be done for it at the moment, and you must wait for some time (e.g., waiting for a partner company to finish its job and contact you).</li>
+<li><strong>Archived</strong>: This state means the chat room does not appear in the main menu unless somebody unarchives it or another message is added to it.</li>
+</ol>
+<h3>Implementation in the Database</h3>
+<p>Add a <code>State</code> field to your <code>ChatRooms</code> table to store the state of each chat room.</p>
+<pre><code class="language-sql">CREATE TABLE ChatRooms (
+    RoomId INT PRIMARY KEY,
+    RoomName NVARCHAR(100),
+    CreatedByUserId INT,
+    CreatedDate DATETIME,
+    State NVARCHAR(10) -- Active, Pending, Archived
+);
+</code></pre>
+<h3>Updating the Chat Room State</h3>
+<p>You can create methods in your service to update the state of the chat rooms.</p>
+<pre><code class="language-csharp">public class ChatRoomService
+{
+    private readonly AppDbContext _context;
+
+    public ChatRoomService(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task UpdateRoomState(int roomId, string state)
+    {
+        var room = await _context.ChatRooms.FindAsync(roomId);
+        if (room != null)
+        {
+            room.State = state;
+            await _context.SaveChangesAsync();
+        }
+    }
+}
+</code></pre>
+<h3>Filtering Chat Rooms in the Main Menu</h3>
+<p>When retrieving chat rooms to display in the main menu, filter out the archived rooms.</p>
+<pre><code class="language-csharp">public class ChatRoomService
+{
+    private readonly AppDbContext _context;
+
+    public ChatRoomService(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task&lt;List&lt;ChatRoom&gt;&gt; GetActiveAndPendingRooms()
+    {
+        return await _context.ChatRooms
+            .Where(r =&gt; r.State != &quot;Archived&quot;)
+            .ToListAsync();
+    }
+}
+</code></pre>
+<h3>UI Considerations</h3>
+<p>In your UI, you can provide options to change the state of a chat room and filter the display based on the state.</p>
+<pre><code class="language-razor">@page &quot;/chatrooms&quot;
+@inject ChatRoomService ChatRoomService
+
+&lt;h3&gt;Chat Rooms&lt;/h3&gt;
+
+&lt;button @onclick=&quot;ShowArchivedRooms&quot;&gt;Show Archived Rooms&lt;/button&gt;
+
+@code {
+    private List&lt;ChatRoom&gt; chatRooms;
+    private bool showArchived;
+
+    protected override async Task OnInitializedAsync()
+    {
+        chatRooms = await ChatRoomService.GetActiveAndPendingRooms();
+    }
+
+    private async Task ShowArchivedRooms()
+    {
+        showArchived = !showArchived;
+        chatRooms = showArchived
+            ? await ChatRoomService.GetArchivedRooms()
+            : await ChatRoomService.GetActiveAndPendingRooms();
+    }
+}
+</code></pre>
+<p>This way, you have a clear and manageable way to handle the states of your chat rooms and display them accordingly in your application.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>To order the active chat rooms by the last message, you need to join the <code>ChatRooms</code> table with the <code>Messages</code> table and sort the results based on the timestamp of the last message in each chat room.</p>
+<h3>Database Query</h3>
+<p>Here's an example of how you can write this query in SQL:</p>
+<pre><code class="language-sql">SELECT c.RoomId, c.RoomName, c.CreatedByUserId, c.CreatedDate, c.State, m.LastMessageTimestamp
+FROM ChatRooms c
+LEFT JOIN (
+    SELECT RoomId, MAX(Timestamp) AS LastMessageTimestamp
+    FROM Messages
+    GROUP BY RoomId
+) m ON c.RoomId = m.RoomId
+WHERE c.State != 'Archived'
+ORDER BY m.LastMessageTimestamp DESC;
+</code></pre>
+<h3>Updating the Service Method</h3>
+<p>You can update your service method to include this logic:</p>
+<pre><code class="language-csharp">public async Task&lt;List&lt;ChatRoom&gt;&gt; GetActiveAndPendingRooms()
+{
+    return await _context.ChatRooms
+        .Where(r =&gt; r.State != &quot;Archived&quot;)
+        .OrderByDescending(r =&gt; _context.Messages
+            .Where(m =&gt; m.RoomId == r.RoomId)
+            .Max(m =&gt; m.Timestamp))
+        .ToListAsync();
+}
+</code></pre>
+<h3>Updating the UI</h3>
+<p>Update your UI to call the service method that retrieves the chat rooms ordered by the last message.</p>
+<pre><code class="language-razor">@page &quot;/chatrooms&quot;
+@inject ChatRoomService ChatRoomService
+
+&lt;h3&gt;Chat Rooms&lt;/h3&gt;
+
+&lt;button @onclick=&quot;ShowArchivedRooms&quot;&gt;Show Archived Rooms&lt;/button&gt;
+
+@code {
+    private List&lt;ChatRoom&gt; chatRooms;
+    private bool showArchived;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadChatRooms();
+    }
+
+    private async Task LoadChatRooms()
+    {
+        chatRooms = showArchived
+            ? await ChatRoomService.GetArchivedRooms()
+            : await ChatRoomService.GetActiveAndPendingRoomsOrderedByLastMessage();
+    }
+
+    private async Task ShowArchivedRooms()
+    {
+        showArchived = !showArchived;
+        await LoadChatRooms();
+    }
+}
+</code></pre>
+<h3>Complete Service Method</h3>
+<p>Here is the complete service method including ordering by the last message timestamp:</p>
+<pre><code class="language-csharp">public class ChatRoomService
+{
+    private readonly AppDbContext _context;
+
+    public ChatRoomService(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task&lt;List&lt;ChatRoom&gt;&gt; GetActiveAndPendingRoomsOrderedByLastMessage()
+    {
+        return await _context.ChatRooms
+            .Where(r =&gt; r.State != &quot;Archived&quot;)
+            .OrderByDescending(r =&gt; _context.Messages
+                .Where(m =&gt; m.RoomId == r.RoomId)
+                .Max(m =&gt; m.Timestamp))
+            .ToListAsync();
+    }
+
+    public async Task&lt;List&lt;ChatRoom&gt;&gt; GetArchivedRooms()
+    {
+        return await _context.ChatRooms
+            .Where(r =&gt; r.State == &quot;Archived&quot;)
+            .ToListAsync();
+    }
+}
+</code></pre>
+<p>With this setup, your active chat rooms will be ordered by the timestamp of the last message, ensuring that the most recently active rooms are displayed at the top.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, adding a column to store the last message's timestamp directly in the <code>ChatRooms</code> table would be more efficient. This way, you can avoid the need to join and aggregate the <code>Messages</code> table every time you query the chat rooms.</p>
+<h3>Updating the Database Schema</h3>
+<p>Add a <code>LastMessageTimestamp</code> column to the <code>ChatRooms</code> table:</p>
+<pre><code class="language-sql">ALTER TABLE ChatRooms
+ADD LastMessageTimestamp DATETIME;
+</code></pre>
+<h3>Updating the ChatRoom Model</h3>
+<p>Update your <code>ChatRoom</code> model to include the new column:</p>
+<pre><code class="language-csharp">public class ChatRoom
+{
+    public int RoomId { get; set; }
+    public string RoomName { get; set; }
+    public int CreatedByUserId { get; set; }
+    public DateTime CreatedDate { get; set; }
+    public string State { get; set; }
+    public DateTime? LastMessageTimestamp { get; set; }
+}
+</code></pre>
+<h3>Updating the Message Handling Logic</h3>
+<p>When a new message is added to a chat room, update the <code>LastMessageTimestamp</code>:</p>
+<pre><code class="language-csharp">public async Task SendMessage(string roomId, string userId, string message)
+{
+    var newMessage = new Message
+    {
+        RoomId = roomId,
+        UserId = userId,
+        Content = message,
+        Timestamp = DateTime.UtcNow
+    };
+
+    _context.Messages.Add(newMessage);
+
+    var chatRoom = await _context.ChatRooms.FindAsync(roomId);
+    chatRoom.LastMessageTimestamp = newMessage.Timestamp;
+
+    await _context.SaveChangesAsync();
+
+    var translations = await _translationService.TranslateMessage(message, roomId, userId);
+    await Clients.Group(roomId).SendAsync(&quot;ReceiveMessage&quot;, userId, message, translations);
+}
+</code></pre>
+<h3>Updating the Service Method</h3>
+<p>Update the service method to use the <code>LastMessageTimestamp</code> for ordering:</p>
+<pre><code class="language-csharp">public async Task&lt;List&lt;ChatRoom&gt;&gt; GetActiveAndPendingRoomsOrderedByLastMessage()
+{
+    return await _context.ChatRooms
+        .Where(r =&gt; r.State != &quot;Archived&quot;)
+        .OrderByDescending(r =&gt; r.LastMessageTimestamp)
+        .ToListAsync();
+}
+</code></pre>
+<h3>Updating the UI</h3>
+<p>Ensure your UI calls the updated service method to retrieve the chat rooms ordered by the last message:</p>
+<pre><code class="language-razor">@page &quot;/chatrooms&quot;
+@inject ChatRoomService ChatRoomService
+
+&lt;h3&gt;Chat Rooms&lt;/h3&gt;
+
+&lt;button @onclick=&quot;ShowArchivedRooms&quot;&gt;Show Archived Rooms&lt;/button&gt;
+
+@code {
+    private List&lt;ChatRoom&gt; chatRooms;
+    private bool showArchived;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadChatRooms();
+    }
+
+    private async Task LoadChatRooms()
+    {
+        chatRooms = showArchived
+            ? await ChatRoomService.GetArchivedRooms()
+            : await ChatRoomService.GetActiveAndPendingRoomsOrderedByLastMessage();
+    }
+
+    private async Task ShowArchivedRooms()
+    {
+        showArchived = !showArchived;
+        await LoadChatRooms();
+    }
+}
+</code></pre>
+<p>By storing the last message timestamp directly in the <code>ChatRooms</code> table, you improve the efficiency of your queries and simplify the logic needed to retrieve and order the chat rooms.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>For task statuses, you can create a set of comprehensive status values that cover various scenarios, including tasks that are unnecessary because something similar has already been done. Here are some suggested status values:</p>
+<ol>
+<li><strong>Pending</strong>: The task is assigned but not yet started.</li>
+<li><strong>In Progress</strong>: The task is currently being worked on.</li>
+<li><strong>Completed</strong>: The task is finished and verified.</li>
+<li><strong>Cancelled</strong>: The task was cancelled before completion.</li>
+<li><strong>Rejected</strong>: The task was rejected, possibly due to invalid or incorrect information.</li>
+<li><strong>Deferred</strong>: The task is postponed to be addressed later.</li>
+<li><strong>Duplicate</strong>: The task is unnecessary because something similar has already been done.</li>
+<li><strong>Blocked</strong>: The task cannot proceed due to an obstacle or dependency on another task.</li>
+</ol>
+<h3>Updating the Database Schema</h3>
+<p>Add a <code>Status</code> column to the <code>Tasks</code> table:</p>
+<pre><code class="language-sql">ALTER TABLE Tasks
+ADD Status NVARCHAR(20);
+</code></pre>
+<h3>Updating the Task Model</h3>
+<p>Update your <code>Task</code> model to include the new status values:</p>
+<pre><code class="language-csharp">public class Task
+{
+    public int TaskId { get; set; }
+    public int RoomId { get; set; }
+    public int AssignedToUserId { get; set; }
+    public string Description { get; set; }
+    public string Status { get; set; } // Pending, In Progress, Completed, Cancelled, Rejected, Deferred, Duplicate, Blocked
+    public DateTime? DueDate { get; set; }
+}
+</code></pre>
+<h3>Creating a Method to Update Task Status</h3>
+<p>Implement a method to update the status of a task:</p>
+<pre><code class="language-csharp">public class TaskService
+{
+    private readonly AppDbContext _context;
+
+    public TaskService(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task UpdateTaskStatus(int taskId, string status)
+    {
+        var task = await _context.Tasks.FindAsync(taskId);
+        if (task != null)
+        {
+            task.Status = status;
+            await _context.SaveChangesAsync();
+        }
+    }
+}
+</code></pre>
+<h3>Example Usage in a Controller</h3>
+<p>Create an endpoint to update the task status:</p>
+<pre><code class="language-csharp">[ApiController]
+[Route(&quot;api/[controller]&quot;)]
+public class TasksController : ControllerBase
+{
+    private readonly TaskService _taskService;
+
+    public TasksController(TaskService taskService)
+    {
+        _taskService = taskService;
+    }
+
+    [HttpPut(&quot;{taskId}/status&quot;)]
+    public async Task&lt;IActionResult&gt; UpdateTaskStatus(int taskId, [FromBody] string status)
+    {
+        await _taskService.UpdateTaskStatus(taskId, status);
+        return NoContent();
+    }
+}
+</code></pre>
+<h3>UI Considerations</h3>
+<p>Provide options in your UI to update the status of a task:</p>
+<pre><code class="language-razor">@page &quot;/tasks&quot;
+@inject TaskService TaskService
+
+&lt;h3&gt;Task List&lt;/h3&gt;
+
+&lt;ul&gt;
+    @foreach (var task in tasks)
+    {
+        &lt;li&gt;
+            @task.Description
+            &lt;select @onchange=&quot;(e) =&gt; UpdateTaskStatus(task.TaskId, e.Value.ToString())&quot;&gt;
+                &lt;option value=&quot;Pending&quot; selected=&quot;@task.Status == &quot;Pending&quot;&quot;&gt;Pending&lt;/option&gt;
+                &lt;option value=&quot;In Progress&quot; selected=&quot;@task.Status == &quot;In Progress&quot;&quot;&gt;In Progress&lt;/option&gt;
+                &lt;option value=&quot;Completed&quot; selected=&quot;@task.Status == &quot;Completed&quot;&quot;&gt;Completed&lt;/option&gt;
+                &lt;option value=&quot;Cancelled&quot; selected=&quot;@task.Status == &quot;Cancelled&quot;&quot;&gt;Cancelled&lt;/option&gt;
+                &lt;option value=&quot;Rejected&quot; selected=&quot;@task.Status == &quot;Rejected&quot;&quot;&gt;Rejected&lt;/option&gt;
+                &lt;option value=&quot;Deferred&quot; selected=&quot;@task.Status == &quot;Deferred&quot;&quot;&gt;Deferred&lt;/option&gt;
+                &lt;option value=&quot;Duplicate&quot; selected=&quot;@task.Status == &quot;Duplicate&quot;&quot;&gt;Duplicate&lt;/option&gt;
+                &lt;option value=&quot;Blocked&quot; selected=&quot;@task.Status == &quot;Blocked&quot;&quot;&gt;Blocked&lt;/option&gt;
+            &lt;/select&gt;
+        &lt;/li&gt;
+    }
+&lt;/ul&gt;
+
+@code {
+    private List&lt;Task&gt; tasks;
+
+    protected override async Task OnInitializedAsync()
+    {
+        tasks = await TaskService.GetTasks();
+    }
+
+    private async Task UpdateTaskStatus(int taskId, string status)
+    {
+        await TaskService.UpdateTaskStatus(taskId, status);
+        tasks = await TaskService.GetTasks();
+    }
+}
+</code></pre>
+<p>This approach ensures that you have a comprehensive set of task statuses that can cover various scenarios in your task management system.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Sure, simplifying the status values can help reduce confusion. Here’s a streamlined set of status values:</p>
+<ol>
+<li><strong>Pending</strong>: The task is assigned but not yet started.</li>
+<li><strong>In Progress</strong>: The task is currently being worked on.</li>
+<li><strong>Completed</strong>: The task is finished.</li>
+<li><strong>Cancelled</strong>: The task was cancelled.</li>
+<li><strong>Unnecessary</strong>: The task is unnecessary because something similar has already been done.</li>
+</ol>
+<h3>Updating the Database Schema</h3>
+<p>Add a <code>Status</code> column to the <code>Tasks</code> table:</p>
+<pre><code class="language-sql">ALTER TABLE Tasks
+ADD Status NVARCHAR(20);
+</code></pre>
+<h3>Updating the Task Model</h3>
+<p>Update your <code>Task</code> model to include the new status values:</p>
+<pre><code class="language-csharp">public class Task
+{
+    public int TaskId { get; set; }
+    public int RoomId { get; set; }
+    public int AssignedToUserId { get; set; }
+    public string Description { get; set; }
+    public string Status { get; set; } // Pending, In Progress, Completed, Cancelled, Unnecessary
+    public DateTime? DueDate { get; set; }
+}
+</code></pre>
+<h3>Creating a Method to Update Task Status</h3>
+<p>Implement a method to update the status of a task:</p>
+<pre><code class="language-csharp">public class TaskService
+{
+    private readonly AppDbContext _context;
+
+    public TaskService(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task UpdateTaskStatus(int taskId, string status)
+    {
+        var task = await _context.Tasks.FindAsync(taskId);
+        if (task != null)
+        {
+            task.Status = status;
+            await _context.SaveChangesAsync();
+        }
+    }
+}
+</code></pre>
+<h3>Example Usage in a Controller</h3>
+<p>Create an endpoint to update the task status:</p>
+<pre><code class="language-csharp">[ApiController]
+[Route(&quot;api/[controller]&quot;)]
+public class TasksController : ControllerBase
+{
+    private readonly TaskService _taskService;
+
+    public TasksController(TaskService taskService)
+    {
+        _taskService = taskService;
+    }
+
+    [HttpPut(&quot;{taskId}/status&quot;)]
+    public async Task&lt;IActionResult&gt; UpdateTaskStatus(int taskId, [FromBody] string status)
+    {
+        await _taskService.UpdateTaskStatus(taskId, status);
+        return NoContent();
+    }
+}
+</code></pre>
+<h3>UI Considerations</h3>
+<p>Provide options in your UI to update the status of a task:</p>
+<pre><code class="language-razor">@page &quot;/tasks&quot;
+@inject TaskService TaskService
+
+&lt;h3&gt;Task List&lt;/h3&gt;
+
+&lt;ul&gt;
+    @foreach (var task in tasks)
+    {
+        &lt;li&gt;
+            @task.Description
+            &lt;select @onchange=&quot;(e) =&gt; UpdateTaskStatus(task.TaskId, e.Value.ToString())&quot;&gt;
+                &lt;option value=&quot;Pending&quot; selected=&quot;@task.Status == &quot;Pending&quot;&quot;&gt;Pending&lt;/option&gt;
+                &lt;option value=&quot;In Progress&quot; selected=&quot;@task.Status == &quot;In Progress&quot;&quot;&gt;In Progress&lt;/option&gt;
+                &lt;option value=&quot;Completed&quot; selected=&quot;@task.Status == &quot;Completed&quot;&quot;&gt;Completed&lt;/option&gt;
+                &lt;option value=&quot;Cancelled&quot; selected=&quot;@task.Status == &quot;Cancelled&quot;&quot;&gt;Cancelled&lt;/option&gt;
+                &lt;option value=&quot;Unnecessary&quot; selected=&quot;@task.Status == &quot;Unnecessary&quot;&quot;&gt;Unnecessary&lt;/option&gt;
+            &lt;/select&gt;
+        &lt;/li&gt;
+    }
+&lt;/ul&gt;
+
+@code {
+    private List&lt;Task&gt; tasks;
+
+    protected override async Task OnInitializedAsync()
+    {
+        tasks = await TaskService.GetTasks();
+    }
+
+    private async Task UpdateTaskStatus(int taskId, string status)
+    {
+        await TaskService.UpdateTaskStatus(taskId, status);
+        tasks = await TaskService.GetTasks();
+    }
+}
+</code></pre>
+<p>By simplifying the status values to these five clear options, you can ensure that all users can easily understand and use them without confusion.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="289f716d-68be-4324-862f-f316e109e340" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">特殊な URL によるログインの省略を実装するか考える</span>
+                    <a href="#289f716d-68be-4324-862f-f316e109e340" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">やめておく。その URL が流出した場合のダメージが大きい。TODO のウェブシステムの方は、しょせん自転車に注油するなどの簡単なことなのでギリギリ大丈夫だが、yyChat では業務情報を扱うので大きな責任問題になる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="3055bb87-2321-4b06-ae6a-6e1747ce180b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Azure Blob Storage について調べる</span>
+                    <a href="#3055bb87-2321-4b06-ae6a-6e1747ce180b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">File Storage: Use Azure Blob Storage or a similar service for storing attachments とのこと。Azure は何かにつけて高額の印象があるが。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Azure Blob Storage is a service offered by Microsoft Azure for storing large amounts of unstructured data, such as text or binary data. Here are the key features and steps to get started with Azure Blob Storage:</p>
+<h3>Key Features</h3>
+<ol>
+<li><strong>Scalability</strong>: Store any amount of data and access it anywhere.</li>
+<li><strong>Accessibility</strong>: Access blobs from anywhere via HTTP or HTTPS.</li>
+<li><strong>Data Redundancy</strong>: Multiple redundancy options like LRS (Locally-redundant storage), GRS (Geo-redundant storage), RA-GRS (Read-access geo-redundant storage), and ZRS (Zone-redundant storage).</li>
+<li><strong>Security</strong>: Fine-grained access control with Azure Active Directory, shared access signatures, and encryption at rest.</li>
+<li><strong>Integration</strong>: Integrates with other Azure services, such as Azure CDN, Azure Search, and Azure Machine Learning.</li>
+</ol>
+<h3>Types of Blobs</h3>
+<ol>
+<li><strong>Block Blobs</strong>: Optimized for uploading large amounts of data efficiently.</li>
+<li><strong>Append Blobs</strong>: Optimized for append operations, making it ideal for logging scenarios.</li>
+<li><strong>Page Blobs</strong>: Optimized for random read/write operations and used for virtual hard drives.</li>
+</ol>
+<h3>Steps to Get Started</h3>
+<h4>Step 1: Create a Storage Account</h4>
+<ol>
+<li><strong>Sign in to Azure Portal</strong>: <a href="https://portal.azure.com/">Azure Portal</a></li>
+<li><strong>Create a new storage account</strong>:
+<ul>
+<li>Navigate to &quot;Create a resource&quot; &gt; &quot;Storage&quot; &gt; &quot;Storage account&quot;.</li>
+<li>Fill in required details like subscription, resource group, storage account name, and location.</li>
+<li>Choose performance, replication, and access tier settings.</li>
+<li>Click &quot;Review + create&quot;.</li>
+</ul>
+</li>
+</ol>
+<h4>Step 2: Configure Storage Account</h4>
+<ol>
+<li><strong>Access Keys</strong>:
+<ul>
+<li>Navigate to your storage account.</li>
+<li>Go to &quot;Access keys&quot; under &quot;Settings&quot; to get your account keys and connection string.</li>
+</ul>
+</li>
+<li><strong>Create Containers</strong>:
+<ul>
+<li>In the storage account, go to &quot;Blob service&quot; &gt; &quot;Containers&quot;.</li>
+<li>Click &quot;+ Container&quot; to create a new container.</li>
+<li>Set the container's public access level as required.</li>
+</ul>
+</li>
+</ol>
+<h4>Step 3: Upload and Manage Blobs</h4>
+<ol>
+<li><strong>Upload Blobs</strong>:
+<ul>
+<li>Navigate to your container.</li>
+<li>Click &quot;Upload&quot; to upload files.</li>
+</ul>
+</li>
+<li><strong>Blob Management</strong>:
+<ul>
+<li>List, delete, and manage blob properties using the Azure Portal, Azure CLI, Azure PowerShell, or programmatically via the Azure Storage SDK.</li>
+</ul>
+</li>
+</ol>
+<h3>Programmatic Access</h3>
+<h4>Using Azure Storage SDK (C# Example)</h4>
+<ol>
+<li><strong>Install Azure.Storage.Blobs NuGet Package</strong>:
+<pre><code class="language-sh">dotnet add package Azure.Storage.Blobs
+</code></pre>
+</li>
+<li><strong>Code to Upload a Blob</strong>:
+<pre><code class="language-csharp">using Azure.Storage.Blobs;
+using System;
+using System.IO;
+using System.Threading.Tasks;
+
+namespace BlobStorageExample
+{
+    class Program
+    {
+        private const string blobServiceEndpoint = &quot;&lt;Your Blob Service Endpoint&gt;&quot;;
+        private const string storageAccountName = &quot;&lt;Your Storage Account Name&gt;&quot;;
+        private const string storageAccountKey = &quot;&lt;Your Storage Account Key&gt;&quot;;
+        private const string containerName = &quot;my-container&quot;;
+
+        static async Task Main(string[] args)
+        {
+            // Create a BlobServiceClient object
+            string connectionString = $&quot;DefaultEndpointsProtocol=https;AccountName={storageAccountName};AccountKey={storageAccountKey};EndpointSuffix=core.windows.net&quot;;
+            BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+
+            // Create a container
+            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+            await containerClient.CreateIfNotExistsAsync();
+
+            // Upload a blob
+            BlobClient blobClient = containerClient.GetBlobClient(&quot;sample.txt&quot;);
+            await blobClient.UploadAsync(new MemoryStream(System.Text.Encoding.UTF8.GetBytes(&quot;Hello, Blob Storage!&quot;)), true);
+
+            Console.WriteLine(&quot;Blob uploaded successfully.&quot;);
+        }
+    }
+}
+</code></pre>
+</li>
+</ol>
+<p>This should give you a solid foundation for working with Azure Blob Storage. If you need more specific information or have any questions about integrating it with your current project, feel free to ask!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">意外と安そうなので、やってみる。</p>
+                            <div class="note_ai_generated">
+<p>To estimate the cost of storing 1000 files, each 100 MB in size, on Azure Blob Storage, we need to consider several factors including storage costs, data transfer costs, and potential additional costs like read/write operations. Here’s a step-by-step guide to help you estimate the cost:</p>
+<h3>1. Storage Costs</h3>
+<p>Azure Blob Storage costs vary depending on the redundancy option you choose (LRS, GRS, RA-GRS, ZRS) and the access tier (Hot, Cool, Archive).</p>
+<p>Let's assume you are using the <strong>Hot</strong> access tier and <strong>Locally-Redundant Storage (LRS)</strong>.</p>
+<h4>Calculation</h4>
+<ul>
+<li><strong>Storage Required</strong>: 1000 files * 100 MB = 100,000 MB = 100 GB</li>
+<li><strong>Cost per GB for Hot LRS</strong>: Approx $0.0184 per GB per month (this can vary slightly by region)</li>
+</ul>
+<p>[ \text{Monthly Storage Cost} = 100 \text{ GB} \times 0.0184 \text{ USD/GB} = 1.84 \text{ USD/month} ]</p>
+<h3>2. Data Transfer Costs</h3>
+<p>Data transfer costs (egress) apply when data is read from Azure to an external location.</p>
+<ul>
+<li><strong>First 5 GB/month</strong>: Free</li>
+<li><strong>Next 10 TB/month</strong>: Approx $0.087 per GB</li>
+</ul>
+<p>If you are only storing and not transferring the data out of Azure, you can ignore this cost.</p>
+<h3>3. Transaction Costs</h3>
+<p>Azure charges for operations like write, list, and read operations. For simplicity, let's assume minimal transactions.</p>
+<ul>
+<li><strong>Write operations</strong>: $0.05 per 10,000 operations</li>
+<li><strong>Read operations</strong>: $0.004 per 10,000 operations</li>
+</ul>
+<p>Assuming:</p>
+<ul>
+<li><strong>Writes per month</strong>: 1000 (one write per file)</li>
+<li><strong>Reads per month</strong>: 1000 (one read per file)</li>
+</ul>
+<p>[ \text{Write Operation Cost} = \frac{1000}{10,000} \times 0.05 \text{ USD} = 0.005 \text{ USD/month} ]
+[ \text{Read Operation Cost} = \frac{1000}{10,000} \times 0.004 \text{ USD} = 0.0004 \text{ USD/month} ]</p>
+<h3>Total Monthly Cost Estimate</h3>
+<ul>
+<li><strong>Storage Cost</strong>: $1.84</li>
+<li><strong>Transaction Cost</strong>: $0.005 (write) + $0.0004 (read) = $0.0054</li>
+</ul>
+<p>[ \text{Total Monthly Cost} \approx 1.84 \text{ USD} + 0.0054 \text{ USD} \approx 1.85 \text{ USD/month} ]</p>
+<h3>Conclusion</h3>
+<p>The approximate cost to store 1000 files, each 100 MB, in Azure Blob Storage (Hot LRS) would be around $1.85 per month, assuming minimal transaction costs and no data egress.</p>
+<p>For the most accurate and up-to-date pricing, you should use the <a href="https://azure.microsoft.com/en-us/pricing/calculator/">Azure Pricing Calculator</a> and check the specific rates for your region and usage pattern.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="84474969-255e-4e9b-a396-4c8af8a2d673" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">遅延翻訳のやり方を調べる</span>
+                    <a href="#84474969-255e-4e9b-a396-4c8af8a2d673" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">たとえば、書き込まれたメッセージはいったんメモリー上のコレクションに入り、そこにあるうちは「翻訳中」とされる。そこにないならデータベースにあるのでそちらが参照される。そちらにあれば、暫定的に元の言語で表示されるか、「翻訳中」と UI に表示され、翻訳ができ次第、JavaScript によりそれに更新される。全くやったことのない実装だが、やり方を細分化していけば、けっこう簡単にできそうでもある。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Your design approach is thoughtful and covers the need to show the original message while waiting for translations to be completed. However, to ensure efficiency, scalability, and maintainability, here are a few enhancements and alternative considerations:</p>
+<h3>1. <strong>Separation of Concerns with a Message Queue System</strong></h3>
+<p>Instead of relying solely on an in-memory collection, you can use a message queue system (e.g., Azure Service Bus, RabbitMQ) to handle translation tasks. This approach ensures that messages are not lost if the server restarts and allows better scaling.</p>
+<p><strong>Process Flow:</strong></p>
+<ul>
+<li>When a message is sent, it is saved to the database with a status indicating it is pending translation.</li>
+<li>The message is then pushed to the queue for translation processing.</li>
+<li>A background service listens to the queue and processes translation tasks, updating the database once translations are completed.</li>
+<li>The client-side fetches the message and checks the database. If the translation is not ready, it displays the original message and uses SignalR to get notified when the translation is ready.</li>
+</ul>
+<h3>2. <strong>Using SignalR for Real-Time Updates</strong></h3>
+<p>SignalR can be utilized to notify clients when a translation is completed. This approach ensures that clients are immediately updated without needing to poll for updates.</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li><p><strong>Message Sent:</strong></p>
+<ul>
+<li>Save the original message in the database with a status of &quot;pending translation.&quot;</li>
+<li>Push the translation tasks to a queue.</li>
+<li>Return the original message to the client.</li>
+</ul>
+</li>
+<li><p><strong>Translation Service:</strong></p>
+<ul>
+<li>A background worker processes the queue, performs translations, and updates the database.</li>
+<li>Once translations are complete, notify clients via SignalR.</li>
+</ul>
+</li>
+<li><p><strong>Client-Side:</strong></p>
+<ul>
+<li>Display the original message immediately.</li>
+<li>Subscribe to SignalR notifications for translation updates.</li>
+<li>Update the message display once the translation is received.</li>
+</ul>
+</li>
+</ol>
+<h3>3. <strong>Efficient Storage and Retrieval</strong></h3>
+<p>Instead of using an in-memory collection, you can leverage a distributed cache (e.g., Redis) to temporarily store pending translations. This approach is more scalable and resilient to server restarts.</p>
+<p><strong>Implementation:</strong></p>
+<ul>
+<li>Store pending translations in Redis with a messageId as the key.</li>
+<li>Once translations are complete, remove the entry from Redis and update the database.</li>
+<li>The client checks Redis first; if not found, it fetches from the database.</li>
+</ul>
+<h3>Example Code</h3>
+<p><strong>Message Queue Configuration (using Azure Service Bus):</strong></p>
+<pre><code class="language-csharp">services.AddSingleton&lt;IQueueClient&gt;(new QueueClient(connectionString, queueName));
+</code></pre>
+<p><strong>Background Service to Process Translations:</strong></p>
+<pre><code class="language-csharp">public class TranslationService : BackgroundService
+{
+    private readonly IQueueClient _queueClient;
+
+    public TranslationService(IQueueClient queueClient)
+    {
+        _queueClient = queueClient;
+    }
+
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        _queueClient.RegisterMessageHandler(async (message, token) =&gt;
+        {
+            var messageBody = Encoding.UTF8.GetString(message.Body);
+            var chatMessage = JsonConvert.DeserializeObject&lt;ChatMessage&gt;(messageBody);
+
+            // Perform translation
+            var translations = await TranslateMessage(chatMessage);
+
+            // Update database with translations
+            await UpdateDatabaseWithTranslations(chatMessage.Id, translations);
+
+            // Notify clients using SignalR
+            await NotifyClients(chatMessage.Id, translations);
+
+            await _queueClient.CompleteAsync(message.SystemProperties.LockToken);
+        }, new MessageHandlerOptions(ExceptionReceivedHandler) { MaxConcurrentCalls = 1, AutoComplete = false });
+    }
+
+    private Task ExceptionReceivedHandler(ExceptionReceivedEventArgs arg)
+    {
+        // Handle exceptions
+        return Task.CompletedTask;
+    }
+}
+</code></pre>
+<p><strong>Client-Side SignalR Configuration:</strong></p>
+<pre><code class="language-javascript">const connection = new signalR.HubConnectionBuilder()
+    .withUrl(&quot;/translationHub&quot;)
+    .build();
+
+connection.on(&quot;ReceiveTranslation&quot;, (messageId, translations) =&gt; {
+    // Update the message display with translations
+    updateMessageTranslations(messageId, translations);
+});
+
+connection.start().catch(err =&gt; console.error(err.toString()));
+</code></pre>
+<p>This design ensures that your system is robust, scalable, and maintains real-time updates efficiently. By leveraging message queues, background services, and real-time notifications, you can handle translations smoothly while providing immediate feedback to users.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>A Message Queue System and a Background Task are both used to handle asynchronous processing, but they differ in their architecture, use cases, and how they manage and process tasks. Here's a comparison to highlight the differences:</p>
+<h3>Message Queue System</h3>
+<p><strong>Definition:</strong>
+A Message Queue System is an intermediary that receives, stores, and forwards messages. It decouples the sender and receiver of messages, ensuring that the system can handle tasks asynchronously and reliably.</p>
+<p><strong>Components:</strong></p>
+<ul>
+<li><strong>Queue:</strong> A storage mechanism where messages are held until they are processed.</li>
+<li><strong>Producers:</strong> Components that send messages to the queue.</li>
+<li><strong>Consumers:</strong> Components that read and process messages from the queue.</li>
+</ul>
+<p><strong>Characteristics:</strong></p>
+<ol>
+<li><strong>Decoupling:</strong> Producers and consumers are decoupled. Producers push messages to the queue, and consumers process them independently.</li>
+<li><strong>Scalability:</strong> Multiple consumers can read from the same queue, allowing the system to scale horizontally.</li>
+<li><strong>Reliability:</strong> Messages are stored in the queue until processed, ensuring no messages are lost even if a consumer fails.</li>
+<li><strong>Persistence:</strong> Messages can be persisted, ensuring durability across system restarts.</li>
+<li><strong>Load Balancing:</strong> Messages can be distributed across multiple consumers, balancing the load.</li>
+</ol>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>Handling high-volume tasks like logging, metrics collection, or background jobs.</li>
+<li>Ensuring reliable message processing with retries.</li>
+<li>Decoupling microservices in a distributed system.</li>
+</ul>
+<h3>Background Task</h3>
+<p><strong>Definition:</strong>
+A Background Task is a unit of work that is executed asynchronously in the background by the application. This can be part of the same application or hosted separately.</p>
+<p><strong>Components:</strong></p>
+<ul>
+<li><strong>Task Runner:</strong> A component or service that runs background tasks.</li>
+<li><strong>Task Queue:</strong> (Optional) An internal mechanism to manage pending tasks.</li>
+</ul>
+<p><strong>Characteristics:</strong></p>
+<ol>
+<li><strong>Tight Coupling:</strong> Typically part of the same application, meaning there's less decoupling compared to message queues.</li>
+<li><strong>Simplicity:</strong> Easier to implement for simple asynchronous processing within the same application context.</li>
+<li><strong>Limited Scalability:</strong> Scaling might require running multiple instances of the application, which can be less efficient than dedicated consumers.</li>
+<li><strong>In-Memory Processing:</strong> Tasks might be stored in memory, which can be lost if the application crashes or restarts unless explicitly persisted.</li>
+<li><strong>Concurrency Control:</strong> Limited control over concurrency compared to message queue systems.</li>
+</ol>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>Simple asynchronous tasks within a web application.</li>
+<li>Scheduled jobs and periodic tasks.</li>
+<li>Lightweight background processing without the need for a full message queue system.</li>
+</ul>
+<h3>Example Scenarios</h3>
+<h4>Using a Message Queue System:</h4>
+<p><strong>Scenario:</strong> Processing user-uploaded images for thumbnails.</p>
+<ol>
+<li><strong>User uploads an image.</strong></li>
+<li><strong>Producer (web app) pushes a message to the queue</strong> with details of the image.</li>
+<li><strong>Queue stores the message</strong> until a consumer is available.</li>
+<li><strong>Consumer (background service)</strong> processes the image to create a thumbnail.</li>
+<li><strong>Consumer updates the database</strong> and notifies the user once the processing is complete.</li>
+</ol>
+<p><strong>Benefits:</strong> Ensures that even if the consumer fails, the message is not lost. Can easily scale by adding more consumers.</p>
+<h4>Using a Background Task:</h4>
+<p><strong>Scenario:</strong> Sending a welcome email after user registration.</p>
+<ol>
+<li><strong>User registers on the web application.</strong></li>
+<li><strong>Background task is triggered</strong> to send a welcome email.</li>
+<li><strong>Task runs in the background,</strong> sending the email while the web application continues to handle user interactions.</li>
+</ol>
+<p><strong>Benefits:</strong> Simple to implement within the same application context. No need for a separate infrastructure like a message queue.</p>
+<h3>Summary</h3>
+<ul>
+<li><strong>Message Queue System:</strong> Best for decoupled, scalable, and reliable asynchronous processing across distributed systems.</li>
+<li><strong>Background Task:</strong> Suitable for simple, lightweight asynchronous processing within the same application.</li>
+</ul>
+<p>For your chat system with auto-translation, using a Message Queue System would be beneficial to handle translations reliably, ensuring messages are processed even if there are failures, and allowing for better scaling as your system grows.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, a Message Queue System is generally an independent service that exists separately from your application, much like how a database service operates independently. Here are the key points to consider:</p>
+<h3>Message Queue System as an Independent Service</h3>
+<p><strong>Independence:</strong></p>
+<ul>
+<li><strong>Autonomous Operation:</strong> A message queue operates independently of the application, meaning it can receive and store messages even if the application is not running. Similarly, consumers can process messages independently.</li>
+<li><strong>Decoupling:</strong> The producer (your application) and consumer (translation service) are decoupled, allowing each to operate without direct dependency on the other. This decoupling can improve system resilience and scalability.</li>
+</ul>
+<p><strong>Examples of Message Queue Systems:</strong></p>
+<ul>
+<li><strong>Azure Service Bus:</strong> A fully managed enterprise message broker with message queues and publish-subscribe topics.</li>
+<li><strong>RabbitMQ:</strong> An open-source message broker that implements the Advanced Message Queuing Protocol (AMQP).</li>
+<li><strong>AWS SQS:</strong> A fully managed message queuing service from Amazon Web Services.</li>
+<li><strong>Google Cloud Pub/Sub:</strong> A real-time messaging service that allows you to send and receive messages between independent applications.</li>
+</ul>
+<h3>Cost Considerations</h3>
+<p><strong>Paying for Message Queue Systems:</strong></p>
+<ul>
+<li><strong>Service-Based Pricing:</strong> When using a managed service like Azure Service Bus, AWS SQS, or Google Cloud Pub/Sub, you generally pay based on usage. Pricing models typically consider factors such as the number of messages, data volume, and specific features (e.g., advanced message handling, redundancy).</li>
+<li><strong>Azure Service Bus Pricing:</strong> Azure charges for operations (sending, receiving, and deleting messages), data transfer, and additional features like premium tiers for advanced capabilities.</li>
+</ul>
+<p><strong>Example Pricing Structure:</strong></p>
+<ul>
+<li><strong>Basic Tier:</strong> Often includes a limited number of messages per month for a fixed cost, suitable for small-scale applications or development/testing.</li>
+<li><strong>Standard/Premium Tiers:</strong> Higher tiers offer more features and higher limits, with pricing based on operations, data transfer, and retention policies.</li>
+</ul>
+<h3>Integration with Your Application</h3>
+<ol>
+<li><p><strong>Send Messages to the Queue:</strong></p>
+<ul>
+<li>When a message is sent (e.g., a chat message), your application publishes this message to the queue.</li>
+<li>The queue stores the message until a consumer retrieves and processes it.</li>
+</ul>
+</li>
+<li><p><strong>Process Messages from the Queue:</strong></p>
+<ul>
+<li>A background service or worker role acts as the consumer, retrieving messages from the queue for processing (e.g., translation).</li>
+<li>Once processing is complete, the service updates the database and optionally sends notifications via SignalR.</li>
+</ul>
+</li>
+<li><p><strong>Application Continuity:</strong></p>
+<ul>
+<li>Your application can continue to function independently, with the message queue ensuring that messages are reliably stored and processed.</li>
+<li>Even if your application or the consumer service experiences downtime, the message queue preserves messages for future processing.</li>
+</ul>
+</li>
+</ol>
+<h3>Summary</h3>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li><strong>Reliability and Durability:</strong> Ensures messages are not lost and can be processed asynchronously.</li>
+<li><strong>Scalability:</strong> Easily scales by adding more consumers to process messages.</li>
+<li><strong>Decoupling:</strong> Separates the concerns of message production and consumption, leading to more maintainable and resilient systems.</li>
+</ul>
+<p><strong>Cost Considerations:</strong></p>
+<ul>
+<li><strong>Independent Billing:</strong> Message queue services are billed separately based on usage and tier. Plan for these costs in your budget.</li>
+<li><strong>Azure Example:</strong> Azure Service Bus has pricing based on operations, data transfer, and other features. Check the specific pricing details for the chosen service.</li>
+</ul>
+<p>Using a message queue system like Azure Service Bus will provide robustness and scalability for your chat system's auto-translation feature, ensuring that messages are reliably processed even if translation can sometimes take minutes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
