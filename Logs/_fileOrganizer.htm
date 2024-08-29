@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>_fileOrganizer</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="_fileOrganizer.htm" class="title">_fileOrganizer</a>
+        </div>
+        <div class="entries">
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">地味にめんどくさい。いろいろなレポジトリーのいろいろなところに分けて整理している。エクスプローラーで行ったり来たりが続く。ウィンドウをいくつも開くとラベルが見えなくなって困る。タブで開くと、どのウィンドウにそのタブが入っているのか分からなくなる。</p>
+                    <p class="note_contents">そういったところが大丈夫の場合も、たとえば WeChat は同じファイルを複数の名前で保存することがあって、すでに別名で保存されているものを同じディレクトリーに入れてしまうミスが起こる。</p>
+                    <p class="note_contents">よくファイルを入れるところのリストを事前に登録しておけるソフトが便利そう。</p>
+                    <!-- Task: 0a06e7c6-caa7-4db1-a50a-f90e633fe935 -->
+                </div>
+            </div>
+            <div id="eff66a7e-bdf3-485e-8c01-91964cafe952" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">仕様を大まかに考える</span>
+                    <a href="#eff66a7e-bdf3-485e-8c01-91964cafe952" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">とにかく、もらったファイルの整理がめんどくさい。いろいろなところから届く。大きなファイルや一般的なファイル（もらったカタログなど）を会社の Google Drive に入れ、小さなものやプライベートなもの（送り状など）をレポジトリーに入れているが、会社用のレポジトリー、夫婦用のもの、自分用のものもあって、とにかく保存先がたくさんあり、エクスプローラーで上がったり下がったりだ。</p>
+                            <p class="note_contents">おまけに WeChat は同じファイルでも二度保存するとファイル名を異ならせてくれる。WhatsApp でもそうだったかもしれない。バイナリーとして一致するのにファイル名が異なるので、すでにレポジトリーには同じファイルの複数のコピーが散在している。必死になって探して消すほどでないため放置しているが、保存時に「それ、もうありますよ」を言ってもらえないので、一連のファイルを全て二度保存することもあって、時間の無駄だ。</p>
+                            <p class="note_contents">といったことから、コンソールアプリでファイルをドラッグ＆ドロップし、保存先がリストにあれば選び、なければ追加し、あるファイルとないファイルが検出され、OK で保存するツールを書く。</p>
+                            <p class="note_contents">重複検出においては、リストの全てのディレクトリーがチェックされると便利か。あるいは、保存先リストの CRUD のところで、「ルート」的な属性をつけての登録もできるようにして、そこはリストには入らないが重複検出は行われるのが便利か。</p>
+                            <p class="note_contents">このソフトの肝は重複検出だ。JSON だと重たくなりそうなので SQLite を検討する。Git で差分が調べられないためコミット時にエディターがもたつかない。OneDrive の誤処理などによりデータが破損することも考えられるため、リストは差分を見て日頃からコミットしやすい JSON とし、ハッシュなどのデータは .gitignore に入れてマニュアルで rebuild できてもよいだろう。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ハッシュはもちろん JIT 的に。つまり、ファイルサイズが一致した場合のみハッシュが要求され、ない場合のみ生成される。</p>
+                            <p class="note_contents">ルートの指定はやめておくべきかもしれない。カタログのディレクトリーなど、ファイルが膨大なところがある。ルートを指定しつつ、そういったものだけ除外すると、設定ファイルがややこしくなる。保存先となりうるところ全てでチェックするだけで十分な精度を得られる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">保存先に階層構造を指定する考えがあったが、これもやめておく。設定ファイルを手書きするならインデントするだけだが、設定ファイルも一応ツールで更新するなら、どれがどれに属するかの指定なども必要になってめんどくさい。かといって、ツリービューなどを持つ WPF または Avalonia UI のアプリとして書くと、もっとめんどくさい。極めて個人的なツールなので、そこまでしない。</p>
+                            <p class="note_contents">保存先は追加と削除のみ可能で、更新が認められない。放り込んだファイルの数により並び替えられると便利。これらの数は JSON ファイルに入る。OneDrive のエラーなどにより JSON が壊れる可能性があるため、「だいたいうまく並び替えられていれば便利」程度に割り切る。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="67909e2c-cb9f-44b8-a446-7cda499cbdf4" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">このタスクリストのログが出力されるようにする</span>
+                    <a href="#67909e2c-cb9f-44b8-a446-7cda499cbdf4" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="1b5d5791-a65d-4f83-ad93-d45a3807d5bc" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">メモ通りにプロジェクト開始時のタスクを処理</span>
+                    <a href="#1b5d5791-a65d-4f83-ad93-d45a3807d5bc" class="permalink">&infin;</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

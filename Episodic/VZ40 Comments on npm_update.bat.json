@@ -1,0 +1,49 @@
+﻿{
+    "guid": "01429668-cc8c-4f8e-b118-c5c6c52038c8",
+    "creation_utc": "2024-08-29T11:51:57.509724+00:00",
+    "code": "VZ40",
+    "title": "Comments on npm_update.bat",
+    "notes": [
+        {
+            "guid": "5f9b545c-cae7-4a1b-8062-b67227adc589",
+            "creation_utc": "2024-08-29T11:54:51.941940+00:00",
+            "code": "YY35",
+            "content": [
+                "Relevant pages:",
+                "",
+                "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cd",
+                "https://stackoverflow.com/questions/5034076/what-does-dp0-mean-and-how-does-it-work",
+                "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/set_1",
+                "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/mkdir",
+                "https://stackoverflow.com/questions/42305275/creating-a-bat-file-with-npm-install-command",
+                "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/call",
+                "https://docs.npmjs.com/cli/v10/commands/npm-install",
+                "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/rmdir",
+                "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/xcopy",
+                "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/del",
+                "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/move",
+                "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/pause"
+            ]
+        },
+        {
+            "guid": "1408e567-df3a-4c89-b715-e8bca6c48d78",
+            "creation_utc": "2024-08-29T12:01:10.054065+00:00",
+            "code": "QK22",
+            "content": [
+                "npm_update.bat must be called periodically to keep the project's npm packages up-to-date.",
+                "",
+                "When an ASP.NET Core Razor Pages app is generated, older versions of Bootstrap and 3 variants of jQuery are included. We can update them using npm_update.bat. Then, @popperjs is added. Probably, one or more of the packages now depend on it. The validation variant of jQuery also comes with localization-related files. Currently, I'm not sure if I need them. So, they are not copied to the lib directory. If I eventually need them, modifying a few lines of the script should get them working."
+            ],
+            "notes": [
+                {
+                    "guid": "677365cf-eccf-46f5-9fd8-cb0318ccf39f",
+                    "creation_utc": "2024-08-29T12:34:11.480598+00:00",
+                    "code": "SM54",
+                    "content": [
+                        "I changed my mind, copied @popperjs and kept the localization directory of the validation variant of jQuery. The files arent many or large. Bootstrap clearly depends on @popperjs. jQuery MAY require the localization directory to function properly. They wont cause any significant security vulnerabilities. If I omit them, on the other hand, some things may be broken."
+                    ]
+                }
+            ]
+        }
+    ]
+}

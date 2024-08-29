@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>yyMail</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="yyMail.htm" class="title">yyMail</a>
+        </div>
+        <div class="entries">
+            <div id="d56fa058-2dff-4447-b7db-d6ab21dc835d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">このタスクリストのログが出力されるようにする</span>
+                    <a href="#d56fa058-2dff-4447-b7db-d6ab21dc835d" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="83407926-a882-4aa5-8623-fc96a0832651" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">仕様を大まかに考える</span>
+                    <a href="#83407926-a882-4aa5-8623-fc96a0832651" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">TODO メールのシステム、外国人とのメールのやりとりのシステムの二つを組み合わせる。メールフォームが似ていて、メールを送ってデータベースに登録するところが共通なので、モードの切り替えによりどちらとしても使えるようにする。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">TODO メールのソフトとしては、自分が自分にタスクやアイデアを送るもの、奥さんが自分にタスクを送るもの、その逆の三つを別々に用意する。あるいは、そのうち二つ目と三つ目を統合する。</p>
+                            <p class="note_contents">夫婦間のタスクのやりとりにおいては、今は TODO メールを送りっぱなす Avalonia UI の自作ソフトを使っている。やっておいてほしいことをパッと送れて便利だが、夫婦ともに、その日のうちにやらなければ、古いメールなんて忙しければ毎日は見ないので、そのまま滞留しがちだ。また、いくつかのタスクを送るときに、何を送ったか、どのような内容で送ったかをこちらで確認できないと不便だ。そういったものは、相手のメーラーにしか入っていない。これら二つに対処するには、相手のタスクリストを見ることができて、そのうち大事なことを強調表示できるということが不可欠。</p>
+                            <p class="note_contents">そうするにおいて、どうせならメールで会話をできるシステムをつくり、OK ボタンを押してアーカイブしない限り相手のメッセージがいつまでも残り、さらにピン留めされたものはいつまでも最上位に表示されるというのは、相手用と自分用の二つのインスタンスを置くよりシンプルかつ便利かもしれない。</p>
+                            <p class="note_contents">その仕様でいくなら、OK は相手も自分も押せるようにすることで、相手のいないチャットルームだからこそ誰にも通知メールが届かない状況で一人でメッセージを書いていって一人で OK を押していく使い方も一つの案。</p>
+                            <p class="note_contents">タスクリストとして使うなら OK でなく、やったかやらなかったの区別くらいはしたくなるが、その場合、ただの雑談だったり古いメッセージへの補足だったりがタスクなのか補足なのかといったことを書き手が指定することになり、その指定が誤っている場合の扱いもめんどくさくなる。「これってタスクですから、タスク属性をつけましたよ」のようなことをやりとりし、そのうえでやったのかどうかを設定してアーカイブするようなことは、仕事そのものにさほど貢献しない過度の管理になる。</p>
+                            <p class="note_contents">といったことを考えるなら、アーカイブは全て OK で行い、返信をつけられるようにすることで、必要なものには返信にて結果を添えるというのが直感的で分かりやすい。</p>
+                            <p class="note_contents">まとめると、ユーザーの CRUD を行い、同じ会社から複数のユーザーを登録して区別することもありうるのでメアドの重複を許し、書き込み時には「自分と一致しない全てのメアド」への通知を行い、OK もピン留めもピン外しも誰でもできて、アーカイブされたものはアーカイブ済みのところに入り、そちらから OK を外すことも可能にして（誤操作は絶対にある）、返信すれば元のメッセージの一部が表示されて JavaScript で展開できる。</p>
+                            <p class="note_contents">ファイルや画像は、メッセージへの CRUD が良いだろう。ファイルや画像だけのエントリーはデータベースをややこしくするし、メディアを載せてからコメントの人もいれば、先にコメントを書いてからメディアの人もいて、関連性があいまいになる。書き込み時に添付でき、その後、さらに追加したり消したり。モードによっては、追加と削除のみできて、削除なら消したことが分かるメッセージが残り、置き換えができないのも便利だろう。管理人のみ「消されたもの」のページにてメッセージも添付ファイルも閲覧できるのも便利か。ビジネスなら、そのくらいできた方が良さそう。</p>
+                            <p class="note_contents">アーカイブ件数が大きくなってくれば、頻度などに基づき自動的に分割される。年ごと、月ごと、日ごとといった分割は普遍的なので、いずれもルーティングによりいつでも開けるように。あるいは月ごとまでにしておき、UL でも使ってリストを表示し、すぐに絞り込めるように。あくまでチャットでなくメールのやりとりであり、毎日100も200も書き込むわけでないため、月ごとで足りるか。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">翻訳メールのシステムとしては、TODO メールのシステムとして考えたことをそのまま引き継ぎ、そこに循環翻訳を導入。</p>
+                            <p class="note_contents">いろいろな国の人がいることも考えられるので、自分の言語と翻訳先の言語を一つ選び、2回の翻訳を行う。クッキーで保存するなら選択は初回だけなので手間でない。内容に問題があれば書き直して同じことを行う。納得すれば書き込む。言語を選んでもらっているので、その言語の属性をつけて原文を保存し、「AI にだいたい正しく理解できる原文になっている」という前提で、各言語に翻訳して通知メールおよびデータ登録。全ユーザーの言語が分かっているので、その分だけデータベース内にデータが入る。その言語リストはそのまま表示言語リストでもあり、ユーザーがクエリーにより選択できるように。</p>
+                            <p class="note_contents">ユーザーの CRUD で言語が増えた場合、その言語への翻訳をバックグラウンドで行いたい。リアルタイムで表示するほどのものでないため、「対応言語リスト」ページでもつくり、その言語でのエントリー数を表示。F5 でリロードするうちにそれがほかと同じ値になれば翻訳が完了。</p>
+                            <p class="note_contents">また、「全翻訳結果」ページもつくりたい。原文と訳文を羅列。そこでも循環翻訳を行えば、「さっきの書き込みは、本当にちゃんと訳せたのか」を念のためにチェックするほど大事なメッセージの扱いにおいて便利。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">yyChat という、プロジェクト管理に向く、複数のチャットルームを持つかのようなメッセージングシステムの開発を考えている。それと機能的な重複がある。それなら一つに統合すべきでないかとも考えた。</p>
+                    <p class="note_contents">ただ、おそらく yyChat は学習および運用のコストが大きい。社内で使うなら教え込めるし、標準的な使い方に反する書き込みなどがあれば、こちらで内容を訂正するとか、部屋をつくり直すとか、いろいろできる。それを取引先とやると、めんどくさいし、トラブルの原因にもなる。</p>
+                    <p class="note_contents">オーバーキルになる懸念もある。母語が同じなら日に2～3通のメールでもまわる程度の取り引きしかないところと、複数プロジェクトをまわせるシステムを使う必要性は乏しい。無理に二つ三つの部屋に分ける程度の情報量しかないなら、翻訳およびファイル管理が行われる利点を持つ単一スレッドの yyMail で足りる。</p>
+                    <p class="note_contents">UI が違うだけで、やることは似ている。翻訳、メールの生成から送信まで、必要なら SMS の送信、ファイル管理、基本的な CRUD などをまず yyLib, yyGptLib, yyMailLib に実装することで、おそらく7割くらいのコードを共通化できる。</p>
+                    <p class="note_contents">残り3割のコードは、それぞれのユーザーにとって最善の形を届けるための不可避のコストだ。</p>
+                    <!-- Task: 81a688a0-8937-4efb-8a90-d3593477a56d -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">何を yyLib に入れるべきかを考える必要がある。メッセージングの共通コードには、必ず、ある程度の仕様が入る。つまりは決め打ちの実装になる。それを yyLib に入れるのは、あとあと問題になる。仕様の数だけ小さなライブラリーをつくることには懸念もあるが、「関係のないコードが各アプリに同梱されない」という当たり前のことを考えるなら、その構成が結局は最善なのだろう。</p>
+                    <!-- Task: 81a688a0-8937-4efb-8a90-d3593477a56d -->
+                </div>
+            </div>
+            <div id="e13c62cf-df36-4d03-ad5c-4f4dd55c8805" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">dotnet dev-certs https --trust を実行</span>
+                    <a href="#e13c62cf-df36-4d03-ad5c-4f4dd55c8805" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents"><a href="https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc" target="_blank" class="url">https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="3ce26293-606f-43f7-97d9-80f286436afc" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">メモ通りにプロジェクト立ち上げ時のタスクを処理</span>
+                    <a href="#3ce26293-606f-43f7-97d9-80f286436afc" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="396edc53-3e4b-40c9-ad74-3cc00ea1b900" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">jQuery などのファイルの更新を自動化</span>
+                    <a href="#396edc53-3e4b-40c9-ad74-3cc00ea1b900" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">npm にバッチファイルを組み合わせることでうまくいきそう。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">npm_update.bat をつくり、コメントを VZ40 Comments on npm_update.bat.json にまとめた。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

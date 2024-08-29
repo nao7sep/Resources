@@ -1,49 +1,49 @@
 ﻿<!DOCTYPE html>
 <html>
     <head>
-        <title>クラスライブラリー群</title>
+        <title>_tempDirCleaner</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace}</style>
     </head>
     <body>
         <div class="title">
-            <a href="Class-Libraries.htm" class="title">クラスライブラリー群</a>
+            <a href="_tempDirCleaner.htm" class="title">_tempDirCleaner</a>
         </div>
         <div class="entries">
             <div class="note">
                 <div class="note_contents">
-                    <p class="note_contents">現時点で、yyLib, yyGptLib, yyMailLib の三つがある。分けるほどでなかったとたびたび思うが、メールを全く使わないアプリにまで MailKit などがぶら下がることの違和感も大きく、今さら統合しようとも思わない。</p>
-                    <p class="note_contents">ただ、タスクリストまで分かれている利益は乏しい。yyTodoMail が動いていて、いずれも「少なくとも一つのアプリは、それにより動く」という状態に至っている。まっさらの開発ではないので、必要な機能を必要なライブラリーに追加していく単純なワークフローへ。</p>
-                    <!-- Task: c4bd0caa-d0da-4680-aa17-5eef28993bbb -->
+                    <p class="note_contents">すぐに終わり、すぐに便利。重要でないが、1時間くらいで終わるだろうからやる。</p>
+                    <!-- Task: c3747ec0-7558-4e7c-9747-34ce0a57ec9d -->
                 </div>
             </div>
-            <div id="d7152aea-f640-4aab-98e5-571b5948610a" class="task done">
+            <div id="f57a5183-b798-4423-bdab-62923f454530" class="task done">
                 <div class="task_contents">&check;
                     <span class="task_contents">このタスクリストのログが出力されるようにする</span>
-                    <a href="#d7152aea-f640-4aab-98e5-571b5948610a" class="permalink">&infin;</a>
+                    <a href="#f57a5183-b798-4423-bdab-62923f454530" class="permalink">&infin;</a>
                 </div>
             </div>
-            <div id="9b0e8c6b-e601-4ff9-83ab-1978654f0998" class="task done">
+            <div id="6eb884f3-3cf5-42da-b583-5d52c53a8e37" class="task done">
                 <div class="task_contents">&check;
-                    <span class="task_contents">現行のそれぞれのライブラリーに仕様や決め打ちのコードが入っていないか調べる</span>
-                    <a href="#9b0e8c6b-e601-4ff9-83ab-1978654f0998" class="permalink">&infin;</a>
+                    <span class="task_contents">大まかな仕様を考える</span>
+                    <a href="#6eb884f3-3cf5-42da-b583-5d52c53a8e37" class="permalink">&infin;</a>
                 </div>
                 <div class="notes">
                     <div class="note">
                         <div class="note_contents">
-                            <p class="note_contents">仕様の数だけ小さなライブラリーをつくっていく。「それぞれのアプリにそれと関係のないコードが同梱されない」という当たり前のことを考えるにおいて最善の構成。ライブラリーまみれになりそうで懸念もあるが、一つにまとめて肥大化するよりよほどマシ。</p>
+                            <p class="note_contents">決め打ちでよい。現在のユーザーの Temp ディレクトリー内のファイルを消す。安全のため、24時間が経過したものだけを。ディレクトリーが多いのも影響がありうるので、こちらも一応タイムスタンプを見ながら、24時間が経過していれば消す。24時間というのは、CCleaner がそういう仕様になっていた記憶がある。完全に消えきらなくなるが、残るのは全体の数％。</p>
                         </div>
                     </div>
                     <div class="note">
                         <div class="note_contents">
-                            <p class="note_contents">yyLib に simple logging の仕様が入っているが、あらゆるアプリで使えるくらいシンプルなものだし、だから simple としたのだからセーフ。また、OpenAI の API のパラメーターなどをモデルクラスで扱えるようになっているが、今のところどのモデルクラスも十分によく使われるものなのでセーフ。</p>
+                            <p class="note_contents">一応、それぞれのファイルの情報をモデルクラスに入れ、シリアライズして JSON に保存するくらいのことを行う。OneDrive にバイナリーを置くだろうから、アプリのルートディレクトリーの近くに Logs サブディレクトリーをつくる。</p>
                         </div>
                     </div>
-                    <div class="note">
-                        <div class="note_contents">
-                            <p class="note_contents">yyGptLib と yyMailLib はいずれも最小限なのでセーフ。</p>
-                        </div>
-                    </div>
+                </div>
+            </div>
+            <div id="18ca148c-6930-4f04-a7d5-d06447640931" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">プロジェクト開始時のタスクをメモ通りに処理</span>
+                    <a href="#18ca148c-6930-4f04-a7d5-d06447640931" class="permalink">&infin;</a>
                 </div>
             </div>
         </div>
