@@ -237,6 +237,123 @@
                     </div>
                 </div>
             </div>
+            <div id="5bc52352-8eaf-4a2b-ad53-ffda5674baa2" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">添付ファイルの保存方法についてメモ</span>
+                    <a href="#5bc52352-8eaf-4a2b-ad53-ffda5674baa2" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">yyChat へのつなぎのツールの開発において良い仕様を思いついたので、ここにメモを残す。yyMail でもこれにならう。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">WordPress は、月ごとにファイルを分ける。uploads/2024/08/... のようなパスをよく見る。日ごとは分けすぎで、年ごとはまとめすぎだ。おそらく設定で変更できるだろうが、デフォルトが「月」なのは妥当だ。時系列的にエントリーを管理するツールなのだから、「月」で分けておけば、ゆるく関連しているファイルがそれぞれのサブディレクトリーにまとまる。</p>
+                            <p class="note_contents">yyChat/yyMail においても、これにならう。</p>
+                            <p class="note_contents">さらに、同じ名前のファイルが存在すれば、1からの連番をパスに含める。内部的には、0がルートで、1以降がサブディレクトリーだ。同じ名前のファイルだけを List にでも入れるにおいてインデックスと連番を一致させられるのも都合が良い。</p>
+                            <p class="note_contents">データベースには、載せた人の ID、タイムスタンプ、それらから抽出した年月日、そのうちどこまでがパスに使われているか、コリジョン対策の連番、それらによる最終的な相対パス、各サイズの縮小版の相対パス（画像の場合）などを入れる。</p>
+                            <p class="note_contents">「どこまでが」を扱えば、パスの生成方法を途中で変更できる。最初は月ごとだったものを年ごとに変更してからコリジョンが多ければ「月」としてつくられたサブディレクトリーと連番が衝突するなどが考えられるが、おそらく問題はない。そのパスが使用可能かどうかだけの判別であり、ファイルシステム側でたとえばその場所に含まれるほかのファイルとの関連性だったり全体の数だったりが問われることはないため。</p>
+                            <p class="note_contents">おそらく「年」でさえ分けない設定も問題ない。コリジョンが数千回になれば「年」で昔に作ったサブディレクトリーと衝突するが、それも実害はない。</p>
+                            <p class="note_contents">yyChat においてはプロジェクトごとに分けようと思っていたが、そうする理由があまりない。URL にプロジェクトの ID が入ることのメリットは、なんとなくそう思うほどには多くない。RDP でサーバーに直接つなぐのでない限り、ファイルシステムにおいてプロジェクトごとにファイルを閲覧できるメリットもない。そこでの誤操作でデータが壊れるのだから、そもそもそういうことをしてはならない。プロジェクトごとに添付ファイルを表示する機能は必ず実装される。</p>
+                            <p class="note_contents">yyChat へのつなぎのツールにおいては、プロジェクトごとに分けることで、関連するファイルをエクスプローラーで一覧表示できる。ただ、つなぎで使う段階においてはそれほど多くのファイルを保存しないし、ファイルが二つ三つしか発生しないプロジェクトも多いため、おそらくサブディレクトリーのつくりすぎになって閲覧性はむしろ下がる。終わるとプロジェクトをアーカイブしていくツールなので、サブディレクトリーがすぐに100、200と増えていく可能性もある。つなぎのツールにおいても上記の方式が適する。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="8f85ce2d-ee63-4bd4-856d-43acc187d9bc" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">添付ファイルの縮小版のつくり方についてメモ</span>
+                    <a href="#8f85ce2d-ee63-4bd4-856d-43acc187d9bc" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ついでに縮小版についても考えておく。</p>
+                            <p class="note_contents">これは、thumbs または resized といったサブディレクトリーを、原版のあるディレクトリーからぶら下げるのが最善だろう。年月日による区別および連番により全ての原版のパスが一意に決まる。そこにさらに thumbs/resized といった単語が含まれることでは一意性が崩れない。</p>
+                            <p class="note_contents">ここで想定すべき問題は二つだ。一つは、たとえば hoge.jpg と hoge.png を載せて、それぞれの縮小版が JPEG だと resized/hoge.jpg がぶつかること。もう一つは、hoge.jpg から resized/hoge.jpg と resized/hoge-large.jpg がつくられたとして、さらに同じところに原版として hoge-large.jpg を載せたなら、resized 内でファイル名が衝突すること。</p>
+                            <p class="note_contents">前者は、縮小版を原版と同じ拡張子でつくることにより回避できる。中身が TIFF なのにユーザーの知識不足で拡張子が JPEG になっているとか、.jpg と .jpeg が混在しているとか、拡張子関連でもいろいろあるが、そこをあえてさわらないことで、問題を回避できる。JPEG なのに拡張子が .bmp なら、これら二つの比較においては縮小版を BMP にすることの理由がないことから、縮小版も JPEG を .bmp とするなどのスマートなやり方がある。ブラウザーがうまく対処するので、システムは拡張子を直さない方が良い。</p>
+                            <p class="note_contents">後者は、全ての縮小版に文字列を追加することで回避できる。そちらが普通の仕様だろうが、こういうのは気を抜くとやらかす設計ミスなので念のため書いておく。</p>
+                            <p class="note_contents">上記二つを守れば、「原版 → 縮小版を特定」と「少なくとも一つの縮小版 → 原版を特定」の両方が可能。原版が hoge-small.jpeg のようなものでも、hoge-small-large.jpeg から small/large を一度取れば原版の名前に戻る。</p>
+                            <p class="note_contents">名前の双方向変換ができることで、原版がなくなっているのに残っている縮小版や、原版があるのにそのサイズだけ存在しない縮小版の検出をやりやすい。</p>
+                            <p class="note_contents">もっとも、自分がやってきた限り、ウェブサーバーは、ファイルがロード中であっても書き込みをロックせず、削除要求がきたなら応じる認識がある。そうでないと、サーバー側がごみファイルだらけになるからか。</p>
+                            <p class="note_contents">WordPress は、原版の隣に縮小版をつくる。</p>
+                            <div class="note_ai_generated">
+<p>When you upload a very large image like <code>hoge.jpg</code> to WordPress, WordPress automatically generates several resized versions of that image in different dimensions to optimize performance and serve the appropriate size based on the context (e.g., thumbnails, medium-sized images, etc.).</p>
+<h3>Where Resized Images Are Saved:</h3>
+<ol>
+<li><p><strong>Upload Directory:</strong> All resized images are saved in the same directory as the original image. The default location is within the <code>wp-content/uploads/</code> directory of your WordPress installation.</p>
+</li>
+<li><p><strong>Year and Month Folders:</strong> By default, WordPress organizes uploaded images into year and month folders. For example, if you upload <code>hoge.jpg</code> in August 2024, the image and its resized versions will typically be saved in a folder like:</p>
+<pre><code>wp-content/uploads/2024/08/
+</code></pre>
+</li>
+<li><p><strong>Resized Image Filenames:</strong> WordPress appends the dimensions to the filename of each resized version. For instance, if <code>hoge.jpg</code> is the original file, the resized images might be named:</p>
+<pre><code>hoge-150x150.jpg (thumbnail size)
+hoge-300x200.jpg (medium size)
+hoge-1024x768.jpg (large size)
+</code></pre>
+</li>
+<li><p><strong>Custom Image Sizes:</strong> If your WordPress theme or plugins define custom image sizes, additional versions of <code>hoge.jpg</code> will be created with those dimensions and saved in the same directory.</p>
+</li>
+</ol>
+<h3>Summary:</h3>
+<p>When you upload a large image like <code>hoge.jpg</code> to WordPress, its resized versions will be saved in the same directory as the original image, typically under <code>wp-content/uploads/yyyy/mm/</code> based on the upload date, with filenames that include the dimensions of each resized image.</p>
+                            </div>
+                            <p class="note_contents">狙ってそういうファイル名にしない限りコリジョンが起こらないが、狙うと簡単にやれてしまうというのは、自分がファイル管理を行うにおいては避けたい。</p>
+                            <p class="note_contents">計算コストもファイルシステム上での負荷もほとんど全く増大しないため、原版と縮小版を、さらに一つの単語を挟むことで区別する。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">縮小版の扱いにおいて一番ややこしいのは、たぶん拡張子だ。</p>
+                            <p class="note_contents">PNG のアニメは今も目にしないので実装されたかどうか分からないが、GIF だと今でもよく使われる。GIF だと、フレーム数を見て、アニメらしきものなら原版を拡大または縮小しての表示になる。そうでないとユーザーの利便性が下がる。</p>
+                            <p class="note_contents">最近はツールの普及により減ったが、昔はスクショを「ペイント」に貼りつけて BMP で保存して載せてくる人が一定数いた。そういったファイルを縮小化して BMP で保存してサムネイル表示するのでは、そのファイルだけサイズが大きくなりがちだ。</p>
+                            <p class="note_contents">WebP の普及も無視できない。今でもウェブ側で完結するツールの印象があり、ダウンロードしてからが不便で、LINE の Windows 版でも画像でなく添付ファイルのように送信されるなど、未対応のツールが多い。しかし、ウェブ系の人は、手元にツールを揃えた上で WebP ばかり載せてくることもありうる。</p>
+                            <p class="note_contents">結局、「一意性を保つ」ということを優先するしかない。BMP で載ってきたなら、中身だけ JPEG にしてファイル名を .bmp にするのも適さないため、縮小版も BMP にするしかない。ファイルの形式を拡張子でなく中身から判断し、その形式で縮小版をつくり、元の拡張子で保存する。</p>
+                            <p class="note_contents">そうするにおいて、アニメーションなら縮小版をそもそもつくらない。</p>
+                            <p class="note_contents">TIFF も複数フレームが入った記憶がある。しかし、これはアニメでなく、レイヤーだ。全フレームの縮小版をつくっても仕方ないため、1枚目のみ抜き出して TIFF で保存するのは一つの方法。</p>
+                            <p class="note_contents">3.68 MB の JPEG 画像を FastStone のデフォルト設定で TIFF として保存したところ 17.2 MB になった。BMP だと 57.6 MB なので、TIFF も悪くない。JPEG として画質を絞れば 1.5 MB くらいになるので、その10倍と考えると大きいが、縦横 1024px くらいなら大ダメージでもない。</p>
+                            <p class="note_contents">たくさんの中国メーカーと大量のファイルのやりとりをしてきたが、TIFF は今のところ1枚も受け取っていない。大多数が JPEG で、そこにスクショとして PNG が混じるくらいだ。写真を PNG で保存すると非効率的だが、スクショは小さくなる。TIFF はカメラマンやデザイナーしか使わないと割り切り、原版が TIFF なら縮小版も TIFF で保存する。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">アニメーション対応の APNG というのがすでにあるが、広く使われているわけでないとのこと。一応、対応は必要。</p>
+                            <div class="note_ai_generated">
+<p>Yes, Animated PNG (APNG) is implemented and supported by many modern web browsers and some software applications.</p>
+<h3>What is APNG?</h3>
+<p>APNG (Animated Portable Network Graphics) is an extension of the PNG format that supports animation, similar to how GIF files work. It was initially proposed by Mozilla and provides a way to create animations while retaining the lossless compression and quality of the PNG format.</p>
+<h3>Support and Implementation:</h3>
+<ul>
+<li><p><strong>Web Browsers</strong>:</p>
+<ul>
+<li><strong>Mozilla Firefox</strong>: APNG support was implemented early on, and Firefox has supported it since version 3.0.</li>
+<li><strong>Google Chrome</strong>: Chrome added support for APNG starting from version 59.</li>
+<li><strong>Apple Safari</strong>: Safari supports APNG from version 8.</li>
+<li><strong>Microsoft Edge</strong>: Edge, based on Chromium, supports APNG as well.</li>
+<li><strong>Opera</strong>: Opera also supports APNG due to its use of the Chromium engine.</li>
+</ul>
+</li>
+<li><p><strong>Software</strong>:</p>
+<ul>
+<li><strong>Image Editors</strong>: Some image editing software like GIMP (with plugins) and certain online tools support creating and editing APNG files.</li>
+<li><strong>Viewers</strong>: Most modern image viewers and editing tools that support PNG can handle APNG files, although animation support may vary.</li>
+</ul>
+</li>
+</ul>
+<h3>Use Cases:</h3>
+<p>APNG is often used when a high-quality animated image is needed, particularly where transparency and color depth are important, and where the limitations of GIF (such as lower color fidelity) are a concern.</p>
+<h3>Limitations:</h3>
+<p>Despite its advantages, APNG is not as widely used as GIF, primarily because GIF remains the more universally supported format across all platforms and applications. APNG files also tend to be larger than GIFs, which can be a consideration for web usage where file size is critical.</p>
+<h3>Summary:</h3>
+<p>APNG is fully implemented and supported by most modern web browsers and some software tools, offering an alternative to GIFs for high-quality animations with lossless compression. However, its use is less widespread compared to GIFs, partly due to compatibility and file size considerations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
