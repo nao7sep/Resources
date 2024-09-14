@@ -10,40 +10,72 @@
             <a href="Class-Libraries.htm" class="title">クラスライブラリー群</a>
         </div>
         <div class="entries">
-            <div class="note">
-                <div class="note_contents">
-                    <p class="note_contents">現時点で、yyLib, yyGptLib, yyMailLib の三つがある。分けるほどでなかったとたびたび思うが、メールを全く使わないアプリにまで MailKit などがぶら下がることの違和感も大きく、今さら統合しようとも思わない。</p>
-                    <p class="note_contents">ただ、タスクリストまで分かれている利益は乏しい。yyTodoMail が動いていて、いずれも「少なくとも一つのアプリは、それにより動く」という状態に至っている。まっさらの開発ではないので、必要な機能を必要なライブラリーに追加していく単純なワークフローへ。</p>
-                    <!-- Task: c4bd0caa-d0da-4680-aa17-5eef28993bbb -->
-                </div>
-            </div>
             <div id="d7152aea-f640-4aab-98e5-571b5948610a" class="task done">
                 <div class="task_contents">&check;
                     <span class="task_contents">このタスクリストのログが出力されるようにする</span>
                     <a href="#d7152aea-f640-4aab-98e5-571b5948610a" class="permalink">&infin;</a>
                 </div>
             </div>
-            <div id="9b0e8c6b-e601-4ff9-83ab-1978654f0998" class="task done">
+            <div id="0e3c1f2a-9023-4970-b589-0187a49ed4ab" class="task done">
                 <div class="task_contents">&check;
-                    <span class="task_contents">現行のそれぞれのライブラリーに仕様や決め打ちのコードが入っていないか調べる</span>
-                    <a href="#9b0e8c6b-e601-4ff9-83ab-1978654f0998" class="permalink">&infin;</a>
+                    <span class="task_contents">全てのライブラリーを yyLib に統合することを検討</span>
+                    <a href="#0e3c1f2a-9023-4970-b589-0187a49ed4ab" class="permalink">&infin;</a>
                 </div>
                 <div class="notes">
                     <div class="note">
                         <div class="note_contents">
-                            <p class="note_contents">仕様の数だけ小さなライブラリーをつくっていく。「それぞれのアプリにそれと関係のないコードが同梱されない」という当たり前のことを考えるにおいて最善の構成。ライブラリーまみれになりそうで懸念もあるが、一つにまとめて肥大化するよりよほどマシ。</p>
+                            <p class="note_contents">たとえば MailKit が yyLib にぶら下がり、メールを使わないアプリにまで MailKit.dll がつくのは、完全に無駄だ。</p>
+                            <p class="note_contents">しかし、yyGptLib は外部ライブラリーを使わないはずで、yyLib が持つ多数の機能のうちの一つであってよい。</p>
+                            <p class="note_contents">また、ファイルが画像かどうかを調べるために ImageSharp を使うのは、yyWebLib に入れるには、ローカルでも使う点に違和感があり、yyMsgLib に入れるには、メッセージング以外でも使う点に違和感がある。</p>
+                            <p class="note_contents">では、yyImageLib でもつくるのか。ファイル管理の実装の一部だが、yyImageLib にファイル管理の機能をまとめるのもおかしい。</p>
+                            <p class="note_contents">かといって、yyLib にそれを入れ、yyImageLib が提供する画像関連機能を使うなら、結局全てのアプリに ImageSharp の DLL がつく点で、ライブラリーを分ける理由がない。</p>
+                            <p class="note_contents">といったことを考えると、プラットフォームで分けてしまう方が現実的と思えてくる。</p>
+                            <p class="note_contents">あるいは、しょせんエントリーポイントが入るだけで、extern 的なコードが呼ばれた時点で落ちるのだと割り切り、プラットフォーム関係なく yyLib に入れてしまうのでも、自分が今後5～10年でいくつかのシステムをつくる程度なら特段の問題がないかもしれない。</p>
                         </div>
                     </div>
                     <div class="note">
                         <div class="note_contents">
-                            <p class="note_contents">yyLib に simple logging の仕様が入っているが、あらゆるアプリで使えるくらいシンプルなものだし、だから simple としたのだからセーフ。また、OpenAI の API のパラメーターなどをモデルクラスで扱えるようになっているが、今のところどのモデルクラスも十分によく使われるものなのでセーフ。</p>
+                            <p class="note_contents">「どう割るか」という思考のコストは、いくらでも大きくなる。まとめてしまっての、「いらないものも引きずっているのが気になるなぁ」というのを「まあいいか」と考えるのは1秒。自分が気にするだけで、実際のところ、数 MB 程度のものが5～10個ぶら下がる程度なら2024年のアプリとしては微々たるもの。先ほどちょっと入れてみた Microsoft の「フォト」でさえ 400 MB ほどのダウンロードだった。気にするような時代でない。</p>
+                            <p class="note_contents">そのため、一つに統合した。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="4a1a8859-eece-4413-984a-996157a00299" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">ライブラリーの分けすぎやまとめすぎについて AI に聞く</span>
+                    <a href="#4a1a8859-eece-4413-984a-996157a00299" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">統合したので不要なタスク。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="43c11847-ca04-4d78-87a5-5ef0fce7ec58" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">ライブラリーの分割やそれぞれの仕様がアジャイル開発に適するか考える</span>
+                    <a href="#43c11847-ca04-4d78-87a5-5ef0fce7ec58" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">「開発」タスクリストのログに、アジャイル（もどき）開発への切り替えについて書いた。</p>
                         </div>
                     </div>
                     <div class="note">
                         <div class="note_contents">
-                            <p class="note_contents">yyGptLib と yyMailLib はいずれも最小限なのでセーフ。</p>
+                            <p class="note_contents">統合したので、これも不要なタスク。</p>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div id="61ab4176-1431-4c57-91e1-6f33b09f4eaa" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">yyLib に統合するなら、タスクリストのログを Terminated に移動</span>
+                    <a href="#61ab4176-1431-4c57-91e1-6f33b09f4eaa" class="permalink">&infin;</a>
                 </div>
             </div>
         </div>
