@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>yyMailLib</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="yyMailLib.htm" class="title">yyMailLib</a>
+        </div>
+        <div class="entries">
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">何でもかんでも yyLib に入れると、yyLib を参照しただけで、全く関係のない NuGet パッケージのアセンブリーまでコンパイル時に出力され、海外の結婚式において車で多数の空き缶を引きずるのを鉄アレイでやるかのようになる。</p>
+                    <p class="note_contents">そういうイメージを嫌い、ベースとする機能、サービス、アセンブリーなどごとにプロジェクトを分けては、それぞれをそれなりに汎用的に作り、それらの組み合わせにより何でもできるようにしている。</p>
+                    <p class="note_contents">この構成は間違っていない。プロジェクトによっては何個も参照しなければならないのがめんどくさそうだが、一つだけ参照して鉄アレイをたくさん引きずるより絶対に良い。</p>
+                    <!-- Task: d3852493-5d71-410b-b8b5-eca87cef1e12 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">yyMail は、そのうちの一つだ。MailKit/MimeKit を参照するので、メール関連の機能が集約される。その分、yyLib にはメール関連の機能を1行たりとも実装しない予定だ。</p>
+                    <p class="note_contents">いくつもパッケージを作るのがめんどくさく、また、8 GB しかメモリー搭載のない SV7 では最近の Visual Studio をいくつも開いておくのは本当に重たくて、ライブラリーはやはり一つにまとめるべきかというのをたびたび考えてしまっているが、理屈として正しい構成なので yyMail を今後もメール関連の独立したライブラリーとして残す。</p>
+                    <!-- Task: d3852493-5d71-410b-b8b5-eca87cef1e12 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">ぶっちゃけ、yyMail については、今すぐにしなければならないことが多くない。そのため、このタスクリストでは、現行のコードをチェックし、srcZip の設定ファイルを追加し、アーカイブを行うまでを扱う。</p>
+                    <!-- Task: d3852493-5d71-410b-b8b5-eca87cef1e12 -->
+                </div>
+            </div>
+            <div id="6b18f90e-734c-41ce-aa10-ac5db6c70388" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">コーディングのガイドラインに準拠しているか調べる</span>
+                    <a href="#6b18f90e-734c-41ce-aa10-ac5db6c70388" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="0cf0472d-10af-40c4-8b30-62e3e77cdb92" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">プロダクトとしての完全性を高める</span>
+                    <a href="#0cf0472d-10af-40c4-8b30-62e3e77cdb92" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">たまに使うと MailKit へのファイルの添付などをすぐには思い出せないのと、メールデータを JSON で扱いたくての簡単なライブラリー。メールを送らないツールも多いので yyLib に含めなかった。プロパティーなどもドキュメントに基づき一通り実装した記憶がある。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="5f1157fa-04a9-443d-8064-b4c879bb048c" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">srcZip の設定ファイルを追加</span>
+                    <a href="#5f1157fa-04a9-443d-8064-b4c879bb048c" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="b3c2fbae-e725-48cb-969f-2d8031c9c855" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">v0.1 としてアーカイブ</span>
+                    <a href="#b3c2fbae-e725-48cb-969f-2d8031c9c855" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="82d683ab-ca88-4b3b-afbd-e8617c2c8691" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ソリューション名に Lib をつける</span>
+                    <a href="#82d683ab-ca88-4b3b-afbd-e8617c2c8691" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="d56c5d44-1268-4b50-9a35-d202f95ba965" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">v0.2 としてアーカイブ</span>
+                    <a href="#d56c5d44-1268-4b50-9a35-d202f95ba965" class="permalink">&infin;</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
