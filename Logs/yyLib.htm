@@ -22,6 +22,73 @@
                     <a href="#da0ced64-3364-4c06-8251-a84eba56b797" class="permalink">&infin;</a>
                 </div>
             </div>
+            <div id="e635fabd-ec62-4258-adb8-31c1a5dee77c" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">モデルクラスの作り方についてベストプラクティスを調べる</span>
+                    <a href="#e635fabd-ec62-4258-adb8-31c1a5dee77c" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ChatGPT にザッと聞いた。</p>
+                            <p class="note_contents">教科書的には、「データベーステーブルをつくるなら NULL になりそうにないもの」を nullable にせず、それで初期値が必要なら required をつけ、set の代わりに init を使い、あるいは record を使い、配列を [] で初期化しておくべき。</p>
+                            <p class="note_contents">しかし、それでモデルをつくってデータベースで Id が NULL にならないから required int にするとか、immutability のため init にするとかすれば、そのモデルで API からのレスポンスをデシリアライズするとか、CRUD をつくることになってやっぱり更新もしたくなるとかにおいて、じわじわとモデルが変わっていく。</p>
+                            <p class="note_contents">現実的には、API の受け子になりうるものなら nullable を基本とし、よほど理由がない限り get/set でつくり、配列も nullable のまま初期値の null になるに任せるのが良い。</p>
+                            <p class="note_contents">データベースの CRUD を高頻度で行うなどの理由があれば Id などが nullable でないモデルの方が処理の無駄を減らせるが、Id が nullable かどうかの差が気になるほどのデータ量なら、そもそもモデルにデータベースのデータをキャッシュしない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="fdcbc6e8-5e69-4c9a-bd56-53b808eaff4e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">モデルクラスの nullable について再確認し、コードを全体的に見直す</span>
+                    <a href="#fdcbc6e8-5e69-4c9a-bd56-53b808eaff4e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">いずれも汎用性の高いモデルになっている。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="b9c06a6a-1291-4645-bc86-dc5df6737cf6" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ライブラリーの統合による依存関係の問題を解消</span>
+                    <a href="#b9c06a6a-1291-4645-bc86-dc5df6737cf6" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">更新履歴のため、GitHub 側のレポジトリーを残し、ローカルのものを消す。それでもビルドに失敗してくれる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">yyGptLib と yyMailLib を使うのは yyTodoMail だけだったので、それがビルドされるようにして最新版のアーカイブをつくった。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d0cf8ea3-e74e-4d44-b740-30ce52f2e2c9" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">SQLite へのログの出力を可能にする</span>
+                    <a href="#d0cf8ea3-e74e-4d44-b740-30ce52f2e2c9" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="eca1cdfd-ecf9-46e3-b2c3-45a2fad057c5" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">yyGpt* クラスの使い方が分かるサンプルコードを追加</span>
+                    <a href="#eca1cdfd-ecf9-46e3-b2c3-45a2fad057c5" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">古いレポジトリーをサーバー側に残すので、そこのコードへのリンクを張った。Mail の方とセットで見た。どちらも良好に書けていて、ライブラリー側の仕様も理にかなっている。ほかで使いやすそうで、十分な拡張性も期待できる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
