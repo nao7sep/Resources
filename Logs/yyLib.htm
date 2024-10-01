@@ -89,6 +89,32 @@
                     </div>
                 </div>
             </div>
+            <div id="89a028bf-d4ef-4879-a402-7e7972bace09" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ImageSharp で JPEG 保存をするときの画質について調べる</span>
+                    <a href="#89a028bf-d4ef-4879-a402-7e7972bace09" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">デフォルトで75になるとドキュメントで見たが、実際にやってみるともっと大きい。明示的に75を指定すると小さくなる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">コードをダウンロードして検索したが、不詳のまま。試すと、間違いなく75より高画質になる。</p>
+                            <p class="note_contents">次のページに、以下のコードがある。</p>
+                            <p class="note_contents"><a href="https://github.com/SixLabors/Samples/blob/main/ImageSharp/ChangeDefaultEncoderOptions/Program.cs" target="_blank" class="url">https://github.com/SixLabors/Samples/blob/main/ImageSharp/ChangeDefaultEncoderOptions/Program.cs</a></p>
+                            <p class="note_contents">Configuration.Default.ImageFormatsManager.SetEncoder(JpegFormat.Instance, new JpegEncoder()<br />
+                                {<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;Quality = 90<br />
+                                });</p>
+                            <p class="note_contents">デフォルト値が75だというのはコードのコメントなどに明記されているため、ウェブシステムなど、ファイルサイズを抑えなければならないところでは明示的に75に設定するべきか。</p>
+                            <p class="note_contents"><a href="https://github.com/SixLabors/ImageSharp/blob/main/src/ImageSharp/Formats/Jpeg/JpegEncoder.cs" target="_blank" class="url">https://github.com/SixLabors/ImageSharp/blob/main/src/ImageSharp/Formats/Jpeg/JpegEncoder.cs</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

@@ -1,0 +1,330 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>_imageAdjuster</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="_imageAdjuster.htm" class="title">_imageAdjuster</a>
+        </div>
+        <div class="entries">
+            <div id="27429cb0-1edf-4ac1-9cfc-3e9f41e3f329" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">プロジェクト開始時のタスクをメモ通りに実行</span>
+                    <a href="#27429cb0-1edf-4ac1-9cfc-3e9f41e3f329" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="1aa89057-b127-4f4d-9f31-ce0d0ada879e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">このタスクリストのログが出力されるようにする</span>
+                    <a href="#1aa89057-b127-4f4d-9f31-ce0d0ada879e" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="23613fd9-466b-4e0a-aa2d-5c345593888a" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">画像の下端と上端の求め方を考える</span>
+                    <a href="#23613fd9-466b-4e0a-aa2d-5c345593888a" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">GetContrastStretchingLimits を実装した。</p>
+                            <p class="note_contents">各所で値を切り捨てると、ループで何度も処理するうちに全体がじわじわと暗くなっていきそうな気がする。下に振れるときがあるなら上に振れるときもあってほしく、それでこそ平均的にはプラマイゼロを期せるため、できるだけ Math.Round を使った。</p>
+                            <p class="note_contents">％の指定としては、-1なら切り取らず、0なら（切り取らないのでなく）ピクセルを捨てることがなく画像の情報量を損ねない範囲内で切り取り、それより大きいなら、切り取る分がそれ以下になるようにした。</p>
+                            <p class="note_contents">ChatGPT は次のコードを提示した。</p>
+                            <p class="note_contents">int cumulativeCount = 0;<br />
+                                int minLuminance = 0;<br />
+                                for (int i = 0; i &lt; histogram.Length; i++)<br />
+                                {<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;cumulativeCount += histogram[i];<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;if (cumulativeCount &gt;= lowerCutoff)<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;{<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minLuminance = i;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                                }</p>
+                            <p class="note_contents">これだと自分の意図する挙動とは微妙に異なる。</p>
+                            <p class="note_contents">まず、lowerCutoff が0のとき、temp == 0 で絶対に break になる。それだと「ダメージのない切り取り」をできない。</p>
+                            <p class="note_contents">また、たとえば lowerCutoff が3で、histogram [0] が0で [1] が3のとき、このコードでは temp == 1 で break するが、それにより得られる下端の値を inclusive に扱うなら、切り取りたい3ピクセルが残る。</p>
+                            <p class="note_contents">では、下端の値を exclusive に扱うのかといえば、そうすると temp == 0 で break する最初の例において値が0の [0] が切り取られることになる。続く [1] の値も0だとすれば、[0] だけ切り取られるのが中途半端な挙動になる。</p>
+                            <p class="note_contents">自分の実装は、下の方に0が続く画像において lowerCutoff が0なら「ダメージのない切り取り」が起こる。</p>
+                            <p class="note_contents">また、「そこを切ったら切りすぎだ」というところを探すため、lowerCutoff 以下の切り取りが正確に行われ、min value として得られるものを必ず「残す画像の inclusive な下端」と見なせる。</p>
+                            <p class="note_contents">テストコードも書いて、イメージ通りに動くのを確認した。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">さらに ChatGPT にコードと一つ前のメモを見せて問題を探してもらった。特になさそう。</p>
+                            <div class="note_ai_generated">
+<p>Your detailed personal note and explanation suggest that you have a clear understanding of the logic behind contrast stretching and pixel intensity adjustments. Overall, the code and your reflections are quite thorough. However, there are a few observations and points that could help you refine your implementation and explanation further:</p>
+<h3>1. <strong>Clarification on <code>Math.Round</code> vs. <code>Math.Floor</code> or <code>Math.Ceiling</code></strong></h3>
+<p>You mentioned that you prefer using <code>Math.Round</code> to ensure a more balanced outcome. This is generally fine, but be aware that <code>Math.Round</code> can introduce slight inconsistencies if the cutoff percentages are not symmetric. The behavior of <code>Math.Round</code> might differ depending on whether the cutoff percentage results in values ending in <code>.5</code>. If precision and symmetry are important, consider explicitly stating when <code>Math.Round</code> should be used and why it aligns with your expectations of achieving an average effect over time.</p>
+<h3>2. <strong>Handling <code>lowerCutoffPercentage == 0</code> and <code>upperCutoffPercentage == 0</code></strong></h3>
+<p>You correctly noted that when <code>lowerCutoffPercentage</code> or <code>upperCutoffPercentage</code> is <code>0</code>, you want to avoid cutting off any pixels unnecessarily and preserve the full range without damage. In your code, you handle this well by allowing <code>lowerCutoffPercentage == 0</code> to continue until it finds actual data without breaking prematurely. This ensures &quot;no damage&quot; clipping, which is desirable.</p>
+<h3>3. <strong>Negative Cutoff Values as Special Flags</strong></h3>
+<p>You mentioned that <code>-1</code> means &quot;no cut,&quot; while <code>0</code> means clipping without losing pixel information. This is a clear distinction, but make sure it’s well documented or validated in your code to prevent confusion. If a user of your function provides other negative values (besides <code>-1</code>), consider handling this as an error or unexpected input.</p>
+<p>For example:</p>
+<pre><code class="language-csharp">if (lowerCutoffPercentage &lt; -1 || upperCutoffPercentage &lt; -1)
+    throw new ArgumentException(&quot;Cutoff percentages cannot be less than -1.&quot;);
+</code></pre>
+<h3>4. <strong>Potential Edge Case Handling</strong></h3>
+<p>In scenarios where the histogram has sparse non-zero values, your code handles cases well by accurately adjusting <code>xMinValue</code> and <code>xMaxValue</code>. However, be aware of possible &quot;empty ranges,&quot; where you could theoretically end up with <code>minValue == maxValue</code> even when <code>lowerCutoffPercentage</code> or <code>upperCutoffPercentage</code> are small but non-zero. You've already added a safeguard (<code>if (xMinValue &gt;= xMaxValue) { xMinValue = 0; xMaxValue = 255; }</code>) to handle such cases, but make sure this condition matches your design intentions.</p>
+<h3>5. <strong>Variable Naming</strong></h3>
+<p>While the use of <code>xMinValue</code>, <code>xMaxValue</code>, etc., is clear within the function’s scope, consider removing the <code>x</code> prefix unless it serves a specific purpose or follows a larger naming convention in your project. Cleaner names such as <code>minValue</code>, <code>maxValue</code>, <code>lowerCutoffPixels</code>, etc., improve readability without sacrificing clarity.</p>
+<h3>6. <strong>Efficiency Considerations</strong></h3>
+<p>Your loop constructs are generally efficient, but if this function is to be called repeatedly on very large images, consider additional optimizations:</p>
+<ul>
+<li>For example, you could use <code>Array.Sum()</code> to quickly calculate <code>totalPixelCount</code> if not already provided, rather than requiring it as an input parameter.</li>
+</ul>
+<h3>7. <strong>Inclusion of Comprehensive Comments</strong></h3>
+<p>You’ve done an excellent job explaining why you chose to handle certain cases differently (e.g., why <code>Math.Round</code> was preferred). Ensure that this level of detail is also reflected in your inline code comments. This will help other developers (or even future you) understand the nuances of your logic without needing to refer to external notes.</p>
+<h3>8. <strong>Comparison with ChatGPT's Suggestion</strong></h3>
+<p>Your concern about <code>ChatGPT</code>'s suggestion is valid:</p>
+<ul>
+<li>If <code>lowerCutoff</code> is <code>0</code>, breaking immediately when <code>temp == 0</code> doesn’t achieve the &quot;no damage clipping&quot; as intended.</li>
+<li>Your method accounts for this more accurately by ensuring that <code>xMinValue</code> corresponds to the actual lower bound that should remain, ensuring inclusivity without unnecessary data loss.</li>
+</ul>
+<h3>Overall Assessment</h3>
+<ul>
+<li>Your implementation and understanding are solid. You’ve carefully considered edge cases, performance, and practical usage.</li>
+<li>The attention to maintaining an inclusive range (<code>MinValue</code> and <code>MaxValue</code>) that precisely matches your intent shows good design and thoughtful handling of image processing nuances.</li>
+</ul>
+<h3>Suggested Code Refinement (incorporating points above)</h3>
+<pre><code class="language-csharp">/// &lt;summary&gt;
+/// Both MinValue and MaxValue are inclusive, meaning they define the range of pixel intensities to be preserved.
+/// A cutoff percentage of -1 means no pixels will be clipped at that end.
+/// &lt;/summary&gt;
+public static (int MinValue, int MaxValue) GetContrastStretchingLimits(int[] histogramData, int totalPixelCount, double lowerCutoffPercentage, double upperCutoffPercentage)
+{
+    if (totalPixelCount &lt;= 0)
+        throw new ArgumentException(&quot;Total pixel count must be greater than zero.&quot;, nameof(totalPixelCount));
+
+    if (lowerCutoffPercentage &lt; -1 || upperCutoffPercentage &lt; -1)
+        throw new ArgumentException(&quot;Cutoff percentages must be -1 or between 0 and 100.&quot;);
+
+    int minValue = 0;
+    if (lowerCutoffPercentage &gt;= 0)
+    {
+        int lowerCutoffPixelCount = (int)Math.Round(totalPixelCount * lowerCutoffPercentage / 100);
+        int currentPixelCount = 0;
+
+        for (int i = 0; i &lt;= 255; i++)
+        {
+            currentPixelCount += histogramData[i];
+            if (currentPixelCount &gt; lowerCutoffPixelCount)
+            {
+                minValue = i;
+                break;
+            }
+        }
+    }
+
+    int maxValue = 255;
+    if (upperCutoffPercentage &gt;= 0)
+    {
+        int upperCutoffPixelCount = (int)Math.Round(totalPixelCount * upperCutoffPercentage / 100);
+        int currentPixelCount = 0;
+
+        for (int i = 255; i &gt;= 0; i--)
+        {
+            currentPixelCount += histogramData[i];
+            if (currentPixelCount &gt; upperCutoffPixelCount)
+            {
+                maxValue = i;
+                break;
+            }
+        }
+    }
+
+    // Reset to full range if invalid min/max range occurs
+    if (minValue &gt;= maxValue)
+    {
+        minValue = 0;
+        maxValue = 255;
+    }
+
+    return (minValue, maxValue);
+}
+</code></pre>
+<h3>Final Thoughts</h3>
+<p>Your implementation is correct, and you’ve covered edge cases effectively. The main points to consider are ensuring comprehensive input validation, clear variable naming, and maintaining a consistent and well-documented approach throughout your code. Your reflections demonstrate a solid grasp of image processing techniques, which is crucial for building robust algorithms.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="4fee2068-b578-40ab-83f8-4bd876d2ff5b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ほかのアプリが下端と上端を何％くらい捨てるのか調べる</span>
+                    <a href="#4fee2068-b578-40ab-83f8-4bd876d2ff5b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">1％でやってみてよさそう。</p>
+                            <div class="note_ai_generated">
+<p>The process you're describing is related to <strong>contrast stretching</strong> or <strong>histogram stretching</strong>, which is widely used in image processing to enhance contrast by adjusting the luminance range. This technique involves clipping the darkest and brightest ends of the histogram based on specified percentages, defining new bounds for the luminance range, and then stretching the values to fit the full 0 to 255 range.</p>
+<h3>Ideal Default Values for Percentages</h3>
+<p>A common practice for contrast stretching is to clip a small percentage of pixels from both ends of the histogram. This helps remove extreme shadows and highlights, which often represent noise rather than useful image data. The most widely used default values for this purpose are:</p>
+<ul>
+<li><strong>1% for the darkest pixels</strong> (lower bound)</li>
+<li><strong>1% for the brightest pixels</strong> (upper bound)</li>
+</ul>
+<p>These values result in excluding the bottom 1% and top 1% of pixel intensities, meaning that the central 98% of the histogram's luminance values are preserved. This setting is a good starting point because it balances contrast enhancement without over-clipping, which might otherwise lead to loss of significant image details.</p>
+<p>In some applications, you might see a slightly more aggressive approach with <strong>2% or 5%</strong> on each end, depending on the desired effect and the nature of the image. But the 1% value on each end is the most standard and offers a reasonable compromise.</p>
+<h3>Applications That Implement This Technique</h3>
+<p>Several image processing applications and libraries implement a similar technique with adjustable or default percentages for contrast stretching:</p>
+<ol>
+<li><p><strong>Adobe Photoshop</strong>:</p>
+<ul>
+<li>The &quot;Auto Contrast&quot; and &quot;Auto Levels&quot; features in Photoshop use a contrast stretching algorithm that often defaults to clipping the <strong>0.5% to 1%</strong> of pixel values on both ends. This makes the 1% value standard for professional applications.</li>
+</ul>
+</li>
+<li><p><strong>GIMP (GNU Image Manipulation Program)</strong>:</p>
+<ul>
+<li>The &quot;Stretch Contrast&quot; feature allows users to clip the histogram tails, with default values around <strong>1%</strong>, though it can be adjusted manually.</li>
+</ul>
+</li>
+<li><p><strong>OpenCV</strong>:</p>
+<ul>
+<li>When using functions like <code>cv2.equalizeHist</code> or custom contrast stretching scripts, it is common to set clipping values around <strong>1%</strong> or configurable according to needs.</li>
+</ul>
+</li>
+<li><p><strong>MATLAB</strong>:</p>
+<ul>
+<li>The <code>imadjust</code> function in MATLAB allows you to specify clipping values, and example implementations often suggest a range of <strong>1% to 2%</strong> as the default.</li>
+</ul>
+</li>
+<li><p><strong>ImageJ</strong>:</p>
+<ul>
+<li>This scientific image analysis software also allows setting lower and upper threshold percentages, with defaults around <strong>0.5% to 1%</strong>.</li>
+</ul>
+</li>
+</ol>
+<h3>Summary</h3>
+<p>The most commonly used default values for contrast stretching/clipping are <strong>1% for both the darkest and brightest ends</strong> of the histogram. This ensures effective contrast enhancement without significant data loss. These values are prevalent in professional and scientific image processing tools like Adobe Photoshop, GIMP, OpenCV, and MATLAB.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="f12a33a2-2fc1-4b72-94f0-e398ec4bd892" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">ガンマ補正を行えるようにする</span>
+                    <a href="#f12a33a2-2fc1-4b72-94f0-e398ec4bd892" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">やめておく。下端と上端から1％を削る実装で十分に良好な結果が得られている。</p>
+                            <p class="note_contents">ガンマ補正をかけると、モニターや目の特性上、暗く見えてコントラストの判別がつきにくくなる部分を回復させられる。</p>
+                            <p class="note_contents">しかし、せっかく締めた黒も薄れる。</p>
+                            <p class="note_contents">ガンマ補正をかけたくなったのはモノクロ印刷に含まれる画像、特に人の顔がコントラストの最適化により暗くなるのを回復したかったからだが、Photoshop でいじろうと、「文字を締めたら顔が黒つぶれする」というのは回避できない。</p>
+                            <p class="note_contents">安い紙に安いインクで印刷したものは初めからそういう出力特性なのだと割り切るしかない。</p>
+                            <p class="note_contents">ここから顔や写真へのダメージを低減するには、AI でそれらを検出して処理対象から除外するなどが必要。</p>
+                            <p class="note_contents">そこまでして得られるものがほとんどないため、ガンマ補正なしでコントラストの最適化のみ行うツールに変更する。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="f81bcfe5-75d7-4ccd-a95e-05465ff54d0a" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">特定の画像で下端、上端、ガンマ値を指定してプレビューを生成できるようにする</span>
+                    <a href="#f81bcfe5-75d7-4ccd-a95e-05465ff54d0a" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">GUI でつくった方が良さそうだが、めんどくさい。</p>
+                            <p class="note_contents">下端と上端を固定し、ガンマ値を0.1ずつ減らしたり増やしたりで10枚くらい生成するか。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">掃除のついでに本も断捨離を進めていて、何冊かスキャンした。</p>
+                            <p class="note_contents">カタログなど、見栄えが大事なものは、黒も締まっている。</p>
+                            <p class="note_contents">読めたら大丈夫な再生紙っぽいものが、黒インクもケチられているようで低コントラストだ。</p>
+                            <p class="note_contents">たまたま最初にそれらを見たことで、画像から PDF ファイルをつくるにおいてはコントラストの最適化が不可欠と思ったが、そのままで大丈夫な画像の方が多い。</p>
+                            <p class="note_contents">また、そういう本でもカラーの表紙においては黒が大丈夫だ。</p>
+                            <p class="note_contents">よって、コントラストの最適化は、（表紙などでない）本の中身において、紙やインクの品質が低くて文字がぼやけて見えるところをくっきりさせるという、より局所的な適用になる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">下端と上端を極端にはできない。データの欠損が起こるからだ。</p>
+                            <p class="note_contents">よって、実際のワークフローは、本の中身のカラーでない全てのページをいったん別のディレクトリーに移動し、それら全てをプログラムに与え、下端と上端のリストおよびそれらの平均値を出力し、そのファイルを見ながら安全な下端と上端を決め、プログラムを再起動し、それら下端と上端を設定し、そのなかでガンマ値を上下に振れさせてのプレビューを出力し、それらのうち最も見やすい値を選び、プログラムの3度目の実行でそれらを指定して一括処理を行うということになるだろう。</p>
+                            <p class="note_contents">いったん別ディレクトリーに移すのは、二つのディレクトリーのサムネイルをザッと見ることで取りこぼしに気づけるため。Ctrl キーを押しながらファイルを選択していくのでは、操作ミスなどにより選択が外れる可能性がある。</p>
+                            <p class="note_contents">ガンマ値を上下に振れさせての出力では、ネチネチと迷わないよう、ある程度の差分をつける。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ガンマ値を扱わないように変更するため、プレビューも不要。</p>
+                            <p class="note_contents">ワークフローは、次のようになりそう。</p>
+                            <p class="note_contents">* 表紙と裏表紙、中身の一部としてのカラー印刷のページ、モノクロ印刷のページといったグループ分け<br />
+                                * それぞれをツールに流し込み、0％、1％のそれぞれの指定における下端と上端、それらの平均を HTML 出力<br />
+                                * ツールを閉じずに HTML ページを閲覧し、平均値を見ながら、最終的に指定する下端と上端を決める<br />
+                                * それらをツールに入力し、一括処理を行う<br />
+                                * 終われば待機状態になるため、出力されたものをチェックし、Y でプログラムを閉じるか、N で元に戻す<br />
+                                * プログラムが閉じられる直前に処理内容がファイルに出力される</p>
+                            <p class="note_contents">十分にシンプルで、汎用性も高い。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="87028490-ae3d-4395-8eb1-fb833dfa0d1b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">複数の画像の分析結果の平均値を出せるようにする</span>
+                    <a href="#87028490-ae3d-4395-8eb1-fb833dfa0d1b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ほかのアプリが何％くらい捨てるのか調べたうえ、捨てない場合、その％分を捨てる場合の両方について下端と上端をそれぞれの画像について計算し、それらの平均を2種類とり、それらの値の適用によりダメージを受けるファイルを特定し、そういった情報をファイルに出力する。表にして色をつけたいので HTML を考えている。これはめんどくさい実装にならない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="e82dfd46-c683-4720-a5d5-2811ff7f6e08" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">結果に満足できなければ元に戻せるようにする</span>
+                    <a href="#e82dfd46-c683-4720-a5d5-2811ff7f6e08" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">これでいいかを聞いてダメならファイルを戻すことと、それと同じことをできるバッチファイルを出力することの二つ。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">バッチファイルは不要。複数回の起動を想定していたが、ガンマ値を扱わないなら一度の起動で最後まで処理できる。元のファイルが失われないので、あとからミスに気づいた場合も何とでもなる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="c112536d-4489-458b-a7bb-a09edc451de3" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">それぞれの処理のパラメーターが記録されるようにする</span>
+                    <a href="#c112536d-4489-458b-a7bb-a09edc451de3" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="47735f49-9696-4de0-92c6-eea3c56a474b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Min == Max の指定による挙動をテスト</span>
+                    <a href="#47735f49-9696-4de0-92c6-eea3c56a474b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">CreateLookupTable がクラッシュせず、double xScale = 255.0 / (maxValue - minValue); のところが無限大になり、Round された整数値が byte に丸められる段階でデータが欠損し、それでも隣り合うピクセルが同様に処理されることで画像の輪郭が分かる状態での変な出力になる。</p>
+                            <p class="note_contents">いずれにしても望ましい挙動でないので禁じた。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

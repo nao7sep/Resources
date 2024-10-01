@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>_img2pdf</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="_img2pdf.htm" class="title">_img2pdf</a>
+        </div>
+        <div class="entries">
+            <div id="975e574a-f266-451b-8c78-1d874225ec47" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://github.com/itext/itext-dotnet" target="_blank" class="url">https://github.com/itext/itext-dotnet</a> をチェック</span>
+                    <a href="#975e574a-f266-451b-8c78-1d874225ec47" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">圧縮率をコントロールするならこれだと ChatGPT が回答。歴史があって、機能が多く、オープンソースなら無料とのこと。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">iText は AGPL で、自分は（特に何も考えず）GPL を使っている。AGPL は、GPL＋「利用者がいつでもソースコードにアクセスできる」とのこと。</p>
+                            <p class="note_contents">プロジェクトを AGPL でつくり、UI にソースコードへの URL を表示すれば大丈夫だろう。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">使い方については、ドキュメントもサンプルも完備されていて、なんとでもなる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="493057d6-14c3-4710-a4ae-97ca61bcd821" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">AGPL でつくる</span>
+                    <a href="#493057d6-14c3-4710-a4ae-97ca61bcd821" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="57eee32b-e9ae-42bd-8d61-9772585c5c64" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">プロジェクト開始時のタスクをメモ通りに実行</span>
+                    <a href="#57eee32b-e9ae-42bd-8d61-9772585c5c64" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="dea3e490-9d45-466a-a588-152a33be759d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">見開きの扱いについて考える</span>
+                    <a href="#dea3e490-9d45-466a-a588-152a33be759d" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ある本の自炊において、縦書きなら右からの見開き、横書きなら左からの見開きで、それらが頻繁に切り替わる例がある。右側を切った記憶があるため、縦書きとしてつくられた本に横書きの見開きが入っている形だ。</p>
+                            <p class="note_contents">これを切ってスキャンしたため、横書きの見開きのところでは、後半の方がファイル名の連番が小さく、「後半 → 前半」という表示になる。単一ページでの表示においては、一つ前のページともつながらないものが出てきて、いったんその次のページに進んでから戻るのが不便だ。</p>
+                            <p class="note_contents">いろいろと考えたが、一番シンプルなのは、_imageMerger を更新し、右から左への結合を行ったり、結合済みのどのファイルが元はどれとどれをどの向きでつなげたものか別ファイルで保存したりすることだ。</p>
+                            <p class="note_contents">そうすれば、上位ディレクトリーには、パソコンで開くにおいて一番見やすいものが残る。それらを PDF 化することでパソコン用の PDF ファイルをつくることができる。</p>
+                            <p class="note_contents">Merged ディレクトリーのファイルにより、ファイルを実際に読む順序で並び替えることもできるため、たとえば全体が右から左なのに一部の見開きが左から右ならそこだけ逆にして PDF 化してのモバイル用のファイルをつくることもできる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="af83e9f9-3540-4f0b-b9bb-6c6ccf560372" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">UI にソースコードへの URL を表示</span>
+                    <a href="#af83e9f9-3540-4f0b-b9bb-6c6ccf560372" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="e6890211-4354-4a17-86a6-43803310f2dd" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">単一ページのものと見開きページのものの両方を出力できるようにする</span>
+                    <a href="#e6890211-4354-4a17-86a6-43803310f2dd" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">多数のスキャン画像を更新版の _imageMerger で再処理して思ったが、主に A4 で配布される文書をスキャンしたものは、そもそも携帯での閲覧に適さない。完全にパソコンで見るものだ。文字数の少ないマンガなら携帯もアリだろうが、見開きでのデザインも多用されるカラーのカタログをパソコン以外で見ることが稀だろうから、両方での出力を見送る。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="513bca4c-c7d6-471a-89bc-2fb0ba87c6b4" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">画像の解像度を落とせるようにする</span>
+                    <a href="#513bca4c-c7d6-471a-89bc-2fb0ba87c6b4" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ScanSnap を使っている。元の本を捨てるので、画質を「エクセレント」、圧縮率を「やや低い」にしている。自分の使っている iX500 では、「エクセレント」は 600dpi とのこと。</p>
+                            <p class="note_contents"><a href="https://www.pfu.ricoh.com/scansnap/products/ix500/specification.html" target="_blank" class="url">https://www.pfu.ricoh.com/scansnap/products/ix500/specification.html</a></p>
+                            <p class="note_contents">「電子帳簿保存法」では、解像度は 200dpi 以上で大丈夫のようだ。</p>
+                            <p class="note_contents"><a href="https://ja.wikipedia.org/wiki/%E9%9B%BB%E5%AD%90%E5%B8%B3%E7%B0%BF%E4%BF%9D%E5%AD%98%E6%B3%95" target="_blank" class="url">https://ja.wikipedia.org/wiki/%E9%9B%BB%E5%AD%90%E5%B8%B3%E7%B0%BF%E4%BF%9D%E5%AD%98%E6%B3%95</a><br />
+                                <a href="https://www.nta.go.jp/publication/pamph/sonota/03.pdf" target="_blank" class="url">https://www.nta.go.jp/publication/pamph/sonota/03.pdf</a></p>
+                            <p class="note_contents">画像によっては解像度の情報がメタデータに入っているかもしれないし、A4 なのか A5 なのかといったサイズを指定してもらえれば、それが完全には正確でなくても、だいたいの解像度を推測できる。</p>
+                            <p class="note_contents">しかし、使うスキャナーが限られているなら、スキャナーの解像度は2倍ずつ上がっていくことが多いようなので、縦横をどの数字で割るかを指定できる程度で十分に使える。「X 分の Y」といった指定も考えたが、ほぼずっと 1/2 だろうからシンプルにする。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="300fb3c7-dcdb-4e97-8812-ca82590b294d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">JPEG 画像の品質の値が結果に影響するのを確認</span>
+                    <a href="#300fb3c7-dcdb-4e97-8812-ca82590b294d" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="9beaa9a0-5487-4c18-9e12-e8b1b3029fd6" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">画像のコントラストの最適化を可能にする</span>
+                    <a href="#9beaa9a0-5487-4c18-9e12-e8b1b3029fd6" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">白飛びも黒つぶれも起こさない安全なモードとそれぞれ数％を削るモードの両方を用意。</p>
+                            <p class="note_contents">ページによって明るくなったり暗くなったりはユーザー体験を落とすため、1周目で全体の値を調べて平均を取ってからそれぞれに適用するとか、その処理においてカラーのページとモノクロのページを区別するとかも考える。</p>
+                            <p class="note_contents">やってみないと分からない処理なので、モードの指定のときに、一度に全てを出力することも選択できるようにする。しばらく放置して、全てできてから見比べるワークフローなら、処理待ちを最小限にできる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">別のツールをつくる。細かいインタラクションがあった方がうまくいきそう。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="a0ec85ee-d4ef-4bde-85f3-50e7755d7088" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">画像のリサイズ時のアルゴリズムを指定できるようにする</span>
+                    <a href="#a0ec85ee-d4ef-4bde-85f3-50e7755d7088" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">デフォルトが Bicubic になっている。デファクト並みによく使われるもの。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="9c1da2ec-744a-42e6-95da-63a277dd6049" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">引数を pt で指定する全てのメソッドについてドキュメントをチェック</span>
+                    <a href="#9c1da2ec-744a-42e6-95da-63a277dd6049" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">IntelliSense で出てくる以上の情報がドキュメントに含まれていない。なぜ pt で指定するのか分からないままだが、動いているし、そういうサンプルコードが多数出てくる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="7276610d-6e89-41f6-9496-4abccd855117" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">AddNewPage でなく AreaBreak の追加でないとページがかわらなかった原因を調べる</span>
+                    <a href="#7276610d-6e89-41f6-9496-4abccd855117" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">AddNewPage では白紙のページが増えるだけで、それからも Document への画像の追加だったことで1ページ目に全ての画像が重なった。Document は文書のルートを示す。起こったことは、仕組みを知れば自然な挙動。</p>
+                            <p class="note_contents">ただ、AddNewPage をなくして AreaBreak として AreaBreakType.NEXT_PAGE のものを追加していくというのは、単一のページに改ページ記号を入れていくかのようで違和感がある。</p>
+                            <p class="note_contents">Word でも改ページを入れる。まずページをつくるのは、PowerPoint に近い。どちらからの変換も可能なのが PDF だからページの区切り方も二つ（以上）あるのかもしれないが、とりあえず AreaBreak が何をするかを調べておく。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">次のページによると、元々 newPage というメソッドが Java 版にあり、それが AreaBreak を追加する方法に移行したようだ。</p>
+                            <p class="note_contents"><a href="https://stackoverflow.com/questions/40859431/adding-a-new-page-in-pdf-using-itext-7" target="_blank" class="url">https://stackoverflow.com/questions/40859431/adding-a-new-page-in-pdf-using-itext-7</a></p>
+                            <p class="note_contents">別のページには、To have a Document instance put the content added afterwards onto a new page, you have to tell that Document instance so, not the underlying PdfDocument instance, by using document.Add(new AreaBreak(AreaBreakType.NEXT_PAGE)); とある。</p>
+                            <p class="note_contents"><a href="https://stackoverflow.com/questions/60503026/c-sharp-itext7-pdf-addnewpage-fails" target="_blank" class="url">https://stackoverflow.com/questions/60503026/c-sharp-itext7-pdf-addnewpage-fails</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="832bd28e-e0aa-40a2-98bf-5f2d5afb5fdc" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">using を忘れているところを探す</span>
+                    <a href="#832bd28e-e0aa-40a2-98bf-5f2d5afb5fdc" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="3b3ef20f-d998-4a2e-ac18-bea85cf7f895" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">生成される PDF 文書の構造をネットの複数のサービスでチェック</span>
+                    <a href="#3b3ef20f-d998-4a2e-ac18-bea85cf7f895" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ちょっとやってみたところ、極めて細かく表示してくれるものがあった。変な PDF 文書になっていないかを調べる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">10ほどのサービスで PDF ファイルとしての正当性をチェックした。メタデータの一部が不足していると一部で叱られたが、「教科書的にやるなら」程度のことのようで、問題視に値しない。</p>
+                            <p class="note_contents">構造については、Word のようなもので、ルール通りにつくられているなら、「この構造でないとダメだ」的なのはないのだろう。いくつもある正解のうちの一つにはなっているようで、各ブラウザーやビューアーでの表示に問題がない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="48132674-4c82-458d-a7f1-0562f6b676b2" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">このタスクリストのログが出力されるようにする</span>
+                    <a href="#48132674-4c82-458d-a7f1-0562f6b676b2" class="permalink">&infin;</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

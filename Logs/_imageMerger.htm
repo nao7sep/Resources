@@ -77,6 +77,54 @@
                     </div>
                 </div>
             </div>
+            <div id="85de094c-4360-4067-8153-a54bb9af9818" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">結合の単位や向きを指定できるようにする</span>
+                    <a href="#85de094c-4360-4067-8153-a54bb9af9818" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">_img2pdf のタスクリストのメモに詳しく書いたが、たとえば横書きで左から右の見開きが続くのに、突然、縦書きで右から左の見開きが入るような本がある。そこだけ、単一ページの表示では、まず右のページ、それから戻って左のページという読み方をしないといけない。</p>
+                            <p class="note_contents">そういうのを防ぐため、事前につなげてしまう。</p>
+                            <p class="note_contents">また、テキストファイルに、どのファイルはどれとどれがどの順序でつながったものかを残す。</p>
+                            <p class="note_contents">これらの下処理により、画像のままパソコンで見ても快適で、PDF ファイルもモバイル用とパソコン用の両方をつくることができる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">「単位」というのは、「2枚ずつ」など。たとえば「右から左に2枚ずつ」の指定において画像が4枚与えられたなら、全体は左から右の本だとするにおいて、</p>
+                            <p class="note_contents">2+1<br />
+                                4+3</p>
+                            <p class="note_contents">というのが Merged.txt に入る。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">どんな本でも、切ってしまえばページは縦に並ぶ。少なくとも脳内ではそのようにイメージしてよい。</p>
+                            <p class="note_contents">それを見開きにおいてどうつなげるかという指定が「向き」であり、</p>
+                            <p class="note_contents">1+2</p>
+                            <p class="note_contents">なのか</p>
+                            <p class="note_contents">2+1</p>
+                            <p class="note_contents">なのかというのは、若い方のページをどちらに置くかの指定に過ぎない。これは十分に分かりやすい。</p>
+                            <p class="note_contents">元が左から右なのか右から左なのかをまず指定してもらって、そこに「逆」という属性をつけられるようにすることも考えたが、こんがらがりそうだ。多くの本においては、この方式の方が Merged.txt の情報量が減るが、思考のパラメーターが増えることでミスが増えるので、作業コストは必ず高まる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="058e79f4-6c33-45ec-80be-49f4ed420a07" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">Merged.txt 内の結合の記号として | を使う</span>
+                    <a href="#058e79f4-6c33-45ec-80be-49f4ed420a07" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">+ だとファイル名に使えてしまう。| は、Windows では使えない。表のセルの区切りに使われるため、違和感も小さい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
