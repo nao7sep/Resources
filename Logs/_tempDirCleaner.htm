@@ -22,6 +22,160 @@
                     <a href="#18ca148c-6930-4f04-a7d5-d06447640931" class="permalink">&infin;</a>
                 </div>
             </div>
+            <div id="7930ef77-68a5-444d-82a5-fa5619ca7894" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">消去前にファイル情報を取って単一の JSON ファイルに保存</span>
+                    <a href="#7930ef77-68a5-444d-82a5-fa5619ca7894" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">消してしまうのだから、情報だけ残っても仕方ない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="2fa28622-5341-4df6-b646-ea3caccfc9e2" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">消す前の確認画面について考える</span>
+                    <a href="#2fa28622-5341-4df6-b646-ea3caccfc9e2" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">なくてよいか。一時ファイルのほとんどはユーザーの関与しないものになる。ファイル名が並んでも分からない。Windows などもツールで一括的に消すのが一時ファイル。消えて困るファイルが入る設計にしないのがプログラマーの務め。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Temp ディレクトリーくらいしか処理しないので、ファイル名を見ても仕方ない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="3e42da1f-bf70-4f99-bb1a-31176e4fc14a" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">現在のユーザーの Temp ディレクトリーを掃除</span>
+                    <a href="#3e42da1f-bf70-4f99-bb1a-31176e4fc14a" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">デフォルトでは24時間が経過したファイルのみ。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ターゲットとオプションを指定できるようにした。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="0370c889-f4cb-4482-8e55-b96a4ccea536" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">掃除のターゲットやオプションを指定できるようにする</span>
+                    <a href="#0370c889-f4cb-4482-8e55-b96a4ccea536" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">一案。たぶんすぐにはしない。内部的にはそういう構造にしておいて UI を用意しない可能性も。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">簡単なことなので、めんどくさがるのがめんどくさくてパッと書いた。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="14d97245-e7ff-4337-a864-fbe7471cfcad" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ほかにも決め打ちで掃除してよいところを探す</span>
+                    <a href="#14d97245-e7ff-4337-a864-fbe7471cfcad" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <div class="note_ai_generated">
+<p>Yes, there are several directories on Windows systems where files can typically be deleted safely to free up space. Here are some key directories in addition to the <code>C:\Users\YourUsername\AppData\Local\Temp</code> folder that are generally safe to clear:</p>
+<h3>1. <strong>Windows Temp Directory (<code>C:\Windows\Temp</code>)</strong></h3>
+<ul>
+<li><strong>Description</strong>: This is the global system temp directory used by Windows and certain applications. Like the user-specific temp folder, it stores temporary files.</li>
+<li><strong>Safe to Delete?</strong>: Yes, but only the files that are not currently in use. You may need administrative privileges to delete some files here.</li>
+</ul>
+<h3>2. <strong>Downloaded Program Files (<code>C:\Windows\Downloaded Program Files</code>)</strong></h3>
+<ul>
+<li><strong>Description</strong>: This folder stores ActiveX controls and Java applets that are downloaded from the internet when browsing with Internet Explorer or Edge.</li>
+<li><strong>Safe to Delete?</strong>: Yes, these files are generally safe to delete. Modern browsers don't use ActiveX or Java applets, so this folder may be unused.</li>
+</ul>
+<h3>3. <strong>Windows Update Cache (<code>C:\Windows\SoftwareDistribution\Download</code>)</strong></h3>
+<ul>
+<li><strong>Description</strong>: Windows Update stores files here temporarily before applying updates.</li>
+<li><strong>Safe to Delete?</strong>: Yes, but only after you've successfully installed updates. Deleting this won't affect your system, though future updates may take longer to download again.</li>
+</ul>
+<h3>4. <strong>Recycle Bin (<code>C:\$Recycle.Bin</code>)</strong></h3>
+<ul>
+<li><strong>Description</strong>: This is where deleted files are temporarily stored until permanently deleted.</li>
+<li><strong>Safe to Delete?</strong>: Yes, if you empty the Recycle Bin, you’ll recover disk space.</li>
+</ul>
+<h3>5. <strong>Browser Cache Directories</strong></h3>
+<ul>
+<li><strong>Locations</strong>:
+<ul>
+<li><strong>Chrome</strong>: <code>C:\Users\YourUsername\AppData\Local\Google\Chrome\User Data\Default\Cache</code></li>
+<li><strong>Firefox</strong>: <code>C:\Users\YourUsername\AppData\Local\Mozilla\Firefox\Profiles\YourProfile\cache2</code></li>
+</ul>
+</li>
+<li><strong>Description</strong>: Browsers cache files like images, scripts, and stylesheets to speed up browsing.</li>
+<li><strong>Safe to Delete?</strong>: Yes, you can clear the cache within the browser itself or manually delete these files.</li>
+</ul>
+<h3>6. <strong>Thumbnail Cache (<code>C:\Users\YourUsername\AppData\Local\Microsoft\Windows\Explorer</code>)</strong></h3>
+<ul>
+<li><strong>Description</strong>: Windows stores thumbnail images of files and folders in this directory to improve performance in File Explorer.</li>
+<li><strong>Safe to Delete?</strong>: Yes, but Windows will rebuild the cache over time as you browse files, so this will only temporarily free up space.</li>
+</ul>
+<h3>7. <strong>Windows Error Reporting Files (<code>C:\ProgramData\Microsoft\Windows\WER\ReportQueue</code>)</strong></h3>
+<ul>
+<li><strong>Description</strong>: This folder stores error logs and reports that Windows generates when applications crash or encounter errors.</li>
+<li><strong>Safe to Delete?</strong>: Yes, you can delete these files without harming your system.</li>
+</ul>
+<h3>8. <strong>Delivery Optimization Files (<code>C:\Windows\SoftwareDistribution\DeliveryOptimization</code>)</strong></h3>
+<ul>
+<li><strong>Description</strong>: Windows 10/11 may use peer-to-peer networking to deliver updates to other PCs, storing some update files in this directory.</li>
+<li><strong>Safe to Delete?</strong>: Yes, these files are used to speed up future updates but can be removed without any issues.</li>
+</ul>
+<h3>9. <strong>System Restore Points and Shadow Copies (<code>System Properties &gt; System Protection &gt; Configure &gt; Delete</code>)</strong></h3>
+<ul>
+<li><strong>Description</strong>: Windows creates restore points, which take up space, particularly after major updates.</li>
+<li><strong>Safe to Delete?</strong>: Yes, but only if you're sure you don't need to roll back your system to an earlier state. You can manage and delete old restore points from within the System Protection settings.</li>
+</ul>
+<h3>10. <strong>Windows Prefetch Files (<code>C:\Windows\Prefetch</code>)</strong></h3>
+<ul>
+<li><strong>Description</strong>: Prefetch files store information about apps that have been run on your system to help speed up loading times.</li>
+<li><strong>Safe to Delete?</strong>: Yes, though Windows will recreate them over time as you use applications. Deleting them may slow down the first load of applications.</li>
+</ul>
+<h3>11. <strong>Windows.old Folder (After Feature Updates) (<code>C:\Windows.old</code>)</strong></h3>
+<ul>
+<li><strong>Description</strong>: This folder is created after a major Windows update to store the previous version of the OS in case you want to roll back.</li>
+<li><strong>Safe to Delete?</strong>: Yes, but only if you're satisfied with the current version of Windows. Deleting this folder will prevent you from reverting to the previous version.</li>
+</ul>
+<h3>12. <strong>DriverStore (<code>C:\Windows\System32\DriverStore\FileRepository</code>)</strong></h3>
+<ul>
+<li><strong>Description</strong>: Windows stores backups of installed drivers in this folder.</li>
+<li><strong>Safe to Delete?</strong>: Not entirely. You can use tools like <code>Disk Cleanup</code> to remove outdated drivers, but do not manually delete files in this folder, as it can break your system.</li>
+</ul>
+<h3><strong>Tools to Help Clean Up:</strong></h3>
+<ul>
+<li><strong>Disk Cleanup</strong>: Use the built-in Disk Cleanup tool (<code>cleanmgr</code>) to safely remove temporary files, system cache, and other unneeded files.</li>
+<li><strong>Storage Sense</strong> (Windows 10/11): This feature automatically deletes temporary files, empty recycle bins, and clears downloaded files periodically.</li>
+</ul>
+<p>When clearing these directories, always ensure that files in use by the system or applications are excluded to avoid problems. Disk Cleanup and other built-in tools are safe ways to clear these directories without manually navigating and risking the deletion of important files.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
