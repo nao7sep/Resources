@@ -22,6 +22,119 @@
                     <a href="#3089a681-bd40-4ffa-9d57-2a1bd65679bd" class="permalink">&infin;</a>
                 </div>
             </div>
+            <div id="6bc1a863-3ac0-4bfd-914e-e08fb7480069" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">FFmpeg でメタデータを落としたファイルを用意</span>
+                    <a href="#6bc1a863-3ac0-4bfd-914e-e08fb7480069" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents"><a href="https://www.ffmpeg.org/ffmpeg.html" target="_blank" class="url">https://www.ffmpeg.org/ffmpeg.html</a></p>
+                            <p class="note_contents">-sn: disables subtitle recording i.e. automatic selection or mapping of any subtitle stream.<br />
+                                -dn: disables data recording i.e. automatic selection or mapping of any data stream.</p>
+                            <p class="note_contents">の二つを適用したものを用意した。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="200a36c7-4819-48f2-8d24-3a57e4cd28f1" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">撮影日時を読めるようにする</span>
+                    <a href="#200a36c7-4819-48f2-8d24-3a57e4cd28f1" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">QuickTime Movie Header というディレクトリーの Created および Modified というタグに入っている。後者は撮影後の編集で更新されるので、撮影日時なら前者を優先的に読む。</p>
+                            <p class="note_contents">得られる文字列は、「年」が最後にくる変なものだ。ソースで探すと、GetEpochTimeDescription が &quot;ddd MMM dd HH:mm:ss zzz yyyy&quot; というフォーマットで生成しているようだ。</p>
+                            <p class="note_contents"><a href="https://github.com/drewnoakes/metadata-extractor-dotnet/blob/main/MetadataExtractor/TagDescriptor.cs" target="_blank" class="url">https://github.com/drewnoakes/metadata-extractor-dotnet/blob/main/MetadataExtractor/TagDescriptor.cs</a></p>
+                            <p class="note_contents">yyMediaTime の開発時には、これを CultureInfo.InvariantCulture で取得して構文解析した。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">DirectoryExtensions.GetString と TagDescriptor.GetEpochTimeDescription の実装を参考に、ExtractCreatedOrModifiedTime を実装し、コメントに URL を含めた。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="89c2942e-4dd0-44ea-a793-81bd7a492138" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">CRC32 と MD5 のハッシュが正しいのを確認</span>
+                    <a href="#89c2942e-4dd0-44ea-a793-81bd7a492138" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="33694066-0e94-4235-8ab9-3e6f8516bec5" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">処理日時やハッシュを JSON ファイルに入れる</span>
+                    <a href="#33694066-0e94-4235-8ab9-3e6f8516bec5" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="1a578cdb-35c0-4dab-8f5b-1be64674a9de" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">メタデータが残っているのをチェック</span>
+                    <a href="#1a578cdb-35c0-4dab-8f5b-1be64674a9de" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">LosslessCut での処理において一番怖いのがこれ。手作業でチェックしないと判明しない。操作ミスとチェック忘れが重なると起こる。そもそもチェックに時間を割きたくない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">YouTube からダウンロードした動画の場合、LosslessCut で意図的にメタデータを消しても、MetadataExtractor での抽出において目立った違いがない。携帯で撮ったものなら、それなりに違いがあった。</p>
+                            <p class="note_contents">カメラと携帯の両方で一つずつモデルファイルを用意し、FFmpeg でメタデータを落とし、それでも含まれるプロパティー名をツール内部で保持する。それらに含まれないものや、含まれていても値が初期的なものから異なるものを表示する。</p>
+                            <p class="note_contents">LosslessCut ではどのプロパティーが失われるのかも調べる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">撮影日時だけでよい。いろいろと手元のファイルをチェックした。顕著なものでは、撮影日時と GPS データくらいしか追加されていない。そのうち GPS データは、携帯でしか入らない。カメラでちゃんと撮ったビデオには入らない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">LosslessCut は、メタデータを残さないオプションでも撮影日時を残すようだ。消すのは Exif や GPS とのこと。</p>
+                            <p class="note_contents">LosslessCut での保存時にメタデータを残すかどうかについては、「残すのが望ましいが、残し損ねても問題視しない」というのを今後の方針とする。</p>
+                            <p class="note_contents">というのも、自分は撮影日時を残したいだけだ。場所はビデオの内容や前後の写真の GPS 情報で分かる。GoPro で撮ったビデオを USB ケーブルで本体から直接転送するとファイルのタイムスタンプが転送日時になるなどにより、いつ撮ったのかが分からなくなるのを回避したいだけだ。</p>
+                            <p class="note_contents">そもそも、yyMediaTime により、ファイル名にタイムスタンプを入れる。そのファイルを「確定」するにおいて、まだ撮影日時が残っていることさえ確認できれば十分。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="6378f808-8f5b-4a3a-9419-1c921c25f2fc" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ファイル情報やメタデータを同一名の JSON ファイルに入れる</span>
+                    <a href="#6378f808-8f5b-4a3a-9419-1c921c25f2fc" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">なくてよい機能かもしれないので再考。外付けに入れてバックアップするまでがワークフロー。そのバックアップ時に「OK の入っていないもの」に気づけばミスを訂正できる。そこに JSON ファイルがあっても、ただのお荷物。確定の時点で読めたメタデータはいつまでも読める。</p>
+                            <p class="note_contents">ただ、ファイルシステムにおける最終更新日時は、クラウドストレージやレポジトリーでの同期により失われる可能性がある。また、計算コストの小さいハッシュを入れておくことで同一性の簡易チェックになる。そういったものだけでよいか。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">メタデータのないファイルなら、ファイルのタイムスタンプを撮影日時と見なさざるを得ない。これは保存が不可欠の情報。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">yyMediaTime でファイル名にタイムスタンプを入れてからの処理なので、たぶんなくても困らないが、やらない理由があるほどのことでもないのでパッと実装した。</p>
+                            <p class="note_contents">ディレクトリーパスには個人情報が含まれうるので除外。そういったものを除く FileInfo の全ての情報、処理日時、CRC32 と MD5 のハッシュ、MetadataExtractor で読み出した全データを JSON ファイルに入れた。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="f5fb85ca-7320-43b9-b91f-1697e5a43572" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">OK の入力によりファイル名に OK を入れる</span>
+                    <a href="#f5fb85ca-7320-43b9-b91f-1697e5a43572" class="permalink">&infin;</a>
+                </div>
+            </div>
         </div>
     </body>
 </html>
