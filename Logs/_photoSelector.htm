@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>_photoSelector</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="_photoSelector.htm" class="title">_photoSelector</a>
+        </div>
+        <div class="entries">
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">いよいよこんなツールを考えるくらい、写真とビデオが溜まっている。</p>
+                    <p class="note_contents">原因はシンプルで、すぐに必要なものでないからだ。</p>
+                    <p class="note_contents">すぐに関係者に送らないといけないなど、ニーズのあるものだけを整理してきた。そうでないものは、目の前の仕事を先送りしてまで整理するものでなく、永遠に溜まる。2018年からの約6年分の写真とビデオが、すでに 1 TB を軽く超えている。</p>
+                    <p class="note_contents">そもそも整理する必要があるのか迷うところだが、子どもを撮ったものが多く、赤ちゃんだったので歩留まりが悪く、初期の写真は10枚のうち良いものが1枚あるかないかといった場合も多い。ビデオも、オチがなくて滑ったものなどが多数ある。今後も増えるものをそのまま残すのでは、保存コストがかさむし、閲覧性も低く、余計に誰得なデータになる。</p>
+                    <p class="note_contents">子どもが見るなら毎日同じようなところで気が狂ったように撮り続けた写真の全てが必要なわけでないため、残す基準を少し厳格化し、面白みのないものをザーッと消してよいだろう。今は、「撮った写真は、1枚でも多く良いものを残す」というやり方をなんとなく続けている。ネタとして使えるもの以外をザーッと消すことで作業効率が向上する。</p>
+                    <p class="note_contents">そういう基準での写真とビデオの取捨選択を補助するツールを書く。</p>
+                    <p class="note_contents">やりたいのは、多すぎていろいろなところに多重にバックアップされて散らばっている写真とビデオをまず分析し、一意性の高いリストをつくり、それぞれのインスタンスに「ほかの保存場所」のリストが入っている状態にして、そのうち特定の日付や期間のものを A というディレクトリーに、そのバックアップのうち一つだけを別ドライブの B というディレクトリーに移動し、それ以外のバックアップをその場で消すことだ。</p>
+                    <p class="note_contents">それから A の写真を処理し、ファイルのコミットまたはバックアップまでが終われば、B をディレクトリーごと消す。</p>
+                    <p class="note_contents">今は、カメラの写真、携帯の写真などが散らばっていて、カメラの写真はフォルダー名も異なるし、4桁の連番を回す機種が多くてファイル名はぶつかっているので、一カ所にまとめることができず、なおさら「いつのものがどこにあるか分からない」というのが深刻化している。どこから着手したらよいか分からず、余計に古いものが放置されている。</p>
+                    <p class="note_contents">ツールが Exif 情報やビデオのメタデータなどを読むことで日ごとや期間ごとにまとめてくれれば、たとえば、「最も新しい3日分と最も古い3日分」といった指定により、飽きにくい整理ができる。</p>
+                    <p class="note_contents">そのモードでの抜き出しが指定の枚数を超えるなら、それは特定の日にイベントか何かがあって多く撮ったということなので、その日はそのイベントだけという選択もできる。</p>
+                    <p class="note_contents">とにかく量が多くて億劫になるが、全く整理しない日がトータル何年も続いて溜まっただけなので、「3＋3日分」を15分ほどサラッと整理するなどを何ヶ月もコツコツとやれば、以前の試算では100時間くらいで整理できる量なので、2年くらいで終わる。</p>
+                    <p class="note_contents">それもまた長い年月だが、毎日15分の隙間時間は絶対に見つかる。管理がちゃんとできていれば、実質、コストゼロで整理が終わるようなものだ。</p>
+                    <!-- Task: 559e4591-80a5-40c7-932a-4e8804b73600 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">試算が100時間だったのは、6年が長くての100時間であり、おそらく正確な値だ。何枚の写真に何分くらいかかるかを複数回測定し、それらの平均値から算出した記憶がある。</p>
+                    <p class="note_contents">そもそも100時間というのは、たった4日間だ。フルタイムでやれば12営業日で終わる。6年分の記録を2週間ちょっとで処理できると考えれば、大した量でない。</p>
+                    <p class="note_contents">しかし、今すぐに写真の整理だけを2週間やれないので、まずは「ゆっくり減っていく」という状態をつくる。時間をかけて溜めたものなのだから、管理の徹底により時間をかけて無理なく処理していけばよい。</p>
+                    <!-- Task: 559e4591-80a5-40c7-932a-4e8804b73600 -->
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
