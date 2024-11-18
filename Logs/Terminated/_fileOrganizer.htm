@@ -1,0 +1,382 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>_fileOrganizer</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="_fileOrganizer.htm" class="title">_fileOrganizer</a>
+        </div>
+        <div class="entries">
+            <div id="67909e2c-cb9f-44b8-a446-7cda499cbdf4" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">このタスクリストのログが出力されるようにする</span>
+                    <a href="#67909e2c-cb9f-44b8-a446-7cda499cbdf4" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="1b5d5791-a65d-4f83-ad93-d45a3807d5bc" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">メモ通りにプロジェクト開始時のタスクを処理</span>
+                    <a href="#1b5d5791-a65d-4f83-ad93-d45a3807d5bc" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="6cdf30b8-8c67-4efd-b10c-f1f3296447c8" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">_workLog のタスクとメモをこちらに統合</span>
+                    <a href="#6cdf30b8-8c67-4efd-b10c-f1f3296447c8" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">_workLog 側で yyChat とのデータの互換性を捨て、こちらでメモも付記できるようにするなら、一つのツールにできる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="7aa1a0a6-b4ec-4ac1-86f4-49faac000440" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">WPF に切り替える</span>
+                    <a href="#7aa1a0a6-b4ec-4ac1-86f4-49faac000440" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">コンソールで考えていたが、単純な UI なので開発時間が半日長くなるだけ。今後もローカルのさまざまなディレクトリーへのファイルの追加は続く。長く使うツールなので操作性を高く。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="90a64695-43b3-4c30-8695-4177cf95b46b" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">ファイルの移動先のリストがスマートに管理されるようにする</span>
+                    <a href="#90a64695-43b3-4c30-8695-4177cf95b46b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">すぐに追加でき、このアプリにより入れたファイルの数や最後に入れた日時などにより並び替えられる。</p>
+                            <p class="note_contents">最後の日時のみで入れ替えるのも選択肢だが、一度コンタクトを取っただけの会社がいきなり躍り出る仕様だと、10社ほどにまとめてコンタクトをとったとき、付き合いの長いところがリストの下の方へ追いやらされる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">WPF でつくり直している。グループを定義し、それぞれにパスを入れていく。取り引きの多いところだけを集めたグループをつくるなど、なんとでもできるので、勝手に並び替える必要はない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="6cd4f073-9740-4e40-98ec-7187f284e9e4" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">ファイルの追加時にメモを添えられるようにする</span>
+                    <a href="#6cd4f073-9740-4e40-98ec-7187f284e9e4" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">_workLog っぽくなる。それでよいかもしれない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">_workLog と統合することを決めた。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">やめておく。そもそもファイル名だけで内容や経緯が分からないのが問題。その状態で WeChat のログなどからコメントをつけてレポジトリーに流し込むのでは、その後もファイル名だけでは分からない。ファイル名の方を見直すべき。</p>
+                            <p class="note_contents">内容が同じものがあればリストに入らず、ファイル名が同じなら警告が出るようにする。そのときに連番をつけるとか日付をつけるとかも間違い。その時点で内容や経緯をファイル名に入れるべき。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="cc6b35f8-2259-4798-8605-9146249be2cc" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">ファイルが画像と「ただのファイル」に分類されるようにする</span>
+                    <a href="#cc6b35f8-2259-4798-8605-9146249be2cc" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">HTML 関連の機能を完全にやめておく。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d16613b2-1707-4e00-95d4-72b52ee9b8fe" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">画像なら縮小版が自動的につくられるようにする</span>
+                    <a href="#d16613b2-1707-4e00-95d4-72b52ee9b8fe" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="0c184662-90b6-4bd7-8436-8938126cd081" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">ファイルの追加時にすぐにその保存先の HTML ページが更新されるようにする</span>
+                    <a href="#0c184662-90b6-4bd7-8436-8938126cd081" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="a4d6d5da-7014-408d-9e53-6241b8b99828" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">全ての HTML ページを一括生成する機能を実装</span>
+                    <a href="#a4d6d5da-7014-408d-9e53-6241b8b99828" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="43dc91aa-ba4f-418e-967b-0a714b9728a5" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">内容の異なる二つのファイルの名前の衝突に対処 → 自動的にはやらない</span>
+                    <a href="#43dc91aa-ba4f-418e-967b-0a714b9728a5" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">このアプリでは、サブディレクトリーをつくるのは適さない。ディレクトリー内での並び順に大きく影響せず、いつのファイルなのか分かりやすいのは、タイムスタンプをつける方法。「日」のみか、UTC にするのか、さらに衝突した場合などは、つくりながら考える。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">連番のサブディレクトリーをつくらないが、ちゃんとした名前のサブディレクトリーの作成については、基本的な機能として主役級の実装を進めている。長く使うなら当然必要な機能。</p>
+                            <p class="note_contents">名前の衝突時については、内容や経緯の分かるファイル名を手作業で入力してもらうのが、あとあとの利便性を高める。連番や日付で何が分かるわけでもないし、コメントを関連づけて HTML ページを生成するなどは管理コストがかさむ。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="b7510006-1210-47f2-9541-6b5e3f2f053d" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">ファイルの追加のたびに個別の JSON ファイルに情報を保存</span>
+                    <a href="#b7510006-1210-47f2-9541-6b5e3f2f053d" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">保存先を追加していけるツールなので、そのサブディレクトリーに。ファイルのコミットと同時に情報ファイルもコミットしてしまえるのが、忘れがなく、整合性を保てる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">これもやめておく。JSON ファイルに入りうるのは元々のタイムスタンプくらいで、レポジトリーでファイルを共有しても JSON ファイルの中身は変わらないことで同一性を保てるという考え方だが、そもそもタイムスタンプで分かることが少ない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="5ed7180d-b929-4992-a587-99ecc7bed308" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">コードを全体的に見て、やり残しを探す</span>
+                    <a href="#5ed7180d-b929-4992-a587-99ecc7bed308" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ローカルで diff を取り、一通り実装の終わった部分を右側にコピーしていくことで実装を進めていた。</p>
+                            <p class="note_contents">その後、香港への出張が入り、帰国して1週間も経たずに今度はモスクワに行く。</p>
+                            <p class="note_contents">diff による実装は、記憶が新しいまま一気に書けるときには管理コストが低くて優れるが、こうして数週間、開発が止まってしまうと、再開時に「何かを忘れている感」が大きい。</p>
+                            <p class="note_contents">モスクワでも少しずつなら開発を進められそうなので、diff 方式をゼロからやり直す。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">やり残しに TODO をつけた。diff 方式は、Git との相性が悪いのでやめておく。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="601e7adc-59eb-4454-8a59-9425fbac7764" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">最後の方の一時的なコミットの内容をチェック</span>
+                    <a href="#601e7adc-59eb-4454-8a59-9425fbac7764" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">開発中に香港への出張が迫ったため、「動いていたが、チェックはまだだったコード」をいったんコミットした。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="05006efe-79d2-4642-81cb-e87f73be96bb" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">存在しないディレクトリーがリストに残っていれば警告を表示</span>
+                    <a href="#05006efe-79d2-4642-81cb-e87f73be96bb" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ロード時でなくアプリの使用中に分かるべき。サブディレクトリーの方でどうせ存在チェックを行うので、それと同様のコードで保存先の方もチェック。なくなっていれば、つくるか聞いてくるように。ドライブが存在しないなどでつくれない場合にはエラーメッセージを出す。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ロード時に警告が表示される。つくるか聞いてくるのは不要。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="4d81714d-3a4c-4385-8ea7-084a7b600b48" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">保存先に入れる前にファイル名を変更できるようにする</span>
+                    <a href="#4d81714d-3a4c-4385-8ea7-084a7b600b48" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="79969a95-aaa0-472f-8f97-1440aaf5f322" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">それぞれのウィンドウのタイトルや初期サイズを見直す</span>
+                    <a href="#79969a95-aaa0-472f-8f97-1440aaf5f322" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="aad1808f-bf10-47bf-a1da-b090723f5bba" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">files のドラッグ＆ドロップを実装</span>
+                    <a href="#aad1808f-bf10-47bf-a1da-b090723f5bba" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="bc240152-bcb3-43e5-af80-4268a55cc3a9" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">WeChat によるファイルの重複の問題に対処</span>
+                    <a href="#bc240152-bcb3-43e5-af80-4268a55cc3a9" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">開発が止まっているようである DupFileEliminator_20160207.zip のツールで重複をうまく探せる。ツール自体はとても良くできている。</p>
+                            <p class="note_contents">ただ、同じファイルを複数のディレクトリーに入れるのは、便宜上のことである場合もある。たいてい、こちらで用意したファイルのうちどれを添付ファイルにして価格表を請求したかといった区別のための重複コピーであり、そこに WeChat によるファイル名の重複が影響することはない。そもそも、そのディレクトリー内で一意なら、ほかのところに名前の違うコピーが存在しても構わない。</p>
+                            <p class="note_contents">そこを DupFileEliminator_20160207.zip のツールはうまく処理できないようで、ディレクトリーをまたぐ重複を検出してくれるのが煩わしい。</p>
+                            <p class="note_contents">本当に困るのは、同一ディレクトリー内の重複だけだ。中国人は、けっこうビデオを送ってくる。数百 MB のビデオの複数のコピーがいろいろなところに存在しては、この塵は積もりやすい。</p>
+                            <p class="note_contents">アプリで保存先を選択したときに、そのタイミングでパッと調べるのが最善。その瞬間の状態を見ての処理なので、そこにファイルを追加するにおける重複チェックの精度が高い。これをアプリ起動時のバックグラウンドでのスキャンなどとして実装しては、使用中に手作業でファイルを操作してしまった場合に、内部のキャッシュと現実の状態が乖離しうる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">相対ファイルパスとサイズが同じなら変更がないとの前提で実装する。サイズの変わらない上書き保存は、Exif の Orientation の変更くらいしか思いつかない。そういうのはコミット前にやる。</p>
+                            <p class="note_contents">相対ファイルパスとサイズでハッシュをデータベースから取るなら、相対ファイルパスがそのままでサイズが変わった場合にハッシュが null になり、すぐさま再生成される。しかし、これもめったにあることでない。重たいビデオの場合、保存先への移動時にハッシュが生成されるので、UI の工夫により待ってもらいやすい。</p>
+                            <p class="note_contents">ハッシュでの比較なら、ディレクトリーを開いた瞬間にその時点での重複を探すのでも、アルゴリズム次第では遅延を全く体感しないはず。ファイルをファイルサイズで並び替えて、ファイルサイズが同じところだけハッシュを比較する。一瞬だろう。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="2c0ce35c-3537-4aa9-a981-8a461de1df0b" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">バックアップの保存先や保存方法について再考</span>
+                    <a href="#2c0ce35c-3537-4aa9-a981-8a461de1df0b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Temp ディレクトリーに投げっぱなしている。設定を毎日何度も更新するわけでなく、一度やりきったら頻度が大幅に下がる。今のままでもよいという考えもある。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="6bad9455-22e8-4875-8bfa-b9ef8bb073a5" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">重複検出のためのハッシュなどを SQLite に入れる</span>
+                    <a href="#6bad9455-22e8-4875-8bfa-b9ef8bb073a5" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">JSON では重たくなる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="61660ea6-0090-4088-9643-b16f79e00faa" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">ファイル名の重複時に警告を表示し、手作業で修正するまで入れられなくする</span>
+                    <a href="#61660ea6-0090-4088-9643-b16f79e00faa" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="3b88ef5f-fcdc-449f-a74e-cf96f60c77af" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">destination のクリックにより subdirectories から選択が外れるようにする</span>
+                    <a href="#3b88ef5f-fcdc-449f-a74e-cf96f60c77af" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="12b92d98-896c-43b9-a052-566baa8c7769" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">ファイルの追加時に保存先での重複と全体での重複の両方をチェック</span>
+                    <a href="#12b92d98-896c-43b9-a052-566baa8c7769" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">管理上の理由により、同じファイルを複数のディレクトリーに保存することがある。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ほかのところと重複するだけなら、警告は出るが、リストに入る。保存先との重複ならリストに入らない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="7ee26b0a-fe2c-4ce6-878a-47fa89eda093" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">全ての保存先の全てのファイルの重複チェックの機能を実装</span>
+                    <a href="#7ee26b0a-fe2c-4ce6-878a-47fa89eda093" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">毎回やるものでないが、必要ならすぐにやれるように。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d75fba5c-6d32-4ff3-bc2f-761df8870051" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">各部の折り返しについて最後にテスト</span>
+                    <a href="#d75fba5c-6d32-4ff3-bc2f-761df8870051" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="f6ddf3ed-94a4-4178-84f4-f0647b7cbf49" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">ファイルの移動時にごみ箱に予備が残るようにする</span>
+                    <a href="#f6ddf3ed-94a4-4178-84f4-f0647b7cbf49" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">保存先に入れるときに、デスクトップなどの元のファイルをごみ箱へ。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="f2ddb4c4-2b7e-41b4-8ca6-05538de0aac6" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">Move/Copy の表示を動的に変更</span>
+                    <a href="#f2ddb4c4-2b7e-41b4-8ca6-05538de0aac6" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Move to Destination または Move to Subdirectory になるなど。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="0c52bea5-1e9a-46fe-ad2c-3feb2ac56eb8" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">開発を打ち切る</span>
+                    <a href="#0c52bea5-1e9a-46fe-ad2c-3feb2ac56eb8" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">やっていて面白くないし、Windows Explorer ですでにできていることを少し効率化するために過度に大がかりなことをしている感が日増しに強まっているため、訪ロ中の時間が限られていることも勘案し、開発を打ち切る。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">MVVM での WPF の開発に自分が不慣れで、たぶん Command を使うべきところでもそうしておらず、binding についても実装に甘さがあり、書いているコードの95％くらいが UI だ。問題を解決するためのロジックとはほど遠いところでグダグダしていて、とにかく時間を無駄にしている感が強い。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Windows Explorer がなく、MS-DOS しかない時代にこのツールを書けているならファイル整理の効率性が飛躍的に高まる点において意地でも完成させたいものだが、一番やりたいことである「重複チェック」のために周囲を揃えすぎようとしていたのは、完全に設計ミスだ。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
