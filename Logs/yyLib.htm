@@ -115,6 +115,21 @@
                     </div>
                 </div>
             </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">うろ覚えだが、NuGet 関連の右往左往についてメモを残す。</p>
+                    <p class="note_contents">build_changed_projects.py にて NuGet の更新を行ったところ、yyLib の System.Data.SqlClient 4.8.1 および System.Drawing.Common 4.7.0 が古いと言われた。</p>
+                    <p class="note_contents">Visual Studio の GUI でこれらのみ .csproj に入れたところ解決したが、その後、EntityFramework 6.4.4 も古くて非推奨になっていると知った。ソリューションエクスプローラーの「依存関係」のところにより、これが上記の二つのパッケージの古いバージョンを参照していると知った。</p>
+                    <p class="note_contents">EntityFramework も「推移的」として入っていて、その依存関係は、「System.Data.SQLite 1.0.119 → System.Data.SQLite.EF6 1.0.119 → EntityFramework」だった。SQLite のもの二つは最新だったが、すでにコードが安定しているのか、「非推奨」なだけで脆弱性は言われていない EntityFramework の最新版への参照に切り替えるためだけにバージョンを上げることはないと判断されたようで、参照が古かった。</p>
+                    <p class="note_contents">この場合の解決策は、いつ最新の EntityFramework への参照に更新してくれるか分からない SQLite を待つことなく最新の EntityFramework を参照し、後方互換性で SQLite が動くと期すること。</p>
+                    <p class="note_contents">そのため、yyLib.csproj に EntityFramework を入れた。</p>
+                    <p class="note_contents">それでも yyChat などが「推移的」の EntityFramework に脆弱性があると言い続けたが、これはプロジェクトのリフレッシュにより直った。build_changed_projects.py にてクリーンアップを行うのが早かった。</p>
+                    <p class="note_contents">リビルドでは直らず、yyChat などにも最新の EntityFramework への参照を入れたが、クリーンアップでは直ったので、EntityFramework への参照を消した。</p>
+                    <p class="note_contents">今後も、「推移的」なパッケージの脆弱性について言われれば、それを参照する一番上の層のパッケージの最新版を参照してみる。それでダメなら、その参照を消して（ここが重要）、一つ下の層のパッケージの最新版を参照する。そういうことを、脆弱性が言われなくなるまで繰り返す。</p>
+                    <p class="note_contents">脆弱性までは言われなくても「非推奨」のパッケージをたまたま目にすれば更新するが、わざわざ探すことは意図的に控える。バグがあれば「脆弱性」が言われる。そうでないなら、最新版より機能が少ない程度のことで、それで困っていない参照元が慌てて最新版を参照する必要性は乏しい。</p>
+                    <!-- Task: dbccd229-b619-43d4-b437-ff4f3442d808 -->
+                </div>
+            </div>
         </div>
     </body>
 </html>
