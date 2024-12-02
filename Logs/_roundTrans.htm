@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>_roundTrans</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="_roundTrans.htm" class="title">_roundTrans</a>
+        </div>
+        <div class="entries">
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">今、仕事と親孝行のためロシアにいる。ChatGPT やその API へのアクセスが制限されているため、VPN が必要。その VPN も1年前より制限が厳しくなっていて、昨年つながった MillenVPN が今年はダメなので OpenConnect-GUI VPN client を使っている。昨年までブロックされていた LINE に今年はそのままつながるため携帯もパソコンも VPN なしの時間が長く（つなぐと速度が大幅に低下する）、ChatGPT の利用頻度がかなり下がっている。</p>
+                    <p class="note_contents">それで Google Translate を使うことが増えて思ったが、やはり翻訳精度は大きく異なる。一方、速度は Google Translate の方が圧倒的に速い。ほぼリアルタイムだ。</p>
+                    <p class="note_contents">今のワークフローは、そちらで英語を書き、右側で日本語をザッと読みながら原文のミスを探し、まとまったら Mery にコピーしてデスクトップにテキストファイルとして保存し（誤操作などによるデータ喪失の回避のため）、全体を通読し、OpenAI の API がベースの自作の翻訳ツールに流し込み、スペイン語、ロシア語、中国語などに翻訳し、そのうち一つを同じツールまたは Google Translate で英語または日本語に戻し、原文と大きく異ならないのを確認し、データが散らからないように各言語の文章を Word ファイルまたは taskKiller のメモに放り込み、WeChat などで送るというものだ。</p>
+                    <p class="note_contents">そのためだけに VPN につなぐのがめんどくさいし、遅すぎて OneDrive がほぼ仕事をしなくなるのも不便だ。また、一部の誤訳や自分の書き間違いなどにより全体を再翻訳したり、循環テストも全体的に必要になったり、とにかくコピペの作業が多かったりも、時間と精神の両方を削る。</p>
+                    <p class="note_contents">さらに言うと、いつ誰に何を送ったかのデータの分散・埋没により、WeChat のログをさかのぼるなどの手間が生じている。言ったか言っていないかよく分からないから「改めて伝える」というのを違和感なく行うコンテキストの演出により長文を書き直して送るなどもあって、書くこちらも、読む相手も、そういうのが負担になっている。</p>
+                    <p class="note_contents">いずれ yyChat を書くときに派生ツールとして各社との翻訳チャットも用意するだろうから今を WeChat と翻訳ツールでしのいでいるが、そういったウェブシステムができたあとも、各人との初期的なやりとりでは WeChat で話すことが多いに決まっている。</p>
+                    <p class="note_contents">そういう初期的なやりとりに今後も長く役立つ翻訳ツールを書く。</p>
+                    <!-- Task: a6f08340-b232-413c-bb60-0539264620e9 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">ワークライフバランスを大事にしていて、外出中に携帯で働くのをできるだけ控えている。それをやってしまうと仕事がつきまとうからだ。そのために携帯も二つに分けていて、外出中には仕事用携帯はバッグの中なので、家族や友だちとの時間に仕事が入り込んでくることが軽減されている。</p>
+                    <p class="note_contents">そういう自分が外出中にウェブで長文を書いて中国メーカーなどに送るなどは考えにくいし、やりやすくしてしまうのは意図的に避けたいこと。</p>
+                    <p class="note_contents">また、ウェブでつくると過去ログの保存・整理の機能や、それが他社に流出しないためのセキュリティーの実装が必要になる。ウェブでログを扱えるようにしてしまうと、たとえば「誰に送ったか」の分類を間違ったことにあとで気づいたときの CRUD なども必要で、ローカルならエクスプローラーでパッと行えることを自前で実装することになる。その UI のつくり込みも必要。</p>
+                    <p class="note_contents">ワークライフバランスを大事にしたく、翻訳の循環テストを行うような文章は自宅の仕事用パソコンのみで書きたく、なおかつめんどくさい開発を回避するため、「XML として完ぺきに読める HTML ファイルを出力する WPF アプリ」としてつくる。</p>
+                    <!-- Task: a6f08340-b232-413c-bb60-0539264620e9 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">Avalonia UI も考えた。以前、それで翻訳ツールをつくり、Mac でも動いている。しかし、Mac 自体、バッテリーが放電でゼロになるくらい使用頻度が低い。Windows でやれていることを特段の理由なく Mac でもやるほど Mac への憧れがないのだろう。好みの問題のようなので、今後いきなり Mac の使用頻度が高まることは考えにくい。よって、パフォーマンスが優れる印象のある WPF で書く。.NET 9 になっていろいろと爆速になっているとも聞いている。</p>
+                    <!-- Task: a6f08340-b232-413c-bb60-0539264620e9 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">大まかな仕様としては、XML として読める HTML ファイルを与えての起動ならそれが読み込まれ、そうでないなら新規ファイルの作成となる。いずれも Temp ディレクトリーに数分ごとに一時保存され、デスクトップが停電してもデータが飛ばない。</p>
+                    <p class="note_contents">Google Translate または普通のテキストエディターで書いて、できあがってからの翻訳なので、エディター機能を充実させない。画面を4分割し、左上に原文、右上に一番大事な言語での訳文、左下に（必ずしも原文の言語と同じでない）循環テスト用の訳文、右下に「内容として異なるところ」を AI に聞いた結果を表示。言語が違っていても大丈夫にするには、おそらくプロンプトの調整が必要。汎用性を与えたいため、できるだけシンプルなプロンプトに。</p>
+                    <p class="note_contents">翻訳を始めてからの誤操作により原文が変わるのを避けたく、翻訳ボタンを押すのと同時に原文をロック。その後、訳文などをチェックし、大丈夫なら保存するまでの間、ロックを解除しなければ原文を変更できず、ロック解除により原文を変更すれば、今度は保存ボタンを押せないように。翻訳ツールなのだから、整合性を強制する仕様は不自然でない。</p>
+                    <p class="note_contents">HTML ファイルとして表示すれば､一番大事な言語での訳文が最初に表示され、その下にほかの言語での訳文、最後に原文が表示される。作業の継続性を考え、循環テスト用の訳文と、AI に違いを調べてもらったものも HTML ファイルに入るが、デフォルトでは表示されないように。JavaScript により、どこかをクリックすることで展開されるくらいでよい。</p>
+                    <p class="note_contents">管理性のため、タイトルを設定できるように。AI にやらせてもよいが、原文が自作の支離滅裂なのだから、タイトルも自分の考えと整合するものを押し通せた方が自分にとって分かりやすい。タイトルの循環テストも行えるように。どこが異なるかを AI に調べてもらうまでは不要。</p>
+                    <p class="note_contents">タイトルに問題がなければ、「ローカルの日付」「相手の言語のタイトル」「原文のタイトル」「拡張子」のファイル名で保存。古いファイルを開いてタイトルを変更したならファイル名が勝手に変わる。しかし、日付は作成日のまま。原文のタイトルを丸括弧に入れる。</p>
+                    <p class="note_contents">日付はパソコンのローカル時刻で。UTC にして Z を入れるなどはうるさいし、そのときに自分がどこにいるかでタイムゾーンを調整するなども、大して利益のない管理になる。時刻も不要。こちらで並び替えられて便利だが、受け取る相手にとって冗長な情報。贈り物なのだから相手を優先。自分が使うにおいては基本的に JST の日付になり、タイムゾーンの異なる人にとっては1日の誤差が生じうるが、だいたいいつ頃のファイルか分かれば十分。</p>
+                    <p class="note_contents">テキストのみコピペで送ることも多いだろうから、P タグでなく BR タグを使い、コピーしたものにちゃんと改行が入るようにする。同じ理由で UL タグなどへの自動変換も行わない。* で始めた行は HTML でも * で始まるように。インデントも保たれてほしいため、&amp;nbsp; か何かを活用。より適した文字があった気がするため調べる。</p>
+                    <!-- Task: a6f08340-b232-413c-bb60-0539264620e9 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">まだロシアにいて、ルーズリーフにとめられる A4 用紙を切らしているため今回は文字で設計したが、図なら一瞬で終わった作業。メモでなくコードを多く書く開発への移行に帰国後に取り組む。</p>
+                    <!-- Task: a6f08340-b232-413c-bb60-0539264620e9 -->
+                </div>
+            </div>
+            <div id="478f42bc-bc21-48a5-a77b-dd98a170876b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">このタスクリストのログが出力されるようにする</span>
+                    <a href="#478f42bc-bc21-48a5-a77b-dd98a170876b" class="permalink">&infin;</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>yyShare</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="yyShare.htm" class="title">yyShare</a>
+        </div>
+        <div class="entries">
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">jvila.lighting に工場がログインできない仕様に変更する。</p>
+                    <p class="note_contents">その場合、WeChat などでのやりとりが増えるが、それだと WeChat で直接つながっている人にしか写真や情報が届かないため、コンテキストの共有にタイムラグやモレが生じる。</p>
+                    <p class="note_contents">また、英語を話せない中国人に中国語でメッセージを送るとか、中国語から英語にしてくれて送ってくれるものの翻訳の質が低くて分かりにくいとかもとても不便で、本質的に重要でないところに時間を取られるのが好きでない。</p>
+                    <p class="note_contents">ウェブにデータを集約し、「載せたで」のアイコンだけ双方に送る運用に同意してくれる会社があれば、こちらでスペイン人やロシア人に伝達するコストを劇的に下げることができる。先方にとっても、原文と訳文の両方が表示されるし、翻訳の循環テストも可能になるため、悪い話でない。</p>
+                    <!-- Task: e6aa29d6-df3c-4659-8eda-14d13d4193d4 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">このシステムは、かなりの高確率で役に立つ。基幹システムなので非公開で開発する jvila.lighting と同時に開発を進め、それが終わる頃にはこちらも終わっているように調整を試みる。</p>
+                    <!-- Task: e6aa29d6-df3c-4659-8eda-14d13d4193d4 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">yyChat とコンセプトが似るため、コードをどのように共通化するかを考える必要がある。</p>
+                    <p class="note_contents">一方、社内で複数プロジェクトを扱う yyChat と、単一スレッドを多数の会社と扱うこちらとでは、セキュリティーに関するところの実装が全く異なるため、一つのシステムとしてモードで切り替えるなどは、設計が複雑になることでセキュリティーリスクになる。二つのシステムとして別々に開発する考えは揺るがない。</p>
+                    <!-- Task: e6aa29d6-df3c-4659-8eda-14d13d4193d4 -->
+                </div>
+            </div>
+            <div id="522c59f5-bb4a-4568-babb-d6800ab1d653" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">このタスクリストのログが出力されるようにする</span>
+                    <a href="#522c59f5-bb4a-4568-babb-d6800ab1d653" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">名前を yyShare にする。</p>
+                            <p class="note_contents">相手側に説明しやすいコンセプトを選ぶ必要がある。photo, trans, share あたりを考えた。「写真を共有するため」と言いきるなら photo も悪くない。翻訳の不便を言うなら trans だ。しかし、どちらも yy をつけると少し長い。また、「多言語チャットで写真や情報を共有する」というコンセプトにおける目的語に相当する部分のうち一部に意味が偏る。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="1bcb187c-cc19-478a-9ed1-424d4e5b8970" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">yyChat のモードの一つにできないか考える</span>
+                    <a href="#1bcb187c-cc19-478a-9ed1-424d4e5b8970" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">単一インスタンスでパートナー企業ごとにアカウントをつくれるシステムにするのでは、実装ミスによる情報漏洩のリスクがある。</p>
+                            <p class="note_contents">仕方なくパートナー企業ごとにバイナリーを配置してアプリを走らせるなら、「部屋が一つしかない yyChat」なので、設定ファイルで切り替えられるようにできそう。別々のシステムとしてつくり分ける理由が見つからなくなっている。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">理由がないのでつくり分けをやめる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="af5501a3-c4aa-4118-8bbd-c5b57e5725f5" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">プロジェクト開始時のタスクをメモ通りに処理</span>
+                    <a href="#af5501a3-c4aa-4118-8bbd-c5b57e5725f5" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="1ff67f03-7055-4701-ad61-5757a0a373d7" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">yyChat とのコードの共通化の方法を考える</span>
+                    <a href="#1ff67f03-7055-4701-ad61-5757a0a373d7" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">どういうレベルで共通化するか。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="6f5822c4-0db3-4509-a31c-9b1d03864115" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">ピン留めにより極小チームのタスク管理にも使えるようにする</span>
+                    <a href="#6f5822c4-0db3-4509-a31c-9b1d03864115" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ピンだらけになりそうだが、ピン留めされたメッセージのみフィルタリングして表示する機能を実装するなら、使い勝手は悪くないかもしれない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">メール通知も活用することで、夫婦間の簡単なタスク管理にも使える。ブログのネタ収集にも使える。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d2642ffb-985b-4fc8-8ba4-bd6214c3e07b" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">メール通知の有無について考える</span>
+                    <a href="#d2642ffb-985b-4fc8-8ba4-bd6214c3e07b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">全ての書き込みについてメール通知を出すのは論外。ただ、先方は社長も登録されているなどで、特定のメッセージのみ社長にも届けたいなら、チェックボックスにチェックできても便利。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="67a896c1-8077-4a0e-a510-101fa3065e82" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">情報漏洩のリスクを低減する方法を考える</span>
+                    <a href="#67a896c1-8077-4a0e-a510-101fa3065e82" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ログインは必須。しばらく開かなければログアウト。定期的に開いていれば勝手にログアウトされないように。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">表示できる過去ログの期間の上限を設定し、それを超えるには社長だけが知っている特殊なパスワードを必要にする？ 工場の作業員の方や営業の担当者の方は直近のものしか見られないように？</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">プロジェクトごとにスレッドをつくってもらう考えもあるが、管理がややこしくなる。単一のスレッドをブックマークして開いてもらえるのが相手にとって楽。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="d0f50efc-b721-4dce-9f13-3979c4997e1b" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">A4 用紙で画面の遷移を考えてスキャン</span>
+                    <a href="#d0f50efc-b721-4dce-9f13-3979c4997e1b" class="permalink">&infin;</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
