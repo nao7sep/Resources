@@ -1,0 +1,16 @@
+﻿App/runtimes/win-x64/native/Magick.Native-Q16-x64.dll
+App/Magick.NET-Q16-AnyCPU.dll
+App/Magick.NET.Core.dll
+App/photoPage.deps.json
+App/photoPage.dll
+App/photoPage.exe
+App/photoPage.runtimeconfig.json
+photoPage/Shared/DirectoryInfoAlt.cs
+photoPage/Shared/FileInfoAlt.cs
+photoPage/GlobalSuppressions.cs
+photoPage/photoPage.csproj
+photoPage/Program.cs
+.gitignore
+LICENSE
+photoPage.sln
+srcZip.txt
