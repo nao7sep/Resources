@@ -1,0 +1,15 @@
+﻿2022年3月14日
+井ノ口慶尚
+
+WPF の Background
+
+// Window
+#F0F0F0 に設定する
+配色などを変更していない Windows 11 + Visual Studio 2022 の「オプション」の背景色
+デフォルトの真っ白では、目が疲れるし、ユーザーが操作できる部分とそうでない部分の区別が付きにくい
+
+// Button や ComboBox
+元々グレーのところはグレーのままで
+ComboBox の Background の変更が難しいのが理由
+https://stackoverflow.com/questions/22695145/wpf-change-background-color-of-a-combobox
+頑張れば何とかなりそうだが、ちょっとしたツールをパッと書くときにそこまですることもない

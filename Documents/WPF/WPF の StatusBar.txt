@@ -1,0 +1,28 @@
+﻿2022年3月14日
+井ノ口慶尚
+
+WPF の StatusBar
+
+// 基本
+VerticalAlignment="Bottom"
+Height="24"
+Background="#007ACC"
+// Visual Studio Code の Light+ テーマのステータスバーの背景色
+// VerticalContentAlignment="Center" は不要
+// Visual Studio ではデフォルト値の Top が表示されるが、
+//     中身の0マージンで割り付け表示になるのか、上下方向に中央寄せになる
+FontFamily="Meiryo"
+// 「WPF のフォント.txt」を参照
+FontSize="12"
+
+// TextBlock
+x:Name を設定
+Foreground="White"
+Padding="5,0"
+// 「WPF の Padding.txt」を参照
+
+// 消せないパディング
+StatusBar に TextBlock を入れて後者に背景色を付けると、前者に上下左右のパディングがあるような表示になる
+後者の高さを24ピクセルにすると、前者の高さは Auto (30) になる
+どちらのマージンやパディングを0にしても余白は消えない
+バグのようで気になるが、高さのあるフォントでも y の下端が切れるなどはないため様子見

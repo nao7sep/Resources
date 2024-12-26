@@ -1,0 +1,19 @@
+﻿2022年3月14日
+井ノ口慶尚
+
+WPF の Window
+
+// 基本
+x:Name="mWindow"
+すぐに大きさが決まらないならどこかにタスクを
+Width を設定
+Height を設定
+必要に応じてコードで WindowState = WindowState.Maximized
+// 大きさを決めてから状態を
+Title を設定
+// 大きさや状態のあとに内容を
+Background="#F0F0F0"
+// 「WPF の Background.txt」を参照
+FontFamily="Meiryo"
+// 「WPF のフォント.txt」を参照
+FontSize="12"
