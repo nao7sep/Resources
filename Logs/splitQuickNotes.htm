@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>splitQuickNotes</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="splitQuickNotes.htm" class="title">splitQuickNotes</a>
+        </div>
+        <div class="entries">
+            <div id="39bcb67f-f94c-4259-a61a-8833dfce60ae" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">プロジェクト開始時のタスクをメモ通りに実行</span>
+                    <a href="#39bcb67f-f94c-4259-a61a-8833dfce60ae" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">エントリーの始まりが次のようになる。</p>
+                    <p class="note_contents">[GUID]<br />
+                        [2024-12-25T04:34:21.3654511Z]<br />
+                        [タイトル]</p>
+                    <p class="note_contents">GUID とタイトルは省略できる。GUID が日時より先なのは、情報の構造としては正しいが、パーズがめんどくさい。</p>
+                    <p class="note_contents">タイトルの次に必ず空行があり、その後は次のエントリーまたはファイルの終わりまでが本文だ。</p>
+                    <!-- Task: 549c0f9d-8bf9-42b7-b517-629fd278423e -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">QuickNotes が文字列へのトリミングや不要な空白系文字の掃除などを行うはずだが、yyLib の機能で同じことを行う。</p>
+                    <p class="note_contents">yyLib 側に単一行の文字列を最適化するメソッドが見当たらないので、ちゃんと確認する。ないなら追加する。</p>
+                    <!-- Task: 549c0f9d-8bf9-42b7-b517-629fd278423e -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">パーズを行単位で行う。</p>
+                    <p class="note_contents">各行を、GUID か、日時か、タイトルっぽいか、それら以外かの四つに分ける。</p>
+                    <p class="note_contents">そのときにすでに何が見つかっているか、バッファに何か入っているかといったステート情報を保持し、矛盾があれば例外を投げて処理を打ち切る。直せる矛盾だろうから、それでよい。</p>
+                    <p class="note_contents">次のエントリーが見つかったときにそれまでのエントリーが確定されるいつもの実装。最後のトリガーのみ EOF になるのも同じ。</p>
+                    <!-- Task: 549c0f9d-8bf9-42b7-b517-629fd278423e -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">GUID はファイル名に入っても人間の役に立たないのでファイル名に入らない。</p>
+                    <p class="note_contents">タイトルは、日時に続けて出力される。タイトルがないなら日時のみのファイル名に。</p>
+                    <p class="note_contents">拡張子は元のファイルのものを引き継ぐ。QuickNotes で *.md をいじることがまずないが、分割前に *.md に改名することでパラメーターとできる。ツールがどちらにするか聞いてくるのはうるさい。</p>
+                    <p class="note_contents">モードは、テキストと Markdown のみ。前者なら Key: Value で、後者ならそれプラス &lt;!-- --&gt; で GUID やフルのタイムスタンプが入る。</p>
+                    <!-- Task: 549c0f9d-8bf9-42b7-b517-629fd278423e -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">簡単なツールだが、QuickNote と QuickNotesParser の二つのクラスをつくる。一応、外部からも使えるように。</p>
+                    <p class="note_contents">QuickNoteLineType も。</p>
+                    <!-- Task: 549c0f9d-8bf9-42b7-b517-629fd278423e -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">yyLib の文字列の最適化の機能について調べた。コメントも含めて読んだ。どういう行を無視するかを指定しての、文字列の先頭、中間、末尾の空行のみ処理するのが Optimize で、それしかない。それで十分に合理的だ。迷いなく使えるメソッドになっている。</p>
+                    <p class="note_contents">自分は行末の空白が無意味と思うので（Markdown でも自分はやらない）エディターでの保存時に削られるように設定しているが、インデントは当然残す。行末に多数の空白をつけてのいたずらを想定するなら、インデントならそれが通るのはおかしい。行中の空白もそうだ。</p>
+                    <p class="note_contents">また、空白にもいろいろあって、「ここから右から左です」の記号なども含めると全ては対応できないし、そもそもこの記号は Unicode で空白系文字だと見なされていない。エディターでは空白っぽく処理されることがあるが、厳密には空白でない。そういうものがほかにもある。</p>
+                    <p class="note_contents">制御文字や、その部分での仕様において使えない文字（たとえば Windows におけるファイル名の中の \ など）さえ混入していなければ、セキュリティー上の問題はないと考えるしかない。</p>
+                    <!-- Task: a8442a42-9c4e-4b54-a900-8f393b2770ec -->
+                </div>
+            </div>
+            <div id="4708f887-6e0d-4ca2-a5d6-f48c3a8a0dd6" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">実装</span>
+                    <a href="#4708f887-6e0d-4ca2-a5d6-f48c3a8a0dd6" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="92650a07-30be-4f78-8f92-862eb6025b8b" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">テスト</span>
+                    <a href="#92650a07-30be-4f78-8f92-862eb6025b8b" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="7a87206b-67ec-4306-8797-c4597e847f32" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">出力される DLL を減らす</span>
+                    <a href="#7a87206b-67ec-4306-8797-c4597e847f32" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">yyLib が依存するものが多数入る。EntityFramework.dll まで入るが、このプログラムで必要なのは文字列の最適化の機能くらい。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">以下のように設定することで劇的に改善。yyLib の自分のコードしか利用しないなら、最小構成で十分。</p>
+                            <p class="note_contents">&lt;ProjectReference Include=&quot;..\..\yyLib\yyLib\yyLib.csproj&quot;&gt;<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&lt;ExcludeAssets&gt;runtime;native&lt;/ExcludeAssets&gt;<br />
+                                &lt;/ProjectReference&gt;</p>
+                            <p class="note_contents"><a href="https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files" target="_blank" class="url">https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="92af8417-df96-4ac8-856f-5f89994ef97a" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">落ちるところがないようにする</span>
+                    <a href="#92af8417-df96-4ac8-856f-5f89994ef97a" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="537c7dc3-6420-4319-b27c-589a14910454" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">アーカイブ</span>
+                    <a href="#537c7dc3-6420-4319-b27c-589a14910454" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ついでに *.pdb もアーカイブに含めないことを考えたが、サイズが小さいし、プロジェクトがオープンソースなので、今のところそのままでよい。例外情報をそのまま表示する雑なコーディングの個人用ツールなので、その情報量が増えて困らない。</p>
+                            <p class="note_contents"><a href="https://stackoverflow.com/questions/608002/do-you-have-to-deploy-the-pdb-file-with-compiling-under-release" target="_blank" class="url">https://stackoverflow.com/questions/608002/do-you-have-to-deploy-the-pdb-file-with-compiling-under-release</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="0e340923-e740-4f80-85c1-4c1873d0cb73" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">バイナリーを配置</span>
+                    <a href="#0e340923-e740-4f80-85c1-4c1873d0cb73" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="807c3a16-7ae9-4cd9-aee8-c2c5c5546111" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">このタスクリストのログが出力されるようにする</span>
+                    <a href="#807c3a16-7ae9-4cd9-aee8-c2c5c5546111" class="permalink">&infin;</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
