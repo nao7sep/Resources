@@ -130,6 +130,252 @@
                     <!-- Task: dbccd229-b619-43d4-b437-ff4f3442d808 -->
                 </div>
             </div>
+            <div id="9b0abac7-9257-4be5-86d7-cea455fb2b2d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://learn.microsoft.com/en-us/dotnet/core/compatibility/9.0" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/core/compatibility/9.0</a> をチェック</span>
+                    <a href="#9b0abac7-9257-4be5-86d7-cea455fb2b2d" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Breaking changes in .NET 9 | Microsoft Learn</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ザッと目を通した。yyLib に影響のある変更はなさそう。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="0ebc7724-e838-4268-9af3-3fd200627e2a" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ライブラリーの仕様としてどうなのかを全体的にちゃんと見る</span>
+                    <a href="#0ebc7724-e838-4268-9af3-3fd200627e2a" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">自分はやはり2000年くらいで設計手法の発展が止まっているようで、世の中は API にあふれているのに知識が乏しいし、API 的なステートレスな実装が内部的にも好まれるのに、複数のクラスが相互依存するステートフルな実装に流れやすい。</p>
+                            <p class="note_contents">API を学び、AI とも設計についていろいろと話してきたことで、少しだけだが、設計手法が新しくなってきた。他者のコードを最近よく見るのも影響しているか。Python をやったことも関係していると思う。</p>
+                            <p class="note_contents">いずれにせよ、今の見方では古くさい設計が各部にあるだろうから、思いきって直す。残して困らないコードなら後方互換性のために残してフラグをつける。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">各部が何に依存してどういうことをするか、ちゃんと見た。設計の甘いところがいくつかあったが、いずれも致命的でなかった。yyChat などの開発に本格的に着手してよいクオリティー。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="97d1370f-a9ed-4ea7-961c-0c0efc453610" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">コメント内のインデントをなくす</span>
+                    <a href="#97d1370f-a9ed-4ea7-961c-0c0efc453610" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">昔やっていたが、今後も続けるのはめんどくさいし、大した効果がない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="9ceaf264-6bc3-42ac-9994-ae69e2a693d2" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">yyConvertor と yyFormatter が紛らわしいのを改善</span>
+                    <a href="#9ceaf264-6bc3-42ac-9994-ae69e2a693d2" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">前者に統合し、メソッド名を整え、全体をチェックした。拡張メソッドを廃止。インテリセンスがうるさくなる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="5135e59e-774b-4fb2-ac1e-2009cd34ba77" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">&lt;summary&gt; 内で一行に複数の文章を入れているところに改行を入れる</span>
+                    <a href="#5135e59e-774b-4fb2-ac1e-2009cd34ba77" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ほかのプロジェクトでも見る。些細なことだが、改行を入れているところとそうでないところがあって、入れているところの方がコードを読みやすい。パッと直せる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">これからつくり込む yyLib と yyChat のみ見た。yyChat には &lt;summary&gt; がまだ一つもなかった。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="098840d2-d602-4e74-9617-f7f775188a64" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ToRoundtripString などを拡張メソッドでないようにする</span>
+                    <a href="#098840d2-d602-4e74-9617-f7f775188a64" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="5285a6f8-8c6c-4771-9118-379c95749e0e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://learn.microsoft.com/en-us/dotnet/core/compatibility/core-libraries/9.0/ziparchiveentry-encoding" target="_blank" class="url">https://learn.microsoft.com/en-us/dotnet/core/compatibility/core-libraries/9.0/ziparchiveentry-encoding</a> の影響を調べる</span>
+                    <a href="#5285a6f8-8c6c-4771-9118-379c95749e0e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ほかのプログラムも対象に。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">C:\Repositories のルートで VSC により検索した。七つくらいのプログラムで使われていたが、いずれも古かった。.NET 9 に移行する予定がないため放置。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="604c5ba8-45c6-48b0-a9c4-050a4eeb124e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">yyMail* の翻訳機能の仕様をチェック</span>
+                    <a href="#604c5ba8-45c6-48b0-a9c4-050a4eeb124e" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ただの入れ物。メールに属性情報をつける程度のこと。yyMailContact には PreferredLanguages があるが、その値に基づき翻訳が要求されるとか、それが可能なメソッドをかましておけば件名や本文がその言語になるとかの仕様にもなっていない。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">MimeKit の MimeMessage より確実にシリアライゼーションを行える、より生データ的なクラスが欲しくて yyMailMessage をつくっては、todoMail の開発時には、ファイルの添付が必要でなく、MimeMessage をそのまま使ったか。</p>
+                            <p class="note_contents">yyMailMessage から MimeMessage への変換には yyLib が今後も責任を負えるため、yyMailMessage &lt;=&gt; JSON という変換で生データ的なものを残し、そこから MimeMessage に変換したものを送るのが、二つの点において優れる。一つは、繰り返しになるが、JSON とのラウンドトリップが確実で、元のデータを確実に復元できること。もう一つは、*.eml の中身になる MIME メッセージと異なり、添付ファイルを外部ファイルへのパスとして扱えることでストレージを効率的に使えること。</p>
+                            <p class="note_contents">yyMailMessageAttachment の OriginalFilePath などが全て get; set; なので、パスに規則性を与えておけば、システムの配置場所が変わろうと添付ファイルのロード直前にパスを調整することで問題を回避できる。</p>
+                            <p class="note_contents">ただメールを送りたいだけなら MimeMessage をそのまま使っても困らないが、多言語システムにおいて内部的に生成されたメッセージに訳文が添えられ、データベース内でうまく分割されて保存されるにおいて念のため「より生のデータ」を JSON でも残しておきたいなら完璧な仕様になっている。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="dd231e0c-b3fd-41c4-8211-57ecb227cd17" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">enum 関連のところで EnumConverter を使うべきか考える</span>
+                    <a href="#dd231e0c-b3fd-41c4-8211-57ecb227cd17" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">現行のコードで問題なし。Enum クラスと EnumConverter クラスの両方のソースコードをザッと見た。厳密にどちらが良いとまでは調べていないが、すぐに EnumConverter に移行するほどの理由は認められなかった。</p>
+                            <p class="note_contents"><a href="https://source.dot.net/#System.Private.CoreLib/src/libraries/System.Private.CoreLib/src/System/Enum.cs" target="_blank" class="url">https://source.dot.net/#System.Private.CoreLib/src/libraries/System.Private.CoreLib/src/System/Enum.cs</a><br />
+                                <a href="https://source.dot.net/#System.ComponentModel.TypeConverter/System/ComponentModel/EnumConverter.cs" target="_blank" class="url">https://source.dot.net/#System.ComponentModel.TypeConverter/System/ComponentModel/EnumConverter.cs</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="9784b28f-995a-49f2-a5dc-410c48575c0b" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">yyMail* で translations を件名や本文に反映できるようにする</span>
+                    <a href="#9784b28f-995a-49f2-a5dc-410c48575c0b" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">yyMailMessageHelper の Load メソッドが拡張メソッドになっていて、yyMailMessage のデータを MimeMessage に流し込む。重複する項目は上書きされる。ここに Func をかませば、宛先に応じた言語でのメール送信などが可能になる。</p>
+                            <p class="note_contents">しかし、Load 自体がシンプルで、Subject, HtmlBody, TextBody それぞれがあれば流し込むだけだ。言語によって件名や本文が切り替わる実装なら、元の言語のデータも近くに転がっていて、必要なら元に戻せるだろうから、Load 直前に Subject などを直接いじればよい。</p>
+                            <p class="note_contents">Func をかませるより、「宛先の言語が translations 内にあれば使い、なければ翻訳あるいは元の言語にフォールバックする」というローカルメソッドをつくった方が、より自然なコーディングになりそう。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="dcd291c2-bc9b-445f-9fbc-379408edf186" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">yyMail* のシリアライゼーションを再テスト</span>
+                    <a href="#dcd291c2-bc9b-445f-9fbc-379408edf186" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">代わりに yyMailMessage などのコードを全体的に見た。うまくいかない理由がないのでテストを省略。全項目に値を設定するのはめんどくさいし、以前にやった記憶がある。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="df831c1f-54e1-42b0-bf99-2e9646e9f951" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents"><a href="https://github.com/openai/openai-dotnet" target="_blank" class="url">https://github.com/openai/openai-dotnet</a> をチェック</span>
+                    <a href="#df831c1f-54e1-42b0-bf99-2e9646e9f951" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">2024年の6月に OpenAI が出していた。それ以前には C# の公式のライブラリーがなくて、だから自分で書いた。自分のものも安定しているが、公式には大きく劣るだろう。公式のコードを見て自分のものを改善し、そのうえで今後は公式のものを使うのか、簡単な処理なら糖衣構文をつくりやすい自分のもので済ませるのかを考える。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">まず自分のコードをザッと見たが、仕様書通りの実装が多く、特段ダメなところがない。愛着もあるし、コードが枯れていれば誰にも迷惑をかけないので、OpenAI のコードを参考に、自分のものをより良くする。そこに学びが発生するし、自分のコードを練り上げていくことで、ほかのウェブ関連のコードの質も高まる。</p>
+                            <p class="note_contents">ウェブ関連のコードは、その処理時間の99％がネットの速度に依存する。手元でやる処理なんて微々たるものだ。デッドロックが発生しないとか、非同期でも例外をちゃんと拾いきれているとか、ごく稀なイレギュラーな応答に対応しているとかが大丈夫なら、公式のコードがパフォーマンスにおいて圧倒的に秀でるわけでない。画像処理のアルゴリズムを自作するようなのとは大きく異なる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">OpenAI のコードをダウンロードし、めぼしいところを見た。それから自分のコードも再度見直した。</p>
+                            <p class="note_contents">OpenAI のものは、全機能をカバーしているし、自分たちが API をつくっていての SDK なのだから、細かい問題への対応力も自分のものより圧倒的に優れる。自分以外がどちらを使うべきかなら、2億％ OpenAI の方だ。他者が自分のものを使う理由は微塵もない。</p>
+                            <p class="note_contents">ただ、自分にとっては、「ほとんどが仕様通りのモデルクラスで、それらを投げたり受け取ったりの非同期の処理のみ自分が実装したコードというのは、ものすごくデバッグしやすい。かゆいところに手が届くため、使えば使うほどコードが枯れていく。こちらでは、どんな問題が起こっても、極めてシンプルにその原因を特定できる。そうやって育てていくスタート地点には十分に立っているコードだと改めて思った。</p>
+                            <p class="note_contents">結論としては、自分のコードを今後も育てていき、バグが見つかれば OpenAI のコードを参考に直し、yyGpt* をコンパクトで小回りの利くクラスとして枯れさせる。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="bc74acdf-dff5-4c26-834c-dfb65c304a30" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">NuGet のパッケージの参照方法を改める</span>
+                    <a href="#bc74acdf-dff5-4c26-834c-dfb65c304a30" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Hoge ライブラリーを Moge アプリが参照するにおいて、Moge 側で「Hoge の DLLを引っ張るな」の指定ができた。それで落ちるのは Hoge が必要な DLL のメソッドが実際に Hoge 経由で Moge により呼ばれたときで、デバッグをちゃんとやっておけば問題ない。</p>
+                            <p class="note_contents">一方、Hoge 側で「DLL をアプリ側に送り出すな」的な指定もできるようで、その方が良いかもしれない。「たくさんの DLL を引きずらない」という構成をゴールにするにおいては、蛇口を全て閉めるより元栓を閉める方が自然だ。</p>
+                            <p class="note_contents">その上で、それがないとデバッグ時に落ちるものをアプリ側でも NuGet で参照するとか、同時にパッケージをアップデートすることでバージョンを一致させて依存関係の問題が生じないようにするとかが正攻法と思われる。</p>
+                            <p class="note_contents">バージョンの一致については、すぐにバイナリーまでアーカイブするため配置において困らないし、Git のログを見ることで同時期にアーカイブしたライブラリーとアプリが分かるため、その組み合わせならビルドが成功するとの保証もある。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">いろいろと試した結論として、ライブラリー側で「送り出すな」の指定をするのをやめておき、アプリ側で必要な場合のみ「送り出されたものを受け入れない」の指定を行う。後者の場合、SQLite でのロギングなど、特定の機能にライブラリー側で参照しているパッケージが必要なら、アプリ側で改めてそれらを参照する。</p>
+                            <p class="note_contents">元栓を閉める方がアプリ側での指定を減らせてスマートに思えるが、「不要な DLL がアプリ側に流れ込む」というのと、「必要な DLL がアプリ側にないことで、ロギングなど、特定の場面においてのみ落ちる」というのとでは、ファイルサイズが大きいかシステムが落ちるかということなので、後者の方がダメージが圧倒的に大きい。そして、特定の状況でのみ落ちるというのは、デバッグをしきれないこともある。</p>
+                            <p class="note_contents">現時点で yyLib は以下を参照している。</p>
+                            <p class="note_contents">* MailKit 4.9.0<br />
+                                * Microsoft.Extensions.Configuration 9.0.0<br />
+                                * Microsoft.Extensions.Configuration.Json 9.0.0<br />
+                                * MimeKit 4.9.0<br />
+                                * System.Data.SQLite 1.0.119</p>
+                            <p class="note_contents">メールを使わず、appsettings.json などを読まず、SQLite でのロギングを行わないアプリなら、これらは全て不要。デフォルトの JSON でのロギングにはパッケージが不要。</p>
+                            <p class="note_contents">よって、yyLib を使うが、JSON でのロギングや yyLib の汎用的なクラス以外は不要というアプリなら、今後もアプリ側で「受け入れない」の指定を行うのが合理的。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">元々は、System.Data.SqlClient 4.8.1 と System.Drawing.Common 4.7.0 が古いと言われ、GUI で調べたところ EntityFramework も古いと出たので、これらの最新版を明示的に参照した。そのことについては、以前のメモに書いた。</p>
+                            <p class="note_contents">また、yyLib に画像処理の機能を追加しようとしたようで、SixLabors.ImageSharp 3.1.6 を参照していた。</p>
+                            <p class="note_contents">今回の更新で、EntityFramework と ImageSharp への参照を消した。そうしたことで、GUI で開けばまた EntityFramework が古いと言われるのかもしれないが、SQLite のパッケージの更新により解決されるべきことだし、推移的な依存関係において自分が関与しないライブラリーが古いというのは今後も起こりうることなので、積極的に調べたり、古いものの最新版を個別に参照したりをやめておく。リスクの小ささに比して手間が大きく、生産的でないため。自分が参照しているパッケージをマメに更新していれば、いずれは勝手に直ること。</p>
+                            <p class="note_contents">ImageSharp は、会社の年商が100万ドルを超えるとライセンス料がかかる認識だ。うちは、会社としてはそれを超える。yyLib などはあくまで個人として開発しているものだが、それをベースに会社のシステムも書けば、あるいは、それをベースにオープンソースのウェブシステムなどを書いてそれを会社で「も」使えば、ライセンス違反だと言われる可能性を否定できない。</p>
+                            <p class="note_contents"><a href="https://old.dotnetfoundation.org/blog/2022/10/20/imagesharpupdate" target="_blank" class="url">https://old.dotnetfoundation.org/blog/2022/10/20/imagesharpupdate</a><br />
+                                <a href="https://github.com/SixLabors/ImageSharp/blob/main/LICENSE" target="_blank" class="url">https://github.com/SixLabors/ImageSharp/blob/main/LICENSE</a></p>
+                            <p class="note_contents">画像処理の機能の追加をやめたのか、ImageSharp への参照をなくしてもコンパイルに失敗しなかった。</p>
+                            <p class="note_contents">画像処理においては、Magick.NET も使える。こちらはライセンスに問題がない。DLL ファイルが大きいとか、C++ のバイナリーを .NET から呼ぶ構成になっているためオーバーヘッドが気になるとか、複数の種類があってややこしいとかの認識があるが（間違っている可能性もあるが）、今まで特に困ったことはないので、今後は改めて Magick.NET を優先的に使う。</p>
+                            <p class="note_contents">yyLib では今後 ImageSharp を参照しない。yyLib を参照するアプリの側では、Magick.NET ではどうしてもできないことがある場合のみ、ImageSharp の使用を検討する。その場合には、あくまで個人によるプロジェクトであり、なおかつオープンソースであると明言する。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">パッケージの参照については、次のページを参考にした。</p>
+                            <p class="note_contents"><a href="https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files" target="_blank" class="url">https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
