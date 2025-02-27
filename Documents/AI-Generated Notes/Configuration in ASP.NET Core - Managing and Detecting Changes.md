@@ -1,4 +1,4 @@
-﻿### Configuration in ASP.NET Core: Managing and Detecting Changes
+﻿## Configuration in ASP.NET Core: Managing and Detecting Changes
 
 Configuration is a cornerstone of modern application development. In ASP.NET Core, `IConfiguration` is used to access and manage application settings, often sourced from `appsettings.json`, environment variables, or other providers. This article explores various aspects of handling configuration, including detecting changes, updating the UI dynamically, and modifying configuration at runtime.
 

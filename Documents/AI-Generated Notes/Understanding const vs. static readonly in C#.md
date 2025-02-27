@@ -1,4 +1,4 @@
-﻿### Understanding `const` vs. `static readonly` in C#
+﻿## Understanding `const` vs. `static readonly` in C#
 
 When defining constants or immutable values in C#, developers often face the choice between using `const` and `static readonly`. While both serve to define values that are meant to remain unchanged, they have distinct characteristics and use cases. This article explores the differences between `const` and `static readonly`, helping you decide when to use each.
 

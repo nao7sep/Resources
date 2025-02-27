@@ -1,10 +1,10 @@
-﻿### Designing Collection Properties in Model Classes: Should They Be Read-Only?
+﻿## Designing Collection Properties in Model Classes: Should They Be Read-Only?
 
 When designing model classes in C#, a common question arises about the best way to implement collection properties like `IList<string> Names`. Key considerations include whether the property should be read-only or writable and how to handle its initialization. This article explores the trade-offs and provides recommendations for designing collection properties effectively.
 
 ---
 
-#### **Read-Only vs Writable Properties**
+### **Read-Only vs Writable Properties**
 
 The first decision to make is whether the property should be read-only or writable.
 
@@ -29,7 +29,7 @@ The first decision to make is whether the property should be read-only or writab
 
 ---
 
-#### **Nullable vs Non-Nullable Collections**
+### **Nullable vs Non-Nullable Collections**
 
 The choice between nullable and non-nullable collections impacts how the property behaves when uninitialized.
 
@@ -50,7 +50,7 @@ The choice between nullable and non-nullable collections impacts how the propert
 
 ---
 
-#### **Null vs Empty: Understanding the Difference**
+### **Null vs Empty: Understanding the Difference**
 
 Deciding whether to allow `null` for a collection often depends on the context:
 
@@ -64,7 +64,7 @@ Deciding whether to allow `null` for a collection often depends on the context:
 
 ---
 
-#### **Serialization Considerations**
+### **Serialization Considerations**
 
 If the model is used in serialization (e.g., JSON), how the property is initialized impacts the serialized output:
 - A `null` collection might not be serialized at all or could appear explicitly as `null` in the output.
@@ -74,7 +74,7 @@ To ensure consistent behavior, consider using JSON configuration options like `J
 
 ---
 
-#### **Recommendations**
+### **Recommendations**
 
 1. **Default to Non-Nullable and Initialize with an Empty Collection**
    - This simplifies client code, as `null` checks are unnecessary.
@@ -85,7 +85,7 @@ To ensure consistent behavior, consider using JSON configuration options like `J
 
 ---
 
-#### **Example Design**
+### **Example Design**
 
 Here’s an example of how to combine these principles:
 

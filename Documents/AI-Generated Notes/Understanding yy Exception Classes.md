@@ -1,4 +1,4 @@
-﻿### Understanding `yy` Exception Classes
+﻿## Understanding `yy` Exception Classes
 
 Custom exception classes are essential in creating robust, maintainable code by clearly communicating what went wrong in specific scenarios. This article explains a series of custom exceptions (`yyArgumentException`, `yyInvalidOperationException`, etc.) designed to address various error situations in a consistent and meaningful way. Here's how these exceptions are intended to work and the rationale behind their design.
 

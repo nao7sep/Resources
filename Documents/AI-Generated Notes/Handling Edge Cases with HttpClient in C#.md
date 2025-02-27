@@ -1,10 +1,10 @@
-﻿# **Handling Edge Cases with HttpClient in C#**
+﻿## **Handling Edge Cases with HttpClient in C#**
 
 `HttpClient` is the modern workhorse for sending HTTP requests and receiving responses in .NET. While it offers a straightforward API, developers often run into nuances when errors occur, connections are aborted, or when streaming large data. This article aims to clarify how to handle these “edge cases” gracefully and explains what happens behind the scenes so you can confidently build robust applications.
 
 ---
 
-## **1. Why HttpClient?**
+### **1. Why HttpClient?**
 
 Before diving into edge cases, here’s a quick recap of why `HttpClient` is usually recommended over legacy classes like `WebClient` or `HttpWebRequest`:
 
@@ -17,22 +17,22 @@ However, with powerful features come a few pitfalls that are worth understanding
 
 ---
 
-## **2. Reusing HttpClient After an Error**
+### **2. Reusing HttpClient After an Error**
 
 One of the top questions is whether you can **reuse** the same `HttpClient` instance after an error (e.g., a dropped connection, network timeout, or failed request).
 
-### **Short Answer**
+#### **Short Answer**
 Yes, you usually **can** reuse the same instance safely.
 
 - If a TCP connection is lost, `HttpClient` disposes that socket internally and will create a fresh one for subsequent requests as needed.
 - The exception you receive (e.g., `HttpRequestException`) does *not* indicate that the entire `HttpClient` is “poisoned” or unusable.
 
-### **Important Caveat**
+#### **Important Caveat**
 If a request partially succeeded (you got an HTTP response but it failed during reading of the response body), make sure to **dispose** the `HttpResponseMessage` or fully read its content. Otherwise, the connection can remain in a half-closed state and cause problems for the next request.
 
 ---
 
-## **3. Typical Exception Scenarios**
+### **3. Typical Exception Scenarios**
 
 When dealing with network or HTTP-level errors, you’ll most commonly see:
 
@@ -51,12 +51,12 @@ In all these cases, once you catch the exception, you can attempt another `HttpC
 
 ---
 
-## **4. Partial Reads and Streaming**
+### **4. Partial Reads and Streaming**
 
-### **4.1 Why It Matters**
+#### **4.1 Why It Matters**
 If you do a request expecting a large response (e.g., file download) and an error happens mid-stream, you might not have consumed the entire response body. If you leave the response unread or undisposed, the connection is in a “limbo” state, and `HttpClient` may be unable to reuse it.
 
-### **4.2 Best Practices**
+#### **4.2 Best Practices**
 
 1. **Dispose the response if you don’t need it**
    ```csharp
@@ -88,9 +88,9 @@ If you do a request expecting a large response (e.g., file download) and an erro
 
 ---
 
-## **5. Dealing with Connection Aborts**
+### **5. Dealing with Connection Aborts**
 
-### **5.1 Server Aborted**
+#### **5.1 Server Aborted**
 If the server resets the TCP connection, you’ll get `HttpRequestException` (often with an inner `SocketException`). For example:
 
 ```csharp
@@ -108,7 +108,7 @@ catch (HttpRequestException ex)
 }
 ```
 
-### **5.2 Client-Side Cancellation**
+#### **5.2 Client-Side Cancellation**
 If you cancel from the client side (using a `CancellationToken` or `client.Timeout`), you’ll get a `TaskCanceledException` or `OperationCanceledException`. The `HttpClient` still works afterwards.
 
 ```csharp
@@ -127,7 +127,7 @@ catch (TaskCanceledException)
 
 ---
 
-## **6. Concurrency and Thread-Safety**
+### **6. Concurrency and Thread-Safety**
 
 `HttpClient` is thread-safe for issuing multiple requests concurrently. However:
 
@@ -154,12 +154,12 @@ async Task FetchDataAsync(HttpClient client)
 
 ---
 
-## **7. Retrying and Resilience**
+### **7. Retrying and Resilience**
 
-### **7.1 The Transient Failure Problem**
+#### **7.1 The Transient Failure Problem**
 In a production environment, sometimes servers are temporarily overloaded, networks flap, or DNS changes. A single failure doesn’t mean your entire application should give up.
 
-### **7.2 Retry Libraries (Polly)**
+#### **7.2 Retry Libraries (Polly)**
 A popular pattern is to integrate [Polly](https://github.com/App-vNext/Polly) for retry policies:
 
 ```csharp
@@ -183,12 +183,12 @@ With this pattern, you seamlessly handle transient errors, backing off a bit bef
 
 ---
 
-## **8. When to Dispose and When to Reuse**
+### **8. When to Dispose and When to Reuse**
 
-### **8.1 Single Long-Lived Instance**
+#### **8.1 Single Long-Lived Instance**
 It’s generally best to **reuse** a single (or a small number of) `HttpClient` instance(s) throughout your application. This avoids the [socket exhaustion problem](https://learn.microsoft.com/en-us/dotnet/fundamentals/networking/sockets/socket-services) caused by creating/destroying `HttpClient` too often.
 
-### **8.2 Using `IHttpClientFactory` (ASP.NET Core)**
+#### **8.2 Using `IHttpClientFactory` (ASP.NET Core)**
 If you’re in ASP.NET Core, prefer registering named or typed clients via `IHttpClientFactory`. This factory manages pooling, DNS refresh, and rotation of underlying handlers:
 
 ```csharp
@@ -225,13 +225,13 @@ public class MyService
 
 ---
 
-## **9. Stale DNS and Handler Rotation**
+### **9. Stale DNS and Handler Rotation**
 
 For extremely long-lived apps, keep in mind that a single `HttpClient` might cache DNS entries too long. If your service endpoints can change IP addresses frequently, you’ll want to ensure the handler re-resolves DNS periodically. `IHttpClientFactory` does this by default in ASP.NET Core, rotating handlers after a certain lifetime (configurable via `HttpClientHandler` or `SocketsHttpHandler` properties).
 
 ---
 
-## **10. Checklist for Handling Edge Cases**
+### **10. Checklist for Handling Edge Cases**
 
 1. **Always Dispose or Read Response**: If you get a `HttpResponseMessage`, ensure you either read it fully or call `.Dispose()` if you don’t need it.
 2. **Handle Exceptions Gracefully**:
@@ -245,7 +245,7 @@ For extremely long-lived apps, keep in mind that a single `HttpClient` might cac
 
 ---
 
-## **Conclusion**
+### **Conclusion**
 
 `HttpClient` is robust and designed to handle failures gracefully. Even when a connection is aborted or an error is thrown, you usually do **not** need to recreate your `HttpClient`. Simply handle exceptions and continue—ensuring you dispose of any partially consumed responses.
 

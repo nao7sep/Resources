@@ -1,4 +1,4 @@
-﻿### Design and Purpose of the `yyAssemblyInfo` Class
+﻿## Design and Purpose of the `yyAssemblyInfo` Class
 
 The `yyAssemblyInfo` class is designed to provide structured and efficient access to metadata about an assembly (`System.Reflection.Assembly`). This document explains the design of the class, its key features, and the reasoning behind its implementation choices.
 

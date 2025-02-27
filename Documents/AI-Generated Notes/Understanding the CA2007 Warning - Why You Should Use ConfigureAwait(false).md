@@ -1,4 +1,4 @@
-﻿### Understanding the `CA2007` Warning: Why You Should Use `ConfigureAwait(false)`
+﻿## Understanding the `CA2007` Warning: Why You Should Use `ConfigureAwait(false)`
 
 If you’ve come across the warning **CA2007: Consider calling ConfigureAwait on the awaited task** in your .NET project, you might wonder what it means and why it’s important. This warning is particularly relevant when writing library code and stems from best practices for asynchronous programming in C#. Let’s dive into what this warning is about, why it matters, and how to address it effectively.
 
@@ -49,7 +49,7 @@ Adding `.ConfigureAwait(false)` prevents this by allowing the continuation to ru
 
 ---
 
-#### 2. **Improving Performance**
+### 2. **Improving Performance**
 Capturing and restoring the synchronization context incurs a small but measurable performance cost. In library code, where you generally don’t need to rely on a specific context, this overhead is unnecessary. Using `.ConfigureAwait(false)` eliminates this cost, resulting in a more efficient implementation.
 
 ---

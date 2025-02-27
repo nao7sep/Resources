@@ -1,4 +1,4 @@
-﻿### Understanding CA1063: Implement the `IDisposable` Pattern Correctly
+﻿## Understanding CA1063: Implement the `IDisposable` Pattern Correctly
 
 The `CA1063` warning or code analysis rule in .NET relates to the correct implementation of the `IDisposable` interface. It ensures that your class properly cleans up unmanaged resources and adheres to best practices for the `IDisposable` pattern.
 
