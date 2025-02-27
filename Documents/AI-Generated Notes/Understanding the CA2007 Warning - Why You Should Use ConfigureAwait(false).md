@@ -47,9 +47,7 @@ public async Task PerformOperationAsync()
 
 Adding `.ConfigureAwait(false)` prevents this by allowing the continuation to run on a different thread, avoiding the deadlock.
 
----
-
-### 2. **Improving Performance**
+#### 2. **Improving Performance**
 Capturing and restoring the synchronization context incurs a small but measurable performance cost. In library code, where you generally don’t need to rely on a specific context, this overhead is unnecessary. Using `.ConfigureAwait(false)` eliminates this cost, resulting in a more efficient implementation.
 
 ---
