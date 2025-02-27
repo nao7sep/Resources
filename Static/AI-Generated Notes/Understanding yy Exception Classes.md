@@ -98,7 +98,24 @@ if (_disposed)
 
 ---
 
-### **6. `yyNotImplementedException`**
+### **6. `yyUnexpectedNullException`**
+#### **Purpose**:
+This exception is thrown when a variable that cannot logically be `null` ends up being `null` due to unexpected circumstances. For instance, if you have a model class with `Name` and `Age` that must both be non-null, and the code has already validated `Name`, you might throw `yyUnexpectedNullException` if `Age` is discovered to be `null` partway through an operation you cannot fully roll back.
+
+#### **Design Philosophy**:
+`yyUnexpectedNullException` makes it clear that the null state is genuinely unexpected, and the safest course of action is to terminate the operation rather than risk partial data changes or an inconsistent state.
+
+#### **Example**:
+```csharp
+if (Age == null)
+{
+    throw new yyUnexpectedNullException("Age cannot be null after Name was validated.");
+}
+```
+
+---
+
+### **7. `yyNotImplementedException`**
 #### **Purpose**:
 This exception is used when a method or functionality has not been implemented yet, typically as a placeholder.
 
@@ -115,7 +132,7 @@ public void SomeFeature()
 
 ---
 
-### **7. `yyNotSupportedException`**
+### **8. `yyNotSupportedException`**
 #### **Purpose**:
 This exception is thrown when a method or feature is deliberately not supported, even if it could theoretically be implemented.
 
@@ -135,7 +152,7 @@ public void ExportToFormat(string format)
 
 ---
 
-### **8. `yyException`**
+### **9. `yyException`**
 #### **Purpose**:
 This is a catch-all exception for cases that do not fit any of the more specific exceptions listed above.
 
