@@ -16,7 +16,10 @@ Private projects should **not** include a `LICENSE` file. This prevents any impl
 ## 4. Exclusion of Assembly Information
 The repository must **not** contain any assembly information files (e.g., `AssemblyInfo.cs` or similar metadata files). These files should be removed or excluded to maintain project privacy and avoid unnecessary metadata exposure.
 
-## 5. Additional Considerations
+## 5. Build Tool Settings
+The project's settings file in the build tool must be updated to **ignore the private project** to ensure it is not automatically built. Ensure that the necessary configurations are added to prevent unintended inclusion in the build process.
+
+## 6. Additional Considerations
 - Ensure access is granted only to necessary team members.
 - Regularly review repository settings to confirm compliance.
 - Maintain documentation within the repository as needed.
