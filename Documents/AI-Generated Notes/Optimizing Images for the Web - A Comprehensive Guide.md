@@ -93,7 +93,7 @@ image.Strip(); // Removes EXIF, ICC, IPTC, XMP, etc.
 
 #### **3.3 Removing Only the EXIF Thumbnail**
 
-Magick.NET does **not** store the thumbnail in a separate “ExifThumbnail” profile. It lives inside the **ExifProfile**. To remove it while keeping other EXIF data:
+To remove only the EXIF thumbnail while keeping other EXIF data, use this approach:
 
 ```csharp
 using ImageMagick;
@@ -106,24 +106,21 @@ class Program
         using (var image = new MagickImage("input.jpg"))
         {
             var exifProfile = image.GetExifProfile();
-            if (exifProfile != null)
-            {
-                exifProfile.RemoveValue(ExifTag.ThumbnailOffset);
-                exifProfile.RemoveValue(ExifTag.ThumbnailLength);
-                exifProfile.RemoveValue(ExifTag.ThumbnailData);
 
-                // Reapply the modified profile
+            // If there's a valid thumbnail offset/length, remove it
+            if (exifProfile != null && exifProfile.ThumbnailOffset != 0 && exifProfile.ThumbnailLength != 0)
+            {
+                exifProfile.RemoveThumbnail();
                 image.SetProfile(exifProfile);
             }
 
             image.Write("output_no_thumb.jpg");
-            Console.WriteLine("Removed EXIF thumbnail while keeping other EXIF data.");
         }
     }
 }
 ```
 
-If you **don’t** need any EXIF data, you can just remove the entire EXIF profile:
+If you **don’t** need any EXIF data, you can remove the entire EXIF profile:
 
 ```csharp
 image.RemoveProfile("exif");
@@ -162,7 +159,7 @@ image.Interlace = Interlace.JPEG; // Progressive JPEG
 
 ### **5. Putting It All Together**
 
-Below is a **complete** Magick.NET example demonstrating orientation fixes, color space handling, targeted metadata removal, resizing, and compression:
+Below is a **complete** Magick.NET example demonstrating orientation fixes, color space handling, targeted metadata removal (including EXIF thumbnail), resizing, and compression:
 
 ```csharp
 using ImageMagick;
@@ -192,16 +189,14 @@ class Program
             {
                 // If metadata or context indicates Adobe RGB:
                 // image.TransformColorSpace(ColorProfile.AdobeRGB1998, ColorProfile.SRGB);
-                // Otherwise, do nothing or embed an sRGB profile if you must.
+                // Otherwise, do nothing or embed an sRGB profile if needed.
             }
 
             // 3) Remove only the EXIF thumbnail, keep other EXIF data
             var exifProfile = image.GetExifProfile();
-            if (exifProfile != null)
+            if (exifProfile != null && exifProfile.ThumbnailOffset != 0 && exifProfile.ThumbnailLength != 0)
             {
-                exifProfile.RemoveValue(ExifTag.ThumbnailOffset);
-                exifProfile.RemoveValue(ExifTag.ThumbnailLength);
-                exifProfile.RemoveValue(ExifTag.ThumbnailData);
+                exifProfile.RemoveThumbnail();
                 image.SetProfile(exifProfile);
             }
 
@@ -217,7 +212,7 @@ class Program
             image.Settings.SetDefine(MagickFormat.Jpeg, "sampling-factor", "4:2:0");
             image.Interlace = Interlace.JPEG; // Progressive
 
-            // 6) Save result
+            // 6) Save the result
             image.Write(outputPath);
         }
 
@@ -257,4 +252,4 @@ class Program
 
 ### **Conclusion**
 
-By **auto-orienting**, **properly handling color spaces**, **removing extraneous metadata**, **resizing**, and **using efficient compression**, you can produce images that look **correct** across all viewers and load **quickly** on the web. Whether you use Magick.NET or another tool, these steps form the foundation of **web image optimization**.
+By **auto-orienting**, **properly handling color spaces**, **removing extraneous metadata** (including EXIF thumbnails), **resizing**, and **using efficient compression**, you can produce images that look **correct** across all viewers and load **quickly** on the web. Whether you use Magick.NET or another tool, these steps form the foundation of **web image optimization**.
