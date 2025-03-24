@@ -1,7 +1,7 @@
 ﻿## Private Project Guidelines
 
-### 1. Repository Naming and Privacy
-All private projects must have names that **start with an underscore** (e.g., `_imgLab`). Additionally, they must be set to **private** on GitHub. This ensures that only authorized collaborators have access to the repository.
+### 1. Repository Naming
+All projects designated as "private" must have names that **start with an underscore** (e.g., `_imgLab`). Though it is recommended to keep these projects private on GitHub, it is not a strict requirement. If you do choose to keep the repository private, only authorized collaborators should have access.
 
 ### 2. README File Requirement
 Each private repository must contain a `README.md` file. This file should include a link to this Markdown document for reference. Example:
@@ -20,8 +20,8 @@ The repository must **not** contain any assembly information files (e.g., `Assem
 The project's settings file in the build tool must be updated to **ignore the private project** to ensure it is not automatically built. Ensure that the necessary configurations are added to prevent unintended inclusion in the build process.
 
 ### 6. Additional Considerations
-- Ensure access is granted only to necessary team members.
+- Ensure access is granted only to necessary team members, when the repository is kept private.
 - Regularly review repository settings to confirm compliance.
 - Maintain documentation within the repository as needed.
 
-By following these guidelines, private projects will remain secure and well-structured within GitHub.
+By following these guidelines, private projects will remain secure and well-structured within GitHub, whether they are actually set to private or not.
