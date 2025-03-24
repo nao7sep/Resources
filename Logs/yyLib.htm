@@ -195,6 +195,42 @@
                     <a href="#5815d111-ac60-489a-9a4f-8c14c342503a" class="permalink">&infin;</a>
                 </div>
             </div>
+            <div id="20378873-cbd1-41fa-8848-006e1b0aaf22" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">yyGptUtility のうち画像をダウンロードするメソッドを single responsibility にする</span>
+                    <a href="#20378873-cbd1-41fa-8848-006e1b0aaf22" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">Select 内での非同期処理がどうしても気になる。実装としては正しいはずだが、タイムアウトもあってどういうタイミングで例外が飛んでくるか分からない処理を非同期で同時に複数やっては、エラーがあったときの対応力がかなり制限される。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">yyWeb または yyHttp をつくり、非同期でファイルをダウンロードするメソッドを用意し、それと組み合わせてのダウンロードの例を GptTester に入れるか。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="8f7a1dce-d219-4b21-aa97-451ad8bc51f7" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">yyGpt* クラスで o1, audio, tools に対応 → tools を見送った</span>
+                    <a href="#8f7a1dce-d219-4b21-aa97-451ad8bc51f7" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">localGpt の開発に着手しては、yyLib 側でなんとなく o1 も試したところ、system が developer になっていたなど、些細な違いにより動かなかった。直したところ、簡単に動いた。chunks でも動いた。それからドキュメントを精査したところ、ほかにも変わっているところがあった。先ほどそれらをチェックし、タスク化した。全て実装すれば、o1, audio, tools への対応が完了する。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">tools のみ今すぐに必要と感じられず手を抜いた。API のドキュメントとの整合性をチェックしたが、テストコードを書いていない。必要になってから問題が見つかれば直す。それ以外は大丈夫。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

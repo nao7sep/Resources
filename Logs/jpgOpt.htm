@@ -28,6 +28,14 @@
                     <a href="#f4b3a46f-2384-40ab-9395-164b2e6b6347" class="permalink">&infin;</a>
                 </div>
             </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">_imgLab を書き、各デバイスによる JPEG 画質や色空間などについて調べた。</p>
+                    <p class="note_contents">Xiaomi の携帯の写真は、Adobe RGB になっていて、それを sRGB で表示するための ICC プロファイルが入っていて、色空間のプロパティーには値が設定されておらず、よって Windows のエクスプローラーでは「未調整」と表示されるようだ。</p>
+                    <p class="note_contents">ICC プロファイルはちゃんとしているので、それに基づいて sRGB に変換する処理を Magick.NET により行えば、色空間のプロパティーごと Exif や ICC プロファイルを落としても正確に表示される。</p>
+                    <!-- Task: dde8bf33-7603-432e-988b-9315ec238753 -->
+                </div>
+            </div>
         </div>
     </body>
 </html>
