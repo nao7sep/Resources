@@ -1,4 +1,4 @@
-ICC profile detected.
+﻿ICC profile detected.
 Color space transformed to sRGB.
 ICC profile removed.
 Thumbnail detected.

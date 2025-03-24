@@ -1,4 +1,4 @@
-Thumbnail detected.
+﻿Thumbnail detected.
 Thumbnail removed.
 Comparison results for DSC06808.JPG:
     Original =>  7,264 KB

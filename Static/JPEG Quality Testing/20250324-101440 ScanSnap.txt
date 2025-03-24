@@ -1,4 +1,4 @@
-Comparison results for 20250220221124_001.jpg:
+﻿Comparison results for 20250220221124_001.jpg:
     Original => 2,274 KB
           75 => 2,109 KB (93%)
           80 => 2,326 KB (102%)
