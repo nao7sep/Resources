@@ -1,0 +1,141 @@
+Thumbnail detected.
+Thumbnail removed.
+Comparison results for DSC06808.JPG:
+    Original =>  7,264 KB
+          75 =>  2,240 KB (31%)
+          80 =>  2,600 KB (36%)
+          85 =>  3,173 KB (44%)
+          90 =>  4,193 KB (58%)
+          95 =>  6,022 KB (83%)
+          96 =>  6,625 KB (91%)
+          97 =>  7,170 KB (99%)
+          98 =>  7,775 KB (107%)
+          99 =>  9,702 KB (134%)
+         100 => 12,177 KB (168%)
+Thumbnail detected.
+Thumbnail removed.
+Comparison results for DSC06942.JPG:
+    Original => 10,176 KB
+          75 =>  5,469 KB (54%)
+          80 =>  6,231 KB (61%)
+          85 =>  7,529 KB (74%)
+          90 =>  8,817 KB (87%)
+          95 => 10,664 KB (105%)
+          96 => 11,181 KB (110%)
+          97 => 11,815 KB (116%)
+          98 => 12,293 KB (121%)
+          99 => 13,904 KB (137%)
+         100 => 16,785 KB (165%)
+Thumbnail detected.
+Thumbnail removed.
+Comparison results for DSC06980.JPG:
+    Original =>  9,440 KB
+          75 =>  3,127 KB (33%)
+          80 =>  3,619 KB (38%)
+          85 =>  4,359 KB (46%)
+          90 =>  5,590 KB (59%)
+          95 =>  8,128 KB (86%)
+          96 =>  8,936 KB (95%)
+          97 =>  9,586 KB (102%)
+          98 =>  9,995 KB (106%)
+          99 => 11,377 KB (121%)
+         100 => 14,088 KB (149%)
+Thumbnail detected.
+Thumbnail removed.
+Comparison results for DSC07275.JPG:
+    Original =>  9,856 KB
+          75 =>  3,192 KB (32%)
+          80 =>  3,672 KB (37%)
+          85 =>  4,404 KB (45%)
+          90 =>  5,666 KB (57%)
+          95 =>  8,163 KB (83%)
+          96 =>  8,974 KB (91%)
+          97 =>  9,598 KB (97%)
+          98 => 10,040 KB (102%)
+          99 => 11,671 KB (118%)
+         100 => 14,796 KB (150%)
+Thumbnail detected.
+Thumbnail removed.
+Comparison results for DSC07390.JPG:
+    Original =>  8,800 KB
+          75 =>  2,847 KB (32%)
+          80 =>  3,299 KB (37%)
+          85 =>  3,997 KB (45%)
+          90 =>  5,192 KB (59%)
+          95 =>  7,677 KB (87%)
+          96 =>  8,422 KB (96%)
+          97 =>  9,031 KB (103%)
+          98 =>  9,422 KB (107%)
+          99 => 10,717 KB (122%)
+         100 => 13,178 KB (150%)
+Thumbnail detected.
+Thumbnail removed.
+Comparison results for DSC07393.JPG:
+    Original =>  7,680 KB
+          75 =>  2,423 KB (32%)
+          80 =>  2,813 KB (37%)
+          85 =>  3,430 KB (45%)
+          90 =>  4,505 KB (59%)
+          95 =>  6,603 KB (86%)
+          96 =>  7,261 KB (95%)
+          97 =>  7,788 KB (101%)
+          98 =>  8,113 KB (106%)
+          99 =>  9,432 KB (123%)
+         100 => 11,915 KB (155%)
+Thumbnail detected.
+Thumbnail removed.
+Comparison results for DSC07405.JPG:
+    Original =>  7,232 KB
+          75 =>  2,219 KB (31%)
+          80 =>  2,592 KB (36%)
+          85 =>  3,188 KB (44%)
+          90 =>  4,235 KB (59%)
+          95 =>  6,278 KB (87%)
+          96 =>  6,922 KB (96%)
+          97 =>  7,429 KB (103%)
+          98 =>  7,779 KB (108%)
+          99 =>  9,119 KB (126%)
+         100 => 11,512 KB (159%)
+Thumbnail detected.
+Thumbnail removed.
+Comparison results for DSC07473.JPG:
+    Original =>  7,360 KB
+          75 =>  2,257 KB (31%)
+          80 =>  2,640 KB (36%)
+          85 =>  3,253 KB (44%)
+          90 =>  4,306 KB (59%)
+          95 =>  6,414 KB (87%)
+          96 =>  7,061 KB (96%)
+          97 =>  7,583 KB (103%)
+          98 =>  7,913 KB (108%)
+          99 =>  9,215 KB (125%)
+         100 => 11,635 KB (158%)
+Thumbnail detected.
+Thumbnail removed.
+Comparison results for DSC07582.JPG:
+    Original =>  7,648 KB
+          75 =>  2,465 KB (32%)
+          80 =>  2,851 KB (37%)
+          85 =>  3,462 KB (45%)
+          90 =>  4,534 KB (59%)
+          95 =>  6,627 KB (87%)
+          96 =>  7,278 KB (95%)
+          97 =>  7,807 KB (102%)
+          98 =>  8,148 KB (107%)
+          99 =>  9,461 KB (124%)
+         100 => 11,729 KB (153%)
+Thumbnail detected.
+Thumbnail removed.
+Comparison results for DSC07590.JPG:
+    Original =>  7,520 KB
+          75 =>  2,483 KB (33%)
+          80 =>  2,871 KB (38%)
+          85 =>  3,465 KB (46%)
+          90 =>  4,554 KB (61%)
+          95 =>  6,480 KB (86%)
+          96 =>  7,148 KB (95%)
+          97 =>  7,761 KB (103%)
+          98 =>  8,368 KB (111%)
+          99 => 10,087 KB (134%)
+         100 => 12,085 KB (161%)
+Press any key to exit:

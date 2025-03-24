@@ -1,0 +1,171 @@
+ICC profile detected.
+Color space transformed to sRGB.
+ICC profile removed.
+Thumbnail detected.
+Thumbnail removed.
+Comparison results for IMG_20250301_125559.jpg:
+    Original => 4,287 KB
+          75 => 1,798 KB (42%)
+          80 => 2,067 KB (48%)
+          85 => 2,410 KB (56%)
+          90 => 3,143 KB (73%)
+          95 => 4,195 KB (98%)
+          96 => 4,499 KB (105%)
+          97 => 4,792 KB (112%)
+          98 => 5,121 KB (119%)
+          99 => 6,375 KB (149%)
+         100 => 7,718 KB (180%)
+ICC profile detected.
+Color space transformed to sRGB.
+ICC profile removed.
+Thumbnail detected.
+Thumbnail removed.
+Comparison results for IMG_20250301_135742.jpg:
+    Original => 3,974 KB
+          75 => 1,497 KB (38%)
+          80 => 1,763 KB (44%)
+          85 => 2,055 KB (52%)
+          90 => 2,869 KB (72%)
+          95 => 3,805 KB (96%)
+          96 => 4,094 KB (103%)
+          97 => 4,394 KB (111%)
+          98 => 4,605 KB (116%)
+          99 => 5,374 KB (135%)
+         100 => 6,254 KB (157%)
+ICC profile detected.
+Color space transformed to sRGB.
+ICC profile removed.
+Thumbnail detected.
+Thumbnail removed.
+Comparison results for IMG_20250301_145836_1.jpg:
+    Original => 3,362 KB
+          75 => 1,209 KB (36%)
+          80 => 1,457 KB (43%)
+          85 => 1,724 KB (51%)
+          90 => 2,459 KB (73%)
+          95 => 3,314 KB (99%)
+          96 => 3,555 KB (106%)
+          97 => 3,785 KB (113%)
+          98 => 3,979 KB (118%)
+          99 => 4,809 KB (143%)
+         100 => 5,627 KB (167%)
+ICC profile detected.
+Color space transformed to sRGB.
+ICC profile removed.
+Thumbnail detected.
+Thumbnail removed.
+Comparison results for IMG_20250301_151452_1.jpg:
+    Original => 2,563 KB
+          75 =>   795 KB (31%)
+          80 =>   981 KB (38%)
+          85 => 1,211 KB (47%)
+          90 => 1,823 KB (71%)
+          95 => 2,537 KB (99%)
+          96 => 2,748 KB (107%)
+          97 => 2,940 KB (115%)
+          98 => 3,099 KB (121%)
+          99 => 3,777 KB (147%)
+         100 => 4,508 KB (176%)
+ICC profile detected.
+Color space transformed to sRGB.
+ICC profile removed.
+Thumbnail detected.
+Thumbnail removed.
+Comparison results for IMG_20250301_151502_1.jpg:
+    Original => 3,614 KB
+          75 => 1,152 KB (32%)
+          80 => 1,436 KB (40%)
+          85 => 1,728 KB (48%)
+          90 => 2,607 KB (72%)
+          95 => 3,555 KB (98%)
+          96 => 3,822 KB (106%)
+          97 => 4,072 KB (113%)
+          98 => 4,198 KB (116%)
+          99 => 4,790 KB (133%)
+         100 => 5,507 KB (152%)
+ICC profile detected.
+Color space transformed to sRGB.
+ICC profile removed.
+Thumbnail detected.
+Thumbnail removed.
+Comparison results for IMG_20250301_151531.jpg:
+    Original => 2,678 KB
+          75 =>   852 KB (32%)
+          80 => 1,049 KB (39%)
+          85 => 1,278 KB (48%)
+          90 => 1,920 KB (72%)
+          95 => 2,644 KB (99%)
+          96 => 2,854 KB (107%)
+          97 => 3,039 KB (113%)
+          98 => 3,196 KB (119%)
+          99 => 3,908 KB (146%)
+         100 => 4,683 KB (175%)
+ICC profile detected.
+Color space transformed to sRGB.
+ICC profile removed.
+Thumbnail detected.
+Thumbnail removed.
+Comparison results for IMG_20250301_155323_1.jpg:
+    Original => 4,793 KB
+          75 => 2,003 KB (42%)
+          80 => 2,346 KB (49%)
+          85 => 2,685 KB (56%)
+          90 => 3,573 KB (75%)
+          95 => 4,624 KB (96%)
+          96 => 4,912 KB (102%)
+          97 => 5,202 KB (109%)
+          98 => 5,412 KB (113%)
+          99 => 6,125 KB (128%)
+         100 => 6,865 KB (143%)
+ICC profile detected.
+Color space transformed to sRGB.
+ICC profile removed.
+Thumbnail detected.
+Thumbnail removed.
+Comparison results for IMG_20250301_155811.jpg:
+    Original => 3,671 KB
+          75 => 1,395 KB (38%)
+          80 => 1,644 KB (45%)
+          85 => 1,938 KB (53%)
+          90 => 2,710 KB (74%)
+          95 => 3,595 KB (98%)
+          96 => 3,859 KB (105%)
+          97 => 4,075 KB (111%)
+          98 => 4,256 KB (116%)
+          99 => 5,081 KB (138%)
+         100 => 6,102 KB (166%)
+ICC profile detected.
+Color space transformed to sRGB.
+ICC profile removed.
+Thumbnail detected.
+Thumbnail removed.
+Comparison results for IMG_20250301_160237.jpg:
+    Original => 2,925 KB
+          75 => 1,033 KB (35%)
+          80 => 1,238 KB (42%)
+          85 => 1,478 KB (51%)
+          90 => 2,122 KB (73%)
+          95 => 2,892 KB (99%)
+          96 => 3,118 KB (107%)
+          97 => 3,308 KB (113%)
+          98 => 3,468 KB (119%)
+          99 => 4,155 KB (142%)
+         100 => 4,884 KB (167%)
+ICC profile detected.
+Color space transformed to sRGB.
+ICC profile removed.
+Thumbnail detected.
+Thumbnail removed.
+Comparison results for IMG_20250301_182531_1.jpg:
+    Original => 3,390 KB
+          75 => 1,150 KB (34%)
+          80 => 1,394 KB (41%)
+          85 => 1,682 KB (50%)
+          90 => 2,474 KB (73%)
+          95 => 3,351 KB (99%)
+          96 => 3,610 KB (106%)
+          97 => 3,830 KB (113%)
+          98 => 3,992 KB (118%)
+          99 => 4,683 KB (138%)
+         100 => 5,470 KB (161%)
+Press any key to exit:
