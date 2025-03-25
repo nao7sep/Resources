@@ -231,6 +231,106 @@
                     </div>
                 </div>
             </div>
+            <div id="72bde67f-ae00-4d78-b656-b2fae98e2e55" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">送った全てのメールを簡単に保存できるようにする</span>
+                    <a href="#72bde67f-ae00-4d78-b656-b2fae98e2e55" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">やめておく。モデルをつくったが、スマートでない。MIME でやればよい。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="362aa946-e1bd-4f43-8e86-fa04b3cbecd2" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">メールのモデルの添付ファイルのパスに関するところを整理</span>
+                    <a href="#362aa946-e1bd-4f43-8e86-fa04b3cbecd2" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">絶対パスで送り、その後どこかに移動したなら相対パスを扱う仕様だが、それはモデルクラスの仕事でない。そちらには、相対パスだけでよく、メタデータを設定するのはモデルクラスの仕事でない。</p>
+                            <p class="note_contents">同様に、モデルクラスが入れ物の役割を超えることをしているところを探す。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">キーで添付ファイルやアップロードされたファイルを一意に識別できる、旧 Managed Files 的な仕組みを先につくるべきか。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">モデル自体をやめておく。全体的に見直す。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="a49cde34-b0ae-41ef-8452-4bf755ebf336" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">AI との全てのやりとりを簡単に保存できるようにする</span>
+                    <a href="#a49cde34-b0ae-41ef-8452-4bf755ebf336" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">これをやりたくて SDK をつくったが、API の更新が頻繁で、もう追いきれない。そもそも、今までの労力が無駄だった。API との関わり方について、まだ間に合ううちに損を切って、考えを大きく変える。詳細をあとでメモに書いておく。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="1ca57354-c741-4ed8-b166-81190e2b655a" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">XML を JSON くらい手軽に読み書きする機能を実装</span>
+                    <a href="#1ca57354-c741-4ed8-b166-81190e2b655a" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ユーザーが読み取り専用で表示するファイルなら HTML を XML 的にちゃんとつくるのが良い。JSON で保存して、その近くに HTML ファイルも出力するなどは二度手間だし、JSON をロードしてきれいに表示するツールの開発もめんどくさい。</p>
+                            <p class="note_contents">XML の読み書きの機能と、そこにデータ構造の認識を与えてエントリー単位で読み書きできる機能の二つに分離？</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">diff に向いてブラウザーですぐ表示できるものとしては、XML にアクセスする標準の機能で XHTML ページをつくるのがよい。ORM 的なことがちょっと必要かもしれないが、基本的には既存のライブラリーの組み合わせで実現できそう。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">OpenAI の API に公式の SDK が出ていなかった頃に yyGpt* を自作した。</p>
+                    <p class="note_contents">しばらく中国出張などで忙しく、開発に戻った頃には公式の SDK が出ていたが、モデルクラスを仕様書から自動生成したのか、どこに何があるか感覚的に分かりにくい重厚長大なもので、使いにくかったので、もうしばらく yyGpt* に頼ることにした。</p>
+                    <p class="note_contents">少し前に yyGpt* を更新し、o1, Streaming の Usage, Vision, Audio などに対応して喜んでいたら、Web search などが出てきた。公式の SDK は未対応だったので、しばらく遅れるならと、yyGpt* への実装にゆるく着手した。</p>
+                    <p class="note_contents">それが終わるより先に今度は Transcribe が出てきて、公式の SDK も更新が再開された。Web search などに対応したのか確認できていないが、Microsoft が OpenAI に出資し、Azure でも OpenAI を走らせているのだから、公式の SDK が放置される可能性は今後も低い。</p>
+                    <p class="note_contents">それでも「どこに何があるか分かりにくい」だけで公式の SDK を否定し、yyGpt* にしがみつく合理性はない。追いかけるのがしんどくなってきた。</p>
+                    <p class="note_contents">Gemini にも対応が必要だし、Web search をやりたいなら Perplexity AI の API の方が安くて高性能だそうだし、安さでは DeepSeek を捨てがたく、Google や Bing の検索エンジンも使いたく、SDK を自分でつくってメンテする暇がない。</p>
+                    <p class="note_contents">書いてしまったものだし、よく動き、気に入っているので、yyGpt* を捨てがたいが、戦略的判断として捨てる。</p>
+                    <!-- Task: 56c7bce4-5b2f-484e-bf9a-ee5bd1cd6ce6 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">Gemini については、公式には次の二つがあるようだ。</p>
+                    <p class="note_contents"><a href="https://github.com/googleapis/google-cloud-dotnet" target="_blank" class="url">https://github.com/googleapis/google-cloud-dotnet</a><br />
+                        <a href="https://github.com/googleapis/google-api-dotnet-client" target="_blank" class="url">https://github.com/googleapis/google-api-dotnet-client</a></p>
+                    <p class="note_contents">そのうち後者については、This client library is supported but in maintenance mode only と書かれている。</p>
+                    <p class="note_contents">どちらのページでも Gemini で検索すると何も出てこない。</p>
+                    <p class="note_contents">次のページを開いて C# のコード例を表示すると using Google.Cloud.AIPlatform.V1 とある。これにより OpenAI 的なことをできるようだ。</p>
+                    <p class="note_contents"><a href="https://cloud.google.com/vertex-ai/generative-ai/docs/start/quickstarts/quickstart-multimodal" target="_blank" class="url">https://cloud.google.com/vertex-ai/generative-ai/docs/start/quickstarts/quickstart-multimodal</a></p>
+                    <p class="note_contents">OpenAI でも、API 側では ChatGPT という名前は出てこない。Google もそういうことなのだろう。</p>
+                    <!-- Task: 56c7bce4-5b2f-484e-bf9a-ee5bd1cd6ce6 -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">学ぶのがめんどくさくて自分で合理的なサブセットをつくりたがるが、OpenAI の SDK をつくってみたことで、学ぶ方がだいぶ楽だと実感した。今も未練タラタラなのが情けないが、自作 SDK を消し、長いものに巻かれるプログラミングに移行する。</p>
+                    <!-- Task: 56c7bce4-5b2f-484e-bf9a-ee5bd1cd6ce6 -->
+                </div>
+            </div>
         </div>
     </body>
 </html>
