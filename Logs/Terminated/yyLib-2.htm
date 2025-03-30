@@ -331,6 +331,97 @@
                     <!-- Task: 56c7bce4-5b2f-484e-bf9a-ee5bd1cd6ce6 -->
                 </div>
             </div>
+            <div id="219f7d28-88f4-4ed3-a663-cb5a71a766f6" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">記念のアーカイブをつくってから、保守しないコードを大胆に消す</span>
+                    <a href="#219f7d28-88f4-4ed3-a663-cb5a71a766f6" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">やめておく。理由をあとで書く。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">yyLib の開発を打ち切ることを決めた。</p>
+                    <p class="note_contents">設計にも実装にも大きな問題はなく、普通に使える。派生開発によりさまざまな機能を追加していくベースとして、まずまずのものだ。</p>
+                    <p class="note_contents">しかし、心境に大きな変化があり、yyLib ではそれを乗り越えることができそうにない。丸一日、いろいろといじりながら考えたが、どうしても無理だ。</p>
+                    <p class="note_contents">その変化とは、「自分が試行錯誤や自作をするより、AI が推奨してくる外部ライブラリーやコードをまずは取り入れて洗練した方が有意に開発効率が高い」という2025年の現実に対する受容だ。</p>
+                    <p class="note_contents">yyLib の大掃除において Cline 系の Roo Code に既存のコメントを書き直してもらったところ、意図をそれなりに書いたこともあってか、かゆいところに手の届く英文がサクサクと出てきた。</p>
+                    <p class="note_contents">コードも、「ほかに用意しておいた方がよいメソッドはない？」などと聞けば、とても賢かった。</p>
+                    <p class="note_contents">自分は英語の非ネイティブなので、どうしても英文には自信がない。たぶん余裕で伝わる英文だが、ネイティブが自然と感じる最善のネーミングなどにはなっていないだろう。</p>
+                    <p class="note_contents">AI にやってもらうと、とにかく英文が良い。英語力が高く、言い回しに納得する。</p>
+                    <p class="note_contents">そういう AI に自分のコードを少しずつ見てもらい、まだ自分の英語のままになっているところを探し、今度はそこも見直すようにプロンプトを書くといった作業をしていて、ふと、「AI に支援してもらっての yyLib の移植」をやった方が効率的だと気づいてしまった。</p>
+                    <!-- Task: b94b9fde-ae93-48b1-9440-879bda75f5fa -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">今回のつくり直しのコストは大きくない。まとまった時間を取られなかったこともあって何ヶ月もかけたライブラリーだが、そのつくり直しにはおそらく1週間もかからない。骨格は悪くないからだ。</p>
+                    <p class="note_contents">ただ、構成をちょっとだけ複雑にしようと思っているので、そのあたりの設計には慎重でありたい。</p>
+                    <p class="note_contents">たとえば、メインのライブラリーに MailKit と MimeKit が必ず入っているのは、構成として良くない。それだと、メールを全く使わない小さなツールの開発にライブラリーを使うのであっても MailKit と MimeKit の関連 DLL ファイルが引き継がれる。</p>
+                    <p class="note_contents">画像処理もそうで、Magick.NET を入れるとすぐに数十 MB になる。これも、Q8 と Q16 があって、ちゃんと使い分けられるようになっているので、プロジェクト参照と名前空間のみ単純に置換すればどちらでも動くように二つのライブラリーをメインのものとは別につくるのが合理的だ。</p>
+                    <p class="note_contents">ASP.NET Core がメインなので、メインのライブラリーにロギング機能を組み込むとするなら、Microsoft によるものが妥当だろう。Serilog も良さそうだが、どうせ Microsoft のものは ASP.NET Core のプロジェクトなら必ず入る。</p>
+                    <p class="note_contents">そういったことを考えても、AI の支援があれば、おそらく1週間くらいだ。</p>
+                    <!-- Task: b94b9fde-ae93-48b1-9440-879bda75f5fa -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">判断の後押しとなったものの一つは .editorconfig だ。</p>
+                    <p class="note_contents">以前、VSC ではうまくいかず、諦めていた。</p>
+                    <p class="note_contents">今回、Editor Config for VS Code を試したところ、やりたいことがうまくいった。</p>
+                    <p class="note_contents">自分は、自分にとって見た目の良いコードを書きたがる癖がある。</p>
+                    <p class="note_contents">たとえば、if (... なら多くのエディターで最初からスペースが入るのに、method(... なら入らないのは、おかしいと感じる。</p>
+                    <p class="note_contents">配列は、type[] と type [] の両方に長短がある。「型」を空白で途切れない一つのまとまりとするなら前者だが、それで this [... とインデックスによるアクセスを書くのは、method (... と不整合になる。では、method(... にして、this[... にするかといえば、if(... がやりすぎになる。</p>
+                    <p class="note_contents">if (... にスペースが入るのは、else{... とのバランスもあるのだろう。自分は { を次の行に置く派だが、C# でも同じ行に置く人は多い。</p>
+                    <p class="note_contents">そういったところでああだこうだ生産性のないことを考えたくないからこそ、if (... にも else {... にも入るなら method (... でいいじゃないか、type [] でいいじゃないか、というように一概に決めている。</p>
+                    <p class="note_contents">蛇足だが、メソッドをつなげるとき、</p>
+                    <p class="note_contents">Hoge()<br />
+                        .Moge()<br />
+                        .Poge();</p>
+                    <p class="note_contents">とする人が多いが、</p>
+                    <p class="note_contents">Hoge<br />
+                        + Moge<br />
+                        + Poge;</p>
+                    <p class="note_contents">としないのだから、自分は</p>
+                    <p class="note_contents">Hoge ().<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;Moge ().<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;Poge ();</p>
+                    <p class="note_contents">としている。</p>
+                    <p class="note_contents">その方が、</p>
+                    <p class="note_contents">Hoge +<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;Moge +<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;Poge;</p>
+                    <p class="note_contents">との親和性が高い。</p>
+                    <p class="note_contents">主従関係（？）が明確なら十分だ。</p>
+                    <p class="note_contents">長い間やっているので、人畜無害な範囲内のこだわりとして、コードのフォーマットには少しだけ好みがある。</p>
+                    <p class="note_contents">AI にコードを生成してもらうと、VSC でのフォーマット機能では好みの形にならず、かといってフォーマットのためだけに激重の Visual Studio を2009年の非力なデスクトップで立ち上げるのはコストが大きく、AI にコードを生成してもらうことをためらう（つまらない）理由の一つになっていた。</p>
+                    <p class="note_contents">.editorconfig によりその問題が大幅に緩和された。</p>
+                    <p class="note_contents">.editorconfig で設定できないのは、メソッドをつなげるときを除いては、IList &lt;... にしたいとか、コンストラクターの継承を ) : base (... としたくない（: の直前に空白を入れてほしくない）とか、その程度だ。</p>
+                    <p class="note_contents">このくらいなら手作業で直しても負担でない。</p>
+                    <!-- Task: b94b9fde-ae93-48b1-9440-879bda75f5fa -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">判断の後押しとなったことは複数ある。そのうちさらに一つを挙げると、コメントを英語と日本語で書きたくなったことだ。</p>
+                    <p class="note_contents">英語をそこそこ書けるので英語で書いてきたが、日本での開発案件も今後ちょくちょく出てくるかもしれない。</p>
+                    <p class="note_contents">AI にコメントを書いてもらうなら、コンテキストを英語で書き、ちゃんとした英語にしてもらい、その日本語訳を添えてもらうのが手間でない。</p>
+                    <p class="note_contents">コピペで使えるプロンプトをいくつか用意しておくことで、場所ごとに書き方を決めておける。</p>
+                    <!-- Task: b94b9fde-ae93-48b1-9440-879bda75f5fa -->
+                </div>
+            </div>
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">こういったことを勘案し、判断をくだした。</p>
+                    <p class="note_contents">現行の設計と実装も悪くないので、できるだけ引き継ぎ、外部ライブラリーを多用し、テストコードをコンソールでなくウェブでつくり、コメントを英語と日本語の両方で生成するだけだ。</p>
+                    <!-- Task: b94b9fde-ae93-48b1-9440-879bda75f5fa -->
+                </div>
+            </div>
         </div>
     </body>
 </html>
