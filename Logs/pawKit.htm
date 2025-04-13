@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>pawKit</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="pawKit.htm" class="title">pawKit</a>
+        </div>
+        <div class="entries">
+            <div id="395cba97-c475-4d0f-8501-2ef071ba9a83" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">.editorconfig をまとめてバッチファイルにより各パソコンに適用</span>
+                    <a href="#395cba97-c475-4d0f-8501-2ef071ba9a83" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="b17a9db8-f2a5-4679-853d-46ae51c0a385" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">プロジェクト開始時のタスクをメモ通りに処理</span>
+                    <a href="#b17a9db8-f2a5-4679-853d-46ae51c0a385" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="a4adc996-1520-4fd8-95fb-e459da1079d9" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">引きずる DLL ごとにライブラリーを小分けする</span>
+                    <a href="#a4adc996-1520-4fd8-95fb-e459da1079d9" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">そのうち Magick.NET については、Q8 用と Q16 用の二つが必要。プロジェクト参照と名前空間の単純置換によりどちらでも動くようにする。あるいは、クラス名なども区別するとしても、単純置換は必ず利くようにする。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="38acf0f3-4d7d-4bf2-8a6f-d3240e9860f0" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">できる限り自分がコードやコメントを書かないワークフローをつくる</span>
+                    <a href="#38acf0f3-4d7d-4bf2-8a6f-d3240e9860f0" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">プロジェクトをつくり、初期的なドキュメントを生成するまでを Roo Code + o3-mini-high でやってみた。いけそう。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="656aaa8d-796c-4f4b-8499-6cc996b972ef" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">長文コメントをできる限りコードと関連づける仕組みを考える</span>
+                    <a href="#656aaa8d-796c-4f4b-8499-6cc996b972ef" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">o1 に Markdown でまとめてもらって Resources レポジトリーに載せてきたが、それではコードと疎結合すぎて設計と実装が不整合になってくる。Cline 系のツールでコードをいじるなら、同時にコメントとの整合性も見てもらいたい。かといって、ほかの部分のコードにも該当する長文コメントを特定のソースファイルに入れるのは抵抗がある。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">モデルプロジェクトを定義し、そこに入れていく。モデルプロジェクトは、今後しばらく絶対に廃止されず、放置もされず、更新が続いていくもの。それらに含まれるドキュメントの URL をほかのプロジェクトのソースに含めるのは問題でない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="4bb04f5b-e10d-4ca1-96f7-1fcb129cd95a" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">ルーチン作業のプロンプトをまとめるファイルをつくる</span>
+                    <a href="#4bb04f5b-e10d-4ca1-96f7-1fcb129cd95a" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">prompts/coding-prompts.txt とした。misc/ でよいのでないか、そもそもサブディレクトリーが必要なのか、といったところを AI と議論したが、言い負かされたw</p>
+                            <p class="note_contents">自分は、一品ものでどこにも属さないものを misc 的なところに入れがちだが、それをすると misc の幅が広がり、内容がちゃんぽんになっているものをつくることの敷居が下がり、misc がさらに充実していく。</p>
+                            <p class="note_contents">プロンプトは絶対に一つのファイルで足りると今は思うが、AI は「増える可能性がある」と言ってくる。ほかと種類的にも内容的にも大きく異なり、なおかついずれ複数になる可能性のある（あるいは複数にした方が管理性が高いなどの理由が生じてくる）ファイルに最初から「カテゴリー的な縛り」としてサブディレクトリーをつくっておくのは、今は気になっても、将来性が高い。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="fc320112-86ed-4631-b06d-a15fdf27ad4d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">テストをできる限りウェブで行う仕組みをつくる</span>
+                    <a href="#fc320112-86ed-4631-b06d-a15fdf27ad4d" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">ロジックを pawKit.Core.Tests で見る。そこにウェブの UI が関わってくるところには、pawKit.Samples.Blazor を活かす。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="132f1e78-4d78-4408-84aa-c3fe5739f4a1" class="task canceled">
+                <div class="task_contents">&cross;
+                    <span class="task_contents">コメントを英語と日本語の両方で生成するプロンプトを場所ごとにつくる</span>
+                    <a href="#132f1e78-4d78-4408-84aa-c3fe5739f4a1" class="permalink">&infin;</a>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">たとえば C# の summary コメントなのか HTML なのか CSS なのかでも書式は異なってくる。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">やめておく。</p>
+                            <p class="note_contents">やってみたが、整合性の確認がめんどくさい、半分寝ていてケアレスミスが多い状態のときに英語だけ更新して日本語の方についてはタスクを残すことさえ忘れて寝落ちしうる、和訳時になぜか区点が途中から全角のドットになることがある、英語を直訳したようなガッチガチの日本語の違和感が強烈でコミット時に妥協を強いられる、この調子だとちょうど良い日本語が出ずプロンプトを調整しながら生成をやり直すワークフローが生産性を下げる可能性が高い、といった問題を認識した。</p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <div class="note_contents">
+                            <p class="note_contents">AI でドキュメントやコメントを最初からしっかり出すのは、AI と一緒に仕様を考えてすぐのまだ記憶が新しいうちの整理が未来の自分や他者に役立ちうる点および生成の手間が小さい点において合理的。そういうのを経ず、いきなりコードを書くとか生成させるとかは、「アジャイル」と感じられてもそうでなく、無計画に走って未来の問題の種まきをするかのようなこと。</p>
+                            <p class="note_contents">一方、それを日本語にするのは、英語で完結しているワークフローにおいて、実利の全くない手間。日本人と一緒にシステムを開発する可能性が見えてきているため日本語も整備しておこうかと思いついた程度で、目の前のコーディングには必要でない。</p>
+                            <p class="note_contents">AI が賢いし、翻訳エンジンも良くなっているので、ちょっとしたプログラミングによりプロジェクトを丸ごと日本語で説明するなどは、あとでやっても困らない。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
