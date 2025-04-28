@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>gptLog</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap');body{margin:0;background-color:#111;color:#ddd;font-family:'M PLUS 1',sans-serif;font-size:1rem;line-height:1.5;overflow-wrap:break-word;word-wrap:break-word}a{color:#69c;text-decoration:underline}a:hover,a:active,a:focus{font-weight:bold}div.task,div.note,div.file,div.image{margin:10px;border:1px solid transparent}div.entries>div.note{border:1px solid #333}div.title{background-color:#538;padding:20px 30px;font-size:2rem;font-weight:bold}a.title{color:#ddd;text-decoration:none}a.title:hover,a.title:active,a.title:focus{text-decoration:underline}div.streaming{background-color:#131}div.streaming:hover{background-color:#353}div.done{background-color:#115}div.done:hover{background-color:#337}div.canceled{background-color:#511}div.canceled:hover{background-color:#733}div.task_contents{margin:10px 15px}span.task_contents{font-weight:bold}a.permalink{visibility:hidden}div.task:hover a.permalink{visibility:visible}div.note{background-color:#111}p.note_contents{margin:15px 20px}div.file{border:1px solid #333;background-color:#111;padding:15px 20px}div.image{border:1px solid #333;background-color:#111;padding:10px}img.image{box-sizing:border-box;vertical-align:top;max-width:100%}div.images{margin:10px;border:1px solid #333;background-color:#111;padding:10px;display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap}div.images>div.image{margin:0;border-style:none;padding:0}ul.files{margin:10px;border:1px solid #333;background-color:#111;padding-top:15px;padding-inline:40px 15px;padding-bottom:15px}div.note_ai_generated{margin:10px;border:1px solid transparent;background-color:#333}div.note_ai_generated>*{margin:15px 20px}div.note_ai_generated h1{font-size:2rem;font-weight:bold}div.note_ai_generated h2{font-size:1.8rem;font-weight:bold}div.note_ai_generated h3{font-size:1.6rem;font-weight:bold}div.note_ai_generated h4{font-size:1.4rem;font-weight:bold}div.note_ai_generated h5{font-size:1.2rem;font-weight:bold}div.note_ai_generated h6{font-size:1rem;font-weight:bold}pre{background-color:#555;padding:15px 20px;white-space:pre-wrap}code{font-family:'M PLUS 1 Code',monospace}</style>
+    </head>
+    <body>
+        <div class="title">
+            <a href="gptLog.htm" class="title">gptLog</a>
+        </div>
+        <div class="entries">
+            <div class="note">
+                <div class="note_contents">
+                    <p class="note_contents">ChatGPT のウェブ版では、一度でも検索を行うと、o3 を選択できなくなる。ネットから入ってきた情報をベースに思考するとハルシネーションがなおのこと起こりやすいなどの理由があるのだろう。</p>
+                    <p class="note_contents">localGpt の開発において、ChatGPT とのやりとりにより仕様が出尽くしたが、それを o3 で仕様書にできず、o4-mini-high や 4o では細かい情報が欠損する。</p>
+                    <p class="note_contents">めんどくさいが、全体をテキストファイルに入れて、それを仕様書にしてもらうしかない。o3 でも添付ファイルの扱いは可能なのを確認できている。</p>
+                    <!-- Task: 167d226d-83c7-45f6-87ae-d223d04f2fb0 -->
+                </div>
+            </div>
+            <div id="f882967a-8423-4f40-94c8-6aebf82a3f2c" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">プロジェクト開始時のタスクをメモ通りに処理</span>
+                    <a href="#f882967a-8423-4f40-94c8-6aebf82a3f2c" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="c6f7479c-4b48-4875-aaf1-6943f2580dfa" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">仕様書をつくる</span>
+                    <a href="#c6f7479c-4b48-4875-aaf1-6943f2580dfa" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="6649a4d6-947e-4828-aaa4-ee570fc2446e" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">仕様書に基づいて実装</span>
+                    <a href="#6649a4d6-947e-4828-aaa4-ee570fc2446e" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="2a1a5812-ca41-4f6d-8444-48e92b7f898d" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">落ちるところがないようにする</span>
+                    <a href="#2a1a5812-ca41-4f6d-8444-48e92b7f898d" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="915214f9-5f25-44fd-b51b-f0bf409516d5" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">AXAML ファイルを全体的に整える</span>
+                    <a href="#915214f9-5f25-44fd-b51b-f0bf409516d5" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="1551749d-2661-41d7-a1bd-0c9224eee3a7" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">README.md を更新</span>
+                    <a href="#1551749d-2661-41d7-a1bd-0c9224eee3a7" class="permalink">&infin;</a>
+                </div>
+            </div>
+            <div id="e7b2609e-e0d8-4f89-bfd6-e6a2fae232eb" class="task done">
+                <div class="task_contents">&check;
+                    <span class="task_contents">アセンブリー情報を設定</span>
+                    <a href="#e7b2609e-e0d8-4f89-bfd6-e6a2fae232eb" class="permalink">&infin;</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
