@@ -1,0 +1,15 @@
+﻿specs/gitsync-specifications-v0.1.md
+src/gitSyncApp/AppSettings.cs
+src/gitSyncApp/appsettings.json
+src/gitSyncApp/ConsoleColorUtil.cs
+src/gitSyncApp/GitLocator.cs
+src/gitSyncApp/GitRepositoryStatus.cs
+src/gitSyncApp/GitRepositoryStatusActions.cs
+src/gitSyncApp/gitSyncApp.csproj
+src/gitSyncApp/PathUtil.cs
+src/gitSyncApp/Program.cs
+src/gitSyncApp/SafeConsoleWriter.cs
+.gitignore
+gitSync.sln
+LICENSE
+README.md

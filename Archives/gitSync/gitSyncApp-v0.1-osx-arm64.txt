@@ -1,0 +1,15 @@
+﻿appsettings.json
+gitSyncApp
+gitSyncApp.deps.json
+gitSyncApp.dll
+gitSyncApp.pdb
+gitSyncApp.runtimeconfig.json
+Microsoft.Extensions.Configuration.Abstractions.dll
+Microsoft.Extensions.Configuration.Binder.dll
+Microsoft.Extensions.Configuration.dll
+Microsoft.Extensions.Configuration.FileExtensions.dll
+Microsoft.Extensions.Configuration.Json.dll
+Microsoft.Extensions.FileProviders.Abstractions.dll
+Microsoft.Extensions.FileProviders.Physical.dll
+Microsoft.Extensions.FileSystemGlobbing.dll
+Microsoft.Extensions.Primitives.dll
