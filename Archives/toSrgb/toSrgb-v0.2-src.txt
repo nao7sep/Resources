@@ -1,0 +1,12 @@
+﻿specs/tosrgb-v0.1-specifications.md
+specs/tosrgb-v0.2-specifications.md
+src/toSrgbApp/CommandLineOptions.cs
+src/toSrgbApp/ImageConverter.cs
+src/toSrgbApp/ImageResizeSelector.cs
+src/toSrgbApp/JpegQualitySelector.cs
+src/toSrgbApp/Program.cs
+src/toSrgbApp/toSrgbApp.csproj
+.gitignore
+LICENSE
+README.md
+toSrgb.sln
