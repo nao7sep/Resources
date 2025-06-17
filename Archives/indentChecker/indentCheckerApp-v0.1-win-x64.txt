@@ -1,0 +1,11 @@
+﻿encodingMap.json
+ignoredExtensions.txt
+ignoredFullPaths.txt
+ignoredNames.txt
+indentCheckerApp.deps.json
+indentCheckerApp.dll
+indentCheckerApp.exe
+indentCheckerApp.pdb
+indentCheckerApp.runtimeconfig.json
+indentModeMap.json
+scanRoots.txt
