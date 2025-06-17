@@ -1,0 +1,8 @@
+﻿Magick.Native-Q16-x64.dll
+Magick.NET-Q16-AnyCPU.dll
+Magick.NET.Core.dll
+toSrgbApp.deps.json
+toSrgbApp.dll
+toSrgbApp.exe
+toSrgbApp.pdb
+toSrgbApp.runtimeconfig.json
