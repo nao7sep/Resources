@@ -17,6 +17,5 @@ src/prjBuildApp/prjBuildApp.csproj
 src/prjBuildApp/Program.cs
 .gitignore
 LICENSE
-prjBuild.code-workspace
 prjBuild.sln
 README.md
