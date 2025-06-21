@@ -1,0 +1,12 @@
+﻿specs/downScale-specifications-v0.1.md
+src/downScaleApp/AudioPlayer.cs
+src/downScaleApp/ConsoleService.cs
+src/downScaleApp/downScaleApp.csproj
+src/downScaleApp/Logger.cs
+src/downScaleApp/loop200104.wav
+src/downScaleApp/Program.cs
+src/downScaleApp/VideoConverter.cs
+.gitignore
+downScale.sln
+LICENSE
+README.md

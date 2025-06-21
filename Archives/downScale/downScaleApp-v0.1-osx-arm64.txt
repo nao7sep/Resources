@@ -1,0 +1,14 @@
+﻿downScaleApp
+downScaleApp.deps.json
+downScaleApp.dll
+downScaleApp.pdb
+downScaleApp.runtimeconfig.json
+loop200104.wav
+NAudio.Asio.dll
+NAudio.Core.dll
+NAudio.dll
+NAudio.Midi.dll
+NAudio.Wasapi.dll
+NAudio.WinMM.dll
+Xabe.FFmpeg.dll
+Xabe.FFmpeg.Downloader.dll
